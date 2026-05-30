@@ -17,6 +17,7 @@
             background: #f0f4f8;
         }
 
+        /* ========== الهيدر ========== */
         .navbar {
             background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
             padding: 18px 40px;
@@ -25,11 +26,14 @@
             align-items: center;
             flex-wrap: wrap;
             color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
 
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
+        .logo a {
+            text-decoration: none;
         }
 
         .nav-links {
@@ -39,39 +43,123 @@
             flex-wrap: wrap;
         }
 
-        .nav-links a {
+        .nav-links > a {
             color: white;
             text-decoration: none;
-            padding: 8px 18px;
+            padding: 8px 20px;
             border-radius: 30px;
             transition: 0.3s;
+            font-weight: 500;
         }
 
-        .nav-links a:hover {
+        .nav-links > a:hover {
             background: #ffb347;
             color: #1e2a3e;
         }
 
+        /* ========== القائمة المنسدلة ========== */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .dropdown-btn:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 16px;
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #1e2a3e;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
+            font-size: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dropdown-content a:hover {
+            background: #f0f4f8;
+            color: #1a5f5f;
+        }
+
+        .dropdown-content .logout-item {
+            color: #e53e3e;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* ========== المحتوى الرئيسي ========== */
         .container {
             max-width: 1400px;
             margin: 30px auto;
             padding: 0 20px;
         }
 
+        /* رأس الصفحة */
         .page-header {
-            background: white;
+            background: linear-gradient(125deg, #1a5f5f, #0a2f2f);
             border-radius: 32px;
-            padding: 30px;
+            padding: 40px;
             margin-bottom: 30px;
+            color: white;
             text-align: center;
         }
 
         .page-header h1 {
-            color: #0a2f2f;
-            font-size: 2rem;
+            font-size: 2.5rem;
             margin-bottom: 10px;
         }
 
+        .page-header p {
+            font-size: 1.1rem;
+            opacity: 0.9;
+        }
+
+        .results-count {
+            margin-top: 15px;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.2);
+            display: inline-block;
+            padding: 5px 20px;
+            border-radius: 30px;
+        }
+
+        /* شريط البحث */
         .search-filter-bar {
             background: white;
             border-radius: 60px;
@@ -81,14 +169,16 @@
             gap: 15px;
             flex-wrap: wrap;
             align-items: center;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
         }
 
         .search-input-wrapper {
-            flex: 2;
+            flex: 3;
             display: flex;
             background: #f8fafc;
             border-radius: 50px;
             overflow: hidden;
+            border: 1px solid #e2e8f0;
         }
 
         .search-input {
@@ -103,13 +193,21 @@
         .search-btn {
             background: #ffb347;
             border: none;
-            padding: 0 25px;
+            padding: 0 30px;
             cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
+        .search-btn:hover {
+            background: #1a5f5f;
+            color: white;
+        }
+
+        /* شبكة الطلبات */
         .requests-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
             gap: 30px;
         }
 
@@ -120,6 +218,7 @@
             box-shadow: 0 10px 25px rgba(0,0,0,0.08);
             transition: all 0.3s ease;
             cursor: pointer;
+            position: relative;
         }
 
         .request-card:hover {
@@ -127,28 +226,41 @@
             box-shadow: 0 20px 35px rgba(0,0,0,0.15);
         }
 
-        .request-info {
-            padding: 22px;
+        .request-header {
+            background: linear-gradient(135deg, #1a5f5f, #0f4f4f);
+            padding: 15px 20px;
+            color: white;
         }
 
         .request-badge {
             display: inline-block;
-            background: #c6f6d5;
-            color: #22543d;
+            background: #ffb347;
+            color: #1e2a3e;
             padding: 4px 12px;
             border-radius: 20px;
             font-size: 11px;
-            margin-bottom: 10px;
+            font-weight: bold;
+        }
+
+        .request-date {
+            font-size: 12px;
+            opacity: 0.8;
+            margin-top: 8px;
+        }
+
+        .request-info {
+            padding: 22px;
         }
 
         .request-title {
             color: #0a2f2f;
             font-size: 1.2rem;
             margin-bottom: 12px;
+            font-weight: bold;
         }
 
         .request-detail {
-            margin: 10px 0;
+            margin: 12px 0;
             color: #475569;
             display: flex;
             gap: 10px;
@@ -160,6 +272,38 @@
             color: #1a5f5f;
         }
 
+        .request-description {
+            background: #f8fafc;
+            padding: 12px;
+            border-radius: 16px;
+            margin: 12px 0;
+            font-size: 14px;
+            color: #64748b;
+            line-height: 1.5;
+        }
+
+        .buyer-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px;
+            background: #eef2f7;
+            border-radius: 20px;
+            margin: 15px 0;
+        }
+
+        .buyer-avatar {
+            width: 40px;
+            height: 40px;
+            background: #1a5f5f;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+        }
+
         .btn-offer {
             width: 100%;
             background: #ffb347;
@@ -167,23 +311,28 @@
             padding: 12px;
             border: none;
             border-radius: 40px;
-            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
             margin-top: 15px;
             transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
         }
 
         .btn-offer:hover {
             background: #1a5f5f;
             color: white;
+            transform: translateY(-2px);
         }
 
+        /* ترقيم الصفحات */
         .pagination {
             display: flex;
             justify-content: center;
             gap: 10px;
-            margin: 40px 0;
+            margin: 50px 0 30px;
             flex-wrap: wrap;
         }
 
@@ -193,24 +342,92 @@
             border: 1px solid #cbd5e1;
             border-radius: 30px;
             cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: #1a5f5f;
+            color: white;
+            border-color: #1a5f5f;
         }
 
         .pagination button.active {
             background: #ffb347;
             border-color: #ffb347;
+            color: #1e2a3e;
         }
 
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* حالات خاصة */
+        .loader {
+            text-align: center;
+            padding: 80px;
+            font-size: 1.2rem;
+            color: #1a5f5f;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 80px;
+            background: white;
+            border-radius: 32px;
+            color: #718096;
+        }
+
+        .no-results i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+
+        /* الفوتر */
         .footer {
             background: #0a2f2f;
             color: white;
             text-align: center;
-            padding: 30px;
-            margin-top: 50px;
+            padding: 35px;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ffb347;
+            text-decoration: none;
         }
 
         @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .page-header h1 {
+                font-size: 1.8rem;
+            }
             .search-filter-bar {
                 flex-direction: column;
+                border-radius: 32px;
+            }
+            .search-input-wrapper {
+                width: 100%;
+            }
+            .requests-grid {
+                grid-template-columns: 1fr;
+            }
+            .dropdown-content {
+                left: auto;
+                right: 0;
             }
         }
     </style>
@@ -218,23 +435,23 @@
 <body>
 
 <div class="navbar">
-    <a href="/" style="text-decoration:none;">
-    <div style="display:flex;align-items:center;gap:12px;font-family:'Cairo',sans-serif;font-weight:700;font-size:22px;color:#0f172a;cursor:pointer;transition:all .3s ease;">
-        <img src="https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/709548215_2209434319875128_7640925248715427952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hhCEJVn_ItwQ7kNvwE1RoKX&_nc_oc=AdoFrDGRfx8kM33l7aB2X-xe-cpIlVPSBffMzDpuuaaNY0IK_xSxp2kH4A7bRMUC030&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=eVsIN6W69tJnSD81wCmsAA&_nc_ss=7b2a8&oh=00_Af6F7JJvo7lXyrTp6fVmFtTxAbbtNjjryJ5K5MfYjzFuaQ&oe=6A206BBC"
-             alt="Chemato"
-             style="width:55px;height:55px;border-radius:50%;border:3px solid #2563eb;box-shadow:0 4px 12px rgba(37,99,235,.25);object-fit:cover;">
-        <span>
-            <span style="color:#2563eb;">كيماتو</span>
-            <span style="color:#64748b;">| سوق المواد الكيماوية</span>
-        </span>
+    <div class="logo">
+        <a href="/" style="text-decoration:none;">
+            <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;">
+                <img src="https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/709548215_2209434319875128_7640925248715427952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hhCEJVn_ItwQ7kNvwE1RoKX&_nc_oc=AdoFrDGRfx8kM33l7aB2X-xe-cpIlVPSBffMzDpuuaaNY0IK_xSxp2kH4A7bRMUC030&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=eVsIN6W69tJnSD81wCmsAA&_nc_ss=7b2a8&oh=00_Af6F7JJvo7lXyrTp6fVmFtTxAbbtNjjryJ5K5MfYjzFuaQ&oe=6A206BBC"
+                     style="width:45px;height:45px;border-radius:50%;border:2px solid #2563eb;object-fit:cover;">
+                <span><span style="color:#2563eb;">كيماتو</span><span style="color:#64748b;"> | جميع الطلبات</span></span>
+            </div>
+        </a>
     </div>
-</a>
-
     <div class="nav-links">
         <a href="index.html">الرئيسية</a>
-        <a href="all-products.html">جميع المنتجات</a>
-        <a href="all-requests.html">جميع الطلبات</a>
-        <a href="auth.html">دخول</a>
+        <a href="all-products.html">📦 جميع المنتجات</a>
+        <a href="all-requests.html">📋 جميع الطلبات</a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><i class="fas fa-bars"></i> القائمة</button>
+            <div class="dropdown-content" id="dropdownContent"></div>
+        </div>
     </div>
 </div>
 
@@ -242,7 +459,7 @@
     <div class="page-header">
         <h1><i class="fas fa-clipboard-list"></i> جميع طلبات الشراء</h1>
         <p>استعرض أحدث طلبات شراء المواد الكيماوية من العملاء في مصر</p>
-        <div id="resultsCount" style="color: #1a5f5f; margin-top: 10px;"></div>
+        <div class="results-count" id="resultsCount"></div>
     </div>
 
     <div class="search-filter-bar">
@@ -253,58 +470,110 @@
     </div>
 
     <div id="requestsContainer" class="requests-grid">
-        <div class="loader" style="text-align: center; padding: 60px;">⏳ جاري تحميل الطلبات...</div>
+        <div class="loader">⏳ جاري تحميل الطلبات...</div>
     </div>
 
     <div id="pagination" class="pagination"></div>
 </div>
 
 <div class="footer">
-    <p>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</p>
+    <div class="footer-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">جميع المنتجات</a>
+        <a href="all-requests.html">جميع الطلبات</a>
+        <a href="auth.html">تسجيل الدخول</a>
+    </div>
+    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</div>
 </div>
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-    
+
     const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
-    
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    
+
     let currentPage = 1
-    const itemsPerPage = 12
     let totalCount = 0
     let currentSearch = ''
-    
+    let currentUser = null
+    let currentProfile = null
+    const itemsPerPage = 12
+
+    // ========== القائمة المنسدلة ==========
+    function setupDropdown() {
+        const dropdownBtn = document.querySelector('.dropdown-btn')
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (dropdownBtn && dropdownContent) {
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation()
+                dropdownContent.classList.toggle('show')
+            })
+            document.addEventListener('click', () => {
+                dropdownContent.classList.remove('show')
+            })
+        }
+    }
+
+    async function updateDropdownContent() {
+        const { data: { user } } = await supabase.auth.getUser()
+        currentUser = user
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (user) {
+            const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
+            currentProfile = profile
+            dropdownContent.innerHTML = `
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}">📦 لوحة التحكم</a>
+                <a href="profile.html">👤 الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
+            `
+            const logoutLink = document.getElementById('logoutLink')
+            if (logoutLink) {
+                logoutLink.onclick = async (e) => {
+                    e.preventDefault()
+                    await supabase.auth.signOut()
+                    window.location.href = 'index.html'
+                }
+            }
+        } else {
+            dropdownContent.innerHTML = `
+                <a href="auth.html">🔐 تسجيل الدخول</a>
+                <a href="auth.html">📝 حساب جديد</a>
+                <a href="supplier-dashboard.html">📦 للموردين</a>
+                <a href="buyer-dashboard.html">🛒 للعملاء</a>
+            `
+        }
+    }
+
+    // ========== عرض الطلبات ==========
     async function loadRequests() {
+        document.getElementById('requestsContainer').innerHTML = '<div class="loader">⏳ جاري تحميل الطلبات...</div>'
+
         let query = supabase
             .from('purchase_requests')
-            .select('*, profiles(full_name, company_name, phone)', { count: 'exact' })
+            .select('*, profiles(full_name, company_name, phone, city, user_type)', { count: 'exact' })
             .eq('status', 'open')
-        
+
         if (currentSearch) {
             query = query.ilike('product_name', `%${currentSearch}%`)
         }
-        
+
         const from = (currentPage - 1) * itemsPerPage
-        const to = from + itemsPerPage - 1
-        
-        const { data, error, count } = await query
+        const { data, count } = await query
             .order('created_at', { ascending: false })
-            .range(from, to)
-        
-        if (error) {
-            document.getElementById('requestsContainer').innerHTML = `<div class="no-results">❌ خطأ: ${error.message}</div>`
-            return
-        }
-        
+            .range(from, from + itemsPerPage - 1)
+
         totalCount = count || 0
-        document.getElementById('resultsCount').innerHTML = `📊 عرض ${data.length} من ${totalCount} طلب شراء`
-        
+        document.getElementById('resultsCount').innerHTML = `📊 عرض ${data?.length || 0} من ${totalCount} طلب شراء`
+
+        const container = document.getElementById('requestsContainer')
         if (!data || data.length === 0) {
-            document.getElementById('requestsContainer').innerHTML = `
-                <div class="no-results" style="text-align: center; padding: 80px; background: white; border-radius: 32px;">
-                    <i class="fas fa-inbox" style="font-size: 50px; color: #cbd5e1;"></i>
+            container.innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-inbox"></i>
                     <h3>لا توجد طلبات شراء</h3>
                     <p>لم نجد أي طلبات شراء تطابق معايير البحث</p>
                 </div>
@@ -312,25 +581,57 @@
             document.getElementById('pagination').innerHTML = ''
             return
         }
-        
-        document.getElementById('requestsContainer').innerHTML = data.map(r => `
+
+        container.innerHTML = data.map(r => `
             <div class="request-card" onclick="window.location.href='request-details.html?id=${r.id}'">
-                <div class="request-info">
+                <div class="request-header">
                     <span class="request-badge"><i class="fas fa-clock"></i> ${new Date(r.created_at).toLocaleDateString('ar-EG')}</span>
+                    <div class="request-date">رقم الطلب: ${r.id.substring(0, 8)}...</div>
+                </div>
+                <div class="request-info">
                     <h3 class="request-title">📦 مطلوب: ${r.product_name}</h3>
-                    <div class="request-detail"><i class="fas fa-balance-scale"></i> الكمية: ${r.quantity_needed || 'غير محدد'}</div>
-                    <div class="request-detail"><i class="fas fa-align-right"></i> ${r.description?.substring(0, 80) || 'لا توجد مواصفات'}${r.description?.length > 80 ? '...' : ''}</div>
-                    <div class="request-detail"><i class="fas fa-building"></i> عميل: ${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</div>
-                    <button class="btn-offer" onclick="event.stopPropagation(); window.location.href='request-details.html?id=${r.id}'">
-                        <i class="fas fa-tag"></i> تقديم عرض لهذا الطلب
+                    
+                    <div class="request-detail">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>الكمية: ${r.quantity_needed || 'غير محدد'}</span>
+                    </div>
+                    
+                    ${r.description ? `
+                        <div class="request-description">
+                            <i class="fas fa-align-right"></i> ${r.description.substring(0, 120)}${r.description.length > 120 ? '...' : ''}
+                        </div>
+                    ` : ''}
+                    
+                    ${r.deadline ? `
+                        <div class="request-detail">
+                            <i class="fas fa-calendar-alt"></i>
+                            <span>آخر موعد: ${new Date(r.deadline).toLocaleDateString('ar-EG')}</span>
+                        </div>
+                    ` : ''}
+                    
+                    <div class="buyer-info">
+                        <div class="buyer-avatar">
+                            ${(r.profiles?.company_name || r.profiles?.full_name || 'ع')[0]}
+                        </div>
+                        <div>
+                            <div><strong>${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</strong></div>
+                            <div style="font-size: 12px; color: #64748b;">
+                                <i class="fas fa-city"></i> ${r.profiles?.city || 'مدينة غير محددة'}
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-offer" onclick="event.stopPropagation(); goToOffer('${r.id}')">
+                        <i class="fas fa-tag"></i> عرض التفاصيل
                     </button>
                 </div>
             </div>
         `).join('')
-        
+
         // ترقيم الصفحات
         const totalPages = Math.ceil(totalCount / itemsPerPage)
         let paginationHtml = ''
+        
         paginationHtml += `<button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>« الأول</button>`
         paginationHtml += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹ السابق</button>`
         
@@ -346,8 +647,8 @@
         
         document.getElementById('pagination').innerHTML = paginationHtml
     }
-    
-    window.goToPage = function(page) {
+
+    window.goToPage = (page) => {
         if (page < 1) return
         const totalPages = Math.ceil(totalCount / itemsPerPage)
         if (page > totalPages) return
@@ -355,21 +656,29 @@
         loadRequests()
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-    
+
+    window.goToOffer = (requestId) => {
+        window.location.href = `request-details.html?id=${requestId}`
+    }
+
+    // ========== البحث ==========
     document.getElementById('searchBtn').addEventListener('click', () => {
         currentSearch = document.getElementById('searchInput').value.trim()
         currentPage = 1
         loadRequests()
     })
-    
+
     document.getElementById('searchInput').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
-            currentSearch = document.getElementById('searchInput').value.trim()
+            currentSearch = e.target.value.trim()
             currentPage = 1
             loadRequests()
         }
     })
-    
+
+    // ========== بدء التشغيل ==========
+    setupDropdown()
+    updateDropdownContent()
     loadRequests()
 </script>
 </body>
