@@ -2,177 +2,1018 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كيماتو | لوحة العميل</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>كيماتو | لوحة تحكم العميل</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', 'Tahoma', sans-serif;
         }
+
+        :root {
+            --primary-dark: #0a2f2f;
+            --primary: #1a5f5f;
+            --primary-light: #2a8f8f;
+            --accent: #ffb347;
+            --accent-dark: #e69500;
+            --gray-light: #f8fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #64748b;
+            --text-dark: #1e2a3e;
+            --text-light: #475569;
+            --white: #ffffff;
+            --danger: #e53e3e;
+            --success: #2a9d8f;
+            --warning: #f4a261;
+            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
+            --shadow-md: 0 10px 25px rgba(0,0,0,0.08);
+            --shadow-lg: 0 20px 40px rgba(0,0,0,0.1);
+            --radius-sm: 16px;
+            --radius-md: 24px;
+            --radius-lg: 32px;
+        }
+
         body {
-            background: #f0f4f8;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+            background: linear-gradient(145deg, #eef2f7 0%, #d9e0e8 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
         }
+
+        /* ========== الهيدر ========== */
         .navbar {
-            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
-            padding: 18px 40px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 16px 24px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 15px;
             color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: var(--shadow-md);
         }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
+
+        @media (min-width: 768px) {
+            .navbar {
+                padding: 18px 40px;
+            }
         }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .logo-content {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-weight: 700;
+            font-size: 18px;
+        }
+
+        @media (min-width: 768px) {
+            .logo-content {
+                font-size: 22px;
+                gap: 12px;
+            }
+        }
+
+        .logo-img {
+            width: 35px;
+            height: 35px;
+            border-radius: 50%;
+            border: 2px solid #2563eb;
+            object-fit: cover;
+        }
+
+        @media (min-width: 768px) {
+            .logo-img {
+                width: 45px;
+                height: 45px;
+            }
+        }
+
+        .logo-text span:first-child { color: #2563eb; }
+        .logo-text span:last-child { color: #94a3b8; font-size: 14px; }
+
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             align-items: center;
+            flex-wrap: wrap;
         }
+
+        @media (min-width: 768px) {
+            .nav-links {
+                gap: 15px;
+            }
+        }
+
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 8px 18px;
+            padding: 6px 12px;
             border-radius: 30px;
+            transition: 0.3s;
+            font-weight: 500;
+            font-size: 13px;
         }
+
+        @media (min-width: 768px) {
+            .nav-links a {
+                padding: 8px 20px;
+                font-size: 1rem;
+            }
+        }
+
         .nav-links a:hover {
-            background: #ffb347;
-            color: #1e2a3e;
+            background: var(--accent);
+            color: var(--text-dark);
         }
+
+        /* ========== القائمة المنسدلة ========== */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 6px 12px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            border: none;
+            font-size: 13px;
+            font-family: inherit;
+        }
+
+        @media (min-width: 768px) {
+            .dropdown-btn {
+                padding: 8px 20px;
+                gap: 8px;
+                font-size: 1rem;
+            }
+        }
+
+        .dropdown-btn:hover {
+            background: var(--accent);
+            color: var(--text-dark);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            min-width: 180px;
+            box-shadow: var(--shadow-lg);
+            border-radius: var(--radius-sm);
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: var(--text-dark);
+            padding: 12px 16px;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
+            font-size: 14px;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .dropdown-content a:hover {
+            background: var(--gray-light);
+            color: var(--primary);
+        }
+
+        .dropdown-content .logout-item {
+            color: var(--danger);
+            border-top: 1px solid var(--gray);
+        }
+
+        .dropdown-content .logout-item:hover {
+            background: #fee2e2;
+        }
+
+        /* ========== المحتوى الرئيسي ========== */
         .container {
-            max-width: 1300px;
-            margin: 30px auto;
-            padding: 0 20px;
+            max-width: 1400px;
+            margin: 20px auto;
+            padding: 0 16px;
         }
-        .header-section {
+
+        @media (min-width: 768px) {
+            .container {
+                margin: 30px auto;
+                padding: 0 24px;
+            }
+        }
+
+        /* بطاقة الترحيب */
+        .welcome-card {
+            background: linear-gradient(125deg, var(--primary), var(--primary-dark));
+            border-radius: var(--radius-lg);
+            padding: 24px;
+            margin-bottom: 30px;
+            color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 30px;
             flex-wrap: wrap;
+            gap: 15px;
         }
+
+        @media (min-width: 768px) {
+            .welcome-card {
+                padding: 30px 35px;
+            }
+        }
+
+        .welcome-text h2 {
+            font-size: 1.3rem;
+            margin-bottom: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .welcome-text h2 {
+                font-size: 1.8rem;
+            }
+        }
+
+        .welcome-text p {
+            opacity: 0.9;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .welcome-text p {
+                font-size: 1rem;
+            }
+        }
+
+        .logout-btn {
+            background: var(--danger);
+            color: white;
+            padding: 8px 20px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .logout-btn {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        .logout-btn:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+
+        /* إحصائيات */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-bottom: 30px;
+        }
+
+        @media (min-width: 640px) {
+            .stats-grid {
+                grid-template-columns: repeat(4, 1fr);
+                gap: 20px;
+            }
+        }
+
+        .stat-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 18px;
+            text-align: center;
+            box-shadow: var(--shadow-sm);
+            transition: 0.3s;
+        }
+
+        @media (min-width: 768px) {
+            .stat-card {
+                padding: 25px;
+            }
+        }
+
+        .stat-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .stat-icon {
+            width: 45px;
+            height: 45px;
+            background: var(--gray-light);
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 12px;
+        }
+
+        @media (min-width: 768px) {
+            .stat-icon {
+                width: 60px;
+                height: 60px;
+                margin-bottom: 15px;
+            }
+        }
+
+        .stat-icon i {
+            font-size: 22px;
+            color: var(--primary);
+        }
+
+        @media (min-width: 768px) {
+            .stat-icon i {
+                font-size: 28px;
+            }
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: var(--primary-dark);
+        }
+
+        @media (min-width: 768px) {
+            .stat-number {
+                font-size: 32px;
+            }
+        }
+
+        .stat-label {
+            color: var(--gray-dark);
+            font-size: 12px;
+            margin-top: 5px;
+        }
+
+        @media (min-width: 768px) {
+            .stat-label {
+                font-size: 14px;
+            }
+        }
+
+        /* رأس قسم الطلبات */
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 15px;
+        }
+
+        .section-header h3 {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            border-right: 4px solid var(--accent);
+            padding-right: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .section-header h3 {
+                font-size: 1.5rem;
+                padding-right: 15px;
+            }
+        }
+
         .btn-add {
-            background: #ffb347;
-            color: #1e2a3e;
-            padding: 12px 25px;
+            background: var(--accent);
+            color: var(--text-dark);
+            padding: 8px 18px;
             border-radius: 40px;
             text-decoration: none;
             font-weight: bold;
+            transition: 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
         }
-        .request-grid {
+
+        @media (min-width: 768px) {
+            .btn-add {
+                padding: 10px 25px;
+                font-size: 1rem;
+            }
+        }
+
+        .btn-add:hover {
+            background: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* شبكة الطلبات */
+        .requests-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
+            grid-template-columns: 1fr;
+            gap: 20px;
         }
-        .card {
-            background: white;
-            border-radius: 24px;
+
+        @media (min-width: 640px) {
+            .requests-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+
+        @media (min-width: 1024px) {
+            .requests-grid {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+
+        .request-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-md);
+            transition: all 0.3s ease;
+            position: relative;
         }
-        .card-content {
-            padding: 20px;
+
+        .request-card:hover {
+            transform: translateY(-5px);
+            box-shadow: var(--shadow-lg);
         }
-        .card h3 {
-            color: #0a2f2f;
-            margin-bottom: 10px;
+
+        .request-header {
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+            padding: 15px;
+            color: white;
         }
-        .badge {
+
+        @media (min-width: 768px) {
+            .request-header {
+                padding: 18px;
+            }
+        }
+
+        .request-status {
             display: inline-block;
-            background: #e9f0f0;
-            padding: 5px 12px;
+            padding: 4px 12px;
             border-radius: 20px;
-            font-size: 12px;
-            margin-bottom: 10px;
+            font-size: 11px;
+            font-weight: bold;
         }
+
+        .status-open {
+            background: var(--success);
+            color: white;
+        }
+
+        .status-matched {
+            background: var(--warning);
+            color: var(--text-dark);
+        }
+
+        .status-closed {
+            background: var(--gray-dark);
+            color: white;
+        }
+
+        .request-title {
+            font-size: 1rem;
+            margin: 10px 0 5px;
+        }
+
+        @media (min-width: 768px) {
+            .request-title {
+                font-size: 1.1rem;
+            }
+        }
+
+        .request-date {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+
+        .request-info {
+            padding: 15px;
+        }
+
+        @media (min-width: 768px) {
+            .request-info {
+                padding: 18px;
+            }
+        }
+
+        .request-detail {
+            margin: 10px 0;
+            color: var(--text-light);
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .request-detail {
+                font-size: 14px;
+            }
+        }
+
+        .request-detail i {
+            width: 20px;
+            color: var(--primary);
+        }
+
         .card-actions {
             display: flex;
             gap: 10px;
             margin-top: 15px;
         }
+
         .btn-edit, .btn-delete {
             flex: 1;
             padding: 8px;
             border: none;
-            border-radius: 20px;
+            border-radius: 25px;
             cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+            font-size: 12px;
         }
+
+        @media (min-width: 768px) {
+            .btn-edit, .btn-delete {
+                padding: 10px;
+                font-size: 14px;
+            }
+        }
+
         .btn-edit {
-            background: #1b6b6b;
+            background: var(--primary);
             color: white;
         }
+
+        .btn-edit:hover {
+            background: var(--accent);
+            color: var(--text-dark);
+            transform: translateY(-2px);
+        }
+
         .btn-delete {
-            background: #e53e3e;
+            background: var(--danger);
             color: white;
         }
+
+        .btn-delete:hover {
+            background: #c53030;
+            transform: translateY(-2px);
+        }
+
+        /* حالة عدم وجود طلبات */
+        .empty-state {
+            text-align: center;
+            padding: 50px 20px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            color: var(--gray-dark);
+        }
+
+        @media (min-width: 768px) {
+            .empty-state {
+                padding: 80px;
+            }
+        }
+
+        .empty-state i {
+            font-size: 50px;
+            margin-bottom: 15px;
+            color: var(--gray);
+        }
+
+        @media (min-width: 768px) {
+            .empty-state i {
+                font-size: 70px;
+            }
+        }
+
+        .empty-state .btn-add {
+            display: inline-block;
+            margin-top: 20px;
+        }
+
+        /* ترقيم الصفحات */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        @media (min-width: 768px) {
+            .pagination {
+                gap: 10px;
+                margin-top: 40px;
+            }
+        }
+
+        .pagination button {
+            padding: 8px 14px;
+            background: var(--white);
+            border: 1px solid var(--gray);
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+            font-size: 13px;
+        }
+
+        @media (min-width: 768px) {
+            .pagination button {
+                padding: 10px 18px;
+                font-size: 14px;
+            }
+        }
+
+        .pagination button:hover:not(:disabled) {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .pagination button.active {
+            background: var(--accent);
+            border-color: var(--accent);
+            color: var(--text-dark);
+        }
+
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+
+        /* الفوتر */
         .footer {
-            background: #0a2f2f;
+            background: var(--primary-dark);
             color: white;
             text-align: center;
             padding: 25px;
             margin-top: 50px;
         }
-        .user-info {
-            background: white;
-            padding: 15px 25px;
-            border-radius: 20px;
-            margin-bottom: 25px;
+
+        @media (min-width: 768px) {
+            .footer {
+                padding: 35px;
+                margin-top: 60px;
+            }
+        }
+
+        .footer-links {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            justify-content: center;
+            gap: 15px;
+            margin-bottom: 15px;
             flex-wrap: wrap;
         }
-        .logout-btn {
-            background: #e53e3e;
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            border: none;
-            cursor: pointer;
+
+        @media (min-width: 768px) {
+            .footer-links {
+                gap: 30px;
+                margin-bottom: 20px;
+            }
+        }
+
+        .footer-links a {
+            color: var(--accent);
+            text-decoration: none;
+            font-size: 12px;
+        }
+
+        @media (min-width: 768px) {
+            .footer-links a {
+                font-size: 14px;
+            }
+        }
+
+        .footer-links a:hover {
+            text-decoration: underline;
         }
     </style>
 </head>
 <body>
 
 <div class="navbar">
-    <div class="logo">🧪 كيماتو - العميل</div>
+    <div class="logo">
+        <a href="index.html" style="text-decoration:none;">
+            <div class="logo-content">
+                <img src="https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/709548215_2209434319875128_7640925248715427952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hhCEJVn_ItwQ7kNvwE1RoKX&_nc_oc=AdoFrDGRfx8kM33l7aB2X-xe-cpIlVPSBffMzDpuuaaNY0IK_xSxp2kH4A7bRMUC030&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=eVsIN6W69tJnSD81wCmsAA&_nc_ss=7b2a8&oh=00_Af6F7JJvo7lXyrTp6fVmFtTxAbbtNjjryJ5K5MfYjzFuaQ&oe=6A206BBC"
+                     class="logo-img" alt="كيماتو">
+                <div class="logo-text">
+                    <span>كيماتو</span>
+                    <span> | لوحة العميل</span>
+                </div>
+            </div>
+        </a>
+    </div>
     <div class="nav-links">
         <a href="index.html">الرئيسية</a>
-        <a href="add-request.html">➕ طلب شراء جديد</a>
+        <a href="all-products.html">📦 المنتجات</a>
+        <a href="all-requests.html">📋 الطلبات</a>
+        <a href="add-request.html">➕ طلب جديد</a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><i class="fas fa-bars"></i> القائمة</button>
+            <div class="dropdown-content" id="dropdownContent"></div>
+        </div>
     </div>
 </div>
 
 <div class="container">
-    <div class="user-info" id="userInfo">
-        <span>جاري التحميل...</span>
-        <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+    <div class="welcome-card" id="welcomeCard">
+        <div class="welcome-text">
+            <h2>👋 مرحباً بك في لوحة العميل</h2>
+            <p>من هنا يمكنك إدارة طلبات الشراء الخاصة بك</p>
+        </div>
+        <button class="logout-btn" id="logoutBtn">🚪 تسجيل خروج</button>
     </div>
-    
-    <div class="header-section">
-        <h2>📋 طلبات الشراء الخاصة بي</h2>
-        <a href="add-request.html" class="btn-add">+ طلب شراء جديد</a>
+
+    <div class="stats-grid" id="statsGrid">
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+            <div class="stat-number" id="totalRequests">0</div>
+            <div class="stat-label">إجمالي الطلبات</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-clock"></i></div>
+            <div class="stat-number" id="openRequests">0</div>
+            <div class="stat-label">طلبات مفتوحة</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-handshake"></i></div>
+            <div class="stat-number" id="matchedRequests">0</div>
+            <div class="stat-label">تم التوفيق</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon"><i class="fas fa-check-circle"></i></div>
+            <div class="stat-number" id="closedRequests">0</div>
+            <div class="stat-label">طلبات مغلقة</div>
+        </div>
     </div>
-    
-    <div id="requestsList" class="request-grid">جاري التحميل...</div>
+
+    <div class="section-header">
+        <h3><i class="fas fa-clipboard-list"></i> طلبات الشراء الخاصة بي</h3>
+        <a href="add-request.html" class="btn-add"><i class="fas fa-plus"></i> طلب شراء جديد</a>
+    </div>
+
+    <div id="requestsContainer" class="requests-grid">
+        <div class="empty-state">
+            <i class="fas fa-inbox"></i>
+            <p>⚠️ لا توجد طلبات شراء حتى الآن</p>
+            <a href="add-request.html" class="btn-add">➕ أضف طلبك الأول</a>
+        </div>
+    </div>
+
+    <div id="pagination" class="pagination"></div>
 </div>
 
 <div class="footer">
-    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية
+    <div class="footer-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">جميع المنتجات</a>
+        <a href="all-requests.html">جميع الطلبات</a>
+        <a href="add-request.html">إضافة طلب</a>
+        <a href="profile.html">الملف الشخصي</a>
+    </div>
+    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية</div>
 </div>
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-    
+
     const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
-    
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    
+
     let currentUser = null
-    
+    let currentProfile = null
+    let currentPage = 1
+    let totalCount = 0
+    const itemsPerPage = 9
+
+    // ========== القائمة المنسدلة ==========
+    function setupDropdown() {
+        const dropdownBtn = document.querySelector('.dropdown-btn')
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (dropdownBtn && dropdownContent) {
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation()
+                dropdownContent.classList.toggle('show')
+            })
+            document.addEventListener('click', () => {
+                dropdownContent.classList.remove('show')
+            })
+        }
+    }
+
+    async function updateDropdownContent() {
+        const { data: { user } } = await supabase.auth.getUser()
+        currentUser = user
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (user) {
+            dropdownContent.innerHTML = `
+                <a href="profile.html">👤 الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
+            `
+            const logoutLink = document.getElementById('logoutLink')
+            if (logoutLink) {
+                logoutLink.onclick = async (e) => {
+                    e.preventDefault()
+                    await supabase.auth.signOut()
+                    window.location.href = 'index.html'
+                }
+            }
+        } else {
+            dropdownContent.innerHTML = `
+                <a href="auth.html">🔐 تسجيل الدخول</a>
+                <a href="auth.html">📝 حساب جديد</a>
+            `
+        }
+    }
+
+    // ========== عرض الإحصائيات ==========
+    async function loadStats() {
+        const { data: requests } = await supabase
+            .from('purchase_requests')
+            .select('status')
+            .eq('buyer_id', currentUser.id)
+
+        const total = requests?.length || 0
+        const open = requests?.filter(r => r.status === 'open').length || 0
+        const matched = requests?.filter(r => r.status === 'matched').length || 0
+        const closed = requests?.filter(r => r.status === 'closed').length || 0
+
+        document.getElementById('totalRequests').innerText = total
+        document.getElementById('openRequests').innerText = open
+        document.getElementById('matchedRequests').innerText = matched
+        document.getElementById('closedRequests').innerText = closed
+    }
+
+    // ========== عرض الطلبات ==========
+    async function loadRequests() {
+        document.getElementById('requestsContainer').innerHTML = '<div class="empty-state"><i class="fas fa-spinner fa-spin"></i><p>جاري التحميل...</p></div>'
+
+        const from = (currentPage - 1) * itemsPerPage
+        const to = from + itemsPerPage - 1
+
+        const { data: requests, count } = await supabase
+            .from('purchase_requests')
+            .select('*', { count: 'exact' })
+            .eq('buyer_id', currentUser.id)
+            .order('created_at', { ascending: false })
+            .range(from, to)
+
+        totalCount = count || 0
+
+        const container = document.getElementById('requestsContainer')
+        
+        if (!requests || requests.length === 0) {
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-inbox"></i>
+                    <p>⚠️ لا توجد طلبات شراء حتى الآن</p>
+                    <a href="add-request.html" class="btn-add">➕ أضف طلبك الأول</a>
+                </div>
+            `
+            document.getElementById('pagination').innerHTML = ''
+            return
+        }
+
+        const statusMap = {
+            'open': { class: 'status-open', text: '🟢 مفتوح' },
+            'matched': { class: 'status-matched', text: '🟡 تم التوفيق' },
+            'closed': { class: 'status-closed', text: '🔴 مغلق' }
+        }
+
+        container.innerHTML = requests.map(r => `
+            <div class="request-card">
+                <div class="request-header">
+                    <span class="request-status ${statusMap[r.status]?.class}">${statusMap[r.status]?.text}</span>
+                    <div class="request-title">📦 ${r.product_name}</div>
+                    <div class="request-date"><i class="fas fa-calendar-alt"></i> ${new Date(r.created_at).toLocaleDateString('ar-EG')}</div>
+                </div>
+                <div class="request-info">
+                    <div class="request-detail">
+                        <i class="fas fa-balance-scale"></i>
+                        <span>الكمية: ${r.quantity_needed || 'غير محدد'}</span>
+                    </div>
+                    ${r.description ? `
+                        <div class="request-detail">
+                            <i class="fas fa-align-right"></i>
+                            <span>${r.description.substring(0, 80)}${r.description.length > 80 ? '...' : ''}</span>
+                        </div>
+                    ` : ''}
+                    ${r.deadline ? `
+                        <div class="request-detail">
+                            <i class="fas fa-calendar-times"></i>
+                            <span>آخر موعد: ${new Date(r.deadline).toLocaleDateString('ar-EG')}</span>
+                        </div>
+                    ` : ''}
+                    <div class="card-actions">
+                        <button class="btn-edit" onclick="editRequest('${r.id}')">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                        <button class="btn-delete" onclick="deleteRequest('${r.id}')">
+                            <i class="fas fa-trash"></i> حذف
+                        </button>
+                    </div>
+                </div>
+            </div>
+        `).join('')
+
+        // ترقيم الصفحات
+        const totalPages = Math.ceil(totalCount / itemsPerPage)
+        let paginationHtml = ''
+        
+        paginationHtml += `<button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>« الأول</button>`
+        paginationHtml += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹ السابق</button>`
+        
+        let startPage = Math.max(1, currentPage - 2)
+        let endPage = Math.min(totalPages, currentPage + 2)
+        
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHtml += `<button onclick="goToPage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`
+        }
+        
+        paginationHtml += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>التالي ›</button>`
+        paginationHtml += `<button onclick="goToPage(${totalPages})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>الأخير »</button>`
+        
+        document.getElementById('pagination').innerHTML = paginationHtml
+    }
+
+    window.goToPage = (page) => {
+        if (page < 1) return
+        const totalPages = Math.ceil(totalCount / itemsPerPage)
+        if (page > totalPages) return
+        currentPage = page
+        loadRequests()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+
+    // ========== التعديل - يوجه إلى edit-request.html ==========
+    window.editRequest = (id) => {
+        window.location.href = `edit-request.html?id=${id}`
+    }
+
+    // ========== الحذف ==========
+    window.deleteRequest = async (id) => {
+        if (confirm('⚠️ هل أنت متأكد من حذف هذا الطلب؟ لا يمكن التراجع عن هذا الإجراء.')) {
+            const { error } = await supabase
+                .from('purchase_requests')
+                .delete()
+                .eq('id', id)
+                .eq('buyer_id', currentUser.id)
+
+            if (error) {
+                alert('❌ خطأ: ' + error.message)
+            } else {
+                alert('✅ تم حذف الطلب بنجاح')
+                loadStats()
+                loadRequests()
+            }
+        }
+    }
+
+    // ========== التحقق من تسجيل الدخول ==========
     async function checkAuth() {
         const { data: { user } } = await supabase.auth.getUser()
         if (!user) {
@@ -180,77 +1021,40 @@
             return
         }
         currentUser = user
-        
+
         const { data: profile } = await supabase
             .from('profiles')
             .select('*')
             .eq('id', user.id)
             .single()
         
-        document.getElementById('userInfo').innerHTML = `
-            <span>👋 مرحباً ${profile?.full_name || profile?.company_name || 'عميل'}</span>
-            <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+        currentProfile = profile
+
+        if (profile?.user_type !== 'buyer') {
+            alert('هذه الصفحة مخصصة للعملاء فقط')
+            window.location.href = 'index.html'
+            return
+        }
+
+        document.getElementById('welcomeCard').innerHTML = `
+            <div class="welcome-text">
+                <h2>👋 مرحباً ${profile.full_name?.split(' ')[0] || 'عميل'}!</h2>
+                <p>من هنا يمكنك إدارة طلبات الشراء الخاصة بك</p>
+            </div>
+            <button class="logout-btn" id="logoutBtn">🚪 تسجيل خروج</button>
         `
-        
-        document.getElementById('logoutBtn').addEventListener('click', logout)
+        document.getElementById('logoutBtn').addEventListener('click', async () => {
+            await supabase.auth.signOut()
+            window.location.href = 'index.html'
+        })
+
+        loadStats()
         loadRequests()
     }
-    
-    async function logout() {
-        await supabase.auth.signOut()
-        window.location.href = 'index.html'
-    }
-    
-    async function loadRequests() {
-        const { data, error } = await supabase
-            .from('purchase_requests')
-            .select('*')
-            .eq('buyer_id', currentUser.id)
-            .order('created_at', { ascending: false })
-        
-        const container = document.getElementById('requestsList')
-        if (error) {
-            container.innerHTML = `<p style="color:red;">خطأ: ${error.message}</p>`
-            return
-        }
-        if (!data || data.length === 0) {
-            container.innerHTML = '<p>⚠️ لا توجد طلبات شراء. أضف طلبك الأول! 🚀</p>'
-            return
-        }
-        
-        container.innerHTML = data.map(r => `
-            <div class="card">
-                <div class="card-content">
-                    <span class="badge">${r.status === 'open' ? '🟢 مفتوح' : '🔴 مغلق'}</span>
-                    <h3>📦 ${r.product_name}</h3>
-                    <p><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</p>
-                    <p><strong>المواصفات:</strong> ${r.description?.substring(0, 100) || '-'}</p>
-                    <p><strong>آخر موعد:</strong> ${r.deadline || 'غير محدد'}</p>
-                    <div class="card-actions">
-                        <button class="btn-edit" onclick="editRequest('${r.id}')">تعديل</button>
-                        <button class="btn-delete" onclick="deleteRequest('${r.id}')">حذف</button>
-                    </div>
-                </div>
-            </div>
-        `).join('')
-    }
-    
-    window.editRequest = function(id) {
-        window.location.href = `add-request.html?id=${id}`
-    }
-    
-    window.deleteRequest = async function(id) {
-        if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
-            const { error } = await supabase.from('purchase_requests').delete().eq('id', id)
-            if (error) {
-                alert('خطأ: ' + error.message)
-            } else {
-                alert('تم الحذف بنجاح')
-                loadRequests()
-            }
-        }
-    }
-    
+
+    // ========== بدء التشغيل ==========
+    setupDropdown()
+    updateDropdownContent()
     checkAuth()
 </script>
 </body>
