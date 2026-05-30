@@ -6,9 +6,17 @@
     <title>كيماتو | سوق المواد الكيماوية في مصر</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', 'Tahoma', sans-serif; }
-        body { background: #f0f4f8; }
-        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+
+        body {
+            background: #f0f4f8;
+        }
+
         /* ========== الهيدر ========== */
         .navbar {
             background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
@@ -23,17 +31,18 @@
             z-index: 100;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        
-        .logo a { text-decoration: none; }
-        
-        /* ========== القائمة الرئيسية ========== */
+
+        .logo a {
+            text-decoration: none;
+        }
+
         .nav-links {
             display: flex;
             gap: 15px;
             align-items: center;
             flex-wrap: wrap;
         }
-        
+
         .nav-links > a {
             color: white;
             text-decoration: none;
@@ -42,18 +51,23 @@
             transition: 0.3s;
             font-weight: 500;
         }
-        
+
         .nav-links > a:hover {
             background: #ffb347;
             color: #1e2a3e;
         }
-        
-        /* ========== القائمة المنسدلة ========== */
+
+        .btn-login {
+            background: #ffb347;
+            color: #1e2a3e !important;
+        }
+
+        /* ========== القائمة المنسدلة - تعمل بالضغط ========== */
         .dropdown {
             position: relative;
             display: inline-block;
         }
-        
+
         .dropdown-btn {
             background: rgba(255,255,255,0.15);
             color: white;
@@ -69,12 +83,12 @@
             font-size: 1rem;
             font-family: inherit;
         }
-        
+
         .dropdown-btn:hover {
             background: #ffb347;
             color: #1e2a3e;
         }
-        
+
         .dropdown-content {
             display: none;
             position: absolute;
@@ -85,11 +99,15 @@
             min-width: 200px;
             box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             border-radius: 16px;
-            z-index: 1;
+            z-index: 1000;
             overflow: hidden;
             margin-top: 8px;
         }
-        
+
+        .dropdown-content.show {
+            display: block;
+        }
+
         .dropdown-content a {
             color: #1e2a3e;
             padding: 12px 20px;
@@ -99,26 +117,22 @@
             font-size: 14px;
             border-bottom: 1px solid #e2e8f0;
         }
-        
+
         .dropdown-content a:hover {
             background: #f0f4f8;
             color: #1a5f5f;
         }
-        
+
         .dropdown-content .logout-item {
             color: #e53e3e;
             border-top: 1px solid #e2e8f0;
         }
-        
+
         .dropdown-content .logout-item:hover {
             background: #fee2e2;
         }
-        
-        .dropdown:hover .dropdown-content {
-            display: block;
-        }
-        
-        /* ========== باقي الاستايلات ========== */
+
+        /* ========== شريط البحث ========== */
         .search-section {
             background: white;
             border-radius: 60px;
@@ -129,6 +143,7 @@
             gap: 15px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
+
         .search-input {
             flex: 1;
             padding: 18px 25px;
@@ -138,10 +153,12 @@
             background: #f8fafc;
             outline: none;
         }
+
         .search-input:focus {
             background: white;
             box-shadow: 0 0 0 2px #ffb347;
         }
+
         .search-btn {
             background: #ffb347;
             border: none;
@@ -155,10 +172,13 @@
             align-items: center;
             gap: 10px;
         }
+
         .search-btn:hover {
             background: #1a5f5f;
             color: white;
         }
+
+        /* ========== فلاتر التصنيفات ========== */
         .filter-buttons {
             display: flex;
             justify-content: center;
@@ -167,6 +187,7 @@
             margin: 20px auto;
             max-width: 800px;
         }
+
         .filter-chip {
             background: #e2e8f0;
             padding: 8px 20px;
@@ -175,15 +196,21 @@
             transition: 0.3s;
             font-size: 14px;
         }
-        .filter-chip:hover, .filter-chip.active {
+
+        .filter-chip:hover,
+        .filter-chip.active {
             background: #1a5f5f;
             color: white;
         }
+
+        /* ========== الحاوية الرئيسية ========== */
         .container {
             max-width: 1400px;
             margin: 30px auto;
             padding: 0 20px;
         }
+
+        /* ========== قسم الترحيب ========== */
         .hero {
             background: linear-gradient(125deg, #1a5f5f, #0a2f2f);
             border-radius: 32px;
@@ -192,21 +219,25 @@
             color: white;
             text-align: center;
         }
+
         .hero h1 {
             font-size: 2.5rem;
             margin-bottom: 15px;
         }
+
         .hero p {
             font-size: 1.2rem;
             opacity: 0.9;
             margin-bottom: 25px;
         }
+
         .hero-buttons {
             display: flex;
             gap: 15px;
             justify-content: center;
             flex-wrap: wrap;
         }
+
         .hero-btn {
             background: #ffb347;
             color: #1e2a3e;
@@ -216,10 +247,13 @@
             font-weight: bold;
             transition: 0.3s;
         }
+
         .hero-btn:hover {
             background: white;
             transform: translateY(-3px);
         }
+
+        /* ========== الأقسام ========== */
         .section-title {
             font-size: 28px;
             margin: 40px 0 25px;
@@ -231,6 +265,7 @@
             align-items: center;
             flex-wrap: wrap;
         }
+
         .view-all {
             font-size: 14px;
             background: #e2e8f0;
@@ -240,15 +275,19 @@
             color: #1a5f5f;
             transition: 0.3s;
         }
+
         .view-all:hover {
             background: #1a5f5f;
             color: white;
         }
-        .product-grid, .request-grid {
+
+        .product-grid,
+        .request-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
             gap: 25px;
         }
+
         .card {
             background: white;
             border-radius: 24px;
@@ -257,30 +296,36 @@
             transition: all 0.3s ease;
             cursor: pointer;
         }
+
         .card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 35px rgba(0,0,0,0.15);
         }
+
         .card-img {
             width: 100%;
             height: 200px;
             object-fit: cover;
             background: #e2e8f0;
         }
+
         .card-content {
             padding: 20px;
         }
+
         .card h3 {
             color: #0a2f2f;
             margin-bottom: 10px;
             font-size: 1.2rem;
         }
+
         .price {
             color: #ffb347;
             font-size: 22px;
             font-weight: bold;
             margin: 10px 0;
         }
+
         .badge {
             display: inline-block;
             background: #e9f0f0;
@@ -289,11 +334,13 @@
             font-size: 12px;
             margin: 10px 0;
         }
+
         .supplier-name {
             color: #718096;
             font-size: 13px;
             margin-top: 10px;
         }
+
         .btn {
             display: inline-block;
             background: #1b6b6b;
@@ -308,10 +355,13 @@
             width: 100%;
             text-align: center;
         }
+
         .btn:hover {
             background: #ffb347;
             color: #1e2a3e;
         }
+
+        /* ========== الفوتر ========== */
         .footer {
             background: #0a2f2f;
             color: white;
@@ -319,6 +369,7 @@
             padding: 35px;
             margin-top: 60px;
         }
+
         .footer-links {
             display: flex;
             justify-content: center;
@@ -326,15 +377,19 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
+
         .footer-links a {
             color: #ffb347;
             text-decoration: none;
         }
+
+        /* ========== تحميل ========== */
         .loader {
             text-align: center;
             padding: 50px;
             color: #1a5f5f;
         }
+
         .no-results {
             text-align: center;
             padding: 60px;
@@ -342,26 +397,32 @@
             border-radius: 32px;
             color: #718096;
         }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 gap: 15px;
             }
+
             .hero h1 {
                 font-size: 1.8rem;
             }
+
             .section-title {
                 font-size: 22px;
             }
+
             .search-section {
                 flex-direction: column;
                 border-radius: 32px;
                 padding: 15px;
             }
+
             .search-btn {
                 padding: 15px;
                 justify-content: center;
             }
+
             .dropdown-content {
                 left: auto;
                 right: 0;
@@ -374,9 +435,8 @@
 <div class="navbar">
     <div class="logo">
         <a href="/" style="text-decoration:none;">
-            <div style="display:flex;align-items:center;gap:12px;font-family:'Cairo',sans-serif;font-weight:700;font-size:22px;color:#0f172a;cursor:pointer;transition:all .3s ease;">
+            <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;">
                 <img src="https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/709548215_2209434319875128_7640925248715427952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hhCEJVn_ItwQ7kNvwE1RoKX&_nc_oc=AdoFrDGRfx8kM33l7aB2X-xe-cpIlVPSBffMzDpuuaaNY0IK_xSxp2kH4A7bRMUC030&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=eVsIN6W69tJnSD81wCmsAA&_nc_ss=7b2a8&oh=00_Af6F7JJvo7lXyrTp6fVmFtTxAbbtNjjryJ5K5MfYjzFuaQ&oe=6A206BBC"
-                     alt="Chemato"
                      style="width:55px;height:55px;border-radius:50%;border:3px solid #2563eb;box-shadow:0 4px 12px rgba(37,99,235,.25);object-fit:cover;">
                 <span>
                     <span style="color:#2563eb;">كيماتو</span>
@@ -385,17 +445,23 @@
             </div>
         </a>
     </div>
-    
+
     <div class="nav-links" id="navLinks">
         <a href="index.html">الرئيسية</a>
         <a href="all-products.html">📦 جميع المنتجات</a>
         <a href="all-requests.html">📋 جميع الطلبات</a>
-        
+
+        <!-- القائمة المنسدلة -->
         <div class="dropdown">
             <button class="dropdown-btn">
                 <i class="fas fa-bars"></i> القائمة
             </button>
-            <div class="dropdown-content" id="dropdownContent"></div>
+            <div class="dropdown-content" id="dropdownContent">
+                <a href="auth.html">🔐 تسجيل الدخول</a>
+                <a href="auth.html">📝 حساب جديد</a>
+                <a href="supplier-dashboard.html">📦 للموردين</a>
+                <a href="buyer-dashboard.html">🛒 للعملاء</a>
+            </div>
         </div>
     </div>
 </div>
@@ -410,16 +476,18 @@
         </div>
     </div>
 
+    <!-- شريط البحث -->
     <div class="search-section">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن منتج... (مثال: كاوية صودا، سولار)">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن منتج... (مثال: كاوية صودا، سولار، أحماض)">
         <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
     </div>
 
-    <!-- فلاتر التصنيفات - هتتعبى من قاعدة البيانات -->
+    <!-- أزرار التصفية (ديناميكية من قاعدة البيانات) -->
     <div class="filter-buttons" id="filterButtons">
         <span class="filter-chip active" data-category-id="all">الكل</span>
     </div>
 
+    <!-- قسم المنتجات -->
     <div class="section-title">
         <span>📦 أحدث المواد الكيماوية</span>
         <a href="all-products.html" class="view-all">عرض الكل ←</a>
@@ -428,6 +496,7 @@
         <div class="loader">⏳ جاري تحميل المنتجات...</div>
     </div>
 
+    <!-- قسم طلبات الشراء -->
     <div class="section-title">
         <span>📢 أحدث طلبات الشراء</span>
         <a href="all-requests.html" class="view-all">عرض الكل ←</a>
@@ -451,36 +520,65 @@
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-    
+
     const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
-    
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    
+
     let currentUser = null
     let currentProfile = null
     let currentCategoryId = 'all'
     let currentSearch = ''
+
+    // ========== القائمة المنسدلة - تعمل بالضغط ==========
+    function setupDropdown() {
+        const dropdownBtn = document.querySelector('.dropdown-btn')
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (dropdownBtn && dropdownContent) {
+            // الضغط على الزر يفتح/يغلق القائمة
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation()
+                dropdownContent.classList.toggle('show')
+            })
+            
+            // لو ضغطت على أي حتة في الصفحة، أقفل القائمة
+            document.addEventListener('click', () => {
+                dropdownContent.classList.remove('show')
+            })
+        }
+    }
     
-    // ========== القائمة المنسدلة ==========
-    async function setupDropdown() {
+    // ========== تحديث القائمة حسب حالة تسجيل الدخول ==========
+    async function updateDropdownContent() {
         const { data: { user } } = await supabase.auth.getUser()
         currentUser = user
         const dropdownContent = document.getElementById('dropdownContent')
         
         if (user) {
-            const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('user_type, full_name')
+                .eq('id', user.id)
+                .single()
             currentProfile = profile
+            
             dropdownContent.innerHTML = `
-                <a href="#" id="dashboardLink">📦 ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}</a>
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}">
+                    📦 ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}
+                </a>
                 <a href="profile.html">👤 الملف الشخصي</a>
                 <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
             `
-            document.getElementById('dashboardLink').href = profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'
-            document.getElementById('logoutLink').onclick = async (e) => {
-                e.preventDefault()
-                await supabase.auth.signOut()
-                window.location.reload()
+            
+            const logoutLink = document.getElementById('logoutLink')
+            if (logoutLink) {
+                logoutLink.onclick = async (e) => {
+                    e.preventDefault()
+                    await supabase.auth.signOut()
+                    window.location.reload()
+                }
             }
         } else {
             dropdownContent.innerHTML = `
@@ -491,7 +589,7 @@
             `
         }
     }
-    
+
     // ========== تحميل التصنيفات من قاعدة البيانات ==========
     async function loadCategoriesFilter() {
         const { data: categories } = await supabase
@@ -499,7 +597,7 @@
             .select('*')
             .eq('is_active', true)
             .order('display_order', { ascending: true })
-        
+
         const container = document.getElementById('filterButtons')
         if (categories && categories.length > 0) {
             categories.forEach(cat => {
@@ -510,7 +608,7 @@
                 `
             })
         }
-        
+
         // ربط أحداث النقر على الفلاتر
         document.querySelectorAll('.filter-chip').forEach(chip => {
             chip.addEventListener('click', () => {
@@ -521,32 +619,32 @@
             })
         })
     }
-    
+
     // ========== عرض المنتجات ==========
     async function loadProducts() {
         let query = supabase
             .from('products')
             .select('*')
             .eq('status', 'active')
-        
+
         if (currentCategoryId !== 'all') {
             query = query.eq('category_id', currentCategoryId)
         }
-        
+
         if (currentSearch) {
             query = query.ilike('name', `%${currentSearch}%`)
         }
-        
+
         const { data: products } = await query
             .order('created_at', { ascending: false })
             .limit(6)
-        
+
         const container = document.getElementById('productsList')
         if (!products || products.length === 0) {
             container.innerHTML = '<div class="no-results">🔍 لا توجد منتجات مطابقة للبحث</div>'
             return
         }
-        
+
         // جلب بيانات الموردين والتصنيفات لكل منتج
         const productsWithDetails = await Promise.all(products.map(async (p) => {
             const { data: profile } = await supabase
@@ -554,10 +652,10 @@
                 .select('full_name, company_name')
                 .eq('id', p.supplier_id)
                 .single()
-            
+
             let categoryName = p.category || 'مواد كيماوية'
             let categoryIcon = '📦'
-            
+
             if (p.category_id) {
                 const { data: cat } = await supabase
                     .from('categories')
@@ -569,10 +667,10 @@
                     categoryIcon = cat.icon || '📦'
                 }
             }
-            
+
             return { ...p, profile, categoryName, categoryIcon }
         }))
-        
+
         container.innerHTML = productsWithDetails.map(p => `
             <div class="card" onclick="window.location.href='product-details.html?id=${p.id}'">
                 <img class="card-img" src="${p.image_url || 'https://placehold.co/400x200?text=🧪'}" alt="${p.name}">
@@ -586,7 +684,7 @@
             </div>
         `).join('')
     }
-    
+
     // ========== عرض طلبات الشراء ==========
     async function loadRequests() {
         const { data } = await supabase
@@ -595,13 +693,13 @@
             .eq('status', 'open')
             .order('created_at', { ascending: false })
             .limit(6)
-        
+
         const container = document.getElementById('requestsList')
         if (!data || data.length === 0) {
             container.innerHTML = '<div class="no-results">⚠️ لا توجد طلبات شراء حالياً</div>'
             return
         }
-        
+
         container.innerHTML = data.map(r => `
             <div class="card" onclick="window.location.href='request-details.html?id=${r.id}'">
                 <div class="card-content">
@@ -613,22 +711,23 @@
             </div>
         `).join('')
     }
-    
+
     // ========== البحث ==========
     document.getElementById('searchBtn').addEventListener('click', () => {
         currentSearch = document.getElementById('searchInput').value.trim()
         loadProducts()
     })
-    
+
     document.getElementById('searchInput').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             currentSearch = document.getElementById('searchInput').value.trim()
             loadProducts()
         }
     })
-    
-    // ========== تشغيل كل حاجة ==========
+
+    // ========== بدء التشغيل ==========
     setupDropdown()
+    updateDropdownContent()
     loadCategoriesFilter()
     loadProducts()
     loadRequests()
