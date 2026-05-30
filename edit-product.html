@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كيماتو | تعديل منتج</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,94 +12,120 @@
             box-sizing: border-box;
             font-family: 'Cairo', 'Tahoma', sans-serif;
         }
+
         body {
             background: linear-gradient(135deg, #0f2b2b, #1a5f5f);
             min-height: 100vh;
             padding: 40px 20px;
         }
+
+        /* ========== الهيدر ========== */
+        .navbar {
+            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
+            padding: 15px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: white;
+            border-radius: 60px;
+            margin-bottom: 30px;
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+
+        /* ========== الفورم ========== */
         .form-container {
-            max-width: 700px;
+            max-width: 800px;
             margin: 0 auto;
             background: white;
             border-radius: 48px;
             padding: 40px;
             box-shadow: 0 25px 50px rgba(0,0,0,0.3);
         }
-        h1 {
-            color: #1a5f5f;
-            margin-bottom: 30px;
+
+        .form-header {
             text-align: center;
+            margin-bottom: 30px;
         }
+
+        .form-header h1 {
+            color: #1a5f5f;
+            font-size: 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+        }
+
+        .form-header p {
+            color: #64748b;
+            margin-top: 8px;
+        }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 25px;
         }
+
         label {
             display: block;
             margin-bottom: 8px;
             font-weight: bold;
             color: #2d3e50;
         }
+
+        .required::after {
+            content: '*';
+            color: #e53e3e;
+            margin-right: 4px;
+        }
+
         input, select, textarea {
             width: 100%;
-            padding: 14px;
-            border: 1px solid #cbd5e1;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
             border-radius: 30px;
             font-size: 1rem;
+            transition: all 0.3s;
+            background: #f8fafc;
         }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #ffb347;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(255,179,71,0.1);
+        }
+
         textarea {
-            border-radius: 20px;
+            border-radius: 24px;
             resize: vertical;
+            min-height: 100px;
         }
-        button {
-            width: 100%;
-            background: #ffb347;
-            border: none;
-            padding: 14px;
-            border-radius: 40px;
-            font-weight: bold;
-            font-size: 1.1rem;
-            cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background: #1a5f5f;
-            color: white;
-        }
-        .message {
-            margin-top: 20px;
-            text-align: center;
-            padding: 12px;
-            border-radius: 30px;
-        }
-        .success {
-            background: #c6f6d5;
-            color: #22543d;
-        }
-        .error {
-            background: #fed7d7;
-            color: #742a2a;
-        }
-        .back-link {
-            display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #1a5f5f;
-            text-decoration: none;
-        }
-        .copyright {
-            text-align: center;
-            margin-top: 30px;
-            color: white;
-            font-size: 0.8rem;
-        }
-        .image-preview {
-            margin-top: 15px;
-            text-align: center;
-        }
-        .image-preview img {
-            max-width: 200px;
-            border-radius: 16px;
-        }
+
+        /* صورة المنتج */
         .current-image {
             background: #eef2f5;
             padding: 15px;
@@ -106,161 +133,503 @@
             margin-bottom: 15px;
             text-align: center;
         }
+
+        .current-image img {
+            max-width: 150px;
+            border-radius: 12px;
+            margin-top: 10px;
+        }
+
+        .image-upload {
+            border: 2px dashed #cbd5e1;
+            border-radius: 24px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: 0.3s;
+            background: #f8fafc;
+        }
+
+        .image-upload:hover {
+            border-color: #ffb347;
+            background: #fffaf5;
+        }
+
+        .image-upload i {
+            font-size: 48px;
+            color: #94a3b8;
+            margin-bottom: 10px;
+        }
+
+        .image-upload p {
+            color: #64748b;
+            font-size: 14px;
+        }
+
+        .image-preview {
+            margin-top: 15px;
+            text-align: center;
+            display: none;
+        }
+
+        .image-preview img {
+            max-width: 200px;
+            max-height: 200px;
+            border-radius: 16px;
+            border: 3px solid #ffb347;
+            padding: 4px;
+        }
+
+        .remove-image {
+            background: #e53e3e;
+            color: white;
+            border: none;
+            padding: 5px 15px;
+            border-radius: 30px;
+            cursor: pointer;
+            margin-top: 10px;
+            font-size: 12px;
+        }
+
+        /* حالة المنتج */
+        .status-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .status-btn {
+            flex: 1;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 40px;
+            background: white;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .status-btn.active {
+            background: #1a5f5f;
+            color: white;
+            border-color: #1a5f5f;
+        }
+
+        .status-btn.active[data-status="active"] {
+            background: #2a9d8f;
+            border-color: #2a9d8f;
+        }
+
+        .status-btn.active[data-status="hidden"] {
+            background: #e2e8f0;
+            color: #1e2a3e;
+            border-color: #cbd5e1;
+        }
+
+        .status-btn.active[data-status="sold"] {
+            background: #e53e3e;
+            border-color: #e53e3e;
+        }
+
+        /* زر الإرسال */
+        .btn-submit {
+            width: 100%;
+            background: linear-gradient(135deg, #ffb347, #ff9500);
+            border: none;
+            padding: 16px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1.2rem;
+            cursor: pointer;
+            transition: 0.3s;
+            color: #1e2a3e;
+            margin-top: 10px;
+        }
+
+        .btn-submit:hover {
+            background: linear-gradient(135deg, #1a5f5f, #0f4f4f);
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+        }
+
+        /* رسائل */
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 30px;
+            font-weight: bold;
+        }
+
+        .success {
+            background: #c6f6d5;
+            color: #22543d;
+            border-right: 4px solid #22543d;
+        }
+
+        .error {
+            background: #fed7d7;
+            color: #742a2a;
+            border-right: 4px solid #742a2a;
+        }
+
+        .info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-right: 4px solid #1e40af;
+        }
+
+        /* تحميل */
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .loading.show {
+            display: block;
+        }
+
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #ffb347;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        /* روابط */
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 25px;
+            color: #1a5f5f;
+            text-decoration: none;
+            font-weight: bold;
+        }
+
+        .back-link:hover {
+            color: #ffb347;
+        }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: white;
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 25px;
+            }
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .status-buttons {
+                flex-direction: column;
+            }
+        }
     </style>
 </head>
 <body>
+
+<div class="navbar">
+    <div class="logo">
+        <a href="/" style="text-decoration:none;">
+            <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:20px;">
+                <img src="https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/709548215_2209434319875128_7640925248715427952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hhCEJVn_ItwQ7kNvwE1RoKX&_nc_oc=AdoFrDGRfx8kM33l7aB2X-xe-cpIlVPSBffMzDpuuaaNY0IK_xSxp2kH4A7bRMUC030&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=eVsIN6W69tJnSD81wCmsAA&_nc_ss=7b2a8&oh=00_Af6F7JJvo7lXyrTp6fVmFtTxAbbtNjjryJ5K5MfYjzFuaQ&oe=6A206BBC"
+                     style="width:40px;height:40px;border-radius:50%;border:2px solid #2563eb;object-fit:cover;">
+                <span><span style="color:#2563eb;">كيماتو</span><span style="color:#64748b;"> | تعديل منتج</span></span>
+            </div>
+        </a>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">📦 جميع المنتجات</a>
+        <a href="supplier-dashboard.html">📦 لوحة المورد</a>
+    </div>
+</div>
+
 <div class="form-container">
-    <h1>✏️ تعديل المنتج</h1>
-    
-    <form id="productForm">
+    <div class="form-header">
+        <h1><i class="fas fa-edit"></i> تعديل المنتج</h1>
+        <p>قم بتعديل بيانات منتجك بكل سهولة</p>
+    </div>
+
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>جاري تحميل بيانات المنتج...</p>
+    </div>
+
+    <form id="productForm" style="display: none;">
         <div class="form-group">
-            <label>اسم المنتج *</label>
+            <label class="required">اسم المنتج</label>
             <input type="text" id="name" required>
         </div>
-        
+
         <div class="form-group">
-            <label>التصنيف</label>
-            <select id="category">
-                <option value="خامات">خامات</option>
-                <option value="أحماض">أحماض</option>
-                <option value="مذيبات">مذيبات</option>
-                <option value="منظفات">منظفات</option>
-                <option value="بوليمرات">بوليمرات</option>
-                <option value="أخرى">أخرى</option>
+            <label class="required">القسم</label>
+            <select id="categoryId" required>
+                <option value="">اختر القسم</option>
             </select>
         </div>
-        
+
         <div class="form-group">
             <label>وصف المنتج</label>
             <textarea id="description" rows="3"></textarea>
         </div>
-        
-        <div class="form-group">
-            <label>السعر (جنيه)</label>
-            <input type="number" id="price" step="0.01">
+
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
+            <div class="form-group">
+                <label>السعر (جنيه)</label>
+                <input type="number" id="price" step="0.01">
+            </div>
+            <div class="form-group">
+                <label>الوحدة</label>
+                <select id="unit">
+                    <option value="كجم">كيلو جرام (كجم)</option>
+                    <option value="طن">طن</option>
+                    <option value="لتر">لتر</option>
+                    <option value="برميل">برميل</option>
+                    <option value="عبوة">عبوة</option>
+                </select>
+            </div>
         </div>
-        
+
         <div class="form-group">
-            <label>الوحدة</label>
-            <select id="unit">
-                <option value="كجم">كيلو جرام</option>
-                <option value="طن">طن</option>
-                <option value="لتر">لتر</option>
-                <option value="برميل">برميل</option>
-            </select>
+            <label>حالة المنتج</label>
+            <div class="status-buttons" id="statusButtons">
+                <button type="button" class="status-btn" data-status="active">🟢 متاح</button>
+                <button type="button" class="status-btn" data-status="hidden">⚪ مخفي</button>
+                <button type="button" class="status-btn" data-status="sold">🔴 تم البيع</button>
+            </div>
+            <input type="hidden" id="status" value="active">
         </div>
-        
+
         <div class="form-group">
-            <label>الحالة</label>
-            <select id="status">
-                <option value="active">متاح</option>
-                <option value="hidden">مخفي</option>
-                <option value="sold">تم البيع</option>
-            </select>
-        </div>
-        
-        <div class="form-group">
-            <label>الصورة الحالية</label>
+            <label>صورة المنتج</label>
             <div id="currentImage" class="current-image"></div>
-            <label>تغيير الصورة (اختياري)</label>
-            <input type="file" id="productImage" accept="image/*">
-            <div class="image-preview" id="imagePreview"></div>
+            <div class="image-upload" id="imageUpload">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>اضغط لتغيير الصورة (اختياري)</p>
+                <input type="file" id="productImage" accept="image/*" style="display: none;">
+            </div>
+            <div class="image-preview" id="imagePreview">
+                <img id="previewImg" src="">
+                <button type="button" class="remove-image" id="removeImageBtn">🗑️ إزالة الصورة الجديدة</button>
+            </div>
         </div>
-        
-        <button type="submit">💾 حفظ التعديلات</button>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+            <i class="fas fa-save"></i> حفظ التغييرات
+        </button>
     </form>
-    
+
     <div id="messageDiv"></div>
-    <a href="supplier-dashboard.html" class="back-link">← العودة للوحة التحكم</a>
+    <a href="supplier-dashboard.html" class="back-link">
+        <i class="fas fa-arrow-right"></i> العودة للوحة التحكم
+    </a>
 </div>
-<div class="copyright">
-    © جميع الحقوق محفوظة Hazem Mohamady 2026
+
+<div class="footer">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر
 </div>
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-    
+
     const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
-    
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    
+
     const urlParams = new URLSearchParams(window.location.search)
     const productId = urlParams.get('id')
-    let currentImageUrl = null
     
-    // معاينة الصورة الجديدة
-    document.getElementById('productImage').addEventListener('change', (e) => {
-        const preview = document.getElementById('imagePreview')
+    let currentUser = null
+    let currentImageUrl = null
+    let selectedImageFile = null
+    let allCategories = []
+
+    // ========== أزرار الحالة ==========
+    function setupStatusButtons() {
+        const buttons = document.querySelectorAll('.status-btn')
+        const statusInput = document.getElementById('status')
+        
+        buttons.forEach(btn => {
+            btn.addEventListener('click', () => {
+                buttons.forEach(b => b.classList.remove('active'))
+                btn.classList.add('active')
+                statusInput.value = btn.dataset.status
+            })
+        })
+    }
+
+    // ========== معاينة الصورة الجديدة ==========
+    const imageUpload = document.getElementById('imageUpload')
+    const imageInput = document.getElementById('productImage')
+    const imagePreview = document.getElementById('imagePreview')
+    const previewImg = document.getElementById('previewImg')
+    const removeImageBtn = document.getElementById('removeImageBtn')
+
+    imageUpload.addEventListener('click', () => {
+        imageInput.click()
+    })
+
+    imageInput.addEventListener('change', (e) => {
         if (e.target.files && e.target.files[0]) {
+            selectedImageFile = e.target.files[0]
             const reader = new FileReader()
             reader.onload = (event) => {
-                preview.innerHTML = `<img src="${event.target.result}" style="max-width:200px; border-radius:16px;">`
+                previewImg.src = event.target.result
+                imagePreview.style.display = 'block'
+                imageUpload.style.display = 'none'
             }
-            reader.readAsDataURL(e.target.files[0])
+            reader.readAsDataURL(selectedImageFile)
         }
     })
-    
+
+    removeImageBtn.addEventListener('click', () => {
+        selectedImageFile = null
+        imageInput.value = ''
+        imagePreview.style.display = 'none'
+        imageUpload.style.display = 'block'
+        previewImg.src = ''
+    })
+
+    // ========== تحميل الأقسام ==========
+    async function loadCategories() {
+        const { data: categories } = await supabase
+            .from('categories')
+            .select('*')
+            .eq('is_active', true)
+            .order('display_order', { ascending: true })
+        
+        allCategories = categories || []
+        const select = document.getElementById('categoryId')
+        if (allCategories.length > 0) {
+            allCategories.forEach(cat => {
+                select.innerHTML += `<option value="${cat.id}">${cat.icon || '📁'} ${cat.name}</option>`
+            })
+        }
+    }
+
+    // ========== تحميل بيانات المنتج ==========
     async function loadProduct() {
         if (!productId) {
             window.location.href = 'supplier-dashboard.html'
             return
         }
-        
+
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+            window.location.href = 'auth.html'
+            return
+        }
+        currentUser = user
+
         const { data, error } = await supabase
             .from('products')
             .select('*')
             .eq('id', productId)
             .single()
-        
+
         if (error || !data) {
             document.getElementById('messageDiv').innerHTML = `<div class="message error">❌ المنتج غير موجود</div>`
             return
         }
-        
+
         currentImageUrl = data.image_url
-        
+
+        // تعبئة البيانات
         document.getElementById('name').value = data.name || ''
-        document.getElementById('category').value = data.category || 'خامات'
         document.getElementById('description').value = data.description || ''
         document.getElementById('price').value = data.price || ''
         document.getElementById('unit').value = data.unit || 'كجم'
         document.getElementById('status').value = data.status || 'active'
-        
+        document.getElementById('categoryId').value = data.category_id || ''
+
+        // تفعيل زر الحالة المناسب
+        const statusBtns = document.querySelectorAll('.status-btn')
+        statusBtns.forEach(btn => {
+            if (btn.dataset.status === data.status) {
+                btn.classList.add('active')
+            }
+        })
+
+        // عرض الصورة الحالية
         if (data.image_url) {
             document.getElementById('currentImage').innerHTML = `
-                <p>الصورة الحالية:</p>
-                <img src="${data.image_url}" style="max-width:150px; border-radius:12px;">
+                <p>📷 الصورة الحالية:</p>
+                <img src="${data.image_url}" alt="صورة المنتج">
             `
         } else {
-            document.getElementById('currentImage').innerHTML = '<p>لا توجد صورة حالية</p>'
+            document.getElementById('currentImage').innerHTML = '<p>📷 لا توجد صورة حالية</p>'
         }
+
+        document.getElementById('loading').classList.remove('show')
+        document.getElementById('productForm').style.display = 'block'
     }
-    
+
+    // ========== حفظ التعديلات ==========
     const form = document.getElementById('productForm')
     const messageDiv = document.getElementById('messageDiv')
-    
+    const loadingDiv = document.getElementById('loading')
+    const submitBtn = document.getElementById('submitBtn')
+
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
-        messageDiv.innerHTML = '<div class="message">جاري الحفظ...</div>'
-        
-        // التحقق من تسجيل الدخول
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user) {
-            messageDiv.innerHTML = '<div class="message error">❌ يجب تسجيل الدخول</div>'
+        messageDiv.innerHTML = ''
+        loadingDiv.classList.add('show')
+        submitBtn.disabled = true
+
+        const name = document.getElementById('name').value.trim()
+        const categoryId = document.getElementById('categoryId').value
+        const description = document.getElementById('description').value
+        const price = parseFloat(document.getElementById('price').value) || null
+        const unit = document.getElementById('unit').value
+        const status = document.getElementById('status').value
+
+        if (!name) {
+            messageDiv.innerHTML = '<div class="message error">❌ الرجاء إدخال اسم المنتج</div>'
+            loadingDiv.classList.remove('show')
+            submitBtn.disabled = false
             return
         }
-        
+
+        if (!categoryId) {
+            messageDiv.innerHTML = '<div class="message error">❌ الرجاء اختيار القسم</div>'
+            loadingDiv.classList.remove('show')
+            submitBtn.disabled = false
+            return
+        }
+
         let imageUrl = currentImageUrl
-        const file = document.getElementById('productImage').files[0]
-        
+
         // رفع صورة جديدة إن وجدت
-        if (file) {
-            const fileName = `product_${Date.now()}_${file.name}`
+        if (selectedImageFile) {
+            const fileExt = selectedImageFile.name.split('.').pop()
+            const fileName = `product_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`
+            
             const { error: uploadError } = await supabase.storage
                 .from('product-images')
-                .upload(fileName, file)
-            
+                .upload(fileName, selectedImageFile)
+
             if (!uploadError) {
                 const { data: urlData } = supabase.storage
                     .from('product-images')
@@ -268,33 +637,46 @@
                 imageUrl = urlData.publicUrl
             }
         }
-        
+
+        // جلب اسم القسم
+        const { data: categoryData } = await supabase
+            .from('categories')
+            .select('name')
+            .eq('id', categoryId)
+            .single()
+
         // تحديث المنتج
         const { error } = await supabase
             .from('products')
             .update({
-                name: document.getElementById('name').value,
-                category: document.getElementById('category').value,
-                description: document.getElementById('description').value,
-                price: parseFloat(document.getElementById('price').value) || null,
-                unit: document.getElementById('unit').value,
-                status: document.getElementById('status').value,
+                name: name,
+                category: categoryData?.name || 'أخرى',
+                category_id: categoryId,
+                description: description,
+                price: price,
+                unit: unit,
+                status: status,
                 image_url: imageUrl
             })
             .eq('id', productId)
-            .eq('supplier_id', user.id)
-        
+            .eq('supplier_id', currentUser.id)
+
         if (error) {
             messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
+            loadingDiv.classList.remove('show')
+            submitBtn.disabled = false
         } else {
-            messageDiv.innerHTML = '<div class="message success">✅ تم تحديث المنتج بنجاح!</div>'
+            messageDiv.innerHTML = '<div class="message success">✅ تم تحديث المنتج بنجاح! جاري التحويل...</div>'
             setTimeout(() => {
                 window.location.href = 'supplier-dashboard.html'
             }, 1500)
         }
     })
-    
+
+    // ========== بدء التشغيل ==========
+    loadCategories()
     loadProduct()
+    setupStatusButtons()
 </script>
 </body>
 </html>
