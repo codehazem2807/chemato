@@ -1,0 +1,510 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | جميع المنتجات</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+
+        body {
+            background: #f0f4f8;
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: white;
+        }
+
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+            transition: 0.3s;
+        }
+
+        .nav-links a:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* رأس الصفحة */
+        .page-header {
+            background: white;
+            border-radius: 32px;
+            padding: 30px;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+
+        .page-header h1 {
+            color: #0a2f2f;
+            font-size: 2rem;
+            margin-bottom: 10px;
+        }
+
+        .page-header p {
+            color: #718096;
+        }
+
+        .results-count {
+            color: #1a5f5f;
+            font-weight: bold;
+            margin-top: 10px;
+        }
+
+        /* شريط البحث والتصفية */
+        .search-filter-bar {
+            background: white;
+            border-radius: 60px;
+            padding: 10px 20px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .search-input-wrapper {
+            flex: 2;
+            display: flex;
+            background: #f8fafc;
+            border-radius: 50px;
+            overflow: hidden;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 16px 20px;
+            border: none;
+            font-size: 1rem;
+            background: transparent;
+            outline: none;
+        }
+
+        .search-btn {
+            background: #ffb347;
+            border: none;
+            padding: 0 25px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+
+        .search-btn:hover {
+            background: #1a5f5f;
+            color: white;
+        }
+
+        .category-filter {
+            flex: 1;
+            padding: 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+            outline: none;
+        }
+
+        .sort-select {
+            padding: 14px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 50px;
+            font-size: 1rem;
+            background: white;
+            cursor: pointer;
+        }
+
+        /* شبكة المنتجات */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 28px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+        }
+
+        .product-img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            background: #e2e8f0;
+        }
+
+        .product-info {
+            padding: 22px;
+        }
+
+        .product-category {
+            display: inline-block;
+            background: #e9f0f0;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            margin-bottom: 10px;
+        }
+
+        .product-name {
+            color: #0a2f2f;
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+        }
+
+        .product-price {
+            color: #ffb347;
+            font-size: 24px;
+            font-weight: bold;
+            margin: 12px 0;
+        }
+
+        .product-supplier {
+            color: #718096;
+            font-size: 13px;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .btn-details {
+            width: 100%;
+            background: #1b6b6b;
+            color: white;
+            padding: 12px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+
+        .btn-details:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+
+        /* ترقيم الصفحات */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin: 40px 0;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 10px 18px;
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+
+        .pagination button:hover {
+            background: #1a5f5f;
+            color: white;
+            border-color: #1a5f5f;
+        }
+
+        .pagination button.active {
+            background: #ffb347;
+            border-color: #ffb347;
+            color: #1e2a3e;
+        }
+
+        .loader {
+            text-align: center;
+            padding: 60px;
+            font-size: 1.2rem;
+            color: #1a5f5f;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 80px;
+            background: white;
+            border-radius: 32px;
+            color: #718096;
+        }
+
+        .footer {
+            background: #0a2f2f;
+            color: white;
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+        }
+
+        @media (max-width: 768px) {
+            .search-filter-bar {
+                flex-direction: column;
+                border-radius: 32px;
+            }
+            .search-input-wrapper {
+                width: 100%;
+            }
+            .category-filter, .sort-select {
+                width: 100%;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">🧪 كيماتو</div>
+    <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">جميع المنتجات</a>
+        <a href="all-requests.html">جميع الطلبات</a>
+        <a href="auth.html" id="authLink">دخول</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="page-header">
+        <h1><i class="fas fa-boxes"></i> جميع المنتجات الكيماوية</h1>
+        <p>استعرض أحدث وأفضل المواد الكيماوية من موردين موثوقين في مصر</p>
+        <div class="results-count" id="resultsCount"></div>
+    </div>
+
+    <div class="search-filter-bar">
+        <div class="search-input-wrapper">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 بحث باسم المنتج...">
+            <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i></button>
+        </div>
+        <select id="categoryFilter" class="category-filter">
+            <option value="all">📂 جميع التصنيفات</option>
+            <option value="خامات">🧪 خامات</option>
+            <option value="أحماض">⚗️ أحماض</option>
+            <option value="مذيبات">🧴 مذيبات</option>
+            <option value="منظفات">🧼 منظفات</option>
+            <option value="بوليمرات">🎯 بوليمرات</option>
+            <option value="أخرى">📦 أخرى</option>
+        </select>
+        <select id="sortBy" class="sort-select">
+            <option value="newest">🕐 الأحدث</option>
+            <option value="price_asc">💰 السعر: من الأقل إلى الأعلى</option>
+            <option value="price_desc">💰 السعر: من الأعلى إلى الأقل</option>
+            <option value="popular">👁️ الأكثر مشاهدة</option>
+        </select>
+    </div>
+
+    <div id="productsContainer" class="products-grid">
+        <div class="loader">⏳ جاري تحميل المنتجات...</div>
+    </div>
+
+    <div id="pagination" class="pagination"></div>
+</div>
+
+<div class="footer">
+    <p>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</p>
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    let currentPage = 1
+    const itemsPerPage = 12
+    let totalCount = 0
+    let currentSearch = ''
+    let currentCategory = 'all'
+    let currentSort = 'newest'
+    
+    async function loadProducts() {
+        document.getElementById('productsContainer').innerHTML = '<div class="loader">⏳ جاري تحميل المنتجات...</div>'
+        
+        let query = supabase
+            .from('products')
+            .select('*, profiles(full_name, company_name)', { count: 'exact' })
+            .eq('status', 'active')
+        
+        // بحث
+        if (currentSearch) {
+            query = query.ilike('name', `%${currentSearch}%`)
+        }
+        
+        // تصفية حسب الفئة
+        if (currentCategory !== 'all') {
+            query = query.eq('category', currentCategory)
+        }
+        
+        // ترتيب
+        switch (currentSort) {
+            case 'price_asc':
+                query = query.order('price', { ascending: true, nullsFirst: false })
+                break
+            case 'price_desc':
+                query = query.order('price', { ascending: false, nullsFirst: false })
+                break
+            case 'popular':
+                query = query.order('views_count', { ascending: false })
+                break
+            default:
+                query = query.order('created_at', { ascending: false })
+        }
+        
+        // ترقيم الصفحات
+        const from = (currentPage - 1) * itemsPerPage
+        const to = from + itemsPerPage - 1
+        
+        const { data, error, count } = await query.range(from, to)
+        
+        if (error) {
+            document.getElementById('productsContainer').innerHTML = `<div class="no-results">❌ خطأ: ${error.message}</div>`
+            return
+        }
+        
+        totalCount = count || 0
+        document.getElementById('resultsCount').innerHTML = `📊 عرض ${data.length} من ${totalCount} منتج`
+        
+        if (!data || data.length === 0) {
+            document.getElementById('productsContainer').innerHTML = `
+                <div class="no-results">
+                    <i class="fas fa-search" style="font-size: 50px; color: #cbd5e1; margin-bottom: 20px;"></i>
+                    <h3>لا توجد منتجات</h3>
+                    <p>لم نجد أي منتجات تطابق معايير البحث</p>
+                    <button onclick="resetFilters()" style="margin-top: 20px; padding: 10px 25px; background: #1a5f5f; color: white; border: none; border-radius: 30px; cursor: pointer;">🔄 إعادة تعيين</button>
+                </div>
+            `
+            document.getElementById('pagination').innerHTML = ''
+            return
+        }
+        
+        document.getElementById('productsContainer').innerHTML = data.map(p => `
+            <div class="product-card" onclick="window.location.href='product-details.html?id=${p.id}'">
+                <img class="product-img" src="${p.image_url || 'https://placehold.co/400x220?text=🧪+كيماتو'}" alt="${p.name}">
+                <div class="product-info">
+                    <span class="product-category">${p.category || 'مواد كيماوية'}</span>
+                    <h3 class="product-name">${p.name}</h3>
+                    <div class="product-price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : '💰 سعر عند الطلب'}</div>
+                    <div class="product-supplier">
+                        <i class="fas fa-building"></i> ${p.profiles?.company_name || p.profiles?.full_name || 'مورد'}
+                    </div>
+                    <button class="btn-details" onclick="event.stopPropagation(); window.location.href='product-details.html?id=${p.id}'">
+                        <i class="fas fa-eye"></i> تفاصيل المنتج
+                    </button>
+                </div>
+            </div>
+        `).join('')
+        
+        // ترقيم الصفحات
+        const totalPages = Math.ceil(totalCount / itemsPerPage)
+        let paginationHtml = ''
+        paginationHtml += `<button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>« الأول</button>`
+        paginationHtml += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹ السابق</button>`
+        
+        let startPage = Math.max(1, currentPage - 2)
+        let endPage = Math.min(totalPages, currentPage + 2)
+        
+        for (let i = startPage; i <= endPage; i++) {
+            paginationHtml += `<button onclick="goToPage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`
+        }
+        
+        paginationHtml += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>التالي ›</button>`
+        paginationHtml += `<button onclick="goToPage(${totalPages})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>الأخير »</button>`
+        
+        document.getElementById('pagination').innerHTML = paginationHtml
+    }
+    
+    window.goToPage = function(page) {
+        if (page < 1) return
+        const totalPages = Math.ceil(totalCount / itemsPerPage)
+        if (page > totalPages) return
+        currentPage = page
+        loadProducts()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    
+    window.resetFilters = function() {
+        currentSearch = ''
+        currentCategory = 'all'
+        currentSort = 'newest'
+        currentPage = 1
+        document.getElementById('searchInput').value = ''
+        document.getElementById('categoryFilter').value = 'all'
+        document.getElementById('sortBy').value = 'newest'
+        loadProducts()
+    }
+    
+    // أحداث البحث والتصفية
+    document.getElementById('searchBtn').addEventListener('click', () => {
+        currentSearch = document.getElementById('searchInput').value.trim()
+        currentPage = 1
+        loadProducts()
+    })
+    
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            currentSearch = document.getElementById('searchInput').value.trim()
+            currentPage = 1
+            loadProducts()
+        }
+    })
+    
+    document.getElementById('categoryFilter').addEventListener('change', (e) => {
+        currentCategory = e.target.value
+        currentPage = 1
+        loadProducts()
+    })
+    
+    document.getElementById('sortBy').addEventListener('change', (e) => {
+        currentSort = e.target.value
+        currentPage = 1
+        loadProducts()
+    })
+    
+    loadProducts()
+</script>
+</body>
+</html>
