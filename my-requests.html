@@ -1,0 +1,318 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | طلباتي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        body {
+            background: #f0f4f8;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+        }
+        .nav-links a:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .btn-add {
+            background: #ffb347;
+            color: #1e2a3e;
+            padding: 12px 25px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .filters input, .filters select {
+            padding: 10px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 30px;
+        }
+        .request-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card h3 {
+            color: #0a2f2f;
+            margin-bottom: 10px;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .status-open {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        .status-matched {
+            background: #fefcbf;
+            color: #975a16;
+        }
+        .status-closed {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn-edit, .btn-delete {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .btn-edit {
+            background: #1b6b6b;
+            color: white;
+        }
+        .btn-delete {
+            background: #e53e3e;
+            color: white;
+        }
+        .footer {
+            background: #0a2f2f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .pagination button {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">🧪 كيماتو - طلباتي</div>
+    <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="buyer-dashboard.html">لوحة التحكم</a>
+        <a href="add-request.html">➕ طلب جديد</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="header-section">
+        <h2>📋 جميع طلبات الشراء</h2>
+        <a href="add-request.html" class="btn-add">+ طلب جديد</a>
+    </div>
+    
+    <div class="filters">
+        <input type="text" id="searchInput" placeholder="🔍 بحث باسم المادة" style="flex:2;">
+        <select id="statusFilter">
+            <option value="">كل الحالات</option>
+            <option value="open">مفتوح</option>
+            <option value="matched">تم التوفيق</option>
+            <option value="closed">مغلق</option>
+        </select>
+    </div>
+    
+    <div id="requestsList" class="request-grid">جاري التحميل...</div>
+    
+    <div class="pagination" id="pagination"></div>
+</div>
+
+<div class="footer">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    let currentUser = null
+    let currentPage = 1
+    const itemsPerPage = 9
+    
+    async function checkAuth() {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+            window.location.href = 'auth.html'
+            return
+        }
+        currentUser = user
+        loadRequests()
+    }
+    
+    async function loadRequests() {
+        const search = document.getElementById('searchInput').value
+        const status = document.getElementById('statusFilter').value
+        
+        let query = supabase
+            .from('purchase_requests')
+            .select('*', { count: 'exact' })
+            .eq('buyer_id', currentUser.id)
+        
+        if (search) {
+            query = query.ilike('product_name', `%${search}%`)
+        }
+        if (status) {
+            query = query.eq('status', status)
+        }
+        
+        const from = (currentPage - 1) * itemsPerPage
+        const to = from + itemsPerPage - 1
+        
+        const { data, error, count } = await query
+            .order('created_at', { ascending: false })
+            .range(from, to)
+        
+        const container = document.getElementById('requestsList')
+        if (error) {
+            container.innerHTML = `<p style="color:red;">خطأ: ${error.message}</p>`
+            return
+        }
+        if (!data || data.length === 0) {
+            container.innerHTML = '<p>⚠️ لا توجد طلبات مطابقة للبحث</p>'
+            document.getElementById('pagination').innerHTML = ''
+            return
+        }
+        
+        const statusMap = {
+            'open': '🟢 مفتوح',
+            'matched': '🟡 تم التوفيق',
+            'closed': '🔴 مغلق'
+        }
+        
+        container.innerHTML = data.map(r => `
+            <div class="card">
+                <div class="card-content">
+                    <span class="status-badge status-${r.status}">${statusMap[r.status] || r.status}</span>
+                    <h3>📦 ${r.product_name}</h3>
+                    <p><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</p>
+                    <p><strong>المواصفات:</strong> ${r.description?.substring(0, 80) || '-'}</p>
+                    <p><strong>آخر موعد:</strong> ${r.deadline || 'غير محدد'}</p>
+                    <div class="card-actions">
+                        <button class="btn-edit" onclick="editRequest('${r.id}')">تعديل</button>
+                        <button class="btn-delete" onclick="deleteRequest('${r.id}')">حذف</button>
+                    </div>
+                </div>
+            </div>
+        `).join('')
+        
+        const totalPages = Math.ceil(count / itemsPerPage)
+        let paginationHtml = ''
+        for (let i = 1; i <= Math.min(totalPages, 10); i++) {
+            paginationHtml += `<button onclick="goToPage(${i})" ${i === currentPage ? 'style="background:#ffb347;"' : ''}>${i}</button>`
+        }
+        document.getElementById('pagination').innerHTML = paginationHtml
+    }
+    
+    window.editRequest = function(id) {
+        window.location.href = `edit-request.html?id=${id}`
+    }
+    
+    window.deleteRequest = async function(id) {
+        if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
+            const { error } = await supabase.from('purchase_requests').delete().eq('id', id)
+            if (error) {
+                alert('خطأ: ' + error.message)
+            } else {
+                alert('تم الحذف بنجاح')
+                loadRequests()
+            }
+        }
+    }
+    
+    window.goToPage = function(page) {
+        currentPage = page
+        loadRequests()
+        window.scrollTo({ top: 0, behavior: 'smooth' })
+    }
+    
+    document.getElementById('searchInput').addEventListener('input', () => {
+        currentPage = 1
+        loadRequests()
+    })
+    document.getElementById('statusFilter').addEventListener('change', () => {
+        currentPage = 1
+        loadRequests()
+    })
+    
+    checkAuth()
+</script>
+</body>
+</html>

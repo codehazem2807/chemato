@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | الملف الشخصي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        body {
+            background: #f0f4f8;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+        }
+        .nav-links a:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+        .container {
+            max-width: 800px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .profile-card {
+            background: white;
+            border-radius: 32px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0a2f2f;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .avatar-section {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .avatar {
+            width: 120px;
+            height: 120px;
+            border-radius: 60px;
+            object-fit: cover;
+            border: 4px solid #ffb347;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2d3e50;
+        }
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+        button {
+            width: 100%;
+            background: #ffb347;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #1a5f5f;
+            color: white;
+        }
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 30px;
+        }
+        .success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        .error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        .footer {
+            background: #0a2f2f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+        .user-type-badge {
+            display: inline-block;
+            background: #e9f0f0;
+            padding: 5px 15px;
+            border-radius: 25px;
+            margin-top: 10px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">🧪 كيماتو</div>
+    <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="#" id="dashboardLink">لوحة التحكم</a>
+        <a href="profile.html">الملف الشخصي</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="profile-card">
+        <h1>👤 الملف الشخصي</h1>
+        
+        <div class="avatar-section">
+            <img id="avatar" class="avatar" src="https://placehold.co/120x120?text=👤" alt="صورة شخصية">
+        </div>
+        
+        <form id="profileForm">
+            <div class="form-group">
+                <label>الاسم كاملاً</label>
+                <input type="text" id="fullName" required>
+            </div>
+            
+            <div class="form-group">
+                <label>اسم الشركة</label>
+                <input type="text" id="companyName" placeholder="اختياري للموردين">
+            </div>
+            
+            <div class="form-group">
+                <label>رقم الهاتف</label>
+                <input type="tel" id="phone" placeholder="01234567890">
+            </div>
+            
+            <div class="form-group">
+                <label>المدينة</label>
+                <input type="text" id="city" placeholder="مثال: القاهرة - الإسكندرية">
+            </div>
+            
+            <div class="form-group">
+                <label>العنوان التفصيلي</label>
+                <input type="text" id="address" placeholder="المنطقة - الشارع">
+            </div>
+            
+            <div class="form-group">
+                <label>رقم واتساب</label>
+                <input type="tel" id="whatsapp" placeholder="للمراسلة السريعة">
+            </div>
+            
+            <div id="userTypeDisplay" class="user-type-badge"></div>
+            
+            <button type="submit">💾 حفظ التغييرات</button>
+        </form>
+        
+        <div id="messageDiv"></div>
+    </div>
+</div>
+
+<div class="footer">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    let currentUser = null
+    let currentProfile = null
+    
+    // رابط لوحة التحكم حسب نوع المستخدم
+    const dashboardLink = document.getElementById('dashboardLink')
+    
+    async function loadProfile() {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+            window.location.href = 'auth.html'
+            return
+        }
+        currentUser = user
+        
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single()
+        
+        currentProfile = profile
+        
+        // تعيين رابط لوحة التحكم
+        if (profile?.user_type === 'supplier') {
+            dashboardLink.href = 'supplier-dashboard.html'
+            dashboardLink.textContent = 'لوحة المورد'
+        } else {
+            dashboardLink.href = 'buyer-dashboard.html'
+            dashboardLink.textContent = 'لوحة العميل'
+        }
+        
+        // تعبئة البيانات
+        document.getElementById('fullName').value = profile?.full_name || ''
+        document.getElementById('companyName').value = profile?.company_name || ''
+        document.getElementById('phone').value = profile?.phone || ''
+        document.getElementById('city').value = profile?.city || ''
+        document.getElementById('address').value = profile?.address || ''
+        document.getElementById('whatsapp').value = profile?.whatsapp || ''
+        
+        const userTypeText = profile?.user_type === 'supplier' ? 'مورد (بائع)' : 'عميل (مشتري)'
+        document.getElementById('userTypeDisplay').innerHTML = `نوع الحساب: ${userTypeText}`
+        
+        if (profile?.avatar_url) {
+            document.getElementById('avatar').src = profile.avatar_url
+        }
+    }
+    
+    const form = document.getElementById('profileForm')
+    const messageDiv = document.getElementById('messageDiv')
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        messageDiv.innerHTML = '<div class="message">جاري الحفظ...</div>'
+        
+        const { error } = await supabase
+            .from('profiles')
+            .update({
+                full_name: document.getElementById('fullName').value,
+                company_name: document.getElementById('companyName').value,
+                phone: document.getElementById('phone').value,
+                city: document.getElementById('city').value,
+                address: document.getElementById('address').value,
+                whatsapp: document.getElementById('whatsapp').value
+            })
+            .eq('id', currentUser.id)
+        
+        if (error) {
+            messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
+        } else {
+            messageDiv.innerHTML = '<div class="message success">✅ تم حفظ الملف الشخصي بنجاح!</div>'
+            setTimeout(() => {
+                messageDiv.innerHTML = ''
+            }, 3000)
+        }
+    })
+    
+    loadProfile()
+</script>
+</body>
+</html>

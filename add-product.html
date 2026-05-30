@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | إضافة منتج</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f2b2b, #1a5f5f);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 48px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #1a5f5f;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2d3e50;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+        textarea {
+            border-radius: 20px;
+            resize: vertical;
+        }
+        button {
+            width: 100%;
+            background: #ffb347;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #1a5f5f;
+            color: white;
+        }
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 30px;
+        }
+        .success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        .error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #1a5f5f;
+            text-decoration: none;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            font-size: 0.8rem;
+        }
+        .image-preview {
+            margin-top: 15px;
+            text-align: center;
+        }
+        .image-preview img {
+            max-width: 200px;
+            border-radius: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>🧪 إضافة منتج كيماوي جديد</h1>
+    
+    <form id="productForm">
+        <div class="form-group">
+            <label>اسم المنتج *</label>
+            <input type="text" id="name" required placeholder="مثال: كاوية صودا 99%">
+        </div>
+        
+        <div class="form-group">
+            <label>التصنيف</label>
+            <select id="category">
+                <option value="خامات">خامات</option>
+                <option value="أحماض">أحماض</option>
+                <option value="مذيبات">مذيبات</option>
+                <option value="منظفات">منظفات</option>
+                <option value="بوليمرات">بوليمرات</option>
+                <option value="أخرى">أخرى</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>وصف المنتج</label>
+            <textarea id="description" rows="3" placeholder="المواصفات، التركيز، درجة النقاء..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>السعر (جنيه)</label>
+            <input type="number" id="price" placeholder="مثال: 12500">
+        </div>
+        
+        <div class="form-group">
+            <label>الوحدة</label>
+            <select id="unit">
+                <option value="كجم">كيلو جرام</option>
+                <option value="طن">طن</option>
+                <option value="لتر">لتر</option>
+                <option value="برميل">برميل</option>
+            </select>
+        </div>
+        
+        <div class="form-group">
+            <label>صورة المنتج</label>
+            <input type="file" id="productImage" accept="image/*">
+            <div class="image-preview" id="imagePreview"></div>
+        </div>
+        
+        <button type="submit">✨ رفع المنتج للسوق</button>
+    </form>
+    
+    <div id="messageDiv"></div>
+    <a href="supplier-dashboard.html" class="back-link">← العودة للوحة التحكم</a>
+</div>
+<div class="copyright">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    // معاينة الصورة
+    document.getElementById('productImage').addEventListener('change', (e) => {
+        const preview = document.getElementById('imagePreview')
+        if (e.target.files && e.target.files[0]) {
+            const reader = new FileReader()
+            reader.onload = (event) => {
+                preview.innerHTML = `<img src="${event.target.result}" style="max-width:200px; border-radius:16px;">`
+            }
+            reader.readAsDataURL(e.target.files[0])
+        }
+    })
+    
+    const form = document.getElementById('productForm')
+    const messageDiv = document.getElementById('messageDiv')
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        messageDiv.innerHTML = '<div class="message">جاري الرفع...</div>'
+        
+        // التحقق من تسجيل الدخول
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+            messageDiv.innerHTML = '<div class="message error">❌ يجب تسجيل الدخول أولاً</div>'
+            setTimeout(() => { window.location.href = 'auth.html' }, 1500)
+            return
+        }
+        
+        // رفع الصورة
+        const file = document.getElementById('productImage').files[0]
+        let imageUrl = null
+        
+        if (file) {
+            const fileName = `product_${Date.now()}_${file.name}`
+            const { data: uploadData, error: uploadError } = await supabase.storage
+                .from('product-images')
+                .upload(fileName, file)
+            
+            if (uploadError) {
+                messageDiv.innerHTML = `<div class="message error">❌ خطأ في رفع الصورة: ${uploadError.message}</div>`
+                return
+            }
+            
+            const { data: urlData } = supabase.storage
+                .from('product-images')
+                .getPublicUrl(fileName)
+            
+            imageUrl = urlData.publicUrl
+        }
+        
+        // إضافة المنتج
+        const { error } = await supabase
+            .from('products')
+            .insert({
+                supplier_id: user.id,
+                name: document.getElementById('name').value,
+                category: document.getElementById('category').value,
+                description: document.getElementById('description').value,
+                price: parseFloat(document.getElementById('price').value) || null,
+                unit: document.getElementById('unit').value,
+                image_url: imageUrl,
+                status: 'active'
+            })
+        
+        if (error) {
+            messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
+        } else {
+            messageDiv.innerHTML = '<div class="message success">✅ تم إضافة المنتج بنجاح!</div>'
+            form.reset()
+            document.getElementById('imagePreview').innerHTML = ''
+            setTimeout(() => {
+                window.location.href = 'supplier-dashboard.html'
+            }, 1500)
+        }
+    })
+</script>
+</body>
+</html>

@@ -1,0 +1,492 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | تسجيل الدخول</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f2b2b, #1a5f5f);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        .auth-card {
+            background: white;
+            max-width: 500px;
+            width: 100%;
+            padding: 40px;
+            border-radius: 48px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #1a5f5f;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .toggle-btns {
+            display: flex;
+            gap: 15px;
+            margin: 25px 0;
+        }
+        .toggle-btn {
+            flex: 1;
+            padding: 12px;
+            border: none;
+            background: #eef2f5;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: 0.3s;
+        }
+        .toggle-btn.active {
+            background: #1a5f5f;
+            color: white;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2d3e50;
+        }
+        input, select {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+        button[type="submit"] {
+            width: 100%;
+            background: #ffb347;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: 0.3s;
+        }
+        button[type="submit"]:hover {
+            background: #1a5f5f;
+            color: white;
+        }
+        .error {
+            background: #fee2e2;
+            color: #dc2626;
+            margin-top: 15px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 30px;
+            border-right: 4px solid #dc2626;
+        }
+        .success {
+            background: #dcfce7;
+            color: #16a34a;
+            margin-top: 15px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 30px;
+            border-right: 4px solid #16a34a;
+        }
+        .warning {
+            background: #fef3c7;
+            color: #d97706;
+            margin-top: 15px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 30px;
+            border-right: 4px solid #d97706;
+        }
+        .info {
+            background: #dbeafe;
+            color: #2563eb;
+            margin-top: 15px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 30px;
+            border-right: 4px solid #2563eb;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            padding-top: 20px;
+            border-top: 2px solid #cbd5e1;
+            font-size: 0.8rem;
+            color: #718096;
+        }
+        .nav-link {
+            text-align: center;
+            margin-top: 15px;
+        }
+        .nav-link a {
+            color: #1a5f5f;
+            text-decoration: none;
+        }
+        .loading {
+            display: none;
+            text-align: center;
+            margin-top: 15px;
+            padding: 10px;
+        }
+        .loading.show {
+            display: block;
+        }
+        .spinner {
+            width: 40px;
+            height: 40px;
+            border: 4px solid #e2e8f0;
+            border-top: 4px solid #1a5f5f;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+<div class="auth-card">
+    <h1>🧪 كيماتو</h1>
+    <p>سوق المواد الكيماوية في مصر</p>
+    
+    <div class="toggle-btns">
+        <button class="toggle-btn active" data-mode="login">تسجيل دخول</button>
+        <button class="toggle-btn" data-mode="register">حساب جديد</button>
+    </div>
+    
+    <form id="authForm">
+        <div id="dynamicFields"></div>
+        <button type="submit" id="submitBtn">دخول</button>
+    </form>
+    <div id="loading" class="loading"><div class="spinner"></div><p>جاري المعالجة...</p></div>
+    <div id="messageDiv"></div>
+    <div class="nav-link">
+        <a href="index.html">← العودة للرئيسية</a>
+    </div>
+    <div class="copyright">
+        © جميع الحقوق محفوظة Hazem Mohamady 2026
+    </div>
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    let currentMode = 'login'
+    
+    const toggleBtns = document.querySelectorAll('.toggle-btn')
+    const dynamicDiv = document.getElementById('dynamicFields')
+    const submitBtn = document.getElementById('submitBtn')
+    const messageDiv = document.getElementById('messageDiv')
+    const loadingDiv = document.getElementById('loading')
+    
+    // دالة عرض الرسائل بتصنيفات مختلفة
+    function showMessage(message, type) {
+        messageDiv.innerHTML = `<div class="${type}">${message}</div>`
+        // تخفي الرسالة بعد 8 ثواني للرسائل الطويلة
+        if (type !== 'error') {
+            setTimeout(() => {
+                if (messageDiv.innerHTML.includes(message)) {
+                    messageDiv.innerHTML = ''
+                }
+            }, 8000)
+        }
+    }
+    
+    function clearMessage() {
+        messageDiv.innerHTML = ''
+    }
+    
+    function renderForm() {
+        clearMessage()
+        if (currentMode === 'login') {
+            dynamicDiv.innerHTML = `
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="email" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="password" required placeholder="********">
+                </div>
+            `
+            submitBtn.innerText = 'تسجيل دخول'
+        } else {
+            dynamicDiv.innerHTML = `
+                <div class="form-group">
+                    <label>الاسم كاملاً</label>
+                    <input type="text" id="fullName" required placeholder="محمد أحمد">
+                </div>
+                <div class="form-group">
+                    <label>البريد الإلكتروني</label>
+                    <input type="email" id="email" required placeholder="example@email.com">
+                </div>
+                <div class="form-group">
+                    <label>كلمة المرور</label>
+                    <input type="password" id="password" required placeholder="********">
+                </div>
+                <div class="form-group">
+                    <label>تأكيد كلمة المرور</label>
+                    <input type="password" id="confirmPassword" required placeholder="********">
+                </div>
+                <div class="form-group">
+                    <label>نوع الحساب</label>
+                    <select id="userType">
+                        <option value="supplier">مورد (أبيع مواد كيماوية)</option>
+                        <option value="buyer">عميل (أريد شراء مواد)</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>رقم الهاتف</label>
+                    <input type="tel" id="phone" placeholder="01234567890">
+                </div>
+                <div class="form-group">
+                    <label>اسم الشركة (اختياري)</label>
+                    <input type="text" id="companyName" placeholder="شركة كيماتو للتجارة">
+                </div>
+            `
+            submitBtn.innerText = 'إنشاء حساب جديد'
+        }
+    }
+    
+    toggleBtns.forEach(btn => {
+        btn.addEventListener('click', () => {
+            currentMode = btn.getAttribute('data-mode')
+            toggleBtns.forEach(b => b.classList.remove('active'))
+            btn.classList.add('active')
+            renderForm()
+        })
+    })
+    
+    // دالة لترجمة رسائل الخطأ من Supabase
+    function translateErrorMessage(error) {
+        const errorMessage = error.message.toLowerCase()
+        
+        if (errorMessage.includes('rate limit') || errorMessage.includes('email rate limit')) {
+            return {
+                type: 'warning',
+                message: '⚠️ تم تجاوز الحد المسموح لإرسال الإيميلات في الساعة. يرجى الانتظار قليلاً (حوالي ساعة) ثم المحاولة مرة أخرى.'
+            }
+        }
+        
+        if (errorMessage.includes('invalid login credentials')) {
+            return {
+                type: 'error',
+                message: '❌ البريد الإلكتروني أو كلمة المرور غير صحيحة. يرجى المحاولة مرة أخرى.'
+            }
+        }
+        
+        if (errorMessage.includes('user already registered')) {
+            return {
+                type: 'error',
+                message: '❌ هذا البريد الإلكتروني مسجل بالفعل. يرجى تسجيل الدخول أو استخدام بريد إلكتروني آخر.'
+            }
+        }
+        
+        if (errorMessage.includes('password')) {
+            return {
+                type: 'error',
+                message: '❌ كلمة المرور يجب أن تكون 6 أحرف على الأقل.'
+            }
+        }
+        
+        if (errorMessage.includes('email')) {
+            return {
+                type: 'error',
+                message: '❌ الرجاء إدخال بريد إلكتروني صحيح.'
+            }
+        }
+        
+        return {
+            type: 'error',
+            message: `❌ حدث خطأ: ${error.message}`
+        }
+    }
+    
+    async function upsertProfile(userId, profileData) {
+        const { data: existingProfile } = await supabase
+            .from('profiles')
+            .select('id')
+            .eq('id', userId)
+            .single()
+        
+        if (existingProfile) {
+            const { error } = await supabase
+                .from('profiles')
+                .update(profileData)
+                .eq('id', userId)
+            return { error }
+        } else {
+            const { error } = await supabase
+                .from('profiles')
+                .insert({ id: userId, ...profileData })
+            return { error }
+        }
+    }
+    
+    const form = document.getElementById('authForm')
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        clearMessage()
+        loadingDiv.classList.add('show')
+        submitBtn.disabled = true
+        
+        const email = document.getElementById('email').value.trim()
+        const password = document.getElementById('password').value
+        
+        if (currentMode === 'login') {
+            // ========== تسجيل الدخول ==========
+            const { data, error } = await supabase.auth.signInWithPassword({ 
+                email, 
+                password 
+            })
+            
+            loadingDiv.classList.remove('show')
+            submitBtn.disabled = false
+            
+            if (error) {
+                const translated = translateErrorMessage(error)
+                showMessage(translated.message, translated.type)
+                return
+            }
+            
+            // جلب نوع المستخدم من profiles
+            const { data: profile, error: profileError } = await supabase
+                .from('profiles')
+                .select('user_type')
+                .eq('id', data.user.id)
+                .single()
+            
+            if (profileError) {
+                showMessage('✅ تم تسجيل الدخول بنجاح! جاري التحويل...', 'success')
+            } else {
+                showMessage('✅ تم تسجيل الدخول بنجاح! جاري التحويل...', 'success')
+            }
+            
+            setTimeout(() => {
+                if (profile?.user_type === 'supplier') {
+                    window.location.href = 'supplier-dashboard.html'
+                } else {
+                    window.location.href = 'buyer-dashboard.html'
+                }
+            }, 1500)
+        } 
+        else {
+            // ========== إنشاء حساب جديد ==========
+            const fullName = document.getElementById('fullName').value.trim()
+            const userType = document.getElementById('userType').value
+            const phone = document.getElementById('phone').value.trim()
+            const companyName = document.getElementById('companyName').value.trim()
+            const confirmPassword = document.getElementById('confirmPassword').value
+            
+            // التحقق من تطابق كلمة المرور
+            if (password !== confirmPassword) {
+                loadingDiv.classList.remove('show')
+                submitBtn.disabled = false
+                showMessage('❌ كلمة المرور غير متطابقة مع تأكيد كلمة المرور', 'error')
+                return
+            }
+            
+            // التحقق من صحة الإيميل
+            if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+                loadingDiv.classList.remove('show')
+                submitBtn.disabled = false
+                showMessage('❌ الرجاء إدخال بريد إلكتروني صحيح', 'error')
+                return
+            }
+            
+            // التحقق من صحة رقم الهاتف (إذا تم إدخاله)
+            if (phone && !/^01[0-9]{9}$/.test(phone)) {
+                loadingDiv.classList.remove('show')
+                submitBtn.disabled = false
+                showMessage('❌ الرجاء إدخال رقم هاتف صحيح (11 رقم يبدأ بـ 01)', 'error')
+                return
+            }
+            
+            // تسجيل المستخدم في Auth
+            const { data, error } = await supabase.auth.signUp({
+                email,
+                password,
+                options: {
+                    data: {
+                        full_name: fullName,
+                        user_type: userType
+                    }
+                }
+            })
+            
+            loadingDiv.classList.remove('show')
+            submitBtn.disabled = false
+            
+            if (error) {
+                const translated = translateErrorMessage(error)
+                showMessage(translated.message, translated.type)
+                return
+            }
+            
+            if (!data.user) {
+                showMessage('❌ فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.', 'error')
+                return
+            }
+            
+            // إنشاء البروفايل
+            const { error: profileError } = await upsertProfile(data.user.id, {
+                full_name: fullName,
+                user_type: userType,
+                phone: phone || null,
+                company_name: companyName || null
+            })
+            
+            if (profileError) {
+                console.error('Profile error:', profileError)
+            }
+            
+            // رسالة نجاح مع تعليمات تأكيد الإيميل
+            showMessage(
+                '✅ تم إنشاء الحساب بنجاح!<br><br>' +
+                '📧 يرجى مراجعة البريد الإلكتروني الخاص بك.<br>' +
+                '🔗 اضغط على رابط التأكيد (Confirm) في الإيميل المرسل من Supabase.<br><br>' +
+                '✉️ إذا لم تجد الإيميل، تحقق من مجلد البريد المزعج (Spam).<br>' +
+                '🔄 بعد تأكيد الإيميل، يمكنك تسجيل الدخول مباشرة.',
+                'info'
+            )
+            
+            // تنظيف الحقول بعد 3 ثواني
+            setTimeout(() => {
+                currentMode = 'login'
+                toggleBtns.forEach(btn => {
+                    btn.classList.remove('active')
+                    if (btn.getAttribute('data-mode') === 'login') {
+                        btn.classList.add('active')
+                    }
+                })
+                renderForm()
+            }, 5000)
+        }
+    })
+    
+    renderForm()
+</script>
+</body>
+</html>

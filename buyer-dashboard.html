@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | لوحة العميل</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        body {
+            background: #f0f4f8;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+        }
+        .nav-links a:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .btn-add {
+            background: #ffb347;
+            color: #1e2a3e;
+            padding: 12px 25px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .request-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card h3 {
+            color: #0a2f2f;
+            margin-bottom: 10px;
+        }
+        .badge {
+            display: inline-block;
+            background: #e9f0f0;
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin-bottom: 10px;
+        }
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn-edit, .btn-delete {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .btn-edit {
+            background: #1b6b6b;
+            color: white;
+        }
+        .btn-delete {
+            background: #e53e3e;
+            color: white;
+        }
+        .footer {
+            background: #0a2f2f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+        .user-info {
+            background: white;
+            padding: 15px 25px;
+            border-radius: 20px;
+            margin-bottom: 25px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .logout-btn {
+            background: #e53e3e;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">🧪 كيماتو - العميل</div>
+    <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="add-request.html">➕ طلب شراء جديد</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="user-info" id="userInfo">
+        <span>جاري التحميل...</span>
+        <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+    </div>
+    
+    <div class="header-section">
+        <h2>📋 طلبات الشراء الخاصة بي</h2>
+        <a href="add-request.html" class="btn-add">+ طلب شراء جديد</a>
+    </div>
+    
+    <div id="requestsList" class="request-grid">جاري التحميل...</div>
+</div>
+
+<div class="footer">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    let currentUser = null
+    
+    async function checkAuth() {
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+            window.location.href = 'auth.html'
+            return
+        }
+        currentUser = user
+        
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('*')
+            .eq('id', user.id)
+            .single()
+        
+        document.getElementById('userInfo').innerHTML = `
+            <span>👋 مرحباً ${profile?.full_name || profile?.company_name || 'عميل'}</span>
+            <button class="logout-btn" id="logoutBtn">تسجيل خروج</button>
+        `
+        
+        document.getElementById('logoutBtn').addEventListener('click', logout)
+        loadRequests()
+    }
+    
+    async function logout() {
+        await supabase.auth.signOut()
+        window.location.href = 'index.html'
+    }
+    
+    async function loadRequests() {
+        const { data, error } = await supabase
+            .from('purchase_requests')
+            .select('*')
+            .eq('buyer_id', currentUser.id)
+            .order('created_at', { ascending: false })
+        
+        const container = document.getElementById('requestsList')
+        if (error) {
+            container.innerHTML = `<p style="color:red;">خطأ: ${error.message}</p>`
+            return
+        }
+        if (!data || data.length === 0) {
+            container.innerHTML = '<p>⚠️ لا توجد طلبات شراء. أضف طلبك الأول! 🚀</p>'
+            return
+        }
+        
+        container.innerHTML = data.map(r => `
+            <div class="card">
+                <div class="card-content">
+                    <span class="badge">${r.status === 'open' ? '🟢 مفتوح' : '🔴 مغلق'}</span>
+                    <h3>📦 ${r.product_name}</h3>
+                    <p><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</p>
+                    <p><strong>المواصفات:</strong> ${r.description?.substring(0, 100) || '-'}</p>
+                    <p><strong>آخر موعد:</strong> ${r.deadline || 'غير محدد'}</p>
+                    <div class="card-actions">
+                        <button class="btn-edit" onclick="editRequest('${r.id}')">تعديل</button>
+                        <button class="btn-delete" onclick="deleteRequest('${r.id}')">حذف</button>
+                    </div>
+                </div>
+            </div>
+        `).join('')
+    }
+    
+    window.editRequest = function(id) {
+        window.location.href = `add-request.html?id=${id}`
+    }
+    
+    window.deleteRequest = async function(id) {
+        if (confirm('هل أنت متأكد من حذف هذا الطلب؟')) {
+            const { error } = await supabase.from('purchase_requests').delete().eq('id', id)
+            if (error) {
+                alert('خطأ: ' + error.message)
+            } else {
+                alert('تم الحذف بنجاح')
+                loadRequests()
+            }
+        }
+    }
+    
+    checkAuth()
+</script>
+</body>
+</html>

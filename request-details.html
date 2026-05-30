@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | تفاصيل الطلب</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        body {
+            background: #f0f4f8;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
+            padding: 18px 40px;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .container {
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+        }
+        .request-card {
+            background: white;
+            border-radius: 32px;
+            padding: 35px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #0a2f2f;
+            margin-bottom: 20px;
+        }
+        .info-row {
+            padding: 12px 0;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .info-label {
+            font-weight: bold;
+            color: #2d3e50;
+            display: inline-block;
+            width: 140px;
+        }
+        .badge {
+            display: inline-block;
+            background: #c6f6d5;
+            color: #22543d;
+            padding: 5px 15px;
+            border-radius: 25px;
+            margin: 15px 0;
+        }
+        .buyer-info {
+            background: #eef2f7;
+            padding: 20px;
+            border-radius: 24px;
+            margin: 25px 0;
+        }
+        .btn-offer {
+            background: #ffb347;
+            color: #1e2a3e;
+            padding: 14px 30px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1.1rem;
+            cursor: pointer;
+            width: 100%;
+            font-weight: bold;
+        }
+        .btn-offer:hover {
+            background: #1b6b6b;
+            color: white;
+        }
+        .back-link {
+            display: inline-block;
+            margin-top: 20px;
+            color: #1a5f5f;
+            text-decoration: none;
+        }
+        .footer {
+            background: #0a2f2f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">🧪 كيماتو</div>
+</div>
+
+<div class="container">
+    <div id="requestDetail" class="request-card">جاري التحميل...</div>
+    <a href="index.html" class="back-link">← العودة للرئيسية</a>
+</div>
+
+<div class="footer">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    const urlParams = new URLSearchParams(window.location.search)
+    const requestId = urlParams.get('id')
+    
+    async function loadRequest() {
+        if (!requestId) {
+            document.getElementById('requestDetail').innerHTML = '<div>❌ لم يتم تحديد الطلب</div>'
+            return
+        }
+        
+        const { data, error } = await supabase
+            .from('purchase_requests')
+            .select('*, profiles(full_name, company_name, phone, city)')
+            .eq('id', requestId)
+            .single()
+        
+        if (error || !data) {
+            document.getElementById('requestDetail').innerHTML = `<div>❌ ${error?.message || 'الطلب غير موجود'}</div>`
+            return
+        }
+        
+        document.getElementById('requestDetail').innerHTML = `
+            <span class="badge">${data.status === 'open' ? '🟢 مفتوح للعروض' : '🔴 مغلق'}</span>
+            <h1>📦 طلب: ${data.product_name}</h1>
+            
+            <div class="info-row">
+                <span class="info-label">الكمية المطلوبة:</span>
+                <span>${data.quantity_needed || 'غير محدد'}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">المواصفات:</span>
+                <span>${data.description || 'لا توجد مواصفات محددة'}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">آخر موعد:</span>
+                <span>${data.deadline || 'غير محدد'}</span>
+            </div>
+            <div class="info-row">
+                <span class="info-label">تاريخ النشر:</span>
+                <span>${new Date(data.created_at).toLocaleDateString('ar-EG')}</span>
+            </div>
+            
+            <div class="buyer-info">
+                <h3>👤 معلومات صاحب الطلب</h3>
+                <p><strong>الاسم:</strong> ${data.profiles?.company_name || data.profiles?.full_name || 'عميل'}</p>
+                <p><strong>المدينة:</strong> ${data.profiles?.city || 'غير محدد'}</p>
+                <p><strong>📞 التواصل:</strong> ${data.profiles?.phone || 'يرجى تسجيل الدخول للتواصل'}</p>
+            </div>
+            
+            <button class="btn-offer" onclick="makeOffer('${data.id}')">💰 تقديم عرض لهذا الطلب</button>
+        `
+    }
+    
+    window.makeOffer = function(requestId) {
+        alert('لتقديم عرض:\nيمكنك التواصل مع العميل مباشرة على الرقم الموضح أعلاه\n(خاصية العروض المباشرة ستضاف قريباً)')
+    }
+    
+    loadRequest()
+</script>
+</body>
+</html>

@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | منتجاتي</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        body {
+            background: #f0f4f8;
+        }
+        .navbar {
+            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
+            padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: white;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+        }
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 30px;
+        }
+        .nav-links a:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+        .container {
+            max-width: 1300px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+        .header-section {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        .btn-add {
+            background: #ffb347;
+            color: #1e2a3e;
+            padding: 12px 25px;
+            border-radius: 40px;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .filters {
+            background: white;
+            padding: 20px;
+            border-radius: 24px;
+            margin-bottom: 30px;
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+        .filters input, .filters select {
+            padding: 10px 15px;
+            border: 1px solid #cbd5e1;
+            border-radius: 30px;
+        }
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 25px;
+        }
+        .card {
+            background: white;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
+            transition: transform 0.3s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
+        }
+        .card-img {
+            width: 100%;
+            height: 180px;
+            object-fit: cover;
+        }
+        .card-content {
+            padding: 20px;
+        }
+        .card h3 {
+            color: #0a2f2f;
+            margin-bottom: 10px;
+        }
+        .price {
+            color: #ffb347;
+            font-size: 20px;
+            font-weight: bold;
+        }
+        .status-badge {
+            display: inline-block;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            margin: 10px 0;
+        }
+        .status-active {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        .status-hidden {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        .card-actions {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .btn-edit, .btn-delete {
+            flex: 1;
+            padding: 8px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+        .btn-edit {
+            background: #1b6b6b;
+            color: white;
+        }
+        .btn-delete {
+            background: #e53e3e;
+            color: white;
+        }
+        .footer {
+            background: #0a2f2f;
+            color: white;
+            text-align: center;
+            padding: 25px;
+            margin-top: 50px;
+        }
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 30px;
+        }
+        .pagination button {
+            padding: 8px 16px;
+            background: white;
+            border: 1px solid #cbd5e1;
+            border-radius: 20px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">🧪 كيماتو - منتجاتي</div>
+    <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="supplier-dashboard.html">لوحة التحكم</a>
+        <a href="add-product.html">➕ إضافة</a>
+    </div>
+</div>
+
+<div class="container">
+    <div class="header-section">
+        <h2>📦 جميع منتجاتي</h2>
+        <a href="add-product.html" class="btn-add">+ منتج جديد</a>
+    </div>
+    
+    <div class="filters">
+        <input type="text" id="searchInput" placeholder="🔍 بحث باسم المنتج" style="flex:2;">
+        <select id="categoryFilter">
+            <option value="">كل التصنيفات</option>
+            <option value="خامات">خامات</option>
+            <option value="أحماض">أحماض</option>
+            <option value="مذيبات">مذيبات</option>
+            <option value="منظفات">منظفات</option>
+            <option value="بوليمرات">بوليمرات</option>
+        </select>
+        <select id="statusFilter">
+            <option value="">كل الحالات</option>
+            <option value="active">متاح</option>
+            <option value="hidden">مخفي</option>
+            <option value="sold">تم البيع</option>
+        </select>
+    </div>
+    
+    <div id="productsList" class="product-grid">جاري التحميل...</div>
+    
+    <div class="pagination" id="pagination"></div>
+</div>
+
+<div class="footer">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية
+</div>
+
+<script type="module

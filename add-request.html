@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>كيماتو | طلب شراء</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #0f2b2b, #1a5f5f);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .form-container {
+            max-width: 700px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 48px;
+            padding: 40px;
+            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+        }
+        h1 {
+            color: #1a5f5f;
+            margin-bottom: 30px;
+            text-align: center;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: bold;
+            color: #2d3e50;
+        }
+        input, select, textarea {
+            width: 100%;
+            padding: 14px;
+            border: 1px solid #cbd5e1;
+            border-radius: 30px;
+            font-size: 1rem;
+        }
+        textarea {
+            border-radius: 20px;
+            resize: vertical;
+        }
+        button {
+            width: 100%;
+            background: #ffb347;
+            border: none;
+            padding: 14px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-top: 20px;
+        }
+        button:hover {
+            background: #1a5f5f;
+            color: white;
+        }
+        .message {
+            margin-top: 20px;
+            text-align: center;
+            padding: 12px;
+            border-radius: 30px;
+        }
+        .success {
+            background: #c6f6d5;
+            color: #22543d;
+        }
+        .error {
+            background: #fed7d7;
+            color: #742a2a;
+        }
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+            color: #1a5f5f;
+            text-decoration: none;
+        }
+        .copyright {
+            text-align: center;
+            margin-top: 30px;
+            color: white;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+<div class="form-container">
+    <h1>📢 طلب شراء مواد كيماوية</h1>
+    
+    <form id="requestForm">
+        <div class="form-group">
+            <label>اسم المادة المطلوبة *</label>
+            <input type="text" id="productName" required placeholder="مثال: كاوية صودا 99%">
+        </div>
+        
+        <div class="form-group">
+            <label>الكمية المطلوبة</label>
+            <input type="text" id="quantity" placeholder="مثال: 5 طن / 1000 كجم">
+        </div>
+        
+        <div class="form-group">
+            <label>المواصفات والتفاصيل</label>
+            <textarea id="description" rows="4" placeholder="التركيز المطلوب، درجة النقاء، تاريخ التسليم المطلوب..."></textarea>
+        </div>
+        
+        <div class="form-group">
+            <label>آخر موعد للاستلام</label>
+            <input type="date" id="deadline">
+        </div>
+        
+        <button type="submit">📢 نشر طلب الشراء</button>
+    </form>
+    
+    <div id="messageDiv"></div>
+    <a href="buyer-dashboard.html" class="back-link">← العودة للوحة التحكم</a>
+</div>
+<div class="copyright">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+    
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+    
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+    
+    const form = document.getElementById('requestForm')
+    const messageDiv = document.getElementById('messageDiv')
+    
+    form.addEventListener('submit', async (e) => {
+        e.preventDefault()
+        messageDiv.innerHTML = '<div class="message">جاري النشر...</div>'
+        
+        const { data: { user } } = await supabase.auth.getUser()
+        if (!user) {
+            messageDiv.innerHTML = '<div class="message error">❌ يجب تسجيل الدخول أولاً</div>'
+            setTimeout(() => { window.location.href = 'auth.html' }, 1500)
+            return
+        }
+        
+        const { error } = await supabase
+            .from('purchase_requests')
+            .insert({
+                buyer_id: user.id,
+                product_name: document.getElementById('productName').value,
+                quantity_needed: document.getElementById('quantity').value,
+                description: document.getElementById('description').value,
+                deadline: document.getElementById('deadline').value || null,
+                status: 'open'
+            })
+        
+        if (error) {
+            messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
+        } else {
+            messageDiv.innerHTML = '<div class="message success">✅ تم نشر طلب الشراء بنجاح!</div>'
+            form.reset()
+            setTimeout(() => {
+                window.location.href = 'buyer-dashboard.html'
+            }, 1500)
+        }
+    })
+</script>
+</body>
+</html>
