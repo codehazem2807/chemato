@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كيماتو | تفاصيل المنتج</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,9 +12,12 @@
             box-sizing: border-box;
             font-family: 'Cairo', 'Tahoma', sans-serif;
         }
+
         body {
             background: #f0f4f8;
         }
+
+        /* ========== الهيدر ========== */
         .navbar {
             background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
             padding: 18px 40px;
@@ -22,146 +26,308 @@
             align-items: center;
             flex-wrap: wrap;
             color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
+
+        .logo a {
+            text-decoration: none;
         }
+
         .nav-links {
             display: flex;
             gap: 15px;
             align-items: center;
+            flex-wrap: wrap;
         }
-        .nav-links a {
+
+        .nav-links > a {
             color: white;
             text-decoration: none;
-            padding: 8px 18px;
+            padding: 8px 20px;
             border-radius: 30px;
+            transition: 0.3s;
+            font-weight: 500;
         }
-        .nav-links a:hover {
+
+        .nav-links > a:hover {
             background: #ffb347;
             color: #1e2a3e;
         }
+
+        /* ========== القائمة المنسدلة ========== */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .dropdown-btn:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 16px;
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #1e2a3e;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
+            font-size: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dropdown-content a:hover {
+            background: #f0f4f8;
+            color: #1a5f5f;
+        }
+
+        .dropdown-content .logout-item {
+            color: #e53e3e;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        .dropdown-content .logout-item:hover {
+            background: #fee2e2;
+        }
+
+        /* ========== المحتوى الرئيسي ========== */
         .container {
-            max-width: 1100px;
+            max-width: 1200px;
             margin: 40px auto;
             padding: 0 20px;
         }
+
+        /* بطاقة المنتج */
         .product-card {
             background: white;
             border-radius: 32px;
             overflow: hidden;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
+
+        /* صورة المنتج */
+        .product-image-section {
+            position: relative;
+            background: #f8fafc;
+            min-height: 400px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
         .product-img {
             width: 100%;
-            height: 400px;
-            object-fit: cover;
-            background: #e2e8f0;
+            height: 450px;
+            object-fit: contain;
+            background: #f8fafc;
+            padding: 20px;
         }
+
+        /* معلومات المنتج */
         .product-info {
             padding: 35px;
         }
-        h1 {
+
+        .product-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            flex-wrap: wrap;
+            margin-bottom: 20px;
+        }
+
+        .product-title h1 {
             color: #0a2f2f;
-            margin-bottom: 15px;
             font-size: 2rem;
+            margin-bottom: 10px;
         }
-        .price {
-            font-size: 32px;
-            color: #ffb347;
-            font-weight: bold;
-            margin: 20px 0;
-        }
-        .badge {
+
+        .product-category {
             display: inline-block;
             background: #e9f0f0;
             padding: 6px 18px;
             border-radius: 25px;
-            margin: 10px 0;
             font-size: 14px;
+            color: #1a5f5f;
         }
-        .category-badge {
-            background: #1b6b6b;
-            color: white;
+
+        .product-price {
+            background: linear-gradient(135deg, #ffb347, #ff9500);
+            padding: 12px 25px;
+            border-radius: 50px;
+            color: #1e2a3e;
+            font-weight: bold;
+            font-size: 28px;
         }
-        .info-section {
-            margin: 25px 0;
-            padding: 20px;
+
+        /* قسم التفاصيل */
+        .details-section {
+            margin: 30px 0;
             background: #f8fafc;
             border-radius: 24px;
+            padding: 25px;
         }
-        .info-row {
+
+        .details-section h3 {
+            color: #0a2f2f;
+            margin-bottom: 20px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 1.3rem;
+        }
+
+        .detail-row {
+            display: flex;
             padding: 12px 0;
             border-bottom: 1px solid #e2e8f0;
-            display: flex;
-            flex-wrap: wrap;
         }
-        .info-label {
+
+        .detail-label {
             font-weight: bold;
             color: #2d3e50;
             width: 140px;
         }
-        .info-value {
+
+        .detail-value {
             flex: 1;
             color: #475569;
         }
-        .supplier-info {
+
+        /* معلومات المورد */
+        .supplier-section {
             background: linear-gradient(135deg, #eef2f7, #e2e8f0);
-            padding: 25px;
             border-radius: 24px;
-            margin: 25px 0;
+            padding: 25px;
+            margin: 30px 0;
         }
-        .supplier-info h3 {
+
+        .supplier-section h3 {
             color: #0a2f2f;
-            margin-bottom: 15px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             gap: 10px;
         }
-        .btn-contact {
-            background: #ffb347;
-            color: #1e2a3e;
-            padding: 16px 30px;
+
+        .supplier-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+        }
+
+        .supplier-info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 10px;
+            background: white;
+            border-radius: 16px;
+        }
+
+        .supplier-info-item i {
+            width: 35px;
+            height: 35px;
+            background: #1a5f5f;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* الأزرار */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 20px;
             border: none;
             border-radius: 40px;
-            font-size: 1.1rem;
+            font-size: 1rem;
             font-weight: bold;
             cursor: pointer;
-            width: 100%;
             transition: 0.3s;
-        }
-        .btn-contact:hover {
-            background: #1b6b6b;
-            color: white;
-        }
-        .btn-message {
-            background: #1b6b6b;
-            color: white;
-            margin-top: 10px;
-        }
-        .back-link {
-            display: inline-block;
-            margin-top: 25px;
-            color: #1a5f5f;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             text-decoration: none;
-            padding: 10px 20px;
-            background: white;
-            border-radius: 30px;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
         }
-        .back-link:hover {
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-call {
             background: #ffb347;
             color: #1e2a3e;
         }
+
+        .btn-call:hover {
+            background: #1a5f5f;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        /* حالة التحميل */
         .loader {
             text-align: center;
-            padding: 60px;
+            padding: 80px;
             background: white;
             border-radius: 32px;
             font-size: 1.2rem;
             color: #1a5f5f;
         }
+
         .error-box {
             text-align: center;
             padding: 60px;
@@ -169,26 +335,64 @@
             border-radius: 32px;
             color: #e53e3e;
         }
+
+        /* الفوتر */
         .footer {
             background: #0a2f2f;
             color: white;
             text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+            padding: 35px;
+            margin-top: 60px;
         }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ffb347;
+            text-decoration: none;
+        }
+
         @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .product-img {
+                height: 300px;
+            }
             .product-info {
                 padding: 20px;
             }
-            h1 {
+            .product-title h1 {
                 font-size: 1.5rem;
             }
-            .price {
-                font-size: 24px;
+            .product-price {
+                font-size: 20px;
+                padding: 8px 18px;
+                margin-top: 10px;
             }
-            .info-label {
+            .product-header {
+                flex-direction: column;
+            }
+            .detail-label {
                 width: 100%;
                 margin-bottom: 5px;
+            }
+            .detail-row {
+                flex-direction: column;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .dropdown-content {
+                left: auto;
+                right: 0;
             }
         }
     </style>
@@ -196,79 +400,125 @@
 <body>
 
 <div class="navbar">
-    <div class="logo">🧪 كيماتو</div>
+    <div class="logo">
+        <a href="/" style="text-decoration:none;">
+            <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;">
+                <img src="https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/709548215_2209434319875128_7640925248715427952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hhCEJVn_ItwQ7kNvwE1RoKX&_nc_oc=AdoFrDGRfx8kM33l7aB2X-xe-cpIlVPSBffMzDpuuaaNY0IK_xSxp2kH4A7bRMUC030&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=eVsIN6W69tJnSD81wCmsAA&_nc_ss=7b2a8&oh=00_Af6F7JJvo7lXyrTp6fVmFtTxAbbtNjjryJ5K5MfYjzFuaQ&oe=6A206BBC"
+                     style="width:45px;height:45px;border-radius:50%;border:2px solid #2563eb;object-fit:cover;">
+                <span><span style="color:#2563eb;">كيماتو</span><span style="color:#64748b;"> | تفاصيل المنتج</span></span>
+            </div>
+        </a>
+    </div>
     <div class="nav-links">
         <a href="index.html">الرئيسية</a>
-        <a href="#" id="dashboardLink" style="display:none;">لوحة التحكم</a>
-        <a href="auth.html" id="authLink" class="btn-login">دخول</a>
-        <a href="#" id="logoutLink" style="display:none;">تسجيل خروج</a>
+        <a href="all-products.html">📦 جميع المنتجات</a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><i class="fas fa-bars"></i> القائمة</button>
+            <div class="dropdown-content" id="dropdownContent"></div>
+        </div>
     </div>
 </div>
 
 <div class="container">
     <div id="productDetail" class="loader">⏳ جاري تحميل تفاصيل المنتج...</div>
-    <a href="index.html" class="back-link">← العودة للرئيسية</a>
+    <a href="index.html" style="display: inline-block; margin-top: 25px; color: #1a5f5f; text-decoration: none; padding: 10px 20px; background: white; border-radius: 30px;">
+        <i class="fas fa-arrow-right"></i> العودة للرئيسية
+    </a>
 </div>
 
 <div class="footer">
-    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية
+    <div class="footer-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">جميع المنتجات</a>
+        <a href="all-requests.html">جميع الطلبات</a>
+        <a href="auth.html">تسجيل الدخول</a>
+    </div>
+    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</div>
 </div>
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-    
+
     const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
-    
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    
+
     const urlParams = new URLSearchParams(window.location.search)
     const productId = urlParams.get('id')
-    
+
     let currentUser = null
     let currentProfile = null
-    
-    // التحقق من تسجيل الدخول
-    async function checkAuth() {
-        const { data: { user } } = await supabase.auth.getUser()
-        currentUser = user
+    let currentProduct = null
+
+    // ========== القائمة المنسدلة ==========
+    function setupDropdown() {
+        const dropdownBtn = document.querySelector('.dropdown-btn')
+        const dropdownContent = document.getElementById('dropdownContent')
         
-        const authLink = document.getElementById('authLink')
-        const logoutLink = document.getElementById('logoutLink')
-        const dashboardLink = document.getElementById('dashboardLink')
-        
-        if (user) {
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('*')
-                .eq('id', user.id)
-                .single()
-            currentProfile = profile
-            
-            authLink.style.display = 'none'
-            logoutLink.style.display = 'inline-block'
-            
-            if (profile?.user_type === 'supplier') {
-                dashboardLink.href = 'supplier-dashboard.html'
-                dashboardLink.textContent = '📦 لوحة المورد'
-            } else {
-                dashboardLink.href = 'buyer-dashboard.html'
-                dashboardLink.textContent = '🛒 لوحة العميل'
-            }
-            dashboardLink.style.display = 'inline-block'
-            
-            logoutLink.onclick = async (e) => {
-                e.preventDefault()
-                await supabase.auth.signOut()
-                window.location.href = 'index.html'
-            }
-        } else {
-            authLink.style.display = 'inline-block'
-            logoutLink.style.display = 'none'
-            dashboardLink.style.display = 'none'
+        if (dropdownBtn && dropdownContent) {
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation()
+                dropdownContent.classList.toggle('show')
+            })
+            document.addEventListener('click', () => {
+                dropdownContent.classList.remove('show')
+            })
         }
     }
-    
+
+    async function updateDropdownContent() {
+        const { data: { user } } = await supabase.auth.getUser()
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (user) {
+            const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
+            dropdownContent.innerHTML = `
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}">📦 لوحة التحكم</a>
+                <a href="profile.html">👤 الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
+            `
+            const logoutLink = document.getElementById('logoutLink')
+            if (logoutLink) {
+                logoutLink.onclick = async (e) => {
+                    e.preventDefault()
+                    await supabase.auth.signOut()
+                    window.location.href = 'index.html'
+                }
+            }
+        } else {
+            dropdownContent.innerHTML = `
+                <a href="auth.html">🔐 تسجيل الدخول</a>
+                <a href="auth.html">📝 حساب جديد</a>
+                <a href="supplier-dashboard.html">📦 للموردين</a>
+                <a href="buyer-dashboard.html">🛒 للعملاء</a>
+            `
+        }
+    }
+
+    // ========== فتح واتساب ==========
+    window.openWhatsApp = (phone) => {
+        if (phone) {
+            let whatsappNumber = phone.replace(/[^0-9]/g, '')
+            if (whatsappNumber.startsWith('0')) {
+                whatsappNumber = '2' + whatsappNumber
+            }
+            window.open(`https://wa.me/${whatsappNumber}`, '_blank')
+        } else {
+            alert('رقم واتساب غير متاح لهذا المورد')
+        }
+    }
+
+    // ========== الاتصال ==========
+    window.makeCall = (phone) => {
+        if (phone) {
+            window.location.href = `tel:${phone}`
+        } else {
+            alert('رقم الهاتف غير متاح لهذا المورد')
+        }
+    }
+
+    // ========== تحميل وعرض المنتج ==========
     async function loadProduct() {
         if (!productId) {
             document.getElementById('productDetail').innerHTML = `
@@ -279,13 +529,13 @@
             `
             return
         }
-        
+
         const { data, error } = await supabase
             .from('products')
-            .select('*, profiles(full_name, company_name, phone, city, address, whatsapp)')
+            .select('*, profiles(full_name, company_name, phone, city, address, whatsapp, user_type)')
             .eq('id', productId)
             .single()
-        
+
         if (error || !data) {
             document.getElementById('productDetail').innerHTML = `
                 <div class="error-box">
@@ -295,107 +545,121 @@
             `
             return
         }
-        
+
+        currentProduct = data
+
         // تحديث عدد المشاهدات
         await supabase
             .from('products')
             .update({ views_count: (data.views_count || 0) + 1 })
             .eq('id', productId)
-        
-        const statusText = {
-            'active': '🟢 متاح',
-            'hidden': '⚪ غير متاح حالياً',
-            'sold': '🔴 تم البيع'
+
+        // جلب اسم القسم
+        let categoryName = data.category || 'مواد كيماوية'
+        let categoryIcon = '📦'
+        if (data.category_id) {
+            const { data: cat } = await supabase
+                .from('categories')
+                .select('name, icon')
+                .eq('id', data.category_id)
+                .single()
+            if (cat) {
+                categoryName = cat.name
+                categoryIcon = cat.icon || '📦'
+            }
         }
-        
+
         document.getElementById('productDetail').innerHTML = `
             <div class="product-card">
-                <img class="product-img" src="${data.image_url || 'https://placehold.co/800x400?text=🧪+كيماتو'}" alt="${data.name}">
+                <div class="product-image-section">
+                    <img class="product-img" src="${data.image_url || 'https://placehold.co/600x400?text=🧪+كيماتو'}" alt="${data.name}">
+                </div>
                 <div class="product-info">
-                    <span class="badge category-badge">${data.category || 'مواد كيماوية'}</span>
-                    <span class="badge">${statusText[data.status] || '🟢 متاح'}</span>
-                    <h1>🧪 ${data.name}</h1>
-                    <div class="price">${data.price ? data.price.toLocaleString() + ' جنيه / ' + data.unit : '💰 سعر عند الطلب'}</div>
-                    
-                    <div class="info-section">
-                        <h3 style="margin-bottom:15px; color:#0a2f2f;">📋 تفاصيل المنتج</h3>
-                        <div class="info-row">
-                            <div class="info-label">الوحدة:</div>
-                            <div class="info-value">${data.unit || 'كجم'}</div>
+                    <div class="product-header">
+                        <div class="product-title">
+                            <h1>🧪 ${data.name}</h1>
+                            <span class="product-category">${categoryIcon} ${categoryName}</span>
                         </div>
-                        <div class="info-row">
-                            <div class="info-label">الوصف:</div>
-                            <div class="info-value">${data.description || 'لا يوجد وصف محدد'}</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">تاريخ الإضافة:</div>
-                            <div class="info-value">${new Date(data.created_at).toLocaleDateString('ar-EG')}</div>
-                        </div>
-                        <div class="info-row">
-                            <div class="info-label">عدد المشاهدات:</div>
-                            <div class="info-value">${(data.views_count || 0) + 1} مشاهدة</div>
+                        <div class="product-price">
+                            ${data.price ? data.price.toLocaleString() + ' جنيه / ' + data.unit : '💰 سعر عند الطلب'}
                         </div>
                     </div>
-                    
-                    <div class="supplier-info">
-                        <h3>🏢 معلومات المورد</h3>
-                        <div class="info-row">
-                            <div class="info-label">اسم المورد:</div>
-                            <div class="info-value">${data.profiles?.company_name || data.profiles?.full_name || 'غير محدد'}</div>
+
+                    <div class="details-section">
+                        <h3><i class="fas fa-info-circle"></i> تفاصيل المنتج</h3>
+                        <div class="detail-row">
+                            <div class="detail-label">الوحدة:</div>
+                            <div class="detail-value">${data.unit || 'كجم'}</div>
                         </div>
-                        <div class="info-row">
-                            <div class="info-label">المدينة:</div>
-                            <div class="info-value">${data.profiles?.city || 'غير محدد'}</div>
+                        <div class="detail-row">
+                            <div class="detail-label">الوصف:</div>
+                            <div class="detail-value">${data.description || 'لا يوجد وصف محدد'}</div>
                         </div>
-                        <div class="info-row">
-                            <div class="info-label">العنوان:</div>
-                            <div class="info-value">${data.profiles?.address || 'غير محدد'}</div>
+                        <div class="detail-row">
+                            <div class="detail-label">تاريخ الإضافة:</div>
+                            <div class="detail-value">${new Date(data.created_at).toLocaleDateString('ar-EG')}</div>
                         </div>
-                        <div class="info-row">
-                            <div class="info-label">رقم الهاتف:</div>
-                            <div class="info-value">${data.profiles?.phone ? '📞 ' + data.profiles.phone : 'غير متاح'}</div>
+                        <div class="detail-row">
+                            <div class="detail-label">عدد المشاهدات:</div>
+                            <div class="detail-value"><i class="fas fa-eye"></i> ${(data.views_count || 0) + 1} مشاهدة</div>
                         </div>
-                        ${data.profiles?.whatsapp ? `
-                        <div class="info-row">
-                            <div class="info-label">واتساب:</div>
-                            <div class="info-value">💬 ${data.profiles.whatsapp}</div>
-                        </div>
-                        ` : ''}
                     </div>
-                    
-                    <button class="btn-contact" onclick="contactSupplier('${data.profiles?.phone}', '${data.profiles?.whatsapp}')">
-                        📞 التواصل مع المورد
-                    </button>
-                    ${currentUser ? `
-                        <button class="btn-contact btn-message" onclick="sendMessage()">
-                            💬 إرسال رسالة للمورد
+
+                    <div class="supplier-section">
+                        <h3><i class="fas fa-building"></i> معلومات المورد</h3>
+                        <div class="supplier-info">
+                            <div class="supplier-info-item">
+                                <i class="fas fa-user"></i>
+                                <div>${data.profiles?.company_name || data.profiles?.full_name || 'غير محدد'}</div>
+                            </div>
+                            <div class="supplier-info-item">
+                                <i class="fas fa-city"></i>
+                                <div>${data.profiles?.city || 'غير محدد'}</div>
+                            </div>
+                            <div class="supplier-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>${data.profiles?.address || 'غير محدد'}</div>
+                            </div>
+                            <div class="supplier-info-item">
+                                <i class="fas fa-phone"></i>
+                                <div>${data.profiles?.phone ? '📞 ' + data.profiles.phone : 'غير متاح'}</div>
+                            </div>
+                            ${data.profiles?.whatsapp ? `
+                            <div class="supplier-info-item">
+                                <i class="fab fa-whatsapp"></i>
+                                <div>${data.profiles.whatsapp}</div>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-whatsapp" onclick="openWhatsApp('${data.profiles?.phone || ''}')">
+                            <i class="fab fa-whatsapp"></i> واتساب
                         </button>
-                    ` : `
-                        <button class="btn-contact btn-message" onclick="window.location.href='auth.html'">
-                            🔐 سجل دخول للتواصل
+                        <button class="btn btn-call" onclick="makeCall('${data.profiles?.phone || ''}')">
+                            <i class="fas fa-phone-alt"></i> اتصال
                         </button>
-                    `}
+                    </div>
                 </div>
             </div>
         `
     }
-    
-    window.contactSupplier = function(phone, whatsapp) {
-        if (phone) {
-            window.location.href = `tel:${phone}`
-        } else if (whatsapp) {
-            window.location.href = `https://wa.me/${whatsapp.replace(/[^0-9]/g, '')}`
-        } else {
-            alert('رقم التواصل غير متاح حالياً. يرجى تسجيل الدخول لإرسال رسالة')
+
+    // ========== بدء التشغيل ==========
+    async function init() {
+        const { data: { user } } = await supabase.auth.getUser()
+        currentUser = user
+        if (user) {
+            const { data: profile } = await supabase.from('profiles').select('*').eq('id', user.id).single()
+            currentProfile = profile
         }
+        setupDropdown()
+        updateDropdownContent()
+        loadProduct()
     }
-    
-    window.sendMessage = function() {
-        alert('🚀 خاصية الرسائل المباشرة قريباً\nحالياً يمكنك التواصل عبر رقم الهاتف الموضح أعلاه')
-    }
-    
-    checkAuth()
-    loadProduct()
+
+    init()
 </script>
 </body>
 </html>
