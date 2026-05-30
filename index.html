@@ -85,6 +85,75 @@
             font-size: 14px;
         }
 
+        /* ========== شريط البحث ========== */
+        .search-section {
+            background: white;
+            border-radius: 60px;
+            padding: 10px 20px;
+            margin: 30px auto;
+            max-width: 800px;
+            display: flex;
+            gap: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 18px 25px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            background: #f8fafc;
+            outline: none;
+        }
+
+        .search-input:focus {
+            background: white;
+            box-shadow: 0 0 0 2px #ffb347;
+        }
+
+        .search-btn {
+            background: #ffb347;
+            border: none;
+            padding: 0 35px;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .search-btn:hover {
+            background: #1a5f5f;
+            color: white;
+        }
+
+        .filter-buttons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin: 20px auto;
+            max-width: 800px;
+        }
+
+        .filter-chip {
+            background: #e2e8f0;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .filter-chip:hover, .filter-chip.active {
+            background: #1a5f5f;
+            color: white;
+        }
+
         /* ========== الحاوية الرئيسية ========== */
         .container {
             max-width: 1400px;
@@ -155,6 +224,12 @@
             border-radius: 30px;
             text-decoration: none;
             color: #1a5f5f;
+            transition: 0.3s;
+        }
+
+        .view-all:hover {
+            background: #1a5f5f;
+            color: white;
         }
 
         .product-grid, .request-grid {
@@ -265,7 +340,14 @@
             color: #1a5f5f;
         }
 
-        /* ========== استجابة ========== */
+        .no-results {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 32px;
+            color: #718096;
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -276,6 +358,15 @@
             }
             .section-title {
                 font-size: 22px;
+            }
+            .search-section {
+                flex-direction: column;
+                border-radius: 32px;
+                padding: 15px;
+            }
+            .search-btn {
+                padding: 15px;
+                justify-content: center;
             }
         }
     </style>
@@ -288,6 +379,8 @@
     </div>
     <div class="nav-links" id="navLinks">
         <a href="index.html">الرئيسية</a>
+        <a href="all-products.html" id="allProductsLink">📦 جميع المنتجات</a>
+        <a href="all-requests.html" id="allRequestsLink">📋 جميع الطلبات</a>
         <a href="#" id="dashboardLink" style="display:none;">لوحة التحكم</a>
         <a href="#" id="profileLink" style="display:none;">الملف الشخصي</a>
         <a href="auth.html" id="authLink" class="btn-login">دخول / حساب جديد</a>
@@ -306,10 +399,26 @@
         </div>
     </div>
 
+    <!-- شريط البحث -->
+    <div class="search-section">
+        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن منتج... (مثال: كاوية صودا، سولار، أحماض)">
+        <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+    </div>
+
+    <!-- أزرار التصفية السريعة -->
+    <div class="filter-buttons" id="filterButtons">
+        <span class="filter-chip active" data-category="all">الكل</span>
+        <span class="filter-chip" data-category="خامات">خامات</span>
+        <span class="filter-chip" data-category="أحماض">أحماض</span>
+        <span class="filter-chip" data-category="مذيبات">مذيبات</span>
+        <span class="filter-chip" data-category="منظفات">منظفات</span>
+        <span class="filter-chip" data-category="بوليمرات">بوليمرات</span>
+    </div>
+
     <!-- قسم المنتجات -->
     <div class="section-title">
         <span>📦 أحدث المواد الكيماوية</span>
-        <a href="#products" class="view-all">عرض الكل →</a>
+        <a href="all-products.html" class="view-all">عرض الكل ←</a>
     </div>
     <div id="productsList" class="product-grid">
         <div class="loader">⏳ جاري تحميل المنتجات...</div>
@@ -318,7 +427,7 @@
     <!-- قسم طلبات الشراء -->
     <div class="section-title">
         <span>📢 أحدث طلبات الشراء</span>
-        <a href="#requests" class="view-all">عرض الكل →</a>
+        <a href="all-requests.html" class="view-all">عرض الكل ←</a>
     </div>
     <div id="requestsList" class="request-grid">
         <div class="loader">⏳ جاري تحميل الطلبات...</div>
@@ -328,15 +437,16 @@
 <div class="footer">
     <div class="footer-links">
         <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">جميع المنتجات</a>
+        <a href="all-requests.html">جميع الطلبات</a>
         <a href="auth.html">تسجيل الدخول</a>
         <a href="supplier-dashboard.html">للموردين</a>
         <a href="buyer-dashboard.html">للعملاء</a>
     </div>
-    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - +201063060576</div>
+    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | Chemato phone:01063060576</div>
 </div>
 
 <script type="module">
-    // ========== جافاسكريبت داخلي ==========
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
     
     const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
@@ -346,8 +456,10 @@
     
     let currentUser = null
     let currentProfile = null
+    let currentCategory = 'all'
+    let currentSearch = ''
     
-    // ========== التحقق من حالة تسجيل الدخول ==========
+    // التحقق من حالة تسجيل الدخول
     async function checkAuth() {
         const { data: { user } } = await supabase.auth.getUser()
         currentUser = user
@@ -359,7 +471,6 @@
         const userNameSpan = document.getElementById('userNameSpan')
         
         if (user) {
-            // جلب البروفايل
             const { data: profile } = await supabase
                 .from('profiles')
                 .select('*')
@@ -387,7 +498,6 @@
             profileLink.style.display = 'inline-block'
             userNameSpan.textContent = `👋 مرحباً ${profile?.full_name?.split(' ')[0] || 'عزيزي'}`
             
-            // تسجيل الخروج
             logoutLink.onclick = async (e) => {
                 e.preventDefault()
                 await supabase.auth.signOut()
@@ -402,12 +512,22 @@
         }
     }
     
-    // ========== عرض المنتجات ==========
+    // عرض المنتجات مع البحث والتصفية
     async function loadProducts() {
-        const { data, error } = await supabase
+        let query = supabase
             .from('products')
             .select('*, profiles(full_name, company_name)')
             .eq('status', 'active')
+        
+        if (currentCategory !== 'all') {
+            query = query.eq('category', currentCategory)
+        }
+        
+        if (currentSearch) {
+            query = query.ilike('name', `%${currentSearch}%`)
+        }
+        
+        const { data, error } = await query
             .order('created_at', { ascending: false })
             .limit(6)
         
@@ -417,7 +537,7 @@
             return
         }
         if (!data || data.length === 0) {
-            container.innerHTML = '<p style="text-align:center;">⚠️ لا توجد منتجات معروضة حالياً</p>'
+            container.innerHTML = '<div class="no-results">🔍 لا توجد منتجات مطابقة للبحث</div>'
             return
         }
         
@@ -435,7 +555,7 @@
         `).join('')
     }
     
-    // ========== عرض طلبات الشراء ==========
+    // عرض طلبات الشراء
     async function loadRequests() {
         const { data, error } = await supabase
             .from('purchase_requests')
@@ -450,7 +570,7 @@
             return
         }
         if (!data || data.length === 0) {
-            container.innerHTML = '<p style="text-align:center;">⚠️ لا توجد طلبات شراء حالياً</p>'
+            container.innerHTML = '<div class="no-results">⚠️ لا توجد طلبات شراء حالياً</div>'
             return
         }
         
@@ -468,7 +588,29 @@
         `).join('')
     }
     
-    // ========== تحميل كل شيء ==========
+    // البحث
+    document.getElementById('searchBtn').addEventListener('click', () => {
+        currentSearch = document.getElementById('searchInput').value.trim()
+        loadProducts()
+    })
+    
+    document.getElementById('searchInput').addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            currentSearch = document.getElementById('searchInput').value.trim()
+            loadProducts()
+        }
+    })
+    
+    // التصفية
+    document.querySelectorAll('.filter-chip').forEach(chip => {
+        chip.addEventListener('click', () => {
+            document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'))
+            chip.classList.add('active')
+            currentCategory = chip.getAttribute('data-category')
+            loadProducts()
+        })
+    })
+    
     checkAuth()
     loadProducts()
     loadRequests()
