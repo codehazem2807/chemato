@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كيماتو | تفاصيل الطلب</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         * {
             margin: 0;
@@ -11,176 +12,736 @@
             box-sizing: border-box;
             font-family: 'Cairo', 'Tahoma', sans-serif;
         }
+
         body {
             background: #f0f4f8;
         }
+
+        /* ========== الهيدر ========== */
         .navbar {
             background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
             padding: 18px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
         }
-        .logo {
-            font-size: 24px;
-            font-weight: bold;
+
+        .logo a {
+            text-decoration: none;
         }
+
+        .nav-links {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links > a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 30px;
+            transition: 0.3s;
+            font-weight: 500;
+        }
+
+        .nav-links > a:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+
+        /* ========== القائمة المنسدلة ========== */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 8px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 500;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: none;
+            font-size: 1rem;
+            font-family: inherit;
+        }
+
+        .dropdown-btn:hover {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
+            border-radius: 16px;
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 8px;
+        }
+
+        .dropdown-content.show {
+            display: block;
+        }
+
+        .dropdown-content a {
+            color: #1e2a3e;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
+            font-size: 14px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .dropdown-content a:hover {
+            background: #f0f4f8;
+            color: #1a5f5f;
+        }
+
+        .dropdown-content .logout-item {
+            color: #e53e3e;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* ========== المحتوى الرئيسي ========== */
         .container {
-            max-width: 900px;
+            max-width: 1000px;
             margin: 40px auto;
             padding: 0 20px;
         }
+
+        /* بطاقة الطلب */
         .request-card {
             background: white;
             border-radius: 32px;
-            padding: 35px;
+            overflow: hidden;
             box-shadow: 0 20px 40px rgba(0,0,0,0.1);
         }
-        h1 {
-            color: #0a2f2f;
-            margin-bottom: 20px;
+
+        /* رأس الطلب */
+        .request-header {
+            background: linear-gradient(135deg, #1a5f5f, #0f4f4f);
+            padding: 30px;
+            color: white;
+            position: relative;
         }
-        .info-row {
-            padding: 12px 0;
-            border-bottom: 1px solid #e2e8f0;
-        }
-        .info-label {
-            font-weight: bold;
-            color: #2d3e50;
+
+        .request-status {
             display: inline-block;
-            width: 140px;
-        }
-        .badge {
-            display: inline-block;
-            background: #c6f6d5;
-            color: #22543d;
-            padding: 5px 15px;
-            border-radius: 25px;
-            margin: 15px 0;
-        }
-        .buyer-info {
-            background: #eef2f7;
-            padding: 20px;
-            border-radius: 24px;
-            margin: 25px 0;
-        }
-        .btn-offer {
             background: #ffb347;
             color: #1e2a3e;
-            padding: 14px 30px;
-            border: none;
-            border-radius: 40px;
-            font-size: 1.1rem;
-            cursor: pointer;
-            width: 100%;
+            padding: 6px 18px;
+            border-radius: 30px;
+            font-size: 14px;
+            font-weight: bold;
+            margin-bottom: 15px;
+        }
+
+        .request-title {
+            font-size: 1.8rem;
+            margin-bottom: 10px;
+        }
+
+        .request-meta {
+            display: flex;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-top: 15px;
+            font-size: 14px;
+            opacity: 0.8;
+        }
+
+        .request-meta i {
+            margin-left: 5px;
+        }
+
+        /* محتوى الطلب */
+        .request-content {
+            padding: 35px;
+        }
+
+        /* قسم التفاصيل */
+        .details-section {
+            margin-bottom: 30px;
+        }
+
+        .section-title {
+            font-size: 1.3rem;
+            color: #0a2f2f;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #e2e8f0;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+
+        .info-item {
+            background: #f8fafc;
+            padding: 15px 20px;
+            border-radius: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .info-icon {
+            width: 45px;
+            height: 45px;
+            background: #e9f0f0;
+            border-radius: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .info-icon i {
+            font-size: 22px;
+            color: #1a5f5f;
+        }
+
+        .info-label {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .info-value {
+            font-size: 16px;
+            font-weight: bold;
+            color: #1e2a3e;
+        }
+
+        /* وصف الطلب */
+        .description-box {
+            background: #f8fafc;
+            padding: 20px;
+            border-radius: 20px;
+            margin-top: 20px;
+        }
+
+        .description-box p {
+            line-height: 1.6;
+            color: #475569;
+        }
+
+        /* معلومات العميل */
+        .buyer-section {
+            background: linear-gradient(135deg, #eef2f7, #e2e8f0);
+            border-radius: 24px;
+            padding: 25px;
+            margin: 30px 0;
+        }
+
+        .buyer-header {
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            margin-bottom: 20px;
+        }
+
+        .buyer-avatar {
+            width: 60px;
+            height: 60px;
+            background: #1a5f5f;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
             font-weight: bold;
         }
-        .btn-offer:hover {
-            background: #1b6b6b;
-            color: white;
+
+        .buyer-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #0a2f2f;
         }
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            color: #1a5f5f;
+
+        .buyer-info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 15px;
+            margin-top: 15px;
+        }
+
+        .buyer-info-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            padding: 12px;
+            background: white;
+            border-radius: 16px;
+        }
+
+        .buyer-info-item i {
+            width: 35px;
+            height: 35px;
+            background: #1a5f5f;
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        /* أزرار التواصل */
+        .action-buttons {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-top: 25px;
+        }
+
+        .btn {
+            flex: 1;
+            padding: 14px 20px;
+            border: none;
+            border-radius: 40px;
+            font-size: 1rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
             text-decoration: none;
         }
+
+        .btn-whatsapp {
+            background: #25D366;
+            color: white;
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-call {
+            background: #ffb347;
+            color: #1e2a3e;
+        }
+
+        .btn-call:hover {
+            background: #1a5f5f;
+            color: white;
+            transform: translateY(-2px);
+        }
+
+        .btn-copy {
+            background: #64748b;
+            color: white;
+        }
+
+        .btn-copy:hover {
+            background: #475569;
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: transparent;
+            border: 2px solid #cbd5e1;
+            color: #1e2a3e;
+        }
+
+        .btn-back:hover {
+            background: #e2e8f0;
+        }
+
+        /* حالة التحميل */
+        .loader {
+            text-align: center;
+            padding: 80px;
+            background: white;
+            border-radius: 32px;
+            font-size: 1.2rem;
+            color: #1a5f5f;
+        }
+
+        .error-box {
+            text-align: center;
+            padding: 60px;
+            background: white;
+            border-radius: 32px;
+            color: #e53e3e;
+        }
+
+        /* رسالة نسخ */
+        .toast {
+            position: fixed;
+            bottom: 30px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #1a5f5f;
+            color: white;
+            padding: 12px 25px;
+            border-radius: 40px;
+            font-weight: bold;
+            z-index: 1000;
+            animation: fadeOut 2s ease forwards;
+        }
+
+        @keyframes fadeOut {
+            0% { opacity: 1; bottom: 30px; }
+            70% { opacity: 1; bottom: 30px; }
+            100% { opacity: 0; bottom: 50px; visibility: hidden; }
+        }
+
+        /* الفوتر */
         .footer {
             background: #0a2f2f;
             color: white;
             text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+            padding: 35px;
+            margin-top: 60px;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #ffb347;
+            text-decoration: none;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 15px;
+            }
+            .request-title {
+                font-size: 1.3rem;
+            }
+            .request-content {
+                padding: 20px;
+            }
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            .action-buttons {
+                flex-direction: column;
+            }
+            .dropdown-content {
+                left: auto;
+                right: 0;
+            }
         }
     </style>
 </head>
 <body>
 
 <div class="navbar">
-    <a href="/" style="text-decoration:none;">
-        <div style="display:flex;align-items:center;gap:12px;font-family:'Cairo',sans-serif;font-weight:700;font-size:22px;cursor:pointer;transition:all .3s ease;">
-            <img src="https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/709548215_2209434319875128_7640925248715427952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hhCEJVn_ItwQ7kNvwE1RoKX&_nc_oc=AdoFrDGRfx8kM33l7aB2X-xe-cpIlVPSBffMzDpuuaaNY0IK_xSxp2kH4A7bRMUC030&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=eVsIN6W69tJnSD81wCmsAA&_nc_ss=7b2a8&oh=00_Af6F7JJvo7lXyrTp6fVmFtTxAbbtNjjryJ5K5MfYjzFuaQ&oe=6A206BBC"
-                 alt="كيماتو"
-                 style="width:55px;height:55px;border-radius:50%;border:3px solid #2563eb;box-shadow:0 4px 12px rgba(37,99,235,.25);object-fit:cover;">
-            <span>
-                <span style="color:#2563eb;">كيماتو</span>
-                <span style="color:#64748b;">| سوق المواد الكيماوية</span>
-            </span>
+    <div class="logo">
+        <a href="/" style="text-decoration:none;">
+            <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;">
+                <img src="https://scontent.fcai19-5.fna.fbcdn.net/v/t39.30808-6/709548215_2209434319875128_7640925248715427952_n.jpg?_nc_cat=101&ccb=1-7&_nc_sid=6ee11a&_nc_ohc=hhCEJVn_ItwQ7kNvwE1RoKX&_nc_oc=AdoFrDGRfx8kM33l7aB2X-xe-cpIlVPSBffMzDpuuaaNY0IK_xSxp2kH4A7bRMUC030&_nc_zt=23&_nc_ht=scontent.fcai19-5.fna&_nc_gid=eVsIN6W69tJnSD81wCmsAA&_nc_ss=7b2a8&oh=00_Af6F7JJvo7lXyrTp6fVmFtTxAbbtNjjryJ5K5MfYjzFuaQ&oe=6A206BBC"
+                     style="width:45px;height:45px;border-radius:50%;border:2px solid #2563eb;object-fit:cover;">
+                <span><span style="color:#2563eb;">كيماتو</span><span style="color:#64748b;"> | تفاصيل الطلب</span></span>
+            </div>
+        </a>
+    </div>
+    <div class="nav-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">📦 جميع المنتجات</a>
+        <a href="all-requests.html">📋 جميع الطلبات</a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><i class="fas fa-bars"></i> القائمة</button>
+            <div class="dropdown-content" id="dropdownContent"></div>
         </div>
-    </a>
+    </div>
 </div>
 
 <div class="container">
-    <div id="requestDetail" class="request-card">جاري التحميل...</div>
-    <a href="index.html" class="back-link">← العودة للرئيسية</a>
+    <div id="requestDetail" class="loader">⏳ جاري تحميل تفاصيل الطلب...</div>
+    <div style="margin-top: 20px; text-align: center;">
+        <a href="all-requests.html" class="btn btn-back" style="display: inline-block; width: auto; padding: 10px 25px;">
+            <i class="fas fa-arrow-right"></i> العودة لجميع الطلبات
+        </a>
+    </div>
 </div>
 
 <div class="footer">
-    © جميع الحقوق محفوظة Hazem Mohamady 2026
+    <div class="footer-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">جميع المنتجات</a>
+        <a href="all-requests.html">جميع الطلبات</a>
+        <a href="auth.html">تسجيل الدخول</a>
+    </div>
+    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</div>
 </div>
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-    
+
     const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
-    
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    
+
     const urlParams = new URLSearchParams(window.location.search)
     const requestId = urlParams.get('id')
-    
+
+    let currentUser = null
+    let currentProfile = null
+
+    // ========== القائمة المنسدلة ==========
+    function setupDropdown() {
+        const dropdownBtn = document.querySelector('.dropdown-btn')
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (dropdownBtn && dropdownContent) {
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation()
+                dropdownContent.classList.toggle('show')
+            })
+            document.addEventListener('click', () => {
+                dropdownContent.classList.remove('show')
+            })
+        }
+    }
+
+    async function updateDropdownContent() {
+        const { data: { user } } = await supabase.auth.getUser()
+        currentUser = user
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (user) {
+            const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
+            currentProfile = profile
+            dropdownContent.innerHTML = `
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}">📦 لوحة التحكم</a>
+                <a href="profile.html">👤 الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
+            `
+            const logoutLink = document.getElementById('logoutLink')
+            if (logoutLink) {
+                logoutLink.onclick = async (e) => {
+                    e.preventDefault()
+                    await supabase.auth.signOut()
+                    window.location.href = 'index.html'
+                }
+            }
+        } else {
+            dropdownContent.innerHTML = `
+                <a href="auth.html">🔐 تسجيل الدخول</a>
+                <a href="auth.html">📝 حساب جديد</a>
+                <a href="supplier-dashboard.html">📦 للموردين</a>
+                <a href="buyer-dashboard.html">🛒 للعملاء</a>
+            `
+        }
+    }
+
+    // ========== عرض رسالة منبثقة ==========
+    function showToast(message) {
+        const toast = document.createElement('div')
+        toast.className = 'toast'
+        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`
+        document.body.appendChild(toast)
+        setTimeout(() => toast.remove(), 2000)
+    }
+
+    // ========== نسخ النص ==========
+    window.copyToClipboard = (text) => {
+        navigator.clipboard.writeText(text)
+        showToast('✅ تم نسخ الرقم بنجاح')
+    }
+
+    // ========== فتح واتساب ==========
+    window.openWhatsApp = (phone) => {
+        if (phone) {
+            let whatsappNumber = phone.replace(/[^0-9]/g, '')
+            if (whatsappNumber.startsWith('0')) {
+                whatsappNumber = '2' + whatsappNumber
+            }
+            window.open(`https://wa.me/${whatsappNumber}`, '_blank')
+        } else {
+            showToast('⚠️ رقم الهاتف غير متاح لهذا العميل')
+        }
+    }
+
+    // ========== الاتصال ==========
+    window.makeCall = (phone) => {
+        if (phone) {
+            window.location.href = `tel:${phone}`
+        } else {
+            showToast('⚠️ رقم الهاتف غير متاح لهذا العميل')
+        }
+    }
+
+    // ========== تحميل وعرض الطلب ==========
     async function loadRequest() {
         if (!requestId) {
-            document.getElementById('requestDetail').innerHTML = '<div>❌ لم يتم تحديد الطلب</div>'
+            document.getElementById('requestDetail').innerHTML = `
+                <div class="error-box">
+                    <h2>❌ خطأ</h2>
+                    <p>لم يتم تحديد الطلب المطلوب</p>
+                </div>
+            `
             return
         }
-        
+
         const { data, error } = await supabase
             .from('purchase_requests')
-            .select('*, profiles(full_name, company_name, phone, city)')
+            .select('*, profiles(full_name, company_name, phone, city, address, whatsapp, user_type)')
             .eq('id', requestId)
             .single()
-        
+
         if (error || !data) {
-            document.getElementById('requestDetail').innerHTML = `<div>❌ ${error?.message || 'الطلب غير موجود'}</div>`
+            document.getElementById('requestDetail').innerHTML = `
+                <div class="error-box">
+                    <h2>❌ عذراً</h2>
+                    <p>${error?.message || 'الطلب غير موجود أو تم حذفه'}</p>
+                </div>
+            `
             return
         }
-        
+
+        const statusMap = {
+            'open': { text: '🟢 مفتوح للعروض', class: 'open' },
+            'matched': { text: '🟡 تم التوفيق مع مورد', class: 'matched' },
+            'closed': { text: '🔴 مغلق', class: 'closed' }
+        }
+
+        const buyerName = data.profiles?.company_name || data.profiles?.full_name || 'عميل'
+        const buyerInitial = buyerName.charAt(0)
+        const phoneNumber = data.profiles?.phone || ''
+        const whatsappNumber = data.profiles?.whatsapp || data.profiles?.phone || ''
+
         document.getElementById('requestDetail').innerHTML = `
-            <span class="badge">${data.status === 'open' ? '🟢 مفتوح للعروض' : '🔴 مغلق'}</span>
-            <h1>📦 طلب: ${data.product_name}</h1>
-            
-            <div class="info-row">
-                <span class="info-label">الكمية المطلوبة:</span>
-                <span>${data.quantity_needed || 'غير محدد'}</span>
+            <div class="request-card">
+                <div class="request-header">
+                    <div class="request-status">${statusMap[data.status]?.text || '🟢 مفتوح'}</div>
+                    <h1 class="request-title">📦 طلب شراء: ${data.product_name}</h1>
+                    <div class="request-meta">
+                        <span><i class="fas fa-calendar"></i> تاريخ النشر: ${new Date(data.created_at).toLocaleDateString('ar-EG')}</span>
+                        <span><i class="fas fa-hashtag"></i> رقم الطلب: ${data.id.substring(0, 12)}...</span>
+                    </div>
+                </div>
+                
+                <div class="request-content">
+                    <div class="details-section">
+                        <div class="section-title">
+                            <i class="fas fa-info-circle"></i>
+                            <span>تفاصيل الطلب</span>
+                        </div>
+                        <div class="info-grid">
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fas fa-box"></i></div>
+                                <div>
+                                    <div class="info-label">المنتج المطلوب</div>
+                                    <div class="info-value">${data.product_name}</div>
+                                </div>
+                            </div>
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fas fa-balance-scale"></i></div>
+                                <div>
+                                    <div class="info-label">الكمية المطلوبة</div>
+                                    <div class="info-value">${data.quantity_needed || 'غير محدد'}</div>
+                                </div>
+                            </div>
+                            ${data.deadline ? `
+                            <div class="info-item">
+                                <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                                <div>
+                                    <div class="info-label">آخر موعد للاستلام</div>
+                                    <div class="info-value">${new Date(data.deadline).toLocaleDateString('ar-EG')}</div>
+                                </div>
+                            </div>
+                            ` : ''}
+                        </div>
+                        
+                        ${data.description ? `
+                            <div class="description-box">
+                                <div class="info-label" style="margin-bottom: 10px;"><i class="fas fa-align-right"></i> وصف الطلب</div>
+                                <p>${data.description.replace(/\n/g, '<br>')}</p>
+                            </div>
+                        ` : ''}
+                    </div>
+                    
+                    <div class="buyer-section">
+                        <div class="buyer-header">
+                            <div class="buyer-avatar">${buyerInitial}</div>
+                            <div>
+                                <div class="buyer-name">${buyerName}</div>
+                                <div style="font-size: 14px; color: #64748b;">${data.profiles?.user_type === 'supplier' ? 'مورد' : 'عميل'}</div>
+                            </div>
+                        </div>
+                        
+                        <div class="buyer-info-grid">
+                            <div class="buyer-info-item">
+                                <i class="fas fa-city"></i>
+                                <div>${data.profiles?.city || 'مدينة غير محددة'}</div>
+                            </div>
+                            <div class="buyer-info-item">
+                                <i class="fas fa-map-marker-alt"></i>
+                                <div>${data.profiles?.address || 'عنوان غير محدد'}</div>
+                            </div>
+                            ${phoneNumber ? `
+                            <div class="buyer-info-item">
+                                <i class="fas fa-phone"></i>
+                                <div>${phoneNumber}</div>
+                                <button onclick="copyToClipboard('${phoneNumber}')" style="background: none; border: none; cursor: pointer; margin-right: auto; color: #1a5f5f;">
+                                    <i class="fas fa-copy"></i>
+                                </button>
+                            </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                    
+                    <div class="action-buttons">
+                        <button class="btn btn-whatsapp" onclick="openWhatsApp('${whatsappNumber}')">
+                            <i class="fab fa-whatsapp"></i> واتساب
+                        </button>
+                        <button class="btn btn-call" onclick="makeCall('${phoneNumber}')">
+                            <i class="fas fa-phone-alt"></i> اتصال
+                        </button>
+                        ${phoneNumber ? `
+                        <button class="btn btn-copy" onclick="copyToClipboard('${phoneNumber}')">
+                            <i class="fas fa-copy"></i> نسخ الرقم
+                        </button>
+                        ` : ''}
+                    </div>
+                </div>
             </div>
-            <div class="info-row">
-                <span class="info-label">المواصفات:</span>
-                <span>${data.description || 'لا توجد مواصفات محددة'}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">آخر موعد:</span>
-                <span>${data.deadline || 'غير محدد'}</span>
-            </div>
-            <div class="info-row">
-                <span class="info-label">تاريخ النشر:</span>
-                <span>${new Date(data.created_at).toLocaleDateString('ar-EG')}</span>
-            </div>
-            
-            <div class="buyer-info">
-                <h3>👤 معلومات صاحب الطلب</h3>
-                <p><strong>الاسم:</strong> ${data.profiles?.company_name || data.profiles?.full_name || 'عميل'}</p>
-                <p><strong>المدينة:</strong> ${data.profiles?.city || 'غير محدد'}</p>
-                <p><strong>📞 التواصل:</strong> ${data.profiles?.phone || 'يرجى تسجيل الدخول للتواصل'}</p>
-            </div>
-            
-            <button class="btn-offer" onclick="makeOffer('${data.id}')">💰 تقديم عرض لهذا الطلب</button>
         `
     }
-    
-    window.makeOffer = function(requestId) {
-        alert('لتقديم عرض:\nيمكنك التواصل مع العميل مباشرة على الرقم الموضح أعلاه\n(خاصية العروض المباشرة ستضاف قريباً)')
-    }
-    
+
+    // ========== بدء التشغيل ==========
+    setupDropdown()
+    updateDropdownContent()
     loadRequest()
 </script>
 </body>
