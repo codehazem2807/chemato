@@ -1,515 +1,346 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كيماتو | سوق المواد الكيماوية في مصر</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link rel="icon" type="image/x-icon" href="logo.ico">
-    <link rel="icon" type="image/png" href="/logo.png">
-    
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>كيماتو | سوق المواد الكيماوية في مصر – بيع وشراء الكيماويات</title>
+    <meta name="description" content="كيماتو هو أكبر سوق إلكتروني للمواد الكيماوية في مصر. بيع واشتري المواد الخام، الأحماض، المذيبات، والكيماويات الصناعية بسهولة وأمان." />
+    <meta name="keywords" content="سوق كيماويات, مواد كيماوية مصر, بيع كيماويات, شراء كيماويات, أحماض, مذيبات, موردين كيماويات, كيماتو" />
+    <link rel="canonical" href="https://kematomarket.com/" />
+    <meta property="og:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
+    <meta property="og:description" content="أكبر سوق إلكتروني للمواد الكيماوية في مصر. بيع وشراء المواد الخام والكيماويات الصناعية." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://kematomarket.com/" />
+    <meta property="og:image" content="https://kematomarket.com/og-image.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
+    <meta name="twitter:description" content="أكبر سوق إلكتروني للمواد الكيماوية في مصر. بيع وشراء المواد الخام والكيماويات الصناعية." />
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    <link rel="icon" type="image/png" href="/logo.png" />
+
+    <!-- Schema.org Organization -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Organization",
+      "name": "كيماتو",
+      "url": "https://kematomarket.com",
+      "logo": "https://kematomarket.com/logo.png",
+      "description": "سوق المواد الكيماوية في مصر",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+201234567890",
+        "contactType": "خدمة العملاء"
+      }
+    }
+    </script>
+    <!-- Schema.org WebSite -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebSite",
+      "name": "كيماتو",
+      "url": "https://kematomarket.com",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://kematomarket.com/search?q={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
+    }
+    </script>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://cdnjs.cloudflare.com" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800&display=swap" rel="stylesheet" />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', 'Tahoma', sans-serif;
-        }
+        /* ===== RESET & BASE ===== */
+        * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo','Tahoma',sans-serif; }
+        body { background:#f5f9fc; color:#1a2a3a; }
 
-        body {
-            background: #f0f4f8;
-        }
-
-        /* ========== الهيدر ========== */
+        /* ===== NAVBAR ===== */
         .navbar {
-            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
-            padding: 18px 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            background:linear-gradient(145deg, #0b3b3b, #1f6e6e);
+            padding:16px 40px;
+            display:flex;
+            justify-content:space-between;
+            align-items:center;
+            flex-wrap:wrap;
+            color:#fff;
+            position:sticky;
+            top:0;
+            z-index:100;
+            box-shadow:0 8px 32px rgba(0,40,40,0.20);
+            border-bottom:2px solid rgba(255,190,70,0.3);
         }
-
-        .logo a {
-            text-decoration: none;
-        }
-
-        .nav-links {
-            display: flex;
-            gap: 15px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
-
+        .logo a { text-decoration:none; }
+        .nav-links { display:flex; gap:10px; align-items:center; flex-wrap:wrap; }
         .nav-links > a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 20px;
-            border-radius: 30px;
-            transition: 0.3s;
-            font-weight: 500;
+            color:#fff; text-decoration:none; padding:8px 20px; border-radius:40px;
+            transition:all 0.25s ease; font-weight:600; letter-spacing:0.2px;
+            background:rgba(255,255,255,0.05);
+            backdrop-filter:blur(4px);
         }
-
         .nav-links > a:hover {
-            background: #ffb347;
-            color: #1e2a3e;
+            background:#f5b042; color:#0a2f2f; transform:translateY(-2px);
+            box-shadow:0 8px 20px rgba(245,176,66,0.35);
         }
+        .btn-login { background:#f5b042; color:#0a2f2f !important; font-weight:700; }
 
-        .btn-login {
-            background: #ffb347;
-            color: #1e2a3e !important;
-        }
-
-        /* ========== القائمة المنسدلة - تعمل بالضغط ========== */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-
+        /* ===== DROPDOWN ===== */
+        .dropdown { position:relative; display:inline-block; }
         .dropdown-btn {
-            background: rgba(255,255,255,0.15);
-            color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: none;
-            font-size: 1rem;
-            font-family: inherit;
+            background:rgba(255,255,255,0.10); color:#fff; padding:8px 22px; border-radius:40px;
+            cursor:pointer; font-weight:600; border:none; font-size:1rem; font-family:inherit;
+            display:flex; align-items:center; gap:8px; backdrop-filter:blur(4px); transition:0.25s;
         }
-
-        .dropdown-btn:hover {
-            background: #ffb347;
-            color: #1e2a3e;
-        }
-
+        .dropdown-btn:hover { background:#f5b042; color:#0a2f2f; transform:translateY(-2px); box-shadow:0 8px 20px rgba(245,176,66,0.3); }
         .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            border-radius: 16px;
-            z-index: 1000;
-            overflow: hidden;
-            margin-top: 8px;
+            display:none; position:absolute; top:110%; left:0; right:0; background:#ffffff;
+            min-width:210px; box-shadow:0 20px 50px rgba(0,0,0,0.15); border-radius:20px;
+            z-index:1000; overflow:hidden; margin-top:6px; border:1px solid rgba(255,255,255,0.2);
         }
-
-        .dropdown-content.show {
-            display: block;
-        }
-
+        .dropdown-content.show { display:block; animation:dropFade 0.2s ease; }
+        @keyframes dropFade { 0%{opacity:0;transform:translateY(-8px);} 100%{opacity:1;transform:translateY(0);} }
         .dropdown-content a {
-            color: #1e2a3e;
-            padding: 12px 20px;
-            text-decoration: none;
-            display: block;
-            transition: 0.2s;
-            font-size: 14px;
-            border-bottom: 1px solid #e2e8f0;
+            color:#1e2a3e; padding:14px 22px; text-decoration:none; display:block;
+            transition:0.2s; font-size:14px; font-weight:500; border-bottom:1px solid #eef2f6;
         }
+        .dropdown-content a:hover { background:#f0f7fc; color:#1a5f5f; padding-right:28px; }
+        .dropdown-content .logout-item { color:#c0392b; border-top:1px solid #eef2f6; }
+        .dropdown-content .logout-item:hover { background:#fee9e7; }
 
-        .dropdown-content a:hover {
-            background: #f0f4f8;
-            color: #1a5f5f;
-        }
-
-        .dropdown-content .logout-item {
-            color: #e53e3e;
-            border-top: 1px solid #e2e8f0;
-        }
-
-        .dropdown-content .logout-item:hover {
-            background: #fee2e2;
-        }
-
-        /* ========== شريط البحث ========== */
+        /* ===== SEARCH ===== */
         .search-section {
-            background: white;
-            border-radius: 60px;
-            padding: 10px 20px;
-            margin: 30px auto;
-            max-width: 800px;
-            display: flex;
-            gap: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            background:#fff; border-radius:80px; padding:6px 10px 6px 6px;
+            margin:28px auto 18px; max-width:820px; display:flex; gap:8px;
+            box-shadow:0 16px 48px rgba(0,30,30,0.08); border:1px solid rgba(245,176,66,0.15);
         }
-
         .search-input {
-            flex: 1;
-            padding: 18px 25px;
-            border: none;
-            border-radius: 50px;
-            font-size: 1.1rem;
-            background: #f8fafc;
-            outline: none;
+            flex:1; padding:18px 28px; border:none; border-radius:60px; font-size:1.05rem;
+            background:#f8fafc; outline:none; transition:0.3s;
         }
-
-        .search-input:focus {
-            background: white;
-            box-shadow: 0 0 0 2px #ffb347;
-        }
-
+        .search-input:focus { background:#fff; box-shadow:0 0 0 3px #f5b042; }
         .search-btn {
-            background: #ffb347;
-            border: none;
-            padding: 0 35px;
-            border-radius: 50px;
-            font-weight: bold;
-            font-size: 1rem;
-            cursor: pointer;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            background:#f5b042; border:none; padding:0 38px; border-radius:60px;
+            font-weight:700; font-size:1rem; cursor:pointer; transition:0.3s;
+            display:flex; align-items:center; gap:10px; color:#0a2f2f; letter-spacing:0.3px;
         }
+        .search-btn:hover { background:#1f6e6e; color:#fff; transform:scale(1.02); box-shadow:0 8px 24px rgba(31,110,110,0.3); }
 
-        .search-btn:hover {
-            background: #1a5f5f;
-            color: white;
-        }
-
-        /* ========== فلاتر التصنيفات ========== */
+        /* ===== FILTERS ===== */
         .filter-buttons {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-            flex-wrap: wrap;
-            margin: 20px auto;
-            max-width: 800px;
+            display:flex; justify-content:center; gap:12px; flex-wrap:wrap;
+            margin:8px auto 28px; max-width:900px;
         }
-
         .filter-chip {
-            background: #e2e8f0;
-            padding: 8px 20px;
-            border-radius: 30px;
-            cursor: pointer;
-            transition: 0.3s;
-            font-size: 14px;
+            background:#eef2f7; padding:10px 26px; border-radius:40px; cursor:pointer;
+            transition:all 0.25s; font-size:14px; font-weight:600; color:#1e2a3e; border:1px solid transparent;
         }
+        .filter-chip:hover { background:#d5e0ea; transform:translateY(-2px); }
+        .filter-chip.active { background:#1f6e6e; color:#fff; box-shadow:0 6px 20px rgba(31,110,110,0.25); border-color:#1f6e6e; }
 
-        .filter-chip:hover,
-        .filter-chip.active {
-            background: #1a5f5f;
-            color: white;
-        }
-
-        /* ========== الحاوية الرئيسية ========== */
-        .container {
-            max-width: 1400px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        /* ========== قسم الترحيب ========== */
+        /* ===== HERO ===== */
         .hero {
-            background: linear-gradient(125deg, #1a5f5f, #0a2f2f);
-            border-radius: 32px;
-            padding: 50px 40px;
-            margin-bottom: 40px;
-            color: white;
-            text-align: center;
+            background:linear-gradient(135deg, #0b3b3b 0%, #1f6e6e 100%);
+            border-radius:44px; padding:60px 40px; margin-bottom:36px; color:#fff;
+            text-align:center; position:relative; overflow:hidden;
+            box-shadow:0 24px 60px rgba(11,59,59,0.25);
         }
-
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 15px;
-        }
-
-        .hero p {
-            font-size: 1.2rem;
-            opacity: 0.9;
-            margin-bottom: 25px;
-        }
-
-        .hero-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
+        .hero::after { content:"🧪"; position:absolute; font-size:16rem; opacity:0.06; left:-30px; bottom:-50px; transform:rotate(-8deg); }
+        .hero h1 { font-size:3rem; font-weight:800; margin-bottom:10px; letter-spacing:-0.5px; }
+        .hero p { font-size:1.2rem; opacity:0.92; margin-bottom:26px; max-width:600px; margin-left:auto; margin-right:auto; }
+        .hero-buttons { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
         .hero-btn {
-            background: #ffb347;
-            color: #1e2a3e;
-            padding: 12px 30px;
-            border-radius: 40px;
-            text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            background:#f5b042; color:#0a2f2f; padding:14px 38px; border-radius:60px;
+            text-decoration:none; font-weight:800; transition:all 0.3s;
+            box-shadow:0 8px 24px rgba(245,176,66,0.30); display:inline-flex; align-items:center; gap:10px;
         }
+        .hero-btn:hover { background:#fff; transform:translateY(-5px); box-shadow:0 20px 40px rgba(0,0,0,0.15); }
+        .hero-btn-outline { background:transparent; border:2px solid rgba(255,255,255,0.4); color:#fff; }
+        .hero-btn-outline:hover { background:#fff; color:#0a2f2f; border-color:#fff; }
 
-        .hero-btn:hover {
-            background: white;
-            transform: translateY(-3px);
-        }
-
-        /* ========== الأقسام ========== */
+        /* ===== SECTION TITLE ===== */
         .section-title {
-            font-size: 28px;
-            margin: 40px 0 25px;
-            color: #0a2f2f;
-            border-right: 5px solid #ffb347;
-            padding-right: 15px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
+            font-size:28px; margin:48px 0 24px; color:#0b3b3b;
+            border-right:6px solid #f5b042; padding-right:18px;
+            display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
         }
-
         .view-all {
-            font-size: 14px;
-            background: #e2e8f0;
-            padding: 8px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            color: #1a5f5f;
-            transition: 0.3s;
+            font-size:14px; background:#eef2f7; padding:8px 24px; border-radius:40px;
+            text-decoration:none; color:#1f6e6e; font-weight:600; transition:0.25s;
         }
+        .view-all:hover { background:#1f6e6e; color:#fff; transform:translateX(-4px); }
 
-        .view-all:hover {
-            background: #1a5f5f;
-            color: white;
+        /* ===== CARDS ===== */
+        .product-grid, .request-grid {
+            display:grid; grid-template-columns:repeat(auto-fill,minmax(280px,1fr)); gap:28px;
         }
-
-        .product-grid,
-        .request-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-            gap: 25px;
-        }
-
         .card {
-            background: white;
-            border-radius: 24px;
-            overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
+            background:#fff; border-radius:28px; overflow:hidden;
+            box-shadow:0 12px 36px rgba(0,20,20,0.06); transition:all 0.35s cubic-bezier(0.15,0.75,0.45,1);
+            cursor:pointer; border:1px solid rgba(245,176,66,0.08); display:flex; flex-direction:column;
         }
+        .card:hover { transform:translateY(-12px) scale(1.01); box-shadow:0 32px 60px rgba(0,30,30,0.12); border-color:#f5b042; }
 
-        .card:hover {
-            transform: translateY(-8px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+        .card-img-wrapper {
+            width:100%; height:200px; position:relative; overflow:hidden;
+            background:linear-gradient(145deg, #e6edf4, #f0f6fb);
+            display:flex; align-items:center; justify-content:center;
         }
-
         .card-img {
-            width: 100%;
-            height: 200px;
-            object-fit: cover;
-            background: #e2e8f0;
+            width:100%; height:100%; object-fit:cover; transition:0.5s;
         }
+        .card:hover .card-img { transform:scale(1.04); }
 
-        .card-content {
-            padding: 20px;
+        /* ===== Placeholder أنيق ===== */
+        .card-img-placeholder {
+            width:100%; height:100%; display:flex; flex-direction:column;
+            align-items:center; justify-content:center;
+            font-size:4rem; color:#1f6e6e; background:linear-gradient(145deg, #dce8f0, #eef4f8);
+            transition:0.4s; padding:20px; text-align:center;
         }
-
-        .card h3 {
-            color: #0a2f2f;
-            margin-bottom: 10px;
-            font-size: 1.2rem;
+        .card-img-placeholder span {
+            font-size:1rem; font-weight:700; color:#0b3b3b; background:rgba(255,255,255,0.80);
+            padding:6px 20px; border-radius:40px; margin-top:10px;
+            backdrop-filter:blur(6px); box-shadow:0 2px 10px rgba(0,0,0,0.04);
         }
-
-        .price {
-            color: #ffb347;
-            font-size: 22px;
-            font-weight: bold;
-            margin: 10px 0;
+        .card:hover .card-img-placeholder {
+            background:linear-gradient(145deg, #c8d8e6, #e2ecf5);
         }
+        .card-img-placeholder i { opacity:0.85; text-shadow:0 4px 16px rgba(0,0,0,0.04); }
 
+        .card-content { padding:22px 20px 24px; flex:1; display:flex; flex-direction:column; }
+        .card h3 { color:#0b3b3b; margin-bottom:6px; font-size:1.15rem; font-weight:700; }
+        .price { color:#d4880f; font-size:22px; font-weight:800; margin:8px 0; }
         .badge {
-            display: inline-block;
-            background: #e9f0f0;
-            padding: 5px 12px;
-            border-radius: 20px;
-            font-size: 12px;
-            margin: 10px 0;
+            display:inline-block; background:#ecf3f8; padding:4px 16px; border-radius:40px;
+            font-size:12px; font-weight:600; margin-bottom:10px; align-self:flex-start; color:#1f6e6e;
         }
-
-        .supplier-name {
-            color: #718096;
-            font-size: 13px;
-            margin-top: 10px;
-        }
-
+        .supplier-name { color:#64748b; font-size:14px; margin-top:6px; font-weight:500; }
         .btn {
-            display: inline-block;
-            background: #1b6b6b;
-            color: white;
-            padding: 10px 20px;
-            border-radius: 30px;
-            text-decoration: none;
-            margin-top: 15px;
-            border: none;
-            cursor: pointer;
-            transition: 0.3s;
-            width: 100%;
-            text-align: center;
+            display:inline-block; background:#1f6e6e; color:#fff; padding:12px 20px;
+            border-radius:60px; text-decoration:none; margin-top:18px; border:none;
+            cursor:pointer; transition:0.25s; width:100%; text-align:center; font-weight:700; letter-spacing:0.3px;
         }
+        .btn:hover { background:#f5b042; color:#0a2f2f; transform:scale(1.02); box-shadow:0 8px 24px rgba(245,176,66,0.30); }
 
-        .btn:hover {
-            background: #ffb347;
-            color: #1e2a3e;
-        }
-
-        /* ========== الفوتر ========== */
+        /* ===== FOOTER ===== */
         .footer {
-            background: #0a2f2f;
-            color: white;
-            text-align: center;
-            padding: 35px;
-            margin-top: 60px;
+            background:#0b3b3b; color:#fff; text-align:center; padding:40px 20px;
+            margin-top:60px; border-top:4px solid #f5b042;
         }
+        .footer-links { display:flex; justify-content:center; gap:30px; margin-bottom:20px; flex-wrap:wrap; }
+        .footer-links a { color:#f5b042; text-decoration:none; font-weight:600; transition:0.2s; }
+        .footer-links a:hover { color:#fff; transform:translateY(-2px); }
 
-        .footer-links {
-            display: flex;
-            justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
+        /* ===== LOADER / NO RESULTS ===== */
+        .loader { text-align:center; padding:50px; color:#1f6e6e; font-weight:600; }
+        .no-results { text-align:center; padding:60px 20px; background:#fff; border-radius:40px; color:#64748b; font-size:1.1rem; box-shadow:0 8px 24px rgba(0,0,0,0.02); }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width:768px) {
+            .navbar { flex-direction:column; gap:15px; padding:16px 20px; }
+            .hero h1 { font-size:2rem; }
+            .hero { padding:40px 20px; }
+            .section-title { font-size:22px; }
+            .search-section { flex-direction:column; border-radius:40px; padding:12px; }
+            .search-btn { padding:16px; justify-content:center; }
+            .dropdown-content { left:auto; right:0; }
         }
-
-        .footer-links a {
-            color: #ffb347;
-            text-decoration: none;
-        }
-
-        /* ========== تحميل ========== */
-        .loader {
-            text-align: center;
-            padding: 50px;
-            color: #1a5f5f;
-        }
-
-        .no-results {
-            text-align: center;
-            padding: 60px;
-            background: white;
-            border-radius: 32px;
-            color: #718096;
-        }
-
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 15px;
-            }
-
-            .hero h1 {
-                font-size: 1.8rem;
-            }
-
-            .section-title {
-                font-size: 22px;
-            }
-
-            .search-section {
-                flex-direction: column;
-                border-radius: 32px;
-                padding: 15px;
-            }
-
-            .search-btn {
-                padding: 15px;
-                justify-content: center;
-            }
-
-            .dropdown-content {
-                left: auto;
-                right: 0;
-            }
-        }
+        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
     </style>
 </head>
 <body>
 
-<div class="navbar">
+<!-- ===== NAVBAR ===== -->
+<header class="navbar" role="banner">
     <div class="logo">
-        <a href="/" style="text-decoration:none;">
+        <a href="/" aria-label="كيماتو - الصفحة الرئيسية">
             <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;">
-                <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
-                     style="width:55px;height:55px;border-radius:50%;border:3px solid #2563eb;box-shadow:0 4px 12px rgba(37,99,235,.25);object-fit:cover;">
+                <img src="https://placehold.co/55x55/0b3b3b/f5b042?text=K" 
+                     alt="شعار كيماتو" width="55" height="55"
+                     style="border-radius:50%;border:3px solid #f5b042;box-shadow:0 4px 16px rgba(245,176,66,0.30);object-fit:cover;">
                 <span>
-                    <span style="color:#2563eb;">كيماتو</span>
-                    <span style="color:#64748b;">| سوق المواد الكيماوية</span>
+                    <span style="color:#f5b042;">كيماتو</span>
+                    <span style="color:#b0c9d9;">| سوق المواد الكيماوية</span>
                 </span>
             </div>
         </a>
     </div>
 
-    <div class="nav-links" id="navLinks">
-        <a href="index.html">الرئيسية</a>
-        <a href="all-products.html">📦 جميع المنتجات</a>
-        <a href="all-requests.html">📋 جميع الطلبات</a>
+    <nav class="nav-links" id="navLinks" aria-label="القائمة الرئيسية">
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="all-products.html"><i class="fas fa-flask"></i> جميع المنتجات</a>
+        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> جميع الطلبات</a>
 
-        <!-- القائمة المنسدلة -->
         <div class="dropdown">
-            <button class="dropdown-btn">
-                <i class="fas fa-bars"></i> القائمة
+            <button class="dropdown-btn" id="dropdownToggle" aria-expanded="false" aria-haspopup="true">
+                <i class="fas fa-user-circle"></i> القائمة
             </button>
-            <div class="dropdown-content" id="dropdownContent">
-                <a href="auth.html">🔐 تسجيل الدخول</a>
-                <a href="auth.html">📝 حساب جديد</a>
-                <a href="supplier-dashboard.html">📦 للموردين</a>
-                <a href="buyer-dashboard.html">🛒 للعملاء</a>
+            <div class="dropdown-content" id="dropdownContent" role="menu">
+                <a href="auth.html" role="menuitem"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html" role="menuitem"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                <a href="supplier-dashboard.html" role="menuitem"><i class="fas fa-warehouse"></i> للموردين</a>
+                <a href="buyer-dashboard.html" role="menuitem"><i class="fas fa-shopping-cart"></i> للعملاء</a>
             </div>
         </div>
-    </div>
-</div>
+    </nav>
+</header>
 
-<div class="container">
-    <div class="hero">
-        <h1>🏭 أكبر سوق للمواد الكيماوية في مصر</h1>
-        <p>بيع واشتري المواد الخام والكيماويات بكل سهولة</p>
-        <div class="hero-buttons">
-            <a href="auth.html" class="hero-btn">📦 انضم كمورد</a>
-            <a href="auth.html" class="hero-btn">🛒 انضم كعميل</a>
-        </div>
-    </div>
+<!-- ===== MAIN ===== -->
+<main>
+    <div class="container" style="max-width:1400px;margin:0 auto;padding:0 20px;">
 
-    <!-- شريط البحث -->
-    <div class="search-section">
-        <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن منتج... (مثال: كاوية صودا، سولار، أحماض)">
-        <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
-    </div>
+        <!-- HERO -->
+        <section class="hero" aria-labelledby="hero-title">
+            <h1 id="hero-title">🏭 أكبر سوق للمواد الكيماوية في مصر</h1>
+            <p>بيع واشتري المواد الخام والكيماويات بكل سهولة وثقة</p>
+            <div class="hero-buttons">
+                <a href="auth.html" class="hero-btn"><i class="fas fa-truck"></i> انضم كمورد</a>
+                <a href="auth.html" class="hero-btn hero-btn-outline"><i class="fas fa-user-plus"></i> انضم كعميل</a>
+            </div>
+        </section>
 
-    <!-- أزرار التصفية (ديناميكية من قاعدة البيانات) -->
-    <div class="filter-buttons" id="filterButtons">
-        <span class="filter-chip active" data-category-id="all">الكل</span>
-    </div>
+        <!-- SEARCH -->
+        <section class="search-section" role="search">
+            <label for="searchInput" class="sr-only">ابحث عن منتج</label>
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن منتج... (مثل: كاوية صودا، أحماض، مذيبات)">
+            <button id="searchBtn" class="search-btn" aria-label="بحث"><i class="fas fa-search"></i> بحث</button>
+        </section>
 
-    <!-- قسم المنتجات -->
-    <div class="section-title">
-        <span>📦 أحدث المواد الكيماوية</span>
-        <a href="all-products.html" class="view-all">عرض الكل ←</a>
-    </div>
-    <div id="productsList" class="product-grid">
-        <div class="loader">⏳ جاري تحميل المنتجات...</div>
-    </div>
+        <!-- FILTERS -->
+        <nav class="filter-buttons" id="filterButtons" aria-label="تصفية المنتجات">
+            <span class="filter-chip active" data-category-id="all" role="button" tabindex="0">الكل</span>
+        </nav>
 
-    <!-- قسم طلبات الشراء -->
-    <div class="section-title">
-        <span>📢 أحدث طلبات الشراء</span>
-        <a href="all-requests.html" class="view-all">عرض الكل ←</a>
-    </div>
-    <div id="requestsList" class="request-grid">
-        <div class="loader">⏳ جاري تحميل الطلبات...</div>
-    </div>
-</div>
+        <!-- PRODUCTS -->
+        <section aria-labelledby="products-title">
+            <div class="section-title">
+                <span id="products-title"><i class="fas fa-boxes" style="color:#1f6e6e;margin-left:8px;"></i> أحدث المواد الكيماوية</span>
+                <a href="all-products.html" class="view-all">عرض الكل ←</a>
+            </div>
+            <div id="productsList" class="product-grid">
+                <div class="loader">⏳ جاري تحميل المنتجات...</div>
+            </div>
+        </section>
 
-<div class="footer">
+        <!-- REQUESTS -->
+        <section aria-labelledby="requests-title">
+            <div class="section-title">
+                <span id="requests-title"><i class="fas fa-hand-holding-heart" style="color:#1f6e6e;margin-left:8px;"></i> أحدث طلبات الشراء</span>
+                <a href="all-requests.html" class="view-all">عرض الكل ←</a>
+            </div>
+            <div id="requestsList" class="request-grid">
+                <div class="loader">⏳ جاري تحميل الطلبات...</div>
+            </div>
+        </section>
+    </div>
+</main>
+
+<!-- ===== FOOTER ===== -->
+<footer class="footer" role="contentinfo">
     <div class="footer-links">
         <a href="index.html">الرئيسية</a>
         <a href="all-products.html">جميع المنتجات</a>
@@ -518,9 +349,10 @@
         <a href="supplier-dashboard.html">للموردين</a>
         <a href="buyer-dashboard.html">للعملاء</a>
     </div>
-    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</div>
-</div>
+    <div style="opacity:0.7;">© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</div>
+</footer>
 
+<!-- ===== SUPABASE SCRIPT ===== -->
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -534,31 +366,31 @@
     let currentCategoryId = 'all'
     let currentSearch = ''
 
-    // ========== القائمة المنسدلة - تعمل بالضغط ==========
+    // ===== DROPDOWN =====
     function setupDropdown() {
-        const dropdownBtn = document.querySelector('.dropdown-btn')
-        const dropdownContent = document.getElementById('dropdownContent')
-        
-        if (dropdownBtn && dropdownContent) {
-            // الضغط على الزر يفتح/يغلق القائمة
-            dropdownBtn.addEventListener('click', (e) => {
+        const toggle = document.getElementById('dropdownToggle')
+        const content = document.getElementById('dropdownContent')
+        if (toggle && content) {
+            toggle.addEventListener('click', (e) => {
                 e.stopPropagation()
-                dropdownContent.classList.toggle('show')
+                const expanded = toggle.getAttribute('aria-expanded') === 'true' ? 'false' : 'true'
+                toggle.setAttribute('aria-expanded', expanded)
+                content.classList.toggle('show')
             })
-            
-            // لو ضغطت على أي حتة في الصفحة، أقفل القائمة
             document.addEventListener('click', () => {
-                dropdownContent.classList.remove('show')
+                content.classList.remove('show')
+                toggle.setAttribute('aria-expanded', 'false')
             })
         }
     }
-    
-    // ========== تحديث القائمة حسب حالة تسجيل الدخول ==========
+
+    // ===== UPDATE DROPDOWN =====
     async function updateDropdownContent() {
         const { data: { user } } = await supabase.auth.getUser()
         currentUser = user
-        const dropdownContent = document.getElementById('dropdownContent')
-        
+        const content = document.getElementById('dropdownContent')
+        if (!content) return
+
         if (user) {
             const { data: profile } = await supabase
                 .from('profiles')
@@ -566,34 +398,33 @@
                 .eq('id', user.id)
                 .single()
             currentProfile = profile
-            
-            dropdownContent.innerHTML = `
-                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}">
-                    📦 ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}
+
+            content.innerHTML = `
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}" role="menuitem">
+                    <i class="fas fa-tachometer-alt"></i> ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}
                 </a>
-                <a href="profile.html">👤 الملف الشخصي</a>
-                <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
+                <a href="profile.html" role="menuitem"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item" role="menuitem"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
             `
-            
-            const logoutLink = document.getElementById('logoutLink')
-            if (logoutLink) {
-                logoutLink.onclick = async (e) => {
+            const logout = document.getElementById('logoutLink')
+            if (logout) {
+                logout.onclick = async (e) => {
                     e.preventDefault()
                     await supabase.auth.signOut()
                     window.location.reload()
                 }
             }
         } else {
-            dropdownContent.innerHTML = `
-                <a href="auth.html">🔐 تسجيل الدخول</a>
-                <a href="auth.html">📝 حساب جديد</a>
-                <a href="supplier-dashboard.html">📦 للموردين</a>
-                <a href="buyer-dashboard.html">🛒 للعملاء</a>
+            content.innerHTML = `
+                <a href="auth.html" role="menuitem"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html" role="menuitem"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                <a href="supplier-dashboard.html" role="menuitem"><i class="fas fa-warehouse"></i> للموردين</a>
+                <a href="buyer-dashboard.html" role="menuitem"><i class="fas fa-shopping-cart"></i> للعملاء</a>
             `
         }
     }
 
-    // ========== تحميل التصنيفات من قاعدة البيانات ==========
+    // ===== LOAD CATEGORIES =====
     async function loadCategoriesFilter() {
         const { data: categories } = await supabase
             .from('categories')
@@ -605,14 +436,13 @@
         if (categories && categories.length > 0) {
             categories.forEach(cat => {
                 container.innerHTML += `
-                    <span class="filter-chip" data-category-id="${cat.id}">
+                    <span class="filter-chip" data-category-id="${cat.id}" role="button" tabindex="0">
                         ${cat.icon || '📁'} ${cat.name}
                     </span>
                 `
             })
         }
 
-        // ربط أحداث النقر على الفلاتر
         document.querySelectorAll('.filter-chip').forEach(chip => {
             chip.addEventListener('click', () => {
                 document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'))
@@ -620,10 +450,28 @@
                 currentCategoryId = chip.getAttribute('data-category-id')
                 loadProducts()
             })
+            chip.addEventListener('keydown', (e) => { if (e.key === 'Enter') chip.click(); })
         })
     }
 
-    // ========== عرض المنتجات ==========
+    // ===== Placeholder أنيق =====
+    function getPlaceholderHTML(productName, categoryIcon = '🧪') {
+        const colors = ['#1f6e6e', '#0b3b3b', '#2d7a7a', '#3a8a8a', '#1a5f5f'];
+        const colorIndex = (productName?.length || 0) % colors.length;
+        const bgColor = colors[colorIndex];
+        
+        return `
+            <div class="card-img-placeholder" style="background:linear-gradient(145deg, ${bgColor}22, ${bgColor}44);">
+                <div style="font-size:4.2rem;opacity:0.75;">${categoryIcon}</div>
+                <span style="background:rgba(255,255,255,0.88);color:#0b3b3b;font-weight:700;font-size:0.9rem;padding:6px 20px;border-radius:40px;margin-top:8px;box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+                    ${productName ? productName.substring(0, 28) : 'منتج'}
+                </span>
+                <div style="font-size:2.2rem;margin-top:4px;opacity:0.20;">${productName ? productName.substring(0,1).toUpperCase() : 'K'}</div>
+            </div>
+        `;
+    }
+
+    // ===== LOAD PRODUCTS =====
     async function loadProducts() {
         let query = supabase
             .from('products')
@@ -633,7 +481,6 @@
         if (currentCategoryId !== 'all') {
             query = query.eq('category_id', currentCategoryId)
         }
-
         if (currentSearch) {
             query = query.ilike('name', `%${currentSearch}%`)
         }
@@ -644,11 +491,10 @@
 
         const container = document.getElementById('productsList')
         if (!products || products.length === 0) {
-            container.innerHTML = '<div class="no-results">🔍 لا توجد منتجات مطابقة للبحث</div>'
+            container.innerHTML = `<div class="no-results"><i class="fas fa-search-minus" style="font-size:2rem;display:block;margin-bottom:12px;"></i>لا توجد منتجات مطابقة للبحث</div>`
             return
         }
 
-        // جلب بيانات الموردين والتصنيفات لكل منتج
         const productsWithDetails = await Promise.all(products.map(async (p) => {
             const { data: profile } = await supabase
                 .from('profiles')
@@ -657,8 +503,7 @@
                 .single()
 
             let categoryName = p.category || 'مواد كيماوية'
-            let categoryIcon = '📦'
-
+            let categoryIcon = '🧪'
             if (p.category_id) {
                 const { data: cat } = await supabase
                     .from('categories')
@@ -667,28 +512,39 @@
                     .single()
                 if (cat) {
                     categoryName = cat.name
-                    categoryIcon = cat.icon || '📦'
+                    categoryIcon = cat.icon || '🧪'
                 }
             }
-
             return { ...p, profile, categoryName, categoryIcon }
         }))
 
-        container.innerHTML = productsWithDetails.map(p => `
-            <div class="card" onclick="window.location.href='product-details.html?id=${p.id}'">
-                <img class="card-img" src="${p.image_url || 'https://placehold.co/400x200?text=🧪'}" alt="${p.name}">
-                <div class="card-content">
-                    <span class="badge">${p.categoryIcon} ${p.categoryName}</span>
-                    <h3>🧪 ${p.name.substring(0, 40)}</h3>
-                    <div class="price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : 'سعر عند الطلب'}</div>
-                    <div class="supplier-name">🏢 ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
-                    <button class="btn" onclick="event.stopPropagation(); window.location.href='product-details.html?id=${p.id}'">تفاصيل المنتج</button>
+        container.innerHTML = productsWithDetails.map(p => {
+            const hasImage = p.image_url && p.image_url.trim() !== '' && !p.image_url.includes('placehold');
+            
+            const imageHtml = hasImage 
+                ? `<img class="card-img" src="${p.image_url}" alt="${p.name} - صورة المنتج" loading="lazy">`
+                : getPlaceholderHTML(p.name, p.categoryIcon);
+
+            return `
+                <div class="card" onclick="window.location.href='product-details.html?id=${p.id}'" role="button" tabindex="0">
+                    <div class="card-img-wrapper">
+                        ${imageHtml}
+                    </div>
+                    <div class="card-content">
+                        <span class="badge">${p.categoryIcon} ${p.categoryName}</span>
+                        <h3>${p.name.substring(0, 40)}</h3>
+                        <div class="price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : 'سعر عند الطلب'}</div>
+                        <div class="supplier-name"><i class="fas fa-building" style="margin-left:6px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
+                        <button class="btn" onclick="event.stopPropagation(); window.location.href='product-details.html?id=${p.id}'" aria-label="تفاصيل المنتج ${p.name}">
+                            <i class="fas fa-info-circle"></i> تفاصيل المنتج
+                        </button>
+                    </div>
                 </div>
-            </div>
-        `).join('')
+            `;
+        }).join('')
     }
 
-    // ========== عرض طلبات الشراء ==========
+    // ===== LOAD REQUESTS =====
     async function loadRequests() {
         const { data } = await supabase
             .from('purchase_requests')
@@ -699,28 +555,38 @@
 
         const container = document.getElementById('requestsList')
         if (!data || data.length === 0) {
-            container.innerHTML = '<div class="no-results">⚠️ لا توجد طلبات شراء حالياً</div>'
+            container.innerHTML = `<div class="no-results"><i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:12px;"></i>لا توجد طلبات شراء حالياً</div>`
             return
         }
 
         container.innerHTML = data.map(r => `
-            <div class="card" onclick="window.location.href='request-details.html?id=${r.id}'">
+            <div class="card" onclick="window.location.href='request-details.html?id=${r.id}'" role="button" tabindex="0">
+                <div class="card-img-wrapper">
+                    <div class="card-img-placeholder" style="background:linear-gradient(145deg, #d4a37333, #b5835a55);">
+                        <div style="font-size:4rem;opacity:0.6;">📋</div>
+                        <span style="background:rgba(255,255,255,0.88);color:#0b3b3b;font-weight:700;font-size:0.9rem;padding:6px 20px;border-radius:40px;margin-top:8px;">
+                            طلب شراء
+                        </span>
+                    </div>
+                </div>
                 <div class="card-content">
-                    <span class="badge">📢 طلب شراء</span>
-                    <h3>📦 مطلوب: ${r.product_name.substring(0, 40)}</h3>
-                    <p><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</p>
-                    <button class="btn" onclick="event.stopPropagation(); window.location.href='request-details.html?id=${r.id}'">تفاصيل الطلب</button>
+                    <span class="badge"><i class="fas fa-bullhorn"></i> طلب شراء</span>
+                    <h3>${r.product_name.substring(0, 40)}</h3>
+                    <p style="margin:6px 0 4px;color:#1e2a3e;"><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</p>
+                    <p style="font-size:13px;color:#64748b;"><i class="fas fa-user"></i> ${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</p>
+                    <button class="btn" onclick="event.stopPropagation(); window.location.href='request-details.html?id=${r.id}'" aria-label="تفاصيل الطلب ${r.product_name}">
+                        <i class="fas fa-arrow-left"></i> تفاصيل الطلب
+                    </button>
                 </div>
             </div>
         `).join('')
     }
 
-    // ========== البحث ==========
+    // ===== SEARCH =====
     document.getElementById('searchBtn').addEventListener('click', () => {
         currentSearch = document.getElementById('searchInput').value.trim()
         loadProducts()
     })
-
     document.getElementById('searchInput').addEventListener('keypress', (e) => {
         if (e.key === 'Enter') {
             currentSearch = document.getElementById('searchInput').value.trim()
@@ -728,12 +594,12 @@
         }
     })
 
-    // ========== بدء التشغيل ==========
+    // ===== INIT =====
     setupDropdown()
-    updateDropdownContent()
-    loadCategoriesFilter()
-    loadProducts()
-    loadRequests()
+    await updateDropdownContent()
+    await loadCategoriesFilter()
+    await loadProducts()
+    await loadRequests()
 </script>
 </body>
 </html>
