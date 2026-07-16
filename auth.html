@@ -4,6 +4,8 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>كيماتو | تسجيل الدخول</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -11,176 +13,377 @@
             box-sizing: border-box;
             font-family: 'Cairo', 'Tahoma', sans-serif;
         }
+        
         body {
-            background: linear-gradient(135deg, #0f2b2b, #1a5f5f);
+            background: linear-gradient(135deg, #0c2d4a, #1a4a6e);
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
             padding: 20px;
         }
+        
+        /* ===== بطاقة المصادقة ===== */
         .auth-card {
             background: white;
-            max-width: 500px;
+            max-width: 520px;
             width: 100%;
-            padding: 40px;
+            padding: 45px 40px;
             border-radius: 48px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            box-shadow: 0 25px 60px rgba(0,0,0,0.35);
+            border: 1px solid rgba(52,152,219,0.10);
         }
-        h1 {
-            color: #1a5f5f;
-            margin-bottom: 10px;
+        
+        /* ===== الهيدر ===== */
+        .auth-header {
             display: flex;
             align-items: center;
-            gap: 10px;
+            gap: 14px;
+            margin-bottom: 5px;
         }
+        
+        .auth-header img {
+            width: 55px;
+            height: 55px;
+            border-radius: 50%;
+            border: 3px solid #3498db;
+            object-fit: cover;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.30);
+        }
+        
+        .auth-header h1 {
+            color: #0c2d4a;
+            font-weight: 900;
+            font-size: 1.8rem;
+        }
+        
+        .auth-header h1 span {
+            color: #3498db;
+        }
+        
+        .auth-subtitle {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 25px;
+            padding-right: 10px;
+            border-right: 3px solid #3498db;
+            padding-right: 12px;
+        }
+        
+        /* ===== أزرار التبديل ===== */
         .toggle-btns {
             display: flex;
-            gap: 15px;
+            gap: 12px;
             margin: 25px 0;
         }
+        
         .toggle-btn {
             flex: 1;
-            padding: 12px;
-            border: none;
-            background: #eef2f5;
+            padding: 13px;
+            border: 2px solid transparent;
+            background: #eef2f6;
             border-radius: 40px;
             cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
+            font-weight: 700;
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+            color: #1a2634;
         }
+        
+        .toggle-btn:hover {
+            background: #dce4ec;
+            transform: translateY(-2px);
+        }
+        
         .toggle-btn.active {
-            background: #1a5f5f;
+            background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
             color: white;
+            box-shadow: 0 6px 24px rgba(26,74,110,0.25);
+            border-color: #3498db;
         }
+        
+        .toggle-btn i {
+            margin-left: 6px;
+        }
+        
+        /* ===== الحقول ===== */
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 18px;
         }
+        
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #2d3e50;
+            margin-bottom: 6px;
+            font-weight: 700;
+            color: #0c2d4a;
+            font-size: 0.9rem;
         }
+        
+        label .required {
+            color: #e53e3e;
+        }
+        
         input, select {
             width: 100%;
-            padding: 14px;
-            border: 1px solid #cbd5e1;
+            padding: 14px 18px;
+            border: 2px solid #e2e8f0;
             border-radius: 30px;
             font-size: 1rem;
+            transition: all 0.3s ease;
+            background: #f8fafc;
+            outline: none;
         }
-        button[type="submit"] {
+        
+        input:focus, select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 4px rgba(52,152,219,0.10);
+            background: white;
+        }
+        
+        input::placeholder {
+            color: #94a3b8;
+        }
+        
+        /* ===== زر الإرسال ===== */
+        .submit-btn {
             width: 100%;
-            background: #ffb347;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
             border: none;
-            padding: 14px;
+            padding: 16px;
             border-radius: 40px;
-            font-weight: bold;
+            font-weight: 800;
             font-size: 1.1rem;
             cursor: pointer;
-            transition: 0.3s;
-        }
-        button[type="submit"]:hover {
-            background: #1a5f5f;
+            transition: all 0.3s ease;
             color: white;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.30);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            margin-top: 5px;
         }
-        .error {
+        
+        .submit-btn:hover {
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+            transform: translateY(-3px) scale(1.01);
+            box-shadow: 0 8px 28px rgba(26,74,110,0.35);
+        }
+        
+        .submit-btn:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+        
+        /* ===== الرسائل ===== */
+        .message-box {
+            margin-top: 15px;
+            padding: 14px 18px;
+            border-radius: 30px;
+            text-align: center;
+            font-weight: 600;
+            font-size: 0.95rem;
+            display: none;
+        }
+        
+        .message-box.show {
+            display: block;
+        }
+        
+        .message-box.error {
             background: #fee2e2;
             color: #dc2626;
-            margin-top: 15px;
-            text-align: center;
-            padding: 12px;
-            border-radius: 30px;
             border-right: 4px solid #dc2626;
         }
-        .success {
+        
+        .message-box.success {
             background: #dcfce7;
             color: #16a34a;
-            margin-top: 15px;
-            text-align: center;
-            padding: 12px;
-            border-radius: 30px;
             border-right: 4px solid #16a34a;
         }
-        .warning {
+        
+        .message-box.warning {
             background: #fef3c7;
             color: #d97706;
-            margin-top: 15px;
-            text-align: center;
-            padding: 12px;
-            border-radius: 30px;
             border-right: 4px solid #d97706;
         }
-        .info {
+        
+        .message-box.info {
             background: #dbeafe;
             color: #2563eb;
-            margin-top: 15px;
-            text-align: center;
-            padding: 12px;
-            border-radius: 30px;
             border-right: 4px solid #2563eb;
         }
-        .copyright {
-            text-align: center;
-            margin-top: 30px;
-            padding-top: 20px;
-            border-top: 2px solid #cbd5e1;
-            font-size: 0.8rem;
-            color: #718096;
-        }
-        .nav-link {
-            text-align: center;
-            margin-top: 15px;
-        }
-        .nav-link a {
-            color: #1a5f5f;
-            text-decoration: none;
-        }
+        
+        /* ===== تحميل ===== */
         .loading {
             display: none;
             text-align: center;
             margin-top: 15px;
             padding: 10px;
         }
+        
         .loading.show {
             display: block;
         }
+        
         .spinner {
             width: 40px;
             height: 40px;
             border: 4px solid #e2e8f0;
-            border-top: 4px solid #1a5f5f;
+            border-top: 4px solid #3498db;
             border-radius: 50%;
             animation: spin 1s linear infinite;
             margin: 0 auto 10px;
         }
+        
         @keyframes spin {
             0% { transform: rotate(0deg); }
             100% { transform: rotate(360deg); }
         }
+        
+        /* ===== روابط ===== */
+        .nav-links {
+            text-align: center;
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 2px solid #eef2f6;
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .nav-links a {
+            color: #1a4a6e;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 0.9rem;
+        }
+        
+        .nav-links a:hover {
+            color: #3498db;
+            transform: translateY(-2px);
+        }
+        
+        .nav-links a i {
+            margin-left: 5px;
+        }
+        
+        .copyright {
+            text-align: center;
+            margin-top: 20px;
+            font-size: 0.75rem;
+            color: #94a3b8;
+        }
+        
+        /* ===== توجيه نوع الحساب ===== */
+        .account-type-hint {
+            background: #eef2f6;
+            padding: 10px 16px;
+            border-radius: 30px;
+            text-align: center;
+            font-size: 0.85rem;
+            color: #0c2d4a;
+            margin-bottom: 15px;
+            display: none;
+        }
+        
+        .account-type-hint.show {
+            display: block;
+        }
+        
+        .account-type-hint i {
+            margin-left: 6px;
+            color: #3498db;
+        }
+        
+        .account-type-hint .highlight {
+            color: #3498db;
+            font-weight: 800;
+        }
+        
+        /* ===== استجابة ===== */
+        @media (max-width: 600px) {
+            .auth-card {
+                padding: 30px 20px;
+                border-radius: 32px;
+            }
+            
+            .auth-header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .auth-header img {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .toggle-btns {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            .nav-links {
+                flex-direction: column;
+                gap: 10px;
+            }
+        }
     </style>
 </head>
 <body>
+
 <div class="auth-card">
-    <h1>🧪 كيماتو</h1>
-    <p>سوق المواد الكيماوية في مصر</p>
+    <!-- ===== الهيدر ===== -->
+    <div class="auth-header">
+        <img src="709548215_2209434319875128_7640925248715427952_n.jpg" alt="شعار كيماتو">
+        <h1>كيماتو</h1>
+    </div>
+    <div class="auth-subtitle">🏭 سوق المواد الكيماوية في مصر</div>
     
+    <!-- ===== أزرار التبديل ===== -->
     <div class="toggle-btns">
-        <button class="toggle-btn active" data-mode="login">تسجيل دخول</button>
-        <button class="toggle-btn" data-mode="register">حساب جديد</button>
+        <button class="toggle-btn active" data-mode="login">
+            <i class="fas fa-sign-in-alt"></i> تسجيل دخول
+        </button>
+        <button class="toggle-btn" data-mode="register">
+            <i class="fas fa-user-plus"></i> حساب جديد
+        </button>
     </div>
     
+    <!-- ===== توجيه نوع الحساب ===== -->
+    <div id="accountTypeHint" class="account-type-hint">
+        <i class="fas fa-info-circle"></i>
+        سيتم توجيهك إلى <span class="highlight" id="typeDisplay">لوحة المورد</span>
+    </div>
+    
+    <!-- ===== النموذج ===== -->
     <form id="authForm">
         <div id="dynamicFields"></div>
-        <button type="submit" id="submitBtn">دخول</button>
+        <button type="submit" class="submit-btn" id="submitBtn">
+            <i class="fas fa-arrow-left"></i> دخول
+        </button>
     </form>
-    <div id="loading" class="loading"><div class="spinner"></div><p>جاري المعالجة...</p></div>
-    <div id="messageDiv"></div>
-    <div class="nav-link">
-        <a href="index.html">← العودة للرئيسية</a>
+    
+    <!-- ===== تحميل ===== -->
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p style="color:#1a4a6e;font-weight:600;">جاري المعالجة...</p>
     </div>
+    
+    <!-- ===== رسائل ===== -->
+    <div id="messageBox" class="message-box"></div>
+    
+    <!-- ===== روابط ===== -->
+    <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="all-products.html"><i class="fas fa-flask"></i> جميع المنتجات</a>
+        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> جميع الطلبات</a>
+    </div>
+    
     <div class="copyright">
-        © جميع الحقوق محفوظة Hazem Mohamady 2026
+        © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو
     </div>
 </div>
 
@@ -192,83 +395,116 @@
     
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     
+    // ========== المتغيرات ==========
     let currentMode = 'login'
+    let selectedUserType = 'supplier' // الافتراضي مورد
     
+    // ========== عناصر DOM ==========
     const toggleBtns = document.querySelectorAll('.toggle-btn')
     const dynamicDiv = document.getElementById('dynamicFields')
     const submitBtn = document.getElementById('submitBtn')
-    const messageDiv = document.getElementById('messageDiv')
+    const messageBox = document.getElementById('messageBox')
     const loadingDiv = document.getElementById('loading')
+    const accountTypeHint = document.getElementById('accountTypeHint')
+    const typeDisplay = document.getElementById('typeDisplay')
     
-    // دالة عرض الرسائل بتصنيفات مختلفة
-    function showMessage(message, type) {
-        messageDiv.innerHTML = `<div class="${type}">${message}</div>`
-        // تخفي الرسالة بعد 8 ثواني للرسائل الطويلة
-        if (type !== 'error') {
-            setTimeout(() => {
-                if (messageDiv.innerHTML.includes(message)) {
-                    messageDiv.innerHTML = ''
-                }
-            }, 8000)
-        }
+    // ========== دوال الرسائل ==========
+    function showMessage(message, type = 'info') {
+        messageBox.className = `message-box show ${type}`
+        messageBox.innerHTML = message
     }
     
     function clearMessage() {
-        messageDiv.innerHTML = ''
+        messageBox.className = 'message-box'
+        messageBox.innerHTML = ''
     }
     
+    // ========== قراءة الـ URL Parameters ==========
+    function getUrlParams() {
+        const params = new URLSearchParams(window.location.search)
+        return {
+            type: params.get('type') // 'supplier' أو 'buyer'
+        }
+    }
+    
+    // ========== تحديث توجيه نوع الحساب ==========
+    function updateAccountTypeHint() {
+        const params = getUrlParams()
+        if (params.type === 'supplier') {
+            selectedUserType = 'supplier'
+            typeDisplay.textContent = 'لوحة المورد'
+            accountTypeHint.classList.add('show')
+        } else if (params.type === 'buyer') {
+            selectedUserType = 'buyer'
+            typeDisplay.textContent = 'لوحة العميل'
+            accountTypeHint.classList.add('show')
+        } else {
+            accountTypeHint.classList.remove('show')
+        }
+    }
+    
+    // ========== عرض النموذج ==========
     function renderForm() {
         clearMessage()
+        const params = getUrlParams()
+        
+        // تعيين نوع المستخدم الافتراضي من الـ URL
+        let defaultUserType = params.type || 'supplier'
+        
         if (currentMode === 'login') {
             dynamicDiv.innerHTML = `
                 <div class="form-group">
-                    <label>البريد الإلكتروني</label>
+                    <label>البريد الإلكتروني <span class="required">*</span></label>
                     <input type="email" id="email" required placeholder="example@email.com">
                 </div>
                 <div class="form-group">
-                    <label>كلمة المرور</label>
+                    <label>كلمة المرور <span class="required">*</span></label>
                     <input type="password" id="password" required placeholder="********">
                 </div>
             `
-            submitBtn.innerText = 'تسجيل دخول'
+            submitBtn.innerHTML = '<i class="fas fa-arrow-left"></i> تسجيل دخول'
         } else {
             dynamicDiv.innerHTML = `
                 <div class="form-group">
-                    <label>الاسم كاملاً</label>
+                    <label>الاسم كاملاً <span class="required">*</span></label>
                     <input type="text" id="fullName" required placeholder="محمد أحمد">
                 </div>
                 <div class="form-group">
-                    <label>البريد الإلكتروني</label>
+                    <label>البريد الإلكتروني <span class="required">*</span></label>
                     <input type="email" id="email" required placeholder="example@email.com">
                 </div>
                 <div class="form-group">
-                    <label>كلمة المرور</label>
-                    <input type="password" id="password" required placeholder="********">
+                    <label>كلمة المرور <span class="required">*</span></label>
+                    <input type="password" id="password" required placeholder="******** (6 أحرف على الأقل)">
                 </div>
                 <div class="form-group">
-                    <label>تأكيد كلمة المرور</label>
+                    <label>تأكيد كلمة المرور <span class="required">*</span></label>
                     <input type="password" id="confirmPassword" required placeholder="********">
                 </div>
                 <div class="form-group">
-                    <label>نوع الحساب</label>
+                    <label>نوع الحساب <span class="required">*</span></label>
                     <select id="userType">
-                        <option value="supplier">مورد (أبيع مواد كيماوية)</option>
-                        <option value="buyer">عميل (أريد شراء مواد)</option>
+                        <option value="supplier" ${defaultUserType === 'supplier' ? 'selected' : ''}>🏭 مورد (أبيع مواد كيماوية)</option>
+                        <option value="buyer" ${defaultUserType === 'buyer' ? 'selected' : ''}>🛒 عميل (أريد شراء مواد)</option>
                     </select>
                 </div>
                 <div class="form-group">
-                    <label>رقم الهاتف</label>
-                    <input type="tel" id="phone" placeholder="01234567890">
+                    <label>رقم الهاتف <span class="required">*</span></label>
+                    <input type="tel" id="phone" required placeholder="01234567890">
                 </div>
                 <div class="form-group">
                     <label>اسم الشركة (اختياري)</label>
                     <input type="text" id="companyName" placeholder="شركة كيماتو للتجارة">
                 </div>
             `
-            submitBtn.innerText = 'إنشاء حساب جديد'
+            submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> إنشاء حساب جديد'
         }
+        
+        // تحديث التوجيه
+        updateAccountTypeHint()
     }
     
+    // ========== تبديل وضع التسجيل/الدخول ==========
     toggleBtns.forEach(btn => {
         btn.addEventListener('click', () => {
             currentMode = btn.getAttribute('data-mode')
@@ -278,7 +514,7 @@
         })
     })
     
-    // دالة لترجمة رسائل الخطأ من Supabase
+    // ========== ترجمة رسائل الخطأ ==========
     function translateErrorMessage(error) {
         const errorMessage = error.message.toLowerCase()
         
@@ -323,6 +559,7 @@
         }
     }
     
+    // ========== إنشاء/تحديث البروفايل ==========
     async function upsertProfile(userId, profileData) {
         const { data: existingProfile } = await supabase
             .from('profiles')
@@ -344,6 +581,7 @@
         }
     }
     
+    // ========== معالجة النموذج ==========
     const form = document.getElementById('authForm')
     
     form.addEventListener('submit', async (e) => {
@@ -416,8 +654,8 @@
                 return
             }
             
-            // التحقق من صحة رقم الهاتف (إذا تم إدخاله)
-            if (phone && !/^01[0-9]{9}$/.test(phone)) {
+            // التحقق من صحة رقم الهاتف
+            if (!/^01[0-9]{9}$/.test(phone)) {
                 loadingDiv.classList.remove('show')
                 submitBtn.disabled = false
                 showMessage('❌ الرجاء إدخال رقم هاتف صحيح (11 رقم يبدأ بـ 01)', 'error')
@@ -454,7 +692,7 @@
             const { error: profileError } = await upsertProfile(data.user.id, {
                 full_name: fullName,
                 user_type: userType,
-                phone: phone || null,
+                phone: phone,
                 company_name: companyName || null
             })
             
@@ -463,17 +701,20 @@
             }
             
             // رسالة نجاح مع تعليمات تأكيد الإيميل
+            const dashboardLink = userType === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'
+            
             showMessage(
                 '✅ تم إنشاء الحساب بنجاح!<br><br>' +
                 '📧 يرجى مراجعة البريد الإلكتروني الخاص بك.<br>' +
-                '🔗 اضغط على رابط التأكيد (Confirm) في الإيميل المرسل من Supabase.<br><br>' +
+                '🔗 اضغط على رابط التأكيد في الإيميل المرسل من Supabase.<br><br>' +
                 '✉️ إذا لم تجد الإيميل، تحقق من مجلد البريد المزعج (Spam).<br>' +
-                '🔄 بعد تأكيد الإيميل، يمكنك تسجيل الدخول مباشرة.',
+                `🔄 بعد تأكيد الإيميل، ستنتقل تلقائياً إلى <strong>${userType === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}</strong>.`,
                 'info'
             )
             
-            // تنظيف الحقول بعد 3 ثواني
+            // تنظيف الحقول بعد 5 ثواني
             setTimeout(() => {
+                // تغيير الوضع إلى تسجيل الدخول
                 currentMode = 'login'
                 toggleBtns.forEach(btn => {
                     btn.classList.remove('active')
@@ -482,9 +723,23 @@
                     }
                 })
                 renderForm()
-            }, 5000)
+            }, 6000)
         }
     })
+    
+    // ========== تهيئة الصفحة ==========
+    // التحقق من وجود `type` في الـ URL
+    const params = getUrlParams()
+    if (params.type) {
+        // تغيير وضع العرض إلى "حساب جديد"
+        currentMode = 'register'
+        toggleBtns.forEach(btn => {
+            btn.classList.remove('active')
+            if (btn.getAttribute('data-mode') === 'register') {
+                btn.classList.add('active')
+            }
+        })
+    }
     
     renderForm()
 </script>
