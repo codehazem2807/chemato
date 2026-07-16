@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>كيماتو | تفاصيل الطلب</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
@@ -13,24 +14,25 @@
         }
 
         :root {
-            --primary-dark: #0a2f2f;
-            --primary: #1a5f5f;
-            --primary-light: #2a8f8f;
-            --accent: #ffb347;
-            --accent-dark: #e69500;
+            --primary-dark: #0c2d4a;
+            --primary: #1a4a6e;
+            --primary-light: #2d7a9e;
+            --accent: #3498db;
+            --accent-dark: #2c81ba;
             --gray-light: #f8fafc;
             --gray: #e2e8f0;
             --gray-dark: #64748b;
-            --text-dark: #1e2a3e;
+            --text-dark: #0c2d4a;
             --text-light: #475569;
             --white: #ffffff;
             --danger: #e53e3e;
             --success: #2a9d8f;
             --warning: #f4a261;
             --whatsapp: #25D366;
-            --shadow-sm: 0 4px 12px rgba(0,0,0,0.05);
-            --shadow-md: 0 10px 25px rgba(0,0,0,0.08);
-            --shadow-lg: 0 20px 40px rgba(0,0,0,0.1);
+            --whatsapp-dark: #128C7E;
+            --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
+            --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
+            --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
             --radius-sm: 16px;
             --radius-md: 24px;
             --radius-lg: 32px;
@@ -38,15 +40,15 @@
 
         body {
             font-family: 'Cairo', 'Tahoma', sans-serif;
-            background: linear-gradient(145deg, #eef2f7 0%, #d9e0e8 100%);
+            background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
             min-height: 100vh;
             color: var(--text-dark);
         }
 
         /* ========== الهيدر ========== */
         .navbar {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            padding: 16px 24px;
+            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
+            padding: 14px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -56,13 +58,8 @@
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: var(--shadow-md);
-        }
-
-        @media (min-width: 768px) {
-            .navbar {
-                padding: 18px 40px;
-            }
+            box-shadow: 0 8px 32px rgba(12,45,74,0.25);
+            border-bottom: 2px solid rgba(52,152,219,0.30);
         }
 
         .logo a {
@@ -72,35 +69,22 @@
         .logo-content {
             display: flex;
             align-items: center;
-            gap: 10px;
-            font-weight: 700;
-            font-size: 18px;
-        }
-
-        @media (min-width: 768px) {
-            .logo-content {
-                font-size: 22px;
-                gap: 12px;
-            }
+            gap: 12px;
+            font-weight: 800;
+            font-size: 22px;
         }
 
         .logo-img {
-            width: 35px;
-            height: 35px;
+            width: 50px;
+            height: 50px;
             border-radius: 50%;
-            border: 2px solid #2563eb;
+            border: 3px solid #3498db;
             object-fit: cover;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.35);
         }
 
-        @media (min-width: 768px) {
-            .logo-img {
-                width: 45px;
-                height: 45px;
-            }
-        }
-
-        .logo-text span:first-child { color: #2563eb; }
-        .logo-text span:last-child { color: #94a3b8; font-size: 14px; }
+        .logo-text span:first-child { color: #3498db; }
+        .logo-text span:last-child { color: #b0c9d9; font-size: 16px; }
 
         .nav-links {
             display: flex;
@@ -109,32 +93,24 @@
             flex-wrap: wrap;
         }
 
-        @media (min-width: 768px) {
-            .nav-links {
-                gap: 15px;
-            }
-        }
-
         .nav-links a {
             color: white;
             text-decoration: none;
-            padding: 6px 12px;
-            border-radius: 30px;
-            transition: 0.3s;
-            font-weight: 500;
-            font-size: 13px;
-        }
-
-        @media (min-width: 768px) {
-            .nav-links a {
-                padding: 8px 20px;
-                font-size: 1rem;
-            }
+            padding: 8px 20px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.06);
+            font-size: 14px;
         }
 
         .nav-links a:hover {
-            background: var(--accent);
-            color: var(--text-dark);
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
 
         /* ========== القائمة المنسدلة ========== */
@@ -144,32 +120,26 @@
         }
 
         .dropdown-btn {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
             color: white;
-            padding: 6px 12px;
-            border-radius: 30px;
+            padding: 8px 22px;
+            border-radius: 40px;
             cursor: pointer;
-            font-weight: 500;
-            transition: 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
-            gap: 6px;
-            border: none;
-            font-size: 13px;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            font-size: 14px;
             font-family: inherit;
         }
 
-        @media (min-width: 768px) {
-            .dropdown-btn {
-                padding: 8px 20px;
-                gap: 8px;
-                font-size: 1rem;
-            }
-        }
-
         .dropdown-btn:hover {
-            background: var(--accent);
-            color: var(--text-dark);
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
 
         .dropdown-content {
@@ -179,30 +149,38 @@
             left: 0;
             right: 0;
             background: white;
-            min-width: 180px;
-            box-shadow: var(--shadow-lg);
-            border-radius: var(--radius-sm);
+            min-width: 200px;
+            box-shadow: 0 24px 56px rgba(0,0,0,0.12);
+            border-radius: 20px;
             z-index: 1000;
             overflow: hidden;
             margin-top: 8px;
+            border: 1px solid rgba(52,152,219,0.15);
         }
 
         .dropdown-content.show {
             display: block;
+            animation: dropFade 0.25s ease;
+        }
+
+        @keyframes dropFade {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .dropdown-content a {
             color: var(--text-dark);
-            padding: 12px 16px;
+            padding: 14px 22px;
             text-decoration: none;
             display: block;
             transition: 0.2s;
             font-size: 14px;
+            font-weight: 500;
             border-bottom: 1px solid var(--gray);
         }
 
         .dropdown-content a:hover {
-            background: var(--gray-light);
+            background: #ebf5fb;
             color: var(--primary);
         }
 
@@ -218,15 +196,8 @@
         /* ========== المحتوى الرئيسي ========== */
         .container {
             max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 16px;
-        }
-
-        @media (min-width: 768px) {
-            .container {
-                margin: 40px auto;
-                padding: 0 24px;
-            }
+            margin: 30px auto;
+            padding: 0 20px;
         }
 
         /* بطاقة الطلب */
@@ -234,35 +205,49 @@
             background: var(--white);
             border-radius: var(--radius-lg);
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            box-shadow: 0 12px 36px rgba(12,45,74,0.06);
+            border: 1px solid rgba(52,152,219,0.06);
         }
 
         /* رأس الطلب */
         .request-header {
-            background: linear-gradient(135deg, var(--primary), var(--primary-dark));
-            padding: 24px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 24px 28px;
             color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .request-header::after {
+            content: "📋";
+            position: absolute;
+            font-size: 8rem;
+            opacity: 0.06;
+            left: -10px;
+            bottom: -30px;
         }
 
         @media (min-width: 768px) {
             .request-header {
-                padding: 30px;
+                padding: 30px 35px;
             }
         }
 
         .request-status {
             display: inline-block;
-            padding: 6px 16px;
+            padding: 6px 18px;
             border-radius: 30px;
             font-size: 12px;
-            font-weight: bold;
-            margin-bottom: 15px;
+            font-weight: 700;
+            margin-bottom: 12px;
+            position: relative;
+            z-index: 1;
         }
 
         @media (min-width: 768px) {
             .request-status {
                 font-size: 14px;
-                padding: 8px 20px;
+                padding: 8px 22px;
             }
         }
 
@@ -283,7 +268,10 @@
 
         .request-title {
             font-size: 1.3rem;
-            margin-bottom: 10px;
+            margin-bottom: 8px;
+            font-weight: 800;
+            position: relative;
+            z-index: 1;
         }
 
         @media (min-width: 768px) {
@@ -296,9 +284,11 @@
             display: flex;
             flex-wrap: wrap;
             gap: 15px;
-            margin-top: 15px;
+            margin-top: 12px;
             font-size: 12px;
-            opacity: 0.9;
+            opacity: 0.85;
+            position: relative;
+            z-index: 1;
         }
 
         @media (min-width: 768px) {
@@ -337,12 +327,17 @@
             display: flex;
             align-items: center;
             gap: 10px;
+            font-weight: 700;
         }
 
         @media (min-width: 768px) {
             .section-title {
                 font-size: 1.3rem;
             }
+        }
+
+        .section-title i {
+            color: #3498db;
         }
 
         .info-grid {
@@ -359,21 +354,38 @@
 
         .info-item {
             background: var(--gray-light);
-            padding: 15px;
+            padding: 16px 18px;
             border-radius: var(--radius-sm);
             display: flex;
             align-items: center;
             gap: 15px;
+            border: 1px solid rgba(52,152,219,0.06);
+            transition: all 0.3s ease;
+        }
+
+        .info-item:hover {
+            border-color: #3498db;
+            box-shadow: var(--shadow-sm);
         }
 
         .info-icon {
             width: 45px;
             height: 45px;
-            background: var(--white);
+            background: linear-gradient(145deg, #e6edf4, #f0f6fb);
             border-radius: 25px;
             display: flex;
             align-items: center;
             justify-content: center;
+            flex-shrink: 0;
+            transition: 0.3s;
+        }
+
+        .info-item:hover .info-icon {
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+        }
+
+        .info-item:hover .info-icon i {
+            color: white;
         }
 
         @media (min-width: 768px) {
@@ -386,6 +398,7 @@
         .info-icon i {
             font-size: 20px;
             color: var(--primary);
+            transition: 0.3s;
         }
 
         @media (min-width: 768px) {
@@ -407,7 +420,7 @@
 
         .info-value {
             font-size: 14px;
-            font-weight: bold;
+            font-weight: 700;
             color: var(--text-dark);
         }
 
@@ -420,13 +433,22 @@
         /* وصف الطلب */
         .description-box {
             background: var(--gray-light);
-            padding: 20px;
+            padding: 18px 20px;
             border-radius: var(--radius-sm);
             margin-top: 15px;
+            border-right: 4px solid #3498db;
+        }
+
+        .description-box .label {
+            font-size: 12px;
+            color: var(--gray-dark);
+            font-weight: 600;
+            display: block;
+            margin-bottom: 8px;
         }
 
         .description-box p {
-            line-height: 1.6;
+            line-height: 1.8;
             color: var(--text-light);
             font-size: 14px;
         }
@@ -439,10 +461,11 @@
 
         /* معلومات العميل */
         .buyer-section {
-            background: linear-gradient(135deg, var(--gray-light), var(--gray));
+            background: linear-gradient(145deg, #eef2f7, #e6edf4);
             border-radius: var(--radius-md);
             padding: 20px;
             margin: 25px 0;
+            border: 1px solid rgba(52,152,219,0.08);
         }
 
         @media (min-width: 768px) {
@@ -462,14 +485,16 @@
         .buyer-avatar {
             width: 55px;
             height: 55px;
-            background: var(--primary);
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-size: 22px;
-            font-weight: bold;
+            font-weight: 800;
+            flex-shrink: 0;
+            box-shadow: 0 4px 16px rgba(26,74,110,0.15);
         }
 
         @media (min-width: 768px) {
@@ -482,7 +507,7 @@
 
         .buyer-name {
             font-size: 1.1rem;
-            font-weight: bold;
+            font-weight: 800;
             color: var(--primary-dark);
         }
 
@@ -490,6 +515,11 @@
             .buyer-name {
                 font-size: 1.3rem;
             }
+        }
+
+        .buyer-type {
+            font-size: 12px;
+            color: var(--gray-dark);
         }
 
         .buyer-info-grid {
@@ -508,21 +538,29 @@
             display: flex;
             align-items: center;
             gap: 12px;
-            padding: 12px;
+            padding: 12px 16px;
             background: var(--white);
             border-radius: var(--radius-sm);
+            transition: all 0.3s ease;
+            border: 1px solid rgba(52,152,219,0.06);
+        }
+
+        .buyer-info-item:hover {
+            border-color: #3498db;
+            transform: translateX(-3px);
         }
 
         .buyer-info-item i {
             width: 35px;
             height: 35px;
-            background: var(--primary);
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
             color: white;
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             font-size: 14px;
+            flex-shrink: 0;
         }
 
         @media (min-width: 768px) {
@@ -533,7 +571,30 @@
             }
         }
 
-        /* أزرار التواصل */
+        .buyer-info-item .info-text {
+            font-size: 14px;
+            color: var(--text-light);
+            word-break: break-word;
+        }
+
+        .buyer-info-item .copy-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            margin-right: auto;
+            color: var(--primary);
+            font-size: 14px;
+            transition: 0.3s;
+            padding: 4px 8px;
+            border-radius: 20px;
+        }
+
+        .buyer-info-item .copy-btn:hover {
+            background: var(--gray-light);
+            color: #3498db;
+        }
+
+        /* ===== أزرار التواصل ===== */
         .action-buttons {
             display: flex;
             flex-direction: column;
@@ -550,69 +611,117 @@
 
         .btn {
             flex: 1;
-            padding: 12px 20px;
+            padding: 14px 20px;
             border: none;
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: bold;
+            border-radius: 60px;
+            font-size: 1rem;
+            font-weight: 700;
             cursor: pointer;
-            transition: 0.3s;
+            transition: all 0.3s ease;
             display: flex;
             align-items: center;
             justify-content: center;
             gap: 10px;
             text-decoration: none;
+            font-family: inherit;
+            min-height: 54px;
         }
 
         @media (min-width: 768px) {
             .btn {
-                padding: 14px 20px;
-                font-size: 1rem;
+                padding: 16px 24px;
+                font-size: 1.05rem;
+                min-height: 60px;
             }
         }
 
         .btn-whatsapp {
-            background: var(--whatsapp);
+            background: linear-gradient(145deg, #25D366, #128C7E);
             color: white;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.25);
         }
 
         .btn-whatsapp:hover {
-            background: #128C7E;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+        }
+
+        .btn-whatsapp i {
+            font-size: 1.4rem;
         }
 
         .btn-call {
-            background: var(--accent);
-            color: var(--text-dark);
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            color: white;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.25);
         }
 
         .btn-call:hover {
-            background: var(--primary);
-            color: white;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(52,152,219,0.35);
+        }
+
+        .btn-call i {
+            font-size: 1.2rem;
         }
 
         .btn-copy {
-            background: var(--gray-dark);
+            background: linear-gradient(145deg, #64748b, #475569);
             color: white;
+            box-shadow: 0 4px 16px rgba(100,116,139,0.2);
         }
 
         .btn-copy:hover {
-            background: #475569;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(100,116,139,0.3);
         }
 
-        .btn-back {
-            background: transparent;
-            border: 2px solid var(--gray);
-            color: var(--text-dark);
+        /* ===== زر العودة ===== */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            margin-top: 25px;
+            color: var(--primary);
+            text-decoration: none;
+            padding: 10px 24px;
+            background: var(--white);
+            border-radius: 40px;
+            font-size: 14px;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(52,152,219,0.06);
         }
 
-        .btn-back:hover {
-            background: var(--gray);
+        @media (min-width: 768px) {
+            .back-link {
+                margin-top: 30px;
+                padding: 12px 30px;
+                font-size: 16px;
+            }
         }
 
-        /* رسالة منبثقة */
+        .back-link:hover {
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            color: white;
+            transform: translateX(-5px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.25);
+        }
+
+        .back-link i {
+            transition: 0.3s;
+        }
+
+        .back-link:hover i {
+            transform: translateX(-5px);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ===== رسالة منبثقة ===== */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -620,105 +729,277 @@
             transform: translateX(-50%);
             background: var(--primary-dark);
             color: white;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 40px;
-            font-weight: bold;
+            font-weight: 700;
             z-index: 1000;
-            font-size: 13px;
-            white-space: nowrap;
-            animation: fadeOut 2s ease forwards;
+            font-size: 14px;
+            animation: slideUp 0.4s ease, fadeOut 2s ease 1s forwards;
+            box-shadow: var(--shadow-lg);
         }
 
         @media (min-width: 768px) {
             .toast {
                 bottom: 30px;
-                padding: 12px 25px;
-                font-size: 14px;
+                padding: 14px 30px;
+                font-size: 16px;
             }
         }
 
-        @keyframes fadeOut {
-            0% { opacity: 1; bottom: 20px; }
-            70% { opacity: 1; bottom: 20px; }
-            100% { opacity: 0; bottom: 40px; visibility: hidden; }
+        @keyframes slideUp {
+            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
+            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
         }
 
-        /* حالة التحميل */
+        @keyframes fadeOut {
+            0% { opacity: 1; }
+            100% { opacity: 0; visibility: hidden; }
+        }
+
+        /* ===== حالة التحميل والخطأ ===== */
         .loader {
             text-align: center;
-            padding: 50px;
+            padding: 60px 20px;
             background: var(--white);
             border-radius: var(--radius-lg);
-            font-size: 1rem;
+            font-size: 1.1rem;
             color: var(--primary);
+            font-weight: 600;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(52,152,219,0.06);
         }
 
         @media (min-width: 768px) {
             .loader {
                 padding: 80px;
-                font-size: 1.2rem;
+                font-size: 1.3rem;
             }
+        }
+
+        .loader .spinner {
+            display: inline-block;
+            width: 40px;
+            height: 40px;
+            border: 4px solid var(--gray);
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-bottom: 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         .error-box {
             text-align: center;
-            padding: 40px;
+            padding: 50px 20px;
             background: var(--white);
             border-radius: var(--radius-lg);
             color: var(--danger);
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(229,62,62,0.10);
         }
 
         @media (min-width: 768px) {
             .error-box {
-                padding: 60px;
+                padding: 70px;
             }
         }
 
-        /* الفوتر */
-        .footer {
-            background: var(--primary-dark);
-            color: white;
-            text-align: center;
-            padding: 25px;
-            margin-top: 50px;
+        .error-box i {
+            font-size: 4rem;
+            margin-bottom: 15px;
+            color: #fee2e2;
+        }
+
+        .error-box h2 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
         }
 
         @media (min-width: 768px) {
-            .footer {
-                padding: 35px;
-                margin-top: 60px;
+            .error-box h2 {
+                font-size: 2rem;
             }
+        }
+
+        .error-box p {
+            color: var(--text-light);
+        }
+
+        /* ===== الفوتر ===== */
+        .footer {
+            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 60px;
+            border-top: 4px solid #3498db;
         }
 
         .footer-links {
             display: flex;
             justify-content: center;
-            gap: 15px;
-            margin-bottom: 15px;
+            gap: 30px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
         }
 
-        @media (min-width: 768px) {
-            .footer-links {
-                gap: 30px;
-                margin-bottom: 20px;
-            }
-        }
-
         .footer-links a {
-            color: var(--accent);
+            color: #3498db;
             text-decoration: none;
-            font-size: 12px;
-        }
-
-        @media (min-width: 768px) {
-            .footer-links a {
-                font-size: 14px;
-            }
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
         }
 
         .footer-links a:hover {
-            text-decoration: underline;
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== استجابة ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 14px 20px;
+            }
+            
+            .logo-content {
+                font-size: 18px;
+            }
+            
+            .logo-img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            
+            .container {
+                padding: 0 16px;
+                margin: 20px auto;
+            }
+            
+            .request-content {
+                padding: 18px;
+            }
+            
+            .request-header {
+                padding: 18px 20px;
+            }
+            
+            .request-title {
+                font-size: 1.1rem;
+            }
+            
+            .action-buttons {
+                flex-direction: column;
+            }
+            
+            .btn {
+                min-height: 50px;
+                padding: 12px 16px;
+                font-size: 0.95rem;
+            }
+            
+            .dropdown-content {
+                left: auto;
+                right: 0;
+            }
+            
+            .info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .buyer-info-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .buyer-section {
+                padding: 16px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .request-title {
+                font-size: 1rem;
+            }
+            
+            .request-meta {
+                font-size: 11px;
+                gap: 10px;
+            }
+            
+            .info-item {
+                padding: 12px 14px;
+            }
+            
+            .info-icon {
+                width: 38px;
+                height: 38px;
+            }
+            
+            .info-icon i {
+                font-size: 16px;
+            }
+            
+            .info-value {
+                font-size: 13px;
+            }
+            
+            .buyer-avatar {
+                width: 45px;
+                height: 45px;
+                font-size: 18px;
+            }
+            
+            .buyer-name {
+                font-size: 1rem;
+            }
+            
+            .buyer-info-item {
+                padding: 10px 12px;
+            }
+            
+            .buyer-info-item i {
+                width: 30px;
+                height: 30px;
+                font-size: 12px;
+            }
+            
+            .buyer-info-item .info-text {
+                font-size: 13px;
+            }
+            
+            .description-box {
+                padding: 14px 16px;
+            }
+            
+            .description-box p {
+                font-size: 13px;
+            }
+        }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0,0,0,0);
+            border: 0;
         }
     </style>
 </head>
@@ -728,7 +1009,7 @@
     <div class="logo">
         <a href="index.html" style="text-decoration:none;">
             <div class="logo-content">
-                <img src="logo.png"
+                <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
                      class="logo-img" alt="كيماتو">
                 <div class="logo-text">
                     <span>كيماتو</span>
@@ -738,22 +1019,25 @@
         </a>
     </div>
     <div class="nav-links">
-        <a href="index.html">الرئيسية</a>
-        <a href="all-products.html">📦 المنتجات</a>
-        <a href="all-requests.html">📋 الطلبات</a>
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
         <div class="dropdown">
-            <button class="dropdown-btn"><i class="fas fa-bars"></i> القائمة</button>
+            <button class="dropdown-btn"><i class="fas fa-user-circle"></i> القائمة</button>
             <div class="dropdown-content" id="dropdownContent"></div>
         </div>
     </div>
 </div>
 
 <div class="container">
-    <div id="requestDetail" class="loader">⏳ جاري تحميل تفاصيل الطلب...</div>
-    <div style="text-align: center; margin-top: 20px;">
-        <a href="all-requests.html" class="btn btn-back" style="display: inline-block; width: auto; padding: 10px 25px;">
-            <i class="fas fa-arrow-right"></i> العودة لجميع الطلبات
-        </a>
+    <div id="requestDetail">
+        <div class="loader">
+            <div class="spinner"></div>
+            <div>⏳ جاري تحميل تفاصيل الطلب...</div>
+        </div>
+    </div>
+    <div class="text-center">
+        <a href="all-requests.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة لجميع الطلبات</a>
     </div>
 </div>
 
@@ -763,6 +1047,8 @@
         <a href="all-products.html">جميع المنتجات</a>
         <a href="all-requests.html">جميع الطلبات</a>
         <a href="auth.html">تسجيل الدخول</a>
+        <a href="supplier-dashboard.html">للموردين</a>
+        <a href="buyer-dashboard.html">للعملاء</a>
     </div>
     <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية</div>
 </div>
@@ -806,9 +1092,9 @@
             const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
             currentProfile = profile
             dropdownContent.innerHTML = `
-                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}">📦 لوحة التحكم</a>
-                <a href="profile.html">👤 الملف الشخصي</a>
-                <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
             `
             const logoutLink = document.getElementById('logoutLink')
             if (logoutLink) {
@@ -820,12 +1106,21 @@
             }
         } else {
             dropdownContent.innerHTML = `
-                <a href="auth.html">🔐 تسجيل الدخول</a>
-                <a href="auth.html">📝 حساب جديد</a>
-                <a href="supplier-dashboard.html">📦 للموردين</a>
-                <a href="buyer-dashboard.html">🛒 للعملاء</a>
+                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
             `
         }
+    }
+
+    // ========== دالة إنشاء رابط واتساب ==========
+    function getWhatsAppLink(phone, productName) {
+        if (!phone) return '#'
+        const cleanPhone = phone.replace(/\D/g, '')
+        const formattedPhone = cleanPhone.startsWith('20') ? cleanPhone : `20${cleanPhone}`
+        const message = `مرحباً، أنا مهتم بتوفير: ${productName} (منصة كيماتو)`
+        return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`
     }
 
     // ========== عرض رسالة منبثقة ==========
@@ -834,23 +1129,31 @@
         toast.className = 'toast'
         toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`
         document.body.appendChild(toast)
-        setTimeout(() => toast.remove(), 2000)
+        setTimeout(() => toast.remove(), 2500)
     }
 
     // ========== نسخ النص ==========
     window.copyToClipboard = (text) => {
-        navigator.clipboard.writeText(text)
-        showToast('✅ تم نسخ الرقم بنجاح')
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            navigator.clipboard.writeText(text)
+            showToast('✅ تم نسخ الرقم بنجاح')
+        } else {
+            // Fallback
+            const textarea = document.createElement('textarea')
+            textarea.value = text
+            document.body.appendChild(textarea)
+            textarea.select()
+            document.execCommand('copy')
+            document.body.removeChild(textarea)
+            showToast('✅ تم نسخ الرقم بنجاح')
+        }
     }
 
     // ========== فتح واتساب ==========
-    window.openWhatsApp = (phone) => {
+    window.openWhatsApp = (phone, productName) => {
         if (phone) {
-            let whatsappNumber = phone.replace(/[^0-9]/g, '')
-            if (whatsappNumber.startsWith('0')) {
-                whatsappNumber = '2' + whatsappNumber
-            }
-            window.open(`https://wa.me/${whatsappNumber}`, '_blank')
+            const link = getWhatsAppLink(phone, productName)
+            window.open(link, '_blank')
         } else {
             showToast('⚠️ رقم الهاتف غير متاح')
         }
@@ -870,6 +1173,7 @@
         if (!requestId) {
             document.getElementById('requestDetail').innerHTML = `
                 <div class="error-box">
+                    <i class="fas fa-exclamation-circle"></i>
                     <h2>❌ خطأ</h2>
                     <p>لم يتم تحديد الطلب المطلوب</p>
                 </div>
@@ -879,13 +1183,14 @@
 
         const { data, error } = await supabase
             .from('purchase_requests')
-            .select('*, profiles(full_name, company_name, phone, city, address, whatsapp, user_type)')
+            .select('*, profiles(full_name, company_name, phone, city, address, user_type)')
             .eq('id', requestId)
             .single()
 
         if (error || !data) {
             document.getElementById('requestDetail').innerHTML = `
                 <div class="error-box">
+                    <i class="fas fa-search-minus"></i>
                     <h2>❌ عذراً</h2>
                     <p>${error?.message || 'الطلب غير موجود أو تم حذفه'}</p>
                 </div>
@@ -902,7 +1207,7 @@
         const buyerName = data.profiles?.company_name || data.profiles?.full_name || 'عميل'
         const buyerInitial = buyerName.charAt(0)
         const phoneNumber = data.profiles?.phone || ''
-        const whatsappNumber = data.profiles?.whatsapp || data.profiles?.phone || ''
+        const whatsappLink = getWhatsAppLink(phoneNumber, data.product_name)
 
         document.getElementById('requestDetail').innerHTML = `
             <div class="request-card">
@@ -910,7 +1215,7 @@
                     <span class="request-status ${statusMap[data.status]?.class}">${statusMap[data.status]?.text}</span>
                     <h1 class="request-title">📦 طلب شراء: ${data.product_name}</h1>
                     <div class="request-meta">
-                        <span><i class="fas fa-calendar"></i> ${new Date(data.created_at).toLocaleDateString('ar-EG')}</span>
+                        <span><i class="fas fa-calendar-alt"></i> ${new Date(data.created_at).toLocaleDateString('ar-EG')}</span>
                         <span><i class="fas fa-hashtag"></i> ${data.id.substring(0, 12)}...</span>
                     </div>
                 </div>
@@ -938,7 +1243,7 @@
                             </div>
                             ${data.deadline ? `
                             <div class="info-item">
-                                <div class="info-icon"><i class="fas fa-calendar-alt"></i></div>
+                                <div class="info-icon"><i class="fas fa-calendar-times"></i></div>
                                 <div>
                                     <div class="info-label">آخر موعد للاستلام</div>
                                     <div class="info-value">${new Date(data.deadline).toLocaleDateString('ar-EG')}</div>
@@ -949,7 +1254,7 @@
                         
                         ${data.description ? `
                             <div class="description-box">
-                                <div class="info-label" style="margin-bottom: 10px;"><i class="fas fa-align-right"></i> وصف الطلب</div>
+                                <span class="label"><i class="fas fa-align-right"></i> وصف الطلب</span>
                                 <p>${data.description.replace(/\n/g, '<br>')}</p>
                             </div>
                         ` : ''}
@@ -960,24 +1265,24 @@
                             <div class="buyer-avatar">${buyerInitial}</div>
                             <div>
                                 <div class="buyer-name">${buyerName}</div>
-                                <div style="font-size: 12px; color: var(--gray-dark);">${data.profiles?.user_type === 'supplier' ? 'مورد' : 'عميل'}</div>
+                                <div class="buyer-type">${data.profiles?.user_type === 'supplier' ? '🏭 مورد' : '🛒 عميل'}</div>
                             </div>
                         </div>
                         
                         <div class="buyer-info-grid">
                             <div class="buyer-info-item">
                                 <i class="fas fa-city"></i>
-                                <div>${data.profiles?.city || 'مدينة غير محددة'}</div>
+                                <div class="info-text">${data.profiles?.city || 'مدينة غير محددة'}</div>
                             </div>
                             <div class="buyer-info-item">
                                 <i class="fas fa-map-marker-alt"></i>
-                                <div>${data.profiles?.address || 'عنوان غير محدد'}</div>
+                                <div class="info-text">${data.profiles?.address || 'عنوان غير محدد'}</div>
                             </div>
                             ${phoneNumber ? `
                             <div class="buyer-info-item">
                                 <i class="fas fa-phone"></i>
-                                <div>${phoneNumber}</div>
-                                <button onclick="copyToClipboard('${phoneNumber}')" style="background: none; border: none; cursor: pointer; margin-right: auto; color: var(--primary);">
+                                <div class="info-text" dir="ltr">${phoneNumber}</div>
+                                <button class="copy-btn" onclick="copyToClipboard('${phoneNumber}')" title="نسخ الرقم">
                                     <i class="fas fa-copy"></i>
                                 </button>
                             </div>
@@ -986,12 +1291,12 @@
                     </div>
                     
                     <div class="action-buttons">
-                        <button class="btn btn-whatsapp" onclick="openWhatsApp('${whatsappNumber}')">
-                            <i class="fab fa-whatsapp"></i> واتساب
-                        </button>
-                        <button class="btn btn-call" onclick="makeCall('${phoneNumber}')">
+                        <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp">
+                            <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
+                        </a>
+                        <a href="tel:${phoneNumber}" class="btn btn-call">
                             <i class="fas fa-phone-alt"></i> اتصال
-                        </button>
+                        </a>
                         ${phoneNumber ? `
                         <button class="btn btn-copy" onclick="copyToClipboard('${phoneNumber}')">
                             <i class="fas fa-copy"></i> نسخ الرقم
