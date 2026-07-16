@@ -409,6 +409,7 @@
         .loading {
             text-align: center;
             padding: 40px 20px;
+            display: none;
         }
 
         .loading.show {
@@ -580,7 +581,8 @@
         <p>قم بتعديل بيانات طلبك بكل سهولة</p>
     </div>
 
-    <div id="loading" class="loading">
+    <!-- مؤشر التحميل - يظهر فقط أثناء جلب البيانات -->
+    <div id="loading" class="loading show">
         <div class="spinner"></div>
         <p>⏳ جاري تحميل بيانات الطلب...</p>
     </div>
@@ -651,6 +653,12 @@
     const requestId = urlParams.get('id')
     
     let currentUser = null
+
+    // ========== عناصر DOM ==========
+    const loadingDiv = document.getElementById('loading')
+    const form = document.getElementById('requestForm')
+    const messageDiv = document.getElementById('messageDiv')
+    const submitBtn = document.getElementById('submitBtn')
 
     // ========== القائمة المنسدلة ==========
     function setupDropdown() {
@@ -732,15 +740,18 @@
             .eq('id', requestId)
             .single()
 
+        // إخفاء التحميل نهائياً سواء نجح أو فشل
+        loadingDiv.classList.remove('show')
+        loadingDiv.style.display = 'none'
+
         if (error || !data) {
-            document.getElementById('messageDiv').innerHTML = `<div class="message error">❌ الطلب غير موجود</div>`
-            document.getElementById('loading').classList.remove('show')
+            messageDiv.innerHTML = `<div class="message error">❌ ${error?.message || 'الطلب غير موجود'}</div>`
             return
         }
 
         // التحقق من ملكية الطلب
         if (data.buyer_id !== currentUser.id) {
-            document.getElementById('messageDiv').innerHTML = `<div class="message error">❌ لا يمكنك تعديل هذا الطلب</div>`
+            messageDiv.innerHTML = `<div class="message error">❌ لا يمكنك تعديل هذا الطلب</div>`
             setTimeout(() => window.location.href = 'buyer-dashboard.html', 2000)
             return
         }
@@ -760,20 +771,16 @@
             }
         })
 
-        document.getElementById('loading').classList.remove('show')
-        document.getElementById('requestForm').style.display = 'block'
+        // إظهار الفورم
+        form.style.display = 'block'
     }
 
     // ========== حفظ التعديلات ==========
-    const form = document.getElementById('requestForm')
-    const messageDiv = document.getElementById('messageDiv')
-    const loadingDiv = document.getElementById('loading')
-    const submitBtn = document.getElementById('submitBtn')
-
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
         messageDiv.innerHTML = ''
         loadingDiv.classList.add('show')
+        loadingDiv.style.display = 'block'
         submitBtn.disabled = true
 
         const productName = document.getElementById('productName').value.trim()
@@ -785,6 +792,7 @@
         if (!productName) {
             messageDiv.innerHTML = '<div class="message error">❌ الرجاء إدخال اسم المادة المطلوبة</div>'
             loadingDiv.classList.remove('show')
+            loadingDiv.style.display = 'none'
             submitBtn.disabled = false
             return
         }
@@ -801,10 +809,12 @@
             .eq('id', requestId)
             .eq('buyer_id', currentUser.id)
 
+        loadingDiv.classList.remove('show')
+        loadingDiv.style.display = 'none'
+        submitBtn.disabled = false
+
         if (error) {
             messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
         } else {
             messageDiv.innerHTML = '<div class="message success">✅ تم تحديث الطلب بنجاح! جاري التحويل...</div>'
             setTimeout(() => {
