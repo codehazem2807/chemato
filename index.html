@@ -128,9 +128,15 @@
         .hero::after { content:"💬"; position:absolute; font-size:18rem; opacity:0.04; left:-20px; bottom:-60px; }
         .hero h1 { font-size:3rem; font-weight:900; margin-bottom:10px; position:relative; }
         .hero p { font-size:1.2rem; opacity:0.92; margin-bottom:26px; max-width:600px; margin-left:auto; margin-right:auto; }
-        .hero-buttons { display:flex; gap:18px; justify-content:center; flex-wrap:wrap; }
+        .hero-buttons { 
+            display:flex; 
+            gap:18px; 
+            justify-content:center; 
+            flex-wrap:wrap;
+            width:100%;
+        }
         
-        /* ===== أزرار الهيرو - تم إصلاحها ===== */
+        /* ===== أزرار الهيرو - تم إصلاحها بالكامل ===== */
         .hero-btn {
             display:inline-flex;
             align-items:center;
@@ -151,6 +157,8 @@
             -webkit-tap-highlight-color:transparent;
             touch-action:manipulation;
             user-select:none;
+            position:relative;
+            z-index:2;
         }
         .hero-btn:hover {
             background:#fff;
@@ -170,6 +178,13 @@
             background:#fff;
             color:#0c2d4a;
             border-color:#fff;
+        }
+        /* إصلاح إضافي للأزرار على الموبايل */
+        .hero-btn i {
+            pointer-events:none;
+        }
+        .hero-btn span, .hero-btn svg {
+            pointer-events:none;
         }
 
         /* ===== HOW IT WORKS ===== */
@@ -373,7 +388,7 @@
         .loader { text-align:center; padding:50px; color:#1a4a6e; font-weight:600; }
         .no-results { text-align:center; padding:60px 20px; background:#fff; border-radius:40px; color:#64748b; }
 
-        /* ===== استجابة الموبايل ===== */
+        /* ===== استجابة الموبايل - تحسين الأزرار ===== */
         @media (max-width:768px) {
             .navbar { flex-direction:column; gap:12px; padding:14px 20px; }
             .hero h1 { font-size:2rem; }
@@ -382,13 +397,18 @@
                 flex-direction:column; 
                 align-items:stretch;
                 width:100%;
+                gap:14px;
             }
             .hero-btn { 
                 width:100%; 
                 justify-content:center; 
-                padding:16px 20px;
-                font-size:1rem;
-                min-height:56px;
+                padding:18px 20px;
+                font-size:1.1rem;
+                min-height:60px;
+                border-radius:50px;
+            }
+            .hero-btn i {
+                font-size:1.2rem;
             }
             .search-section { flex-direction:column; border-radius:40px; padding:12px; }
             .search-btn { padding:16px; justify-content:center; }
@@ -405,16 +425,15 @@
             .dropdown-content { left:auto; right:0; }
         }
 
-        /* ===== تحسينات إضافية للموبايل ===== */
         @media (max-width:480px) {
             .hero h1 { font-size:1.6rem; }
             .hero p { font-size:1rem; }
-            .hero-btn { 
-                padding:14px 16px;
-                font-size:0.95rem;
-                min-height:50px;
-            }
             .hero { padding:28px 16px; }
+            .hero-btn { 
+                padding:16px 14px;
+                font-size:1rem;
+                min-height:54px;
+            }
             .stat-number { font-size:1.8rem; }
             .stat-card { padding:16px; }
         }
@@ -466,12 +485,12 @@
             <h1 id="hero-title">💬 تواصل مباشر مع موردي المواد الكيماوية</h1>
             <p>ابحث عن المنتج الذي تحتاجه، وتواصل مع المورد مباشرة عبر واتساب للاستفسار والاتفاق على التفاصيل</p>
             <div class="hero-buttons">
-                <a href="auth.html?type=supplier" class="hero-btn" id="supplierBtn">
+                <button class="hero-btn" id="supplierBtn">
                     <i class="fas fa-truck"></i> انضم كمورد
-                </a>
-                <a href="auth.html?type=buyer" class="hero-btn hero-btn-outline" id="buyerBtn">
+                </button>
+                <button class="hero-btn hero-btn-outline" id="buyerBtn">
                     <i class="fas fa-user-plus"></i> انضم كعميل
-                </a>
+                </button>
             </div>
         </section>
 
@@ -586,28 +605,36 @@
     let currentCategoryId = 'all'
     let currentSearch = ''
 
-    // ===== إصلاح مشكلة الأزرار على الموبايل =====
-    function fixMobileButtons() {
-        // التأكد من أن الأزرار تعمل على الموبايل
+    // ===== إصلاح أزرار الهيرو (انضم كمورد / انضم كعميل) =====
+    function setupHeroButtons() {
         const supplierBtn = document.getElementById('supplierBtn')
         const buyerBtn = document.getElementById('buyerBtn')
         
-        // إضافة معالج نقر إضافي للأزرار للتأكد من عملها
         if (supplierBtn) {
-            supplierBtn.addEventListener('click', function(e) {
-                // إذا كان الزر يعمل بشكل طبيعي، لا نفعل شيء
-                // ولكن نضمن أن الحدث ينتقل
-            })
-            // إزالة أي عوائق للنقر
+            // إزالة أي مستمعين سابقين
+            supplierBtn.removeEventListener('click', handleSupplierClick)
+            supplierBtn.addEventListener('click', handleSupplierClick)
+            // تحسين اللمس للموبايل
             supplierBtn.style.touchAction = 'manipulation'
         }
         
         if (buyerBtn) {
-            buyerBtn.addEventListener('click', function(e) {
-                // نفس الشيء
-            })
+            buyerBtn.removeEventListener('click', handleBuyerClick)
+            buyerBtn.addEventListener('click', handleBuyerClick)
             buyerBtn.style.touchAction = 'manipulation'
         }
+    }
+    
+    function handleSupplierClick(e) {
+        e.preventDefault()
+        e.stopPropagation()
+        window.location.href = 'auth.html?type=supplier'
+    }
+    
+    function handleBuyerClick(e) {
+        e.preventDefault()
+        e.stopPropagation()
+        window.location.href = 'auth.html?type=buyer'
     }
 
     // ===== DROPDOWN =====
@@ -883,8 +910,8 @@
     await loadProducts()
     await loadRequests()
     
-    // ===== إصلاح الأزرار على الموبايل =====
-    fixMobileButtons()
+    // ===== إصلاح أزرار الهيرو (انضم كمورد / انضم كعميل) =====
+    setupHeroButtons()
 </script>
 </body>
 </html>
