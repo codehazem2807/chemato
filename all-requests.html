@@ -6,20 +6,12 @@
     <title>كيماتو | جميع طلبات الشراء</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Cairo', 'Tahoma', sans-serif;
-        }
-
-        body {
-            background: #f0f4f8;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', 'Tahoma', sans-serif; }
+        body { background: #f0f4f8; }
 
         /* ========== الهيدر ========== */
         .navbar {
-            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
+            background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
             padding: 18px 40px;
             display: flex;
             justify-content: space-between;
@@ -30,11 +22,10 @@
             top: 0;
             z-index: 100;
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            border-bottom: 2px solid rgba(52,152,219,0.30);
         }
 
-        .logo a {
-            text-decoration: none;
-        }
+        .logo a { text-decoration: none; }
 
         .nav-links {
             display: flex;
@@ -50,11 +41,15 @@
             border-radius: 30px;
             transition: 0.3s;
             font-weight: 500;
+            background: rgba(255,255,255,0.06);
+            border: 1px solid rgba(255,255,255,0.06);
         }
 
         .nav-links > a:hover {
-            background: #ffb347;
-            color: #1e2a3e;
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
 
         /* ========== القائمة المنسدلة ========== */
@@ -64,9 +59,9 @@
         }
 
         .dropdown-btn {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
             color: white;
-            padding: 8px 20px;
+            padding: 8px 22px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 500;
@@ -74,14 +69,16 @@
             display: flex;
             align-items: center;
             gap: 8px;
-            border: none;
+            border: 1px solid rgba(255,255,255,0.08);
             font-size: 1rem;
             font-family: inherit;
         }
 
         .dropdown-btn:hover {
-            background: #ffb347;
-            color: #1e2a3e;
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
 
         .dropdown-content {
@@ -114,13 +111,17 @@
         }
 
         .dropdown-content a:hover {
-            background: #f0f4f8;
-            color: #1a5f5f;
+            background: #ebf5fb;
+            color: #1a4a6e;
         }
 
         .dropdown-content .logout-item {
             color: #e53e3e;
             border-top: 1px solid #e2e8f0;
+        }
+
+        .dropdown-content .logout-item:hover {
+            background: #fee2e2;
         }
 
         /* ========== المحتوى الرئيسي ========== */
@@ -132,12 +133,13 @@
 
         /* رأس الصفحة */
         .page-header {
-            background: linear-gradient(125deg, #1a5f5f, #0a2f2f);
+            background: linear-gradient(135deg, #0c2d4a, #1a4a6e);
             border-radius: 32px;
             padding: 40px;
             margin-bottom: 30px;
             color: white;
             text-align: center;
+            box-shadow: 0 24px 64px rgba(12,45,74,0.25);
         }
 
         .page-header h1 {
@@ -190,24 +192,28 @@
             outline: none;
         }
 
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
+        }
+
         .search-btn {
-            background: #ffb347;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
             border: none;
             padding: 0 30px;
             cursor: pointer;
             font-weight: bold;
             transition: 0.3s;
-        }
-
-        .search-btn:hover {
-            background: #1a5f5f;
             color: white;
         }
 
-        /* شبكة الطلبات */
+        .search-btn:hover {
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+        }
+
+        /* ========== شبكة الطلبات ========== */
         .requests-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
             gap: 30px;
         }
 
@@ -215,117 +221,204 @@
             background: white;
             border-radius: 28px;
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
-            cursor: pointer;
-            position: relative;
+            box-shadow: 0 12px 36px rgba(12,45,74,0.06);
+            transition: all 0.4s cubic-bezier(0.15,0.75,0.45,1);
+            border: 1px solid rgba(52,152,219,0.06);
+            display: flex;
+            flex-direction: column;
         }
 
         .request-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+            transform: translateY(-14px) scale(1.01);
+            box-shadow: 0 36px 72px rgba(12,45,74,0.12);
+            border-color: #3498db;
         }
 
-        .request-header {
-            background: linear-gradient(135deg, #1a5f5f, #0f4f4f);
-            padding: 15px 20px;
-            color: white;
+        /* ===== صورة الطلب (Placeholder) ===== */
+        .request-img-wrapper {
+            width: 100%;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, #d4a37333, #b5835a55);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .request-img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #1a4a6e;
+            background: linear-gradient(145deg, #dce8f0, #eef4f8);
+            transition: 0.5s;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .request-card:hover .request-img-placeholder {
+            background: linear-gradient(145deg, #c8d8e6, #e2ecf5);
+        }
+
+        .request-img-placeholder span {
+            font-size: 1rem;
+            font-weight: 700;
+            color: #0c2d4a;
+            background: rgba(255,255,255,0.88);
+            padding: 6px 20px;
+            border-radius: 40px;
+            margin-top: 10px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
+        }
+
+        /* ===== محتوى الطلب ===== */
+        .request-info {
+            padding: 22px 20px 24px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .request-badge {
             display: inline-block;
-            background: #ffb347;
-            color: #1e2a3e;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 11px;
-            font-weight: bold;
-        }
-
-        .request-date {
+            background: #ecf3f8;
+            padding: 4px 16px;
+            border-radius: 40px;
             font-size: 12px;
-            opacity: 0.8;
-            margin-top: 8px;
-        }
-
-        .request-info {
-            padding: 22px;
+            font-weight: 600;
+            margin-bottom: 10px;
+            align-self: flex-start;
+            color: #1a4a6e;
         }
 
         .request-title {
-            color: #0a2f2f;
-            font-size: 1.2rem;
-            margin-bottom: 12px;
-            font-weight: bold;
+            color: #0c2d4a;
+            font-size: 1.15rem;
+            margin-bottom: 8px;
+            font-weight: 700;
+            line-height: 1.4;
         }
 
         .request-detail {
-            margin: 12px 0;
+            margin: 6px 0;
             color: #475569;
             display: flex;
             gap: 10px;
             align-items: baseline;
+            font-size: 14px;
         }
 
         .request-detail i {
-            width: 25px;
-            color: #1a5f5f;
+            width: 22px;
+            color: #1a4a6e;
         }
 
         .request-description {
             background: #f8fafc;
-            padding: 12px;
+            padding: 12px 16px;
             border-radius: 16px;
-            margin: 12px 0;
+            margin: 10px 0;
             font-size: 14px;
             color: #64748b;
-            line-height: 1.5;
+            line-height: 1.6;
         }
 
         .buyer-info {
             display: flex;
             align-items: center;
-            gap: 10px;
-            padding: 12px;
+            gap: 12px;
+            padding: 12px 16px;
             background: #eef2f7;
             border-radius: 20px;
-            margin: 15px 0;
+            margin: 12px 0 8px;
         }
 
         .buyer-avatar {
             width: 40px;
             height: 40px;
-            background: #1a5f5f;
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
             border-radius: 50%;
             display: flex;
             align-items: center;
             justify-content: center;
             color: white;
             font-weight: bold;
+            font-size: 1.1rem;
+            flex-shrink: 0;
         }
 
-        .btn-offer {
-            width: 100%;
-            background: #ffb347;
-            color: #1e2a3e;
-            padding: 12px;
-            border: none;
-            border-radius: 40px;
-            font-weight: bold;
-            cursor: pointer;
-            margin-top: 15px;
-            transition: 0.3s;
+        .buyer-name {
+            font-weight: 700;
+            color: #0c2d4a;
+            font-size: 0.95rem;
+        }
+
+        .buyer-city {
+            font-size: 12px;
+            color: #64748b;
+        }
+
+        .request-date {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        /* ===== BUTTONS ===== */
+        .btn-group {
             display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
+            gap: 10px;
+            margin-top: 16px;
+            flex-wrap: wrap;
         }
 
-        .btn-offer:hover {
-            background: #1a5f5f;
-            color: white;
-            transform: translateY(-2px);
+        .btn-group .btn {
+            flex: 1;
+            min-width: 100px;
         }
+
+        .btn {
+            display: inline-block;
+            color: #fff;
+            padding: 12px 16px;
+            border-radius: 60px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.95rem;
+            letter-spacing: 0.3px;
+        }
+
+        .btn-details {
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+            box-shadow: 0 4px 16px rgba(26,74,110,0.15);
+        }
+        .btn-details:hover {
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 28px rgba(52,152,219,0.35);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+        }
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: scale(1.02) translateY(-2px);
+            box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+        }
+        .btn-whatsapp i { margin-left: 6px; }
+        .btn-details i { margin-left: 6px; }
 
         /* ترقيم الصفحات */
         .pagination {
@@ -344,18 +437,19 @@
             cursor: pointer;
             transition: 0.3s;
             font-weight: bold;
+            font-size: 0.9rem;
         }
 
         .pagination button:hover:not(:disabled) {
-            background: #1a5f5f;
+            background: #1a4a6e;
             color: white;
-            border-color: #1a5f5f;
+            border-color: #1a4a6e;
         }
 
         .pagination button.active {
-            background: #ffb347;
-            border-color: #ffb347;
-            color: #1e2a3e;
+            background: #3498db;
+            border-color: #3498db;
+            color: white;
         }
 
         .pagination button:disabled {
@@ -368,7 +462,8 @@
             text-align: center;
             padding: 80px;
             font-size: 1.2rem;
-            color: #1a5f5f;
+            color: #1a4a6e;
+            font-weight: 600;
         }
 
         .no-results {
@@ -376,7 +471,7 @@
             padding: 80px;
             background: white;
             border-radius: 32px;
-            color: #718096;
+            color: #64748b;
         }
 
         .no-results i {
@@ -387,11 +482,12 @@
 
         /* الفوتر */
         .footer {
-            background: #0a2f2f;
+            background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
             color: white;
             text-align: center;
-            padding: 35px;
+            padding: 40px 20px;
             margin-top: 60px;
+            border-top: 4px solid #3498db;
         }
 
         .footer-links {
@@ -403,21 +499,33 @@
         }
 
         .footer-links a {
-            color: #ffb347;
+            color: #3498db;
             text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateY(-3px);
         }
 
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
                 gap: 15px;
+                padding: 14px 20px;
             }
             .page-header h1 {
                 font-size: 1.8rem;
             }
+            .page-header {
+                padding: 30px 20px;
+            }
             .search-filter-bar {
                 flex-direction: column;
                 border-radius: 32px;
+                padding: 15px;
             }
             .search-input-wrapper {
                 width: 100%;
@@ -429,6 +537,12 @@
                 left: auto;
                 right: 0;
             }
+            .btn-group {
+                flex-direction: column;
+            }
+            .btn-group .btn {
+                min-width: unset;
+            }
         }
     </style>
 </head>
@@ -439,17 +553,17 @@
         <a href="/" style="text-decoration:none;">
             <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;">
                 <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
-                     style="width:45px;height:45px;border-radius:50%;border:2px solid #2563eb;object-fit:cover;">
-                <span><span style="color:#2563eb;">كيماتو</span><span style="color:#64748b;"> | جميع الطلبات</span></span>
+                     style="width:50px;height:50px;border-radius:50%;border:3px solid #3498db;object-fit:cover;">
+                <span><span style="color:#3498db;">كيماتو</span><span style="color:#b0c9d9;"> | جميع الطلبات</span></span>
             </div>
         </a>
     </div>
     <div class="nav-links">
-        <a href="index.html">الرئيسية</a>
-        <a href="all-products.html">📦 جميع المنتجات</a>
-        <a href="all-requests.html">📋 جميع الطلبات</a>
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="all-products.html"><i class="fas fa-flask"></i> جميع المنتجات</a>
+        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> جميع الطلبات</a>
         <div class="dropdown">
-            <button class="dropdown-btn"><i class="fas fa-bars"></i> القائمة</button>
+            <button class="dropdown-btn"><i class="fas fa-user-circle"></i> القائمة</button>
             <div class="dropdown-content" id="dropdownContent"></div>
         </div>
     </div>
@@ -482,6 +596,8 @@
         <a href="all-products.html">جميع المنتجات</a>
         <a href="all-requests.html">جميع الطلبات</a>
         <a href="auth.html">تسجيل الدخول</a>
+        <a href="supplier-dashboard.html">للموردين</a>
+        <a href="buyer-dashboard.html">للعملاء</a>
     </div>
     <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</div>
 </div>
@@ -497,8 +613,6 @@
     let currentPage = 1
     let totalCount = 0
     let currentSearch = ''
-    let currentUser = null
-    let currentProfile = null
     const itemsPerPage = 12
 
     // ========== القائمة المنسدلة ==========
@@ -519,16 +633,14 @@
 
     async function updateDropdownContent() {
         const { data: { user } } = await supabase.auth.getUser()
-        currentUser = user
         const dropdownContent = document.getElementById('dropdownContent')
         
         if (user) {
             const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
-            currentProfile = profile
             dropdownContent.innerHTML = `
-                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}">📦 لوحة التحكم</a>
-                <a href="profile.html">👤 الملف الشخصي</a>
-                <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
             `
             const logoutLink = document.getElementById('logoutLink')
             if (logoutLink) {
@@ -540,12 +652,21 @@
             }
         } else {
             dropdownContent.innerHTML = `
-                <a href="auth.html">🔐 تسجيل الدخول</a>
-                <a href="auth.html">📝 حساب جديد</a>
-                <a href="supplier-dashboard.html">📦 للموردين</a>
-                <a href="buyer-dashboard.html">🛒 للعملاء</a>
+                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
             `
         }
+    }
+
+    // ========== دالة إنشاء رابط واتساب ==========
+    function getWhatsAppLink(phone, productName) {
+        if (!phone) return '#'
+        const cleanPhone = phone.replace(/\D/g, '')
+        const formattedPhone = cleanPhone.startsWith('20') ? cleanPhone : `20${cleanPhone}`
+        const message = `مرحباً، أنا مهتم بتوفير: ${productName} (منصة كيماتو)`
+        return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`
     }
 
     // ========== عرض الطلبات ==========
@@ -582,51 +703,65 @@
             return
         }
 
-        container.innerHTML = data.map(r => `
-            <div class="request-card" onclick="window.location.href='request-details.html?id=${r.id}'">
-                <div class="request-header">
-                    <span class="request-badge"><i class="fas fa-clock"></i> ${new Date(r.created_at).toLocaleDateString('ar-EG')}</span>
-                    <div class="request-date">رقم الطلب: ${r.id.substring(0, 8)}...</div>
-                </div>
-                <div class="request-info">
-                    <h3 class="request-title">📦 مطلوب: ${r.product_name}</h3>
-                    
-                    <div class="request-detail">
-                        <i class="fas fa-balance-scale"></i>
-                        <span>الكمية: ${r.quantity_needed || 'غير محدد'}</span>
+        container.innerHTML = data.map(r => {
+            const whatsappLink = getWhatsAppLink(r.profiles?.phone, r.product_name)
+            const buyerName = r.profiles?.company_name || r.profiles?.full_name || 'عميل'
+            const initial = buyerName.charAt(0)
+            
+            return `
+                <div class="request-card">
+                    <div class="request-img-wrapper" onclick="window.location.href='request-details.html?id=${r.id}'">
+                        <div class="request-img-placeholder">
+                            <div style="font-size:4rem;opacity:0.6;">📋</div>
+                            <span style="background:rgba(255,255,255,0.88);color:#0c2d4a;font-weight:700;font-size:0.9rem;padding:6px 20px;border-radius:40px;margin-top:8px;box-shadow:0 2px 12px rgba(0,0,0,0.04);">
+                                طلب شراء
+                            </span>
+                        </div>
                     </div>
-                    
-                    ${r.description ? `
-                        <div class="request-description">
-                            <i class="fas fa-align-right"></i> ${r.description.substring(0, 120)}${r.description.length > 120 ? '...' : ''}
-                        </div>
-                    ` : ''}
-                    
-                    ${r.deadline ? `
+                    <div class="request-info">
+                        <span class="request-badge"><i class="fas fa-clock"></i> ${new Date(r.created_at).toLocaleDateString('ar-EG')}</span>
+                        
+                        <h3 class="request-title">📦 مطلوب: ${r.product_name}</h3>
+                        
                         <div class="request-detail">
-                            <i class="fas fa-calendar-alt"></i>
-                            <span>آخر موعد: ${new Date(r.deadline).toLocaleDateString('ar-EG')}</span>
+                            <i class="fas fa-balance-scale"></i>
+                            <span><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</span>
                         </div>
-                    ` : ''}
-                    
-                    <div class="buyer-info">
-                        <div class="buyer-avatar">
-                            ${(r.profiles?.company_name || r.profiles?.full_name || 'ع')[0]}
-                        </div>
-                        <div>
-                            <div><strong>${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</strong></div>
-                            <div style="font-size: 12px; color: #64748b;">
-                                <i class="fas fa-city"></i> ${r.profiles?.city || 'مدينة غير محددة'}
+                        
+                        ${r.deadline ? `
+                            <div class="request-detail">
+                                <i class="fas fa-calendar-alt"></i>
+                                <span><strong>آخر موعد:</strong> ${new Date(r.deadline).toLocaleDateString('ar-EG')}</span>
+                            </div>
+                        ` : ''}
+                        
+                        ${r.description ? `
+                            <div class="request-description">
+                                <i class="fas fa-align-right" style="margin-left:6px;"></i> 
+                                ${r.description.substring(0, 100)}${r.description.length > 100 ? '...' : ''}
+                            </div>
+                        ` : ''}
+                        
+                        <div class="buyer-info">
+                            <div class="buyer-avatar">${initial}</div>
+                            <div>
+                                <div class="buyer-name">${buyerName}</div>
+                                <div class="buyer-city"><i class="fas fa-city"></i> ${r.profiles?.city || 'مدينة غير محددة'}</div>
                             </div>
                         </div>
+                        
+                        <div class="btn-group">
+                            <a href="request-details.html?id=${r.id}" class="btn btn-details" onclick="event.stopPropagation();">
+                                <i class="fas fa-info-circle"></i> تفاصيل
+                            </a>
+                            <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();">
+                                <i class="fab fa-whatsapp"></i> واتساب
+                            </a>
+                        </div>
                     </div>
-                    
-                    <button class="btn-offer" onclick="event.stopPropagation(); goToOffer('${r.id}')">
-                        <i class="fas fa-tag"></i> عرض التفاصيل
-                    </button>
                 </div>
-            </div>
-        `).join('')
+            `
+        }).join('')
 
         // ترقيم الصفحات
         const totalPages = Math.ceil(totalCount / itemsPerPage)
@@ -655,10 +790,6 @@
         currentPage = page
         loadRequests()
         window.scrollTo({ top: 0, behavior: 'smooth' })
-    }
-
-    window.goToOffer = (requestId) => {
-        window.location.href = `request-details.html?id=${requestId}`
     }
 
     // ========== البحث ==========
