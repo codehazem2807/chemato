@@ -2,43 +2,91 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>كيماتو | لوحة تحكم المورد</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+
+        :root {
+            --primary-dark: #0c2d4a;
+            --primary: #1a4a6e;
+            --primary-light: #2d7a9e;
+            --accent: #3498db;
+            --accent-dark: #2c81ba;
+            --gray-light: #f8fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #64748b;
+            --text-dark: #0c2d4a;
+            --text-light: #475569;
+            --white: #ffffff;
+            --danger: #e53e3e;
+            --success: #2a9d8f;
+            --warning: #f4a261;
+            --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
+            --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
+            --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
+            --radius-sm: 16px;
+            --radius-md: 24px;
+            --radius-lg: 32px;
         }
 
         body {
-            background: #f0f4f8;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+            background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
         }
 
         /* ========== الهيدر ========== */
         .navbar {
-            background: linear-gradient(135deg, #0a2f2f, #1b6b6b);
-            padding: 18px 40px;
+            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
+            padding: 14px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 15px;
             color: white;
             position: sticky;
             top: 0;
             z-index: 100;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 32px rgba(12,45,74,0.25);
+            border-bottom: 2px solid rgba(52,152,219,0.30);
         }
 
         .logo a {
             text-decoration: none;
         }
 
+        .logo-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 22px;
+        }
+
+        .logo-img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #3498db;
+            object-fit: cover;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.35);
+        }
+
+        .logo-text span:first-child { color: #3498db; }
+        .logo-text span:last-child { color: #b0c9d9; font-size: 16px; }
+
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -47,14 +95,26 @@
             color: white;
             text-decoration: none;
             padding: 8px 20px;
-            border-radius: 30px;
-            transition: 0.3s;
-            font-weight: 500;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.06);
+            font-size: 14px;
         }
 
         .nav-links a:hover {
-            background: #ffb347;
-            color: #1e2a3e;
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
+        }
+
+        .nav-links a.active {
+            background: #3498db;
+            color: white;
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
 
         /* ========== القائمة المنسدلة ========== */
@@ -64,24 +124,26 @@
         }
 
         .dropdown-btn {
-            background: rgba(255,255,255,0.15);
+            background: rgba(255,255,255,0.08);
             color: white;
-            padding: 8px 20px;
-            border-radius: 30px;
+            padding: 8px 22px;
+            border-radius: 40px;
             cursor: pointer;
-            font-weight: 500;
-            transition: 0.3s;
+            font-weight: 600;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             gap: 8px;
-            border: none;
-            font-size: 1rem;
+            border: 1px solid rgba(255,255,255,0.08);
+            font-size: 14px;
             font-family: inherit;
         }
 
         .dropdown-btn:hover {
-            background: #ffb347;
-            color: #1e2a3e;
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
 
         .dropdown-content {
@@ -92,35 +154,47 @@
             right: 0;
             background: white;
             min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
-            border-radius: 16px;
+            box-shadow: 0 24px 56px rgba(0,0,0,0.12);
+            border-radius: 20px;
             z-index: 1000;
             overflow: hidden;
             margin-top: 8px;
+            border: 1px solid rgba(52,152,219,0.15);
         }
 
         .dropdown-content.show {
             display: block;
+            animation: dropFade 0.25s ease;
+        }
+
+        @keyframes dropFade {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
         }
 
         .dropdown-content a {
-            color: #1e2a3e;
-            padding: 12px 20px;
+            color: var(--text-dark);
+            padding: 14px 22px;
             text-decoration: none;
             display: block;
             transition: 0.2s;
             font-size: 14px;
-            border-bottom: 1px solid #e2e8f0;
+            font-weight: 500;
+            border-bottom: 1px solid var(--gray);
         }
 
         .dropdown-content a:hover {
-            background: #f0f4f8;
-            color: #1a5f5f;
+            background: #ebf5fb;
+            color: var(--primary);
         }
 
         .dropdown-content .logout-item {
-            color: #e53e3e;
-            border-top: 1px solid #e2e8f0;
+            color: var(--danger);
+            border-top: 1px solid var(--gray);
+        }
+
+        .dropdown-content .logout-item:hover {
+            background: #fee2e2;
         }
 
         /* ========== المحتوى الرئيسي ========== */
@@ -132,176 +206,301 @@
 
         /* بطاقة الترحيب */
         .welcome-card {
-            background: linear-gradient(125deg, #1a5f5f, #0a2f2f);
-            border-radius: 32px;
-            padding: 30px;
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: var(--radius-lg);
+            padding: 30px 35px;
             margin-bottom: 30px;
             color: white;
             display: flex;
             justify-content: space-between;
             align-items: center;
             flex-wrap: wrap;
+            gap: 15px;
+            box-shadow: 0 24px 64px rgba(12,45,74,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .welcome-card::after {
+            content: "🏭";
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.04;
+            left: -20px;
+            bottom: -60px;
         }
 
         .welcome-text h2 {
             font-size: 1.8rem;
-            margin-bottom: 8px;
+            font-weight: 900;
+            margin-bottom: 5px;
+            position: relative;
         }
 
         .welcome-text p {
             opacity: 0.9;
+            font-size: 1rem;
+            position: relative;
         }
 
         .logout-btn {
-            background: #e53e3e;
+            background: var(--danger);
             color: white;
             padding: 10px 25px;
             border: none;
             border-radius: 40px;
             cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 16px rgba(229,62,62,0.25);
+            position: relative;
+            z-index: 1;
         }
 
         .logout-btn:hover {
             background: #c53030;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(229,62,62,0.35);
         }
 
-        /* إحصائيات */
+        /* ===== إحصائيات ===== */
         .stats-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            grid-template-columns: repeat(4, 1fr);
             gap: 20px;
-            margin-bottom: 40px;
+            margin-bottom: 30px;
         }
 
         .stat-card {
-            background: white;
-            border-radius: 24px;
-            padding: 25px;
+            background: var(--white);
+            border-radius: var(--radius-md);
+            padding: 24px;
             text-align: center;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s cubic-bezier(0.15,0.75,0.45,1);
+            border: 1px solid rgba(52,152,219,0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .stat-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #1a4a6e);
+            opacity: 0;
             transition: 0.3s;
         }
 
         .stat-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-md);
+            border-color: #3498db;
+        }
+
+        .stat-card:hover::before {
+            opacity: 1;
         }
 
         .stat-icon {
             width: 60px;
             height: 60px;
-            background: #e9f0f0;
+            background: linear-gradient(145deg, #e6edf4, #f0f6fb);
             border-radius: 30px;
             display: flex;
             align-items: center;
             justify-content: center;
-            margin: 0 auto 15px;
+            margin: 0 auto 12px;
+            transition: 0.3s;
+        }
+
+        .stat-card:hover .stat-icon {
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+        }
+
+        .stat-card:hover .stat-icon i {
+            color: white;
         }
 
         .stat-icon i {
             font-size: 28px;
-            color: #1a5f5f;
+            color: var(--primary);
+            transition: 0.3s;
         }
 
         .stat-number {
-            font-size: 32px;
-            font-weight: bold;
-            color: #0a2f2f;
+            font-size: 2.2rem;
+            font-weight: 900;
+            color: var(--primary-dark);
+            line-height: 1.2;
         }
 
         .stat-label {
-            color: #64748b;
+            color: var(--gray-dark);
+            font-size: 14px;
+            font-weight: 600;
             margin-top: 5px;
         }
 
-        /* رأس قسم المنتجات */
+        /* ===== رأس القسم ===== */
         .section-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             flex-wrap: wrap;
+            gap: 15px;
         }
 
         .section-header h3 {
             font-size: 1.5rem;
-            color: #0a2f2f;
-            border-right: 4px solid #ffb347;
+            color: var(--primary-dark);
+            border-right: 4px solid #3498db;
             padding-right: 15px;
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .section-header h3 i {
+            color: #3498db;
         }
 
         .btn-add {
-            background: #ffb347;
-            color: #1e2a3e;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            color: white;
             padding: 10px 25px;
             border-radius: 40px;
             text-decoration: none;
-            font-weight: bold;
-            transition: 0.3s;
+            font-weight: 700;
+            transition: all 0.3s;
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            font-size: 0.95rem;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.30);
         }
 
         .btn-add:hover {
-            background: #1a5f5f;
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
             color: white;
-            transform: translateY(-2px);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(26,74,110,0.35);
         }
 
-        /* شبكة المنتجات */
+        /* ===== شبكة المنتجات ===== */
         .products-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 25px;
         }
 
         .product-card {
-            background: white;
-            border-radius: 24px;
+            background: var(--white);
+            border-radius: var(--radius-md);
             overflow: hidden;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-            transition: all 0.3s ease;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s cubic-bezier(0.15,0.75,0.45,1);
+            border: 1px solid rgba(52,152,219,0.06);
+            display: flex;
+            flex-direction: column;
         }
 
         .product-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 35px rgba(0,0,0,0.15);
+            transform: translateY(-10px);
+            box-shadow: var(--shadow-lg);
+            border-color: #3498db;
+        }
+
+        /* ===== صورة المنتج ===== */
+        .product-img-wrapper {
+            width: 100%;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, #e6edf4, #f0f6fb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .product-img {
             width: 100%;
-            height: 180px;
+            height: 100%;
             object-fit: cover;
-            background: #e2e8f0;
+            transition: 0.6s cubic-bezier(0.15,0.75,0.45,1);
+        }
+
+        .product-card:hover .product-img {
+            transform: scale(1.06);
+        }
+
+        /* ===== Placeholder ===== */
+        .product-img-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            color: #1a4a6e;
+            background: linear-gradient(145deg, #dce8f0, #eef4f8);
+            transition: 0.5s;
+            padding: 20px;
+            text-align: center;
+        }
+
+        .product-card:hover .product-img-placeholder {
+            background: linear-gradient(145deg, #c8d8e6, #e2ecf5);
+        }
+
+        .product-img-placeholder span {
+            font-size: 0.9rem;
+            font-weight: 700;
+            color: #0c2d4a;
+            background: rgba(255,255,255,0.88);
+            padding: 6px 20px;
+            border-radius: 40px;
+            margin-top: 8px;
+            backdrop-filter: blur(6px);
+            box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
 
         .product-info {
-            padding: 18px;
+            padding: 18px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
         }
 
         .product-name {
-            color: #0a2f2f;
-            font-size: 1.1rem;
-            margin-bottom: 8px;
-            font-weight: bold;
+            color: var(--primary-dark);
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 4px;
         }
 
         .product-price {
-            color: #ffb347;
+            color: #d4880f;
             font-size: 20px;
-            font-weight: bold;
+            font-weight: 800;
+            margin: 6px 0;
         }
 
         .product-status {
             display: inline-block;
-            padding: 4px 12px;
+            padding: 4px 14px;
             border-radius: 20px;
             font-size: 11px;
-            margin: 10px 0;
+            font-weight: 700;
+            margin: 4px 0 8px;
+            align-self: flex-start;
         }
 
         .status-active {
@@ -319,58 +518,86 @@
             color: #975a16;
         }
 
+        .product-category {
+            font-size: 12px;
+            color: var(--gray-dark);
+            margin: 2px 0;
+        }
+
+        .product-views {
+            font-size: 12px;
+            color: #94a3b8;
+            margin-top: 4px;
+        }
+
+        /* ===== أزرار الإجراءات ===== */
         .card-actions {
             display: flex;
             gap: 10px;
-            margin-top: 15px;
+            margin-top: auto;
+            padding-top: 12px;
+            border-top: 1px solid #eef2f6;
         }
 
         .btn-edit, .btn-delete {
             flex: 1;
-            padding: 8px;
+            padding: 10px;
             border: none;
-            border-radius: 20px;
+            border-radius: 30px;
             cursor: pointer;
-            font-weight: bold;
-            transition: 0.3s;
+            font-weight: 700;
+            transition: all 0.3s;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 5px;
+            gap: 6px;
+            font-size: 13px;
         }
 
         .btn-edit {
-            background: #1b6b6b;
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
             color: white;
+            box-shadow: 0 4px 16px rgba(26,74,110,0.15);
         }
 
         .btn-edit:hover {
-            background: #ffb347;
-            color: #1e2a3e;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(52,152,219,0.35);
         }
 
         .btn-delete {
-            background: #e53e3e;
+            background: #dc2626;
             color: white;
+            box-shadow: 0 4px 16px rgba(220,38,38,0.15);
         }
 
         .btn-delete:hover {
-            background: #c53030;
+            background: #b91c1c;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(220,38,38,0.25);
         }
 
-        /* حالة عدم وجود منتجات */
+        /* ===== حالة فارغة ===== */
         .empty-state {
             text-align: center;
-            padding: 60px;
-            background: white;
-            border-radius: 32px;
-            color: #718096;
+            padding: 60px 20px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            color: var(--gray-dark);
+            grid-column: 1 / -1;
+            border: 2px dashed #cbd5e1;
         }
 
         .empty-state i {
             font-size: 60px;
-            margin-bottom: 20px;
+            margin-bottom: 15px;
             color: #cbd5e1;
+        }
+
+        .empty-state h3 {
+            color: var(--text-dark);
+            margin-bottom: 8px;
         }
 
         .empty-state .btn-add {
@@ -378,13 +605,14 @@
             margin-top: 20px;
         }
 
-        /* الفوتر */
+        /* ===== الفوتر ===== */
         .footer {
-            background: #0a2f2f;
+            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
             color: white;
             text-align: center;
-            padding: 35px;
+            padding: 35px 20px;
             margin-top: 60px;
+            border-top: 4px solid #3498db;
         }
 
         .footer-links {
@@ -396,29 +624,131 @@
         }
 
         .footer-links a {
-            color: #ffb347;
+            color: #3498db;
             text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+
+        .footer-links a:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* ===== استجابة ===== */
+        @media (max-width: 1024px) {
+            .products-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 15px;
+                gap: 12px;
+                padding: 14px 20px;
             }
+            
+            .logo-content {
+                font-size: 18px;
+            }
+            
+            .logo-img {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            
+            .container {
+                padding: 0 16px;
+                margin: 20px auto;
+            }
+            
             .welcome-card {
+                padding: 20px;
                 flex-direction: column;
                 text-align: center;
-                gap: 15px;
             }
+            
+            .welcome-text h2 {
+                font-size: 1.3rem;
+            }
+            
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
             }
+            
+            .stat-card {
+                padding: 18px;
+            }
+            
+            .stat-number {
+                font-size: 1.5rem;
+            }
+            
+            .stat-icon {
+                width: 45px;
+                height: 45px;
+            }
+            
+            .stat-icon i {
+                font-size: 20px;
+            }
+            
             .products-grid {
                 grid-template-columns: 1fr;
+                gap: 20px;
             }
+            
+            .section-header {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .section-header h3 {
+                font-size: 1.2rem;
+            }
+            
+            .btn-add {
+                justify-content: center;
+            }
+            
+            .card-actions {
+                flex-direction: column;
+            }
+            
             .dropdown-content {
                 left: auto;
                 right: 0;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .stats-grid {
+                grid-template-columns: 1fr 1fr;
+                gap: 10px;
+            }
+            
+            .stat-card {
+                padding: 14px;
+            }
+            
+            .stat-number {
+                font-size: 1.3rem;
+            }
+            
+            .stat-label {
+                font-size: 11px;
             }
         }
     </style>
@@ -427,34 +757,39 @@
 
 <div class="navbar">
     <div class="logo">
-        <a href="/" style="text-decoration:none;">
-            <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;">
+        <a href="index.html" style="text-decoration:none;">
+            <div class="logo-content">
                 <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
-                     style="width:45px;height:45px;border-radius:50%;border:2px solid #2563eb;object-fit:cover;">
-                <span><span style="color:#2563eb;">كيماتو</span><span style="color:#64748b;"> | لوحة المورد</span></span>
+                     class="logo-img" alt="كيماتو">
+                <div class="logo-text">
+                    <span>كيماتو</span>
+                    <span> | لوحة المورد</span>
+                </div>
             </div>
         </a>
     </div>
     <div class="nav-links">
-        <a href="index.html">الرئيسية</a>
-        <a href="all-products.html">📦 جميع المنتجات</a>
-        <a href="add-product.html">➕ إضافة منتج</a>
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+        <a href="add-product.html" class="active"><i class="fas fa-plus"></i> إضافة منتج</a>
         <div class="dropdown">
-            <button class="dropdown-btn"><i class="fas fa-bars"></i> القائمة</button>
+            <button class="dropdown-btn"><i class="fas fa-user-circle"></i> القائمة</button>
             <div class="dropdown-content" id="dropdownContent"></div>
         </div>
     </div>
 </div>
 
 <div class="container">
+    <!-- ===== بطاقة الترحيب ===== -->
     <div class="welcome-card" id="welcomeCard">
         <div class="welcome-text">
             <h2>👋 مرحباً بك في لوحة المورد</h2>
             <p>من هنا يمكنك إدارة منتجاتك ومتابعة عروضك</p>
         </div>
-        <button class="logout-btn" id="logoutBtn">🚪 تسجيل خروج</button>
+        <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</button>
     </div>
 
+    <!-- ===== الإحصائيات ===== -->
     <div class="stats-grid" id="statsGrid">
         <div class="stat-card">
             <div class="stat-icon"><i class="fas fa-box"></i></div>
@@ -478,6 +813,7 @@
         </div>
     </div>
 
+    <!-- ===== قائمة المنتجات ===== -->
     <div class="section-header">
         <h3><i class="fas fa-boxes"></i> منتجاتي</h3>
         <a href="add-product.html" class="btn-add"><i class="fas fa-plus"></i> إضافة منتج جديد</a>
@@ -486,20 +822,23 @@
     <div id="productsContainer" class="products-grid">
         <div class="empty-state">
             <i class="fas fa-box-open"></i>
-            <p>⚠️ لا توجد منتجات حتى الآن</p>
-            <a href="add-product.html" class="btn-add">➕ أضف منتجك الأول</a>
+            <h3>لا توجد منتجات</h3>
+            <p>قم بإضافة منتجك الأول الآن</p>
+            <a href="add-product.html" class="btn-add"><i class="fas fa-plus"></i> أضف منتجك الأول</a>
         </div>
     </div>
 </div>
 
+<!-- ===== الفوتر ===== -->
 <div class="footer">
     <div class="footer-links">
         <a href="index.html">الرئيسية</a>
         <a href="all-products.html">جميع المنتجات</a>
         <a href="add-product.html">إضافة منتج</a>
         <a href="profile.html">الملف الشخصي</a>
+        <a href="auth.html">تسجيل الدخول</a>
     </div>
-    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</div>
+    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية</div>
 </div>
 
 <script type="module">
@@ -531,12 +870,13 @@
 
     async function updateDropdownContent() {
         const { data: { user } } = await supabase.auth.getUser()
+        currentUser = user
         const dropdownContent = document.getElementById('dropdownContent')
         
         if (user) {
             dropdownContent.innerHTML = `
-                <a href="profile.html">👤 الملف الشخصي</a>
-                <a href="#" id="logoutLink" class="logout-item">🚪 تسجيل خروج</a>
+                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
             `
             const logoutLink = document.getElementById('logoutLink')
             if (logoutLink) {
@@ -548,10 +888,26 @@
             }
         } else {
             dropdownContent.innerHTML = `
-                <a href="auth.html">🔐 تسجيل الدخول</a>
-                <a href="auth.html">📝 حساب جديد</a>
+                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
             `
         }
+    }
+
+    // ========== دالة Placeholder ==========
+    function getPlaceholderHTML(productName, categoryIcon = '🧪') {
+        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a'];
+        const colorIndex = (productName?.length || 0) % colors.length;
+        const bgColor = colors[colorIndex];
+        
+        return `
+            <div class="product-img-placeholder" style="background:linear-gradient(145deg, ${bgColor}22, ${bgColor}44);">
+                <div style="font-size:4rem;opacity:0.75;">${categoryIcon}</div>
+                <span>${productName ? productName.substring(0, 28) : 'منتج'}</span>
+            </div>
+        `;
     }
 
     // ========== عرض الإحصائيات ==========
@@ -586,8 +942,9 @@
             container.innerHTML = `
                 <div class="empty-state">
                     <i class="fas fa-box-open"></i>
-                    <p>⚠️ لا توجد منتجات حتى الآن</p>
-                    <a href="add-product.html" class="btn-add">➕ أضف منتجك الأول</a>
+                    <h3>لا توجد منتجات</h3>
+                    <p>قم بإضافة منتجك الأول الآن</p>
+                    <a href="add-product.html" class="btn-add"><i class="fas fa-plus"></i> أضف منتجك الأول</a>
                 </div>
             `
             return
@@ -596,15 +953,19 @@
         // جلب أسماء الأقسام لكل منتج
         const productsWithCategories = await Promise.all(products.map(async (p) => {
             let categoryName = p.category || 'مواد كيماوية'
+            let categoryIcon = '🧪'
             if (p.category_id) {
                 const { data: cat } = await supabase
                     .from('categories')
-                    .select('name')
+                    .select('name, icon')
                     .eq('id', p.category_id)
                     .single()
-                if (cat) categoryName = cat.name
+                if (cat) {
+                    categoryName = cat.name
+                    categoryIcon = cat.icon || '🧪'
+                }
             }
-            return { ...p, categoryName }
+            return { ...p, categoryName, categoryIcon }
         }))
 
         const statusMap = {
@@ -613,22 +974,31 @@
             'sold': { class: 'status-sold', text: '🔴 تم البيع' }
         }
 
-        container.innerHTML = productsWithCategories.map(p => `
-            <div class="product-card">
-                <img class="product-img" src="${p.image_url || 'https://placehold.co/400x180?text=🧪'}" alt="${p.name}">
-                <div class="product-info">
-                    <div class="product-name">🧪 ${p.name}</div>
-                    <div class="product-price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : '💰 سعر عند الطلب'}</div>
-                    <div class="product-status ${statusMap[p.status]?.class || 'status-active'}">${statusMap[p.status]?.text || '🟢 متاح'}</div>
-                    <div style="font-size:12px; color:#718096; margin:5px 0;">📂 ${p.categoryName}</div>
-                    <div style="font-size:12px; color:#94a3b8;"><i class="fas fa-eye"></i> ${p.views_count || 0} مشاهدة</div>
-                    <div class="card-actions">
-                        <button class="btn-edit" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i> تعديل</button>
-                        <button class="btn-delete" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i> حذف</button>
+        container.innerHTML = productsWithCategories.map(p => {
+            const hasImage = p.image_url && p.image_url.trim() !== '' && !p.image_url.includes('placehold');
+            const imageHtml = hasImage 
+                ? `<img class="product-img" src="${p.image_url}" alt="${p.name}" loading="lazy">`
+                : getPlaceholderHTML(p.name, p.categoryIcon);
+
+            return `
+                <div class="product-card">
+                    <div class="product-img-wrapper">
+                        ${imageHtml}
+                    </div>
+                    <div class="product-info">
+                        <div class="product-name">${p.name}</div>
+                        <div class="product-price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : '💰 سعر عند الطلب'}</div>
+                        <div class="product-status ${statusMap[p.status]?.class || 'status-active'}">${statusMap[p.status]?.text || '🟢 متاح'}</div>
+                        <div class="product-category"><i class="fas fa-folder"></i> ${p.categoryName}</div>
+                        <div class="product-views"><i class="fas fa-eye"></i> ${p.views_count || 0} مشاهدة</div>
+                        <div class="card-actions">
+                            <button class="btn-edit" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i> تعديل</button>
+                            <button class="btn-delete" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i> حذف</button>
+                        </div>
                     </div>
                 </div>
-            </div>
-        `).join('')
+            `
+        }).join('')
     }
 
     // ========== التعديل ==========
@@ -673,17 +1043,19 @@
         currentProfile = profile
 
         if (profile?.user_type !== 'supplier') {
-            alert('هذه الصفحة مخصصة للموردين فقط')
+            alert('⚠️ هذه الصفحة مخصصة للموردين فقط')
             window.location.href = 'index.html'
             return
         }
 
+        // تحديث بطاقة الترحيب
+        const firstName = profile.full_name?.split(' ')[0] || 'مورد'
         document.getElementById('welcomeCard').innerHTML = `
             <div class="welcome-text">
-                <h2>👋 مرحباً ${profile.full_name?.split(' ')[0] || 'مورد'}!</h2>
+                <h2>👋 مرحباً ${firstName}!</h2>
                 <p>من هنا يمكنك إدارة منتجاتك ومتابعة عروضك</p>
             </div>
-            <button class="logout-btn" id="logoutBtn">🚪 تسجيل خروج</button>
+            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</button>
         `
         document.getElementById('logoutBtn').addEventListener('click', async () => {
             await supabase.auth.signOut()
