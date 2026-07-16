@@ -28,7 +28,6 @@
             --danger: #e53e3e;
             --success: #2a9d8f;
             --warning: #f4a261;
-            --whatsapp: #25D366;
             --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
             --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
             --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
@@ -401,6 +400,7 @@
         .loading {
             text-align: center;
             padding: 40px 20px;
+            display: none;
         }
 
         .loading.show {
@@ -562,7 +562,8 @@
         <p>قم بتعديل بيانات منتجك بكل سهولة</p>
     </div>
 
-    <div id="loading" class="loading">
+    <!-- مؤشر التحميل - يظهر فقط أثناء جلب البيانات -->
+    <div id="loading" class="loading show">
         <div class="spinner"></div>
         <p>⏳ جاري تحميل بيانات المنتج...</p>
     </div>
@@ -662,6 +663,12 @@
     let selectedImageFile = null
     let allCategories = []
 
+    // ========== عناصر DOM ==========
+    const loadingDiv = document.getElementById('loading')
+    const form = document.getElementById('productForm')
+    const messageDiv = document.getElementById('messageDiv')
+    const submitBtn = document.getElementById('submitBtn')
+
     // ========== أزرار الحالة ==========
     function setupStatusButtons() {
         const buttons = document.querySelectorAll('.status-btn')
@@ -745,9 +752,12 @@
             .eq('id', productId)
             .single()
 
+        // إخفاء التحميل نهائياً سواء نجح أو فشل
+        loadingDiv.classList.remove('show')
+        loadingDiv.style.display = 'none'
+
         if (error || !data) {
-            document.getElementById('messageDiv').innerHTML = `<div class="message error">❌ المنتج غير موجود</div>`
-            document.getElementById('loading').classList.remove('show')
+            messageDiv.innerHTML = `<div class="message error">❌ ${error?.message || 'المنتج غير موجود'}</div>`
             return
         }
 
@@ -780,20 +790,16 @@
             currentImageDiv.innerHTML = '<p>📷 لا توجد صورة حالية</p>'
         }
 
-        document.getElementById('loading').classList.remove('show')
-        document.getElementById('productForm').style.display = 'block'
+        // إظهار الفورم
+        form.style.display = 'block'
     }
 
     // ========== حفظ التعديلات ==========
-    const form = document.getElementById('productForm')
-    const messageDiv = document.getElementById('messageDiv')
-    const loadingDiv = document.getElementById('loading')
-    const submitBtn = document.getElementById('submitBtn')
-
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
         messageDiv.innerHTML = ''
         loadingDiv.classList.add('show')
+        loadingDiv.style.display = 'block'
         submitBtn.disabled = true
 
         const name = document.getElementById('name').value.trim()
@@ -806,6 +812,7 @@
         if (!name) {
             messageDiv.innerHTML = '<div class="message error">❌ الرجاء إدخال اسم المنتج</div>'
             loadingDiv.classList.remove('show')
+            loadingDiv.style.display = 'none'
             submitBtn.disabled = false
             return
         }
@@ -813,6 +820,7 @@
         if (!categoryId) {
             messageDiv.innerHTML = '<div class="message error">❌ الرجاء اختيار القسم</div>'
             loadingDiv.classList.remove('show')
+            loadingDiv.style.display = 'none'
             submitBtn.disabled = false
             return
         }
@@ -859,10 +867,12 @@
             .eq('id', productId)
             .eq('supplier_id', currentUser.id)
 
+        loadingDiv.classList.remove('show')
+        loadingDiv.style.display = 'none'
+        submitBtn.disabled = false
+
         if (error) {
             messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
         } else {
             messageDiv.innerHTML = '<div class="message success">✅ تم تحديث المنتج بنجاح! جاري التحويل...</div>'
             setTimeout(() => {
