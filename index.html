@@ -241,19 +241,47 @@
         }
         .supplier-name { color:#64748b; font-size:14px; margin-top:6px; font-weight:500; }
 
-        /* ===== WHATSAPP BUTTON ===== */
+        /* ===== BUTTONS ===== */
+        .btn-group {
+            display:flex;
+            gap:10px;
+            margin-top:18px;
+            flex-wrap:wrap;
+        }
+        
+        .btn-group .btn {
+            flex:1;
+            min-width:120px;
+        }
+
+        .btn {
+            display:inline-block; color:#fff; padding:12px 16px;
+            border-radius:60px; text-decoration:none; border:none;
+            cursor:pointer; transition:all 0.3s; text-align:center;
+            font-weight:700; font-size:0.95rem; letter-spacing:0.3px;
+        }
+        
+        .btn-details {
+            background:linear-gradient(145deg, #1a4a6e, #0c2d4a);
+            box-shadow:0 4px 16px rgba(26,74,110,0.15);
+        }
+        .btn-details:hover {
+            background:linear-gradient(145deg, #3498db, #2c81ba);
+            transform:scale(1.02) translateY(-2px);
+            box-shadow:0 8px 28px rgba(52,152,219,0.35);
+        }
+        
         .btn-whatsapp {
-            display:inline-block; background:#25D366; color:#fff; padding:14px 20px;
-            border-radius:60px; text-decoration:none; margin-top:18px; border:none;
-            cursor:pointer; transition:all 0.3s; width:100%; text-align:center;
-            font-weight:700; font-size:1rem; letter-spacing:0.3px;
+            background:#25D366;
             box-shadow:0 4px 16px rgba(37,211,102,0.25);
         }
         .btn-whatsapp:hover {
-            background:#128C7E; transform:scale(1.02) translateY(-2px);
+            background:#128C7E;
+            transform:scale(1.02) translateY(-2px);
             box-shadow:0 8px 28px rgba(37,211,102,0.35);
         }
-        .btn-whatsapp i { margin-left:8px; }
+        .btn-whatsapp i { margin-left:6px; }
+        .btn-details i { margin-left:6px; }
 
         /* ===== TRUST BADGE ===== */
         .trust-badge {
@@ -283,6 +311,8 @@
             .search-section { flex-direction:column; border-radius:40px; padding:12px; }
             .search-btn { padding:16px; justify-content:center; }
             .stats { grid-template-columns:1fr 1fr; }
+            .btn-group { flex-direction:column; }
+            .btn-group .btn { min-width:unset; }
         }
         .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
     </style>
@@ -450,6 +480,44 @@
         }
     }
 
+    // ===== UPDATE DROPDOWN =====
+    async function updateDropdownContent() {
+        const { data: { user } } = await supabase.auth.getUser()
+        const content = document.getElementById('dropdownContent')
+        if (!content) return
+
+        if (user) {
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('user_type, full_name')
+                .eq('id', user.id)
+                .single()
+
+            content.innerHTML = `
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}" role="menuitem">
+                    <i class="fas fa-tachometer-alt"></i> ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}
+                </a>
+                <a href="profile.html" role="menuitem"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item" role="menuitem"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+            `
+            const logout = document.getElementById('logoutLink')
+            if (logout) {
+                logout.onclick = async (e) => {
+                    e.preventDefault()
+                    await supabase.auth.signOut()
+                    window.location.reload()
+                }
+            }
+        } else {
+            content.innerHTML = `
+                <a href="auth.html" role="menuitem"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html" role="menuitem"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                <a href="supplier-dashboard.html" role="menuitem"><i class="fas fa-warehouse"></i> للموردين</a>
+                <a href="buyer-dashboard.html" role="menuitem"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+            `
+        }
+    }
+
     // ===== LOAD CATEGORIES =====
     async function loadCategoriesFilter() {
         const { data: categories } = await supabase
@@ -504,9 +572,7 @@
     // ===== GET WHATSAPP LINK =====
     function getWhatsAppLink(phone, productName) {
         if (!phone) return '#'
-        // Format phone number (remove any non-digit characters)
         const cleanPhone = phone.replace(/\D/g, '')
-        // Ensure it starts with 20 for Egypt, or use as is
         const formattedPhone = cleanPhone.startsWith('20') ? cleanPhone : `20${cleanPhone}`
         const message = `مرحباً، أنا مهتم بـ: ${productName} (منصة كيماتو)`
         return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`
@@ -589,9 +655,15 @@
                         <h3>${p.name.substring(0, 40)}</h3>
                         <div class="price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : 'سعر عند الطلب'}</div>
                         <div class="supplier-name"><i class="fas fa-building" style="margin-left:6px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
-                        <a href="${whatsappLink}" target="_blank" class="btn-whatsapp" onclick="event.stopPropagation();">
-                            <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
-                        </a>
+                        
+                        <div class="btn-group">
+                            <a href="product-details.html?id=${p.id}" class="btn btn-details" onclick="event.stopPropagation();">
+                                <i class="fas fa-info-circle"></i> تفاصيل
+                            </a>
+                            <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();">
+                                <i class="fab fa-whatsapp"></i> واتساب
+                            </a>
+                        </div>
                     </div>
                 </div>
             `;
@@ -631,9 +703,15 @@
                         <h3>${r.product_name.substring(0, 40)}</h3>
                         <p style="margin:6px 0 4px;color:#1e2a3e;"><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</p>
                         <p style="font-size:13px;color:#64748b;"><i class="fas fa-user"></i> ${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</p>
-                        <a href="${whatsappLink}" target="_blank" class="btn-whatsapp" onclick="event.stopPropagation();">
-                            <i class="fab fa-whatsapp"></i> تواصل مع العميل
-                        </a>
+                        
+                        <div class="btn-group">
+                            <a href="request-details.html?id=${r.id}" class="btn btn-details" onclick="event.stopPropagation();">
+                                <i class="fas fa-info-circle"></i> تفاصيل
+                            </a>
+                            <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();">
+                                <i class="fab fa-whatsapp"></i> واتساب
+                            </a>
+                        </div>
                     </div>
                 </div>
             `;
@@ -654,6 +732,7 @@
 
     // ===== INIT =====
     setupDropdown()
+    await updateDropdownContent()
     await loadCategoriesFilter()
     await loadStats()
     await loadProducts()
