@@ -2,175 +2,674 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كيماتو | طلب شراء</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>كيماتو | طلب شراء مواد كيماوية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     <style>
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Cairo', 'Tahoma', sans-serif;
         }
+
+        :root {
+            --primary-dark: #0c2d4a;
+            --primary: #1a4a6e;
+            --primary-light: #2d7a9e;
+            --accent: #3498db;
+            --accent-dark: #2c81ba;
+            --gray-light: #f8fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #64748b;
+            --text-dark: #0c2d4a;
+            --text-light: #475569;
+            --white: #ffffff;
+            --danger: #e53e3e;
+            --success: #2a9d8f;
+            --warning: #f4a261;
+            --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
+            --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
+            --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
+            --radius-sm: 16px;
+            --radius-md: 24px;
+            --radius-lg: 32px;
+        }
+
         body {
-            background: linear-gradient(135deg, #0f2b2b, #1a5f5f);
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+            background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
             min-height: 100vh;
-            padding: 40px 20px;
+            color: var(--text-dark);
+            padding: 20px;
         }
+
+        @media (min-width: 768px) {
+            body {
+                padding: 40px 20px;
+            }
+        }
+
+        /* ========== الهيدر ========== */
+        .navbar {
+            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
+            padding: 14px 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: white;
+            border-radius: 60px;
+            margin-bottom: 30px;
+            box-shadow: 0 8px 32px rgba(12,45,74,0.25);
+            border-bottom: 2px solid rgba(52,152,219,0.30);
+        }
+
+        .logo a {
+            text-decoration: none;
+        }
+
+        .logo-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 20px;
+        }
+
+        .logo-img {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            border: 2px solid #3498db;
+            object-fit: cover;
+        }
+
+        .logo-text span:first-child { color: #3498db; }
+        .logo-text span:last-child { color: #b0c9d9; font-size: 14px; }
+
+        .nav-links {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.06);
+            font-size: 14px;
+        }
+
+        .nav-links a:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
+        }
+
+        /* ========== القائمة المنسدلة ========== */
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
+        .dropdown-btn {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            padding: 8px 22px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border: 1px solid rgba(255,255,255,0.08);
+            font-size: 14px;
+            font-family: inherit;
+        }
+
+        .dropdown-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: white;
+            min-width: 200px;
+            box-shadow: 0 24px 56px rgba(0,0,0,0.12);
+            border-radius: 20px;
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 8px;
+            border: 1px solid rgba(52,152,219,0.15);
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: dropFade 0.25s ease;
+        }
+
+        @keyframes dropFade {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .dropdown-content a {
+            color: var(--text-dark);
+            padding: 14px 22px;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 1px solid var(--gray);
+        }
+
+        .dropdown-content a:hover {
+            background: #ebf5fb;
+            color: var(--primary);
+        }
+
+        .dropdown-content .logout-item {
+            color: var(--danger);
+            border-top: 1px solid var(--gray);
+        }
+
+        .dropdown-content .logout-item:hover {
+            background: #fee2e2;
+        }
+
+        /* ========== الفورم ========== */
         .form-container {
             max-width: 700px;
             margin: 0 auto;
-            background: white;
-            border-radius: 48px;
-            padding: 40px;
-            box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            padding: 35px 30px;
+            box-shadow: 0 12px 36px rgba(12,45,74,0.06);
+            border: 1px solid rgba(52,152,219,0.06);
         }
-        h1 {
-            color: #1a5f5f;
-            margin-bottom: 30px;
+
+        @media (min-width: 768px) {
+            .form-container {
+                padding: 45px 40px;
+            }
+        }
+
+        .form-header {
             text-align: center;
+            margin-bottom: 30px;
         }
+
+        .form-header h1 {
+            color: var(--primary-dark);
+            font-size: 1.8rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            font-weight: 800;
+        }
+
+        @media (min-width: 768px) {
+            .form-header h1 {
+                font-size: 2.2rem;
+            }
+        }
+
+        .form-header h1 i {
+            color: #3498db;
+        }
+
+        .form-header p {
+            color: var(--gray-dark);
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
         .form-group {
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
+
         label {
             display: block;
-            margin-bottom: 8px;
-            font-weight: bold;
-            color: #2d3e50;
+            margin-bottom: 6px;
+            font-weight: 700;
+            color: var(--text-dark);
+            font-size: 0.9rem;
         }
+
+        .required::after {
+            content: '*';
+            color: var(--danger);
+            margin-right: 4px;
+        }
+
         input, select, textarea {
             width: 100%;
-            padding: 14px;
-            border: 1px solid #cbd5e1;
+            padding: 14px 18px;
+            border: 2px solid var(--gray);
             border-radius: 30px;
             font-size: 1rem;
+            transition: all 0.3s ease;
+            background: var(--gray-light);
+            font-family: inherit;
         }
+
+        input:focus, select:focus, textarea:focus {
+            outline: none;
+            border-color: #3498db;
+            background: var(--white);
+            box-shadow: 0 0 0 4px rgba(52,152,219,0.10);
+        }
+
         textarea {
-            border-radius: 20px;
+            border-radius: 24px;
             resize: vertical;
+            min-height: 100px;
         }
-        button {
+
+        /* ===== زر الإرسال ===== */
+        .btn-submit {
             width: 100%;
-            background: #ffb347;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
             border: none;
-            padding: 14px;
+            padding: 16px;
             border-radius: 40px;
-            font-weight: bold;
+            font-weight: 800;
             font-size: 1.1rem;
             cursor: pointer;
-            margin-top: 20px;
-        }
-        button:hover {
-            background: #1a5f5f;
+            transition: all 0.3s ease;
             color: white;
+            box-shadow: 0 4px 16px rgba(52,152,219,0.30);
+            margin-top: 5px;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
         }
+
+        .btn-submit:hover {
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 28px rgba(26,74,110,0.35);
+        }
+
+        .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none !important;
+        }
+
+        /* ===== رسائل ===== */
         .message {
             margin-top: 20px;
-            text-align: center;
-            padding: 12px;
+            padding: 14px 20px;
             border-radius: 30px;
+            font-weight: 700;
+            text-align: center;
         }
-        .success {
+
+        .message.success {
             background: #c6f6d5;
             color: #22543d;
+            border-right: 4px solid #22543d;
         }
-        .error {
+
+        .message.error {
             background: #fed7d7;
             color: #742a2a;
+            border-right: 4px solid #742a2a;
         }
-        .back-link {
+
+        .message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-right: 4px solid #1e40af;
+        }
+
+        /* ===== تحميل ===== */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+
+        .loading.show {
             display: block;
-            text-align: center;
-            margin-top: 20px;
-            color: #1a5f5f;
-            text-decoration: none;
         }
-        .copyright {
+
+        .loading .spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid var(--gray);
+            border-top: 4px solid #3498db;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 15px;
+        }
+
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+
+        .loading p {
+            color: var(--gray-dark);
+            font-weight: 600;
+        }
+
+        /* ===== روابط ===== */
+        .back-link {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             text-align: center;
-            margin-top: 30px;
-            color: white;
+            margin-top: 25px;
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 700;
+            transition: 0.3s;
+            padding: 10px 20px;
+            background: var(--white);
+            border-radius: 40px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(52,152,219,0.06);
+        }
+
+        .back-link:hover {
+            color: #3498db;
+            transform: translateX(-5px);
+            box-shadow: var(--shadow-md);
+        }
+
+        .text-center {
+            text-align: center;
+        }
+
+        /* ===== الفوتر ===== */
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            color: var(--gray-dark);
             font-size: 0.8rem;
+        }
+
+        /* ===== استجابة ===== */
+        @media (max-width: 768px) {
+            .form-container {
+                padding: 20px;
+                border-radius: var(--radius-md);
+            }
+            
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 14px 20px;
+                border-radius: 40px;
+            }
+            
+            .nav-links {
+                justify-content: center;
+            }
+            
+            .nav-links a {
+                padding: 6px 14px;
+                font-size: 12px;
+            }
+            
+            .form-header h1 {
+                font-size: 1.4rem;
+            }
+            
+            .logo-content {
+                font-size: 17px;
+            }
+            
+            .logo-img {
+                width: 35px;
+                height: 35px;
+            }
+            
+            .form-group {
+                margin-bottom: 18px;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .form-container {
+                padding: 16px;
+            }
+            
+            .form-header h1 {
+                font-size: 1.2rem;
+            }
+            
+            .form-header p {
+                font-size: 0.85rem;
+            }
+            
+            input, select, textarea {
+                padding: 12px 14px;
+                font-size: 0.95rem;
+            }
+            
+            .btn-submit {
+                padding: 14px;
+                font-size: 1rem;
+            }
         }
     </style>
 </head>
 <body>
+
+<div class="navbar">
+    <div class="logo">
+        <a href="index.html" style="text-decoration:none;">
+            <div class="logo-content">
+                <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
+                     class="logo-img" alt="كيماتو">
+                <div class="logo-text">
+                    <span>كيماتو</span>
+                    <span> | طلب شراء</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+        <a href="buyer-dashboard.html"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+        <div class="dropdown">
+            <button class="dropdown-btn"><i class="fas fa-user-circle"></i> القائمة</button>
+            <div class="dropdown-content" id="dropdownContent"></div>
+        </div>
+    </div>
+</div>
+
 <div class="form-container">
-    <h1>📢 طلب شراء مواد كيماوية</h1>
-    
+    <div class="form-header">
+        <h1><i class="fas fa-bullhorn"></i> طلب شراء مواد كيماوية</h1>
+        <p>انشر طلب شراء ليصل إلى جميع الموردين في مصر</p>
+    </div>
+
     <form id="requestForm">
         <div class="form-group">
-            <label>اسم المادة المطلوبة *</label>
-            <input type="text" id="productName" required placeholder="مثال: كاوية صودا 99%">
+            <label class="required">اسم المادة المطلوبة</label>
+            <input type="text" id="productName" required placeholder="مثال: كاوية صودا 99% - حمض كبريتيك">
         </div>
-        
+
         <div class="form-group">
             <label>الكمية المطلوبة</label>
             <input type="text" id="quantity" placeholder="مثال: 5 طن / 1000 كجم">
         </div>
-        
+
         <div class="form-group">
             <label>المواصفات والتفاصيل</label>
             <textarea id="description" rows="4" placeholder="التركيز المطلوب، درجة النقاء، تاريخ التسليم المطلوب..."></textarea>
         </div>
-        
+
         <div class="form-group">
             <label>آخر موعد للاستلام</label>
             <input type="date" id="deadline">
         </div>
-        
-        <button type="submit">📢 نشر طلب الشراء</button>
+
+        <button type="submit" class="btn-submit" id="submitBtn">
+            <i class="fas fa-rocket"></i> نشر طلب الشراء
+        </button>
     </form>
-    
+
     <div id="messageDiv"></div>
-    <a href="buyer-dashboard.html" class="back-link">← العودة للوحة التحكم</a>
+    <div id="loading" class="loading">
+        <div class="spinner"></div>
+        <p>⏳ جاري نشر طلب الشراء...</p>
+    </div>
+
+    <div class="text-center">
+        <a href="buyer-dashboard.html" class="back-link">
+            <i class="fas fa-arrow-right"></i> العودة للوحة التحكم
+        </a>
+    </div>
 </div>
-<div class="copyright">
-    © جميع الحقوق محفوظة Hazem Mohamady 2026
+
+<div class="footer">
+    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر
 </div>
 
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
-    
+
     const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
     const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
-    
+
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
-    
+
+    // ========== عناصر DOM ==========
     const form = document.getElementById('requestForm')
     const messageDiv = document.getElementById('messageDiv')
-    
+    const loadingDiv = document.getElementById('loading')
+    const submitBtn = document.getElementById('submitBtn')
+
+    // ========== القائمة المنسدلة ==========
+    function setupDropdown() {
+        const dropdownBtn = document.querySelector('.dropdown-btn')
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (dropdownBtn && dropdownContent) {
+            dropdownBtn.addEventListener('click', (e) => {
+                e.stopPropagation()
+                dropdownContent.classList.toggle('show')
+            })
+            document.addEventListener('click', () => {
+                dropdownContent.classList.remove('show')
+            })
+        }
+    }
+
+    async function updateDropdownContent() {
+        const { data: { user } } = await supabase.auth.getUser()
+        const dropdownContent = document.getElementById('dropdownContent')
+        
+        if (user) {
+            const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
+            dropdownContent.innerHTML = `
+                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+            `
+            const logoutLink = document.getElementById('logoutLink')
+            if (logoutLink) {
+                logoutLink.onclick = async (e) => {
+                    e.preventDefault()
+                    await supabase.auth.signOut()
+                    window.location.href = 'index.html'
+                }
+            }
+        } else {
+            dropdownContent.innerHTML = `
+                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+            `
+        }
+    }
+
+    // ========== تقديم الطلب ==========
     form.addEventListener('submit', async (e) => {
         e.preventDefault()
-        messageDiv.innerHTML = '<div class="message">جاري النشر...</div>'
-        
+        messageDiv.innerHTML = ''
+        loadingDiv.classList.add('show')
+        submitBtn.disabled = true
+
         const { data: { user } } = await supabase.auth.getUser()
         if (!user) {
             messageDiv.innerHTML = '<div class="message error">❌ يجب تسجيل الدخول أولاً</div>'
+            loadingDiv.classList.remove('show')
+            submitBtn.disabled = false
             setTimeout(() => { window.location.href = 'auth.html' }, 1500)
             return
         }
-        
+
+        const productName = document.getElementById('productName').value.trim()
+        const quantity = document.getElementById('quantity').value.trim()
+        const description = document.getElementById('description').value
+        const deadline = document.getElementById('deadline').value || null
+
+        if (!productName) {
+            messageDiv.innerHTML = '<div class="message error">❌ الرجاء إدخال اسم المادة المطلوبة</div>'
+            loadingDiv.classList.remove('show')
+            submitBtn.disabled = false
+            return
+        }
+
         const { error } = await supabase
             .from('purchase_requests')
             .insert({
                 buyer_id: user.id,
-                product_name: document.getElementById('productName').value,
-                quantity_needed: document.getElementById('quantity').value,
-                description: document.getElementById('description').value,
-                deadline: document.getElementById('deadline').value || null,
+                product_name: productName,
+                quantity_needed: quantity,
+                description: description,
+                deadline: deadline,
                 status: 'open'
             })
-        
+
+        loadingDiv.classList.remove('show')
+        submitBtn.disabled = false
+
         if (error) {
             messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
         } else {
-            messageDiv.innerHTML = '<div class="message success">✅ تم نشر طلب الشراء بنجاح!</div>'
+            messageDiv.innerHTML = '<div class="message success">✅ تم نشر طلب الشراء بنجاح! جاري التحويل...</div>'
             form.reset()
             setTimeout(() => {
                 window.location.href = 'buyer-dashboard.html'
             }, 1500)
         }
     })
+
+    // ========== بدء التشغيل ==========
+    setupDropdown()
+    updateDropdownContent()
 </script>
 </body>
 </html>
