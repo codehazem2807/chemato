@@ -32,6 +32,7 @@
             border-radius: 48px;
             box-shadow: 0 25px 60px rgba(0,0,0,0.35);
             border: 1px solid rgba(52,152,219,0.10);
+            position: relative;
         }
         
         /* ===== الهيدر ===== */
@@ -271,9 +272,54 @@
             margin-left: 5px;
         }
         
+        /* ===== رقم التواصل مع المطور ===== */
+        .developer-contact {
+            text-align: center;
+            margin-top: 18px;
+            padding: 14px 16px;
+            background: linear-gradient(135deg, #eef2f6, #f8fafc);
+            border-radius: 30px;
+            border: 2px dashed #3498db;
+            transition: 0.3s;
+        }
+        
+        .developer-contact:hover {
+            border-color: #1a4a6e;
+            background: linear-gradient(135deg, #e2ecf5, #eef4f8);
+        }
+        
+        .developer-contact .label {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 600;
+            display: block;
+            margin-bottom: 4px;
+        }
+        
+        .developer-contact a {
+            color: #0c2d4a;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.1rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: 0.3s;
+        }
+        
+        .developer-contact a:hover {
+            color: #25D366;
+            transform: scale(1.05);
+        }
+        
+        .developer-contact a i {
+            color: #25D366;
+            font-size: 1.3rem;
+        }
+        
         .copyright {
             text-align: center;
-            margin-top: 20px;
+            margin-top: 15px;
             font-size: 0.75rem;
             color: #94a3b8;
         }
@@ -329,6 +375,10 @@
                 flex-direction: column;
                 gap: 10px;
             }
+            
+            .developer-contact a {
+                font-size: 0.95rem;
+            }
         }
     </style>
 </head>
@@ -375,6 +425,14 @@
     <!-- ===== رسائل ===== -->
     <div id="messageBox" class="message-box"></div>
     
+    <!-- ===== رقم التواصل مع المطور ===== -->
+    <div class="developer-contact">
+        <span class="label"><i class="fas fa-headset"></i> تواصل مع الدعم الفني</span>
+        <a href="https://wa.me/201063060576" target="_blank">
+            <i class="fab fa-whatsapp"></i> 01063060576
+        </a>
+    </div>
+    
     <!-- ===== روابط ===== -->
     <div class="nav-links">
         <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
@@ -397,7 +455,7 @@
     
     // ========== المتغيرات ==========
     let currentMode = 'login'
-    let selectedUserType = 'supplier' // الافتراضي مورد
+    let selectedUserType = 'supplier'
     
     // ========== عناصر DOM ==========
     const toggleBtns = document.querySelectorAll('.toggle-btn')
@@ -448,7 +506,6 @@
         clearMessage()
         const params = getUrlParams()
         
-        // تعيين نوع المستخدم الافتراضي من الـ URL
         let defaultUserType = params.type || 'supplier'
         
         if (currentMode === 'login') {
@@ -500,7 +557,6 @@
             submitBtn.innerHTML = '<i class="fas fa-user-plus"></i> إنشاء حساب جديد'
         }
         
-        // تحديث التوجيه
         updateAccountTypeHint()
     }
     
@@ -581,6 +637,15 @@
         }
     }
     
+    // ========== تسجيل الدخول التلقائي ==========
+    async function autoLogin(email, password) {
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email,
+            password
+        })
+        return { data, error }
+    }
+    
     // ========== معالجة النموذج ==========
     const form = document.getElementById('authForm')
     
@@ -631,7 +696,7 @@
             }, 1500)
         } 
         else {
-            // ========== إنشاء حساب جديد ==========
+            // ========== إنشاء حساب جديد مع تسجيل دخول تلقائي ==========
             const fullName = document.getElementById('fullName').value.trim()
             const userType = document.getElementById('userType').value
             const phone = document.getElementById('phone').value.trim()
@@ -674,16 +739,17 @@
                 }
             })
             
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
-            
             if (error) {
+                loadingDiv.classList.remove('show')
+                submitBtn.disabled = false
                 const translated = translateErrorMessage(error)
                 showMessage(translated.message, translated.type)
                 return
             }
             
             if (!data.user) {
+                loadingDiv.classList.remove('show')
+                submitBtn.disabled = false
                 showMessage('❌ فشل إنشاء الحساب. يرجى المحاولة مرة أخرى.', 'error')
                 return
             }
@@ -700,38 +766,57 @@
                 console.error('Profile error:', profileError)
             }
             
-            // رسالة نجاح مع تعليمات تأكيد الإيميل
+            // ===== تسجيل الدخول التلقائي =====
+            showMessage('🔄 جاري تسجيل الدخول التلقائي...', 'info')
+            
+            const { data: loginData, error: loginError } = await autoLogin(email, password)
+            
+            loadingDiv.classList.remove('show')
+            submitBtn.disabled = false
+            
+            if (loginError) {
+                // إذا فشل تسجيل الدخول التلقائي، أعط المستخدم خيار تسجيل الدخول يدوياً
+                showMessage(
+                    '✅ تم إنشاء الحساب بنجاح!<br><br>' +
+                    '⚠️ يرجى <strong>تسجيل الدخول يدوياً</strong> باستخدام بريدك الإلكتروني وكلمة المرور.<br><br>' +
+                    '📧 تم إرسال رابط تأكيد إلى بريدك الإلكتروني.',
+                    'warning'
+                )
+                // تحويل المستخدم إلى وضع تسجيل الدخول
+                setTimeout(() => {
+                    currentMode = 'login'
+                    toggleBtns.forEach(btn => {
+                        btn.classList.remove('active')
+                        if (btn.getAttribute('data-mode') === 'login') {
+                            btn.classList.add('active')
+                        }
+                    })
+                    renderForm()
+                    // تعبئة البريد الإلكتروني تلقائياً
+                    document.getElementById('email').value = email
+                }, 3000)
+                return
+            }
+            
+            // تسجيل الدخول التلقائي ناجح
             const dashboardLink = userType === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'
             
             showMessage(
-                '✅ تم إنشاء الحساب بنجاح!<br><br>' +
-                '📧 يرجى مراجعة البريد الإلكتروني الخاص بك.<br>' +
-                '🔗 اضغط على رابط التأكيد في الإيميل المرسل من Supabase.<br><br>' +
-                '✉️ إذا لم تجد الإيميل، تحقق من مجلد البريد المزعج (Spam).<br>' +
-                `🔄 بعد تأكيد الإيميل، ستنتقل تلقائياً إلى <strong>${userType === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}</strong>.`,
-                'info'
+                '✅ تم إنشاء الحساب وتسجيل الدخول بنجاح!<br><br>' +
+                '📧 تم إرسال رابط تأكيد إلى بريدك الإلكتروني (يمكنك تأكيده لاحقاً).<br><br>' +
+                `🔄 جاري التحويل إلى <strong>${userType === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}</strong>...`,
+                'success'
             )
             
-            // تنظيف الحقول بعد 5 ثواني
             setTimeout(() => {
-                // تغيير الوضع إلى تسجيل الدخول
-                currentMode = 'login'
-                toggleBtns.forEach(btn => {
-                    btn.classList.remove('active')
-                    if (btn.getAttribute('data-mode') === 'login') {
-                        btn.classList.add('active')
-                    }
-                })
-                renderForm()
-            }, 6000)
+                window.location.href = dashboardLink
+            }, 2000)
         }
     })
     
     // ========== تهيئة الصفحة ==========
-    // التحقق من وجود `type` في الـ URL
     const params = getUrlParams()
     if (params.type) {
-        // تغيير وضع العرض إلى "حساب جديد"
         currentMode = 'register'
         toggleBtns.forEach(btn => {
             btn.classList.remove('active')
