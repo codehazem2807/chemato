@@ -5,17 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>كيماتو | سوق المواد الكيماوية في مصر</title>
 
-    <!-- ===== SEO ===== -->
-    <meta name="description" content="كيماتو هو سوق المواد الكيماوية في مصر. بيع وشراء كاوية صودا، حمض كبريتيك، مذيبات، وكل المواد الخام. تواصل مباشر مع الموردين عبر واتساب." />
-    <meta name="keywords" content="كيماتو, سوق كيماويات, مواد كيماوية, كاوية صودا, حمض كبريتيك, مذيبات, موردين كيماويات, مصر" />
-    <link rel="canonical" href="https://chemato.vercel.app/" />
-
-    <!-- ===== Open Graph ===== -->
-    <meta property="og:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
-    <meta property="og:description" content="سوق المواد الكيماوية في مصر. تواصل مباشر مع الموردين عبر واتساب." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://chemato.vercel.app/" />
-
     <!-- ===== OneSignal ===== -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
@@ -38,6 +27,17 @@
             console.log('✅ OneSignal initialized successfully!');
         });
     </script>
+
+    <!-- ===== SEO ===== -->
+    <meta name="description" content="كيماتو هو سوق المواد الكيماوية في مصر. بيع وشراء كاوية صودا، حمض كبريتيك، مذيبات، وكل المواد الخام. تواصل مباشر مع الموردين عبر واتساب." />
+    <meta name="keywords" content="كيماتو, سوق كيماويات, مواد كيماوية, كاوية صودا, حمض كبريتيك, مذيبات, موردين كيماويات, مصر" />
+    <link rel="canonical" href="https://chemato.vercel.app/" />
+
+    <!-- ===== Open Graph ===== -->
+    <meta property="og:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
+    <meta property="og:description" content="سوق المواد الكيماوية في مصر. تواصل مباشر مع الموردين عبر واتساب." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chemato.vercel.app/" />
 
     <!-- ===== Schema ===== -->
     <script type="application/ld+json">
@@ -101,28 +101,10 @@
             background:rgba(255,255,255,0.06);
             backdrop-filter:blur(4px);
             border:1px solid rgba(255,255,255,0.06);
-            position:relative;
         }
         .nav-links > a:hover {
             background:#3498db; color:#fff; transform:translateY(-2px);
             box-shadow:0 8px 24px rgba(52,152,219,0.35);
-        }
-        .nav-links > a .badge {
-            position:absolute;
-            top:-5px;
-            right:-5px;
-            background:#ff4757;
-            color:#fff;
-            border-radius:50%;
-            padding:2px 7px;
-            font-size:10px;
-            font-weight:700;
-            animation:pulse 1.5s infinite;
-        }
-        @keyframes pulse {
-            0% { transform:scale(1); }
-            50% { transform:scale(1.15); }
-            100% { transform:scale(1); }
         }
 
         /* ===== DROPDOWN ===== */
@@ -157,22 +139,60 @@
         .hero::after { content:"🧪"; position:absolute; font-size:18rem; opacity:0.04; left:-20px; bottom:-60px; }
         .hero h1 { font-size:2.8rem; font-weight:900; margin-bottom:8px; position:relative; }
         .hero p { font-size:1.1rem; opacity:0.9; margin-bottom:20px; position:relative; }
-        .hero-buttons { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; width:100%; }
+        .hero-buttons { 
+            display:flex; 
+            gap:15px; 
+            justify-content:center; 
+            flex-wrap:wrap;
+            width:100%;
+        }
         
         .hero-btn {
-            display:inline-flex; align-items:center; justify-content:center; gap:10px;
-            background:linear-gradient(145deg, #3498db, #2c81ba); color:#fff;
-            padding:14px 38px; border-radius:60px; text-decoration:none;
-            font-weight:800; font-size:1rem; transition:all 0.35s ease;
-            box-shadow:0 8px 28px rgba(52,152,219,0.35); border:none; cursor:pointer;
-            font-family:inherit; -webkit-tap-highlight-color:transparent;
-            touch-action:manipulation; user-select:none; min-height:52px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            background:linear-gradient(145deg, #3498db, #2c81ba);
+            color:#fff;
+            padding:14px 38px;
+            border-radius:60px;
+            text-decoration:none;
+            font-weight:800;
+            font-size:1rem;
+            transition:all 0.35s ease;
+            box-shadow:0 8px 28px rgba(52,152,219,0.35);
+            border:none;
+            cursor:pointer;
+            font-family:inherit;
+            -webkit-tap-highlight-color:transparent;
+            touch-action:manipulation;
+            user-select:none;
+            position:relative;
+            z-index:2;
+            min-height:52px;
         }
-        .hero-btn:hover { background:#fff; color:#0c2d4a; transform:translateY(-4px); }
-        .hero-btn:active { transform:scale(0.96); }
-        .hero-btn-outline { background:transparent; border:2px solid rgba(255,255,255,0.30); color:#fff; box-shadow:none; }
-        .hero-btn-outline:hover { background:#fff; color:#0c2d4a; border-color:#fff; }
-        .hero-btn i { pointer-events:none; }
+        .hero-btn:hover {
+            background:#fff;
+            color:#0c2d4a;
+            transform:translateY(-4px);
+        }
+        .hero-btn:active {
+            transform:scale(0.96);
+        }
+        .hero-btn-outline {
+            background:transparent;
+            border:2px solid rgba(255,255,255,0.30);
+            color:#fff;
+            box-shadow:none;
+        }
+        .hero-btn-outline:hover {
+            background:#fff;
+            color:#0c2d4a;
+            border-color:#fff;
+        }
+        .hero-btn i {
+            pointer-events:none;
+        }
 
         /* ===== SEARCH ===== */
         .search-section {
@@ -233,7 +253,9 @@
             background:linear-gradient(145deg, #e6edf4, #f0f6fb);
             display:flex; align-items:center; justify-content:center;
         }
-        .card-img { width:100%; height:100%; object-fit:cover; transition:0.6s; }
+        .card-img {
+            width:100%; height:100%; object-fit:cover; transition:0.6s;
+        }
         .card:hover .card-img { transform:scale(1.05); }
         .card-img-placeholder {
             width:100%; height:100%; display:flex; flex-direction:column;
@@ -254,7 +276,9 @@
         }
         .supplier-name { color:#64748b; font-size:13px; margin-top:4px; font-weight:500; }
 
-        .btn-group { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
+        .btn-group {
+            display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;
+        }
         .btn-group .btn { flex:1; min-width:100px; }
         .btn {
             display:inline-block; color:#fff; padding:10px 14px; border-radius:60px;
@@ -266,7 +290,9 @@
             box-shadow:0 4px 12px rgba(26,74,110,0.15);
         }
         .btn-details:hover { background:linear-gradient(145deg, #3498db, #2c81ba); transform:translateY(-2px); }
-        .btn-whatsapp { background:#25D366; box-shadow:0 4px 12px rgba(37,211,102,0.20); }
+        .btn-whatsapp {
+            background:#25D366; box-shadow:0 4px 12px rgba(37,211,102,0.20);
+        }
         .btn-whatsapp:hover { background:#128C7E; transform:translateY(-2px); }
 
         /* ===== REQUESTS ===== */
@@ -344,8 +370,24 @@
             .hero { padding:30px 20px; }
             .hero h1 { font-size:2rem; }
             .hero p { font-size:1rem; }
-            .hero-buttons { flex-direction:column; align-items:stretch; width:100%; gap:12px; }
-            .hero-btn { width:100%; justify-content:center; padding:16px 20px; font-size:1.05rem; min-height:56px; border-radius:50px; }
+            .hero-buttons { 
+                flex-direction:column; 
+                align-items:stretch;
+                width:100%;
+                gap:12px;
+            }
+            .hero-btn { 
+                width:100%; 
+                justify-content:center; 
+                padding:16px 20px;
+                font-size:1.05rem;
+                min-height:56px;
+                border-radius:50px;
+                display:flex !important;
+            }
+            .hero-btn i {
+                font-size:1.2rem;
+            }
             .search-section { flex-direction:column; border-radius:30px; padding:10px; }
             .search-btn { padding:14px; justify-content:center; }
             .product-grid { grid-template-columns:1fr; gap:18px; }
@@ -357,17 +399,32 @@
             .toast-container { max-width:95%; bottom:15px; }
             .toast { padding:14px 18px; }
         }
+        
         @media (max-width:480px) {
             .hero { padding:24px 16px; }
             .hero h1 { font-size:1.6rem; }
             .hero p { font-size:0.9rem; }
-            .hero-btn { padding:14px 16px; font-size:1rem; min-height:50px; }
+            .hero-btn { 
+                padding:14px 16px;
+                font-size:1rem;
+                min-height:50px;
+            }
             .card-img-wrapper { height:150px; }
         }
+
         @media (hover: none) {
-            .hero-btn:hover { background:linear-gradient(145deg, #3498db, #2c81ba); color:#fff; transform:none; }
-            .hero-btn-outline:hover { background:transparent; color:#fff; border-color:rgba(255,255,255,0.30); }
+            .hero-btn:hover {
+                background:linear-gradient(145deg, #3498db, #2c81ba);
+                color:#fff;
+                transform:none;
+            }
+            .hero-btn-outline:hover {
+                background:transparent;
+                color:#fff;
+                border-color:rgba(255,255,255,0.30);
+            }
         }
+
         .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
     </style>
 </head>
@@ -407,7 +464,7 @@
         <!-- ===== HERO ===== -->
         <section class="hero animate-on-load">
             <h1>🏭 سوق المواد الكيماوية في مصر</h1>
-            <p>بيع واشتري كاوية صودا، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
+            <p>بيع واشتري صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
             <div class="hero-buttons">
                 <a href="auth.html?type=supplier" class="hero-btn" id="supplierBtn">
                     <i class="fas fa-truck"></i> انضم كمورد
@@ -508,6 +565,8 @@
             })
             newBuyerBtn.style.touchAction = 'manipulation'
         }
+        
+        console.log('✅ تم إصلاح أزرار الهيرو بنجاح');
     }
 
     // ===== DROPDOWN =====
@@ -662,12 +721,6 @@
                 </div>
             `
         }).join('')
-        
-        // إرسال إشعار عند تحميل منتجات جديدة (للتجربة)
-        if (productsWithDetails.length > 0) {
-            // إرسال إشعار تجريبي - هتشيله بعدين
-            // sendOneSignalNotification('🆕 منتج جديد', productsWithDetails[0].name);
-        }
     }
 
     // ===== LOAD REQUESTS =====
@@ -724,9 +777,8 @@
         setupHeroButtons()
         
         console.log('✅ كيماتو يعمل مع OneSignal!');
-        console.log('📱 إنتظر رسالة الإشعارات من المتصفح');
         
-        // إرسال إشعار ترحيبي للمستخدم الجديد
+        // إرسال إشعار ترحيبي
         setTimeout(() => {
             showToast('👋', 'مرحباً بك في كيماتو!', 'سوق المواد الكيماوية في مصر', 'استكشف المنتجات', '/all-products.html');
         }, 2000);
