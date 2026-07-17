@@ -326,6 +326,12 @@
             border-right: 4px solid #742a2a;
         }
 
+        .message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-right: 4px solid #1e40af;
+        }
+
         /* ===== تحميل ===== */
         .loading {
             display: none;
@@ -572,6 +578,17 @@
     © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر
 </div>
 
+<!-- ===== OneSignal (لإرسال الإشعارات) ===== -->
+<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+<script>
+    window.OneSignalDeferred = window.OneSignalDeferred || [];
+    OneSignalDeferred.push(async function(OneSignal) {
+        await OneSignal.init({
+            appId: "a9e85b5f-bcf4-4867-a586-d0119c5dce89",
+        });
+    });
+</script>
+
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -602,7 +619,6 @@
 
     imageInput.addEventListener('change', (e) => {
         if (e.target.files && e.target.files[0]) {
-            // التحقق من حجم الملف (5 ميجابايت)
             if (e.target.files[0].size > 5 * 1024 * 1024) {
                 alert('⚠️ حجم الصورة يتجاوز 5 ميجابايت. يرجى اختيار صورة أصغر.')
                 imageInput.value = ''
@@ -627,6 +643,49 @@
         imageUpload.style.display = 'block'
         previewImg.src = ''
     })
+
+    // ========== إرسال إشعار عبر OneSignal ==========
+    async function sendOneSignalNotification(title, message, url = null) {
+        try {
+            // التحقق من وجود OneSignal
+            if (window.OneSignalDeferred) {
+                const OneSignal = await window.OneSignalDeferred[0]();
+                
+                // إرسال إشعار لكل المشتركين باستخدام API
+                const response = await fetch('https://onesignal.com/api/v1/notifications', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization': 'Basic YOUR_REST_API_KEY' // هاتها من لوحة OneSignal
+                    },
+                    body: JSON.stringify({
+                        app_id: 'a9e85b5f-bcf4-4867-a586-d0119c5dce89',
+                        headings: { 
+                            en: title,
+                            ar: title 
+                        },
+                        contents: { 
+                            en: message,
+                            ar: message 
+                        },
+                        included_segments: ['All'], // يبعت لكل المشتركين
+                        url: url || 'https://chemato.vercel.app',
+                        chrome_web_icon: 'https://chemato.vercel.app/logo.png'
+                    })
+                });
+                
+                const data = await response.json();
+                console.log('✅ تم إرسال الإشعار:', data);
+                return true;
+            } else {
+                console.log('⚠️ OneSignal غير جاهز');
+                return false;
+            }
+        } catch (error) {
+            console.error('❌ خطأ في إرسال الإشعار:', error);
+            return false;
+        }
+    }
 
     // ========== تحميل الأقسام ==========
     async function loadCategories() {
@@ -715,7 +774,7 @@
             .single()
 
         // إضافة المنتج
-        const { error } = await supabase.from('products').insert({
+        const { data: newProduct, error } = await supabase.from('products').insert({
             supplier_id: user.id,
             name: name,
             category: categoryData?.name || 'أخرى',
@@ -726,14 +785,27 @@
             image_url: imageUrl,
             status: 'active',
             views_count: 0
-        })
+        }).select()
 
         if (error) {
             messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
             loadingDiv.classList.remove('show')
             submitBtn.disabled = false
         } else {
-            messageDiv.innerHTML = '<div class="message success">✅ تم إضافة المنتج بنجاح! جاري التحويل...</div>'
+            // ===== إرسال إشعار لكل المشتركين =====
+            const productName = name
+            const categoryName = categoryData?.name || 'مواد كيماوية'
+            
+            // إرسال الإشعار
+            await sendOneSignalNotification(
+                '🆕 منتج جديد في كيماتو',
+                `تم إضافة ${productName} في قسم ${categoryName}`,
+                'https://chemato.vercel.app/all-products.html'
+            );
+
+            // رسالة نجاح
+            messageDiv.innerHTML = '<div class="message success">✅ تم إضافة المنتج بنجاح! تم إرسال إشعار لكل المشتركين.</div>'
+            
             setTimeout(() => {
                 window.location.href = 'supplier-dashboard.html'
             }, 2000)
