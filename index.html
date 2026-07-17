@@ -116,9 +116,15 @@
         .hero::after { content:"🧪"; position:absolute; font-size:18rem; opacity:0.04; left:-20px; bottom:-60px; }
         .hero h1 { font-size:2.8rem; font-weight:900; margin-bottom:8px; position:relative; }
         .hero p { font-size:1.1rem; opacity:0.9; margin-bottom:20px; position:relative; }
-        .hero-buttons { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; }
+        .hero-buttons { 
+            display:flex; 
+            gap:15px; 
+            justify-content:center; 
+            flex-wrap:wrap;
+            width:100%;
+        }
         
-        /* ===== أزرار الهيرو - تم إصلاحها ===== */
+        /* ===== أزرار الهيرو - تم إصلاحها للهاتف ===== */
         .hero-btn {
             display:inline-flex;
             align-items:center;
@@ -139,6 +145,9 @@
             -webkit-tap-highlight-color:transparent;
             touch-action:manipulation;
             user-select:none;
+            position:relative;
+            z-index:2;
+            min-height:52px;
         }
         .hero-btn:hover {
             background:#fff;
@@ -281,12 +290,33 @@
         .loader { text-align:center; padding:40px; color:#1a4a6e; font-weight:600; }
         .no-results { text-align:center; padding:40px 20px; background:#fff; border-radius:32px; color:#64748b; }
 
+        /* ===== تحسينات الهاتف ===== */
         @media (max-width:768px) {
             .navbar { flex-direction:column; gap:10px; padding:12px 20px; }
-            .hero h1 { font-size:2rem; }
             .hero { padding:30px 20px; }
-            .hero-buttons { flex-direction:column; align-items:stretch; width:100%; gap:12px; }
-            .hero-btn { width:100%; justify-content:center; padding:16px 20px; font-size:1.05rem; min-height:56px; }
+            .hero h1 { font-size:2rem; }
+            .hero p { font-size:1rem; }
+            
+            /* ===== إصلاح الأزرار على الهاتف ===== */
+            .hero-buttons { 
+                flex-direction:column; 
+                align-items:stretch;
+                width:100%;
+                gap:12px;
+            }
+            .hero-btn { 
+                width:100%; 
+                justify-content:center; 
+                padding:16px 20px;
+                font-size:1.05rem;
+                min-height:56px;
+                border-radius:50px;
+                display:flex !important;
+            }
+            .hero-btn i {
+                font-size:1.2rem;
+            }
+            
             .search-section { flex-direction:column; border-radius:30px; padding:10px; }
             .search-btn { padding:14px; justify-content:center; }
             .product-grid { grid-template-columns:1fr; gap:18px; }
@@ -296,13 +326,33 @@
             .dropdown-content { left:auto; right:0; }
             .section-title { font-size:20px; }
         }
+        
         @media (max-width:480px) {
-            .hero h1 { font-size:1.6rem; }
             .hero { padding:24px 16px; }
-            .hero p { font-size:0.95rem; }
-            .hero-btn { padding:14px 16px; font-size:1rem; min-height:50px; }
+            .hero h1 { font-size:1.6rem; }
+            .hero p { font-size:0.9rem; }
+            .hero-btn { 
+                padding:14px 16px;
+                font-size:1rem;
+                min-height:50px;
+            }
             .card-img-wrapper { height:150px; }
         }
+
+        /* ===== تحسينات إضافية للأزرار ===== */
+        @media (hover: none) {
+            .hero-btn:hover {
+                background:linear-gradient(145deg, #3498db, #2c81ba);
+                color:#fff;
+                transform:none;
+            }
+            .hero-btn-outline:hover {
+                background:transparent;
+                color:#fff;
+                border-color:rgba(255,255,255,0.30);
+            }
+        }
+
         .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
     </style>
 </head>
@@ -342,7 +392,7 @@
         <!-- ===== HERO ===== -->
         <section class="hero animate-on-load">
             <h1>🏭 سوق المواد الكيماوية في مصر</h1>
-            <p>بيع واشتري صودا كاوية ، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
+            <p>بيع واشتري كاوية صودا، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
             <div class="hero-buttons">
                 <a href="auth.html?type=supplier" class="hero-btn" id="supplierBtn">
                     <i class="fas fa-truck"></i> انضم كمورد
@@ -414,28 +464,61 @@
     let currentCategoryId = 'all'
     let currentSearch = ''
 
-    // ===== إصلاح أزرار الهيرو =====
+    // ===== إصلاح أزرار الهيرو - حل جذري للهاتف =====
     function setupHeroButtons() {
         const supplierBtn = document.getElementById('supplierBtn')
         const buyerBtn = document.getElementById('buyerBtn')
         
+        // دالة للتنقل مع منع الأخطاء
+        function navigateTo(url) {
+            try {
+                window.location.href = url
+            } catch(e) {
+                // حل بديل إذا فشل window.location
+                window.open(url, '_self')
+            }
+        }
+        
         if (supplierBtn) {
-            // إضافة مستمع للنقر
-            supplierBtn.addEventListener('click', function(e) {
-                // لا نمنع السلوك الافتراضي لأننا نستخدم <a>
-                // ولكن نضمن أن الرابط يعمل
-                console.log('تم النقر على زر المورد');
-            });
-            // تحسين اللمس للموبايل
-            supplierBtn.style.touchAction = 'manipulation';
+            // إزالة أي مستمعين سابقين
+            const newSupplierBtn = supplierBtn.cloneNode(true)
+            supplierBtn.parentNode.replaceChild(newSupplierBtn, supplierBtn)
+            
+            newSupplierBtn.addEventListener('click', function(e) {
+                e.preventDefault()
+                e.stopPropagation()
+                navigateTo('auth.html?type=supplier')
+            })
+            
+            // إضافة touch event للموبايل
+            newSupplierBtn.addEventListener('touchstart', function(e) {
+                // لا نفعل شيء هنا، نترك الـ click يعمل
+            }, { passive: true })
+            
+            // تحسين اللمس
+            newSupplierBtn.style.touchAction = 'manipulation'
+            newSupplierBtn.style.cursor = 'pointer'
         }
         
         if (buyerBtn) {
-            buyerBtn.addEventListener('click', function(e) {
-                console.log('تم النقر على زر العميل');
-            });
-            buyerBtn.style.touchAction = 'manipulation';
+            const newBuyerBtn = buyerBtn.cloneNode(true)
+            buyerBtn.parentNode.replaceChild(newBuyerBtn, buyerBtn)
+            
+            newBuyerBtn.addEventListener('click', function(e) {
+                e.preventDefault()
+                e.stopPropagation()
+                navigateTo('auth.html?type=buyer')
+            })
+            
+            newBuyerBtn.addEventListener('touchstart', function(e) {
+                // passive
+            }, { passive: true })
+            
+            newBuyerBtn.style.touchAction = 'manipulation'
+            newBuyerBtn.style.cursor = 'pointer'
         }
+        
+        console.log('✅ تم إصلاح أزرار الهيرو بنجاح')
     }
 
     // ===== DROPDOWN =====
@@ -609,7 +692,10 @@
     await loadRequests()
     
     // ===== تشغيل إصلاح الأزرار =====
-    setupHeroButtons()
+    // تأخير بسيط للتأكد من تحميل DOM بالكامل
+    setTimeout(() => {
+        setupHeroButtons()
+    }, 100)
 </script>
 </body>
 </html>
