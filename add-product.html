@@ -40,7 +40,6 @@
             body { padding: 40px 20px; }
         }
 
-        /* ========== الهيدر ========== */
         .navbar {
             background: linear-gradient(145deg, var(--primary-dark), var(--primary));
             padding: 14px 30px;
@@ -106,7 +105,6 @@
             box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
 
-        /* ========== الفورم ========== */
         .form-container {
             max-width: 800px;
             margin: 0 auto;
@@ -190,7 +188,6 @@
             min-height: 100px;
         }
 
-        /* ===== صورة المنتج ===== */
         .image-upload {
             border: 2px dashed #cbd5e1;
             border-radius: 24px;
@@ -256,7 +253,6 @@
             transform: translateY(-2px);
         }
 
-        /* ===== زر الإرسال ===== */
         .btn-submit {
             width: 100%;
             background: linear-gradient(145deg, #3498db, #2c81ba);
@@ -289,7 +285,6 @@
             transform: none !important;
         }
 
-        /* ===== رسائل ===== */
         .message {
             margin-top: 20px;
             padding: 14px 20px;
@@ -310,7 +305,12 @@
             border-right: 4px solid #742a2a;
         }
 
-        /* ===== تحميل ===== */
+        .message.info {
+            background: #dbeafe;
+            color: #1e40af;
+            border-right: 4px solid #1e40af;
+        }
+
         .loading {
             display: none;
             text-align: center;
@@ -341,7 +341,6 @@
             font-weight: 600;
         }
 
-        /* ===== روابط ===== */
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -376,7 +375,6 @@
             font-size: 0.8rem;
         }
 
-        /* ===== استجابة ===== */
         @media (max-width: 768px) {
             .form-container { padding: 20px; border-radius: var(--radius-md); }
             .navbar { flex-direction: column; gap: 12px; padding: 14px 20px; border-radius: 40px; }
@@ -521,7 +519,6 @@
     let selectedImageFile = null
     let currentUser = null
 
-    // ========== عناصر DOM ==========
     const form = document.getElementById('productForm')
     const messageDiv = document.getElementById('messageDiv')
     const loadingDiv = document.getElementById('loading')
@@ -568,13 +565,17 @@
     // ===== ONE SIGNAL - إرسال إشعار =====
     // =====================================================
     const ONESIGNAL_APP_ID = 'a9e85b5f-bcf4-4867-a586-d0119c5dce89'
-    const ONESIGNAL_API_KEY = 'os_v2_app_vhufwx546regpjmg2aizyxoorhvnpj4xr3teld5uxdmb4izmthq4dlzkaw7qqtujswreqwl5dbqxkscskn6q5wvqayf6qupk6fxxo2a'
+    
+    // 🔑 هات Rest API Key من لوحة تحكم OneSignal
+    // Settings → Keys & IDs → Rest API Key
+    // بيبدأ بـ os_v2_app_ وبعدها حروف وأرقام طويلة
+    const ONESIGNAL_API_KEY = 'os_v2_app_vhufwx546regpjmg2aizyxoorgrnzsffrhyu2lewoe72qzs7tcqwdcc6gujq3rrw66xfl4d4u227sjnrci5hdblgdrplopi55xopenq'
 
     async function sendOneSignalNotification(title, message, url = null) {
         try {
             console.log('📤 جاري إرسال الإشعار...');
             console.log('📤 App ID:', ONESIGNAL_APP_ID);
-            console.log('📤 API Key:', ONESIGNAL_API_KEY ? '✅ موجود' : '❌ غير موجود');
+            console.log('📤 API Key موجود:', ONESIGNAL_API_KEY ? '✅ نعم' : '❌ لا');
             
             const response = await fetch('https://onesignal.com/api/v1/notifications', {
                 method: 'POST',
@@ -604,16 +605,18 @@
 
             const data = await response.json();
             
+            console.log('📩 استجابة OneSignal:', data);
+            
             if (data.errors) {
                 console.error('❌ خطأ من OneSignal:', data.errors);
-                return false;
+                return { success: false, error: data.errors };
             }
             
             console.log('✅ تم إرسال الإشعار بنجاح! ID:', data.id);
-            return true;
+            return { success: true, id: data.id };
         } catch (error) {
-            console.error('❌ خطأ:', error);
-            return false;
+            console.error('❌ خطأ في الإرسال:', error);
+            return { success: false, error: error.message };
         }
     }
 
@@ -718,21 +721,21 @@
             submitBtn.disabled = false
         } else {
             // ===== إرسال إشعار =====
-            const sent = await sendOneSignalNotification(
+            const result = await sendOneSignalNotification(
                 `🆕 منتج جديد: ${name}`,
                 `تم إضافة ${name} في قسم ${categoryData?.name || 'مواد كيماوية'}`,
                 'https://chemato.vercel.app/all-products.html'
             );
 
-            if (sent) {
+            if (result.success) {
                 messageDiv.innerHTML = '<div class="message success">✅ تم إضافة المنتج بنجاح! 📱 تم إرسال إشعار للجميع</div>';
             } else {
-                messageDiv.innerHTML = '<div class="message success">✅ تم إضافة المنتج بنجاح! ⚠️ لكن حدث مشكلة في إرسال الإشعار</div>';
+                messageDiv.innerHTML = `<div class="message info">✅ تم إضافة المنتج بنجاح! ⚠️ حدث مشكلة في الإشعار: ${result.error}</div>`;
             }
             
             setTimeout(() => {
                 window.location.href = 'supplier-dashboard.html'
-            }, 3000)
+            }, 4000)
         }
     })
 
