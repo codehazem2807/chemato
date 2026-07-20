@@ -141,20 +141,54 @@
         .hero p { font-size:1.1rem; opacity:0.9; margin-bottom:20px; position:relative; }
         .hero-buttons { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; width:100%; }
         
+        /* ===== أزرار الهيرو - إصلاح نهائي ===== */
         .hero-btn {
-            display:inline-flex; align-items:center; justify-content:center; gap:10px;
-            background:linear-gradient(145deg, #3498db, #2c81ba); color:#fff;
-            padding:14px 38px; border-radius:60px; text-decoration:none;
-            font-weight:800; font-size:1rem; transition:all 0.35s ease;
-            box-shadow:0 8px 28px rgba(52,152,219,0.35); border:none; cursor:pointer;
-            font-family:inherit; -webkit-tap-highlight-color:transparent;
-            touch-action:manipulation; user-select:none; min-height:52px;
+            display:inline-flex;
+            align-items:center;
+            justify-content:center;
+            gap:10px;
+            background:linear-gradient(145deg, #3498db, #2c81ba);
+            color:#fff;
+            padding:14px 38px;
+            border-radius:60px;
+            text-decoration:none;
+            font-weight:800;
+            font-size:1rem;
+            transition:all 0.35s ease;
+            box-shadow:0 8px 28px rgba(52,152,219,0.35);
+            border:none;
+            cursor:pointer;
+            font-family:inherit;
+            -webkit-tap-highlight-color:transparent;
+            touch-action:manipulation;
+            user-select:none;
+            min-height:52px;
+            /* إصلاح إضافي */
+            pointer-events:auto;
+            z-index:10;
         }
-        .hero-btn:hover { background:#fff; color:#0c2d4a; transform:translateY(-4px); }
-        .hero-btn:active { transform:scale(0.96); }
-        .hero-btn-outline { background:transparent; border:2px solid rgba(255,255,255,0.30); color:#fff; box-shadow:none; }
-        .hero-btn-outline:hover { background:#fff; color:#0c2d4a; border-color:#fff; }
-        .hero-btn i { pointer-events:none; }
+        .hero-btn:hover {
+            background:#fff;
+            color:#0c2d4a;
+            transform:translateY(-4px);
+        }
+        .hero-btn:active {
+            transform:scale(0.96);
+        }
+        .hero-btn-outline {
+            background:transparent;
+            border:2px solid rgba(255,255,255,0.30);
+            color:#fff;
+            box-shadow:none;
+        }
+        .hero-btn-outline:hover {
+            background:#fff;
+            color:#0c2d4a;
+            border-color:#fff;
+        }
+        .hero-btn i {
+            pointer-events:none;
+        }
 
         /* ===== SEARCH ===== */
         .search-section {
@@ -429,7 +463,7 @@
     <div style="opacity:0.7;">© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
 </footer>
 
-<!-- ===== SUPABASE + ONESIGNAL ===== -->
+<!-- ===== SUPABASE ===== -->
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -441,32 +475,69 @@
     let currentCategoryId = 'all'
     let currentSearch = ''
 
-    // ===== إصلاح أزرار الهيرو =====
+    // ===== إصلاح أزرار الهيرو - نهائي =====
     function setupHeroButtons() {
         const supplierBtn = document.getElementById('supplierBtn')
         const buyerBtn = document.getElementById('buyerBtn')
         
+        // دالة للتنقل
         function navigateTo(url) {
-            try { window.location.href = url } catch(e) { window.open(url, '_self') }
+            try {
+                window.location.href = url
+            } catch(e) {
+                window.open(url, '_self')
+            }
         }
         
+        // إصلاح زر المورد
         if (supplierBtn) {
+            // إزالة أي مستمعين سابقين
             const newSupplierBtn = supplierBtn.cloneNode(true)
             supplierBtn.parentNode.replaceChild(newSupplierBtn, supplierBtn)
+            
+            // إضافة مستمع جديد
             newSupplierBtn.addEventListener('click', function(e) {
-                e.preventDefault(); e.stopPropagation(); navigateTo('auth.html?type=supplier')
+                e.preventDefault()
+                e.stopPropagation()
+                navigateTo('auth.html?type=supplier')
             })
+            
+            // تحسين اللمس
             newSupplierBtn.style.touchAction = 'manipulation'
+            newSupplierBtn.style.cursor = 'pointer'
+            newSupplierBtn.style.pointerEvents = 'auto'
+            newSupplierBtn.style.position = 'relative'
+            newSupplierBtn.style.zIndex = '10'
+            
+            console.log('✅ زر المورد تم إصلاحه')
         }
         
+        // إصلاح زر العميل
         if (buyerBtn) {
             const newBuyerBtn = buyerBtn.cloneNode(true)
             buyerBtn.parentNode.replaceChild(newBuyerBtn, buyerBtn)
+            
             newBuyerBtn.addEventListener('click', function(e) {
-                e.preventDefault(); e.stopPropagation(); navigateTo('auth.html?type=buyer')
+                e.preventDefault()
+                e.stopPropagation()
+                navigateTo('auth.html?type=buyer')
             })
+            
             newBuyerBtn.style.touchAction = 'manipulation'
+            newBuyerBtn.style.cursor = 'pointer'
+            newBuyerBtn.style.pointerEvents = 'auto'
+            newBuyerBtn.style.position = 'relative'
+            newBuyerBtn.style.zIndex = '10'
+            
+            console.log('✅ زر العميل تم إصلاحه')
         }
+        
+        // تأكد من أن الأزرار تعمل حتى لو كان هناك hover effect
+        document.querySelectorAll('.hero-btn').forEach(btn => {
+            btn.addEventListener('touchstart', function() {
+                // هذا يحسن الاستجابة على الموبايل
+            }, { passive: true })
+        })
     }
 
     // ===== DROPDOWN =====
@@ -656,10 +727,15 @@
         await loadCategoriesFilter()
         await loadProducts()
         await loadRequests()
-        setupHeroButtons()
         
-        console.log('✅ كيماتو يعمل مع OneSignal!');
-        console.log('📱 App ID: f05bebbb-41c6-4770-926b-b8de9990a537');
+        // إصلاح الأزرار بعد تحميل الصفحة
+        setTimeout(() => {
+            setupHeroButtons()
+            console.log('✅ تم إصلاح جميع الأزرار')
+        }, 200)
+        
+        console.log('✅ كيماتو يعمل مع OneSignal!')
+        console.log('📱 App ID: f05bebbb-41c6-4770-926b-b8de9990a537')
         
         setTimeout(() => {
             showToast('👋', 'مرحباً بك في كيماتو!', 'سوق المواد الكيماوية في مصر', 'استكشف المنتجات', '/all-products.html');
