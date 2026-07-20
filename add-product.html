@@ -6,6 +6,30 @@
     <title>كيماتو | إضافة منتج جديد</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <!-- ===== OneSignal ===== -->
+    <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
+    <script>
+        window.OneSignalDeferred = window.OneSignalDeferred || [];
+        OneSignalDeferred.push(async function(OneSignal) {
+            await OneSignal.init({
+                appId: "f05bebbb-41c6-4770-926b-b8de9990a537",
+                safari_web_id: "web.onesignal.auto.43666e9c-a8ad-4b1e-8de4-10291bcbdb86",
+                notifyButton: {
+                    enable: true,
+                    position: 'bottom-right',
+                    theme: 'default',
+                    size: 'medium',
+                    showCredit: false,
+                },
+                serviceWorkerParam: {
+                    scope: '/'
+                },
+                serviceWorkerPath: 'OneSignalSDKWorker.js',
+            });
+        });
+    </script>
+
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
@@ -497,17 +521,6 @@
     © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر
 </div>
 
-<!-- ===== OneSignal ===== -->
-<script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
-<script>
-    window.OneSignalDeferred = window.OneSignalDeferred || [];
-    OneSignalDeferred.push(async function(OneSignal) {
-        await OneSignal.init({
-            appId: "a9e85b5f-bcf4-4867-a586-d0119c5dce89",
-        });
-    });
-</script>
-
 <script type="module">
     import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
@@ -564,18 +577,13 @@
     // =====================================================
     // ===== ONE SIGNAL - إرسال إشعار =====
     // =====================================================
-    const ONESIGNAL_APP_ID = 'a9e85b5f-bcf4-4867-a586-d0119c5dce89'
-    
-    // 🔑 هات Rest API Key من لوحة تحكم OneSignal
-    // Settings → Keys & IDs → Rest API Key
-    // بيبدأ بـ os_v2_app_ وبعدها حروف وأرقام طويلة
-    const ONESIGNAL_API_KEY = 'os_v2_app_vhufwx546regpjmg2aizyxoorghmxtwthbbe6gfvcwlgregfojmulfz36ze3ypjdmmhm6pm5tdr25zdqydq5bzonhgmpcysigu4olca'
+    const ONESIGNAL_APP_ID = 'f05bebbb-41c6-4770-926b-b8de9990a537'
+    const ONESIGNAL_API_KEY = 'os_v2_app_6bn6xo2byzdxbetlxdpjteffg5mbcafckuue2rvtgemlb6pklznmi3cc3mqfzhmtqfprv3ncx25rchjrfmbld34dcprjjdwsa7yt5kq'
 
     async function sendOneSignalNotification(title, message, url = null) {
         try {
             console.log('📤 جاري إرسال الإشعار...');
             console.log('📤 App ID:', ONESIGNAL_APP_ID);
-            console.log('📤 API Key موجود:', ONESIGNAL_API_KEY ? '✅ نعم' : '❌ لا');
             
             const response = await fetch('https://onesignal.com/api/v1/notifications', {
                 method: 'POST',
