@@ -11,7 +11,8 @@
         window.OneSignalDeferred = window.OneSignalDeferred || [];
         OneSignalDeferred.push(async function(OneSignal) {
             await OneSignal.init({
-                appId: "a9e85b5f-bcf4-4867-a586-d0119c5dce89",
+                appId: "f05bebbb-41c6-4770-926b-b8de9990a537",
+                safari_web_id: "web.onesignal.auto.43666e9c-a8ad-4b1e-8de4-10291bcbdb86",
                 notifyButton: {
                     enable: true,
                     position: 'bottom-right',
@@ -24,7 +25,6 @@
                 },
                 serviceWorkerPath: 'OneSignalSDKWorker.js',
             });
-            console.log('✅ OneSignal initialized successfully!');
         });
     </script>
 
@@ -139,60 +139,22 @@
         .hero::after { content:"🧪"; position:absolute; font-size:18rem; opacity:0.04; left:-20px; bottom:-60px; }
         .hero h1 { font-size:2.8rem; font-weight:900; margin-bottom:8px; position:relative; }
         .hero p { font-size:1.1rem; opacity:0.9; margin-bottom:20px; position:relative; }
-        .hero-buttons { 
-            display:flex; 
-            gap:15px; 
-            justify-content:center; 
-            flex-wrap:wrap;
-            width:100%;
-        }
+        .hero-buttons { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; width:100%; }
         
         .hero-btn {
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:10px;
-            background:linear-gradient(145deg, #3498db, #2c81ba);
-            color:#fff;
-            padding:14px 38px;
-            border-radius:60px;
-            text-decoration:none;
-            font-weight:800;
-            font-size:1rem;
-            transition:all 0.35s ease;
-            box-shadow:0 8px 28px rgba(52,152,219,0.35);
-            border:none;
-            cursor:pointer;
-            font-family:inherit;
-            -webkit-tap-highlight-color:transparent;
-            touch-action:manipulation;
-            user-select:none;
-            position:relative;
-            z-index:2;
-            min-height:52px;
+            display:inline-flex; align-items:center; justify-content:center; gap:10px;
+            background:linear-gradient(145deg, #3498db, #2c81ba); color:#fff;
+            padding:14px 38px; border-radius:60px; text-decoration:none;
+            font-weight:800; font-size:1rem; transition:all 0.35s ease;
+            box-shadow:0 8px 28px rgba(52,152,219,0.35); border:none; cursor:pointer;
+            font-family:inherit; -webkit-tap-highlight-color:transparent;
+            touch-action:manipulation; user-select:none; min-height:52px;
         }
-        .hero-btn:hover {
-            background:#fff;
-            color:#0c2d4a;
-            transform:translateY(-4px);
-        }
-        .hero-btn:active {
-            transform:scale(0.96);
-        }
-        .hero-btn-outline {
-            background:transparent;
-            border:2px solid rgba(255,255,255,0.30);
-            color:#fff;
-            box-shadow:none;
-        }
-        .hero-btn-outline:hover {
-            background:#fff;
-            color:#0c2d4a;
-            border-color:#fff;
-        }
-        .hero-btn i {
-            pointer-events:none;
-        }
+        .hero-btn:hover { background:#fff; color:#0c2d4a; transform:translateY(-4px); }
+        .hero-btn:active { transform:scale(0.96); }
+        .hero-btn-outline { background:transparent; border:2px solid rgba(255,255,255,0.30); color:#fff; box-shadow:none; }
+        .hero-btn-outline:hover { background:#fff; color:#0c2d4a; border-color:#fff; }
+        .hero-btn i { pointer-events:none; }
 
         /* ===== SEARCH ===== */
         .search-section {
@@ -253,9 +215,7 @@
             background:linear-gradient(145deg, #e6edf4, #f0f6fb);
             display:flex; align-items:center; justify-content:center;
         }
-        .card-img {
-            width:100%; height:100%; object-fit:cover; transition:0.6s;
-        }
+        .card-img { width:100%; height:100%; object-fit:cover; transition:0.6s; }
         .card:hover .card-img { transform:scale(1.05); }
         .card-img-placeholder {
             width:100%; height:100%; display:flex; flex-direction:column;
@@ -276,9 +236,7 @@
         }
         .supplier-name { color:#64748b; font-size:13px; margin-top:4px; font-weight:500; }
 
-        .btn-group {
-            display:flex; gap:8px; margin-top:14px; flex-wrap:wrap;
-        }
+        .btn-group { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
         .btn-group .btn { flex:1; min-width:100px; }
         .btn {
             display:inline-block; color:#fff; padding:10px 14px; border-radius:60px;
@@ -290,9 +248,7 @@
             box-shadow:0 4px 12px rgba(26,74,110,0.15);
         }
         .btn-details:hover { background:linear-gradient(145deg, #3498db, #2c81ba); transform:translateY(-2px); }
-        .btn-whatsapp {
-            background:#25D366; box-shadow:0 4px 12px rgba(37,211,102,0.20);
-        }
+        .btn-whatsapp { background:#25D366; box-shadow:0 4px 12px rgba(37,211,102,0.20); }
         .btn-whatsapp:hover { background:#128C7E; transform:translateY(-2px); }
 
         /* ===== REQUESTS ===== */
@@ -312,48 +268,28 @@
         .loader { text-align:center; padding:40px; color:#1a4a6e; font-weight:600; }
         .no-results { text-align:center; padding:40px 20px; background:#fff; border-radius:32px; color:#64748b; }
 
-        /* ===== Toast Notifications ===== */
+        /* ===== Toast ===== */
         .toast-container {
-            position:fixed;
-            bottom:20px;
-            left:50%;
-            transform:translateX(-50%);
-            z-index:9999;
-            max-width:90%;
-            width:450px;
+            position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
+            z-index:9999; max-width:90%; width:450px;
         }
         .toast {
             background:linear-gradient(135deg, #1a4a6e, #0c2d4a);
-            color:#fff;
-            padding:16px 24px;
-            border-radius:20px;
-            box-shadow:0 12px 40px rgba(0,0,0,0.25);
-            margin-bottom:10px;
-            display:flex;
-            align-items:center;
-            gap:14px;
-            animation:toastIn 0.5s ease;
-            border-right:4px solid #3498db;
+            color:#fff; padding:16px 24px; border-radius:20px;
+            box-shadow:0 12px 40px rgba(0,0,0,0.25); margin-bottom:10px;
+            display:flex; align-items:center; gap:14px;
+            animation:toastIn 0.5s ease; border-right:4px solid #3498db;
         }
         .toast .icon { font-size:2rem; flex-shrink:0; }
         .toast .content { flex:1; }
         .toast .content .title { font-weight:800; font-size:1rem; }
         .toast .content .desc { font-size:0.85rem; opacity:0.85; }
         .toast .close {
-            background:rgba(255,255,255,0.15);
-            border:none;
-            color:#fff;
-            border-radius:50%;
-            width:30px;
-            height:30px;
-            cursor:pointer;
-            font-size:1rem;
-            transition:0.3s;
-            flex-shrink:0;
+            background:rgba(255,255,255,0.15); border:none; color:#fff;
+            border-radius:50%; width:30px; height:30px; cursor:pointer; font-size:1rem;
+            transition:0.3s; flex-shrink:0;
         }
         .toast .close:hover { background:rgba(255,255,255,0.25); }
-        .toast .link { color:#ffb347; text-decoration:none; font-weight:700; margin-right:8px; }
-
         @keyframes toastIn {
             0% { opacity:0; transform:translateY(30px) scale(0.95); }
             100% { opacity:1; transform:translateY(0) scale(1); }
@@ -364,30 +300,13 @@
         }
         .toast.hide { animation:toastOut 0.4s ease forwards; }
 
-        /* ===== تحسينات الهاتف ===== */
         @media (max-width:768px) {
             .navbar { flex-direction:column; gap:10px; padding:12px 20px; }
             .hero { padding:30px 20px; }
             .hero h1 { font-size:2rem; }
             .hero p { font-size:1rem; }
-            .hero-buttons { 
-                flex-direction:column; 
-                align-items:stretch;
-                width:100%;
-                gap:12px;
-            }
-            .hero-btn { 
-                width:100%; 
-                justify-content:center; 
-                padding:16px 20px;
-                font-size:1.05rem;
-                min-height:56px;
-                border-radius:50px;
-                display:flex !important;
-            }
-            .hero-btn i {
-                font-size:1.2rem;
-            }
+            .hero-buttons { flex-direction:column; align-items:stretch; width:100%; gap:12px; }
+            .hero-btn { width:100%; justify-content:center; padding:16px 20px; font-size:1.05rem; min-height:56px; border-radius:50px; }
             .search-section { flex-direction:column; border-radius:30px; padding:10px; }
             .search-btn { padding:14px; justify-content:center; }
             .product-grid { grid-template-columns:1fr; gap:18px; }
@@ -396,35 +315,18 @@
             .btn-group .btn { min-width:unset; }
             .dropdown-content { left:auto; right:0; }
             .section-title { font-size:20px; }
-            .toast-container { max-width:95%; bottom:15px; }
-            .toast { padding:14px 18px; }
         }
-        
         @media (max-width:480px) {
             .hero { padding:24px 16px; }
             .hero h1 { font-size:1.6rem; }
             .hero p { font-size:0.9rem; }
-            .hero-btn { 
-                padding:14px 16px;
-                font-size:1rem;
-                min-height:50px;
-            }
+            .hero-btn { padding:14px 16px; font-size:1rem; min-height:50px; }
             .card-img-wrapper { height:150px; }
         }
-
         @media (hover: none) {
-            .hero-btn:hover {
-                background:linear-gradient(145deg, #3498db, #2c81ba);
-                color:#fff;
-                transform:none;
-            }
-            .hero-btn-outline:hover {
-                background:transparent;
-                color:#fff;
-                border-color:rgba(255,255,255,0.30);
-            }
+            .hero-btn:hover { background:linear-gradient(145deg, #3498db, #2c81ba); color:#fff; transform:none; }
+            .hero-btn-outline:hover { background:transparent; color:#fff; border-color:rgba(255,255,255,0.30); }
         }
-
         .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
     </style>
 </head>
@@ -565,8 +467,6 @@
             })
             newBuyerBtn.style.touchAction = 'manipulation'
         }
-        
-        console.log('✅ تم إصلاح أزرار الهيرو بنجاح');
     }
 
     // ===== DROPDOWN =====
@@ -613,30 +513,12 @@
             <div class="icon">${icon}</div>
             <div class="content">
                 <div class="title">${title}</div>
-                <div class="desc">${description} ${linkText && linkUrl ? `<a href="${linkUrl}" class="link">${linkText}</a>` : ''}</div>
+                <div class="desc">${description} ${linkText && linkUrl ? `<a href="${linkUrl}" class="link" style="color:#ffb347;text-decoration:none;font-weight:700;margin-right:8px;">${linkText}</a>` : ''}</div>
             </div>
             <button class="close" onclick="this.parentElement.classList.add('hide'); setTimeout(()=>this.remove(),400)">✕</button>
         `
         container.appendChild(toast)
         setTimeout(() => { toast.classList.add('hide'); setTimeout(() => toast.remove(), 400) }, 8000)
-    }
-
-    // ===== إرسال إشعار عبر OneSignal =====
-    async function sendOneSignalNotification(title, message, url = null) {
-        try {
-            // استخدام OneSignal SDK مباشرة
-            if (window.OneSignalDeferred) {
-                const OneSignal = await window.OneSignalDeferred[0]();
-                await OneSignal.sendSelfNotification(title, message, url, {
-                    icon: 'https://chemato.vercel.app/logo.png',
-                });
-                console.log('✅ إشعار OneSignal تم إرساله بنجاح');
-            } else {
-                console.log('⚠️ OneSignal غير جاهز بعد');
-            }
-        } catch (error) {
-            console.error('❌ خطأ في إرسال إشعار OneSignal:', error);
-        }
     }
 
     // ===== LOAD CATEGORIES =====
@@ -767,7 +649,7 @@
         if (e.key === 'Enter') { currentSearch = e.target.value.trim(); loadProducts(); }
     })
 
-    // ===== بدء التشغيل =====
+    // ===== INIT =====
     async function init() {
         setupDropdown()
         await updateDropdownContent()
@@ -777,8 +659,8 @@
         setupHeroButtons()
         
         console.log('✅ كيماتو يعمل مع OneSignal!');
+        console.log('📱 App ID: f05bebbb-41c6-4770-926b-b8de9990a537');
         
-        // إرسال إشعار ترحيبي
         setTimeout(() => {
             showToast('👋', 'مرحباً بك في كيماتو!', 'سوق المواد الكيماوية في مصر', 'استكشف المنتجات', '/all-products.html');
         }, 2000);
