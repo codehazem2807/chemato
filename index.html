@@ -18,7 +18,7 @@
     <meta property="og:description" content="سوق المواد الكيماوية في مصر. تواصل مباشر مع الموردين عبر واتساب." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://kaimat0.com/" />
-    <meta property="og:image" content="https://kaimat0.com/709548215_2209434319875128_7640925248715427952_n.jpg" />
+    <meta property="og:image" content="https://kaimat0.com/logo.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     
@@ -26,15 +26,42 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
     <meta name="twitter:description" content="سوق المواد الكيماوية في مصر. تواصل مباشر مع الموردين." />
-    <meta name="twitter:image" content="https://kaimat0.com/709548215_2209434319875128_7640925248715427952_n.jpg" />
+    <meta name="twitter:image" content="https://kaimat0.com/logo.png" />
     
     <!-- ===== Canonical ===== -->
     <link rel="canonical" href="https://kaimat0.com/" />
     
-    <!-- ===== أيقونات الموقع ===== -->
-    <link rel="icon" type="image/png" sizes="32x32" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>" />
-    <link rel="apple-touch-icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧪</text></svg>" />
+    <!-- ===== أيقونات الموقع (FAVICON) ===== -->
+    <!-- أيقونة ico للمتصفحات القديمة -->
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    
+    <!-- أيقونات PNG للمتصفحات الحديثة -->
+    <link rel="icon" type="image/png" sizes="16x16" href="logo.png" />
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
+    <link rel="icon" type="image/png" sizes="48x48" href="logo.png" />
+    <link rel="icon" type="image/png" sizes="64x64" href="logo.png" />
+    <link rel="icon" type="image/png" sizes="128x128" href="logo.png" />
+    <link rel="icon" type="image/png" sizes="256x256" href="logo.png" />
+    
+    <!-- أيقونة Apple Touch (للأجهزة المحمولة) -->
+    <link rel="apple-touch-icon" sizes="57x57" href="logo.png" />
+    <link rel="apple-touch-icon" sizes="60x60" href="logo.png" />
+    <link rel="apple-touch-icon" sizes="72x72" href="logo.png" />
+    <link rel="apple-touch-icon" sizes="76x76" href="logo.png" />
+    <link rel="apple-touch-icon" sizes="114x114" href="logo.png" />
+    <link rel="apple-touch-icon" sizes="120x120" href="logo.png" />
+    <link rel="apple-touch-icon" sizes="144x144" href="logo.png" />
+    <link rel="apple-touch-icon" sizes="152x152" href="logo.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="logo.png" />
+    
+    <!-- أيقونة Android Chrome -->
+    <link rel="icon" type="image/png" sizes="192x192" href="logo.png" />
+    <link rel="icon" type="image/png" sizes="512x512" href="logo.png" />
+    
+    <!-- لون شريط المتصفح -->
     <meta name="theme-color" content="#0c2d4a" />
+    <meta name="msapplication-TileColor" content="#0c2d4a" />
+    <meta name="msapplication-TileImage" content="logo.png" />
 
     <!-- ===== Schema.org ===== -->
     <script type="application/ld+json">
@@ -410,7 +437,8 @@
 <header class="navbar animate-on-load">
     <div class="logo">
         <a href="/" aria-label="كيماتو - سوق المواد الكيماوية في مصر">
-            <img src="709548215_2209434319875128_7640925248715427952_n.jpg" alt="شعار كيماتو - سوق المواد الكيماوية في مصر" width="50" height="50" loading="eager" />
+            <!-- استخدام logo.png في الشعار -->
+            <img src="logo.png" alt="شعار كيماتو - سوق المواد الكيماوية في مصر" width="50" height="50" loading="eager" />
             <span class="logo-text">
                 <span class="blue">كيماتو</span>
                 <span class="gray">| سوق المواد الكيماوية</span>
@@ -858,6 +886,7 @@
         setTimeout(() => {
             setupHeroButtons()
             console.log('✅ كيماتو يعمل مع جميع التحسينات!')
+            console.log('✅ تم استخدام logo.png و logo.ico كأيقونات للموقع')
         }, 200)
         
         setTimeout(() => {
