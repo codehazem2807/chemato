@@ -32,18 +32,13 @@
     <link rel="canonical" href="https://kaimat0.com/" />
     
     <!-- ===== أيقونات الموقع (FAVICON) ===== -->
-    <!-- أيقونة ico للمتصفحات القديمة -->
     <link rel="icon" type="image/x-icon" href="logo.ico" />
-    
-    <!-- أيقونات PNG للمتصفحات الحديثة -->
     <link rel="icon" type="image/png" sizes="16x16" href="logo.png" />
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
     <link rel="icon" type="image/png" sizes="48x48" href="logo.png" />
     <link rel="icon" type="image/png" sizes="64x64" href="logo.png" />
     <link rel="icon" type="image/png" sizes="128x128" href="logo.png" />
     <link rel="icon" type="image/png" sizes="256x256" href="logo.png" />
-    
-    <!-- أيقونة Apple Touch (للأجهزة المحمولة) -->
     <link rel="apple-touch-icon" sizes="57x57" href="logo.png" />
     <link rel="apple-touch-icon" sizes="60x60" href="logo.png" />
     <link rel="apple-touch-icon" sizes="72x72" href="logo.png" />
@@ -53,12 +48,9 @@
     <link rel="apple-touch-icon" sizes="144x144" href="logo.png" />
     <link rel="apple-touch-icon" sizes="152x152" href="logo.png" />
     <link rel="apple-touch-icon" sizes="180x180" href="logo.png" />
-    
-    <!-- أيقونة Android Chrome -->
     <link rel="icon" type="image/png" sizes="192x192" href="logo.png" />
     <link rel="icon" type="image/png" sizes="512x512" href="logo.png" />
     
-    <!-- لون شريط المتصفح -->
     <meta name="theme-color" content="#0c2d4a" />
     <meta name="msapplication-TileColor" content="#0c2d4a" />
     <meta name="msapplication-TileImage" content="logo.png" />
@@ -113,796 +105,1676 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
     <style>
-        * { margin:0; padding:0; box-sizing:border-box; font-family:'Cairo','Tahoma',sans-serif; }
-        body { background:#f4f7fb; color:#1a2634; }
-
-        @keyframes fadeSlideUp {
-            0% { opacity:0; transform:translateY(30px); }
-            100% { opacity:1; transform:translateY(0); }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
         }
-        .animate-on-load { animation:fadeSlideUp 0.7s ease forwards; opacity:0; }
-        .delay-1 { animation-delay:0.1s; }
-        .delay-2 { animation-delay:0.2s; }
+
+        body {
+            background: #f4f7fb;
+            color: #1a2634;
+        }
+
+        /* ===== تحسينات الأنيميشن ===== */
+        @keyframes fadeSlideUp {
+            0% {
+                opacity: 0;
+                transform: translateY(40px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulseGlow {
+            0%,
+            100% {
+                box-shadow: 0 0 20px rgba(52, 152, 219, 0.2);
+            }
+            50% {
+                box-shadow: 0 0 40px rgba(52, 152, 219, 0.4);
+            }
+        }
+
+        @keyframes float {
+            0%,
+            100% {
+                transform: translateY(0px);
+            }
+            50% {
+                transform: translateY(-8px);
+            }
+        }
+
+        @keyframes shimmer {
+            0% {
+                background-position: -200% 0;
+            }
+            100% {
+                background-position: 200% 0;
+            }
+        }
+
+        @keyframes rotateSlow {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+
+        .animate-on-load {
+            animation: fadeSlideUp 0.8s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+            opacity: 0;
+        }
+
+        .delay-1 {
+            animation-delay: 0.15s;
+        }
+        .delay-2 {
+            animation-delay: 0.3s;
+        }
+        .delay-3 {
+            animation-delay: 0.45s;
+        }
+        .delay-4 {
+            animation-delay: 0.6s;
+        }
 
         /* ===== NAVBAR ===== */
         .navbar {
-            background:linear-gradient(145deg, #0c2d4a, #1a4a6e);
-            padding:14px 40px;
-            display:flex;
-            justify-content:space-between;
-            align-items:center;
-            flex-wrap:wrap;
-            color:#fff;
-            position:sticky;
-            top:0;
-            z-index:100;
-            box-shadow:0 8px 32px rgba(12,45,74,0.25);
-            border-bottom:2px solid rgba(52,152,219,0.30);
+            background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
+            padding: 14px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            color: #fff;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(12, 45, 74, 0.25);
+            border-bottom: 2px solid rgba(52, 152, 219, 0.30);
+            backdrop-filter: blur(10px);
+            transition: all 0.3s ease;
         }
-        .logo a { text-decoration:none; display:flex; align-items:center; gap:12px; }
-        .logo img {
-            width:50px; height:50px; border-radius:50%;
-            border:3px solid #3498db;
-            box-shadow:0 4px 16px rgba(52,152,219,0.35);
-            object-fit:cover;
-        }
-        .logo-text { font-weight:800; font-size:22px; }
-        .logo-text .blue { color:#3498db; }
-        .logo-text .gray { color:#b0c9d9; }
 
-        .nav-links { display:flex; gap:8px; align-items:center; flex-wrap:wrap; }
-        .nav-links > a {
-            color:#fff; text-decoration:none; padding:8px 20px; border-radius:40px;
-            transition:all 0.3s ease; font-weight:600;
-            background:rgba(255,255,255,0.06);
-            backdrop-filter:blur(4px);
-            border:1px solid rgba(255,255,255,0.06);
+        .navbar.scrolled {
+            padding: 10px 40px;
+            background: rgba(12, 45, 74, 0.95);
         }
-        .nav-links > a:hover {
-            background:#3498db; color:#fff; transform:translateY(-2px);
-            box-shadow:0 8px 24px rgba(52,152,219,0.35);
+
+        .logo a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .logo img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            border: 3px solid #3498db;
+            box-shadow: 0 4px 16px rgba(52, 152, 219, 0.35);
+            object-fit: cover;
+            transition: transform 0.3s ease;
+        }
+
+        .logo img:hover {
+            transform: scale(1.05) rotate(-5deg);
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 22px;
+        }
+        .logo-text .blue {
+            color: #3498db;
+        }
+        .logo-text .gray {
+            color: #b0c9d9;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links>a {
+            color: #fff;
+            text-decoration: none;
+            padding: 8px 20px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            background: rgba(255, 255, 255, 0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .nav-links>a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            width: 0;
+            height: 2px;
+            background: #3498db;
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+
+        .nav-links>a:hover::after {
+            width: 70%;
+        }
+
+        .nav-links>a:hover {
+            background: #3498db;
+            color: #fff;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52, 152, 219, 0.35);
         }
 
         /* ===== DROPDOWN ===== */
-        .dropdown { position:relative; display:inline-block; }
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+
         .dropdown-btn {
-            background:rgba(255,255,255,0.08); color:#fff; padding:8px 22px; border-radius:40px;
-            cursor:pointer; font-weight:600; border:1px solid rgba(255,255,255,0.08);
-            font-size:1rem; font-family:inherit;
-            display:flex; align-items:center; gap:8px; transition:all 0.3s;
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 8px 22px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            font-size: 1rem;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
         }
-        .dropdown-btn:hover { background:#3498db; transform:translateY(-2px); }
+
+        .dropdown-btn:hover {
+            background: #3498db;
+            transform: translateY(-2px);
+        }
+
         .dropdown-content {
-            display:none; position:absolute; top:110%; left:0; right:0; background:#ffffff;
-            min-width:210px; box-shadow:0 24px 56px rgba(0,0,0,0.12); border-radius:20px;
-            z-index:1000; overflow:hidden; margin-top:6px;
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            right: 0;
+            background: #ffffff;
+            min-width: 210px;
+            box-shadow: 0 24px 56px rgba(0, 0, 0, 0.12);
+            border-radius: 20px;
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 6px;
+            border: 1px solid rgba(0, 0, 0, 0.05);
         }
-        .dropdown-content.show { display:block; animation:dropFade 0.25s ease; }
-        @keyframes dropFade { 0%{opacity:0;transform:translateY(-10px);} 100%{opacity:1;transform:translateY(0);} }
+
+        .dropdown-content.show {
+            display: block;
+            animation: dropFade 0.25s ease;
+        }
+
+        @keyframes dropFade {
+            0% {
+                opacity: 0;
+                transform: translateY(-10px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
         .dropdown-content a {
-            color:#1a2634; padding:14px 22px; text-decoration:none; display:block;
-            transition:0.2s; font-size:14px; font-weight:500; border-bottom:1px solid #eef2f6;
+            color: #1a2634;
+            padding: 14px 22px;
+            text-decoration: none;
+            display: block;
+            transition: 0.2s;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 1px solid #eef2f6;
+            position: relative;
         }
-        .dropdown-content a:hover { background:#ebf5fb; color:#1a4a6e; }
-        .dropdown-content a.logout-item { color:#c0392b; }
-        .dropdown-content a.logout-item:hover { background:#fde8e5; }
+
+        .dropdown-content a:hover {
+            background: #ebf5fb;
+            color: #1a4a6e;
+            padding-right: 28px;
+        }
+
+        .dropdown-content a.logout-item {
+            color: #c0392b;
+        }
+
+        .dropdown-content a.logout-item:hover {
+            background: #fde8e5;
+        }
 
         /* ===== HERO ===== */
         .hero {
-            background:linear-gradient(135deg, #0c2d4a 0%, #1a4a6e 100%);
-            border-radius:44px; padding:50px 40px; margin-bottom:30px; color:#fff;
-            text-align:center; position:relative; overflow:hidden;
-            box-shadow:0 24px 64px rgba(12,45,74,0.25);
+            background: linear-gradient(135deg, #0c2d4a 0%, #1a4a6e 100%);
+            border-radius: 44px;
+            padding: 60px 40px;
+            margin-bottom: 30px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 0 24px 64px rgba(12, 45, 74, 0.25);
+            animation: pulseGlow 4s ease-in-out infinite;
         }
-        .hero::after { content:"🧪"; position:absolute; font-size:18rem; opacity:0.04; left:-20px; bottom:-60px; }
-        .hero h1 { font-size:2.8rem; font-weight:900; margin-bottom:8px; position:relative; }
-        .hero p { font-size:1.1rem; opacity:0.9; margin-bottom:20px; position:relative; }
-        .hero-buttons { display:flex; gap:15px; justify-content:center; flex-wrap:wrap; width:100%; }
-        
+
+        .hero::before {
+            content: '🧪';
+            position: absolute;
+            font-size: 22rem;
+            opacity: 0.04;
+            left: -40px;
+            bottom: -80px;
+            animation: rotateSlow 60s linear infinite;
+        }
+
+        .hero::after {
+            content: '🔬';
+            position: absolute;
+            font-size: 16rem;
+            opacity: 0.04;
+            right: -30px;
+            top: -60px;
+            animation: rotateSlow 80s linear infinite reverse;
+        }
+
+        .hero h1 {
+            font-size: 3.2rem;
+            font-weight: 900;
+            margin-bottom: 8px;
+            position: relative;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+        }
+
+        .hero h1 .highlight {
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            opacity: 0.9;
+            margin-bottom: 20px;
+            position: relative;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            flex-wrap: wrap;
+            width: 100%;
+        }
+
         .welcome-message {
-            margin-top:15px;
-            padding:12px 28px;
-            background:rgba(255,255,255,0.10);
-            border-radius:60px;
-            display:inline-block;
-            backdrop-filter:blur(4px);
-            font-weight:600;
-            font-size:1.1rem;
-            border:1px solid rgba(255,255,255,0.15);
+            margin-top: 15px;
+            padding: 12px 32px;
+            background: rgba(255, 255, 255, 0.10);
+            border-radius: 60px;
+            display: inline-block;
+            backdrop-filter: blur(4px);
+            font-weight: 600;
+            font-size: 1.1rem;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            animation: float 3s ease-in-out infinite;
         }
-        
+
         /* ===== أزرار الهيرو ===== */
         .hero-btn {
-            display:inline-flex;
-            align-items:center;
-            justify-content:center;
-            gap:10px;
-            background:linear-gradient(145deg, #3498db, #2c81ba);
-            color:#fff;
-            padding:14px 38px;
-            border-radius:60px;
-            text-decoration:none;
-            font-weight:800;
-            font-size:1rem;
-            transition:all 0.35s ease;
-            box-shadow:0 8px 28px rgba(52,152,219,0.35);
-            border:none;
-            cursor:pointer;
-            font-family:inherit;
-            -webkit-tap-highlight-color:transparent;
-            touch-action:manipulation;
-            user-select:none;
-            min-height:52px;
-            pointer-events:auto;
-            z-index:10;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            color: #fff;
+            padding: 16px 42px;
+            border-radius: 60px;
+            text-decoration: none;
+            font-weight: 800;
+            font-size: 1.05rem;
+            transition: all 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            box-shadow: 0 8px 28px rgba(52, 152, 219, 0.35);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            -webkit-tap-highlight-color: transparent;
+            touch-action: manipulation;
+            user-select: none;
+            min-height: 52px;
+            pointer-events: auto;
+            z-index: 10;
+            position: relative;
+            overflow: hidden;
         }
+
+        .hero-btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.1), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: 0.6s;
+        }
+
+        .hero-btn:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+
         .hero-btn:hover {
-            background:#fff;
-            color:#0c2d4a;
-            transform:translateY(-4px);
+            background: #fff;
+            color: #0c2d4a;
+            transform: translateY(-4px) scale(1.02);
+            box-shadow: 0 12px 40px rgba(52, 152, 219, 0.45);
         }
+
         .hero-btn:active {
-            transform:scale(0.96);
+            transform: scale(0.96);
         }
+
         .hero-btn-outline {
-            background:transparent;
-            border:2px solid rgba(255,255,255,0.30);
-            color:#fff;
-            box-shadow:none;
+            background: transparent;
+            border: 2px solid rgba(255, 255, 255, 0.30);
+            color: #fff;
+            box-shadow: none;
         }
+
         .hero-btn-outline:hover {
-            background:#fff;
-            color:#0c2d4a;
-            border-color:#fff;
+            background: #fff;
+            color: #0c2d4a;
+            border-color: #fff;
         }
+
         .hero-btn i {
-            pointer-events:none;
+            pointer-events: none;
         }
 
         /* ===== SEARCH ===== */
         .search-section {
-            background:#fff; border-radius:80px; padding:6px 10px 6px 6px;
-            margin:20px auto 25px; max-width:800px; display:flex; gap:8px;
-            box-shadow:0 12px 36px rgba(12,45,74,0.06);
+            background: #fff;
+            border-radius: 80px;
+            padding: 6px 10px 6px 6px;
+            margin: 20px auto 25px;
+            max-width: 800px;
+            display: flex;
+            gap: 8px;
+            box-shadow: 0 12px 36px rgba(12, 45, 74, 0.06);
+            transition: all 0.3s ease;
+            border: 2px solid transparent;
         }
+
+        .search-section:focus-within {
+            border-color: #3498db;
+            box-shadow: 0 12px 48px rgba(52, 152, 219, 0.12);
+        }
+
         .search-input {
-            flex:1; padding:16px 24px; border:none; border-radius:60px; font-size:1rem;
-            background:#f8fafc; outline:none;
+            flex: 1;
+            padding: 16px 24px;
+            border: none;
+            border-radius: 60px;
+            font-size: 1rem;
+            background: #f8fafc;
+            outline: none;
+            transition: all 0.3s ease;
         }
-        .search-input:focus { background:#fff; box-shadow:0 0 0 3px #3498db; }
+
+        .search-input:focus {
+            background: #fff;
+        }
+
         .search-btn {
-            background:linear-gradient(145deg, #3498db, #2c81ba); border:none; padding:0 30px; border-radius:60px;
-            font-weight:700; font-size:1rem; cursor:pointer; transition:all 0.3s;
-            display:flex; align-items:center; gap:8px; color:#fff;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            border: none;
+            padding: 0 30px;
+            border-radius: 60px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            color: #fff;
+            min-width: 80px;
+            justify-content: center;
         }
-        .search-btn:hover { background:linear-gradient(145deg, #1a4a6e, #0c2d4a); }
+
+        .search-btn:hover {
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+            transform: scale(1.02);
+        }
 
         /* ===== FILTERS ===== */
         .filter-buttons {
-            display:flex; justify-content:center; gap:10px; flex-wrap:wrap;
-            margin:5px auto 25px; max-width:800px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin: 5px auto 25px;
+            max-width: 800px;
         }
+
         .filter-chip {
-            background:#e8edf3; padding:8px 22px; border-radius:40px; cursor:pointer;
-            transition:all 0.3s; font-size:13px; font-weight:600; color:#1a2634;
+            background: #e8edf3;
+            padding: 8px 22px;
+            border-radius: 40px;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a2634;
+            border: 2px solid transparent;
         }
-        .filter-chip:hover { background:#d0dce8; transform:translateY(-2px); }
-        .filter-chip.active { background:#1a4a6e; color:#fff; box-shadow:0 4px 16px rgba(26,74,110,0.25); }
+
+        .filter-chip:hover {
+            background: #d0dce8;
+            transform: translateY(-2px);
+        }
+
+        .filter-chip.active {
+            background: #1a4a6e;
+            color: #fff;
+            box-shadow: 0 4px 16px rgba(26, 74, 110, 0.25);
+            border-color: #3498db;
+            transform: translateY(-2px);
+        }
 
         /* ===== PRODUCTS ===== */
         .section-title {
-            font-size:24px; margin:30px 0 20px; color:#0c2d4a;
-            border-right:5px solid #3498db; padding-right:15px;
-            display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap;
+            font-size: 24px;
+            margin: 30px 0 20px;
+            color: #0c2d4a;
+            border-right: 5px solid #3498db;
+            padding-right: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
         }
+
+        .section-title .icon-wrapper {
+            display: inline-block;
+            animation: float 3s ease-in-out infinite;
+        }
+
         .view-all {
-            font-size:13px; background:#e8edf3; padding:6px 20px; border-radius:40px;
-            text-decoration:none; color:#1a4a6e; font-weight:600;
+            font-size: 13px;
+            background: #e8edf3;
+            padding: 6px 20px;
+            border-radius: 40px;
+            text-decoration: none;
+            color: #1a4a6e;
+            font-weight: 600;
+            transition: all 0.3s ease;
         }
-        .view-all:hover { background:#1a4a6e; color:#fff; }
+
+        .view-all:hover {
+            background: #1a4a6e;
+            color: #fff;
+            transform: translateX(-5px);
+        }
 
         .product-grid {
-            display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 25px;
         }
+
         .request-grid {
-            display:grid; grid-template-columns:repeat(auto-fill,minmax(270px,1fr)); gap:25px;
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(270px, 1fr));
+            gap: 25px;
         }
+
         .card {
-            background:#fff; border-radius:24px; overflow:hidden;
-            box-shadow:0 8px 24px rgba(12,45,74,0.06); transition:all 0.4s;
-            border:1px solid rgba(52,152,219,0.06); display:flex; flex-direction:column;
-            animation:fadeSlideUp 0.7s ease forwards;
-            opacity:0;
+            background: #fff;
+            border-radius: 24px;
+            overflow: hidden;
+            box-shadow: 0 8px 24px rgba(12, 45, 74, 0.06);
+            transition: all 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            border: 1px solid rgba(52, 152, 219, 0.06);
+            display: flex;
+            flex-direction: column;
+            animation: fadeSlideUp 0.7s ease forwards;
+            opacity: 0;
+            position: relative;
         }
-        .card:hover { transform:translateY(-10px); box-shadow:0 24px 48px rgba(12,45,74,0.12); border-color:#3498db; }
+
+        .card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, #3498db, #2ecc71, #3498db);
+            background-size: 200% 100%;
+            animation: shimmer 3s linear infinite;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .card:hover::before {
+            opacity: 1;
+        }
+
+        .card:hover {
+            transform: translateY(-12px);
+            box-shadow: 0 32px 64px rgba(12, 45, 74, 0.12);
+            border-color: #3498db;
+        }
 
         .card-img-wrapper {
-            width:100%; height:180px; position:relative; overflow:hidden;
-            background:linear-gradient(145deg, #e6edf4, #f0f6fb);
-            display:flex; align-items:center; justify-content:center;
+            width: 100%;
+            height: 180px;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(145deg, #e6edf4, #f0f6fb);
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
-        .card-img { width:100%; height:100%; object-fit:cover; transition:0.6s; }
-        .card:hover .card-img { transform:scale(1.05); }
+
+        .card-img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: all 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+
+        .card:hover .card-img {
+            transform: scale(1.08);
+        }
+
         .card-img-placeholder {
-            width:100%; height:100%; display:flex; flex-direction:column;
-            align-items:center; justify-content:center;
-            font-size:3.5rem; color:#1a4a6e; background:linear-gradient(145deg, #dce8f0, #eef4f8);
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 3.5rem;
+            color: #1a4a6e;
+            background: linear-gradient(145deg, #dce8f0, #eef4f8);
+            transition: all 0.3s ease;
         }
+
+        .card:hover .card-img-placeholder {
+            background: linear-gradient(145deg, #c8d8e8, #dce8f0);
+        }
+
         .card-img-placeholder span {
-            background:rgba(255,255,255,0.88); padding:4px 16px; border-radius:40px;
-            font-size:0.8rem; font-weight:700; color:#0c2d4a; margin-top:6px;
+            background: rgba(255, 255, 255, 0.88);
+            padding: 4px 16px;
+            border-radius: 40px;
+            font-size: 0.8rem;
+            font-weight: 700;
+            color: #0c2d4a;
+            margin-top: 6px;
         }
 
-        .card-content { padding:18px 18px 20px; flex:1; display:flex; flex-direction:column; }
-        .card h3 { color:#0c2d4a; font-size:1.05rem; font-weight:700; margin-bottom:4px; }
-        .price { color:#d4880f; font-size:20px; font-weight:800; margin:6px 0; }
+        .card-content {
+            padding: 18px 18px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card h3 {
+            color: #0c2d4a;
+            font-size: 1.05rem;
+            font-weight: 700;
+            margin-bottom: 4px;
+            transition: color 0.3s ease;
+        }
+
+        .card:hover h3 {
+            color: #1a4a6e;
+        }
+
+        .price {
+            color: #d4880f;
+            font-size: 20px;
+            font-weight: 800;
+            margin: 6px 0;
+        }
+
         .badge {
-            display:inline-block; background:#ecf3f8; padding:3px 14px; border-radius:40px;
-            font-size:11px; font-weight:600; margin-bottom:8px; align-self:flex-start; color:#1a4a6e;
+            display: inline-block;
+            background: #ecf3f8;
+            padding: 3px 14px;
+            border-radius: 40px;
+            font-size: 11px;
+            font-weight: 600;
+            margin-bottom: 8px;
+            align-self: flex-start;
+            color: #1a4a6e;
         }
-        .supplier-name { color:#64748b; font-size:13px; margin-top:4px; font-weight:500; }
 
-        .btn-group { display:flex; gap:8px; margin-top:14px; flex-wrap:wrap; }
-        .btn-group .btn { flex:1; min-width:100px; }
+        .supplier-name {
+            color: #64748b;
+            font-size: 13px;
+            margin-top: 4px;
+            font-weight: 500;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 8px;
+            margin-top: 14px;
+            flex-wrap: wrap;
+        }
+
+        .btn-group .btn {
+            flex: 1;
+            min-width: 100px;
+        }
+
         .btn {
-            display:inline-block; color:#fff; padding:10px 14px; border-radius:60px;
-            text-decoration:none; border:none; cursor:pointer; transition:all 0.3s;
-            text-align:center; font-weight:700; font-size:0.85rem;
+            display: inline-block;
+            color: #fff;
+            padding: 10px 14px;
+            border-radius: 60px;
+            text-decoration: none;
+            border: none;
+            cursor: pointer;
+            transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
+            text-align: center;
+            font-weight: 700;
+            font-size: 0.85rem;
+            position: relative;
+            overflow: hidden;
         }
+
+        .btn::after {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.15), transparent);
+            transform: rotate(45deg) translateX(-100%);
+            transition: 0.5s;
+        }
+
+        .btn:hover::after {
+            transform: rotate(45deg) translateX(100%);
+        }
+
         .btn-details {
-            background:linear-gradient(145deg, #1a4a6e, #0c2d4a);
-            box-shadow:0 4px 12px rgba(26,74,110,0.15);
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+            box-shadow: 0 4px 12px rgba(26, 74, 110, 0.15);
         }
-        .btn-details:hover { background:linear-gradient(145deg, #3498db, #2c81ba); transform:translateY(-2px); }
-        .btn-whatsapp { background:#25D366; box-shadow:0 4px 12px rgba(37,211,102,0.20); }
-        .btn-whatsapp:hover { background:#128C7E; transform:translateY(-2px); }
+
+        .btn-details:hover {
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52, 152, 219, 0.3);
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.20);
+        }
+
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
+        }
 
         /* ===== FOOTER ===== */
         .footer {
-            background:linear-gradient(145deg, #0c2d4a, #1a4a6e); color:#fff; text-align:center; padding:30px 20px;
-            margin-top:40px; border-top:4px solid #3498db;
+            background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
+            color: #fff;
+            text-align: center;
+            padding: 30px 20px;
+            margin-top: 40px;
+            border-top: 4px solid #3498db;
         }
-        .footer-links { display:flex; justify-content:center; gap:25px; margin-bottom:15px; flex-wrap:wrap; }
-        .footer-links a { color:#3498db; text-decoration:none; font-weight:600; }
-        .footer-links a:hover { color:#fff; }
 
-        .loader { text-align:center; padding:40px; color:#1a4a6e; font-weight:600; }
-        .no-results { text-align:center; padding:40px 20px; background:#fff; border-radius:32px; color:#64748b; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 25px;
+            margin-bottom: 15px;
+            flex-wrap: wrap;
+        }
+
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            position: relative;
+        }
+
+        .footer-links a::after {
+            content: '';
+            position: absolute;
+            bottom: -2px;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: #fff;
+            transition: width 0.3s ease;
+        }
+
+        .footer-links a:hover::after {
+            width: 100%;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .loader {
+            text-align: center;
+            padding: 40px;
+            color: #1a4a6e;
+            font-weight: 600;
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px 20px;
+            background: #fff;
+            border-radius: 32px;
+            color: #64748b;
+        }
 
         /* ===== Toast ===== */
         .toast-container {
-            position:fixed; bottom:20px; left:50%; transform:translateX(-50%);
-            z-index:9999; max-width:90%; width:450px;
+            position: fixed;
+            bottom: 20px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            max-width: 90%;
+            width: 450px;
         }
-        .toast {
-            background:linear-gradient(135deg, #1a4a6e, #0c2d4a);
-            color:#fff; padding:16px 24px; border-radius:20px;
-            box-shadow:0 12px 40px rgba(0,0,0,0.25); margin-bottom:10px;
-            display:flex; align-items:center; gap:14px;
-            animation:toastIn 0.5s ease; border-right:4px solid #3498db;
-        }
-        .toast .icon { font-size:2rem; flex-shrink:0; }
-        .toast .content { flex:1; }
-        .toast .content .title { font-weight:800; font-size:1rem; }
-        .toast .content .desc { font-size:0.85rem; opacity:0.85; }
-        .toast .close {
-            background:rgba(255,255,255,0.15); border:none; color:#fff;
-            border-radius:50%; width:30px; height:30px; cursor:pointer; font-size:1rem;
-            transition:0.3s; flex-shrink:0;
-        }
-        .toast .close:hover { background:rgba(255,255,255,0.25); }
-        @keyframes toastIn {
-            0% { opacity:0; transform:translateY(30px) scale(0.95); }
-            100% { opacity:1; transform:translateY(0) scale(1); }
-        }
-        @keyframes toastOut {
-            0% { opacity:1; transform:translateY(0); }
-            100% { opacity:0; transform:translateY(-30px); }
-        }
-        .toast.hide { animation:toastOut 0.4s ease forwards; }
 
-        @media (max-width:768px) {
-            .navbar { flex-direction:column; gap:10px; padding:12px 20px; }
-            .hero { padding:30px 20px; }
-            .hero h1 { font-size:2rem; }
-            .hero p { font-size:1rem; }
-            .hero-buttons { flex-direction:column; align-items:stretch; width:100%; gap:12px; }
-            .hero-btn { width:100%; justify-content:center; padding:16px 20px; font-size:1.05rem; min-height:56px; border-radius:50px; }
-            .search-section { flex-direction:column; border-radius:30px; padding:10px; }
-            .search-btn { padding:14px; justify-content:center; }
-            .product-grid { grid-template-columns:1fr; gap:18px; }
-            .request-grid { grid-template-columns:1fr; gap:18px; }
-            .btn-group { flex-direction:column; }
-            .btn-group .btn { min-width:unset; }
-            .dropdown-content { left:auto; right:0; }
-            .section-title { font-size:20px; }
+        .toast {
+            background: linear-gradient(135deg, #1a4a6e, #0c2d4a);
+            color: #fff;
+            padding: 16px 24px;
+            border-radius: 20px;
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.25);
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            animation: toastIn 0.5s cubic-bezier(0.22, 1, 0.36, 1);
+            border-right: 4px solid #3498db;
         }
-        @media (max-width:480px) {
-            .hero { padding:24px 16px; }
-            .hero h1 { font-size:1.6rem; }
-            .hero p { font-size:0.9rem; }
-            .hero-btn { padding:14px 16px; font-size:1rem; min-height:50px; }
-            .card-img-wrapper { height:150px; }
+
+        .toast .icon {
+            font-size: 2rem;
+            flex-shrink: 0;
         }
+
+        .toast .content {
+            flex: 1;
+        }
+
+        .toast .content .title {
+            font-weight: 800;
+            font-size: 1rem;
+        }
+
+        .toast .content .desc {
+            font-size: 0.85rem;
+            opacity: 0.85;
+        }
+
+        .toast .close {
+            background: rgba(255, 255, 255, 0.15);
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+
+        .toast .close:hover {
+            background: rgba(255, 255, 255, 0.25);
+            transform: rotate(90deg);
+        }
+
+        @keyframes toastIn {
+            0% {
+                opacity: 0;
+                transform: translateY(30px) scale(0.95);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        @keyframes toastOut {
+            0% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            100% {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+        }
+
+        .toast.hide {
+            animation: toastOut 0.4s ease forwards;
+        }
+
+        /* ===== Stat Counter ===== */
+        .stats-bar {
+            display: flex;
+            justify-content: center;
+            gap: 40px;
+            flex-wrap: wrap;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.05);
+            border-radius: 60px;
+            margin: 10px 0 20px;
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 2rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #3498db, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            opacity: 0.7;
+            display: block;
+        }
+
+        /* ===== Responsive ===== */
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 10px;
+                padding: 12px 20px;
+            }
+
+            .hero {
+                padding: 30px 20px;
+            }
+
+            .hero h1 {
+                font-size: 2.2rem;
+            }
+
+            .hero h1 .highlight {
+                font-size: 2.2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            .hero-buttons {
+                flex-direction: column;
+                align-items: stretch;
+                width: 100%;
+                gap: 12px;
+            }
+
+            .hero-btn {
+                width: 100%;
+                justify-content: center;
+                padding: 16px 20px;
+                font-size: 1.05rem;
+                min-height: 56px;
+                border-radius: 50px;
+            }
+
+            .search-section {
+                flex-direction: column;
+                border-radius: 30px;
+                padding: 10px;
+            }
+
+            .search-btn {
+                padding: 14px;
+                justify-content: center;
+            }
+
+            .product-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .request-grid {
+                grid-template-columns: 1fr;
+                gap: 18px;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn-group .btn {
+                min-width: unset;
+            }
+
+            .dropdown-content {
+                left: auto;
+                right: 0;
+            }
+
+            .section-title {
+                font-size: 20px;
+            }
+
+            .stats-bar {
+                gap: 20px;
+                padding: 15px;
+            }
+
+            .stat-number {
+                font-size: 1.5rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .hero {
+                padding: 24px 16px;
+            }
+
+            .hero h1 {
+                font-size: 1.8rem;
+            }
+
+            .hero h1 .highlight {
+                font-size: 1.8rem;
+            }
+
+            .hero p {
+                font-size: 0.9rem;
+            }
+
+            .hero-btn {
+                padding: 14px 16px;
+                font-size: 1rem;
+                min-height: 50px;
+            }
+
+            .card-img-wrapper {
+                height: 150px;
+            }
+
+            .logo-text {
+                font-size: 18px;
+            }
+
+            .logo img {
+                width: 40px;
+                height: 40px;
+            }
+        }
+
         @media (hover: none) {
-            .hero-btn:hover { background:linear-gradient(145deg, #3498db, #2c81ba); color:#fff; transform:none; }
-            .hero-btn-outline:hover { background:transparent; color:#fff; border-color:rgba(255,255,255,0.30); }
+            .hero-btn:hover {
+                background: linear-gradient(145deg, #3498db, #2c81ba);
+                color: #fff;
+                transform: none;
+            }
+
+            .hero-btn-outline:hover {
+                background: transparent;
+                color: #fff;
+                border-color: rgba(255, 255, 255, 0.30);
+            }
+
+            .card:hover {
+                transform: none;
+            }
+
+            .btn:hover::after {
+                transform: rotate(45deg) translateX(-100%);
+            }
         }
-        .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); border:0; }
+
+        .sr-only {
+            position: absolute;
+            width: 1px;
+            height: 1px;
+            padding: 0;
+            margin: -1px;
+            overflow: hidden;
+            clip: rect(0, 0, 0, 0);
+            border: 0;
+        }
+
+        /* Scroll to top button */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 24px rgba(52, 152, 219, 0.35);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(52, 152, 219, 0.5);
+        }
     </style>
 </head>
 <body>
 
-<!-- ===== NAVBAR ===== -->
-<header class="navbar animate-on-load">
-    <div class="logo">
-        <a href="/" aria-label="كيماتو - سوق المواد الكيماوية في مصر">
-            <!-- استخدام logo.png في الشعار -->
-            <img src="logo.png" alt="شعار كيماتو - سوق المواد الكيماوية في مصر" width="50" height="50" loading="eager" />
-            <span class="logo-text">
-                <span class="blue">كيماتو</span>
-                <span class="gray">| سوق المواد الكيماوية</span>
-            </span>
-        </a>
-    </div>
-    <nav class="nav-links">
-        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-        <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
-        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
-        <div class="dropdown">
-            <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
-            <div class="dropdown-content" id="dropdownContent">
-                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
-            </div>
+    <!-- ===== NAVBAR ===== -->
+    <header class="navbar animate-on-load">
+        <div class="logo">
+            <a href="/" aria-label="كيماتو - سوق المواد الكيماوية في مصر">
+                <img src="logo.png" alt="شعار كيماتو - سوق المواد الكيماوية في مصر" width="50" height="50" loading="eager" />
+                <span class="logo-text">
+                    <span class="blue">كيماتو</span>
+                    <span class="gray">| سوق المواد الكيماوية</span>
+                </span>
+            </a>
         </div>
-    </nav>
-</header>
-
-<!-- ===== MAIN ===== -->
-<main>
-    <div class="container" style="max-width:1400px;margin:0 auto;padding:0 20px;">
-
-        <!-- ===== HERO ===== -->
-        <section class="hero animate-on-load">
-            <h1>🏭 سوق المواد الكيماوية في مصر</h1>
-            <p>بيع واشتري صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
-            <div class="hero-buttons" id="heroButtons">
-                <a href="auth.html?type=supplier" class="hero-btn" id="supplierBtn">
-                    <i class="fas fa-truck"></i> انضم كمورد
-                </a>
-                <a href="auth.html?type=buyer" class="hero-btn hero-btn-outline" id="buyerBtn">
-                    <i class="fas fa-user-plus"></i> انضم كعميل
-                </a>
+        <nav class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+            <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+            <div class="dropdown">
+                <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                    <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                    <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                    <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                </div>
             </div>
-            <!-- سيتم إضافة رسالة الترحيب هنا عبر JavaScript -->
-            <div id="welcomeContainer"></div>
-        </section>
-
-        <!-- ===== SEARCH ===== -->
-        <section class="search-section animate-on-load delay-1" role="search">
-            <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن منتج... مثل: كاوية صودا، حمض كبريتيك">
-            <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
-        </section>
-
-        <!-- ===== FILTERS ===== -->
-        <nav class="filter-buttons animate-on-load delay-1" id="filterButtons">
-            <span class="filter-chip active" data-category-id="all">الكل</span>
         </nav>
+    </header>
 
-        <!-- ===== PRODUCTS ===== -->
-        <section>
-            <div class="section-title animate-on-load delay-2">
-                <span><i class="fas fa-boxes" style="color:#1a4a6e;margin-left:8px;"></i> أحدث المنتجات</span>
-                <a href="all-products.html" class="view-all">عرض الكل ←</a>
-            </div>
-            <div id="productsList" class="product-grid">
-                <div class="loader">⏳ جاري تحميل المنتجات...</div>
-            </div>
-        </section>
+    <!-- ===== MAIN ===== -->
+    <main>
+        <div class="container" style="max-width:1400px;margin:0 auto;padding:0 20px;">
 
-        <!-- ===== REQUESTS ===== -->
-        <section>
-            <div class="section-title animate-on-load delay-2">
-                <span><i class="fas fa-hand-holding-heart" style="color:#1a4a6e;margin-left:8px;"></i> طلبات الشراء</span>
-                <a href="all-requests.html" class="view-all">عرض الكل ←</a>
-            </div>
-            <div id="requestsList" class="request-grid">
-                <div class="loader">⏳ جاري تحميل الطلبات...</div>
-            </div>
-        </section>
+            <!-- ===== HERO ===== -->
+            <section class="hero animate-on-load">
+                <h1>🏭 <span class="highlight">سوق المواد الكيماوية</span> في مصر</h1>
+                <p>بيع واشتري صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
 
-    </div>
-</main>
+                <!-- ===== Stats Bar ===== -->
+                <div class="stats-bar">
+                    <div class="stat-item">
+                        <span class="stat-number" id="productCount">0</span>
+                        <span class="stat-label">منتج</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="requestCount">0</span>
+                        <span class="stat-label">طلب شراء</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="stat-number" id="supplierCount">0</span>
+                        <span class="stat-label">مورد</span>
+                    </div>
+                </div>
 
-<!-- ===== TOAST CONTAINER ===== -->
-<div id="toastContainer" class="toast-container"></div>
+                <div class="hero-buttons" id="heroButtons">
+                    <a href="auth.html?type=supplier" class="hero-btn" id="supplierBtn">
+                        <i class="fas fa-truck"></i> انضم كمورد
+                    </a>
+                    <a href="auth.html?type=buyer" class="hero-btn hero-btn-outline" id="buyerBtn">
+                        <i class="fas fa-user-plus"></i> انضم كعميل
+                    </a>
+                </div>
+                <div id="welcomeContainer"></div>
+            </section>
 
-<!-- ===== FOOTER ===== -->
-<footer class="footer">
-    <div class="footer-links">
-        <a href="index.html">الرئيسية</a>
-        <a href="all-products.html">جميع المنتجات</a>
-        <a href="all-requests.html">جميع الطلبات</a>
-        <a href="auth.html">تسجيل الدخول</a>
-        <a href="supplier-dashboard.html">للموردين</a>
-        <a href="buyer-dashboard.html">للعملاء</a>
-    </div>
-    <div style="opacity:0.7;">© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
-</footer>
+            <!-- ===== SEARCH ===== -->
+            <section class="search-section animate-on-load delay-1" role="search">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن منتج... مثل: كاوية صودا، حمض كبريتيك">
+                <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+            </section>
 
-<!-- ===== SUPABASE ===== -->
-<script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+            <!-- ===== FILTERS ===== -->
+            <nav class="filter-buttons animate-on-load delay-1" id="filterButtons">
+                <span class="filter-chip active" data-category-id="all">الكل</span>
+            </nav>
 
-    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+            <!-- ===== PRODUCTS ===== -->
+            <section>
+                <div class="section-title animate-on-load delay-2">
+                    <span>
+                        <span class="icon-wrapper"><i class="fas fa-boxes" style="color:#1a4a6e;margin-left:8px;"></i></span>
+                        أحدث المنتجات
+                    </span>
+                    <a href="all-products.html" class="view-all">عرض الكل ←</a>
+                </div>
+                <div id="productsList" class="product-grid">
+                    <div class="loader">⏳ جاري تحميل المنتجات...</div>
+                </div>
+            </section>
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+            <!-- ===== REQUESTS ===== -->
+            <section>
+                <div class="section-title animate-on-load delay-3">
+                    <span>
+                        <span class="icon-wrapper"><i class="fas fa-hand-holding-heart" style="color:#1a4a6e;margin-left:8px;"></i></span>
+                        طلبات الشراء
+                    </span>
+                    <a href="all-requests.html" class="view-all">عرض الكل ←</a>
+                </div>
+                <div id="requestsList" class="request-grid">
+                    <div class="loader">⏳ جاري تحميل الطلبات...</div>
+                </div>
+            </section>
 
-    let currentCategoryId = 'all'
-    let currentSearch = ''
+        </div>
+    </main>
 
-    // ===== التحقق من حالة المستخدم وإخفاء الأزرار =====
-    async function checkUserAndHideButtons() {
-        const { data: { user } } = await supabase.auth.getUser()
-        const supplierBtn = document.getElementById('supplierBtn')
-        const buyerBtn = document.getElementById('buyerBtn')
-        const welcomeContainer = document.getElementById('welcomeContainer')
-        
-        if (user) {
-            // إخفاء الأزرار
-            if (supplierBtn) supplierBtn.style.display = 'none'
-            if (buyerBtn) buyerBtn.style.display = 'none'
-            
-            // جلب بيانات المستخدم
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('full_name, user_type')
-                .eq('id', user.id)
-                .single()
-            
-            const name = profile?.full_name || 'مستخدم'
-            const type = profile?.user_type === 'supplier' ? 'مورد' : 'عميل'
-            
-            // عرض رسالة الترحيب
-            if (welcomeContainer) {
-                welcomeContainer.innerHTML = `
-                    <div class="welcome-message">
-                        👋 مرحباً ${name} (${type})
+    <!-- ===== SCROLL TO TOP ===== -->
+    <button class="scroll-top" id="scrollTopBtn" aria-label="العودة للأعلى">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- ===== TOAST CONTAINER ===== -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- ===== FOOTER ===== -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="all-products.html">جميع المنتجات</a>
+            <a href="all-requests.html">جميع الطلبات</a>
+            <a href="auth.html">تسجيل الدخول</a>
+            <a href="supplier-dashboard.html">للموردين</a>
+            <a href="buyer-dashboard.html">للعملاء</a>
+        </div>
+        <div style="opacity:0.7;">© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
+    </footer>
+
+    <!-- ===== SUPABASE ===== -->
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+        const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+        let currentCategoryId = 'all'
+        let currentSearch = ''
+
+        // ===== التحقق من حالة المستخدم وإخفاء الأزرار =====
+        async function checkUserAndHideButtons() {
+            const { data: { user } } = await supabase.auth.getUser()
+            const supplierBtn = document.getElementById('supplierBtn')
+            const buyerBtn = document.getElementById('buyerBtn')
+            const welcomeContainer = document.getElementById('welcomeContainer')
+
+            if (user) {
+                if (supplierBtn) supplierBtn.style.display = 'none'
+                if (buyerBtn) buyerBtn.style.display = 'none'
+
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('full_name, user_type')
+                    .eq('id', user.id)
+                    .single()
+
+                const name = profile?.full_name || 'مستخدم'
+                const type = profile?.user_type === 'supplier' ? 'مورد' : 'عميل'
+
+                if (welcomeContainer) {
+                    welcomeContainer.innerHTML = `
+                            <div class="welcome-message">
+                                👋 مرحباً ${name} (${type})
+                            </div>
+                        `
+                }
+            } else {
+                if (supplierBtn) supplierBtn.style.display = 'inline-flex'
+                if (buyerBtn) buyerBtn.style.display = 'inline-flex'
+                if (welcomeContainer) welcomeContainer.innerHTML = ''
+            }
+        }
+
+        // ===== إصلاح أزرار الهيرو =====
+        function setupHeroButtons() {
+            const supplierBtn = document.getElementById('supplierBtn')
+            const buyerBtn = document.getElementById('buyerBtn')
+
+            function navigateTo(url) {
+                try {
+                    window.location.href = url
+                } catch (e) {
+                    window.open(url, '_self')
+                }
+            }
+
+            if (supplierBtn) {
+                const newSupplierBtn = supplierBtn.cloneNode(true)
+                supplierBtn.parentNode.replaceChild(newSupplierBtn, supplierBtn)
+                newSupplierBtn.addEventListener('click', function(e) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    navigateTo('auth.html?type=supplier')
+                })
+                newSupplierBtn.style.touchAction = 'manipulation'
+                newSupplierBtn.style.cursor = 'pointer'
+                newSupplierBtn.style.pointerEvents = 'auto'
+                newSupplierBtn.style.position = 'relative'
+                newSupplierBtn.style.zIndex = '10'
+            }
+
+            if (buyerBtn) {
+                const newBuyerBtn = buyerBtn.cloneNode(true)
+                buyerBtn.parentNode.replaceChild(newBuyerBtn, buyerBtn)
+                newBuyerBtn.addEventListener('click', function(e) {
+                    e.preventDefault()
+                    e.stopPropagation()
+                    navigateTo('auth.html?type=buyer')
+                })
+                newBuyerBtn.style.touchAction = 'manipulation'
+                newBuyerBtn.style.cursor = 'pointer'
+                newBuyerBtn.style.pointerEvents = 'auto'
+                newBuyerBtn.style.position = 'relative'
+                newBuyerBtn.style.zIndex = '10'
+            }
+        }
+
+        // ===== DROPDOWN =====
+        function setupDropdown() {
+            const toggle = document.getElementById('dropdownToggle')
+            const content = document.getElementById('dropdownContent')
+            if (toggle && content) {
+                toggle.addEventListener('click', (e) => { e.stopPropagation();
+                    content.classList.toggle('show'); })
+                document.addEventListener('click', () => { content.classList.remove('show'); })
+            }
+        }
+
+        async function updateDropdownContent() {
+            const { data: { user } } = await supabase.auth.getUser()
+            const content = document.getElementById('dropdownContent')
+            if (!content) return
+
+            if (user) {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('user_type, full_name')
+                    .eq('id', user.id)
+                    .single()
+
+                content.innerHTML = `
+                        <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                        <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                    `
+                document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                    e.preventDefault()
+                    await supabase.auth.signOut()
+                    window.location.reload()
+                })
+            } else {
+                content.innerHTML = `
+                        <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                        <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                        <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                    `
+            }
+        }
+
+        // ===== TOAST NOTIFICATIONS =====
+        function showToast(icon, title, description, linkText = null, linkUrl = null) {
+            const container = document.getElementById('toastContainer')
+            const toast = document.createElement('div')
+            toast.className = 'toast'
+            toast.innerHTML = `
+                    <div class="icon">${icon}</div>
+                    <div class="content">
+                        <div class="title">${title}</div>
+                        <div class="desc">${description} ${linkText && linkUrl ? `<a href="${linkUrl}" class="link" style="color:#ffb347;text-decoration:none;font-weight:700;margin-right:8px;">${linkText}</a>` : ''}</div>
+                    </div>
+                    <button class="close" onclick="this.parentElement.classList.add('hide'); setTimeout(()=>this.remove(),400)">✕</button>
+                `
+            container.appendChild(toast)
+            setTimeout(() => { toast.classList.add('hide');
+                setTimeout(() => toast.remove(), 400) }, 8000)
+        }
+
+        // ===== LOAD CATEGORIES =====
+        async function loadCategoriesFilter() {
+            const { data: categories } = await supabase
+                .from('categories')
+                .select('*')
+                .eq('is_active', true)
+                .order('display_order')
+
+            const container = document.getElementById('filterButtons')
+            if (categories?.length) {
+                categories.forEach(cat => {
+                    container.innerHTML += `<span class="filter-chip" data-category-id="${cat.id}">${cat.icon || '📁'} ${cat.name}</span>`
+                })
+            }
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'))
+                    chip.classList.add('active')
+                    currentCategoryId = chip.dataset.categoryId
+                    loadProducts()
+                })
+            })
+        }
+
+        // ===== GET WHATSAPP LINK =====
+        function getWhatsAppLink(phone, productName) {
+            if (!phone) return '#'
+            const cleanPhone = phone.replace(/\D/g, '')
+            const formattedPhone = cleanPhone.startsWith('20') ? cleanPhone : `20${cleanPhone}`
+            return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(`مرحباً، أنا مهتم بـ: ${productName} (منصة كيماتو)`)}`
+        }
+
+        // ===== PLACEHOLDER =====
+        function getPlaceholderHTML(productName, catIcon = '🧪') {
+            return `
+                    <div class="card-img-placeholder">
+                        <div>${catIcon}</div>
+                        <span>${productName?.substring(0, 28) || 'منتج'}</span>
                     </div>
                 `
+        }
+
+        // ===== LOAD PRODUCTS =====
+        async function loadProducts() {
+            let query = supabase.from('products').select('*').eq('status', 'active')
+            if (currentCategoryId !== 'all') query = query.eq('category_id', currentCategoryId)
+            if (currentSearch) query = query.ilike('name', `%${currentSearch}%`)
+
+            const { data: products } = await query.order('created_at', { ascending: false }).limit(6)
+            const container = document.getElementById('productsList')
+
+            if (!products?.length) {
+                container.innerHTML =
+                    `<div class="no-results"><i class="fas fa-search-minus" style="font-size:2rem;display:block;margin-bottom:10px;"></i>لا توجد منتجات</div>`
+                return
             }
-        } else {
-            // التأكد من ظهور الأزرار
-            if (supplierBtn) supplierBtn.style.display = 'inline-flex'
-            if (buyerBtn) buyerBtn.style.display = 'inline-flex'
-            if (welcomeContainer) welcomeContainer.innerHTML = ''
-        }
-    }
 
-    // ===== إصلاح أزرار الهيرو =====
-    function setupHeroButtons() {
-        const supplierBtn = document.getElementById('supplierBtn')
-        const buyerBtn = document.getElementById('buyerBtn')
-        
-        function navigateTo(url) {
-            try {
-                window.location.href = url
-            } catch(e) {
-                window.open(url, '_self')
-            }
-        }
-        
-        if (supplierBtn) {
-            const newSupplierBtn = supplierBtn.cloneNode(true)
-            supplierBtn.parentNode.replaceChild(newSupplierBtn, supplierBtn)
-            newSupplierBtn.addEventListener('click', function(e) {
-                e.preventDefault()
-                e.stopPropagation()
-                navigateTo('auth.html?type=supplier')
-            })
-            newSupplierBtn.style.touchAction = 'manipulation'
-            newSupplierBtn.style.cursor = 'pointer'
-            newSupplierBtn.style.pointerEvents = 'auto'
-            newSupplierBtn.style.position = 'relative'
-            newSupplierBtn.style.zIndex = '10'
-        }
-        
-        if (buyerBtn) {
-            const newBuyerBtn = buyerBtn.cloneNode(true)
-            buyerBtn.parentNode.replaceChild(newBuyerBtn, buyerBtn)
-            newBuyerBtn.addEventListener('click', function(e) {
-                e.preventDefault()
-                e.stopPropagation()
-                navigateTo('auth.html?type=buyer')
-            })
-            newBuyerBtn.style.touchAction = 'manipulation'
-            newBuyerBtn.style.cursor = 'pointer'
-            newBuyerBtn.style.pointerEvents = 'auto'
-            newBuyerBtn.style.position = 'relative'
-            newBuyerBtn.style.zIndex = '10'
-        }
-    }
-
-    // ===== DROPDOWN =====
-    function setupDropdown() {
-        const toggle = document.getElementById('dropdownToggle')
-        const content = document.getElementById('dropdownContent')
-        if (toggle && content) {
-            toggle.addEventListener('click', (e) => { e.stopPropagation(); content.classList.toggle('show'); })
-            document.addEventListener('click', () => { content.classList.remove('show'); })
-        }
-    }
-
-    async function updateDropdownContent() {
-        const { data: { user } } = await supabase.auth.getUser()
-        const content = document.getElementById('dropdownContent')
-        if (!content) return
-
-        if (user) {
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('user_type, full_name')
-                .eq('id', user.id)
-                .single()
-            
-            content.innerHTML = `
-                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}</a>
-                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
-                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-            `
-            document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
-                e.preventDefault()
-                await supabase.auth.signOut()
-                window.location.reload()
-            })
-        } else {
-            content.innerHTML = `
-                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
-            `
-        }
-    }
-
-    // ===== TOAST NOTIFICATIONS =====
-    function showToast(icon, title, description, linkText = null, linkUrl = null) {
-        const container = document.getElementById('toastContainer')
-        const toast = document.createElement('div')
-        toast.className = 'toast'
-        toast.innerHTML = `
-            <div class="icon">${icon}</div>
-            <div class="content">
-                <div class="title">${title}</div>
-                <div class="desc">${description} ${linkText && linkUrl ? `<a href="${linkUrl}" class="link" style="color:#ffb347;text-decoration:none;font-weight:700;margin-right:8px;">${linkText}</a>` : ''}</div>
-            </div>
-            <button class="close" onclick="this.parentElement.classList.add('hide'); setTimeout(()=>this.remove(),400)">✕</button>
-        `
-        container.appendChild(toast)
-        setTimeout(() => { toast.classList.add('hide'); setTimeout(() => toast.remove(), 400) }, 8000)
-    }
-
-    // ===== LOAD CATEGORIES =====
-    async function loadCategoriesFilter() {
-        const { data: categories } = await supabase
-            .from('categories')
-            .select('*')
-            .eq('is_active', true)
-            .order('display_order')
-        
-        const container = document.getElementById('filterButtons')
-        if (categories?.length) {
-            categories.forEach(cat => {
-                container.innerHTML += `<span class="filter-chip" data-category-id="${cat.id}">${cat.icon || '📁'} ${cat.name}</span>`
-            })
-        }
-        document.querySelectorAll('.filter-chip').forEach(chip => {
-            chip.addEventListener('click', () => {
-                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'))
-                chip.classList.add('active')
-                currentCategoryId = chip.dataset.categoryId
-                loadProducts()
-            })
-        })
-    }
-
-    // ===== GET WHATSAPP LINK =====
-    function getWhatsAppLink(phone, productName) {
-        if (!phone) return '#'
-        const cleanPhone = phone.replace(/\D/g, '')
-        const formattedPhone = cleanPhone.startsWith('20') ? cleanPhone : `20${cleanPhone}`
-        return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(`مرحباً، أنا مهتم بـ: ${productName} (منصة كيماتو)`)}`
-    }
-
-    // ===== PLACEHOLDER =====
-    function getPlaceholderHTML(productName, catIcon = '🧪') {
-        return `
-            <div class="card-img-placeholder">
-                <div>${catIcon}</div>
-                <span>${productName?.substring(0, 28) || 'منتج'}</span>
-            </div>
-        `
-    }
-
-    // ===== LOAD PRODUCTS =====
-    async function loadProducts() {
-        let query = supabase.from('products').select('*').eq('status', 'active')
-        if (currentCategoryId !== 'all') query = query.eq('category_id', currentCategoryId)
-        if (currentSearch) query = query.ilike('name', `%${currentSearch}%`)
-
-        const { data: products } = await query.order('created_at', { ascending: false }).limit(6)
-        const container = document.getElementById('productsList')
-
-        if (!products?.length) {
-            container.innerHTML = `<div class="no-results"><i class="fas fa-search-minus" style="font-size:2rem;display:block;margin-bottom:10px;"></i>لا توجد منتجات</div>`
-            return
-        }
-
-        const productsWithDetails = await Promise.all(products.map(async (p) => {
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('full_name, company_name, phone')
-                .eq('id', p.supplier_id)
-                .single()
-            
-            let catName = p.category || 'مواد كيماوية', catIcon = '🧪'
-            if (p.category_id) {
-                const { data: cat } = await supabase
-                    .from('categories')
-                    .select('name, icon')
-                    .eq('id', p.category_id)
+            const productsWithDetails = await Promise.all(products.map(async (p) => {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('full_name, company_name, phone')
+                    .eq('id', p.supplier_id)
                     .single()
-                if (cat) { catName = cat.name; catIcon = cat.icon || '🧪' }
-            }
-            return { ...p, profile, categoryName: catName, categoryIcon: catIcon }
-        }))
 
-        container.innerHTML = productsWithDetails.map((p, i) => {
-            const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold')
-            const imageHtml = hasImage ? `<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy">` : getPlaceholderHTML(p.name, p.categoryIcon)
-            const whatsappLink = getWhatsAppLink(p.profile?.phone, p.name)
-
-            return `
-                <div class="card" style="animation-delay:${0.05 + i * 0.06}s;">
-                    <div class="card-img-wrapper">${imageHtml}</div>
-                    <div class="card-content">
-                        <span class="badge">${p.categoryIcon} ${p.categoryName}</span>
-                        <h3>${p.name.substring(0, 40)}</h3>
-                        <div class="price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : 'سعر عند الطلب'}</div>
-                        <div class="supplier-name"><i class="fas fa-building" style="margin-left:6px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
-                        <div class="btn-group">
-                            <a href="product-details.html?id=${p.id}" class="btn btn-details" onclick="event.stopPropagation();"><i class="fas fa-info-circle"></i> تفاصيل</a>
-                            <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();"><i class="fab fa-whatsapp"></i> واتساب</a>
-                        </div>
-                    </div>
-                </div>
-            `
-        }).join('')
-    }
-
-    // ===== LOAD REQUESTS =====
-    async function loadRequests() {
-        const { data } = await supabase
-            .from('purchase_requests')
-            .select('*, profiles(full_name, company_name, phone)')
-            .eq('status', 'open')
-            .order('created_at', { ascending: false })
-            .limit(6)
-        
-        const container = document.getElementById('requestsList')
-
-        if (!data?.length) {
-            container.innerHTML = `<div class="no-results"><i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:10px;"></i>لا توجد طلبات</div>`
-            return
-        }
-
-        container.innerHTML = data.map((r, i) => {
-            const whatsappLink = getWhatsAppLink(r.profiles?.phone, r.product_name)
-            return `
-                <div class="card" style="animation-delay:${0.05 + i * 0.06}s;">
-                    <div class="card-img-wrapper">
-                        <div class="card-img-placeholder" style="background:linear-gradient(145deg, #d4a37333, #b5835a55);">
-                            <div style="font-size:3.5rem;">📋</div>
-                            <span>طلب شراء</span>
-                        </div>
-                    </div>
-                    <div class="card-content">
-                        <span class="badge"><i class="fas fa-bullhorn"></i> طلب شراء</span>
-                        <h3>${r.product_name.substring(0, 40)}</h3>
-                        <p style="margin:4px 0;color:#1e2a3e;"><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</p>
-                        <p style="font-size:13px;color:#64748b;"><i class="fas fa-user"></i> ${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</p>
-                        <div class="btn-group">
-                            <a href="request-details.html?id=${r.id}" class="btn btn-details" onclick="event.stopPropagation();"><i class="fas fa-info-circle"></i> تفاصيل</a>
-                            <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();"><i class="fab fa-whatsapp"></i> واتساب</a>
-                        </div>
-                    </div>
-                </div>
-            `
-        }).join('')
-    }
-
-    // ===== SEARCH =====
-    document.getElementById('searchBtn').addEventListener('click', () => {
-        currentSearch = document.getElementById('searchInput').value.trim()
-        loadProducts()
-    })
-    document.getElementById('searchInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') { currentSearch = e.target.value.trim(); loadProducts(); }
-    })
-
-    // ===== GENERATE PRODUCT SCHEMA =====
-    async function generateProductSchema() {
-        const { data: products } = await supabase
-            .from('products')
-            .select('*')
-            .eq('status', 'active')
-            .order('created_at', { ascending: false })
-            .limit(5)
-        
-        if (!products?.length) return
-        
-        const schema = {
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "name": "أحدث المنتجات الكيماوية في مصر",
-            "description": "قائمة بأحدث المنتجات الكيماوية المتاحة في سوق كيماتو",
-            "itemListElement": products.map((p, i) => ({
-                "@type": "ListItem",
-                "position": i + 1,
-                "item": {
-                    "@type": "Product",
-                    "name": p.name,
-                    "description": p.description || p.name,
-                    "offers": {
-                        "@type": "Offer",
-                        "price": p.price || "0",
-                        "priceCurrency": "EGP",
-                        "availability": "https://schema.org/InStock"
-                    }
+                let catName = p.category || 'مواد كيماوية',
+                    catIcon = '🧪'
+                if (p.category_id) {
+                    const { data: cat } = await supabase
+                        .from('categories')
+                        .select('name, icon')
+                        .eq('id', p.category_id)
+                        .single()
+                    if (cat) { catName = cat.name;
+                        catIcon = cat.icon || '🧪' }
                 }
+                return { ...p, profile, categoryName: catName, categoryIcon: catIcon }
             }))
+
+            container.innerHTML = productsWithDetails.map((p, i) => {
+                const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold')
+                const imageHtml = hasImage ?
+                    `<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy">` :
+                    getPlaceholderHTML(p.name, p.categoryIcon)
+                const whatsappLink = getWhatsAppLink(p.profile?.phone, p.name)
+
+                return `
+                        <div class="card" style="animation-delay:${0.05 + i * 0.06}s;">
+                            <div class="card-img-wrapper">${imageHtml}</div>
+                            <div class="card-content">
+                                <span class="badge">${p.categoryIcon} ${p.categoryName}</span>
+                                <h3>${p.name.substring(0, 40)}</h3>
+                                <div class="price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : 'سعر عند الطلب'}</div>
+                                <div class="supplier-name"><i class="fas fa-building" style="margin-left:6px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
+                                <div class="btn-group">
+                                    <a href="product-details.html?id=${p.id}" class="btn btn-details" onclick="event.stopPropagation();"><i class="fas fa-info-circle"></i> تفاصيل</a>
+                                    <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();"><i class="fab fa-whatsapp"></i> واتساب</a>
+                                </div>
+                            </div>
+                        </div>
+                    `
+            }).join('')
+
+            // تحديث عداد المنتجات
+            document.getElementById('productCount').textContent = products.length
         }
-        
-        const script = document.createElement('script')
-        script.type = 'application/ld+json'
-        script.textContent = JSON.stringify(schema)
-        document.head.appendChild(script)
-    }
 
-    // ===== INIT =====
-    async function init() {
-        setupDropdown()
-        await updateDropdownContent()
-        await checkUserAndHideButtons()
-        await loadCategoriesFilter()
-        await loadProducts()
-        await loadRequests()
-        await generateProductSchema()
-        
-        setTimeout(() => {
-            setupHeroButtons()
-            console.log('✅ كيماتو يعمل مع جميع التحسينات!')
-            console.log('✅ تم استخدام logo.png و logo.ico كأيقونات للموقع')
-        }, 200)
-        
-        setTimeout(() => {
-            showToast('👋', 'مرحباً بك في كيماتو!', 'سوق المواد الكيماوية في مصر', 'استكشف المنتجات', '/all-products.html');
-        }, 2000);
-    }
+        // ===== LOAD REQUESTS =====
+        async function loadRequests() {
+            const { data } = await supabase
+                .from('purchase_requests')
+                .select('*, profiles(full_name, company_name, phone)')
+                .eq('status', 'open')
+                .order('created_at', { ascending: false })
+                .limit(6)
 
-    // ===== تحديث حالة المستخدم عند تغييرها =====
-    supabase.auth.onAuthStateChange((event, session) => {
-        if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
-            checkUserAndHideButtons()
-            updateDropdownContent()
+            const container = document.getElementById('requestsList')
+
+            if (!data?.length) {
+                container.innerHTML =
+                    `<div class="no-results"><i class="fas fa-inbox" style="font-size:2rem;display:block;margin-bottom:10px;"></i>لا توجد طلبات</div>`
+                return
+            }
+
+            container.innerHTML = data.map((r, i) => {
+                const whatsappLink = getWhatsAppLink(r.profiles?.phone, r.product_name)
+                return `
+                        <div class="card" style="animation-delay:${0.05 + i * 0.06}s;">
+                            <div class="card-img-wrapper">
+                                <div class="card-img-placeholder" style="background:linear-gradient(145deg, #d4a37333, #b5835a55);">
+                                    <div style="font-size:3.5rem;">📋</div>
+                                    <span>طلب شراء</span>
+                                </div>
+                            </div>
+                            <div class="card-content">
+                                <span class="badge"><i class="fas fa-bullhorn"></i> طلب شراء</span>
+                                <h3>${r.product_name.substring(0, 40)}</h3>
+                                <p style="margin:4px 0;color:#1e2a3e;"><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</p>
+                                <p style="font-size:13px;color:#64748b;"><i class="fas fa-user"></i> ${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</p>
+                                <div class="btn-group">
+                                    <a href="request-details.html?id=${r.id}" class="btn btn-details" onclick="event.stopPropagation();"><i class="fas fa-info-circle"></i> تفاصيل</a>
+                                    <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();"><i class="fab fa-whatsapp"></i> واتساب</a>
+                                </div>
+                            </div>
+                        </div>
+                    `
+            }).join('')
+
+            document.getElementById('requestCount').textContent = data.length
         }
-    })
 
-    init()
-</script>
+        // ===== LOAD SUPPLIER COUNT =====
+        async function loadSupplierCount() {
+            const { count } = await supabase
+                .from('profiles')
+                .select('*', { count: 'exact', head: true })
+                .eq('user_type', 'supplier')
+
+            document.getElementById('supplierCount').textContent = count || 0
+        }
+
+        // ===== SEARCH =====
+        document.getElementById('searchBtn').addEventListener('click', () => {
+            currentSearch = document.getElementById('searchInput').value.trim()
+            loadProducts()
+        })
+        document.getElementById('searchInput').addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') { currentSearch = e.target.value.trim();
+                loadProducts(); }
+        })
+
+        // ===== SCROLL TO TOP =====
+        function setupScrollTop() {
+            const btn = document.getElementById('scrollTopBtn')
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 400) {
+                    btn.classList.add('visible')
+                } else {
+                    btn.classList.remove('visible')
+                }
+            })
+            btn.addEventListener('click', () => {
+                window.scrollTo({ top: 0, behavior: 'smooth' })
+            })
+        }
+
+        // ===== NAVBAR SCROLL EFFECT =====
+        function setupNavbarScroll() {
+            const navbar = document.querySelector('.navbar')
+            window.addEventListener('scroll', () => {
+                if (window.scrollY > 50) {
+                    navbar.classList.add('scrolled')
+                } else {
+                    navbar.classList.remove('scrolled')
+                }
+            })
+        }
+
+        // ===== GENERATE PRODUCT SCHEMA =====
+        async function generateProductSchema() {
+            const { data: products } = await supabase
+                .from('products')
+                .select('*')
+                .eq('status', 'active')
+                .order('created_at', { ascending: false })
+                .limit(5)
+
+            if (!products?.length) return
+
+            const schema = {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "أحدث المنتجات الكيماوية في مصر",
+                "description": "قائمة بأحدث المنتجات الكيماوية المتاحة في سوق كيماتو",
+                "itemListElement": products.map((p, i) => ({
+                    "@type": "ListItem",
+                    "position": i + 1,
+                    "item": {
+                        "@type": "Product",
+                        "name": p.name,
+                        "description": p.description || p.name,
+                        "offers": {
+                            "@type": "Offer",
+                            "price": p.price || "0",
+                            "priceCurrency": "EGP",
+                            "availability": "https://schema.org/InStock"
+                        }
+                    }
+                }))
+            }
+
+            const script = document.createElement('script')
+            script.type = 'application/ld+json'
+            script.textContent = JSON.stringify(schema)
+            document.head.appendChild(script)
+        }
+
+        // ===== INIT =====
+        async function init() {
+            setupDropdown()
+            await updateDropdownContent()
+            await checkUserAndHideButtons()
+            await loadCategoriesFilter()
+            await loadProducts()
+            await loadRequests()
+            await loadSupplierCount()
+            await generateProductSchema()
+            setupScrollTop()
+            setupNavbarScroll()
+
+            setTimeout(() => {
+                setupHeroButtons()
+                console.log('✅ كيماتو يعمل مع جميع التحسينات!')
+                console.log('✅ تم استخدام logo.png و logo.ico كأيقونات للموقع')
+            }, 200)
+
+            setTimeout(() => {
+                showToast('👋', 'مرحباً بك في كيماتو!', 'سوق المواد الكيماوية في مصر', 'استكشف المنتجات',
+                    '/all-products.html');
+            }, 2000);
+        }
+
+        // ===== تحديث حالة المستخدم عند تغييرها =====
+        supabase.auth.onAuthStateChange((event, session) => {
+            if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
+                checkUserAndHideButtons()
+                updateDropdownContent()
+            }
+        })
+
+        init()
+    </script>
 </body>
 </html>
