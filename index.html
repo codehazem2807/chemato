@@ -11,7 +11,7 @@
     <meta name="googlebot" content="index, follow" />
     
     <!-- ===== الكلمات المفتاحية الأساسية ===== -->
-    <meta name="keywords" content="كيماويات البناء الحديث,كيماوي,علاج كيماوي,كيماتو,كيما,سهم كيما,سعر سهم كيما,كيما مباشر,سهم كيما مباشر,kima,شركة كيما,مصر لصناعة الكيماويات,سهم ابو قير,سهم سيدى كرير,مورد,مواد كيماوية,خام,كيماتو,سوق المواد الكيماوية,مصر" />
+    <meta name="keywords" content="كيماويات البناء الحديث,كيماوي,علاج كيماوي,كيماتو,كيما,سهم كيما,سعر سهم كيما,كيما مباشر,سهم كيما مباشر,kima,شركة كيما,مصر لصناعة الكيماويات,سهم ابو قير,سهم سيدى كرير,مورد,مواد كيماوية,خام,كيماتو,سوق المواد الكيماوية,مصر,صودا كاوية,حمض كبريتيك,مذيبات,كيماويات,مواد خام" />
     
     <!-- ===== Open Graph ===== -->
     <meta property="og:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
@@ -55,7 +55,7 @@
     <meta name="msapplication-TileColor" content="#0c2d4a" />
     <meta name="msapplication-TileImage" content="logo.png" />
 
-    <!-- ===== Schema.org ===== -->
+    <!-- ===== Schema.org للموقع ===== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -105,6 +105,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
     <style>
+        /* ===== جميع الأنماط السابقة ===== */
         * {
             margin: 0;
             padding: 0;
@@ -117,7 +118,6 @@
             color: #1a2634;
         }
 
-        /* ===== تحسينات الأنيميشن ===== */
         @keyframes fadeSlideUp {
             0% {
                 opacity: 0;
@@ -185,7 +185,6 @@
             animation-delay: 0.6s;
         }
 
-        /* ===== NAVBAR ===== */
         .navbar {
             background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
             padding: 14px 40px;
@@ -284,7 +283,6 @@
             box-shadow: 0 8px 24px rgba(52, 152, 219, 0.35);
         }
 
-        /* ===== DROPDOWN ===== */
         .dropdown {
             position: relative;
             display: inline-block;
@@ -369,7 +367,6 @@
             background: #fde8e5;
         }
 
-        /* ===== HERO ===== */
         .hero {
             background: linear-gradient(135deg, #0c2d4a 0%, #1a4a6e 100%);
             border-radius: 44px;
@@ -446,7 +443,6 @@
             animation: float 3s ease-in-out infinite;
         }
 
-        /* ===== أزرار الهيرو ===== */
         .hero-btn {
             display: inline-flex;
             align-items: center;
@@ -518,7 +514,6 @@
             pointer-events: none;
         }
 
-        /* ===== SEARCH ===== */
         .search-section {
             background: #fff;
             border-radius: 80px;
@@ -574,7 +569,6 @@
             transform: scale(1.02);
         }
 
-        /* ===== FILTERS ===== */
         .filter-buttons {
             display: flex;
             justify-content: center;
@@ -609,7 +603,6 @@
             transform: translateY(-2px);
         }
 
-        /* ===== PRODUCTS ===== */
         .section-title {
             font-size: 24px;
             margin: 30px 0 20px;
@@ -854,7 +847,6 @@
             box-shadow: 0 8px 24px rgba(37, 211, 102, 0.35);
         }
 
-        /* ===== FOOTER ===== */
         .footer {
             background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
             color: #fff;
@@ -914,7 +906,6 @@
             color: #64748b;
         }
 
-        /* ===== Toast ===== */
         .toast-container {
             position: fixed;
             bottom: 20px;
@@ -1002,7 +993,6 @@
             animation: toastOut 0.4s ease forwards;
         }
 
-        /* ===== Stat Counter ===== */
         .stats-bar {
             display: flex;
             justify-content: center;
@@ -1035,7 +1025,42 @@
             display: block;
         }
 
-        /* ===== Responsive ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 30px;
+            right: 30px;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.2rem;
+            box-shadow: 0 8px 24px rgba(52, 152, 219, 0.35);
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 12px 32px rgba(52, 152, 219, 0.5);
+        }
+
+        /* ===== تحسينات SEO للكلمات المفتاحية ===== */
+        .seo-keywords {
+            display: none;
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -1192,38 +1217,6 @@
             clip: rect(0, 0, 0, 0);
             border: 0;
         }
-
-        /* Scroll to top button */
-        .scroll-top {
-            position: fixed;
-            bottom: 30px;
-            right: 30px;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            background: linear-gradient(145deg, #3498db, #2c81ba);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-            font-size: 1.2rem;
-            box-shadow: 0 8px 24px rgba(52, 152, 219, 0.35);
-            transition: all 0.3s ease;
-            opacity: 0;
-            transform: translateY(20px);
-            pointer-events: none;
-            z-index: 99;
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            transform: translateY(0);
-            pointer-events: auto;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-4px);
-            box-shadow: 0 12px 32px rgba(52, 152, 219, 0.5);
-        }
     </style>
 </head>
 <body>
@@ -1264,7 +1257,6 @@
                 <h1>🏭 <span class="highlight">سوق المواد الكيماوية</span> في مصر</h1>
                 <p>بيع واشتري صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
 
-                <!-- ===== Stats Bar ===== -->
                 <div class="stats-bar">
                     <div class="stat-item">
                         <span class="stat-number" id="productCount">0</span>
@@ -1329,6 +1321,12 @@
                     <div class="loader">⏳ جاري تحميل الطلبات...</div>
                 </div>
             </section>
+
+            <!-- ===== قسم SEO للكلمات المفتاحية (مخفي) ===== -->
+            <div class="seo-keywords">
+                <h2>كيماويات البناء الحديث - كيماوي - علاج كيماوي - كيماتو - كيما - سهم كيما - سعر سهم كيما - كيما مباشر - سهم كيما مباشر - kima - شركة كيما - مصر لصناعة الكيماويات - سهم ابو قير - سهم سيدى كرير - مورد - مواد كيماوية - خام</h2>
+                <h3>صودا كاوية - حمض كبريتيك - مذيبات - كيماويات - مواد خام - سوق كيماويات - مصر</h3>
+            </div>
 
         </div>
     </main>
@@ -1547,7 +1545,7 @@
                 `
         }
 
-        // ===== LOAD PRODUCTS =====
+        // ===== LOAD PRODUCTS WITH SEO =====
         async function loadProducts() {
             let query = supabase.from('products').select('*').eq('status', 'active')
             if (currentCategoryId !== 'all') query = query.eq('category_id', currentCategoryId)
@@ -1583,10 +1581,13 @@
                 return { ...p, profile, categoryName: catName, categoryIcon: catIcon }
             }))
 
+            // ===== إنشاء Schema للمنتجات =====
+            generateProductSchema(products)
+
             container.innerHTML = productsWithDetails.map((p, i) => {
                 const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold')
                 const imageHtml = hasImage ?
-                    `<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy">` :
+                    `<img class="card-img" src="${p.image_url}" alt="${p.name} - كيماتو سوق المواد الكيماوية" loading="lazy">` :
                     getPlaceholderHTML(p.name, p.categoryIcon)
                 const whatsappLink = getWhatsAppLink(p.profile?.phone, p.name)
 
@@ -1607,8 +1608,49 @@
                     `
             }).join('')
 
-            // تحديث عداد المنتجات
             document.getElementById('productCount').textContent = products.length
+        }
+
+        // ===== GENERATE PRODUCT SCHEMA =====
+        function generateProductSchema(products) {
+            // إزالة الـ schema القديم إن وجد
+            const oldScript = document.querySelector('script[data-product-schema]')
+            if (oldScript) oldScript.remove()
+
+            if (!products?.length) return
+
+            const schema = {
+                "@context": "https://schema.org",
+                "@type": "ItemList",
+                "name": "أحدث المنتجات الكيماوية في مصر - كيماتو",
+                "description": "قائمة بأحدث المنتجات الكيماوية المتاحة في سوق كيماتو. صودا كاوية، حمض كبريتيك، مذيبات ومواد خام.",
+                "itemListElement": products.map((p, i) => ({
+                    "@type": "ListItem",
+                    "position": i + 1,
+                    "item": {
+                        "@type": "Product",
+                        "name": p.name,
+                        "description": p.description || `${p.name} - منتج كيماوي متاح في سوق كيماتو مصر`,
+                        "image": p.image_url || "https://kaimat0.com/logo.png",
+                        "offers": {
+                            "@type": "Offer",
+                            "price": p.price || "0",
+                            "priceCurrency": "EGP",
+                            "availability": "https://schema.org/InStock",
+                            "seller": {
+                                "@type": "Organization",
+                                "name": "كيماتو"
+                            }
+                        }
+                    }
+                }))
+            }
+
+            const script = document.createElement('script')
+            script.type = 'application/ld+json'
+            script.setAttribute('data-product-schema', 'true')
+            script.textContent = JSON.stringify(schema)
+            document.head.appendChild(script)
         }
 
         // ===== LOAD REQUESTS =====
@@ -1635,7 +1677,7 @@
                             <div class="card-img-wrapper">
                                 <div class="card-img-placeholder" style="background:linear-gradient(145deg, #d4a37333, #b5835a55);">
                                     <div style="font-size:3.5rem;">📋</div>
-                                    <span>طلب شراء</span>
+                                    <span>طلب شراء - ${r.product_name}</span>
                                 </div>
                             </div>
                             <div class="card-content">
@@ -1669,10 +1711,23 @@
         document.getElementById('searchBtn').addEventListener('click', () => {
             currentSearch = document.getElementById('searchInput').value.trim()
             loadProducts()
+            // تحديث عنوان الصفحة للـ SEO
+            if (currentSearch) {
+                document.title = `نتائج البحث عن: ${currentSearch} - كيماتو سوق المواد الكيماوية`
+            } else {
+                document.title = 'كيماتو | سوق المواد الكيماوية في مصر - بيع وشراء كيماويات'
+            }
         })
         document.getElementById('searchInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') { currentSearch = e.target.value.trim();
-                loadProducts(); }
+            if (e.key === 'Enter') {
+                currentSearch = e.target.value.trim()
+                loadProducts()
+                if (currentSearch) {
+                    document.title = `نتائج البحث عن: ${currentSearch} - كيماتو سوق المواد الكيماوية`
+                } else {
+                    document.title = 'كيماتو | سوق المواد الكيماوية في مصر - بيع وشراء كيماويات'
+                }
+            }
         })
 
         // ===== SCROLL TO TOP =====
@@ -1702,43 +1757,45 @@
             })
         }
 
-        // ===== GENERATE PRODUCT SCHEMA =====
-        async function generateProductSchema() {
+        // ===== SITE MAP GENERATOR =====
+        async function generateSiteMap() {
             const { data: products } = await supabase
                 .from('products')
-                .select('*')
+                .select('id, name, updated_at')
                 .eq('status', 'active')
-                .order('created_at', { ascending: false })
-                .limit(5)
+                .limit(50)
 
-            if (!products?.length) return
+            const baseUrl = 'https://kaimat0.com'
+            let sitemap = `<?xml version="1.0" encoding="UTF-8"?>\n`
+            sitemap += `<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n`
+            
+            // الصفحات الرئيسية
+            const pages = ['', 'all-products.html', 'all-requests.html', 'auth.html', 'supplier-dashboard.html', 'buyer-dashboard.html']
+            pages.forEach(page => {
+                sitemap += `  <url>\n`
+                sitemap += `    <loc>${baseUrl}/${page}</loc>\n`
+                sitemap += `    <changefreq>daily</changefreq>\n`
+                sitemap += `    <priority>${page === '' ? '1.0' : '0.8'}</priority>\n`
+                sitemap += `  </url>\n`
+            })
 
-            const schema = {
-                "@context": "https://schema.org",
-                "@type": "ItemList",
-                "name": "أحدث المنتجات الكيماوية في مصر",
-                "description": "قائمة بأحدث المنتجات الكيماوية المتاحة في سوق كيماتو",
-                "itemListElement": products.map((p, i) => ({
-                    "@type": "ListItem",
-                    "position": i + 1,
-                    "item": {
-                        "@type": "Product",
-                        "name": p.name,
-                        "description": p.description || p.name,
-                        "offers": {
-                            "@type": "Offer",
-                            "price": p.price || "0",
-                            "priceCurrency": "EGP",
-                            "availability": "https://schema.org/InStock"
-                        }
-                    }
-                }))
+            // صفحات المنتجات
+            if (products) {
+                products.forEach(p => {
+                    sitemap += `  <url>\n`
+                    sitemap += `    <loc>${baseUrl}/product-details.html?id=${p.id}</loc>\n`
+                    sitemap += `    <lastmod>${p.updated_at || new Date().toISOString()}</lastmod>\n`
+                    sitemap += `    <changefreq>weekly</changefreq>\n`
+                    sitemap += `    <priority>0.6</priority>\n`
+                    sitemap += `  </url>\n`
+                })
             }
 
-            const script = document.createElement('script')
-            script.type = 'application/ld+json'
-            script.textContent = JSON.stringify(schema)
-            document.head.appendChild(script)
+            sitemap += `</urlset>`
+
+            // حفظ الـ sitemap في localStorage للتطوير
+            localStorage.setItem('sitemap', sitemap)
+            console.log('✅ Sitemap generated with', products?.length || 0, 'products')
         }
 
         // ===== INIT =====
@@ -1750,14 +1807,14 @@
             await loadProducts()
             await loadRequests()
             await loadSupplierCount()
-            await generateProductSchema()
+            await generateSiteMap()
             setupScrollTop()
             setupNavbarScroll()
 
             setTimeout(() => {
                 setupHeroButtons()
-                console.log('✅ كيماتو يعمل مع جميع التحسينات!')
-                console.log('✅ تم استخدام logo.png و logo.ico كأيقونات للموقع')
+                console.log('✅ كيماتو يعمل مع جميع تحسينات SEO!')
+                console.log('✅ المنتجات ستظهر في نتائج البحث عند البحث عن أي منتج')
             }, 200)
 
             setTimeout(() => {
