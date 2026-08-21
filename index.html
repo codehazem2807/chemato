@@ -26,9 +26,6 @@
     <link rel="apple-touch-icon" href="logo.png" />
     <meta name="theme-color" content="#0c2d4a" />
 
-    <!-- CSP Headers -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline' https://cdn.jsdelivr.net https://cdn.onesignal.com https://www.googletagmanager.com; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https://*.supabase.co; connect-src 'self' https://*.supabase.co https://*.onesignal.com;">
-
     <!-- Schema.org structured data -->
     <script type="application/ld+json">
     {
@@ -122,6 +119,10 @@
                 background: linear-gradient(145deg, #1a2a3a, #0f1f2f);
                 color: #7ec8e3;
             }
+            .card-img-placeholder span {
+                background: #0a1a2a;
+                color: #e0e0e0;
+            }
             .search-wrapper {
                 background: #16213e;
                 border-color: #0f3460;
@@ -132,6 +133,9 @@
             }
             .search-wrapper input:focus {
                 background: #1a2a3a;
+            }
+            .search-wrapper input::placeholder {
+                color: #6a7a8a;
             }
             .section-header h2 {
                 color: #e0e0e0;
@@ -174,6 +178,17 @@
             }
             .btn-outline {
                 border-color: rgba(255,255,255,0.3);
+            }
+            .advanced-filters select {
+                background: #1a2a3a;
+                border-color: #0f3460;
+                color: #e0e0e0;
+            }
+            .advanced-filters select option {
+                background: #1a2a3a;
+            }
+            .advanced-toggle {
+                color: #7ec8e3;
             }
         }
 
@@ -613,6 +628,7 @@
             display: flex;
             gap: 8px;
             flex-wrap: wrap;
+            justify-content: center;
         }
 
         .filter-chip {
@@ -627,6 +643,9 @@
             border: 2px solid transparent;
             user-select: none;
             min-height: 36px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
 
         .filter-chip:hover {
@@ -680,13 +699,7 @@
             font-family: inherit;
             font-size: 0.85rem;
             cursor: pointer;
-        }
-        @media (prefers-color-scheme: dark) {
-            .advanced-filters select {
-                background: #1a2a3a;
-                border-color: #0f3460;
-                color: #e0e0e0;
-            }
+            min-height: 40px;
         }
 
         .section-header {
@@ -694,6 +707,8 @@
             justify-content: space-between;
             align-items: center;
             margin: 20px 0 14px;
+            flex-wrap: wrap;
+            gap: 8px;
         }
 
         .section-header h2 {
@@ -830,25 +845,23 @@
 
         .card-actions .btn {
             flex: 1;
-            min-width: 80px;
-            padding: 8px 12px;
+            min-width: 60px;
+            padding: 8px 10px;
             border-radius: 30px;
             text-decoration: none;
             font-weight: 700;
-            font-size: 0.75rem;
+            font-size: 0.7rem;
             text-align: center;
             transition: all 0.3s;
             border: none;
             cursor: pointer;
             font-family: inherit;
             color: #fff;
-            position: relative;
-            overflow: hidden;
-            min-height: 44px;
             display: inline-flex;
             align-items: center;
             justify-content: center;
             gap: 4px;
+            min-height: 38px;
         }
 
         .btn-detail {
@@ -871,8 +884,8 @@
 
         .btn-share {
             background: #6c757d;
-            flex: 0.5;
-            min-width: 40px;
+            flex: 0.4;
+            min-width: 36px;
         }
         .btn-share:hover {
             background: #495057;
@@ -918,6 +931,7 @@
 
         .toast .icon {
             font-size: 1.6rem;
+            flex-shrink: 0;
         }
 
         .toast .content {
@@ -949,6 +963,7 @@
             cursor: pointer;
             font-size: 0.9rem;
             transition: 0.3s;
+            flex-shrink: 0;
         }
 
         .toast .close:hover {
@@ -990,10 +1005,11 @@
             display: flex;
             gap: 8px;
             margin-top: 8px;
+            justify-content: center;
         }
         .share-btn {
             background: rgba(255,255,255,0.1);
-            border: none;
+            border: 1px solid rgba(255,255,255,0.15);
             color: #fff;
             padding: 6px 14px;
             border-radius: 20px;
@@ -1196,13 +1212,17 @@
                 font-size: 0.85rem;
             }
             .filter-chip {
-                padding: 10px 16px;
-                font-size: 0.85rem;
-                min-height: 44px;
+                padding: 8px 14px;
+                font-size: 0.75rem;
+                min-height: 36px;
             }
             .card-actions .btn {
-                min-height: 44px;
-                padding: 10px 8px;
+                min-height: 38px;
+                padding: 6px 8px;
+                font-size: 0.65rem;
+            }
+            .skeleton-loader {
+                grid-template-columns: 1fr;
             }
         }
 
@@ -1222,6 +1242,15 @@
             }
             .filter-chip:hover {
                 transform: none;
+            }
+            .btn-detail:hover {
+                background: linear-gradient(135deg, #1a4a6e, #0a2538);
+            }
+            .btn-whatsapp:hover {
+                background: #25D366;
+            }
+            .btn-share:hover {
+                background: #6c757d;
             }
         }
     </style>
@@ -1292,7 +1321,7 @@
 
                 <!-- Share buttons -->
                 <div class="share-buttons">
-                    <button class="share-btn" onclick="sharePage()"><i class="fas fa-share-alt"></i> مشاركة</button>
+                    <button class="share-btn" onclick="sharePage()"><i class="fas fa-share-alt"></i> مشاركة الصفحة</button>
                 </div>
             </div>
         </section>
@@ -1390,7 +1419,7 @@
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
                 .then(() => console.log('✅ Service Worker registered'))
-                .catch(err => console.log('❌ SW registration failed:', err));
+                .catch(() => console.log('⚠️ Service Worker registration failed'));
         }
     </script>
 
@@ -1408,6 +1437,7 @@
         let currentPriceFilter = 'all'
         let currentSort = 'newest'
         let currentProducts = []
+        let channel = null
 
         // ===== SHARE FUNCTION =====
         window.sharePage = async function() {
@@ -1422,39 +1452,46 @@
                     // User cancelled
                 }
             } else {
-                navigator.clipboard.writeText(window.location.href).then(() => {
+                try {
+                    await navigator.clipboard.writeText(window.location.href);
                     showToast('📋', 'تم النسخ!', 'تم نسخ الرابط إلى الحافظة');
-                });
+                } catch (e) {
+                    showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط');
+                }
             }
         }
 
         // ===== USER =====
         async function checkUser() {
-            const { data: { user } } = await supabase.auth.getUser()
-            const supplierBtn = document.getElementById('supplierBtn')
-            const buyerBtn = document.getElementById('buyerBtn')
-            const welcome = document.getElementById('welcomeContainer')
+            try {
+                const { data: { user } } = await supabase.auth.getUser()
+                const supplierBtn = document.getElementById('supplierBtn')
+                const buyerBtn = document.getElementById('buyerBtn')
+                const welcome = document.getElementById('welcomeContainer')
 
-            if (user) {
-                if (supplierBtn) supplierBtn.style.display = 'none'
-                if (buyerBtn) buyerBtn.style.display = 'none'
+                if (user) {
+                    if (supplierBtn) supplierBtn.style.display = 'none'
+                    if (buyerBtn) buyerBtn.style.display = 'none'
 
-                const { data: profile } = await supabase
-                    .from('profiles')
-                    .select('full_name, user_type')
-                    .eq('id', user.id)
-                    .single()
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('full_name, user_type')
+                        .eq('id', user.id)
+                        .single()
 
-                const name = profile?.full_name || 'مستخدم'
-                const type = profile?.user_type === 'supplier' ? 'مورد' : 'عميل'
+                    const name = profile?.full_name || 'مستخدم'
+                    const type = profile?.user_type === 'supplier' ? 'مورد' : 'عميل'
 
-                if (welcome) {
-                    welcome.innerHTML = `<div class="welcome-msg">👋 مرحباً ${name} (${type})</div>`
+                    if (welcome) {
+                        welcome.innerHTML = `<div class="welcome-msg">👋 مرحباً ${name} (${type})</div>`
+                    }
+                } else {
+                    if (supplierBtn) supplierBtn.style.display = 'inline-flex'
+                    if (buyerBtn) buyerBtn.style.display = 'inline-flex'
+                    if (welcome) welcome.innerHTML = ''
                 }
-            } else {
-                if (supplierBtn) supplierBtn.style.display = 'inline-flex'
-                if (buyerBtn) buyerBtn.style.display = 'inline-flex'
-                if (welcome) welcome.innerHTML = ''
+            } catch (e) {
+                console.error('Error checking user:', e)
             }
         }
 
@@ -1472,40 +1509,45 @@
         }
 
         async function updateDropdown() {
-            const { data: { user } } = await supabase.auth.getUser()
-            const content = document.getElementById('dropdownContent')
-            if (!content) return
+            try {
+                const { data: { user } } = await supabase.auth.getUser()
+                const content = document.getElementById('dropdownContent')
+                if (!content) return
 
-            if (user) {
-                const { data: profile } = await supabase
-                    .from('profiles')
-                    .select('user_type')
-                    .eq('id', user.id)
-                    .single()
+                if (user) {
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('user_type')
+                        .eq('id', user.id)
+                        .single()
 
-                content.innerHTML = `
-                    <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}</a>
-                    <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
-                    <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-                `
-                document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
-                    e.preventDefault()
-                    await supabase.auth.signOut()
-                    window.location.reload()
-                })
-            } else {
-                content.innerHTML = `
-                    <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                    <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                    <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                    <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
-                `
+                    content.innerHTML = `
+                        <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> ${profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل'}</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                        <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                    `
+                    document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                        e.preventDefault()
+                        await supabase.auth.signOut()
+                        window.location.reload()
+                    })
+                } else {
+                    content.innerHTML = `
+                        <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                        <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                        <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                    `
+                }
+            } catch (e) {
+                console.error('Error updating dropdown:', e)
             }
         }
 
         // ===== TOAST =====
         function showToast(icon, title, desc, linkText = null, linkUrl = null) {
             const container = document.getElementById('toastContainer')
+            if (!container) return
             const toast = document.createElement('div')
             toast.className = 'toast'
             toast.innerHTML = `
@@ -1530,54 +1572,68 @@
 
         // ===== LOAD CATEGORIES =====
         async function loadCategories() {
-            const { data: categories } = await supabase
-                .from('categories')
-                .select('*')
-                .eq('is_active', true)
-                .order('display_order')
+            try {
+                const { data: categories } = await supabase
+                    .from('categories')
+                    .select('*')
+                    .eq('is_active', true)
+                    .order('display_order')
 
-            const container = document.getElementById('filterButtons')
-            if (categories?.length) {
-                categories.forEach(cat => {
-                    container.innerHTML +=
-                        `<span class="filter-chip" data-category-id="${cat.id}">${cat.icon || '📁'} ${cat.name}</span>`
+                const container = document.getElementById('filterButtons')
+                if (!container) return
+
+                if (categories?.length) {
+                    categories.forEach(cat => {
+                        container.innerHTML +=
+                            `<span class="filter-chip" data-category-id="${cat.id}">${cat.icon || '📁'} ${cat.name}</span>`
+                    })
+                }
+
+                document.querySelectorAll('.filter-chip').forEach(chip => {
+                    chip.addEventListener('click', () => {
+                        document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'))
+                        chip.classList.add('active')
+                        currentCategoryId = chip.dataset.categoryId
+                        loadProducts()
+                    })
                 })
+            } catch (e) {
+                console.error('Error loading categories:', e)
             }
-
-            document.querySelectorAll('.filter-chip').forEach(chip => {
-                chip.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'))
-                    chip.classList.add('active')
-                    currentCategoryId = chip.dataset.categoryId
-                    loadProducts()
-                })
-            })
         }
 
         // ===== LOAD TOTAL PRODUCTS COUNT =====
         async function loadTotalProductsCount() {
-            const { count, error } = await supabase
-                .from('products')
-                .select('*', { count: 'exact', head: true })
-                .eq('status', 'active')
+            try {
+                const { count, error } = await supabase
+                    .from('products')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('status', 'active')
 
-            if (!error) {
-                const element = document.getElementById('totalProducts')
-                element.textContent = count || 0
-                element.classList.remove('updated')
-                void element.offsetWidth
-                element.classList.add('updated')
+                if (!error) {
+                    const element = document.getElementById('totalProducts')
+                    if (element) {
+                        element.textContent = count || 0
+                        element.classList.remove('updated')
+                        void element.offsetWidth
+                        element.classList.add('updated')
+                    }
+                }
+                return count || 0
+            } catch (e) {
+                console.error('Error loading product count:', e)
+                return 0
             }
-            return count || 0
         }
 
         // ===== LOAD PRODUCTS =====
         async function loadProducts() {
             const container = document.getElementById('productsList')
+            if (!container) return
             
             // Show skeleton loader
             container.innerHTML = `
-                <div class="skeleton-loader" id="skeletonLoader">
+                <div class="skeleton-loader">
                     ${Array(6).fill(0).map(() => '<div class="skeleton-card"></div>').join('')}
                 </div>
             `
@@ -1595,11 +1651,13 @@
 
                 // Apply price filter
                 if (currentPriceFilter !== 'all') {
-                    const [min, max] = currentPriceFilter.split('-').map(Number)
                     if (currentPriceFilter === '1000+') {
                         query = query.gte('price', 1000)
-                    } else if (!isNaN(min) && !isNaN(max)) {
-                        query = query.gte('price', min).lte('price', max)
+                    } else {
+                        const [min, max] = currentPriceFilter.split('-').map(Number)
+                        if (!isNaN(min) && !isNaN(max)) {
+                            query = query.gte('price', min).lte('price', max)
+                        }
                     }
                 }
 
@@ -1652,20 +1710,20 @@
                     const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold')
                     const imgHtml = hasImage ?
                         `<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy" decoding="async">` :
-                        `<div class="card-img-placeholder"><div>${p.catIcon}</div><span>${p.name?.substring(0, 20)}</span></div>`
+                        `<div class="card-img-placeholder"><div>${p.catIcon}</div><span>${p.name?.substring(0, 20) || ''}</span></div>`
 
                     return `
                         <div class="card" style="animation-delay:${i * 0.05}s;">
                             ${imgHtml}
                             <div class="card-body">
                                 <span class="card-badge">${p.catIcon} ${p.catName}</span>
-                                <h3>${p.name.substring(0, 35)}</h3>
-                                <div class="card-price">${p.price ? p.price.toLocaleString() + ' ج.م / ' + p.unit : 'سعر عند الطلب'}</div>
+                                <h3>${p.name ? p.name.substring(0, 35) : ''}</h3>
+                                <div class="card-price">${p.price ? p.price.toLocaleString() + ' ج.م / ' + (p.unit || '') : 'سعر عند الطلب'}</div>
                                 <div class="card-supplier"><i class="fas fa-building" style="margin-left:4px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
                                 <div class="card-actions">
                                     <a href="product-details.html?id=${p.id}" class="btn btn-detail"><i class="fas fa-info-circle"></i> تفاصيل</a>
                                     <a href="${getWhatsApp(p.profile?.phone, p.name)}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
-                                    <button class="btn btn-share" onclick="shareProduct('${p.id}', '${p.name.replace(/'/g, "\\'")}')"><i class="fas fa-share-alt"></i></button>
+                                    <button class="btn btn-share" onclick="shareProduct('${p.id}', '${p.name ? p.name.replace(/'/g, "\\'") : ''}')"><i class="fas fa-share-alt"></i></button>
                                 </div>
                             </div>
                         </div>
@@ -1690,13 +1748,15 @@
             const url = `${window.location.origin}/product-details.html?id=${id}`
             if (navigator.share) {
                 navigator.share({
-                    title: name,
-                    text: `تحقق من هذا المنتج على كيماتو: ${name}`,
+                    title: name || 'منتج',
+                    text: `تحقق من هذا المنتج على كيماتو: ${name || ''}`,
                     url: url
                 }).catch(() => {})
             } else {
                 navigator.clipboard.writeText(url).then(() => {
-                    showToast('📋', 'تم النسخ!', `تم نسخ رابط ${name}`);
+                    showToast('📋', 'تم النسخ!', `تم نسخ رابط ${name || 'المنتج'}`);
+                }).catch(() => {
+                    showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط');
                 });
             }
         }
@@ -1717,8 +1777,8 @@
                     "position": i + 1,
                     "item": {
                         "@type": "Product",
-                        "name": p.name,
-                        "description": p.description || p.name,
+                        "name": p.name || 'منتج',
+                        "description": p.description || p.name || '',
                         "offers": {
                             "@type": "Offer",
                             "price": p.price || "0",
@@ -1746,6 +1806,7 @@
                     .limit(6)
 
                 const container = document.getElementById('requestsList')
+                if (!container) return
 
                 if (!data?.length) {
                     container.innerHTML =
@@ -1761,7 +1822,7 @@
                         </div>
                         <div class="card-body">
                             <span class="card-badge"><i class="fas fa-bullhorn"></i> طلب شراء</span>
-                            <h3>${r.product_name.substring(0, 35)}</h3>
+                            <h3>${r.product_name ? r.product_name.substring(0, 35) : ''}</h3>
                             <div style="font-size:0.9rem;color:#1e2a3e;margin:2px 0;"><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</div>
                             <div class="card-supplier"><i class="fas fa-user"></i> ${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</div>
                             <div class="card-actions">
@@ -1773,7 +1834,8 @@
                 `).join('')
 
                 const count = data.length
-                document.getElementById('totalRequests').textContent = count
+                const el = document.getElementById('totalRequests')
+                if (el) el.textContent = count
             } catch (error) {
                 console.error('Error loading requests:', error)
             }
@@ -1788,10 +1850,12 @@
                     .eq('user_type', 'supplier')
 
                 const element = document.getElementById('totalSuppliers')
-                element.textContent = count || 0
-                element.classList.remove('updated')
-                void element.offsetWidth
-                element.classList.add('updated')
+                if (element) {
+                    element.textContent = count || 0
+                    element.classList.remove('updated')
+                    void element.offsetWidth
+                    element.classList.add('updated')
+                }
             } catch (error) {
                 console.error('Error loading supplier count:', error)
             }
@@ -1799,14 +1863,18 @@
 
         // ===== SETUP REALTIME =====
         function setupRealtime() {
-            const channel = supabase
+            if (channel) {
+                supabase.removeChannel(channel)
+            }
+            
+            channel = supabase
                 .channel('products_changes')
                 .on('postgres_changes', {
                     event: 'INSERT',
                     schema: 'public',
                     table: 'products'
                 }, (payload) => {
-                    showToast('🆕', 'منتج جديد!', `تم إضافة: ${payload.new.name}`, 'عرض', '/all-products.html')
+                    showToast('🆕', 'منتج جديد!', `تم إضافة: ${payload.new.name || ''}`, 'عرض', '/all-products.html')
                     loadProducts()
                     loadTotalProductsCount()
                 })
@@ -1819,46 +1887,62 @@
                     loadTotalProductsCount()
                 })
                 .subscribe()
-
-            return channel
         }
 
         // ===== SEARCH =====
-        document.getElementById('searchBtn').addEventListener('click', () => {
-            currentSearch = document.getElementById('searchInput').value.trim()
-            loadProducts()
-            if (currentSearch) {
-                document.title = `نتائج: ${currentSearch} - كيماتو`
-            } else {
-                document.title = 'كيماتو | سوق المواد الكيماوية في مصر'
-            }
-        })
+        const searchBtn = document.getElementById('searchBtn')
+        const searchInput = document.getElementById('searchInput')
+        
+        if (searchBtn) {
+            searchBtn.addEventListener('click', () => {
+                currentSearch = searchInput?.value?.trim() || ''
+                loadProducts()
+                if (currentSearch) {
+                    document.title = `نتائج: ${currentSearch} - كيماتو`
+                } else {
+                    document.title = 'كيماتو | سوق المواد الكيماوية في مصر'
+                }
+            })
+        }
 
-        document.getElementById('searchInput').addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                document.getElementById('searchBtn').click()
-            }
-        })
+        if (searchInput) {
+            searchInput.addEventListener('keypress', (e) => {
+                if (e.key === 'Enter') {
+                    searchBtn?.click()
+                }
+            })
+        }
 
         // ===== ADVANCED FILTERS =====
-        document.getElementById('advancedToggle').addEventListener('click', () => {
-            const filters = document.getElementById('advancedFilters')
-            filters.classList.toggle('show')
-        })
+        const advancedToggle = document.getElementById('advancedToggle')
+        const advancedFilters = document.getElementById('advancedFilters')
+        const priceFilter = document.getElementById('priceFilter')
+        const sortFilter = document.getElementById('sortFilter')
 
-        document.getElementById('priceFilter').addEventListener('change', (e) => {
-            currentPriceFilter = e.target.value
-            loadProducts()
-        })
+        if (advancedToggle && advancedFilters) {
+            advancedToggle.addEventListener('click', () => {
+                advancedFilters.classList.toggle('show')
+            })
+        }
 
-        document.getElementById('sortFilter').addEventListener('change', (e) => {
-            currentSort = e.target.value
-            loadProducts()
-        })
+        if (priceFilter) {
+            priceFilter.addEventListener('change', (e) => {
+                currentPriceFilter = e.target.value
+                loadProducts()
+            })
+        }
+
+        if (sortFilter) {
+            sortFilter.addEventListener('change', (e) => {
+                currentSort = e.target.value
+                loadProducts()
+            })
+        }
 
         // ===== SCROLL TOP =====
         function setupScrollTop() {
             const btn = document.getElementById('scrollTopBtn')
+            if (!btn) return
             window.addEventListener('scroll', () => {
                 btn.classList.toggle('visible', window.scrollY > 300)
             })
@@ -1905,6 +1989,7 @@
                         .from('price_alerts')
                         .select('*')
                         .eq('active', true)
+                        .limit(10)
 
                     if (alerts?.length) {
                         for (const alert of alerts) {
@@ -1914,8 +1999,8 @@
                                 .eq('id', alert.product_id)
                                 .single()
 
-                            if (product && product.price <= alert.target_price) {
-                                showToast('🔔', 'تنبيه السعر!', `${product.name} وصل لـ ${product.price} ج.م`)
+                            if (product && product.price !== null && product.price <= alert.target_price) {
+                                showToast('🔔', 'تنبيه السعر!', `${product.name || 'منتج'} وصل لـ ${product.price} ج.م`)
                                 // Deactivate alert
                                 await supabase
                                     .from('price_alerts')
@@ -1928,17 +2013,6 @@
                     // Silent fail
                 }
             }, 3600000)
-        }
-
-        // ===== SAFE FETCH =====
-        async function safeFetch(fn, fallback) {
-            try {
-                return await fn();
-            } catch (error) {
-                console.error('Error:', error);
-                showToast('⚠️', 'حدث خطأ', 'يرجى المحاولة مرة أخرى');
-                return fallback;
-            }
         }
 
         // ===== INIT =====
@@ -1962,9 +2036,10 @@
             setupRealtime()
             setupPriceAlerts()
 
-            // Set up hero buttons
+            // Hero buttons - add click handlers
             const supplierBtn = document.getElementById('supplierBtn')
             const buyerBtn = document.getElementById('buyerBtn')
+            
             if (supplierBtn) {
                 supplierBtn.addEventListener('click', (e) => {
                     e.preventDefault()
@@ -1980,7 +2055,8 @@
 
             setTimeout(() => {
                 console.log('✅ كيماتو يعمل على chemato.vercel.app')
-                console.log('✅ إجمالي المنتجات: ' + document.getElementById('totalProducts').textContent)
+                const totalEl = document.getElementById('totalProducts')
+                console.log('✅ إجمالي المنتجات: ' + (totalEl?.textContent || '0'))
             }, 100)
 
             setTimeout(() => {
@@ -1989,11 +2065,13 @@
             }, 1500)
         }
 
+        // Auth state change listener
         supabase.auth.onAuthStateChange(() => {
             checkUser()
             updateDropdown()
         })
 
+        // Start the app
         init()
     </script>
 </body>
