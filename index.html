@@ -190,6 +190,16 @@
             .advanced-toggle {
                 color: #7ec8e3;
             }
+            .suggestions-box {
+                background: #16213e;
+                border-color: #0f3460;
+            }
+            .suggestion-item:hover {
+                background: #1a2a3a;
+            }
+            .suggestion-item .highlight {
+                color: #7ec8e3;
+            }
         }
 
         @keyframes fadeUp {
@@ -559,12 +569,17 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        /* ===== SEARCH WITH SUGGESTIONS ===== */
+        .search-container {
+            position: relative;
+            max-width: 720px;
+            margin: 14px auto 16px;
+        }
+
         .search-wrapper {
             background: #fff;
             border-radius: 60px;
             padding: 4px 6px 4px 4px;
-            margin: 14px auto 16px;
-            max-width: 720px;
             display: flex;
             gap: 6px;
             box-shadow: 0 8px 28px rgba(0, 0, 0, 0.04);
@@ -613,6 +628,123 @@
             background: #0a2538;
             transform: scale(1.01);
         }
+
+        /* Suggestions Box */
+        .suggestions-box {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 16px 48px rgba(0, 0, 0, 0.12);
+            border: 1px solid rgba(0,0,0,0.06);
+            max-height: 320px;
+            overflow-y: auto;
+            display: none;
+            z-index: 1001;
+        }
+
+        .suggestions-box.show {
+            display: block;
+            animation: fadeUp 0.2s ease;
+        }
+
+        .suggestions-box::-webkit-scrollbar {
+            width: 4px;
+        }
+        .suggestions-box::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 10px;
+        }
+        .suggestions-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .suggestion-item {
+            padding: 12px 20px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            border-bottom: 1px solid #f0f2f5;
+            color: #1a2634;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover {
+            background: #eef5fa;
+        }
+
+        .suggestion-item .icon {
+            font-size: 1.1rem;
+            color: #3498db;
+            flex-shrink: 0;
+        }
+
+        .suggestion-item .text {
+            flex: 1;
+            font-weight: 500;
+        }
+
+        .suggestion-item .highlight {
+            color: #3498db;
+            font-weight: 800;
+        }
+
+        .suggestion-item .sub-text {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-right: 8px;
+        }
+
+        .suggestion-item .badge {
+            background: #ecf3f8;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #1a4a6e;
+            flex-shrink: 0;
+        }
+
+        .suggestion-loading {
+            padding: 16px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .suggestion-empty {
+            padding: 16px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .suggestion-category {
+            padding: 8px 20px;
+            background: #f8fafc;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 1px solid #f0f2f5;
+        }
+        @media (prefers-color-scheme: dark) {
+            .suggestion-category {
+                background: #1a2a3a;
+                color: #7a8a9a;
+                border-bottom-color: #0f3460;
+            }
+        }
+
+        /* ===== END SEARCH WITH SUGGESTIONS ===== */
 
         .filters-wrapper {
             display: flex;
@@ -1060,6 +1192,16 @@
             display: none;
         }
 
+        /* ===== KEYBOARD NAVIGATION ===== */
+        .suggestion-item.active {
+            background: #eef5fa;
+        }
+        @media (prefers-color-scheme: dark) {
+            .suggestion-item.active {
+                background: #1a2a3a;
+            }
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 padding: 10px 16px;
@@ -1159,6 +1301,9 @@
                 flex-direction: column;
                 align-items: center;
             }
+            .suggestions-box {
+                max-height: 240px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1224,6 +1369,13 @@
             .skeleton-loader {
                 grid-template-columns: 1fr;
             }
+            .suggestions-box {
+                max-height: 200px;
+            }
+            .suggestion-item {
+                padding: 10px 14px;
+                font-size: 0.85rem;
+            }
         }
 
         @media (hover: none) {
@@ -1251,6 +1403,17 @@
             }
             .btn-share:hover {
                 background: #6c757d;
+            }
+            .suggestion-item:hover {
+                background: transparent;
+            }
+            .suggestion-item.active {
+                background: #eef5fa;
+            }
+            @media (prefers-color-scheme: dark) {
+                .suggestion-item.active {
+                    background: #1a2a3a;
+                }
             }
         }
     </style>
@@ -1326,10 +1489,13 @@
             </div>
         </section>
 
-        <!-- ===== SEARCH ===== -->
-        <div class="search-wrapper animate delay-1">
-            <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج... مثل: صودا كاوية، حمض كبريتيك" />
-            <button id="searchBtn"><i class="fas fa-search"></i> بحث</button>
+        <!-- ===== SEARCH WITH SUGGESTIONS ===== -->
+        <div class="search-container animate delay-1">
+            <div class="search-wrapper">
+                <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج... مثل: صودا كاوية، حمض كبريتيك" autocomplete="off" />
+                <button id="searchBtn"><i class="fas fa-search"></i> بحث</button>
+            </div>
+            <div class="suggestions-box" id="suggestionsBox"></div>
         </div>
 
         <!-- ===== FILTERS ===== -->
@@ -1438,6 +1604,9 @@
         let currentSort = 'newest'
         let currentProducts = []
         let channel = null
+        let suggestionsTimeout = null
+        let selectedSuggestionIndex = -1
+        let allProductsForSuggestions = []
 
         // ===== SHARE FUNCTION =====
         window.sharePage = async function() {
@@ -1623,6 +1792,123 @@
             } catch (e) {
                 console.error('Error loading product count:', e)
                 return 0
+            }
+        }
+
+        // ===== LOAD ALL PRODUCTS FOR SUGGESTIONS =====
+        async function loadAllProductsForSuggestions() {
+            try {
+                const { data } = await supabase
+                    .from('products')
+                    .select('id, name, category, category_id, price')
+                    .eq('status', 'active')
+                    .limit(200)
+
+                allProductsForSuggestions = data || []
+            } catch (e) {
+                console.error('Error loading products for suggestions:', e)
+                allProductsForSuggestions = []
+            }
+        }
+
+        // ===== SUGGESTIONS =====
+        function showSuggestions(query) {
+            const box = document.getElementById('suggestionsBox')
+            if (!box) return
+
+            if (!query || query.length < 1) {
+                box.classList.remove('show')
+                return
+            }
+
+            const results = allProductsForSuggestions.filter(p => 
+                p.name && p.name.toLowerCase().includes(query.toLowerCase())
+            ).slice(0, 10)
+
+            if (results.length === 0) {
+                box.innerHTML = `<div class="suggestion-empty">🔍 لا توجد نتائج لـ "${query}"</div>`
+                box.classList.add('show')
+                return
+            }
+
+            let html = ''
+            // Add "view all results" option
+            html += `
+                <div class="suggestion-item" data-action="view-all" data-query="${query}">
+                    <span class="icon">🔍</span>
+                    <span class="text">عرض جميع النتائج لـ "<span class="highlight">${query}</span>"</span>
+                    <span class="badge">${results.length}</span>
+                </div>
+            `
+
+            // Add product suggestions
+            results.forEach(p => {
+                const priceText = p.price ? `${p.price.toLocaleString()} ج.م` : 'سعر عند الطلب'
+                html += `
+                    <div class="suggestion-item" data-product-id="${p.id}">
+                        <span class="icon">🧪</span>
+                        <span class="text">${highlightMatch(p.name, query)}</span>
+                        <span class="sub-text">${priceText}</span>
+                    </div>
+                `
+            })
+
+            box.innerHTML = html
+            box.classList.add('show')
+            selectedSuggestionIndex = -1
+        }
+
+        function highlightMatch(text, query) {
+            if (!text || !query) return text || ''
+            const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
+            return text.replace(regex, '<span class="highlight">$1</span>')
+        }
+
+        function hideSuggestions() {
+            const box = document.getElementById('suggestionsBox')
+            if (box) box.classList.remove('show')
+            selectedSuggestionIndex = -1
+        }
+
+        // ===== SUGGESTIONS KEYBOARD NAVIGATION =====
+        function navigateSuggestions(direction) {
+            const box = document.getElementById('suggestionsBox')
+            if (!box || !box.classList.contains('show')) return
+
+            const items = box.querySelectorAll('.suggestion-item')
+            if (items.length === 0) return
+
+            // Remove active from all
+            items.forEach(el => el.classList.remove('active'))
+
+            if (direction === 'down') {
+                selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, items.length - 1)
+            } else if (direction === 'up') {
+                selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, 0)
+            }
+
+            if (selectedSuggestionIndex >= 0) {
+                items[selectedSuggestionIndex].classList.add('active')
+                items[selectedSuggestionIndex].scrollIntoView({ block: 'nearest' })
+            }
+        }
+
+        function selectCurrentSuggestion() {
+            const box = document.getElementById('suggestionsBox')
+            if (!box || !box.classList.contains('show')) return
+
+            const items = box.querySelectorAll('.suggestion-item')
+            if (items.length === 0) return
+
+            let targetItem
+            if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < items.length) {
+                targetItem = items[selectedSuggestionIndex]
+            } else {
+                targetItem = items[0]
+            }
+
+            if (targetItem) {
+                targetItem.click()
             }
         }
 
@@ -1877,6 +2163,7 @@
                     showToast('🆕', 'منتج جديد!', `تم إضافة: ${payload.new.name || ''}`, 'عرض', '/all-products.html')
                     loadProducts()
                     loadTotalProductsCount()
+                    loadAllProductsForSuggestions()
                 })
                 .on('postgres_changes', {
                     event: 'DELETE',
@@ -1885,33 +2172,116 @@
                 }, () => {
                     loadProducts()
                     loadTotalProductsCount()
+                    loadAllProductsForSuggestions()
                 })
                 .subscribe()
         }
 
-        // ===== SEARCH =====
+        // ===== SEARCH WITH SUGGESTIONS =====
         const searchBtn = document.getElementById('searchBtn')
         const searchInput = document.getElementById('searchInput')
+        const suggestionsBox = document.getElementById('suggestionsBox')
         
+        // Search input handler with suggestions
+        if (searchInput) {
+            searchInput.addEventListener('input', (e) => {
+                const query = e.target.value.trim()
+                currentSearch = query
+                
+                if (suggestionsTimeout) {
+                    clearTimeout(suggestionsTimeout)
+                }
+                
+                if (query.length >= 1) {
+                    suggestionsTimeout = setTimeout(() => {
+                        showSuggestions(query)
+                    }, 150)
+                } else {
+                    hideSuggestions()
+                }
+            })
+
+            searchInput.addEventListener('focus', () => {
+                const query = searchInput.value.trim()
+                if (query.length >= 1) {
+                    showSuggestions(query)
+                }
+            })
+
+            searchInput.addEventListener('blur', () => {
+                // Delay to allow click on suggestion
+                setTimeout(() => {
+                    hideSuggestions()
+                }, 200)
+            })
+
+            // Keyboard navigation
+            searchInput.addEventListener('keydown', (e) => {
+                if (e.key === 'ArrowDown') {
+                    e.preventDefault()
+                    navigateSuggestions('down')
+                } else if (e.key === 'ArrowUp') {
+                    e.preventDefault()
+                    navigateSuggestions('up')
+                } else if (e.key === 'Enter') {
+                    e.preventDefault()
+                    if (suggestionsBox.classList.contains('show')) {
+                        selectCurrentSuggestion()
+                    } else {
+                        searchBtn?.click()
+                    }
+                } else if (e.key === 'Escape') {
+                    hideSuggestions()
+                }
+            })
+        }
+
+        // Suggestions click handler (event delegation)
+        if (suggestionsBox) {
+            suggestionsBox.addEventListener('click', (e) => {
+                const item = e.target.closest('.suggestion-item')
+                if (!item) return
+
+                const action = item.dataset.action
+                const productId = item.dataset.productId
+                const query = item.dataset.query
+
+                if (action === 'view-all' && query) {
+                    currentSearch = query
+                    searchInput.value = query
+                    hideSuggestions()
+                    loadProducts()
+                    document.title = `نتائج: ${query} - كيماتو`
+                    searchBtn?.click()
+                } else if (productId) {
+                    // Go to product details
+                    window.location.href = `product-details.html?id=${productId}`
+                }
+            })
+        }
+
+        // Search button
         if (searchBtn) {
             searchBtn.addEventListener('click', () => {
-                currentSearch = searchInput?.value?.trim() || ''
+                const query = searchInput?.value?.trim() || ''
+                currentSearch = query
+                hideSuggestions()
                 loadProducts()
-                if (currentSearch) {
-                    document.title = `نتائج: ${currentSearch} - كيماتو`
+                if (query) {
+                    document.title = `نتائج: ${query} - كيماتو`
                 } else {
                     document.title = 'كيماتو | سوق المواد الكيماوية في مصر'
                 }
             })
         }
 
-        if (searchInput) {
-            searchInput.addEventListener('keypress', (e) => {
-                if (e.key === 'Enter') {
-                    searchBtn?.click()
-                }
-            })
-        }
+        // Close suggestions on outside click
+        document.addEventListener('click', (e) => {
+            const container = document.querySelector('.search-container')
+            if (container && !container.contains(e.target)) {
+                hideSuggestions()
+            }
+        })
 
         // ===== ADVANCED FILTERS =====
         const advancedToggle = document.getElementById('advancedToggle')
@@ -2022,6 +2392,9 @@
             await checkUser()
             await loadCategories()
 
+            // Load all products for suggestions
+            await loadAllProductsForSuggestions()
+
             // Load stats first
             await Promise.all([
                 loadTotalProductsCount(),
@@ -2057,6 +2430,7 @@
                 console.log('✅ كيماتو يعمل على chemato.vercel.app')
                 const totalEl = document.getElementById('totalProducts')
                 console.log('✅ إجمالي المنتجات: ' + (totalEl?.textContent || '0'))
+                console.log('✅ عدد المنتجات للاقتراحات: ' + allProductsForSuggestions.length)
             }, 100)
 
             setTimeout(() => {
