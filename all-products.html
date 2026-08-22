@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>كيماتو | جميع المنتجات الكيماوية في مصر</title>
     
-    <meta name="description" content="استعرض جميع المنتجات الكيماوية في مصر. صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام من موردين موثوقين." />
+    <meta name="description" content="استعرض جميع المنتجات الكيماوية في مصر. صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام من موردين موثوقين. ابحث عن أي مادة كيماوية واحصل على أفضل الأسعار." />
     <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="كيماويات,كيماتو,منتجات كيماوية,صودا كاوية,حمض كبريتيك,مذيبات,مصر" />
+    <meta name="keywords" content="كيماويات,كيماتو,منتجات كيماوية,صودا كاوية,حمض كبريتيك,مذيبات,مصر,مواد خام,كيما,سهم كيما" />
     
     <meta property="og:title" content="كيماتو | جميع المنتجات الكيماوية في مصر" />
-    <meta property="og:description" content="استعرض جميع المنتجات الكيماوية في مصر من موردين موثوقين." />
+    <meta property="og:description" content="استعرض جميع المنتجات الكيماوية في مصر من موردين موثوقين. ابحث عن أي مادة كيماوية." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chemato.vercel.app/all-products.html" />
     <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
@@ -25,6 +25,16 @@
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
     <link rel="apple-touch-icon" href="logo.png" />
     <meta name="theme-color" content="#0c2d4a" />
+    
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "CollectionPage",
+      "name": "جميع المنتجات الكيماوية في مصر",
+      "description": "استعرض جميع المنتجات الكيماوية في مصر من موردين موثوقين",
+      "url": "https://chemato.vercel.app/all-products.html"
+    }
+    </script>
     
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
@@ -41,112 +51,47 @@
             min-height: 100vh;
         }
 
-        /* Dark mode */
         @media (prefers-color-scheme: dark) {
-            body {
-                background: #1a1a2e;
-            }
-            .navbar {
-                background: #0a1a2a !important;
-            }
-            .search-filter-bar {
-                background: #16213e !important;
-                border-color: #0f3460 !important;
-            }
-            .search-input {
-                background: #1a2a3a !important;
-                color: #e0e0e0 !important;
-            }
-            .search-input::placeholder {
-                color: #6a7a8a;
-            }
-            .search-input-wrapper {
-                background: #1a2a3a !important;
-                border-color: #0f3460 !important;
-            }
-            .category-filter, .sort-select {
-                background: #1a2a3a !important;
-                color: #e0e0e0 !important;
-                border-color: #0f3460 !important;
-            }
-            .category-filter option, .sort-select option {
-                background: #1a2a3a;
-                color: #e0e0e0;
-            }
-            .product-card {
-                background: #16213e !important;
-                border-color: #0f3460 !important;
-            }
-            .product-name {
-                color: #e0e0e0 !important;
-            }
-            .product-category {
-                background: #1a2a3a !important;
-                color: #7ec8e3 !important;
-            }
-            .product-supplier {
-                color: #a0aec0 !important;
-            }
-            .product-views {
-                color: #6a7a8a !important;
-            }
-            .product-img-placeholder {
-                background: linear-gradient(145deg, #1a2a3a, #0f1f2f) !important;
-                color: #7ec8e3 !important;
-            }
-            .product-img-placeholder span {
-                background: #0a1a2a !important;
-                color: #e0e0e0 !important;
-            }
-            .product-img-placeholder .first-letter {
-                color: #4a6a8a !important;
-            }
-            .pagination button {
-                background: #16213e !important;
-                border-color: #0f3460 !important;
-                color: #e0e0e0 !important;
-            }
-            .pagination button:hover:not(:disabled) {
-                background: #1a4a6e !important;
-                color: #fff !important;
-            }
-            .pagination button.active {
-                background: #3498db !important;
-                border-color: #3498db !important;
-                color: #fff !important;
-            }
-            .dropdown-content {
-                background: #16213e !important;
-            }
-            .dropdown-content a {
-                color: #e0e0e0 !important;
-                border-bottom-color: #1a2a3a !important;
-            }
-            .dropdown-content a:hover {
-                background: #1a2a3a !important;
-            }
-            .dropdown-content .logout-item {
-                border-top-color: #1a2a3a !important;
-            }
-            .page-header {
-                background: linear-gradient(135deg, #0a1a2a, #1a4a6e) !important;
-            }
-            .no-results {
-                background: #16213e !important;
-                color: #a0aec0 !important;
-            }
-            .no-results i {
-                color: #2a3a4a !important;
-            }
-            .footer {
-                background: #0a1a2a !important;
-            }
-            .footer-links a {
-                color: #5a9bc7 !important;
-            }
-            .footer-links a:hover {
-                color: #fff !important;
-            }
+            body { background: #1a1a2e; }
+            .navbar { background: #0a1a2a !important; }
+            .search-filter-bar { background: #16213e !important; border-color: #0f3460 !important; }
+            .search-input { background: #1a2a3a !important; color: #e0e0e0 !important; }
+            .search-input::placeholder { color: #6a7a8a; }
+            .search-input-wrapper { background: #1a2a3a !important; border-color: #0f3460 !important; }
+            .category-filter, .sort-select { background: #1a2a3a !important; color: #e0e0e0 !important; border-color: #0f3460 !important; }
+            .category-filter option, .sort-select option { background: #1a2a3a; color: #e0e0e0; }
+            .product-card { background: #16213e !important; border-color: #0f3460 !important; }
+            .product-name { color: #e0e0e0 !important; }
+            .product-category { background: #1a2a3a !important; color: #7ec8e3 !important; }
+            .product-supplier { color: #a0aec0 !important; }
+            .product-views { color: #6a7a8a !important; }
+            .product-img-placeholder { background: linear-gradient(145deg, #1a2a3a, #0f1f2f) !important; color: #7ec8e3 !important; }
+            .product-img-placeholder span { background: #0a1a2a !important; color: #e0e0e0 !important; }
+            .product-img-placeholder .first-letter { color: #4a6a8a !important; }
+            .pagination button { background: #16213e !important; border-color: #0f3460 !important; color: #e0e0e0 !important; }
+            .pagination button:hover:not(:disabled) { background: #1a4a6e !important; color: #fff !important; }
+            .pagination button.active { background: #3498db !important; border-color: #3498db !important; color: #fff !important; }
+            .dropdown-content { background: #16213e !important; }
+            .dropdown-content a { color: #e0e0e0 !important; border-bottom-color: #1a2a3a !important; }
+            .dropdown-content a:hover { background: #1a2a3a !important; }
+            .dropdown-content .logout-item { border-top-color: #1a2a3a !important; }
+            .page-header { background: linear-gradient(135deg, #0a1a2a, #1a4a6e) !important; }
+            .no-results { background: #16213e !important; color: #a0aec0 !important; }
+            .no-results i { color: #2a3a4a !important; }
+            .footer { background: #0a1a2a !important; }
+            .footer-links a { color: #5a9bc7 !important; }
+            .footer-links a:hover { color: #fff !important; }
+            .suggestions-box { background: #16213e !important; border-color: #0f3460 !important; }
+            .suggestion-item { color: #e0e0e0 !important; border-bottom-color: #1a2a3a !important; }
+            .suggestion-item:hover { background: #1a2a3a !important; }
+            .suggestion-item .highlight { color: #7ec8e3 !important; }
+            .suggestion-item.active { background: #1a2a3a !important; }
+            .suggestion-view-all { background: #1a2a3a !important; }
+            .suggestion-view-all:hover { background: #1a2a3a !important; }
+            .suggestion-empty { color: #6a7a8a !important; }
+            .price-alert-btn { color: #7ec8e3 !important; border-color: rgba(126,200,227,0.2) !important; }
+            .price-alert-btn:hover { background: #3498db !important; color: #fff !important; }
+            .price-alert-btn.active { background: #2ecc71 !important; color: #fff !important; }
         }
 
         @keyframes fadeUp {
@@ -346,6 +291,13 @@
             font-weight: 600;
         }
 
+        /* ===== SEARCH WITH SUGGESTIONS ===== */
+        .search-container {
+            position: relative;
+            flex: 3;
+            min-width: 200px;
+        }
+
         .search-filter-bar {
             background: white;
             border-radius: 60px;
@@ -360,13 +312,14 @@
         }
 
         .search-input-wrapper {
-            flex: 3;
+            flex: 1;
             display: flex;
             background: #f8fafc;
             border-radius: 50px;
             overflow: hidden;
             border: 1px solid #e2e8f0;
             position: relative;
+            min-width: 200px;
         }
 
         .search-input {
@@ -377,6 +330,7 @@
             background: transparent;
             outline: none;
             font-family: inherit;
+            min-width: 120px;
         }
 
         .search-input:focus {
@@ -413,11 +367,119 @@
             display: flex;
             align-items: center;
             gap: 8px;
+            flex-shrink: 0;
         }
 
         .search-btn:hover {
             background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
         }
+
+        /* Suggestions Box */
+        .suggestions-box {
+            position: absolute;
+            top: calc(100% + 8px);
+            left: 0;
+            right: 0;
+            background: #fff;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.15);
+            border: 1px solid #e0e7ef;
+            max-height: 350px;
+            overflow-y: auto;
+            display: none !important;
+            z-index: 10000;
+        }
+
+        .suggestions-box.show {
+            display: block !important;
+        }
+
+        .suggestions-box::-webkit-scrollbar {
+            width: 4px;
+        }
+        .suggestions-box::-webkit-scrollbar-thumb {
+            background: #3498db;
+            border-radius: 10px;
+        }
+        .suggestions-box::-webkit-scrollbar-track {
+            background: transparent;
+        }
+
+        .suggestion-item {
+            padding: 12px 18px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            transition: 0.2s;
+            border-bottom: 1px solid #f0f2f5;
+            color: #1a2634;
+        }
+
+        .suggestion-item:last-child {
+            border-bottom: none;
+        }
+
+        .suggestion-item:hover {
+            background: #eef5fa;
+        }
+
+        .suggestion-item.active {
+            background: #eef5fa;
+        }
+
+        .suggestion-item .text {
+            flex: 1;
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+
+        .suggestion-item .highlight {
+            color: #3498db;
+            font-weight: 800;
+        }
+
+        .suggestion-item .sub-text {
+            font-size: 0.75rem;
+            color: #64748b;
+            margin-right: 8px;
+            flex-shrink: 0;
+        }
+
+        .suggestion-item .badge {
+            background: #ecf3f8;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            color: #1a4a6e;
+            flex-shrink: 0;
+        }
+
+        .suggestion-empty {
+            padding: 16px 20px;
+            text-align: center;
+            color: #64748b;
+            font-size: 0.85rem;
+        }
+
+        .suggestion-view-all {
+            border-bottom: 2px solid #3498db !important;
+            background: #f8faff !important;
+        }
+        .suggestion-view-all:hover {
+            background: #eef5fa !important;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            .suggestion-view-all {
+                background: #1a2a3a !important;
+            }
+            .suggestion-view-all:hover {
+                background: #1a2a3a !important;
+            }
+        }
+        /* ===== END SEARCH ===== */
 
         .category-filter, .sort-select {
             padding: 12px 18px;
@@ -425,11 +487,12 @@
             border-radius: 50px;
             background: white;
             cursor: pointer;
-            min-width: 170px;
+            min-width: 160px;
             font-size: 0.9rem;
             outline: none;
             transition: 0.3s;
             font-family: inherit;
+            flex-shrink: 0;
         }
 
         .category-filter:focus, .sort-select:focus {
@@ -652,6 +715,16 @@
             background: #128C7E;
             transform: scale(1.02) translateY(-2px);
             box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+        }
+
+        .btn-share {
+            background: #6c757d;
+            flex: 0.5;
+            min-width: 44px;
+        }
+        .btn-share:hover {
+            background: #495057;
+            transform: scale(1.02) translateY(-2px);
         }
 
         .pagination {
@@ -879,6 +952,9 @@
                 padding: 12px;
                 gap: 10px;
             }
+            .search-container {
+                width: 100%;
+            }
             .search-input-wrapper {
                 width: 100%;
             }
@@ -939,6 +1015,13 @@
                 padding: 0 16px;
                 font-size: 0.85rem;
             }
+            .suggestions-box {
+                max-height: 240px;
+            }
+            .suggestion-item {
+                padding: 8px 12px;
+                font-size: 0.85rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -957,6 +1040,12 @@
             .product-name {
                 font-size: 1rem;
             }
+            .suggestions-box {
+                max-height: 200px;
+            }
+            .suggestion-item .sub-text {
+                font-size: 0.65rem;
+            }
         }
 
         @media (hover: none) {
@@ -969,6 +1058,10 @@
             }
             .btn-whatsapp:hover {
                 background: #25D366;
+                transform: none;
+            }
+            .btn-share:hover {
+                background: #6c757d;
                 transform: none;
             }
             .pagination button:hover:not(:disabled) {
@@ -987,6 +1080,17 @@
             .dropdown-btn:hover {
                 background: rgba(255,255,255,0.08);
                 transform: none;
+            }
+            .suggestion-item:hover {
+                background: transparent;
+            }
+            .suggestion-item.active {
+                background: #eef5fa;
+            }
+            @media (prefers-color-scheme: dark) {
+                .suggestion-item.active {
+                    background: #1a2a3a;
+                }
             }
         }
     </style>
@@ -1022,10 +1126,13 @@
     </div>
 
     <div class="search-filter-bar">
-        <div class="search-input-wrapper">
-            <input type="text" id="searchInput" class="search-input" placeholder="🔍 بحث باسم المنتج..." autocomplete="off" />
-            <button class="clear-search" id="clearSearch" aria-label="مسح البحث"><i class="fas fa-times"></i></button>
-            <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+        <div class="search-container">
+            <div class="search-input-wrapper">
+                <input type="text" id="searchInput" class="search-input" placeholder="🔍 ابحث عن منتج... مثل: صودا كاوية، حمض كبريتيك" autocomplete="off" />
+                <button class="clear-search" id="clearSearch" aria-label="مسح البحث"><i class="fas fa-times"></i></button>
+                <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+            </div>
+            <div class="suggestions-box" id="suggestionsBox"></div>
         </div>
         <select id="categoryFilter" class="category-filter">
             <option value="all">📂 جميع التصنيفات</option>
@@ -1084,6 +1191,9 @@
     const itemsPerPage = 12
     let allCategories = []
     let isPriceAlertActive = {}
+    let allProductsForSuggestions = []
+    let suggestionsTimeout = null
+    let selectedSuggestionIndex = -1
 
     // ========== TOAST ==========
     function showToast(icon, title, desc) {
@@ -1101,6 +1211,41 @@
         `
         container.appendChild(toast)
         setTimeout(() => toast.remove(), 5000)
+    }
+
+    // ========== SHARE PRODUCT ==========
+    window.shareProduct = function(productId, productName) {
+        const url = `${window.location.origin}/product-details.html?id=${productId}`
+        if (navigator.share) {
+            navigator.share({
+                title: productName || 'منتج كيماوي',
+                text: `🔬 ${productName || 'منتج'} - اكتشف هذا المنتج على كيماتو`,
+                url: url
+            }).catch(() => {})
+        } else {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('📋', 'تم النسخ!', `تم نسخ رابط ${productName || 'المنتج'}`)
+            }).catch(() => {
+                showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط')
+            })
+        }
+    }
+
+    // ========== SHARE PAGE ==========
+    window.sharePage = function() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'كيماتو - جميع المنتجات الكيماوية في مصر',
+                text: 'استعرض جميع المنتجات الكيماوية في مصر من موردين موثوقين',
+                url: window.location.href
+            }).catch(() => {})
+        } else {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('📋', 'تم النسخ!', 'تم نسخ رابط الصفحة')
+            }).catch(() => {
+                showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط')
+            })
+        }
     }
 
     // ========== SCROLL TOP ==========
@@ -1184,6 +1329,119 @@
         }
     }
 
+    // ========== LOAD ALL PRODUCTS FOR SUGGESTIONS ==========
+    async function loadAllProductsForSuggestions() {
+        try {
+            const { data } = await supabase
+                .from('products')
+                .select('id, name, price')
+                .eq('status', 'active')
+                .limit(200)
+            allProductsForSuggestions = data || []
+            console.log('✅ Products loaded for suggestions:', allProductsForSuggestions.length)
+        } catch (e) {
+            console.error('Error loading products for suggestions:', e)
+            allProductsForSuggestions = []
+        }
+    }
+
+    // ========== SUGGESTIONS ==========
+    function showSuggestions(query) {
+        const box = document.getElementById('suggestionsBox')
+        if (!box) return
+
+        if (!query || query.length < 1) {
+            box.classList.remove('show')
+            return
+        }
+
+        const lowerQuery = query.toLowerCase()
+        const results = allProductsForSuggestions.filter(p => 
+            p.name && p.name.toLowerCase().includes(lowerQuery)
+        ).slice(0, 10)
+
+        if (results.length === 0) {
+            box.innerHTML = `<div class="suggestion-empty">🔍 لا توجد نتائج لـ "${query}"</div>`
+            box.classList.add('show')
+            return
+        }
+
+        let html = ''
+        
+        html += `
+            <div class="suggestion-item suggestion-view-all" data-action="view-all" data-query="${query}">
+                <span class="text">🔍 عرض جميع النتائج لـ "<span class="highlight">${query}</span>"</span>
+                <span class="badge">${results.length}</span>
+            </div>
+        `
+
+        results.forEach(p => {
+            const priceText = p.price ? `${p.price.toLocaleString()} ج.م` : 'سعر عند الطلب'
+            html += `
+                <div class="suggestion-item" data-product-id="${p.id}">
+                    <span class="text">${highlightMatch(p.name, query)}</span>
+                    <span class="sub-text">${priceText}</span>
+                </div>
+            `
+        })
+
+        box.innerHTML = html
+        box.classList.add('show')
+        selectedSuggestionIndex = -1
+    }
+
+    function highlightMatch(text, query) {
+        if (!text || !query) return text || ''
+        const regex = new RegExp(`(${query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')})`, 'gi')
+        return text.replace(regex, '<span class="highlight">$1</span>')
+    }
+
+    function hideSuggestions() {
+        const box = document.getElementById('suggestionsBox')
+        if (box) box.classList.remove('show')
+        selectedSuggestionIndex = -1
+    }
+
+    function navigateSuggestions(direction) {
+        const box = document.getElementById('suggestionsBox')
+        if (!box || !box.classList.contains('show')) return
+
+        const items = box.querySelectorAll('.suggestion-item')
+        if (items.length === 0) return
+
+        items.forEach(el => el.classList.remove('active'))
+
+        if (direction === 'down') {
+            selectedSuggestionIndex = Math.min(selectedSuggestionIndex + 1, items.length - 1)
+        } else if (direction === 'up') {
+            selectedSuggestionIndex = Math.max(selectedSuggestionIndex - 1, 0)
+        }
+
+        if (selectedSuggestionIndex >= 0) {
+            items[selectedSuggestionIndex].classList.add('active')
+            items[selectedSuggestionIndex].scrollIntoView({ block: 'nearest' })
+        }
+    }
+
+    function selectCurrentSuggestion() {
+        const box = document.getElementById('suggestionsBox')
+        if (!box || !box.classList.contains('show')) return
+
+        const items = box.querySelectorAll('.suggestion-item')
+        if (items.length === 0) return
+
+        let targetItem
+        if (selectedSuggestionIndex >= 0 && selectedSuggestionIndex < items.length) {
+            targetItem = items[selectedSuggestionIndex]
+        } else {
+            targetItem = items[0]
+        }
+
+        if (targetItem) {
+            targetItem.click()
+        }
+    }
+
     // ========== WHATSAPP LINK ==========
     function getWhatsAppLink(phone, productName) {
         if (!phone) return '#'
@@ -1246,9 +1504,7 @@
         return `
             <div class="product-img-placeholder" style="background:linear-gradient(145deg, ${bgColor}22, ${bgColor}44);">
                 <div style="font-size:4.5rem;opacity:0.75;">${categoryIcon}</div>
-                <span style="background:rgba(255,255,255,0.88);color:#0c2d4a;font-weight:700;font-size:0.9rem;padding:6px 20px;border-radius:40px;margin-top:8px;box-shadow:0 2px 12px rgba(0,0,0,0.04);">
-                    ${productName ? productName.substring(0, 28) : 'منتج'}
-                </span>
+                <span>${productName ? productName.substring(0, 28) : 'منتج'}</span>
                 <div class="first-letter">${productName ? productName.substring(0,1).toUpperCase() : 'K'}</div>
             </div>
         `;
@@ -1373,7 +1629,7 @@
                                     <button class="price-alert-btn ${isAlertActive ? 'active' : ''}" 
                                             onclick="event.stopPropagation(); setPriceAlert('${p.id}', '${p.name.replace(/'/g, "\\'")}', ${priceValue})">
                                         <i class="fas ${isAlertActive ? 'fa-bell-slash' : 'fa-bell'}"></i>
-                                        ${isAlertActive ? 'إلغاء التنبيه' : 'تنبيه السعر'}
+                                        ${isAlertActive ? 'إلغاء' : 'تنبيه'}
                                     </button>
                                 ` : ''}
                             </div>
@@ -1387,6 +1643,9 @@
                                 <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();">
                                     <i class="fab fa-whatsapp"></i> واتساب
                                 </a>
+                                <button class="btn btn-share" onclick="event.stopPropagation(); shareProduct('${p.id}', '${p.name.replace(/'/g, "\\'")}')">
+                                    <i class="fas fa-share-alt"></i>
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -1450,6 +1709,7 @@
         document.getElementById('categoryFilter').value = 'all'
         document.getElementById('sortBy').value = 'newest'
         document.getElementById('clearSearch').classList.remove('visible')
+        hideSuggestions()
         loadProducts()
     }
 
@@ -1459,36 +1719,113 @@
     const searchBtn = document.getElementById('searchBtn')
     const categoryFilter = document.getElementById('categoryFilter')
     const sortBy = document.getElementById('sortBy')
+    const suggestionsBox = document.getElementById('suggestionsBox')
 
     // Show/hide clear button
     if (searchInput && clearSearch) {
         searchInput.addEventListener('input', () => {
             clearSearch.classList.toggle('visible', searchInput.value.length > 0)
+            
+            // Suggestions
+            const query = searchInput.value.trim()
+            currentSearch = query
+            
+            if (suggestionsTimeout) {
+                clearTimeout(suggestionsTimeout)
+            }
+            
+            if (query.length >= 1) {
+                suggestionsTimeout = setTimeout(() => {
+                    showSuggestions(query)
+                }, 200)
+            } else {
+                hideSuggestions()
+            }
         })
+
+        searchInput.addEventListener('focus', () => {
+            const query = searchInput.value.trim()
+            if (query.length >= 1) {
+                showSuggestions(query)
+            }
+        })
+
+        searchInput.addEventListener('blur', () => {
+            setTimeout(() => { hideSuggestions() }, 300)
+        })
+
+        // Keyboard navigation
+        searchInput.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowDown') {
+                e.preventDefault()
+                navigateSuggestions('down')
+            } else if (e.key === 'ArrowUp') {
+                e.preventDefault()
+                navigateSuggestions('up')
+            } else if (e.key === 'Enter') {
+                e.preventDefault()
+                if (suggestionsBox && suggestionsBox.classList.contains('show')) {
+                    selectCurrentSuggestion()
+                } else {
+                    searchBtn?.click()
+                }
+            } else if (e.key === 'Escape') {
+                hideSuggestions()
+            }
+        })
+
         clearSearch.addEventListener('click', () => {
             searchInput.value = ''
             clearSearch.classList.remove('visible')
             currentSearch = ''
             currentPage = 1
+            hideSuggestions()
             loadProducts()
             searchInput.focus()
         })
     }
 
+    // Suggestions click handler
+    if (suggestionsBox) {
+        suggestionsBox.addEventListener('click', (e) => {
+            const item = e.target.closest('.suggestion-item')
+            if (!item) return
+
+            const action = item.dataset.action
+            const productId = item.dataset.productId
+            const query = item.dataset.query
+
+            if (action === 'view-all' && query) {
+                currentSearch = query
+                searchInput.value = query
+                hideSuggestions()
+                loadProducts()
+                document.title = `نتائج: ${query} - كيماتو`
+                searchBtn?.click()
+            } else if (productId) {
+                window.location.href = `product-details.html?id=${productId}`
+            }
+        })
+    }
+
+    // Close suggestions on outside click
+    document.addEventListener('click', (e) => {
+        const container = document.querySelector('.search-container')
+        if (container && !container.contains(e.target)) {
+            hideSuggestions()
+        }
+    })
+
     if (searchBtn) {
         searchBtn.addEventListener('click', () => {
             currentSearch = searchInput.value.trim()
             currentPage = 1
+            hideSuggestions()
             loadProducts()
-        })
-    }
-
-    if (searchInput) {
-        searchInput.addEventListener('keypress', (e) => {
-            if (e.key === 'Enter') {
-                currentSearch = e.target.value.trim()
-                currentPage = 1
-                loadProducts()
+            if (currentSearch) {
+                document.title = `نتائج: ${currentSearch} - كيماتو`
+            } else {
+                document.title = 'كيماتو | جميع المنتجات الكيماوية في مصر'
             }
         })
     }
@@ -1510,18 +1847,47 @@
     }
 
     // ========== INIT ==========
-    setupDropdown()
-    await updateDropdownContent()
-    await loadCategories()
-    await loadProducts()
-    setupScrollTop()
+    async function init() {
+        setupDropdown()
+        await updateDropdownContent()
+        await loadCategories()
+        await loadAllProductsForSuggestions()
+        await loadProducts()
+        setupScrollTop()
+        
+        // Add share page button to header
+        const resultsCount = document.querySelector('.results-count')
+        if (resultsCount) {
+            const shareBtn = document.createElement('button')
+            shareBtn.style.cssText = `
+                background: rgba(255,255,255,0.15);
+                border: 1px solid rgba(255,255,255,0.2);
+                border-radius: 30px;
+                padding: 5px 18px;
+                color: white;
+                cursor: pointer;
+                font-family: inherit;
+                font-size: 0.85rem;
+                transition: 0.3s;
+                margin-right: 10px;
+            `
+            shareBtn.innerHTML = `<i class="fas fa-share-alt"></i> مشاركة الصفحة`
+            shareBtn.onclick = () => sharePage()
+            shareBtn.onmouseenter = () => { shareBtn.style.background = 'rgba(255,255,255,0.25)' }
+            shareBtn.onmouseleave = () => { shareBtn.style.background = 'rgba(255,255,255,0.15)' }
+            resultsCount.parentNode.appendChild(shareBtn)
+        }
+
+        console.log('✅ كيماتو | جميع المنتجات يعمل')
+        console.log('✅ عدد المنتجات للاقتراحات:', allProductsForSuggestions.length)
+    }
 
     // Auth state change
     supabase.auth.onAuthStateChange(() => {
         updateDropdownContent()
     })
 
-    console.log('✅ كيماتو | جميع المنتجات يعمل')
+    init()
 </script>
 </body>
 </html>
