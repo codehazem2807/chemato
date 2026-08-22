@@ -4,8 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>كيماتو | لوحة تحكم المورد</title>
+    
+    <meta name="description" content="لوحة تحكم المورد في كيماتو. إدارة المنتجات، متابعة المشاهدات، وإدارة العروض." />
+    <meta name="robots" content="noindex, nofollow" />
+    
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
+    <link rel="apple-touch-icon" href="logo.png" />
+    <meta name="theme-color" content="#0c2d4a" />
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
     <style>
         * {
             margin: 0;
@@ -36,11 +46,145 @@
             --radius-lg: 32px;
         }
 
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --gray-light: #1a1a2e;
+                --gray: #1a2a3a;
+                --gray-dark: #6a7a8a;
+                --text-dark: #e0e0e0;
+                --text-light: #a0aec0;
+                --white: #16213e;
+                --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
+                --shadow-md: 0 10px 25px rgba(0,0,0,0.4);
+                --shadow-lg: 0 20px 40px rgba(0,0,0,0.5);
+            }
+            body {
+                background: #1a1a2e !important;
+            }
+            .navbar {
+                background: #0a1a2a !important;
+            }
+            .welcome-card {
+                background: linear-gradient(135deg, #0a1a2a, #1a4a6e) !important;
+            }
+            .stat-card {
+                background: #16213e !important;
+                border-color: #0f3460 !important;
+            }
+            .stat-number {
+                color: #e0e0e0 !important;
+            }
+            .stat-label {
+                color: #6a7a8a !important;
+            }
+            .stat-icon {
+                background: #1a2a3a !important;
+            }
+            .stat-card:hover .stat-icon {
+                background: linear-gradient(145deg, #3498db, #2c81ba) !important;
+            }
+            .product-card {
+                background: #16213e !important;
+                border-color: #0f3460 !important;
+            }
+            .product-name {
+                color: #e0e0e0 !important;
+            }
+            .product-category {
+                color: #6a7a8a !important;
+            }
+            .product-views {
+                color: #4a5a6a !important;
+            }
+            .product-img-placeholder {
+                background: linear-gradient(145deg, #1a2a3a, #0f1f2f) !important;
+                color: #7ec8e3 !important;
+            }
+            .product-img-placeholder span {
+                background: #0a1a2a !important;
+                color: #e0e0e0 !important;
+            }
+            .card-actions {
+                border-top-color: #1a2a3a !important;
+            }
+            .section-header h3 {
+                color: #e0e0e0 !important;
+            }
+            .empty-state {
+                background: #16213e !important;
+                border-color: #0f3460 !important;
+            }
+            .empty-state h3 {
+                color: #e0e0e0 !important;
+            }
+            .empty-state p {
+                color: #6a7a8a !important;
+            }
+            .dropdown-content {
+                background: #16213e !important;
+                border-color: #0f3460 !important;
+            }
+            .dropdown-content a {
+                color: #e0e0e0 !important;
+                border-bottom-color: #1a2a3a !important;
+            }
+            .dropdown-content a:hover {
+                background: #1a2a3a !important;
+            }
+            .dropdown-content .logout-item {
+                border-top-color: #1a2a3a !important;
+            }
+            .footer {
+                background: #0a1a2a !important;
+            }
+            .footer-links a {
+                color: #5a9bc7 !important;
+            }
+            .footer-links a:hover {
+                color: #fff !important;
+            }
+        }
+
         body {
             font-family: 'Cairo', 'Tahoma', sans-serif;
             background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
             min-height: 100vh;
             color: var(--text-dark);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        @keyframes dropFade {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .skeleton-loader {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+        .skeleton-card {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            height: 350px;
+            border-radius: var(--radius-md);
+        }
+        @media (prefers-color-scheme: dark) {
+            .skeleton-card {
+                background: linear-gradient(90deg, #2a2a3e 25%, #3a3a4e 50%, #2a2a3e 75%);
+            }
         }
 
         /* ========== الهيدر ========== */
@@ -73,10 +217,10 @@
         }
 
         .logo-img {
-            width: 50px;
-            height: 50px;
+            width: 44px;
+            height: 44px;
             border-radius: 50%;
-            border: 3px solid #3498db;
+            border: 2px solid #3498db;
             object-fit: cover;
             box-shadow: 0 4px 16px rgba(52,152,219,0.35);
         }
@@ -92,9 +236,9 @@
         }
 
         .nav-links a {
-            color: white;
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
-            padding: 8px 20px;
+            padding: 7px 18px;
             border-radius: 40px;
             transition: all 0.3s ease;
             font-weight: 600;
@@ -126,7 +270,7 @@
         .dropdown-btn {
             background: rgba(255,255,255,0.08);
             color: white;
-            padding: 8px 22px;
+            padding: 7px 18px;
             border-radius: 40px;
             cursor: pointer;
             font-weight: 600;
@@ -152,7 +296,7 @@
             top: 100%;
             left: 0;
             right: 0;
-            background: white;
+            background: var(--white);
             min-width: 200px;
             box-shadow: 0 24px 56px rgba(0,0,0,0.12);
             border-radius: 20px;
@@ -167,14 +311,9 @@
             animation: dropFade 0.25s ease;
         }
 
-        @keyframes dropFade {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
         .dropdown-content a {
             color: var(--text-dark);
-            padding: 14px 22px;
+            padding: 12px 22px;
             text-decoration: none;
             display: block;
             transition: 0.2s;
@@ -243,6 +382,51 @@
             position: relative;
         }
 
+        .welcome-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn-refresh {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .btn-refresh:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .btn-share-page {
+            background: rgba(255,255,255,0.15);
+            color: white;
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 0.95rem;
+            font-family: inherit;
+        }
+
+        .btn-share-page:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
         .logout-btn {
             background: var(--danger);
             color: white;
@@ -253,9 +437,8 @@
             font-weight: 700;
             transition: all 0.3s;
             font-size: 0.95rem;
+            font-family: inherit;
             box-shadow: 0 4px 16px rgba(229,62,62,0.25);
-            position: relative;
-            z-index: 1;
         }
 
         .logout-btn:hover {
@@ -282,7 +465,14 @@
             border: 1px solid rgba(52,152,219,0.06);
             position: relative;
             overflow: hidden;
+            animation: fadeUp 0.5s ease forwards;
+            opacity: 0;
         }
+
+        .stat-card:nth-child(1) { animation-delay: 0.05s; }
+        .stat-card:nth-child(2) { animation-delay: 0.1s; }
+        .stat-card:nth-child(3) { animation-delay: 0.15s; }
+        .stat-card:nth-child(4) { animation-delay: 0.2s; }
 
         .stat-card::before {
             content: '';
@@ -307,8 +497,8 @@
         }
 
         .stat-icon {
-            width: 60px;
-            height: 60px;
+            width: 56px;
+            height: 56px;
             background: linear-gradient(145deg, #e6edf4, #f0f6fb);
             border-radius: 30px;
             display: flex;
@@ -327,7 +517,7 @@
         }
 
         .stat-icon i {
-            font-size: 28px;
+            font-size: 26px;
             color: var(--primary);
             transition: 0.3s;
         }
@@ -371,6 +561,13 @@
             color: #3498db;
         }
 
+        .section-actions {
+            display: flex;
+            gap: 12px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
         .btn-add {
             background: linear-gradient(145deg, #3498db, #2c81ba);
             color: white;
@@ -393,6 +590,37 @@
             box-shadow: 0 8px 28px rgba(26,74,110,0.35);
         }
 
+        /* ===== بحث المنتجات ===== */
+        .search-products {
+            display: flex;
+            gap: 10px;
+            align-items: center;
+            flex: 1;
+            max-width: 400px;
+        }
+
+        .search-products input {
+            flex: 1;
+            padding: 10px 18px;
+            border: 1px solid var(--gray);
+            border-radius: 40px;
+            font-size: 14px;
+            outline: none;
+            transition: 0.3s;
+            font-family: inherit;
+            background: var(--white);
+            color: var(--text-dark);
+        }
+
+        .search-products input:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+        }
+
+        .search-products input::placeholder {
+            color: var(--gray-dark);
+        }
+
         /* ===== شبكة المنتجات ===== */
         .products-grid {
             display: grid;
@@ -409,7 +637,16 @@
             border: 1px solid rgba(52,152,219,0.06);
             display: flex;
             flex-direction: column;
+            animation: fadeUp 0.5s ease forwards;
+            opacity: 0;
         }
+
+        .product-card:nth-child(1) { animation-delay: 0.05s; }
+        .product-card:nth-child(2) { animation-delay: 0.1s; }
+        .product-card:nth-child(3) { animation-delay: 0.15s; }
+        .product-card:nth-child(4) { animation-delay: 0.2s; }
+        .product-card:nth-child(5) { animation-delay: 0.25s; }
+        .product-card:nth-child(6) { animation-delay: 0.3s; }
 
         .product-card:hover {
             transform: translateY(-10px);
@@ -417,7 +654,6 @@
             border-color: #3498db;
         }
 
-        /* ===== صورة المنتج ===== */
         .product-img-wrapper {
             width: 100%;
             height: 180px;
@@ -427,6 +663,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
 
         .product-img {
@@ -440,7 +677,6 @@
             transform: scale(1.06);
         }
 
-        /* ===== Placeholder ===== */
         .product-img-placeholder {
             width: 100%;
             height: 100%;
@@ -507,13 +743,15 @@
             background: #c6f6d5;
             color: #22543d;
         }
-
         .status-hidden {
             background: #fed7d7;
             color: #742a2a;
         }
-
         .status-sold {
+            background: #fef3c7;
+            color: #975a16;
+        }
+        .status-pending {
             background: #fef3c7;
             color: #975a16;
         }
@@ -552,6 +790,7 @@
             justify-content: center;
             gap: 6px;
             font-size: 13px;
+            font-family: inherit;
         }
 
         .btn-edit {
@@ -605,6 +844,75 @@
             margin-top: 20px;
         }
 
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            max-width: 90%;
+            width: 420px;
+        }
+
+        .toast {
+            background: #0a2538;
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-right: 4px solid #3498db;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .toast .icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .toast .content {
+            flex: 1;
+        }
+
+        .toast .content .title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .toast .content .desc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .toast .close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+        .toast .close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .toast.success {
+            border-right-color: #2ecc71;
+        }
+        .toast.error {
+            border-right-color: #e74c3c;
+        }
+        .toast.warning {
+            border-right-color: #f39c12;
+        }
+
         /* ===== الفوتر ===== */
         .footer {
             background: linear-gradient(145deg, var(--primary-dark), var(--primary));
@@ -641,6 +949,9 @@
             .products-grid {
                 grid-template-columns: repeat(2, 1fr);
             }
+            .skeleton-loader {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
 
         @media (max-width: 768px) {
@@ -649,87 +960,90 @@
                 gap: 12px;
                 padding: 14px 20px;
             }
-            
             .logo-content {
                 font-size: 18px;
             }
-            
             .logo-img {
                 width: 40px;
                 height: 40px;
             }
-            
             .nav-links {
                 justify-content: center;
             }
-            
             .nav-links a {
                 padding: 6px 14px;
                 font-size: 12px;
             }
-            
             .container {
                 padding: 0 16px;
                 margin: 20px auto;
             }
-            
             .welcome-card {
                 padding: 20px;
                 flex-direction: column;
                 text-align: center;
             }
-            
             .welcome-text h2 {
                 font-size: 1.3rem;
             }
-            
+            .welcome-actions {
+                justify-content: center;
+                width: 100%;
+            }
             .stats-grid {
                 grid-template-columns: repeat(2, 1fr);
                 gap: 15px;
             }
-            
             .stat-card {
                 padding: 18px;
             }
-            
             .stat-number {
                 font-size: 1.5rem;
             }
-            
             .stat-icon {
                 width: 45px;
                 height: 45px;
             }
-            
             .stat-icon i {
                 font-size: 20px;
             }
-            
             .products-grid {
                 grid-template-columns: 1fr;
                 gap: 20px;
             }
-            
+            .skeleton-loader {
+                grid-template-columns: 1fr;
+            }
             .section-header {
                 flex-direction: column;
                 align-items: stretch;
             }
-            
             .section-header h3 {
                 font-size: 1.2rem;
             }
-            
+            .section-actions {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            .search-products {
+                max-width: 100%;
+            }
             .btn-add {
                 justify-content: center;
             }
-            
             .card-actions {
                 flex-direction: column;
             }
-            
             .dropdown-content {
                 left: auto;
                 right: 0;
+                min-width: 170px;
+            }
+            .footer-links {
+                gap: 12px;
+            }
+            .footer-links a {
+                font-size: 12px;
             }
         }
 
@@ -738,17 +1052,56 @@
                 grid-template-columns: 1fr 1fr;
                 gap: 10px;
             }
-            
             .stat-card {
                 padding: 14px;
             }
-            
             .stat-number {
                 font-size: 1.3rem;
             }
-            
             .stat-label {
                 font-size: 11px;
+            }
+            .stat-icon {
+                width: 38px;
+                height: 38px;
+            }
+            .stat-icon i {
+                font-size: 16px;
+            }
+        }
+
+        @media (hover: none) {
+            .stat-card:hover {
+                transform: none;
+            }
+            .stat-card:hover .stat-icon {
+                background: linear-gradient(145deg, #e6edf4, #f0f6fb);
+            }
+            .stat-card:hover .stat-icon i {
+                color: var(--primary);
+            }
+            .product-card:hover {
+                transform: none;
+            }
+            .btn-edit:hover {
+                background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+                transform: none;
+            }
+            .btn-delete:hover {
+                background: #dc2626;
+                transform: none;
+            }
+            .btn-add:hover {
+                background: linear-gradient(145deg, #3498db, #2c81ba);
+                transform: none;
+            }
+            .nav-links a:hover {
+                background: rgba(255,255,255,0.06);
+                transform: none;
+            }
+            .dropdown-btn:hover {
+                background: rgba(255,255,255,0.08);
+                transform: none;
             }
         }
     </style>
@@ -757,10 +1110,9 @@
 
 <div class="navbar">
     <div class="logo">
-        <a href="index.html" style="text-decoration:none;">
+        <a href="index.html">
             <div class="logo-content">
-                <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
-                     class="logo-img" alt="كيماتو">
+                <img src="logo.png" class="logo-img" alt="كيماتو">
                 <div class="logo-text">
                     <span>كيماتو</span>
                     <span> | لوحة المورد</span>
@@ -773,7 +1125,7 @@
         <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
         <a href="add-product.html" class="active"><i class="fas fa-plus"></i> إضافة منتج</a>
         <div class="dropdown">
-            <button class="dropdown-btn"><i class="fas fa-user-circle"></i> القائمة</button>
+            <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
             <div class="dropdown-content" id="dropdownContent"></div>
         </div>
     </div>
@@ -786,7 +1138,11 @@
             <h2>👋 مرحباً بك في لوحة المورد</h2>
             <p>من هنا يمكنك إدارة منتجاتك ومتابعة عروضك</p>
         </div>
-        <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</button>
+        <div class="welcome-actions">
+            <button class="btn-share-page" onclick="sharePage()"><i class="fas fa-share-alt"></i> مشاركة</button>
+            <button class="btn-refresh" onclick="refreshData()"><i class="fas fa-sync-alt"></i> تحديث</button>
+            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</button>
+        </div>
     </div>
 
     <!-- ===== الإحصائيات ===== -->
@@ -816,18 +1172,25 @@
     <!-- ===== قائمة المنتجات ===== -->
     <div class="section-header">
         <h3><i class="fas fa-boxes"></i> منتجاتي</h3>
-        <a href="add-product.html" class="btn-add"><i class="fas fa-plus"></i> إضافة منتج جديد</a>
+        <div class="section-actions">
+            <div class="search-products">
+                <input type="text" id="searchProducts" placeholder="🔍 ابحث في منتجاتك..." />
+            </div>
+            <a href="add-product.html" class="btn-add"><i class="fas fa-plus"></i> إضافة منتج جديد</a>
+        </div>
     </div>
 
     <div id="productsContainer" class="products-grid">
-        <div class="empty-state">
-            <i class="fas fa-box-open"></i>
-            <h3>لا توجد منتجات</h3>
-            <p>قم بإضافة منتجك الأول الآن</p>
-            <a href="add-product.html" class="btn-add"><i class="fas fa-plus"></i> أضف منتجك الأول</a>
+        <div class="skeleton-loader" id="skeletonLoader">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
         </div>
     </div>
 </div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast-container" id="toastContainer"></div>
 
 <!-- ===== الفوتر ===== -->
 <div class="footer">
@@ -838,7 +1201,7 @@
         <a href="profile.html">الملف الشخصي</a>
         <a href="auth.html">تسجيل الدخول</a>
     </div>
-    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية</div>
+    <div>© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
 </div>
 
 <script type="module">
@@ -851,41 +1214,79 @@
 
     let currentUser = null
     let currentProfile = null
+    let allProducts = []
 
-    // ========== القائمة المنسدلة ==========
+    // ========== TOAST ==========
+    function showToast(icon, title, desc, type = 'info') {
+        const container = document.getElementById('toastContainer')
+        if (!container) return
+        const toast = document.createElement('div')
+        toast.className = `toast ${type}`
+        toast.innerHTML = `
+            <div class="icon">${icon}</div>
+            <div class="content">
+                <div class="title">${title}</div>
+                <div class="desc">${desc}</div>
+            </div>
+            <button class="close" onclick="this.parentElement.remove()">✕</button>
+        `
+        container.appendChild(toast)
+        setTimeout(() => toast.remove(), 5000)
+    }
+
+    // ========== SHARE PAGE ==========
+    window.sharePage = function() {
+        if (navigator.share) {
+            navigator.share({
+                title: 'كيماتو - لوحة تحكم المورد',
+                text: 'إدارة منتجاتي على منصة كيماتو',
+                url: window.location.href
+            }).catch(() => {})
+        } else {
+            navigator.clipboard.writeText(window.location.href).then(() => {
+                showToast('📋', 'تم النسخ!', 'تم نسخ رابط الصفحة', 'success')
+            }).catch(() => {
+                showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', 'error')
+            })
+        }
+    }
+
+    // ========== REFRESH ==========
+    window.refreshData = function() {
+        showToast('🔄', 'جاري التحديث...', 'يتم تحديث البيانات', 'info')
+        loadStats()
+        loadProducts()
+    }
+
+    // ========== DROPDOWN ==========
     function setupDropdown() {
-        const dropdownBtn = document.querySelector('.dropdown-btn')
-        const dropdownContent = document.getElementById('dropdownContent')
-        
-        if (dropdownBtn && dropdownContent) {
-            dropdownBtn.addEventListener('click', (e) => {
+        const toggle = document.getElementById('dropdownToggle')
+        const content = document.getElementById('dropdownContent')
+        if (toggle && content) {
+            toggle.addEventListener('click', (e) => {
                 e.stopPropagation()
-                dropdownContent.classList.toggle('show')
+                content.classList.toggle('show')
             })
-            document.addEventListener('click', () => {
-                dropdownContent.classList.remove('show')
-            })
+            document.addEventListener('click', () => content.classList.remove('show'))
         }
     }
 
     async function updateDropdownContent() {
         const { data: { user } } = await supabase.auth.getUser()
-        currentUser = user
         const dropdownContent = document.getElementById('dropdownContent')
-        
+        if (!dropdownContent) return
+
         if (user) {
             dropdownContent.innerHTML = `
                 <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> لوحة المورد</a>
                 <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
             `
-            const logoutLink = document.getElementById('logoutLink')
-            if (logoutLink) {
-                logoutLink.onclick = async (e) => {
-                    e.preventDefault()
-                    await supabase.auth.signOut()
-                    window.location.href = 'index.html'
-                }
-            }
+            document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                e.preventDefault()
+                await supabase.auth.signOut()
+                window.location.href = 'index.html'
+            })
         } else {
             dropdownContent.innerHTML = `
                 <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
@@ -896,9 +1297,9 @@
         }
     }
 
-    // ========== دالة Placeholder ==========
+    // ========== PLACEHOLDER ==========
     function getPlaceholderHTML(productName, categoryIcon = '🧪') {
-        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a'];
+        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e'];
         const colorIndex = (productName?.length || 0) % colors.length;
         const bgColor = colors[colorIndex];
         
@@ -910,166 +1311,219 @@
         `;
     }
 
-    // ========== عرض الإحصائيات ==========
+    // ========== STATS ==========
     async function loadStats() {
-        const { data: products } = await supabase
-            .from('products')
-            .select('status, views_count')
-            .eq('supplier_id', currentUser.id)
+        try {
+            const { data: products } = await supabase
+                .from('products')
+                .select('status, views_count')
+                .eq('supplier_id', currentUser?.id)
 
-        const total = products?.length || 0
-        const active = products?.filter(p => p.status === 'active').length || 0
-        const sold = products?.filter(p => p.status === 'sold').length || 0
-        const views = products?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0
+            const total = products?.length || 0
+            const active = products?.filter(p => p.status === 'active').length || 0
+            const sold = products?.filter(p => p.status === 'sold').length || 0
+            const views = products?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0
 
-        document.getElementById('totalProducts').innerText = total
-        document.getElementById('activeProducts').innerText = active
-        document.getElementById('soldProducts').innerText = sold
-        document.getElementById('totalViews').innerText = views
+            document.getElementById('totalProducts').innerText = total
+            document.getElementById('activeProducts').innerText = active
+            document.getElementById('soldProducts').innerText = sold
+            document.getElementById('totalViews').innerText = views
+        } catch (e) {
+            console.error('Error loading stats:', e)
+        }
     }
 
-    // ========== عرض المنتجات ==========
-    async function loadProducts() {
-        const { data: products } = await supabase
-            .from('products')
-            .select('*')
-            .eq('supplier_id', currentUser.id)
-            .order('created_at', { ascending: false })
-
+    // ========== PRODUCTS ==========
+    async function loadProducts(searchTerm = '') {
         const container = document.getElementById('productsContainer')
-        
-        if (!products || products.length === 0) {
-            container.innerHTML = `
-                <div class="empty-state">
-                    <i class="fas fa-box-open"></i>
-                    <h3>لا توجد منتجات</h3>
-                    <p>قم بإضافة منتجك الأول الآن</p>
-                    <a href="add-product.html" class="btn-add"><i class="fas fa-plus"></i> أضف منتجك الأول</a>
-                </div>
-            `
-            return
-        }
+        container.innerHTML = `
+            <div class="skeleton-loader">
+                ${Array(3).fill(0).map(() => '<div class="skeleton-card"></div>').join('')}
+            </div>
+        `
 
-        // جلب أسماء الأقسام لكل منتج
-        const productsWithCategories = await Promise.all(products.map(async (p) => {
-            let categoryName = p.category || 'مواد كيماوية'
-            let categoryIcon = '🧪'
-            if (p.category_id) {
-                const { data: cat } = await supabase
-                    .from('categories')
-                    .select('name, icon')
-                    .eq('id', p.category_id)
-                    .single()
-                if (cat) {
-                    categoryName = cat.name
-                    categoryIcon = cat.icon || '🧪'
-                }
+        try {
+            let query = supabase
+                .from('products')
+                .select('*')
+                .eq('supplier_id', currentUser?.id)
+                .order('created_at', { ascending: false })
+
+            if (searchTerm) {
+                query = query.ilike('name', `%${searchTerm}%`)
             }
-            return { ...p, categoryName, categoryIcon }
-        }))
 
-        const statusMap = {
-            'active': { class: 'status-active', text: '🟢 متاح' },
-            'hidden': { class: 'status-hidden', text: '⚪ مخفي' },
-            'sold': { class: 'status-sold', text: '🔴 تم البيع' }
-        }
+            const { data: products, error } = await query
 
-        container.innerHTML = productsWithCategories.map(p => {
-            const hasImage = p.image_url && p.image_url.trim() !== '' && !p.image_url.includes('placehold');
-            const imageHtml = hasImage 
-                ? `<img class="product-img" src="${p.image_url}" alt="${p.name}" loading="lazy">`
-                : getPlaceholderHTML(p.name, p.categoryIcon);
+            if (error) {
+                showToast('❌', 'خطأ', error.message, 'error')
+                return
+            }
 
-            return `
-                <div class="product-card">
-                    <div class="product-img-wrapper">
-                        ${imageHtml}
+            allProducts = products || []
+
+            if (!products || products.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-box-open"></i>
+                        <h3>${searchTerm ? 'لا توجد نتائج للبحث' : 'لا توجد منتجات'}</h3>
+                        <p>${searchTerm ? 'جرب بحثاً آخر' : 'قم بإضافة منتجك الأول الآن'}</p>
+                        ${!searchTerm ? `<a href="add-product.html" class="btn-add"><i class="fas fa-plus"></i> أضف منتجك الأول</a>` : ''}
                     </div>
-                    <div class="product-info">
-                        <div class="product-name">${p.name}</div>
-                        <div class="product-price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : '💰 سعر عند الطلب'}</div>
-                        <div class="product-status ${statusMap[p.status]?.class || 'status-active'}">${statusMap[p.status]?.text || '🟢 متاح'}</div>
-                        <div class="product-category"><i class="fas fa-folder"></i> ${p.categoryName}</div>
-                        <div class="product-views"><i class="fas fa-eye"></i> ${p.views_count || 0} مشاهدة</div>
-                        <div class="card-actions">
-                            <button class="btn-edit" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i> تعديل</button>
-                            <button class="btn-delete" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i> حذف</button>
+                `
+                return
+            }
+
+            // Get categories
+            const productsWithCategories = await Promise.all(products.map(async (p) => {
+                let categoryName = p.category || 'مواد كيماوية'
+                let categoryIcon = '🧪'
+                if (p.category_id) {
+                    const { data: cat } = await supabase
+                        .from('categories')
+                        .select('name, icon')
+                        .eq('id', p.category_id)
+                        .single()
+                    if (cat) {
+                        categoryName = cat.name
+                        categoryIcon = cat.icon || '🧪'
+                    }
+                }
+                return { ...p, categoryName, categoryIcon }
+            }))
+
+            const statusMap = {
+                'active': { class: 'status-active', text: '🟢 متاح' },
+                'hidden': { class: 'status-hidden', text: '⚪ مخفي' },
+                'sold': { class: 'status-sold', text: '🔴 تم البيع' },
+                'pending': { class: 'status-pending', text: '🟡 قيد المراجعة' }
+            }
+
+            container.innerHTML = productsWithCategories.map((p, index) => {
+                const hasImage = p.image_url && p.image_url.trim() !== '' && !p.image_url.includes('placehold')
+                const imageHtml = hasImage 
+                    ? `<img class="product-img" src="${p.image_url}" alt="${p.name}" loading="lazy" decoding="async">`
+                    : getPlaceholderHTML(p.name, p.categoryIcon)
+
+                return `
+                    <div class="product-card" style="animation-delay:${(index % 6) * 0.05}s;">
+                        <div class="product-img-wrapper" onclick="window.location.href='product-details.html?id=${p.id}'">
+                            ${imageHtml}
+                        </div>
+                        <div class="product-info">
+                            <div class="product-name">${p.name}</div>
+                            <div class="product-price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : '💰 سعر عند الطلب'}</div>
+                            <div class="product-status ${statusMap[p.status]?.class || 'status-active'}">${statusMap[p.status]?.text || '🟢 متاح'}</div>
+                            <div class="product-category"><i class="fas fa-folder"></i> ${p.categoryName}</div>
+                            <div class="product-views"><i class="fas fa-eye"></i> ${p.views_count || 0} مشاهدة</div>
+                            <div class="card-actions">
+                                <button class="btn-edit" onclick="editProduct('${p.id}')"><i class="fas fa-edit"></i> تعديل</button>
+                                <button class="btn-delete" onclick="deleteProduct('${p.id}')"><i class="fas fa-trash"></i> حذف</button>
+                            </div>
                         </div>
                     </div>
+                `
+            }).join('')
+        } catch (e) {
+            console.error('Error loading products:', e)
+            container.innerHTML = `
+                <div class="empty-state" style="border-color:#e74c3c;">
+                    <i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i>
+                    <h3>حدث خطأ</h3>
+                    <p>لم نتمكن من تحميل المنتجات</p>
+                    <button onclick="refreshData()" style="margin-top:20px;padding:12px 28px;background:#3498db;color:white;border:none;border-radius:30px;cursor:pointer;font-weight:700;font-family:inherit;">🔄 إعادة المحاولة</button>
                 </div>
             `
-        }).join('')
+        }
     }
 
-    // ========== التعديل ==========
+    // ========== EDIT ==========
     window.editProduct = (id) => {
         window.location.href = `edit-product.html?id=${id}`
     }
 
-    // ========== الحذف ==========
+    // ========== DELETE ==========
     window.deleteProduct = async (id) => {
         if (confirm('⚠️ هل أنت متأكد من حذف هذا المنتج؟ لا يمكن التراجع عن هذا الإجراء.')) {
-            const { error } = await supabase
-                .from('products')
-                .delete()
-                .eq('id', id)
-                .eq('supplier_id', currentUser.id)
+            try {
+                const { error } = await supabase
+                    .from('products')
+                    .delete()
+                    .eq('id', id)
+                    .eq('supplier_id', currentUser.id)
 
-            if (error) {
-                alert('❌ خطأ: ' + error.message)
-            } else {
-                alert('✅ تم حذف المنتج بنجاح')
-                loadStats()
-                loadProducts()
+                if (error) {
+                    showToast('❌', 'خطأ', error.message, 'error')
+                } else {
+                    showToast('✅', 'تم الحذف', 'تم حذف المنتج بنجاح', 'success')
+                    loadStats()
+                    loadProducts()
+                }
+            } catch (e) {
+                showToast('❌', 'خطأ', 'حدث خطأ أثناء الحذف', 'error')
             }
         }
     }
 
-    // ========== التحقق من تسجيل الدخول ==========
+    // ========== SEARCH ==========
+    document.getElementById('searchProducts')?.addEventListener('input', (e) => {
+        const term = e.target.value.trim()
+        loadProducts(term)
+    })
+
+    // ========== AUTH ==========
     async function checkAuth() {
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user) {
-            window.location.href = 'auth.html'
-            return
+        try {
+            const { data: { user } } = await supabase.auth.getUser()
+            if (!user) {
+                showToast('🔒', 'تسجيل الدخول مطلوب', 'يرجى تسجيل الدخول كمورد', 'warning')
+                setTimeout(() => { window.location.href = 'auth.html' }, 1500)
+                return
+            }
+            currentUser = user
+
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', user.id)
+                .single()
+            
+            currentProfile = profile
+
+            if (profile?.user_type !== 'supplier') {
+                showToast('⚠️', 'غير مصرح', 'هذه الصفحة مخصصة للموردين فقط', 'error')
+                setTimeout(() => { window.location.href = 'index.html' }, 1500)
+                return
+            }
+
+            // Update welcome card
+            const firstName = profile.full_name?.split(' ')[0] || 'مورد'
+            document.querySelector('.welcome-text h2').textContent = `👋 مرحباً ${firstName}!`
+            document.querySelector('.welcome-text p').textContent = 'من هنا يمكنك إدارة منتجاتك ومتابعة عروضك'
+
+            // Logout
+            document.getElementById('logoutBtn').addEventListener('click', async () => {
+                await supabase.auth.signOut()
+                window.location.href = 'index.html'
+            })
+
+            loadStats()
+            loadProducts()
+        } catch (e) {
+            console.error('Auth error:', e)
+            showToast('❌', 'خطأ', 'حدث خطأ في التحقق من الجلسة', 'error')
         }
-        currentUser = user
-
-        const { data: profile } = await supabase
-            .from('profiles')
-            .select('*')
-            .eq('id', user.id)
-            .single()
-        
-        currentProfile = profile
-
-        if (profile?.user_type !== 'supplier') {
-            alert('⚠️ هذه الصفحة مخصصة للموردين فقط')
-            window.location.href = 'index.html'
-            return
-        }
-
-        // تحديث بطاقة الترحيب
-        const firstName = profile.full_name?.split(' ')[0] || 'مورد'
-        document.getElementById('welcomeCard').innerHTML = `
-            <div class="welcome-text">
-                <h2>👋 مرحباً ${firstName}!</h2>
-                <p>من هنا يمكنك إدارة منتجاتك ومتابعة عروضك</p>
-            </div>
-            <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</button>
-        `
-        document.getElementById('logoutBtn').addEventListener('click', async () => {
-            await supabase.auth.signOut()
-            window.location.href = 'index.html'
-        })
-
-        loadStats()
-        loadProducts()
     }
 
-    // ========== بدء التشغيل ==========
+    // ========== INIT ==========
     setupDropdown()
     updateDropdownContent()
     checkAuth()
+
+    // Auth state change
+    supabase.auth.onAuthStateChange(() => {
+        updateDropdownContent()
+    })
 </script>
 </body>
 </html>
