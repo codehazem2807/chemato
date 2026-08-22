@@ -1320,6 +1320,7 @@
             <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
             <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+            <a href="all-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>  <!-- ✅ زر الموردين -->
             <div class="dropdown">
                 <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
                 <div class="dropdown-content" id="dropdownContent">
@@ -1456,6 +1457,7 @@
             <a href="index.html">الرئيسية</a>
             <a href="all-products.html">المنتجات</a>
             <a href="all-requests.html">الطلبات</a>
+            <a href="all-suppliers.html">الموردين</a>
             <a href="auth.html">تسجيل الدخول</a>
             <a href="supplier-dashboard.html">للموردين</a>
             <a href="buyer-dashboard.html">للعملاء</a>
@@ -2202,7 +2204,7 @@
                 const base = 'https://chemato.vercel.app'
                 let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 
-                const pages = ['', 'all-products.html', 'all-requests.html', 'auth.html']
+                const pages = ['', 'all-products.html', 'all-requests.html', 'all-suppliers.html', 'auth.html']
                 pages.forEach(p => {
                     sitemap += `<url><loc>${base}/${p}</loc><priority>${p === '' ? '1.0' : '0.8'}</priority></url>\n`
                 })
