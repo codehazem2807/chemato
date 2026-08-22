@@ -2,17 +2,184 @@
 <html lang="ar" dir="rtl">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>كيماتو | جميع المنتجات</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>كيماتو | جميع المنتجات الكيماوية في مصر</title>
+    
+    <meta name="description" content="استعرض جميع المنتجات الكيماوية في مصر. صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام من موردين موثوقين." />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="كيماويات,كيماتو,منتجات كيماوية,صودا كاوية,حمض كبريتيك,مذيبات,مصر" />
+    
+    <meta property="og:title" content="كيماتو | جميع المنتجات الكيماوية في مصر" />
+    <meta property="og:description" content="استعرض جميع المنتجات الكيماوية في مصر من موردين موثوقين." />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://chemato.vercel.app/all-products.html" />
+    <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
+    
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="كيماتو | جميع المنتجات الكيماوية في مصر" />
+    <meta name="twitter:description" content="استعرض جميع المنتجات الكيماوية في مصر من موردين موثوقين." />
+    <meta name="twitter:image" content="https://chemato.vercel.app/logo.png" />
+    
+    <link rel="canonical" href="https://chemato.vercel.app/all-products.html" />
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
+    <link rel="apple-touch-icon" href="logo.png" />
+    <meta name="theme-color" content="#0c2d4a" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+    
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Cairo', 'Tahoma', sans-serif; }
-        body { background: #f0f4f8; }
-        
-        /* ========== الهيدر ========== */
+        * { 
+            margin: 0; 
+            padding: 0; 
+            box-sizing: border-box; 
+            font-family: 'Cairo', 'Tahoma', sans-serif; 
+        }
+        body { 
+            background: #f0f4f8; 
+            min-height: 100vh;
+        }
+
+        /* Dark mode */
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a2e;
+            }
+            .navbar {
+                background: #0a1a2a !important;
+            }
+            .search-filter-bar {
+                background: #16213e !important;
+                border-color: #0f3460 !important;
+            }
+            .search-input {
+                background: #1a2a3a !important;
+                color: #e0e0e0 !important;
+            }
+            .search-input::placeholder {
+                color: #6a7a8a;
+            }
+            .search-input-wrapper {
+                background: #1a2a3a !important;
+                border-color: #0f3460 !important;
+            }
+            .category-filter, .sort-select {
+                background: #1a2a3a !important;
+                color: #e0e0e0 !important;
+                border-color: #0f3460 !important;
+            }
+            .category-filter option, .sort-select option {
+                background: #1a2a3a;
+                color: #e0e0e0;
+            }
+            .product-card {
+                background: #16213e !important;
+                border-color: #0f3460 !important;
+            }
+            .product-name {
+                color: #e0e0e0 !important;
+            }
+            .product-category {
+                background: #1a2a3a !important;
+                color: #7ec8e3 !important;
+            }
+            .product-supplier {
+                color: #a0aec0 !important;
+            }
+            .product-views {
+                color: #6a7a8a !important;
+            }
+            .product-img-placeholder {
+                background: linear-gradient(145deg, #1a2a3a, #0f1f2f) !important;
+                color: #7ec8e3 !important;
+            }
+            .product-img-placeholder span {
+                background: #0a1a2a !important;
+                color: #e0e0e0 !important;
+            }
+            .product-img-placeholder .first-letter {
+                color: #4a6a8a !important;
+            }
+            .pagination button {
+                background: #16213e !important;
+                border-color: #0f3460 !important;
+                color: #e0e0e0 !important;
+            }
+            .pagination button:hover:not(:disabled) {
+                background: #1a4a6e !important;
+                color: #fff !important;
+            }
+            .pagination button.active {
+                background: #3498db !important;
+                border-color: #3498db !important;
+                color: #fff !important;
+            }
+            .dropdown-content {
+                background: #16213e !important;
+            }
+            .dropdown-content a {
+                color: #e0e0e0 !important;
+                border-bottom-color: #1a2a3a !important;
+            }
+            .dropdown-content a:hover {
+                background: #1a2a3a !important;
+            }
+            .dropdown-content .logout-item {
+                border-top-color: #1a2a3a !important;
+            }
+            .page-header {
+                background: linear-gradient(135deg, #0a1a2a, #1a4a6e) !important;
+            }
+            .no-results {
+                background: #16213e !important;
+                color: #a0aec0 !important;
+            }
+            .no-results i {
+                color: #2a3a4a !important;
+            }
+            .footer {
+                background: #0a1a2a !important;
+            }
+            .footer-links a {
+                color: #5a9bc7 !important;
+            }
+            .footer-links a:hover {
+                color: #fff !important;
+            }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .skeleton-loader {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            gap: 30px;
+        }
+        .skeleton-card {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            height: 380px;
+            border-radius: 28px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .skeleton-card {
+                background: linear-gradient(90deg, #2a2a3e 25%, #3a3a4e 50%, #2a2a3e 75%);
+            }
+        }
+
         .navbar {
             background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
-            padding: 18px 40px;
+            padding: 14px 40px;
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -24,114 +191,131 @@
             box-shadow: 0 4px 20px rgba(0,0,0,0.1);
             border-bottom: 2px solid rgba(52,152,219,0.30);
         }
+
+        .logo a { 
+            text-decoration: none; 
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
         
-        .logo a { text-decoration: none; }
+        .logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #3498db;
+            object-fit: cover;
+        }
         
+        .logo-text {
+            font-weight: 800;
+            font-size: 20px;
+            color: #fff;
+        }
+        .logo-text .blue { color: #3498db; }
+        .logo-text .gray { color: #9bb7d4; font-weight: 400; }
+
         .nav-links {
             display: flex;
-            gap: 15px;
+            gap: 8px;
             align-items: center;
             flex-wrap: wrap;
         }
-        
+
         .nav-links > a {
-            color: white;
+            color: rgba(255,255,255,0.85);
             text-decoration: none;
-            padding: 8px 20px;
+            padding: 7px 18px;
             border-radius: 30px;
             transition: 0.3s;
-            font-weight: 500;
-            background: rgba(255,255,255,0.06);
-            border: 1px solid rgba(255,255,255,0.06);
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: rgba(255,255,255,0.05);
+            border: 1px solid transparent;
         }
-        
+
         .nav-links > a:hover {
             background: #3498db;
-            color: white;
+            color: #fff;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
-        
-        /* ========== القائمة المنسدلة ========== */
+
         .dropdown {
             position: relative;
             display: inline-block;
         }
-        
+
         .dropdown-btn {
             background: rgba(255,255,255,0.08);
-            color: white;
-            padding: 8px 22px;
+            color: #fff;
+            padding: 7px 18px;
             border-radius: 30px;
             cursor: pointer;
-            font-weight: 500;
-            transition: 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+            font-family: inherit;
+            border: 1px solid rgba(255,255,255,0.06);
             display: flex;
             align-items: center;
             gap: 8px;
-            border: 1px solid rgba(255,255,255,0.08);
-            font-size: 1rem;
-            font-family: inherit;
+            transition: 0.3s;
         }
-        
+
         .dropdown-btn:hover {
             background: #3498db;
-            color: white;
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
-        
+
         .dropdown-content {
             display: none;
             position: absolute;
-            top: 100%;
+            top: 110%;
             left: 0;
-            right: 0;
-            background: white;
+            background: #fff;
             min-width: 200px;
-            box-shadow: 0 8px 16px rgba(0,0,0,0.2);
             border-radius: 16px;
-            z-index: 1000;
+            box-shadow: 0 20px 48px rgba(0,0,0,0.12);
             overflow: hidden;
-            margin-top: 8px;
+            z-index: 1000;
         }
-        
+
         .dropdown-content.show {
             display: block;
+            animation: fadeUp 0.2s ease;
         }
-        
+
         .dropdown-content a {
-            color: #1e2a3e;
+            color: #1a2634;
             padding: 12px 20px;
             text-decoration: none;
             display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f2f5;
             transition: 0.2s;
-            font-size: 14px;
-            border-bottom: 1px solid #e2e8f0;
         }
-        
+
         .dropdown-content a:hover {
-            background: #ebf5fb;
-            color: #1a4a6e;
+            background: #eef5fa;
+            padding-right: 28px;
         }
-        
+
         .dropdown-content .logout-item {
-            color: #e53e3e;
-            border-top: 1px solid #e2e8f0;
+            color: #c0392b;
+            border-top: 1px solid #f0f2f5;
         }
-        
         .dropdown-content .logout-item:hover {
-            background: #fee2e2;
+            background: #fde8e5;
         }
-        
-        /* ========== المحتوى الرئيسي ========== */
+
         .container {
             max-width: 1400px;
             margin: 30px auto;
             padding: 0 20px;
         }
-        
-        /* رأس الصفحة */
+
         .page-header {
             background: linear-gradient(135deg, #0c2d4a, #1a4a6e);
             border-radius: 32px;
@@ -141,27 +325,27 @@
             text-align: center;
             box-shadow: 0 24px 64px rgba(12,45,74,0.25);
         }
-        
+
         .page-header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
-        
+
         .page-header p {
             font-size: 1.1rem;
             opacity: 0.9;
         }
-        
+
         .results-count {
             margin-top: 15px;
             font-size: 0.9rem;
-            background: rgba(255,255,255,0.2);
+            background: rgba(255,255,255,0.15);
             display: inline-block;
-            padding: 5px 20px;
+            padding: 6px 24px;
             border-radius: 30px;
+            font-weight: 600;
         }
-        
-        /* شريط البحث والفلترة */
+
         .search-filter-bar {
             background: white;
             border-radius: 60px;
@@ -172,8 +356,9 @@
             flex-wrap: wrap;
             align-items: center;
             box-shadow: 0 4px 12px rgba(0,0,0,0.05);
+            border: 1px solid rgba(0,0,0,0.04);
         }
-        
+
         .search-input-wrapper {
             flex: 3;
             display: flex;
@@ -181,78 +366,102 @@
             border-radius: 50px;
             overflow: hidden;
             border: 1px solid #e2e8f0;
+            position: relative;
         }
-        
+
         .search-input {
             flex: 1;
-            padding: 16px 20px;
+            padding: 14px 20px;
             border: none;
             font-size: 1rem;
             background: transparent;
             outline: none;
+            font-family: inherit;
         }
-        
+
         .search-input:focus {
-            box-shadow: 0 0 0 3px rgba(52,152,219,0.2);
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
         }
-        
+
+        .clear-search {
+            background: transparent;
+            border: none;
+            padding: 0 16px;
+            cursor: pointer;
+            color: #94a3b8;
+            font-size: 1.1rem;
+            display: none;
+            transition: 0.3s;
+        }
+        .clear-search:hover {
+            color: #1a2634;
+        }
+        .clear-search.visible {
+            display: flex;
+            align-items: center;
+        }
+
         .search-btn {
             background: linear-gradient(145deg, #3498db, #2c81ba);
             border: none;
-            padding: 0 30px;
+            padding: 0 28px;
             cursor: pointer;
-            font-weight: bold;
+            font-weight: 700;
             transition: 0.3s;
             color: white;
+            font-size: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        
+
         .search-btn:hover {
             background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
         }
-        
+
         .category-filter, .sort-select {
-            padding: 14px 20px;
+            padding: 12px 18px;
             border: 1px solid #e2e8f0;
             border-radius: 50px;
             background: white;
             cursor: pointer;
-            min-width: 180px;
+            min-width: 170px;
             font-size: 0.9rem;
             outline: none;
             transition: 0.3s;
+            font-family: inherit;
         }
-        
+
         .category-filter:focus, .sort-select:focus {
             border-color: #3498db;
-            box-shadow: 0 0 0 2px rgba(52,152,219,0.2);
+            box-shadow: 0 0 0 2px rgba(52,152,219,0.15);
         }
-        
-        /* ========== شبكة المنتجات ========== */
+
         .products-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
         }
-        
+
         .product-card {
             background: white;
             border-radius: 28px;
             overflow: hidden;
             box-shadow: 0 12px 36px rgba(12,45,74,0.06);
             transition: all 0.4s cubic-bezier(0.15,0.75,0.45,1);
-            cursor: pointer;
             border: 1px solid rgba(52,152,219,0.06);
             display: flex;
             flex-direction: column;
+            animation: fadeUp 0.5s ease forwards;
+            opacity: 0;
         }
-        
+
         .product-card:hover {
             transform: translateY(-14px) scale(1.01);
             box-shadow: 0 36px 72px rgba(12,45,74,0.12);
             border-color: #3498db;
         }
-        
-        /* ===== صورة المنتج ===== */
+
         .product-img-wrapper {
             width: 100%;
             height: 220px;
@@ -262,20 +471,20 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            cursor: pointer;
         }
-        
+
         .product-img {
             width: 100%;
             height: 100%;
             object-fit: cover;
             transition: 0.6s cubic-bezier(0.15,0.75,0.45,1);
         }
-        
+
         .product-card:hover .product-img {
             transform: scale(1.06);
         }
-        
-        /* ===== Placeholder للأيقونة ===== */
+
         .product-img-placeholder {
             width: 100%;
             height: 100%;
@@ -285,16 +494,15 @@
             justify-content: center;
             font-size: 4.5rem;
             color: #1a4a6e;
-            background: linear-gradient(145deg, #dce8f0, #eef4f8);
             transition: 0.5s;
             padding: 20px;
             text-align: center;
         }
-        
+
         .product-card:hover .product-img-placeholder {
-            background: linear-gradient(145deg, #c8d8e6, #e2ecf5);
+            transform: scale(1.02);
         }
-        
+
         .product-img-placeholder span {
             font-size: 1rem;
             font-weight: 700;
@@ -306,20 +514,20 @@
             backdrop-filter: blur(6px);
             box-shadow: 0 2px 12px rgba(0,0,0,0.04);
         }
-        
+
         .product-img-placeholder .first-letter {
             font-size: 2.5rem;
             margin-top: 4px;
-            opacity: 0.20;
+            opacity: 0.15;
         }
-        
+
         .product-info {
-            padding: 22px 20px 24px;
+            padding: 20px 20px 24px;
             flex: 1;
             display: flex;
             flex-direction: column;
         }
-        
+
         .product-category {
             display: inline-block;
             background: #ecf3f8;
@@ -331,7 +539,7 @@
             align-self: flex-start;
             color: #1a4a6e;
         }
-        
+
         .product-name {
             color: #0c2d4a;
             font-size: 1.15rem;
@@ -339,14 +547,47 @@
             font-weight: 700;
             line-height: 1.4;
         }
-        
+
+        .product-price-wrapper {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin: 8px 0;
+        }
+
         .product-price {
             color: #d4880f;
             font-size: 22px;
             font-weight: 800;
-            margin: 8px 0;
         }
-        
+
+        .price-alert-btn {
+            background: rgba(52,152,219,0.08);
+            border: 1px solid rgba(52,152,219,0.2);
+            border-radius: 30px;
+            padding: 4px 12px;
+            font-size: 0.7rem;
+            cursor: pointer;
+            color: #3498db;
+            font-weight: 600;
+            transition: 0.3s;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .price-alert-btn:hover {
+            background: #3498db;
+            color: #fff;
+            border-color: #3498db;
+        }
+        .price-alert-btn.active {
+            background: #2ecc71;
+            color: #fff;
+            border-color: #2ecc71;
+        }
+
         .product-supplier {
             color: #64748b;
             font-size: 14px;
@@ -356,30 +597,32 @@
             align-items: center;
             gap: 8px;
         }
-        
+
         .product-views {
             font-size: 12px;
             color: #94a3b8;
             margin-top: 10px;
         }
-        
-        /* ===== BUTTONS ===== */
+
         .btn-group {
             display: flex;
             gap: 10px;
             margin-top: 18px;
             flex-wrap: wrap;
         }
-        
+
         .btn-group .btn {
             flex: 1;
-            min-width: 100px;
+            min-width: 80px;
         }
-        
+
         .btn {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
             color: #fff;
-            padding: 12px 16px;
+            padding: 10px 16px;
             border-radius: 60px;
             text-decoration: none;
             border: none;
@@ -387,10 +630,10 @@
             transition: all 0.3s;
             text-align: center;
             font-weight: 700;
-            font-size: 0.95rem;
-            letter-spacing: 0.3px;
+            font-size: 0.85rem;
+            font-family: inherit;
         }
-        
+
         .btn-details {
             background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
             box-shadow: 0 4px 16px rgba(26,74,110,0.15);
@@ -400,7 +643,7 @@
             transform: scale(1.02) translateY(-2px);
             box-shadow: 0 8px 28px rgba(52,152,219,0.35);
         }
-        
+
         .btn-whatsapp {
             background: #25D366;
             box-shadow: 0 4px 16px rgba(37,211,102,0.25);
@@ -410,18 +653,15 @@
             transform: scale(1.02) translateY(-2px);
             box-shadow: 0 8px 28px rgba(37,211,102,0.35);
         }
-        .btn-whatsapp i { margin-left: 6px; }
-        .btn-details i { margin-left: 6px; }
-        
-        /* ترقيم الصفحات */
+
         .pagination {
             display: flex;
             justify-content: center;
-            gap: 10px;
-            margin: 50px 0 30px;
+            gap: 8px;
+            margin: 40px 0 20px;
             flex-wrap: wrap;
         }
-        
+
         .pagination button {
             padding: 10px 18px;
             background: white;
@@ -429,28 +669,30 @@
             border-radius: 30px;
             cursor: pointer;
             transition: 0.3s;
-            font-weight: bold;
+            font-weight: 600;
             font-size: 0.9rem;
+            font-family: inherit;
+            min-width: 44px;
         }
-        
+
         .pagination button:hover:not(:disabled) {
             background: #1a4a6e;
             color: white;
             border-color: #1a4a6e;
+            transform: translateY(-2px);
         }
-        
+
         .pagination button.active {
             background: #3498db;
             border-color: #3498db;
             color: white;
         }
-        
+
         .pagination button:disabled {
-            opacity: 0.5;
+            opacity: 0.4;
             cursor: not-allowed;
         }
-        
-        /* حالات خاصة */
+
         .loader {
             text-align: center;
             padding: 80px;
@@ -458,39 +700,135 @@
             color: #1a4a6e;
             font-weight: 600;
         }
-        
+
         .no-results {
             text-align: center;
-            padding: 80px;
+            padding: 80px 40px;
             background: white;
             border-radius: 32px;
             color: #64748b;
         }
-        
+
         .no-results i {
             font-size: 60px;
             margin-bottom: 20px;
             color: #cbd5e1;
         }
-        
+
+        .no-results h3 {
+            font-size: 1.5rem;
+            margin-bottom: 10px;
+        }
+
         .no-results button {
             margin-top: 20px;
-            padding: 10px 25px;
+            padding: 12px 28px;
             background: #1a4a6e;
             color: white;
             border: none;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
+            font-size: 1rem;
             transition: 0.3s;
+            font-family: inherit;
         }
-        
+
         .no-results button:hover {
             background: #3498db;
             transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.3);
         }
-        
-        /* الفوتر */
+
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            max-width: 90%;
+            width: 420px;
+        }
+
+        .toast {
+            background: #0a2538;
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-right: 4px solid #3498db;
+            animation: fadeUp 0.4s ease;
+        }
+
+        .toast .icon {
+            font-size: 1.6rem;
+            flex-shrink: 0;
+        }
+
+        .toast .content {
+            flex: 1;
+        }
+
+        .toast .content .title {
+            font-weight: 700;
+            font-size: 0.95rem;
+        }
+
+        .toast .content .desc {
+            font-size: 0.8rem;
+            opacity: 0.8;
+        }
+
+        .toast .close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: 0.3s;
+            flex-shrink: 0;
+        }
+        .toast .close:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2176ae);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 20px rgba(52,152,219,0.3);
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            z-index: 99;
+        }
+
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+
+        .scroll-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(52,152,219,0.4);
+        }
+
         .footer {
             background: linear-gradient(145deg, #0c2d4a, #1a4a6e);
             color: white;
@@ -499,7 +837,7 @@
             margin-top: 60px;
             border-top: 4px solid #3498db;
         }
-        
+
         .footer-links {
             display: flex;
             justify-content: center;
@@ -507,35 +845,39 @@
             margin-bottom: 20px;
             flex-wrap: wrap;
         }
-        
+
         .footer-links a {
-            color: #3498db;
+            color: #5a9bc7;
             text-decoration: none;
             font-weight: 600;
             transition: 0.3s;
         }
-        
+
         .footer-links a:hover {
             color: white;
             transform: translateY(-3px);
         }
-        
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 15px;
-                padding: 14px 20px;
+                gap: 12px;
+                padding: 12px 16px;
             }
             .page-header h1 {
-                font-size: 1.8rem;
+                font-size: 1.6rem;
             }
             .page-header {
-                padding: 30px 20px;
+                padding: 24px 16px;
+            }
+            .page-header p {
+                font-size: 0.95rem;
             }
             .search-filter-bar {
                 flex-direction: column;
-                border-radius: 32px;
-                padding: 15px;
+                border-radius: 28px;
+                padding: 12px;
+                gap: 10px;
             }
             .search-input-wrapper {
                 width: 100%;
@@ -551,6 +893,7 @@
             .dropdown-content {
                 left: auto;
                 right: 0;
+                min-width: 170px;
             }
             .product-img-wrapper {
                 height: 180px;
@@ -561,6 +904,90 @@
             .btn-group .btn {
                 min-width: unset;
             }
+            .nav-links a {
+                padding: 5px 12px;
+                font-size: 0.8rem;
+            }
+            .dropdown-btn {
+                padding: 5px 12px;
+                font-size: 0.8rem;
+            }
+            .logo-text {
+                font-size: 16px;
+            }
+            .logo img {
+                width: 36px;
+                height: 36px;
+            }
+            .skeleton-loader {
+                grid-template-columns: 1fr;
+            }
+            .skeleton-card {
+                height: 320px;
+            }
+            .container {
+                padding: 0 12px;
+                margin: 16px auto;
+            }
+            .footer-links {
+                gap: 12px;
+            }
+            .footer-links a {
+                font-size: 0.8rem;
+            }
+            .search-btn {
+                padding: 0 16px;
+                font-size: 0.85rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .page-header h1 {
+                font-size: 1.3rem;
+            }
+            .product-card {
+                border-radius: 20px;
+            }
+            .product-img-wrapper {
+                height: 150px;
+            }
+            .product-price {
+                font-size: 18px;
+            }
+            .product-name {
+                font-size: 1rem;
+            }
+        }
+
+        @media (hover: none) {
+            .product-card:hover {
+                transform: none;
+            }
+            .btn-details:hover {
+                background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+                transform: none;
+            }
+            .btn-whatsapp:hover {
+                background: #25D366;
+                transform: none;
+            }
+            .pagination button:hover:not(:disabled) {
+                background: white;
+                color: #1a2634;
+                transform: none;
+            }
+            .pagination button.active:hover {
+                background: #3498db;
+                color: white;
+            }
+            .nav-links > a:hover {
+                background: rgba(255,255,255,0.05);
+                transform: none;
+            }
+            .dropdown-btn:hover {
+                background: rgba(255,255,255,0.08);
+                transform: none;
+            }
         }
     </style>
 </head>
@@ -568,12 +995,12 @@
 
 <div class="navbar">
     <div class="logo">
-        <a href="/" style="text-decoration:none;">
-            <div style="display:flex;align-items:center;gap:12px;font-weight:700;font-size:22px;">
-                <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
-                     style="width:50px;height:50px;border-radius:50%;border:3px solid #3498db;object-fit:cover;">
-                <span><span style="color:#3498db;">كيماتو</span><span style="color:#b0c9d9;"> | جميع المنتجات</span></span>
-            </div>
+        <a href="/">
+            <img src="logo.png" alt="كيماتو" />
+            <span class="logo-text">
+                <span class="blue">كيماتو</span>
+                <span class="gray">| جميع المنتجات</span>
+            </span>
         </a>
     </div>
     <div class="nav-links">
@@ -581,7 +1008,7 @@
         <a href="all-products.html"><i class="fas fa-flask"></i> جميع المنتجات</a>
         <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> جميع الطلبات</a>
         <div class="dropdown">
-            <button class="dropdown-btn"><i class="fas fa-user-circle"></i> القائمة</button>
+            <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
             <div class="dropdown-content" id="dropdownContent"></div>
         </div>
     </div>
@@ -591,31 +1018,43 @@
     <div class="page-header">
         <h1><i class="fas fa-boxes"></i> جميع المنتجات الكيماوية</h1>
         <p>استعرض أحدث وأفضل المواد الكيماوية من موردين موثوقين في مصر</p>
-        <div class="results-count" id="resultsCount"></div>
+        <div class="results-count" id="resultsCount">📊 جاري التحميل...</div>
     </div>
 
     <div class="search-filter-bar">
         <div class="search-input-wrapper">
-            <input type="text" id="searchInput" class="search-input" placeholder="🔍 بحث باسم المنتج...">
-            <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i></button>
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 بحث باسم المنتج..." autocomplete="off" />
+            <button class="clear-search" id="clearSearch" aria-label="مسح البحث"><i class="fas fa-times"></i></button>
+            <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
         </div>
         <select id="categoryFilter" class="category-filter">
             <option value="all">📂 جميع التصنيفات</option>
         </select>
         <select id="sortBy" class="sort-select">
             <option value="newest">🕐 الأحدث</option>
-            <option value="price_asc">💰 السعر: من الأقل للأعلى</option>
-            <option value="price_desc">💰 السعر: من الأعلى للأقل</option>
+            <option value="price_asc">💰 السعر: من الأقل</option>
+            <option value="price_desc">💰 السعر: من الأعلى</option>
             <option value="popular">👁️ الأكثر مشاهدة</option>
         </select>
     </div>
 
     <div id="productsContainer" class="products-grid">
-        <div class="loader">⏳ جاري تحميل المنتجات...</div>
+        <div class="skeleton-loader" id="skeletonLoader">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+        </div>
     </div>
 
     <div id="pagination" class="pagination"></div>
 </div>
+
+<button class="scroll-top" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
+
+<div class="toast-container" id="toastContainer"></div>
 
 <div class="footer">
     <div class="footer-links">
@@ -626,7 +1065,7 @@
         <a href="supplier-dashboard.html">للموردين</a>
         <a href="buyer-dashboard.html">للعملاء</a>
     </div>
-    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر</div>
+    <div>© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
 </div>
 
 <script type="module">
@@ -637,80 +1076,115 @@
     
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
     
-    // ========== المتغيرات ==========
     let currentPage = 1
     let totalCount = 0
     let currentSearch = ''
     let currentCategoryId = 'all'
     let currentSort = 'newest'
     const itemsPerPage = 12
-    
     let allCategories = []
-    
-    // ========== القائمة المنسدلة ==========
+    let isPriceAlertActive = {}
+
+    // ========== TOAST ==========
+    function showToast(icon, title, desc) {
+        const container = document.getElementById('toastContainer')
+        if (!container) return
+        const toast = document.createElement('div')
+        toast.className = 'toast'
+        toast.innerHTML = `
+            <div class="icon">${icon}</div>
+            <div class="content">
+                <div class="title">${title}</div>
+                <div class="desc">${desc}</div>
+            </div>
+            <button class="close" onclick="this.parentElement.remove()">✕</button>
+        `
+        container.appendChild(toast)
+        setTimeout(() => toast.remove(), 5000)
+    }
+
+    // ========== SCROLL TOP ==========
+    function setupScrollTop() {
+        const btn = document.getElementById('scrollTopBtn')
+        if (!btn) return
+        window.addEventListener('scroll', () => {
+            btn.classList.toggle('visible', window.scrollY > 400)
+        })
+        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
+    }
+
+    // ========== DROPDOWN ==========
     function setupDropdown() {
-        const dropdownBtn = document.querySelector('.dropdown-btn')
-        const dropdownContent = document.getElementById('dropdownContent')
-        
-        if (dropdownBtn && dropdownContent) {
-            dropdownBtn.addEventListener('click', (e) => {
+        const toggle = document.getElementById('dropdownToggle')
+        const content = document.getElementById('dropdownContent')
+        if (toggle && content) {
+            toggle.addEventListener('click', (e) => {
                 e.stopPropagation()
-                dropdownContent.classList.toggle('show')
+                content.classList.toggle('show')
             })
-            document.addEventListener('click', () => {
-                dropdownContent.classList.remove('show')
-            })
+            document.addEventListener('click', () => content.classList.remove('show'))
         }
     }
-    
+
     async function updateDropdownContent() {
-        const { data: { user } } = await supabase.auth.getUser()
-        const dropdownContent = document.getElementById('dropdownContent')
-        
-        if (user) {
-            const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
-            dropdownContent.innerHTML = `
-                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
-                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
-                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-            `
-            const logoutLink = document.getElementById('logoutLink')
-            if (logoutLink) {
-                logoutLink.onclick = async (e) => {
+        try {
+            const { data: { user } } = await supabase.auth.getUser()
+            const dropdownContent = document.getElementById('dropdownContent')
+            if (!dropdownContent) return
+
+            if (user) {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('user_type')
+                    .eq('id', user.id)
+                    .single()
+
+                dropdownContent.innerHTML = `
+                    <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                    <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                    <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                `
+                document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
                     e.preventDefault()
                     await supabase.auth.signOut()
                     window.location.href = 'index.html'
-                }
+                })
+            } else {
+                dropdownContent.innerHTML = `
+                    <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                    <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                    <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                    <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                `
             }
-        } else {
-            dropdownContent.innerHTML = `
-                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
-            `
+        } catch (e) {
+            console.error('Error updating dropdown:', e)
         }
     }
-    
-    // ========== تحميل التصنيفات ==========
+
+    // ========== LOAD CATEGORIES ==========
     async function loadCategories() {
-        const { data: categories } = await supabase
-            .from('categories')
-            .select('*')
-            .eq('is_active', true)
-            .order('display_order', { ascending: true })
-        
-        allCategories = categories || []
-        
-        const select = document.getElementById('categoryFilter')
-        if (allCategories.length > 0) {
-            allCategories.forEach(cat => {
-                select.innerHTML += `<option value="${cat.id}">${cat.icon || '📁'} ${cat.name}</option>`
-            })
+        try {
+            const { data: categories } = await supabase
+                .from('categories')
+                .select('*')
+                .eq('is_active', true)
+                .order('display_order', { ascending: true })
+            
+            allCategories = categories || []
+            
+            const select = document.getElementById('categoryFilter')
+            if (allCategories.length > 0) {
+                allCategories.forEach(cat => {
+                    select.innerHTML += `<option value="${cat.id}">${cat.icon || '📁'} ${cat.name}</option>`
+                })
+            }
+        } catch (e) {
+            console.error('Error loading categories:', e)
         }
     }
-    
-    // ========== دالة إنشاء رابط واتساب ==========
+
+    // ========== WHATSAPP LINK ==========
     function getWhatsAppLink(phone, productName) {
         if (!phone) return '#'
         const cleanPhone = phone.replace(/\D/g, '')
@@ -718,10 +1192,54 @@
         const message = `مرحباً، أنا مهتم بـ: ${productName} (منصة كيماتو)`
         return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`
     }
-    
-    // ========== دالة إنشاء Placeholder ==========
+
+    // ========== PRICE ALERT ==========
+    window.setPriceAlert = async function(productId, productName, targetPrice) {
+        try {
+            const { data: { user } } = await supabase.auth.getUser()
+            if (!user) {
+                showToast('🔒', 'تسجيل الدخول مطلوب', 'يرجى تسجيل الدخول لتفعيل تنبيه السعر')
+                window.location.href = 'auth.html'
+                return
+            }
+
+            const { data: existing } = await supabase
+                .from('price_alerts')
+                .select('id')
+                .eq('product_id', productId)
+                .eq('user_id', user.id)
+                .eq('active', true)
+                .single()
+
+            if (existing) {
+                await supabase
+                    .from('price_alerts')
+                    .update({ active: false })
+                    .eq('id', existing.id)
+                showToast('🔕', 'تم إلغاء التنبيه', `لن يتم إعلامك عند انخفاض سعر ${productName}`)
+                isPriceAlertActive[productId] = false
+                return
+            }
+
+            await supabase
+                .from('price_alerts')
+                .insert({
+                    product_id: productId,
+                    user_id: user.id,
+                    target_price: targetPrice || 0,
+                    active: true
+                })
+            showToast('🔔', 'تم تفعيل التنبيه!', `سيتم إعلامك عند انخفاض سعر ${productName}`)
+            isPriceAlertActive[productId] = true
+        } catch (e) {
+            console.error('Error setting price alert:', e)
+            showToast('⚠️', 'حدث خطأ', 'لم نتمكن من تفعيل التنبيه، حاول مرة أخرى')
+        }
+    }
+
+    // ========== PLACEHOLDER ==========
     function getPlaceholderHTML(productName, categoryIcon = '🧪') {
-        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a'];
+        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e'];
         const colorIndex = (productName?.length || 0) % colors.length;
         const bgColor = colors[colorIndex];
         
@@ -735,144 +1253,184 @@
             </div>
         `;
     }
-    
-    // ========== عرض المنتجات ==========
+
+    // ========== LOAD PRODUCTS ==========
     async function loadProducts() {
-        document.getElementById('productsContainer').innerHTML = '<div class="loader">⏳ جاري تحميل المنتجات...</div>'
+        const container = document.getElementById('productsContainer')
+        container.innerHTML = `
+            <div class="skeleton-loader">
+                ${Array(6).fill(0).map(() => '<div class="skeleton-card"></div>').join('')}
+            </div>
+        `
         
-        let query = supabase
-            .from('products')
-            .select('*', { count: 'exact' })
-            .eq('status', 'active')
-        
-        if (currentCategoryId !== 'all') {
-            query = query.eq('category_id', currentCategoryId)
-        }
-        
-        if (currentSearch) {
-            query = query.ilike('name', `%${currentSearch}%`)
-        }
-        
-        switch (currentSort) {
-            case 'price_asc':
-                query = query.order('price', { ascending: true, nullsFirst: false })
-                break
-            case 'price_desc':
-                query = query.order('price', { ascending: false, nullsFirst: false })
-                break
-            case 'popular':
-                query = query.order('views_count', { ascending: false })
-                break
-            default:
-                query = query.order('created_at', { ascending: false })
-        }
-        
-        const from = (currentPage - 1) * itemsPerPage
-        const to = from + itemsPerPage - 1
-        
-        const { data: products, error, count } = await query.range(from, to)
-        
-        if (error) {
-            document.getElementById('productsContainer').innerHTML = `<div class="no-results">❌ خطأ: ${error.message}</div>`
-            return
-        }
-        
-        totalCount = count || 0
-        document.getElementById('resultsCount').innerHTML = `📊 عرض ${products?.length || 0} من ${totalCount} منتج`
-        
-        if (!products || products.length === 0) {
-            document.getElementById('productsContainer').innerHTML = `
-                <div class="no-results">
-                    <i class="fas fa-search"></i>
-                    <h3>لا توجد منتجات</h3>
-                    <p>لم نجد أي منتجات تطابق معايير البحث</p>
-                    <button onclick="resetFilters()">🔄 إعادة تعيين</button>
-                </div>
-            `
-            document.getElementById('pagination').innerHTML = ''
-            return
-        }
-        
-        // جلب بيانات إضافية لكل منتج
-        const productsWithDetails = await Promise.all(products.map(async (p) => {
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('full_name, company_name, phone')
-                .eq('id', p.supplier_id)
-                .single()
+        try {
+            let query = supabase
+                .from('products')
+                .select('*', { count: 'exact' })
+                .eq('status', 'active')
             
-            let categoryName = p.category || 'مواد كيماوية'
-            let categoryIcon = '🧪'
-            
-            if (p.category_id && allCategories.length > 0) {
-                const found = allCategories.find(c => c.id === p.category_id)
-                if (found) {
-                    categoryName = found.name
-                    categoryIcon = found.icon || '🧪'
-                }
+            if (currentCategoryId !== 'all') {
+                query = query.eq('category_id', currentCategoryId)
             }
             
-            return { ...p, profile, categoryName, categoryIcon }
-        }))
-        
-        document.getElementById('productsContainer').innerHTML = productsWithDetails.map(p => {
-            // التحقق من وجود صورة حقيقية
-            const hasImage = p.image_url && p.image_url.trim() !== '' && !p.image_url.includes('placehold');
+            if (currentSearch) {
+                query = query.ilike('name', `%${currentSearch}%`)
+            }
             
-            // اختيار عرض الصورة أو الـ Placeholder
-            const imageHtml = hasImage 
-                ? `<img class="product-img" src="${p.image_url}" alt="${p.name}" loading="lazy">`
-                : getPlaceholderHTML(p.name, p.categoryIcon);
+            switch (currentSort) {
+                case 'price_asc':
+                    query = query.order('price', { ascending: true, nullsFirst: false })
+                    break
+                case 'price_desc':
+                    query = query.order('price', { ascending: false, nullsFirst: false })
+                    break
+                case 'popular':
+                    query = query.order('views_count', { ascending: false })
+                    break
+                default:
+                    query = query.order('created_at', { ascending: false })
+            }
             
-            // رابط واتساب
-            const whatsappLink = getWhatsAppLink(p.profile?.phone, p.name)
+            const from = (currentPage - 1) * itemsPerPage
+            const to = from + itemsPerPage - 1
             
-            return `
-                <div class="product-card">
-                    <div class="product-img-wrapper" onclick="window.location.href='product-details.html?id=${p.id}'">
-                        ${imageHtml}
+            const { data: products, error, count } = await query.range(from, to)
+            
+            if (error) {
+                container.innerHTML = `<div class="no-results">❌ خطأ: ${error.message}</div>`
+                return
+            }
+            
+            totalCount = count || 0
+            document.getElementById('resultsCount').innerHTML = `📊 عرض ${products?.length || 0} من ${totalCount} منتج`
+            
+            if (!products || products.length === 0) {
+                container.innerHTML = `
+                    <div class="no-results">
+                        <i class="fas fa-search"></i>
+                        <h3>لا توجد منتجات</h3>
+                        <p>لم نجد أي منتجات تطابق معايير البحث</p>
+                        <button onclick="resetFilters()">🔄 إعادة تعيين الفلاتر</button>
                     </div>
-                    <div class="product-info">
-                        <span class="product-category">${p.categoryIcon} ${p.categoryName}</span>
-                        <h3 class="product-name">${p.name}</h3>
-                        <div class="product-price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : '💰 سعر عند الطلب'}</div>
-                        <div class="product-supplier"><i class="fas fa-building"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
-                        <div class="product-views"><i class="fas fa-eye"></i> ${p.views_count || 0} مشاهدة</div>
-                        
-                        <div class="btn-group">
-                            <a href="product-details.html?id=${p.id}" class="btn btn-details" onclick="event.stopPropagation();">
-                                <i class="fas fa-info-circle"></i> تفاصيل
-                            </a>
-                            <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();">
-                                <i class="fab fa-whatsapp"></i> واتساب
-                            </a>
+                `
+                document.getElementById('pagination').innerHTML = ''
+                return
+            }
+            
+            // Check price alerts for current user
+            const { data: { user } } = await supabase.auth.getUser()
+            if (user) {
+                const { data: alerts } = await supabase
+                    .from('price_alerts')
+                    .select('product_id')
+                    .eq('user_id', user.id)
+                    .eq('active', true)
+                alerts?.forEach(a => { isPriceAlertActive[a.product_id] = true })
+            }
+            
+            const productsWithDetails = await Promise.all(products.map(async (p) => {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('full_name, company_name, phone')
+                    .eq('id', p.supplier_id)
+                    .single()
+                
+                let categoryName = p.category || 'مواد كيماوية'
+                let categoryIcon = '🧪'
+                
+                if (p.category_id && allCategories.length > 0) {
+                    const found = allCategories.find(c => c.id === p.category_id)
+                    if (found) {
+                        categoryName = found.name
+                        categoryIcon = found.icon || '🧪'
+                    }
+                }
+                
+                return { ...p, profile, categoryName, categoryIcon }
+            }))
+            
+            container.innerHTML = productsWithDetails.map((p, index) => {
+                const hasImage = p.image_url && p.image_url.trim() !== '' && !p.image_url.includes('placehold')
+                const imageHtml = hasImage 
+                    ? `<img class="product-img" src="${p.image_url}" alt="${p.name}" loading="lazy" decoding="async">`
+                    : getPlaceholderHTML(p.name, p.categoryIcon)
+                
+                const whatsappLink = getWhatsAppLink(p.profile?.phone, p.name)
+                const isAlertActive = isPriceAlertActive[p.id] || false
+                const priceValue = p.price || 0
+                
+                return `
+                    <div class="product-card" style="animation-delay:${(index % 6) * 0.05}s;">
+                        <div class="product-img-wrapper" onclick="window.location.href='product-details.html?id=${p.id}'">
+                            ${imageHtml}
+                        </div>
+                        <div class="product-info">
+                            <span class="product-category">${p.categoryIcon} ${p.categoryName}</span>
+                            <h3 class="product-name">${p.name}</h3>
+                            <div class="product-price-wrapper">
+                                <span class="product-price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + p.unit : '💰 سعر عند الطلب'}</span>
+                                ${p.price ? `
+                                    <button class="price-alert-btn ${isAlertActive ? 'active' : ''}" 
+                                            onclick="event.stopPropagation(); setPriceAlert('${p.id}', '${p.name.replace(/'/g, "\\'")}', ${priceValue})">
+                                        <i class="fas ${isAlertActive ? 'fa-bell-slash' : 'fa-bell'}"></i>
+                                        ${isAlertActive ? 'إلغاء التنبيه' : 'تنبيه السعر'}
+                                    </button>
+                                ` : ''}
+                            </div>
+                            <div class="product-supplier"><i class="fas fa-building"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
+                            <div class="product-views"><i class="fas fa-eye"></i> ${p.views_count || 0} مشاهدة</div>
+                            
+                            <div class="btn-group">
+                                <a href="product-details.html?id=${p.id}" class="btn btn-details" onclick="event.stopPropagation();">
+                                    <i class="fas fa-info-circle"></i> تفاصيل
+                                </a>
+                                <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </a>
+                            </div>
                         </div>
                     </div>
+                `
+            }).join('')
+            
+            // Pagination
+            const totalPages = Math.ceil(totalCount / itemsPerPage)
+            let paginationHtml = ''
+            
+            if (totalPages > 1) {
+                paginationHtml += `<button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>«</button>`
+                paginationHtml += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹</button>`
+                
+                let startPage = Math.max(1, currentPage - 2)
+                let endPage = Math.min(totalPages, currentPage + 2)
+                
+                if (startPage > 1) paginationHtml += `<button onclick="goToPage(${startPage - 1})">...</button>`
+                
+                for (let i = startPage; i <= endPage; i++) {
+                    paginationHtml += `<button onclick="goToPage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`
+                }
+                
+                if (endPage < totalPages) paginationHtml += `<button onclick="goToPage(${endPage + 1})">...</button>`
+                
+                paginationHtml += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>›</button>`
+                paginationHtml += `<button onclick="goToPage(${totalPages})" ${currentPage === totalPages ? 'disabled' : ''}>»</button>`
+            }
+            
+            document.getElementById('pagination').innerHTML = paginationHtml
+        } catch (e) {
+            console.error('Error loading products:', e)
+            container.innerHTML = `
+                <div class="no-results" style="border:2px solid #e74c3c;">
+                    <i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i>
+                    <h3>حدث خطأ</h3>
+                    <p>لم نتمكن من تحميل المنتجات. يرجى المحاولة مرة أخرى.</p>
+                    <button onclick="location.reload()">🔄 إعادة تحميل</button>
                 </div>
             `
-        }).join('')
-        
-        // ترقيم الصفحات
-        const totalPages = Math.ceil(totalCount / itemsPerPage)
-        let paginationHtml = ''
-        
-        paginationHtml += `<button onclick="goToPage(1)" ${currentPage === 1 ? 'disabled' : ''}>« الأول</button>`
-        paginationHtml += `<button onclick="goToPage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>‹ السابق</button>`
-        
-        let startPage = Math.max(1, currentPage - 2)
-        let endPage = Math.min(totalPages, currentPage + 2)
-        
-        for (let i = startPage; i <= endPage; i++) {
-            paginationHtml += `<button onclick="goToPage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`
         }
-        
-        paginationHtml += `<button onclick="goToPage(${currentPage + 1})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>التالي ›</button>`
-        paginationHtml += `<button onclick="goToPage(${totalPages})" ${currentPage === totalPages || totalPages === 0 ? 'disabled' : ''}>الأخير »</button>`
-        
-        document.getElementById('pagination').innerHTML = paginationHtml
     }
-    
-    // ========== التنقل بين الصفحات ==========
+
+    // ========== PAGINATION ==========
     window.goToPage = function(page) {
         if (page < 1) return
         const totalPages = Math.ceil(totalCount / itemsPerPage)
@@ -881,8 +1439,8 @@
         loadProducts()
         window.scrollTo({ top: 0, behavior: 'smooth' })
     }
-    
-    // ========== إعادة تعيين الفلاتر ==========
+
+    // ========== RESET FILTERS ==========
     window.resetFilters = function() {
         currentSearch = ''
         currentCategoryId = 'all'
@@ -891,41 +1449,79 @@
         document.getElementById('searchInput').value = ''
         document.getElementById('categoryFilter').value = 'all'
         document.getElementById('sortBy').value = 'newest'
+        document.getElementById('clearSearch').classList.remove('visible')
         loadProducts()
     }
-    
-    // ========== ربط الأحداث ==========
-    document.getElementById('searchBtn').addEventListener('click', () => {
-        currentSearch = document.getElementById('searchInput').value.trim()
-        currentPage = 1
-        loadProducts()
-    })
-    
-    document.getElementById('searchInput').addEventListener('keypress', (e) => {
-        if (e.key === 'Enter') {
-            currentSearch = e.target.value.trim()
+
+    // ========== EVENT HANDLERS ==========
+    const searchInput = document.getElementById('searchInput')
+    const clearSearch = document.getElementById('clearSearch')
+    const searchBtn = document.getElementById('searchBtn')
+    const categoryFilter = document.getElementById('categoryFilter')
+    const sortBy = document.getElementById('sortBy')
+
+    // Show/hide clear button
+    if (searchInput && clearSearch) {
+        searchInput.addEventListener('input', () => {
+            clearSearch.classList.toggle('visible', searchInput.value.length > 0)
+        })
+        clearSearch.addEventListener('click', () => {
+            searchInput.value = ''
+            clearSearch.classList.remove('visible')
+            currentSearch = ''
             currentPage = 1
             loadProducts()
-        }
-    })
-    
-    document.getElementById('categoryFilter').addEventListener('change', (e) => {
-        currentCategoryId = e.target.value
-        currentPage = 1
-        loadProducts()
-    })
-    
-    document.getElementById('sortBy').addEventListener('change', (e) => {
-        currentSort = e.target.value
-        currentPage = 1
-        loadProducts()
-    })
-    
-    // ========== بدء التشغيل ==========
+            searchInput.focus()
+        })
+    }
+
+    if (searchBtn) {
+        searchBtn.addEventListener('click', () => {
+            currentSearch = searchInput.value.trim()
+            currentPage = 1
+            loadProducts()
+        })
+    }
+
+    if (searchInput) {
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                currentSearch = e.target.value.trim()
+                currentPage = 1
+                loadProducts()
+            }
+        })
+    }
+
+    if (categoryFilter) {
+        categoryFilter.addEventListener('change', (e) => {
+            currentCategoryId = e.target.value
+            currentPage = 1
+            loadProducts()
+        })
+    }
+
+    if (sortBy) {
+        sortBy.addEventListener('change', (e) => {
+            currentSort = e.target.value
+            currentPage = 1
+            loadProducts()
+        })
+    }
+
+    // ========== INIT ==========
     setupDropdown()
-    updateDropdownContent()
-    loadCategories()
-    loadProducts()
+    await updateDropdownContent()
+    await loadCategories()
+    await loadProducts()
+    setupScrollTop()
+
+    // Auth state change
+    supabase.auth.onAuthStateChange(() => {
+        updateDropdownContent()
+    })
+
+    console.log('✅ كيماتو | جميع المنتجات يعمل')
 </script>
 </body>
 </html>
