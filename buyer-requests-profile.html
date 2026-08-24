@@ -1,1 +1,995 @@
 
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <title>كيماتو | طلبات العميل</title>
+    
+    <meta name="description" content="استعرض طلبات الشراء الخاصة بالعميل على منصة كيماتو" />
+    <meta name="robots" content="index, follow" />
+    
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
+    <link rel="apple-touch-icon" href="logo.png" />
+    <meta name="theme-color" content="#0c2d4a" />
+    
+    <meta property="og:title" content="كيماتو | طلبات الشراء" />
+    <meta property="og:description" content="استعرض طلبات الشراء على منصة كيماتو" />
+    <meta property="og:type" content="website" />
+    <meta property="og:url" id="ogUrl" content="" />
+    <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
+    
+    <link rel="canonical" id="canonicalUrl" href="" />
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --primary-dark: #0c2d4a;
+            --primary: #1a4a6e;
+            --primary-light: #2d7a9e;
+            --accent: #3498db;
+            --accent-dark: #2c81ba;
+            --gray-light: #f8fafc;
+            --gray: #e2e8f0;
+            --gray-dark: #64748b;
+            --text-dark: #0c2d4a;
+            --text-light: #475569;
+            --white: #ffffff;
+            --danger: #e53e3e;
+            --success: #2a9d8f;
+            --warning: #f4a261;
+            --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
+            --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
+            --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
+            --radius-sm: 16px;
+            --radius-md: 24px;
+            --radius-lg: 32px;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            :root {
+                --gray-light: #1a1a2e;
+                --gray: #1a2a3a;
+                --gray-dark: #6a7a8a;
+                --text-dark: #e0e0e0;
+                --text-light: #a0aec0;
+                --white: #16213e;
+                --shadow-sm: 0 4px 12px rgba(0,0,0,0.3);
+                --shadow-md: 0 10px 25px rgba(0,0,0,0.4);
+                --shadow-lg: 0 20px 40px rgba(0,0,0,0.5);
+            }
+            body { background: #1a1a2e !important; }
+            .navbar { background: #0a1a2a !important; }
+            .profile-header { background: linear-gradient(135deg, #0a1a2a, #1a4a6e) !important; }
+            .request-card { background: #16213e !important; border-color: #0f3460 !important; }
+            .request-header { background: linear-gradient(135deg, #0a1a2a, #1a4a6e) !important; }
+            .request-title { color: #e0e0e0 !important; }
+            .request-detail { color: #a0aec0 !important; }
+            .request-detail strong { color: #e0e0e0 !important; }
+            .request-description { background: #1a2a3a !important; color: #a0aec0 !important; border-right-color: #3498db !important; }
+            .request-date { color: #6a7a8a !important; }
+            .stat-item { color: #a0aec0 !important; }
+            .stat-item .number { color: #e0e0e0 !important; }
+            .dropdown-content { background: #16213e !important; border-color: #0f3460 !important; }
+            .dropdown-content a { color: #e0e0e0 !important; border-bottom-color: #1a2a3a !important; }
+            .dropdown-content a:hover { background: #1a2a3a !important; }
+            .dropdown-content .logout-item { border-top-color: #1a2a3a !important; }
+            .footer { background: #0a1a2a !important; }
+            .footer-links a { color: #5a9bc7 !important; }
+            .footer-links a:hover { color: #fff !important; }
+            .empty-state { background: #16213e !important; color: #a0aec0 !important; }
+            .empty-state i { color: #2a3a4a !important; }
+            .toast { background: #0a1a2a !important; }
+        }
+
+        body {
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+            background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
+            min-height: 100vh;
+            color: var(--text-dark);
+            transition: background 0.3s, color 0.3s;
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes dropFade {
+            0% { opacity: 0; transform: translateY(-10px); }
+            100% { opacity: 1; transform: translateY(0); }
+        }
+
+        .navbar {
+            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
+            padding: 14px 40px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 15px;
+            color: white;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            box-shadow: 0 8px 32px rgba(12,45,74,0.25);
+            border-bottom: 2px solid rgba(52,152,219,0.30);
+        }
+
+        .logo a { text-decoration: none; }
+        .logo-content {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            font-weight: 800;
+            font-size: 22px;
+        }
+        .logo-img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #3498db;
+            object-fit: cover;
+        }
+        .logo-text span:first-child { color: #3498db; }
+        .logo-text span:last-child { color: #b0c9d9; font-size: 16px; }
+
+        .nav-links {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .nav-links a {
+            color: rgba(255,255,255,0.85);
+            text-decoration: none;
+            padding: 7px 18px;
+            border-radius: 40px;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            background: rgba(255,255,255,0.06);
+            backdrop-filter: blur(4px);
+            border: 1px solid rgba(255,255,255,0.06);
+            font-size: 14px;
+        }
+        .nav-links a:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
+        }
+
+        .dropdown {
+            position: relative;
+            display: inline-block;
+        }
+        .dropdown-btn {
+            background: rgba(255,255,255,0.08);
+            color: white;
+            padding: 7px 18px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 600;
+            border: 1px solid rgba(255,255,255,0.08);
+            font-size: 14px;
+            font-family: inherit;
+        }
+        .dropdown-btn:hover {
+            background: #3498db;
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
+        }
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background: var(--white);
+            min-width: 200px;
+            box-shadow: 0 24px 56px rgba(0,0,0,0.12);
+            border-radius: 20px;
+            z-index: 1000;
+            overflow: hidden;
+            margin-top: 8px;
+            border: 1px solid rgba(52,152,219,0.15);
+        }
+        .dropdown-content.show {
+            display: block;
+            animation: dropFade 0.25s ease;
+        }
+        .dropdown-content a {
+            color: var(--text-dark);
+            padding: 12px 22px;
+            text-decoration: none;
+            display: block;
+            font-size: 14px;
+            font-weight: 500;
+            border-bottom: 1px solid var(--gray);
+        }
+        .dropdown-content a:hover {
+            background: #ebf5fb;
+            color: var(--primary);
+        }
+        .dropdown-content .logout-item {
+            color: var(--danger);
+            border-top: 1px solid var(--gray);
+        }
+        .dropdown-content .logout-item:hover {
+            background: #fee2e2;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 30px auto;
+            padding: 0 20px;
+        }
+
+        /* ===== بروفايل العميل ===== */
+        .profile-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            border-radius: var(--radius-lg);
+            padding: 35px 40px;
+            margin-bottom: 30px;
+            color: white;
+            display: flex;
+            align-items: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            box-shadow: 0 24px 64px rgba(12,45,74,0.25);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .profile-header::after {
+            content: "🛒";
+            position: absolute;
+            font-size: 12rem;
+            opacity: 0.04;
+            left: -20px;
+            bottom: -60px;
+        }
+
+        .profile-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: white;
+            flex-shrink: 0;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+            border: 3px solid rgba(255,255,255,0.2);
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-info {
+            flex: 1;
+            min-width: 200px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .profile-info h1 {
+            font-size: 1.8rem;
+            font-weight: 900;
+            margin-bottom: 4px;
+        }
+
+        .profile-info .sub {
+            opacity: 0.8;
+            font-size: 1rem;
+        }
+
+        .profile-info .sub i {
+            margin-left: 6px;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 30px;
+            margin-top: 12px;
+            flex-wrap: wrap;
+        }
+
+        .stat-item {
+            text-align: center;
+            color: rgba(255,255,255,0.8);
+        }
+
+        .stat-item .number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            color: white;
+            display: block;
+        }
+
+        .stat-item .label {
+            font-size: 0.75rem;
+            opacity: 0.7;
+        }
+
+        .profile-actions {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-top: 8px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .btn {
+            padding: 10px 24px;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.95rem;
+            font-family: inherit;
+            text-decoration: none;
+            color: white;
+        }
+
+        .btn-whatsapp {
+            background: #25D366;
+            box-shadow: 0 4px 16px rgba(37,211,102,0.25);
+        }
+        .btn-whatsapp:hover {
+            background: #128C7E;
+            transform: translateY(-2px);
+        }
+
+        .btn-share {
+            background: rgba(255,255,255,0.15);
+            border: 1px solid rgba(255,255,255,0.2) !important;
+        }
+        .btn-share:hover {
+            background: rgba(255,255,255,0.25);
+            transform: translateY(-2px);
+        }
+
+        .btn-back {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1) !important;
+        }
+        .btn-back:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ===== الطلبات ===== */
+        .section-title {
+            font-size: 1.3rem;
+            color: var(--primary-dark);
+            margin-bottom: 20px;
+            border-right: 4px solid #3498db;
+            padding-right: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-title i { color: #3498db; }
+
+        .requests-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            gap: 25px;
+        }
+
+        .request-card {
+            background: var(--white);
+            border-radius: var(--radius-md);
+            overflow: hidden;
+            box-shadow: var(--shadow-sm);
+            transition: all 0.4s cubic-bezier(0.15,0.75,0.45,1);
+            border: 1px solid rgba(52,152,219,0.06);
+            display: flex;
+            flex-direction: column;
+            animation: fadeUp 0.5s ease forwards;
+            opacity: 0;
+        }
+        .request-card:nth-child(1) { animation-delay: 0.05s; }
+        .request-card:nth-child(2) { animation-delay: 0.1s; }
+        .request-card:nth-child(3) { animation-delay: 0.15s; }
+        .request-card:nth-child(4) { animation-delay: 0.2s; }
+        .request-card:nth-child(5) { animation-delay: 0.25s; }
+        .request-card:nth-child(6) { animation-delay: 0.3s; }
+
+        .request-card:hover {
+            transform: translateY(-8px);
+            box-shadow: var(--shadow-lg);
+            border-color: #3498db;
+        }
+
+        .request-header {
+            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
+            padding: 18px 20px;
+            color: white;
+        }
+
+        .request-status {
+            display: inline-block;
+            padding: 4px 14px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+        }
+        .status-open { background: #2a9d8f; color: white; }
+        .status-matched { background: #f4a261; color: var(--text-dark); }
+        .status-closed { background: #64748b; color: white; }
+        .status-pending { background: #f39c12; color: white; }
+
+        .request-title {
+            font-size: 1.1rem;
+            font-weight: 700;
+            margin: 10px 0 5px;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .request-date {
+            font-size: 11px;
+            opacity: 0.8;
+        }
+        .request-info {
+            padding: 18px 20px 20px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+        .request-detail {
+            margin: 6px 0;
+            color: var(--text-light);
+            display: flex;
+            gap: 10px;
+            align-items: baseline;
+            font-size: 14px;
+        }
+        .request-detail i {
+            width: 22px;
+            color: var(--primary);
+        }
+        .request-detail strong { color: var(--text-dark); }
+        .request-description {
+            background: #f8fafc;
+            padding: 10px 14px;
+            border-radius: 16px;
+            margin: 8px 0 12px;
+            font-size: 13px;
+            color: #64748b;
+            line-height: 1.6;
+            border-right: 3px solid #3498db;
+        }
+
+        .contact-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            padding: 10px 20px;
+            background: linear-gradient(145deg, #25D366, #128C7E);
+            color: white;
+            border: none;
+            border-radius: 40px;
+            cursor: pointer;
+            font-weight: 700;
+            transition: all 0.3s;
+            font-size: 0.9rem;
+            font-family: inherit;
+            text-decoration: none;
+            margin-top: 8px;
+            align-self: flex-start;
+        }
+        .contact-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 28px rgba(37,211,102,0.35);
+        }
+
+        /* ===== حالة فارغة ===== */
+        .empty-state {
+            text-align: center;
+            padding: 60px 40px;
+            background: var(--white);
+            border-radius: var(--radius-lg);
+            color: var(--gray-dark);
+            grid-column: 1 / -1;
+        }
+        .empty-state i {
+            font-size: 60px;
+            margin-bottom: 20px;
+            color: #cbd5e1;
+        }
+        .empty-state h3 {
+            font-size: 1.3rem;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+        }
+
+        /* ===== TOAST ===== */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            max-width: 90%;
+            width: 420px;
+        }
+        .toast {
+            background: #0a2538;
+            color: #fff;
+            padding: 14px 20px;
+            border-radius: 16px;
+            box-shadow: 0 12px 40px rgba(0,0,0,0.2);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border-right: 4px solid #3498db;
+            animation: fadeUp 0.4s ease;
+        }
+        .toast .icon { font-size: 1.6rem; flex-shrink: 0; }
+        .toast .content { flex: 1; }
+        .toast .content .title { font-weight: 700; font-size: 0.95rem; }
+        .toast .content .desc { font-size: 0.8rem; opacity: 0.8; }
+        .toast .close {
+            background: rgba(255,255,255,0.1);
+            border: none;
+            color: #fff;
+            border-radius: 50%;
+            width: 28px;
+            height: 28px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            flex-shrink: 0;
+        }
+        .toast .close:hover { background: rgba(255,255,255,0.2); }
+        .toast.success { border-right-color: #2ecc71; }
+        .toast.error { border-right-color: #e74c3c; }
+
+        /* ===== الفوتر ===== */
+        .footer {
+            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
+            color: white;
+            text-align: center;
+            padding: 35px 20px;
+            margin-top: 60px;
+            border-top: 4px solid #3498db;
+        }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        .footer-links a {
+            color: #3498db;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.3s;
+            font-size: 14px;
+        }
+        .footer-links a:hover {
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                flex-direction: column;
+                gap: 12px;
+                padding: 14px 20px;
+            }
+            .logo-content { font-size: 18px; }
+            .logo-img { width: 40px; height: 40px; }
+            .nav-links { justify-content: center; }
+            .nav-links a { padding: 6px 14px; font-size: 12px; }
+            .container { padding: 0 16px; margin: 20px auto; }
+            .profile-header {
+                padding: 24px 20px;
+                flex-direction: column;
+                text-align: center;
+            }
+            .profile-avatar { width: 70px; height: 70px; font-size: 2rem; }
+            .profile-info h1 { font-size: 1.4rem; }
+            .profile-stats { justify-content: center; }
+            .profile-actions { justify-content: center; }
+            .requests-grid { grid-template-columns: 1fr; gap: 20px; }
+            .dropdown-content { left: auto; right: 0; min-width: 170px; }
+            .footer-links { gap: 12px; }
+            .footer-links a { font-size: 12px; }
+        }
+
+        @media (max-width: 480px) {
+            .profile-avatar { width: 56px; height: 56px; font-size: 1.5rem; }
+            .profile-info h1 { font-size: 1.2rem; }
+            .stat-item .number { font-size: 1.2rem; }
+            .btn { font-size: 0.85rem; padding: 8px 16px; }
+        }
+
+        @media (hover: none) {
+            .request-card:hover { transform: none; }
+            .btn-whatsapp:hover { background: #25D366; transform: none; }
+            .btn-share:hover { background: rgba(255,255,255,0.15); transform: none; }
+            .btn-back:hover { background: rgba(255,255,255,0.1); transform: none; }
+            .nav-links a:hover { background: rgba(255,255,255,0.06); transform: none; }
+            .dropdown-btn:hover { background: rgba(255,255,255,0.08); transform: none; }
+        }
+    </style>
+</head>
+<body>
+
+<div class="navbar">
+    <div class="logo">
+        <a href="index.html">
+            <div class="logo-content">
+                <img src="logo.png" class="logo-img" alt="كيماتو">
+                <div class="logo-text">
+                    <span>كيماتو</span>
+                    <span> | طلبات العميل</span>
+                </div>
+            </div>
+        </a>
+    </div>
+    <div class="nav-links">
+        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+        <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+        <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
+        <div class="dropdown">
+            <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
+            <div class="dropdown-content" id="dropdownContent"></div>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <!-- ===== بروفايل العميل ===== -->
+    <div id="profileContainer">
+        <div class="profile-header" id="profileHeader">
+            <div class="profile-avatar" id="profileAvatar" style="background:#1a4a6e;">م</div>
+            <div class="profile-info">
+                <h1 id="profileName">جاري التحميل...</h1>
+                <div class="sub"><i class="fas fa-user"></i> عميل في منصة كيماتو</div>
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <span class="number" id="totalRequests">0</span>
+                        <span class="label">إجمالي الطلبات</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number" id="openRequests">0</span>
+                        <span class="label">طلبات مفتوحة</span>
+                    </div>
+                    <div class="stat-item">
+                        <span class="number" id="matchedRequests">0</span>
+                        <span class="label">تم التوفيق</span>
+                    </div>
+                </div>
+                <div class="profile-actions">
+                    <button class="btn btn-share" onclick="shareProfile()"><i class="fas fa-share-alt"></i> مشاركة</button>
+                    <a href="buyer-dashboard.html" class="btn btn-back"><i class="fas fa-arrow-right"></i> لوحة التحكم</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- ===== الطلبات ===== -->
+    <div class="section-title">
+        <i class="fas fa-clipboard-list"></i>
+        <span>جميع طلبات الشراء</span>
+    </div>
+
+    <div id="requestsContainer" class="requests-grid">
+        <div class="empty-state">
+            <i class="fas fa-spinner fa-spin"></i>
+            <h3>جاري التحميل...</h3>
+        </div>
+    </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div class="toast-container" id="toastContainer"></div>
+
+<!-- ===== الفوتر ===== -->
+<div class="footer">
+    <div class="footer-links">
+        <a href="index.html">الرئيسية</a>
+        <a href="all-products.html">جميع المنتجات</a>
+        <a href="all-requests.html">جميع الطلبات</a>
+        <a href="chemato-suppliers.html">الموردين</a>
+        <a href="auth.html">تسجيل الدخول</a>
+    </div>
+    <div>© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
+</div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+    const urlParams = new URLSearchParams(window.location.search)
+    const buyerId = urlParams.get('id')
+
+    let buyerData = null
+    let buyerRequests = []
+
+    // ========== TOAST ==========
+    function showToast(icon, title, desc, type = 'info') {
+        const container = document.getElementById('toastContainer')
+        if (!container) return
+        const toast = document.createElement('div')
+        toast.className = `toast ${type}`
+        toast.innerHTML = `
+            <div class="icon">${icon}</div>
+            <div class="content">
+                <div class="title">${title}</div>
+                <div class="desc">${desc}</div>
+            </div>
+            <button class="close" onclick="this.parentElement.remove()">✕</button>
+        `
+        container.appendChild(toast)
+        setTimeout(() => toast.remove(), 5000)
+    }
+
+    // ========== SHARE ==========
+    window.shareProfile = function() {
+        const name = buyerData?.full_name || 'عميل'
+        const url = window.location.href
+        if (navigator.share) {
+            navigator.share({
+                title: `طلبات ${name} على كيماتو`,
+                text: `استعرض طلبات ${name} على منصة كيماتو`,
+                url: url
+            }).catch(() => {})
+        } else {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('📋', 'تم النسخ!', 'تم نسخ رابط البروفايل', 'success')
+            }).catch(() => {
+                showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', 'error')
+            })
+        }
+    }
+
+    // ========== DROPDOWN ==========
+    function setupDropdown() {
+        const toggle = document.getElementById('dropdownToggle')
+        const content = document.getElementById('dropdownContent')
+        if (toggle && content) {
+            toggle.addEventListener('click', (e) => {
+                e.stopPropagation()
+                content.classList.toggle('show')
+            })
+            document.addEventListener('click', () => content.classList.remove('show'))
+        }
+    }
+
+    async function updateDropdownContent() {
+        const { data: { user } } = await supabase.auth.getUser()
+        const dropdownContent = document.getElementById('dropdownContent')
+        if (!dropdownContent) return
+
+        if (user) {
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('user_type')
+                .eq('id', user.id)
+                .single()
+
+            dropdownContent.innerHTML = `
+                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                ${profile?.user_type === 'supplier' ? '<a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> لوحة المورد</a>' : ''}
+                ${profile?.user_type === 'buyer' ? '<a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> لوحة العميل</a>' : ''}
+                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+            `
+            document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                e.preventDefault()
+                await supabase.auth.signOut()
+                window.location.href = 'index.html'
+            })
+        } else {
+            dropdownContent.innerHTML = `
+                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+            `
+        }
+    }
+
+    // ========== WHATSAPP ==========
+    function getWhatsAppLink(phone, name) {
+        if (!phone) return '#'
+        const clean = phone.replace(/\D/g, '')
+        const formatted = clean.startsWith('20') ? clean : `20${clean}`
+        const message = `مرحباً، أنا مهتم بطلباتكم على منصة كيماتو`
+        return `https://wa.me/${formatted}?text=${encodeURIComponent(message)}`
+    }
+
+    // ========== LOAD PROFILE ==========
+    async function loadProfile() {
+        if (!buyerId) {
+            showToast('⚠️', 'خطأ', 'لم يتم تحديد العميل', 'error')
+            document.getElementById('profileName').textContent = 'لم يتم تحديد العميل'
+            return
+        }
+
+        try {
+            const { data: buyer, error } = await supabase
+                .from('profiles')
+                .select('*')
+                .eq('id', buyerId)
+                .single()
+
+            if (error || !buyer) {
+                showToast('❌', 'خطأ', 'لم نتمكن من العثور على العميل', 'error')
+                document.getElementById('profileName').textContent = 'عميل غير موجود'
+                return
+            }
+
+            buyerData = buyer
+
+            const colors = ['#1a4a6e', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e']
+            const colorIndex = (buyer.full_name?.length || 0) % colors.length
+            const avatarColor = colors[colorIndex]
+            const initial = buyer.full_name?.charAt(0)?.toUpperCase() || 'م'
+
+            document.getElementById('profileAvatar').textContent = initial
+            document.getElementById('profileAvatar').style.background = avatarColor
+            document.getElementById('profileName').textContent = buyer.full_name || 'عميل'
+
+            await loadRequests()
+        } catch (e) {
+            console.error('Error loading profile:', e)
+            showToast('❌', 'خطأ', 'حدث خطأ أثناء تحميل البيانات', 'error')
+        }
+    }
+
+    // ========== LOAD REQUESTS ==========
+    async function loadRequests() {
+        const container = document.getElementById('requestsContainer')
+        container.innerHTML = `
+            <div class="empty-state">
+                <i class="fas fa-spinner fa-spin"></i>
+                <h3>جاري تحميل الطلبات...</h3>
+            </div>
+        `
+
+        try {
+            const { data: requests, error } = await supabase
+                .from('purchase_requests')
+                .select('*')
+                .eq('buyer_id', buyerId)
+                .order('created_at', { ascending: false })
+
+            if (error) {
+                showToast('❌', 'خطأ', error.message, 'error')
+                return
+            }
+
+            buyerRequests = requests || []
+
+            // Update stats
+            const total = buyerRequests.length
+            const open = buyerRequests.filter(r => r.status === 'open' || r.status === 'pending').length
+            const matched = buyerRequests.filter(r => r.status === 'matched').length
+
+            document.getElementById('totalRequests').textContent = total
+            document.getElementById('openRequests').textContent = open
+            document.getElementById('matchedRequests').textContent = matched
+
+            if (buyerRequests.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-inbox"></i>
+                        <h3>لا توجد طلبات شراء</h3>
+                        <p>هذا العميل لم يضف أي طلبات حتى الآن</p>
+                    </div>
+                `
+                return
+            }
+
+            const statusMap = {
+                'open': { class: 'status-open', text: '🟢 مفتوح' },
+                'pending': { class: 'status-pending', text: '🟡 قيد المراجعة' },
+                'matched': { class: 'status-matched', text: '🟠 تم التوفيق' },
+                'closed': { class: 'status-closed', text: '🔴 مغلق' }
+            }
+
+            const whatsappLink = getWhatsAppLink(buyerData?.phone, buyerData?.full_name)
+
+            container.innerHTML = buyerRequests.map((r, index) => `
+                <div class="request-card" style="animation-delay:${(index % 6) * 0.05}s;">
+                    <div class="request-header">
+                        <span class="request-status ${statusMap[r.status]?.class}">${statusMap[r.status]?.text}</span>
+                        <div class="request-title">📦 ${r.product_name}</div>
+                        <div class="request-date"><i class="fas fa-calendar-alt"></i> ${new Date(r.created_at).toLocaleDateString('ar-EG')}</div>
+                    </div>
+                    <div class="request-info">
+                        <div class="request-detail">
+                            <i class="fas fa-balance-scale"></i>
+                            <span><strong>الكمية:</strong> ${r.quantity_needed || 'غير محدد'}</span>
+                        </div>
+                        ${r.deadline ? `
+                            <div class="request-detail">
+                                <i class="fas fa-calendar-times"></i>
+                                <span><strong>آخر موعد:</strong> ${new Date(r.deadline).toLocaleDateString('ar-EG')}</span>
+                            </div>
+                        ` : ''}
+                        ${r.description ? `
+                            <div class="request-description">
+                                <i class="fas fa-align-right" style="margin-left:6px;"></i>
+                                ${r.description}
+                            </div>
+                        ` : ''}
+                        <a href="${whatsappLink}" target="_blank" class="contact-btn">
+                            <i class="fab fa-whatsapp"></i> تواصل مع العميل
+                        </a>
+                    </div>
+                </div>
+            `).join('')
+
+        } catch (e) {
+            console.error('Error loading requests:', e)
+            container.innerHTML = `
+                <div class="empty-state" style="border:2px solid #e74c3c;">
+                    <i class="fas fa-exclamation-triangle" style="color:#e74c3c;"></i>
+                    <h3>حدث خطأ</h3>
+                    <p>لم نتمكن من تحميل الطلبات</p>
+                </div>
+            `
+        }
+    }
+
+    // ========== UPDATE SEO ==========
+    function updateSEO(name) {
+        const title = `طلبات ${name || 'العميل'} | كيماتو`
+        const desc = `استعرض طلبات ${name || 'العميل'} على منصة كيماتو - سوق المواد الكيماوية في مصر`
+        const url = window.location.href
+
+        document.title = title
+        document.getElementById('ogUrl').content = url
+        document.getElementById('canonicalUrl').href = url
+    }
+
+    // ========== INIT ==========
+    async function init() {
+        setupDropdown()
+        await updateDropdownContent()
+        await loadProfile()
+
+        // Update SEO after loading profile
+        if (buyerData) {
+            updateSEO(buyerData.full_name)
+        }
+
+        console.log('✅ كيماتو | طلبات العميل يعمل')
+    }
+
+    supabase.auth.onAuthStateChange(() => {
+        updateDropdownContent()
+    })
+
+    init()
+</script>
+</body>
+</html>
