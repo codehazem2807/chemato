@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
@@ -89,6 +88,16 @@
             .empty-state { background: #16213e !important; color: #a0aec0 !important; }
             .empty-state i { color: #2a3a4a !important; }
             .toast { background: #0a1a2a !important; }
+            .search-filter-bar { background: #16213e !important; border-color: #0f3460 !important; }
+            .search-input { background: #1a2a3a !important; color: #e0e0e0 !important; }
+            .search-input::placeholder { color: #6a7a8a; }
+            .search-input-wrapper { background: #1a2a3a !important; border-color: #0f3460 !important; }
+            .filter-select { background: #1a2a3a !important; color: #e0e0e0 !important; border-color: #0f3460 !important; }
+            .filter-select option { background: #1a2a3a; color: #e0e0e0; }
+            .skeleton-card { background: linear-gradient(90deg, #2a2a3e 25%, #3a3a4e 50%, #2a2a3e 75%) !important; }
+            .days-left.urgent { background: #4a1a1a; color: #fca5a5; }
+            .days-left.normal { background: #4a3a1a; color: #fbbf24; }
+            .days-left.safe { background: #1a3a2a; color: #6ee7b7; }
         }
 
         body {
@@ -107,6 +116,19 @@
         @keyframes dropFade {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .skeleton-card {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            height: 280px;
+            border-radius: var(--radius-md);
         }
 
         .navbar {
@@ -375,6 +397,90 @@
             transform: translateY(-2px);
         }
 
+        .btn-home {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.1) !important;
+        }
+        .btn-home:hover {
+            background: rgba(255,255,255,0.2);
+            transform: translateY(-2px);
+        }
+
+        /* ===== شريط البحث والفلتر ===== */
+        .search-filter-bar {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            margin-bottom: 25px;
+            background: var(--white);
+            padding: 12px 18px;
+            border-radius: 60px;
+            box-shadow: var(--shadow-sm);
+            border: 1px solid rgba(52,152,219,0.06);
+            align-items: center;
+        }
+
+        .search-input-wrapper {
+            flex: 1;
+            display: flex;
+            background: var(--gray-light);
+            border-radius: 50px;
+            overflow: hidden;
+            border: 1px solid var(--gray);
+            min-width: 200px;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 10px 18px;
+            border: none;
+            font-size: 0.95rem;
+            background: transparent;
+            outline: none;
+            font-family: inherit;
+            color: var(--text-dark);
+        }
+
+        .search-input:focus {
+            box-shadow: 0 0 0 3px rgba(52,152,219,0.15);
+        }
+
+        .search-btn {
+            background: linear-gradient(145deg, #3498db, #2c81ba);
+            border: none;
+            padding: 0 22px;
+            cursor: pointer;
+            color: white;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-family: inherit;
+            font-size: 0.95rem;
+        }
+
+        .search-btn:hover {
+            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+        }
+
+        .filter-select {
+            padding: 10px 18px;
+            border: 1px solid var(--gray);
+            border-radius: 50px;
+            background: var(--white);
+            cursor: pointer;
+            font-size: 0.9rem;
+            outline: none;
+            font-family: inherit;
+            color: var(--text-dark);
+            min-width: 150px;
+        }
+
+        .filter-select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52,152,219,0.15);
+        }
+
         /* ===== الطلبات ===== */
         .section-title {
             font-size: 1.3rem;
@@ -479,6 +585,20 @@
             border-right: 3px solid #3498db;
         }
 
+        /* ===== أيام متبقية ===== */
+        .days-left {
+            display: inline-block;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 700;
+            margin-top: 4px;
+            align-self: flex-start;
+        }
+        .days-left.urgent { background: #fee2e2; color: #dc2626; }
+        .days-left.normal { background: #fef3c7; color: #d4880f; }
+        .days-left.safe { background: #c6f6d5; color: #22543d; }
+
         .contact-btn {
             display: inline-flex;
             align-items: center;
@@ -563,6 +683,36 @@
         .toast.success { border-right-color: #2ecc71; }
         .toast.error { border-right-color: #e74c3c; }
 
+        /* ===== SCROLL TOP ===== */
+        .scroll-top {
+            position: fixed;
+            bottom: 24px;
+            right: 24px;
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #3498db, #2176ae);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-size: 1.1rem;
+            box-shadow: 0 6px 20px rgba(52,152,219,0.3);
+            transition: all 0.3s;
+            opacity: 0;
+            transform: translateY(16px);
+            pointer-events: none;
+            z-index: 99;
+        }
+        .scroll-top.visible {
+            opacity: 1;
+            transform: translateY(0);
+            pointer-events: auto;
+        }
+        .scroll-top:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 10px 28px rgba(52,152,219,0.4);
+        }
+
         /* ===== الفوتر ===== */
         .footer {
             background: linear-gradient(145deg, var(--primary-dark), var(--primary));
@@ -591,6 +741,7 @@
             transform: translateY(-3px);
         }
 
+        /* ===== استجابة ===== */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -611,6 +762,14 @@
             .profile-info h1 { font-size: 1.4rem; }
             .profile-stats { justify-content: center; }
             .profile-actions { justify-content: center; }
+            .search-filter-bar {
+                flex-direction: column;
+                border-radius: 28px;
+                padding: 12px;
+                gap: 10px;
+            }
+            .search-input-wrapper { width: 100%; }
+            .filter-select { width: 100%; min-width: unset; }
             .requests-grid { grid-template-columns: 1fr; gap: 20px; }
             .dropdown-content { left: auto; right: 0; min-width: 170px; }
             .footer-links { gap: 12px; }
@@ -622,6 +781,7 @@
             .profile-info h1 { font-size: 1.2rem; }
             .stat-item .number { font-size: 1.2rem; }
             .btn { font-size: 0.85rem; padding: 8px 16px; }
+            .search-btn { padding: 0 14px; font-size: 0.85rem; }
         }
 
         @media (hover: none) {
@@ -629,8 +789,11 @@
             .btn-whatsapp:hover { background: #25D366; transform: none; }
             .btn-share:hover { background: rgba(255,255,255,0.15); transform: none; }
             .btn-back:hover { background: rgba(255,255,255,0.1); transform: none; }
+            .btn-home:hover { background: rgba(255,255,255,0.1); transform: none; }
             .nav-links a:hover { background: rgba(255,255,255,0.06); transform: none; }
             .dropdown-btn:hover { background: rgba(255,255,255,0.08); transform: none; }
+            .search-btn:hover { background: linear-gradient(145deg, #3498db, #2c81ba); }
+            .contact-btn:hover { background: linear-gradient(145deg, #25D366, #128C7E); transform: none; }
         }
     </style>
 </head>
@@ -683,11 +846,27 @@
                     </div>
                 </div>
                 <div class="profile-actions">
+                    <a href="index.html" class="btn btn-home"><i class="fas fa-home"></i> الرئيسية</a>
                     <button class="btn btn-share" onclick="shareProfile()"><i class="fas fa-share-alt"></i> مشاركة</button>
                     <a href="buyer-dashboard.html" class="btn btn-back"><i class="fas fa-arrow-right"></i> لوحة التحكم</a>
                 </div>
             </div>
         </div>
+    </div>
+
+    <!-- ===== شريط البحث والفلتر ===== -->
+    <div class="search-filter-bar">
+        <div class="search-input-wrapper">
+            <input type="text" id="searchInput" class="search-input" placeholder="🔍 بحث باسم المنتج..." autocomplete="off" />
+            <button id="searchBtn" class="search-btn"><i class="fas fa-search"></i> بحث</button>
+        </div>
+        <select id="statusFilter" class="filter-select">
+            <option value="all">📊 جميع الحالات</option>
+            <option value="open">🟢 مفتوح</option>
+            <option value="pending">🟡 قيد المراجعة</option>
+            <option value="matched">🟠 تم التوفيق</option>
+            <option value="closed">🔴 مغلق</option>
+        </select>
     </div>
 
     <!-- ===== الطلبات ===== -->
@@ -697,12 +876,17 @@
     </div>
 
     <div id="requestsContainer" class="requests-grid">
-        <div class="empty-state">
-            <i class="fas fa-spinner fa-spin"></i>
-            <h3>جاري التحميل...</h3>
-        </div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
+        <div class="skeleton-card"></div>
     </div>
 </div>
+
+<!-- ===== SCROLL TOP ===== -->
+<button class="scroll-top" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
 
 <!-- ===== TOAST ===== -->
 <div class="toast-container" id="toastContainer"></div>
@@ -732,6 +916,8 @@
 
     let buyerData = null
     let buyerRequests = []
+    let currentSearch = ''
+    let currentStatus = 'all'
 
     // ========== TOAST ==========
     function showToast(icon, title, desc, type = 'info') {
@@ -768,6 +954,16 @@
                 showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', 'error')
             })
         }
+    }
+
+    // ========== SCROLL TOP ==========
+    function setupScrollTop() {
+        const btn = document.getElementById('scrollTopBtn')
+        if (!btn) return
+        window.addEventListener('scroll', () => {
+            btn.classList.toggle('visible', window.scrollY > 400)
+        })
+        btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
     }
 
     // ========== DROPDOWN ==========
@@ -825,6 +1021,20 @@
         return `https://wa.me/${formatted}?text=${encodeURIComponent(message)}`
     }
 
+    // ========== GET DAYS LEFT ==========
+    function getDaysLeft(deadline) {
+        if (!deadline) return ''
+        const now = new Date()
+        const end = new Date(deadline)
+        const diff = Math.ceil((end - now) / (1000 * 60 * 60 * 24))
+        
+        if (diff < 0) return `<span class="days-left urgent">⏰ انتهى الموعد</span>`
+        if (diff === 0) return `<span class="days-left urgent">⏳ اليوم الأخير</span>`
+        if (diff <= 3) return `<span class="days-left urgent">⏳ ${diff} أيام متبقية</span>`
+        if (diff <= 7) return `<span class="days-left normal">⏳ ${diff} أيام متبقية</span>`
+        return `<span class="days-left safe">⏳ ${diff} يوم متبقي</span>`
+    }
+
     // ========== LOAD PROFILE ==========
     async function loadProfile() {
         if (!buyerId) {
@@ -867,18 +1077,32 @@
     // ========== LOAD REQUESTS ==========
     async function loadRequests() {
         const container = document.getElementById('requestsContainer')
+        
+        // Show skeleton
         container.innerHTML = `
-            <div class="empty-state">
-                <i class="fas fa-spinner fa-spin"></i>
-                <h3>جاري تحميل الطلبات...</h3>
-            </div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
         `
 
         try {
-            const { data: requests, error } = await supabase
+            let query = supabase
                 .from('purchase_requests')
                 .select('*')
                 .eq('buyer_id', buyerId)
+
+            if (currentSearch) {
+                query = query.ilike('product_name', `%${currentSearch}%`)
+            }
+
+            if (currentStatus !== 'all') {
+                query = query.eq('status', currentStatus)
+            }
+
+            const { data: requests, error } = await query
                 .order('created_at', { ascending: false })
 
             if (error) {
@@ -902,7 +1126,7 @@
                     <div class="empty-state">
                         <i class="fas fa-inbox"></i>
                         <h3>لا توجد طلبات شراء</h3>
-                        <p>هذا العميل لم يضف أي طلبات حتى الآن</p>
+                        <p>${currentSearch || currentStatus !== 'all' ? 'لا توجد نتائج تطابق معايير البحث' : 'هذا العميل لم يضف أي طلبات حتى الآن'}</p>
                     </div>
                 `
                 return
@@ -934,6 +1158,7 @@
                                 <i class="fas fa-calendar-times"></i>
                                 <span><strong>آخر موعد:</strong> ${new Date(r.deadline).toLocaleDateString('ar-EG')}</span>
                             </div>
+                            ${getDaysLeft(r.deadline)}
                         ` : ''}
                         ${r.description ? `
                             <div class="request-description">
@@ -971,11 +1196,30 @@
         document.getElementById('canonicalUrl').href = url
     }
 
+    // ========== SEARCH EVENTS ==========
+    document.getElementById('searchBtn')?.addEventListener('click', () => {
+        currentSearch = document.getElementById('searchInput').value.trim()
+        loadRequests()
+    })
+
+    document.getElementById('searchInput')?.addEventListener('keypress', (e) => {
+        if (e.key === 'Enter') {
+            currentSearch = e.target.value.trim()
+            loadRequests()
+        }
+    })
+
+    document.getElementById('statusFilter')?.addEventListener('change', (e) => {
+        currentStatus = e.target.value
+        loadRequests()
+    })
+
     // ========== INIT ==========
     async function init() {
         setupDropdown()
         await updateDropdownContent()
         await loadProfile()
+        setupScrollTop()
 
         // Update SEO after loading profile
         if (buyerData) {
