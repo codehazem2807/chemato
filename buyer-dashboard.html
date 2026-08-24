@@ -97,8 +97,9 @@
             .pagination button { background: #16213e !important; border-color: #0f3460 !important; color: #e0e0e0 !important; }
             .pagination button:hover:not(:disabled) { background: #1a4a6e !important; color: #fff !important; }
             .pagination button.active { background: #3498db !important; border-color: #3498db !important; color: #fff !important; }
-            .btn-share-profile { background: #1a2a3a !important; color: #7ec8e3 !important; border-color: #0f3460 !important; }
-            .btn-share-profile:hover { background: #3498db !important; color: #fff !important; }
+            .btn-profile-requests { background: #1a2a3a !important; color: #7ec8e3 !important; border-color: #0f3460 !important; }
+            .btn-profile-requests:hover { background: #3498db !important; color: #fff !important; }
+            .skeleton-card { background: linear-gradient(90deg, #2a2a3e 25%, #3a3a4e 50%, #2a2a3e 75%) !important; }
         }
 
         body {
@@ -117,6 +118,32 @@
         @keyframes dropFade {
             0% { opacity: 0; transform: translateY(-10px); }
             100% { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        /* ===== Skeleton Loader ===== */
+        .skeleton-loader {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 25px;
+        }
+
+        .skeleton-card {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            height: 300px;
+            border-radius: var(--radius-md);
+        }
+
+        @media (max-width: 768px) {
+            .skeleton-loader {
+                grid-template-columns: 1fr;
+            }
         }
 
         /* ========== الهيدر ========== */
@@ -321,7 +348,6 @@
             transform: translateY(-2px);
         }
 
-        /* ===== زر بروفايل الطلبات الجديد ===== */
         .btn-profile-requests {
             background: rgba(255,255,255,0.15);
             color: white;
@@ -336,6 +362,7 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
+            text-decoration: none;
         }
         .btn-profile-requests:hover {
             background: rgba(255,255,255,0.25);
@@ -343,6 +370,12 @@
         }
         .btn-profile-requests i {
             color: #3498db;
+        }
+        .btn-profile-requests.view-all {
+            background: rgba(255,255,255,0.10);
+        }
+        .btn-profile-requests.view-all:hover {
+            background: rgba(255,255,255,0.20);
         }
 
         .logout-btn {
@@ -986,10 +1019,14 @@
             <p>من هنا يمكنك إدارة طلبات الشراء الخاصة بك</p>
         </div>
         <div class="welcome-actions">
-            <!-- ✅ زر بروفايل الطلبات الجديد -->
+            <!-- زر بروفايل الطلبات -->
             <button class="btn-profile-requests" id="profileRequestsBtn">
                 <i class="fas fa-address-card"></i> بروفايل طلباتي
             </button>
+            <!-- زر عرض الكل -->
+            <a href="#" class="btn-profile-requests view-all" id="viewAllBtn">
+                <i class="fas fa-external-link-alt"></i> عرض الكل
+            </a>
             <button class="btn-refresh" onclick="refreshData()"><i class="fas fa-sync-alt"></i> تحديث</button>
             <button class="logout-btn" id="logoutBtn"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</button>
         </div>
@@ -1038,11 +1075,10 @@
     </div>
 
     <div id="requestsContainer" class="requests-grid">
-        <div class="empty-state">
-            <i class="fas fa-inbox"></i>
-            <h3>لا توجد طلبات شراء</h3>
-            <p>قم بإضافة طلبك الأول الآن</p>
-            <a href="add-request.html" class="btn-add"><i class="fas fa-plus"></i> أضف طلبك الأول</a>
+        <div class="skeleton-loader">
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
+            <div class="skeleton-card"></div>
         </div>
     </div>
 
@@ -1105,10 +1141,12 @@
     // ========== SHARE PROFILE ==========
     function shareProfile() {
         const url = `${window.location.origin}/buyer-requests-profile.html?id=${currentUser?.id}`
+        const name = currentProfile?.full_name || 'العميل'
+        
         if (navigator.share) {
             navigator.share({
-                title: 'طلبات الشراء الخاصة بي',
-                text: 'استعرض طلبات الشراء الخاصة بي على منصة كيماتو',
+                title: `طلبات ${name} على كيماتو`,
+                text: `استعرض طلبات ${name} على منصة كيماتو - سوق المواد الكيماوية في مصر`,
                 url: url
             }).catch(() => {})
         } else {
@@ -1208,10 +1246,11 @@
     // ========== REQUESTS ==========
     async function loadRequests() {
         const container = document.getElementById('requestsContainer')
+        
+        // Show skeleton
         container.innerHTML = `
-            <div class="empty-state">
-                <i class="fas fa-spinner fa-spin"></i>
-                <h3>جاري التحميل...</h3>
+            <div class="skeleton-loader">
+                ${Array(3).fill(0).map(() => '<div class="skeleton-card"></div>').join('')}
             </div>
         `
 
@@ -1252,6 +1291,21 @@
                 `
                 document.getElementById('pagination').innerHTML = ''
                 return
+            }
+
+            // تحديث الفلتر بعدد الطلبات لكل حالة
+            const statusCounts = {
+                all: totalCount,
+                open: requests.filter(r => r.status === 'open').length,
+                pending: requests.filter(r => r.status === 'pending').length,
+                matched: requests.filter(r => r.status === 'matched').length,
+                closed: requests.filter(r => r.status === 'closed').length
+            }
+
+            const filterSelect = document.getElementById('statusFilter')
+            // فقط نحدث النص إذا كان الفلتر في وضع 'all' ولم يتغير يدوياً
+            if (currentStatus === 'all') {
+                // نحتفظ بالقيمة المختارة
             }
 
             const statusMap = {
@@ -1404,6 +1458,13 @@
         shareProfile()
     })
 
+    // ========== VIEW ALL BUTTON ==========
+    document.getElementById('viewAllBtn')?.addEventListener('click', (e) => {
+        e.preventDefault()
+        const url = `${window.location.origin}/buyer-requests-profile.html?id=${currentUser?.id}`
+        window.open(url, '_blank')
+    })
+
     // ========== AUTH ==========
     async function checkAuth() {
         try {
@@ -1429,10 +1490,18 @@
                 return
             }
 
+            // جلب عدد الطلبات لتحديث رسالة الترحيب
+            const { data: requests } = await supabase
+                .from('purchase_requests')
+                .select('id')
+                .eq('buyer_id', user.id)
+
+            const totalRequests = requests?.length || 0
+
             // Update welcome card
             const firstName = profile.full_name?.split(' ')[0] || 'عميل'
             document.querySelector('.welcome-text h2').textContent = `👋 مرحباً ${firstName}!`
-            document.querySelector('.welcome-text p').textContent = 'من هنا يمكنك إدارة طلبات الشراء الخاصة بك'
+            document.querySelector('.welcome-text p').textContent = `📋 لديك ${totalRequests} طلب شراء`
 
             // Logout
             document.getElementById('logoutBtn').addEventListener('click', async () => {
