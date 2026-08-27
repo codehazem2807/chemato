@@ -30,7 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
-        /* ===== نفس الـ CSS السابق مع تحسينات ===== */
+        /* ===== نفس الـ CSS السابق مع إضافة تحسينات ===== */
         * {
             margin: 0;
             padding: 0;
@@ -1636,58 +1636,67 @@
             if (ratingEl) ratingEl.value = '5'
             
             // Reload reviews
-            await loadReviews(productId, productData?.supplier_id)
+            await loadReviews(productId)
         } catch (e) {
             console.error('Error submitting review:', e)
             showToast('⚠️', 'حدث خطأ', 'لم نتمكن من إضافة التقييم، حاول مرة أخرى', 'error')
         }
     }
 
-    // ========== LOAD REVIEWS ==========
-    async function loadReviews(productId, supplierId) {
+    // ========== LOAD REVIEWS (المعدلة) ==========
+    async function loadReviews(productId) {
         const container = document.getElementById('reviewsContainer')
-        if (!container) return
+        if (!container) {
+            console.error('reviewsContainer not found')
+            return
+        }
 
         try {
+            console.log('🔍 جاري تحميل التقييمات للمنتج:', productId)
+            
             const { data, error } = await supabase
                 .from('reviews')
                 .select('*, profiles(full_name)')
                 .eq('product_id', productId)
                 .order('created_at', { ascending: false })
 
-            if (error) throw error
+            if (error) {
+                console.error('❌ خطأ في جلب التقييمات:', error)
+                container.innerHTML = `
+                    <div class="no-reviews">
+                        <i class="fas fa-exclamation-circle"></i>
+                        <p>حدث خطأ في تحميل التقييمات: ${error.message}</p>
+                    </div>
+                `
+                return
+            }
 
-            const reviews = data || []
-            renderReviews(reviews)
-            return reviews
+            console.log('✅ تم جلب التقييمات:', data?.length || 0)
+            
+            // تحديث الملخص في الأعلى
+            renderReviewsSummary(data || [])
+            
+            // عرض التقييمات
+            renderReviewsList(data || [], container)
+            
         } catch (e) {
-            console.error('Error loading reviews:', e)
+            console.error('❌ خطأ في loadReviews:', e)
             container.innerHTML = `
                 <div class="no-reviews">
                     <i class="fas fa-exclamation-circle"></i>
                     <p>حدث خطأ في تحميل التقييمات</p>
                 </div>
             `
-            return []
         }
     }
 
-    function renderReviews(reviews) {
-        const container = document.getElementById('reviewsContainer')
+    // ========== RENDER REVIEWS SUMMARY ==========
+    function renderReviewsSummary(reviews) {
         const avgRatingEl = document.getElementById('avgRating')
         const ratingCountEl = document.getElementById('ratingCount')
         const starsContainer = document.getElementById('ratingStars')
 
-        if (!container) return
-
         if (!reviews || reviews.length === 0) {
-            container.innerHTML = `
-                <div class="no-reviews">
-                    <i class="fas fa-star"></i>
-                    <p>لا توجد تقييمات لهذا المنتج بعد</p>
-                    <p style="font-size:0.8rem;color:var(--gray-dark);">كن أول من يقيم هذا المنتج!</p>
-                </div>
-            `
             if (avgRatingEl) avgRatingEl.textContent = '0'
             if (ratingCountEl) ratingCountEl.textContent = '(0)'
             if (starsContainer) {
@@ -1709,6 +1718,20 @@
             for (let i = 0; i < 5; i++) {
                 starsContainer.innerHTML += `<span class="star ${i < fullStars ? 'filled' : ''}">★</span>`
             }
+        }
+    }
+
+    // ========== RENDER REVIEWS LIST ==========
+    function renderReviewsList(reviews, container) {
+        if (!reviews || reviews.length === 0) {
+            container.innerHTML = `
+                <div class="no-reviews">
+                    <i class="fas fa-star"></i>
+                    <p>لا توجد تقييمات لهذا المنتج بعد</p>
+                    <p style="font-size:0.8rem;color:var(--gray-dark);">كن أول من يقيم هذا المنتج!</p>
+                </div>
+            `
+            return
         }
 
         container.innerHTML = reviews.map(review => {
@@ -2054,8 +2077,8 @@
                 ${similarProductsHtml}
             `
 
-            // ===== LOAD REVIEWS =====
-            await loadReviews(data.id, data.supplier_id)
+            // ===== LOAD REVIEWS بعد عرض الصفحة =====
+            await loadReviews(data.id)
 
         } catch (e) {
             console.error('Error loading product:', e)
