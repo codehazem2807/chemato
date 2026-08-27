@@ -30,6 +30,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
     
     <style>
+        /* ===== نفس الـ CSS السابق مع تحسينات ===== */
         * {
             margin: 0;
             padding: 0;
@@ -151,18 +152,6 @@
             100% { transform: rotate(360deg); }
         }
 
-        @keyframes floatBubble {
-            0% { transform: translateY(0) scale(1); opacity: 0.3; }
-            50% { transform: translateY(-20px) scale(1.1); opacity: 0.5; }
-            100% { transform: translateY(0) scale(1); opacity: 0.3; }
-        }
-
-        .animate {
-            animation: fadeUp 0.6s ease forwards;
-            opacity: 0;
-        }
-
-        /* ========== الهيدر ========== */
         .navbar {
             background: linear-gradient(145deg, var(--primary-dark), var(--primary));
             padding: 14px 40px;
@@ -310,7 +299,6 @@
             padding: 0 20px;
         }
 
-        /* ===== بطاقة المنتج ===== */
         .product-card {
             background: var(--white);
             border-radius: var(--radius-lg);
@@ -472,7 +460,6 @@
             border-color: #2ecc71;
         }
 
-        /* ===== أقسام التفاصيل ===== */
         .details-section {
             margin: 25px 0;
             background: var(--gray-light);
@@ -523,7 +510,6 @@
             flex: 1;
         }
 
-        /* ===== معلومات المورد مع التقييم ===== */
         .supplier-section {
             background: linear-gradient(145deg, #eef2f7, #e6edf4);
             border-radius: var(--radius-md);
@@ -569,7 +555,6 @@
         }
         .supplier-section h3 i { color: #3498db; }
 
-        /* ===== NEW: تقييم المورد ===== */
         .supplier-rating-badge {
             display: inline-flex;
             align-items: center;
@@ -646,12 +631,6 @@
             .supplier-info-item .info-text { font-size: 15px; }
         }
 
-        .supplier-info-item .info-text .highlight {
-            font-weight: 700;
-            color: var(--primary-dark);
-        }
-
-        /* ===== NEW: أزرار التواصل ===== */
         .action-buttons {
             display: flex;
             flex-direction: column;
@@ -716,7 +695,7 @@
             transform: translateY(-3px);
         }
 
-        /* ===== NEW: قسم التقييمات والمراجعات ===== */
+        /* ===== قسم التقييمات ===== */
         .reviews-section {
             background: var(--white);
             border-radius: var(--radius-md);
@@ -859,7 +838,6 @@
             color: var(--gray);
         }
 
-        /* ===== NEW: نموذج إضافة تقييم ===== */
         .review-form {
             background: var(--gray-light);
             border-radius: var(--radius-sm);
@@ -948,7 +926,6 @@
             color: #fff;
         }
 
-        /* ===== منتجات مشابهة ===== */
         .similar-products-section {
             margin-top: 40px;
             animation: fadeUp 0.5s ease forwards;
@@ -1031,7 +1008,6 @@
             margin-top: 2px;
         }
 
-        /* ===== روابط ===== */
         .back-link {
             display: inline-flex;
             align-items: center;
@@ -1062,7 +1038,6 @@
 
         .text-center { text-align: center; }
 
-        /* ===== حالة التحميل والخطأ ===== */
         .loader {
             text-align: center;
             padding: 60px 20px;
@@ -1116,7 +1091,6 @@
             color: var(--text-light);
         }
 
-        /* ===== TOAST ===== */
         .toast-container {
             position: fixed;
             bottom: 24px;
@@ -1157,7 +1131,6 @@
         .toast.success { border-right-color: #2ecc71; }
         .toast.error { border-right-color: #e74c3c; }
 
-        /* ===== SCROLL TOP ===== */
         .scroll-top {
             position: fixed;
             bottom: 100px;
@@ -1187,7 +1160,6 @@
             box-shadow: 0 10px 28px rgba(52,152,219,0.4);
         }
 
-        /* ===== الفوتر ===== */
         .footer {
             background: linear-gradient(145deg, var(--primary-dark), var(--primary));
             color: white;
@@ -1215,7 +1187,6 @@
             transform: translateY(-3px);
         }
 
-        /* ===== استجابة ===== */
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -1303,17 +1274,6 @@
                 color: #3498db;
             }
         }
-
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
-            overflow: hidden;
-            clip: rect(0,0,0,0);
-            border: 0;
-        }
     </style>
 </head>
 <body>
@@ -1390,7 +1350,6 @@
     let currentProfile = null
     let isPriceAlertActive = false
     let viewTracked = false
-    let contactCounts = {}
 
     // ========== TOAST ==========
     function showToast(icon, title, desc, type = 'info') {
@@ -1538,11 +1497,10 @@
                 .eq('product_id', productId)
                 .eq('contact_type', 'whatsapp')
 
-            if (data) {
-                contactCounts[productId] = data.length
-            }
+            return data?.length || 0
         } catch (e) {
             console.error('Error loading contact counts:', e)
+            return 0
         }
     }
 
@@ -1583,8 +1541,11 @@
                     .eq('id', existing.id)
                 showToast('🔕', 'تم إلغاء التنبيه', `لن يتم إعلامك عند انخفاض سعر ${productName}`, 'success')
                 isPriceAlertActive = false
-                document.querySelector('.price-alert-btn')?.classList.remove('active')
-                document.querySelector('.price-alert-btn')?.innerHTML = `<i class="fas fa-bell"></i> تفعيل تنبيه السعر`
+                const alertBtn = document.querySelector('.price-alert-btn')
+                if (alertBtn) {
+                    alertBtn.classList.remove('active')
+                    alertBtn.innerHTML = `<i class="fas fa-bell"></i> تفعيل تنبيه السعر`
+                }
                 return
             }
 
@@ -1598,8 +1559,11 @@
                 })
             showToast('🔔', 'تم تفعيل التنبيه!', `سيتم إعلامك عند انخفاض سعر ${productName}`, 'success')
             isPriceAlertActive = true
-            document.querySelector('.price-alert-btn')?.classList.add('active')
-            document.querySelector('.price-alert-btn')?.innerHTML = `<i class="fas fa-bell-slash"></i> إلغاء التنبيه`
+            const alertBtn = document.querySelector('.price-alert-btn')
+            if (alertBtn) {
+                alertBtn.classList.add('active')
+                alertBtn.innerHTML = `<i class="fas fa-bell-slash"></i> إلغاء التنبيه`
+            }
         } catch (e) {
             console.error('Error setting price alert:', e)
             showToast('⚠️', 'حدث خطأ', 'لم نتمكن من تفعيل التنبيه، حاول مرة أخرى', 'error')
@@ -1632,9 +1596,18 @@
             return
         }
 
-        const rating = document.getElementById('reviewRating')?.value
-        const comment = document.getElementById('reviewComment')?.value
-        const reviewType = document.getElementById('reviewType')?.value
+        const ratingEl = document.getElementById('reviewRating')
+        const commentEl = document.getElementById('reviewComment')
+        const typeEl = document.getElementById('reviewType')
+
+        if (!ratingEl || !commentEl) {
+            showToast('⚠️', 'خطأ', 'حدث خطأ في النموذج، حاول مرة أخرى', 'error')
+            return
+        }
+
+        const rating = ratingEl.value
+        const comment = commentEl.value.trim()
+        const reviewType = typeEl?.value || 'product'
         const productData = window.__productData
 
         if (!rating || !comment) {
@@ -1647,19 +1620,22 @@
                 .from('reviews')
                 .insert({
                     product_id: productId,
-                    supplier_id: productData?.supplier_id,
+                    supplier_id: productData?.supplier_id || null,
                     user_id: currentUser.id,
                     rating: parseInt(rating),
                     comment: comment,
-                    review_type: reviewType || 'product'
+                    review_type: reviewType
                 })
 
             if (error) throw error
 
             showToast('✅', 'تم إضافة التقييم!', 'شكراً لتقييمك للمنتج', 'success')
-            document.getElementById('reviewForm').classList.remove('show')
-            document.getElementById('reviewComment').value = ''
-            document.getElementById('reviewRating').value = '5'
+            const form = document.getElementById('reviewForm')
+            if (form) form.classList.remove('show')
+            if (commentEl) commentEl.value = ''
+            if (ratingEl) ratingEl.value = '5'
+            
+            // Reload reviews
             await loadReviews(productId, productData?.supplier_id)
         } catch (e) {
             console.error('Error submitting review:', e)
@@ -1669,6 +1645,9 @@
 
     // ========== LOAD REVIEWS ==========
     async function loadReviews(productId, supplierId) {
+        const container = document.getElementById('reviewsContainer')
+        if (!container) return
+
         try {
             const { data, error } = await supabase
                 .from('reviews')
@@ -1679,15 +1658,21 @@
             if (error) throw error
 
             const reviews = data || []
-            renderReviews(reviews, supplierId)
+            renderReviews(reviews)
             return reviews
         } catch (e) {
             console.error('Error loading reviews:', e)
+            container.innerHTML = `
+                <div class="no-reviews">
+                    <i class="fas fa-exclamation-circle"></i>
+                    <p>حدث خطأ في تحميل التقييمات</p>
+                </div>
+            `
             return []
         }
     }
 
-    function renderReviews(reviews, supplierId) {
+    function renderReviews(reviews) {
         const container = document.getElementById('reviewsContainer')
         const avgRatingEl = document.getElementById('avgRating')
         const ratingCountEl = document.getElementById('ratingCount')
@@ -1695,7 +1680,7 @@
 
         if (!container) return
 
-        if (!reviews.length) {
+        if (!reviews || reviews.length === 0) {
             container.innerHTML = `
                 <div class="no-reviews">
                     <i class="fas fa-star"></i>
@@ -1712,13 +1697,12 @@
         }
 
         const total = reviews.length
-        const sum = reviews.reduce((acc, r) => acc + r.rating, 0)
-        const avg = (sum / total).toFixed(1)
+        const sum = reviews.reduce((acc, r) => acc + (r.rating || 0), 0)
+        const avg = total > 0 ? (sum / total).toFixed(1) : '0'
 
         if (avgRatingEl) avgRatingEl.textContent = avg
         if (ratingCountEl) ratingCountEl.textContent = `(${total})`
 
-        // Update stars
         if (starsContainer) {
             const fullStars = Math.round(parseFloat(avg))
             starsContainer.innerHTML = ''
@@ -1728,26 +1712,28 @@
         }
 
         container.innerHTML = reviews.map(review => {
-            const date = new Date(review.created_at)
+            const date = review.created_at ? new Date(review.created_at) : new Date()
             const formattedDate = date.toLocaleDateString('ar-EG')
 
             let starsHtml = ''
+            const rating = review.rating || 0
             for (let i = 0; i < 5; i++) {
-                starsHtml += `<span class="star ${i < review.rating ? 'filled' : ''}">★</span>`
+                starsHtml += `<span class="star ${i < rating ? 'filled' : ''}">★</span>`
             }
 
             const typeLabel = review.review_type === 'supplier' ? 'تقييم للمورد' : 'تقييم للمنتج'
             const typeClass = review.review_type === 'supplier' ? 'supplier' : 'product'
+            const userName = review.profiles?.full_name || 'مستخدم'
 
             return `
                 <div class="review-card">
                     <div class="review-header">
-                        <span class="review-user">${review.profiles?.full_name || 'مستخدم'}</span>
+                        <span class="review-user">${userName}</span>
                         <span class="review-date">${formattedDate}</span>
                     </div>
                     <div class="review-stars">${starsHtml}</div>
                     <span class="review-type-badge ${typeClass}">${typeLabel}</span>
-                    <p class="review-text">${review.comment}</p>
+                    <p class="review-text">${review.comment || ''}</p>
                 </div>
             `
         }).join('')
@@ -1756,6 +1742,8 @@
     // ========== LOAD SUPPLIER RATING ==========
     async function loadSupplierRating(supplierId) {
         try {
+            if (!supplierId) return { avg: 0, count: 0 }
+
             const { data, error } = await supabase
                 .from('reviews')
                 .select('rating')
@@ -1765,8 +1753,8 @@
                 return { avg: 0, count: 0 }
             }
 
-            const sum = data.reduce((acc, r) => acc + r.rating, 0)
-            const avg = (sum / data.length).toFixed(1)
+            const sum = data.reduce((acc, r) => acc + (r.rating || 0), 0)
+            const avg = data.length > 0 ? (sum / data.length).toFixed(1) : '0'
 
             return { avg, count: data.length }
         } catch (e) {
@@ -1777,28 +1765,41 @@
 
     // ========== UPDATE SEO ==========
     function updateSEO(productName, productDescription, productImage) {
-        const title = `${productName} | كيماتو - سوق المواد الكيماوية في مصر`
-        const desc = productDescription || `تفاصيل ${productName} على منصة كيماتو - سوق المواد الكيماوية في مصر`
+        const title = `${productName || 'منتج'} | كيماتو - سوق المواد الكيماوية في مصر`
+        const desc = productDescription || `تفاصيل ${productName || 'المنتج'} على منصة كيماتو - سوق المواد الكيماوية في مصر`
         const image = productImage || 'https://chemato.vercel.app/logo.png'
         const url = window.location.href
 
         document.title = title
-        document.getElementById('pageTitle').textContent = title
-        document.getElementById('metaDescription').content = desc
-        document.getElementById('ogTitle').content = title
-        document.getElementById('ogDescription').content = desc
-        document.getElementById('ogUrl').content = url
-        document.getElementById('ogImage').content = image
-        document.getElementById('twitterTitle').content = title
-        document.getElementById('twitterDescription').content = desc
-        document.getElementById('twitterImage').content = image
-        document.getElementById('canonicalLink').href = url
+        const titleEl = document.getElementById('pageTitle')
+        if (titleEl) titleEl.textContent = title
+        const metaDesc = document.getElementById('metaDescription')
+        if (metaDesc) metaDesc.content = desc
+        const ogTitle = document.getElementById('ogTitle')
+        if (ogTitle) ogTitle.content = title
+        const ogDesc = document.getElementById('ogDescription')
+        if (ogDesc) ogDesc.content = desc
+        const ogUrl = document.getElementById('ogUrl')
+        if (ogUrl) ogUrl.content = url
+        const ogImage = document.getElementById('ogImage')
+        if (ogImage) ogImage.content = image
+        const twitterTitle = document.getElementById('twitterTitle')
+        if (twitterTitle) twitterTitle.content = title
+        const twitterDesc = document.getElementById('twitterDescription')
+        if (twitterDesc) twitterDesc.content = desc
+        const twitterImage = document.getElementById('twitterImage')
+        if (twitterImage) twitterImage.content = image
+        const canonical = document.getElementById('canonicalLink')
+        if (canonical) canonical.href = url
     }
 
     // ========== LOAD PRODUCT ==========
     async function loadProduct() {
+        const container = document.getElementById('productDetail')
+        if (!container) return
+
         if (!productId) {
-            document.getElementById('productDetail').innerHTML = `
+            container.innerHTML = `
                 <div class="error-box">
                     <i class="fas fa-exclamation-circle"></i>
                     <h2>❌ خطأ</h2>
@@ -1816,7 +1817,7 @@
                 .single()
 
             if (error || !data) {
-                document.getElementById('productDetail').innerHTML = `
+                container.innerHTML = `
                     <div class="error-box">
                         <i class="fas fa-search-minus"></i>
                         <h2>❌ عذراً</h2>
@@ -1833,21 +1834,23 @@
             await trackProductView(data.id, data.supplier_id)
 
             // ===== LOAD CONTACT COUNTS =====
-            await loadContactCounts(data.id)
+            const contactCount = await loadContactCounts(data.id)
 
             // Get category
             let categoryName = data.category || 'مواد كيماوية'
             let categoryIcon = '🧪'
             if (data.category_id) {
-                const { data: cat } = await supabase
-                    .from('categories')
-                    .select('name, icon')
-                    .eq('id', data.category_id)
-                    .single()
-                if (cat) {
-                    categoryName = cat.name
-                    categoryIcon = cat.icon || '🧪'
-                }
+                try {
+                    const { data: cat } = await supabase
+                        .from('categories')
+                        .select('name, icon')
+                        .eq('id', data.category_id)
+                        .single()
+                    if (cat) {
+                        categoryName = cat.name || categoryName
+                        categoryIcon = cat.icon || '🧪'
+                    }
+                } catch (e) {}
             }
 
             // ===== LOAD SUPPLIER RATING =====
@@ -1864,30 +1867,30 @@
 
             // Check price alert status
             if (currentUser) {
-                const { data: alertData } = await supabase
-                    .from('price_alerts')
-                    .select('id')
-                    .eq('product_id', productId)
-                    .eq('user_id', currentUser.id)
-                    .eq('active', true)
-                    .single()
-                isPriceAlertActive = !!alertData
+                try {
+                    const { data: alertData } = await supabase
+                        .from('price_alerts')
+                        .select('id')
+                        .eq('product_id', productId)
+                        .eq('user_id', currentUser.id)
+                        .eq('active', true)
+                        .single()
+                    isPriceAlertActive = !!alertData
+                } catch (e) {}
             }
 
-            const whatsappLink = getWhatsAppLink(phoneNumber, data.name)
             const hasImage = data.image_url && data.image_url.trim() !== '' && !data.image_url.includes('placehold')
             const imageHtml = hasImage 
-                ? `<img class="product-img" src="${data.image_url}" alt="${data.name}" loading="lazy" decoding="async">`
+                ? `<img class="product-img" src="${data.image_url}" alt="${data.name || 'منتج'}" loading="lazy" decoding="async">`
                 : getPlaceholderHTML(data.name, categoryIcon)
 
             const viewsCount = data.views_count || 0
-            const contactCount = contactCounts[productId] || 0
 
             // Load similar products
             const similarProductsHtml = await loadSimilarProducts(data.category_id, data.id)
 
             // ===== RENDER PRODUCT =====
-            document.getElementById('productDetail').innerHTML = `
+            container.innerHTML = `
                 <div class="product-card">
                     <div class="product-gallery">
                         ${imageHtml}
@@ -1895,16 +1898,16 @@
                     <div class="product-info">
                         <div class="product-header">
                             <div class="product-title">
-                                <h1>${categoryIcon} ${data.name}</h1>
+                                <h1>${categoryIcon} ${data.name || 'منتج'}</h1>
                                 <span class="product-category">${categoryIcon} ${categoryName}</span>
                             </div>
                             <div>
                                 <div class="product-price">
-                                    ${data.price ? data.price.toLocaleString() + ' جنيه / ' + data.unit : '💰 سعر عند الطلب'}
+                                    ${data.price ? data.price.toLocaleString() + ' جنيه / ' + (data.unit || '') : '💰 سعر عند الطلب'}
                                 </div>
                                 ${data.price ? `
                                     <button class="price-alert-btn ${isPriceAlertActive ? 'active' : ''}" 
-                                            onclick="setPriceAlert('${data.id}', '${data.name.replace(/'/g, "\\'")}', ${data.price})">
+                                            onclick="setPriceAlert('${data.id}', '${(data.name || 'منتج').replace(/'/g, "\\'")}', ${data.price})">
                                         <i class="fas ${isPriceAlertActive ? 'fa-bell-slash' : 'fa-bell'}"></i>
                                         ${isPriceAlertActive ? 'إلغاء التنبيه' : 'تفعيل تنبيه السعر'}
                                     </button>
@@ -1929,7 +1932,7 @@
                             ` : ''}
                             <div class="detail-row">
                                 <div class="detail-label">تاريخ الإضافة:</div>
-                                <div class="detail-value">${new Date(data.created_at).toLocaleDateString('ar-EG')}</div>
+                                <div class="detail-value">${data.created_at ? new Date(data.created_at).toLocaleDateString('ar-EG') : 'غير محدد'}</div>
                             </div>
                             <div class="detail-row">
                                 <div class="detail-label">المشاهدات:</div>
@@ -2035,13 +2038,13 @@
                         </div>
 
                         <div class="action-buttons">
-                            <button class="btn btn-whatsapp" onclick="trackAndOpenWhatsApp('${supplierId || ''}', '${data.id}', '${phoneNumber}', '${data.name.replace(/'/g, "\\'")}')">
+                            <button class="btn btn-whatsapp" onclick="trackAndOpenWhatsApp('${supplierId || ''}', '${data.id}', '${phoneNumber}', '${(data.name || 'منتج').replace(/'/g, "\\'")}')">
                                 <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
                             </button>
                             <a href="tel:${phoneNumber}" class="btn btn-call">
                                 <i class="fas fa-phone-alt"></i> اتصال
                             </a>
-                            <button class="btn btn-share" onclick="shareProduct('${data.name.replace(/'/g, "\\'")}', '${data.id}')">
+                            <button class="btn btn-share" onclick="shareProduct('${(data.name || 'منتج').replace(/'/g, "\\'")}', '${data.id}')">
                                 <i class="fas fa-share-alt"></i>
                             </button>
                         </div>
@@ -2056,7 +2059,7 @@
 
         } catch (e) {
             console.error('Error loading product:', e)
-            document.getElementById('productDetail').innerHTML = `
+            container.innerHTML = `
                 <div class="error-box">
                     <i class="fas fa-exclamation-triangle"></i>
                     <h2>❌ حدث خطأ</h2>
@@ -2090,7 +2093,7 @@
             data.forEach(p => {
                 const hasImage = p.image_url && p.image_url.trim() !== '' && !p.image_url.includes('placehold')
                 const imgHtml = hasImage 
-                    ? `<img src="${p.image_url}" alt="${p.name}" loading="lazy" decoding="async">`
+                    ? `<img src="${p.image_url}" alt="${p.name || 'منتج'}" loading="lazy" decoding="async">`
                     : `<div class="placeholder">🧪</div>`
 
                 html += `
@@ -2099,7 +2102,7 @@
                             ${imgHtml}
                         </div>
                         <div class="info">
-                            <div class="name">${p.name}</div>
+                            <div class="name">${p.name || 'منتج'}</div>
                             <div class="price">${p.price ? p.price.toLocaleString() + ' جنيه' : 'سعر عند الطلب'}</div>
                             <div class="category">${p.category || 'كيماويات'}</div>
                         </div>
@@ -2118,6 +2121,8 @@
     // ========== EXPOSE GLOBAL FUNCTIONS ==========
     window.trackAndOpenWhatsApp = trackAndOpenWhatsApp
     window.submitReview = submitReview
+    window.setPriceAlert = setPriceAlert
+    window.shareProduct = shareProduct
 
     // ========== INIT ==========
     async function init() {
