@@ -328,7 +328,6 @@
             z-index: 1;
         }
 
-        /* ===== Rating badge on avatar ===== */
         .avatar-rating {
             position: absolute;
             bottom: -4px;
@@ -387,7 +386,6 @@
             line-height: 1.6;
         }
 
-        /* ===== Supplier Stats Badges ===== */
         .supplier-stats-badges {
             display: flex;
             gap: 10px;
@@ -486,7 +484,6 @@
             transform: translateY(-2px);
         }
 
-        /* ===== إحصائيات المورد ===== */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -551,7 +548,6 @@
             margin-top: 5px;
         }
 
-        /* ===== معلومات إضافية ===== */
         .info-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
@@ -586,7 +582,6 @@
             color: var(--text-dark);
         }
 
-        /* ===== تصنيفات المورد ===== */
         .categories-section {
             margin-bottom: 30px;
         }
@@ -621,7 +616,6 @@
             color: #3498db;
         }
 
-        /* ===== قسم المنتجات ===== */
         .products-section h3 {
             font-size: 1.3rem;
             color: var(--primary-dark);
@@ -668,7 +662,6 @@
             border-color: #3498db;
         }
 
-        /* ===== Product Rating Badge ===== */
         .product-rating-badge {
             position: absolute;
             top: 10px;
@@ -822,7 +815,6 @@
             transform: translateY(-2px);
         }
 
-        /* ===== حالة فارغة ===== */
         .no-results {
             text-align: center;
             padding: 60px 40px;
@@ -1207,7 +1199,6 @@
 
     const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-    // ========== جلب ID المورد من الرابط ==========
     const urlParams = new URLSearchParams(window.location.search)
     const supplierId = urlParams.get('id')
 
@@ -1319,7 +1310,7 @@
         `
     }
 
-    // ========== LOAD SUPPLIER RATING (المعدلة - بدون join) ==========
+    // ========== LOAD SUPPLIER RATING ==========
     async function loadSupplierRating(supplierId) {
         try {
             if (!supplierId) return { avg: 0, count: 0 }
@@ -1364,7 +1355,9 @@
     // ========== LOAD PRODUCT RATINGS (المعدلة - بدون join) ==========
     async function loadProductRatings(productIds) {
         try {
-            if (!productIds || productIds.length === 0) return {}
+            if (!productIds || productIds.length === 0) {
+                return {}
+            }
             
             const { data, error } = await supabase
                 .from('reviews')
@@ -1372,14 +1365,21 @@
                 .in('product_id', productIds)
                 .eq('review_type', 'product')
 
-            if (error || !data) return {}
+            if (error) {
+                console.warn('⚠️ خطأ في جلب تقييمات المنتجات:', error.message)
+                return {}
+            }
+
+            if (!data || data.length === 0) {
+                return {}
+            }
 
             const ratingsMap = {}
             data.forEach(r => {
                 if (!ratingsMap[r.product_id]) {
                     ratingsMap[r.product_id] = { sum: 0, count: 0 }
                 }
-                ratingsMap[r.product_id].sum += r.rating
+                ratingsMap[r.product_id].sum += (r.rating || 0)
                 ratingsMap[r.product_id].count += 1
             })
 
@@ -1392,7 +1392,7 @@
             })
             return result
         } catch (e) {
-            console.error('Error loading product ratings:', e)
+            console.error('❌ خطأ في loadProductRatings:', e)
             return {}
         }
     }
@@ -1426,13 +1426,11 @@
 
             supplierData = supplier
 
-            // جلب التقييمات والتواصلات
             const [rating, contacts] = await Promise.all([
                 loadSupplierRating(supplierId),
                 loadContactCount(supplierId)
             ])
 
-            // تحديث المعلومات الشخصية
             const colors = ['#1a4a6e', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e', '#6a4a9e']
             const colorIndex = (supplier.full_name?.length || 0) % colors.length
             const avatarColor = colors[colorIndex]
@@ -1442,7 +1440,6 @@
             avatarEl.textContent = initial
             avatarEl.style.background = avatarColor
 
-            // إظهار تقييم على الصورة
             const avatarRating = document.getElementById('avatarRating')
             if (rating.count > 0) {
                 avatarRating.style.display = 'flex'
@@ -1456,7 +1453,6 @@
                 document.getElementById('profileBio').textContent = supplier.bio
             }
 
-            // تحديث البادجات
             if (rating.count > 0) {
                 document.getElementById('ratingBadge').style.display = 'inline-flex'
                 document.getElementById('ratingValue').textContent = `${rating.avg} (${rating.count})`
@@ -1467,23 +1463,19 @@
                 document.getElementById('contactValue').textContent = contacts
             }
 
-            // واتساب
             const whatsappLink = getWhatsAppLink(supplier.phone, supplier.full_name)
             document.getElementById('whatsappBtn').href = whatsappLink
             if (!supplier.phone) {
                 document.getElementById('whatsappBtn').style.display = 'none'
             }
 
-            // معلومات إضافية
             document.getElementById('infoPhone').textContent = supplier.phone || 'غير متاح'
             document.getElementById('infoEmail').textContent = supplier.email || 'غير متاح'
             document.getElementById('infoJoined').textContent = supplier.created_at ? new Date(supplier.created_at).toLocaleDateString('ar-EG') : 'غير متاح'
             document.getElementById('infoType').textContent = 'مورد ✓'
 
-            // تحديث عنوان الصفحة
             document.title = `${supplier.full_name || 'مورد'} | ملف المورد - كيماتو`
 
-            // تحميل المنتجات
             await loadSupplierProducts()
 
         } catch (e) {
@@ -1523,34 +1515,42 @@
 
             supplierProducts = products || []
 
-            // جلب أسماء التصنيفات وتقييمات المنتجات
+            let ratingsMap = {}
             const productIds = supplierProducts.map(p => p.id)
-            const ratingsMap = await loadProductRatings(productIds)
+            
+            if (productIds.length > 0) {
+                try {
+                    ratingsMap = await loadProductRatings(productIds)
+                } catch (e) {
+                    console.warn('⚠️ فشل جلب التقييمات:', e)
+                    ratingsMap = {}
+                }
+            }
 
             const productsWithDetails = await Promise.all(supplierProducts.map(async (p) => {
                 let categoryName = p.category || 'مواد كيماوية'
                 let categoryIcon = '🧪'
                 if (p.category_id) {
-                    const { data: cat } = await supabase
-                        .from('categories')
-                        .select('name, icon')
-                        .eq('id', p.category_id)
-                        .single()
-                    if (cat) {
-                        categoryName = cat.name
-                        categoryIcon = cat.icon || '🧪'
-                    }
+                    try {
+                        const { data: cat } = await supabase
+                            .from('categories')
+                            .select('name, icon')
+                            .eq('id', p.category_id)
+                            .single()
+                        if (cat) {
+                            categoryName = cat.name
+                            categoryIcon = cat.icon || '🧪'
+                        }
+                    } catch (e) {}
                 }
                 const rating = ratingsMap[p.id] || null
                 return { ...p, categoryName, categoryIcon, rating }
             }))
 
-            // تحديث الإحصائيات
             const total = supplierProducts.length
             const views = supplierProducts.reduce((sum, p) => sum + (p.views_count || 0), 0)
             const active = supplierProducts.filter(p => p.status === 'active').length
 
-            // استخراج التصنيفات الفريدة
             const categories = new Set()
             productsWithDetails.forEach(p => {
                 if (p.categoryName) categories.add(p.categoryName)
@@ -1562,14 +1562,12 @@
             document.getElementById('activeProducts').textContent = active
             document.getElementById('categoriesCount').textContent = categoriesList.length
 
-            // تحديث بادجة المشاهدات
             const viewsBadge = document.getElementById('viewsBadge')
-            if (views > 0) {
+            if (viewsBadge && views > 0) {
                 viewsBadge.style.display = 'inline-flex'
                 document.getElementById('viewsValue').textContent = views
             }
 
-            // عرض التصنيفات
             if (categoriesList.length > 0) {
                 document.getElementById('categoriesSection').style.display = 'block'
                 document.getElementById('categoriesTags').innerHTML = categoriesList.map(cat => 
@@ -1577,7 +1575,6 @@
                 ).join('')
             }
 
-            // عرض المنتجات
             if (supplierProducts.length === 0) {
                 container.innerHTML = `
                     <div class="no-results">
