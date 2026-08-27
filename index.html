@@ -5,12 +5,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>كيماتو | سوق المواد الكيماوية في مصر | تواصل مع موردين الصودا الكاوية والمذيبات</title>
     
-    <!-- ===== NEW: تحسين الميتا للبحث ===== -->
     <meta name="description" content="كيماتو - أول منصة B2B للمواد الكيماوية في مصر. بيع وشراء صودا كاوية، حمض كبريتيك، مذيبات وكل المواد الخام. تواصل مباشر مع الموردين والمعامل." />
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content="كيماويات,كيماتو,سوق الكيماويات,صودا كاوية,حمض كبريتيك,مذيبات,مواد خام,موردين كيماويات,مصر,كيما,سهم كيما" />
     
-    <!-- ===== NEW: Open Graph محسّن ===== -->
     <meta property="og:title" content="كيماتو | سوق المواد الكيماوية في مصر | تواصل مع الموردين" />
     <meta property="og:description" content="أول منصة B2B للمواد الكيماوية في مصر. اعرض منتجك مجاناً وتواصل مع آلاف العملاء والموردين." />
     <meta property="og:type" content="website" />
@@ -26,7 +24,7 @@
     <link rel="apple-touch-icon" href="logo.png" />
     <meta name="theme-color" content="#0c2d4a" />
 
-    <!-- ===== Schema محسّن ===== -->
+    <!-- Schema محسّن -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
@@ -53,15 +51,11 @@
         "telephone": "+201234567890",
         "contactType": "customer service",
         "availableLanguage": ["Arabic"]
-      },
-      "sameAs": [
-        "https://www.facebook.com/chemato",
-        "https://www.instagram.com/chemato"
-      ]
+      }
     }
     </script>
 
-    <!-- ===== OneSignal ===== -->
+    <!-- OneSignal (مع تعديل موضع الزر) -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -69,14 +63,21 @@
             await OneSignal.init({
                 appId: "f05bebbb-41c6-4770-926b-b8de9990a537",
                 safari_web_id: "web.onesignal.auto.43666e9c-a8ad-4b1e-8de4-10291bcbdb86",
-                notifyButton: { enable: true, position: 'bottom-right', theme: 'default', size: 'medium', showCredit: false },
+                notifyButton: { 
+                    enable: true, 
+                    position: 'bottom-right', 
+                    theme: 'default', 
+                    size: 'medium', 
+                    showCredit: false,
+                    offset: { bottom: '80px', right: '20px' }  // <-- رفع الزر للأعلى
+                },
                 serviceWorkerParam: { scope: '/' },
                 serviceWorkerPath: 'OneSignalSDKWorker.js',
             });
         });
     </script>
 
-    <!-- ===== Google Analytics (بدل الـ X بالرقم الحقيقي) ===== -->
+    <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -85,7 +86,7 @@
         gtag('config', 'G-XXXXXXXXXX');
     </script>
 
-    <!-- ===== Preload ===== -->
+    <!-- Preload -->
     <link rel="preload" href="logo.png" as="image">
     <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
@@ -95,7 +96,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
     <style>
-        /* ===== كل الـ CSS الموجود هنا زي ما هو ===== */
+        /* ===== CSS الأساسي ===== */
         * {
             margin: 0;
             padding: 0;
@@ -216,8 +217,17 @@
             .suggestion-item.active {
                 background: #1a2a3a;
             }
+            .featured-section {
+                background: linear-gradient(135deg, #1a2a1a, #2a2a1a);
+                border-color: #f1c40f;
+            }
+            .featured-section::before {
+                background: #f1c40f;
+                color: #1a1a2e;
+            }
         }
 
+        /* ===== Animations ===== */
         @keyframes fadeUp {
             from { opacity: 0; transform: translateY(30px); }
             to { opacity: 1; transform: translateY(0); }
@@ -247,6 +257,7 @@
         .delay-2 { animation-delay: 0.2s; }
         .delay-3 { animation-delay: 0.3s; }
 
+        /* ===== Skeleton ===== */
         .skeleton-loader {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -265,7 +276,7 @@
             }
         }
 
-        /* ===== NEW: شريط المنتجات المميزة ===== */
+        /* ===== Featured Section ===== */
         .featured-section {
             background: linear-gradient(135deg, #fef9e7, #fdebd0);
             border-radius: 20px;
@@ -286,18 +297,6 @@
             font-weight: 700;
             font-size: 0.75rem;
         }
-        @media (prefers-color-scheme: dark) {
-            .featured-section {
-                background: linear-gradient(135deg, #1a2a1a, #2a2a1a);
-                border-color: #f1c40f;
-            }
-            .featured-section::before {
-                background: #f1c40f;
-                color: #1a1a2e;
-            }
-        }
-
-        /* ===== NEW: تاج "مميز" على البطاقة ===== */
         .featured-badge {
             background: #f39c12;
             color: #fff;
@@ -308,8 +307,16 @@
             margin-right: 6px;
             display: inline-block;
         }
+        .card.featured {
+            border: 2px solid #f39c12;
+            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.15);
+        }
+        .card.featured:hover {
+            border-color: #e67e22;
+            box-shadow: 0 20px 48px rgba(243, 156, 18, 0.2);
+        }
 
-        /* ===== باقي الـ CSS زي ما هو ===== */
+        /* ===== Navbar ===== */
         .navbar {
             background: linear-gradient(135deg, #0a2538, #143b57);
             padding: 12px 32px;
@@ -437,12 +444,14 @@
             background: #fde8e5;
         }
 
+        /* ===== Main Container ===== */
         .main-container {
             max-width: 1300px;
             margin: 0 auto;
             padding: 0 24px 30px;
         }
 
+        /* ===== Hero ===== */
         .hero {
             background: linear-gradient(135deg, #0a2538 0%, #1a4a6e 100%);
             border-radius: 32px;
@@ -508,7 +517,7 @@
             border-radius: 50px;
             margin: 8px auto 18px;
             border: 1px solid rgba(255, 255, 255, 0.06);
-            max-width: 550px;
+            max-width: 650px;
         }
 
         .stat-item {
@@ -595,6 +604,7 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
+        /* ===== Search ===== */
         .search-container {
             position: relative;
             max-width: 720px;
@@ -751,6 +761,7 @@
             background: #eef5fa !important;
         }
 
+        /* ===== Filters ===== */
         .filters-wrapper {
             display: flex;
             justify-content: center;
@@ -839,6 +850,7 @@
             min-height: 40px;
         }
 
+        /* ===== Section Header ===== */
         .section-header {
             display: flex;
             justify-content: space-between;
@@ -879,6 +891,7 @@
             color: #fff;
         }
 
+        /* ===== Grid & Cards ===== */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
@@ -903,16 +916,6 @@
             transform: translateY(-8px);
             box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06);
             border-color: #3498db;
-        }
-
-        /* ===== NEW: حدود ذهبية للمنتجات المميزة ===== */
-        .card.featured {
-            border: 2px solid #f39c12;
-            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.15);
-        }
-        .card.featured:hover {
-            border-color: #e67e22;
-            box-shadow: 0 20px 48px rgba(243, 156, 18, 0.2);
         }
 
         .card-img {
@@ -1054,6 +1057,7 @@
             color: #64748b;
         }
 
+        /* ===== Toast ===== */
         .toast-container {
             position: fixed;
             bottom: 24px;
@@ -1118,9 +1122,10 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
+        /* ===== Scroll Top (مرفوع للأعلى عشان ما يتداخلش مع OneSignal) ===== */
         .scroll-top {
             position: fixed;
-            bottom: 24px;
+            bottom: 100px;  /* <-- مرفوع للأعلى عشان ما يتداخلش مع زر الإشعارات */
             right: 24px;
             width: 44px;
             height: 44px;
@@ -1170,6 +1175,7 @@
             background: rgba(255,255,255,0.2);
         }
 
+        /* ===== Footer ===== */
         .footer {
             background: linear-gradient(135deg, #0a2538, #143b57);
             color: #fff;
@@ -1208,6 +1214,7 @@
             display: none;
         }
 
+        /* ===== Responsive ===== */
         @media (max-width: 768px) {
             .navbar {
                 padding: 10px 16px;
@@ -1285,6 +1292,13 @@
             .suggestions-box {
                 max-height: 240px;
             }
+            .scroll-top {
+                bottom: 80px;  /* <-- مرفوع للأعلى في الموبايل */
+                right: 16px;
+                width: 40px;
+                height: 40px;
+                font-size: 1rem;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1351,6 +1365,13 @@
                 right: 12px;
                 padding: 1px 12px;
             }
+            .scroll-top {
+                bottom: 70px;
+                right: 12px;
+                width: 36px;
+                height: 36px;
+                font-size: 0.9rem;
+            }
         }
 
         @media (hover: none) {
@@ -1397,7 +1418,6 @@
             <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
             <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
             <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
-            <!-- ===== NEW: رابط المدونة ===== -->
             <a href="blog.html"><i class="fas fa-newspaper"></i> المدونة</a>
             <div class="dropdown">
                 <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
@@ -1485,11 +1505,11 @@
                 <option value="price-low">الأقل سعراً</option>
                 <option value="price-high">الأعلى سعراً</option>
                 <option value="name">الاسم</option>
-                <option value="popular">الأكثر مشاهدة</option> <!-- ===== NEW ===== -->
+                <option value="popular">الأكثر مشاهدة</option>
             </select>
         </div>
 
-        <!-- ===== NEW: المنتجات المميزة ===== -->
+        <!-- ===== المنتجات المميزة ===== -->
         <div id="featuredContainer" class="featured-section animate delay-2" style="display:none;">
             <div class="section-header" style="margin-top:4px;">
                 <h2 style="border-right-color:#f39c12;"><i class="fas fa-star" style="color:#f39c12;"></i> منتجات مميزة</h2>
@@ -1527,7 +1547,7 @@
             </div>
         </section>
 
-        <!-- ===== NEW: قسم المدونة (آخر المقالات) ===== -->
+        <!-- ===== BLOG POSTS ===== -->
         <section>
             <div class="section-header animate delay-3">
                 <h2><i class="fas fa-newspaper" style="color:#e67e22;"></i> أحدث المقالات</h2>
@@ -1544,7 +1564,7 @@
 
     </main>
 
-    <!-- ===== SCROLL TOP ===== -->
+    <!-- ===== SCROLL TOP (مرفوع للأعلى) ===== -->
     <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
 
     <!-- ===== TOAST ===== -->
@@ -1557,7 +1577,7 @@
             <a href="all-products.html">المنتجات</a>
             <a href="all-requests.html">الطلبات</a>
             <a href="chemato-suppliers.html">الموردين</a>
-            <a href="blog.html">المدونة</a> <!-- ===== NEW ===== -->
+            <a href="blog.html">المدونة</a>
             <a href="auth.html">تسجيل الدخول</a>
             <a href="supplier-dashboard.html">للموردين</a>
             <a href="buyer-dashboard.html">للعملاء</a>
@@ -1714,12 +1734,38 @@
             setTimeout(() => toast.remove(), 7000)
         }
 
-        // ===== WHATSAPP (محسّن) =====
-        function getWhatsApp(phone, name) {
-            if (!phone) return '#';
-            let clean = phone.replace(/\D/g, '');
-            if (!clean.startsWith('20')) clean = '20' + clean;
-            return `https://wa.me/${clean}?text=${encodeURIComponent(`مرحباً، مهتم بـ: ${name} (كيماتو)`)}`;
+        // ===== WHATSAPP (مع تتبع التواصل) =====
+        async function trackAndOpenWhatsApp(supplierId, productId, phone, name) {
+            if (!phone) return '#'
+            
+            let clean = phone.replace(/\D/g, '')
+            if (!clean.startsWith('20')) clean = '20' + clean
+            
+            // ===== NEW: تسجيل التواصل =====
+            try {
+                const { data: { user } } = await supabase.auth.getUser()
+                
+                await supabase.rpc('log_supplier_contact', {
+                    p_supplier_id: supplierId,
+                    p_product_id: productId,
+                    p_buyer_id: user?.id || null,
+                    p_contact_type: 'whatsapp',
+                    p_contact_data: { 
+                        phone: phone,
+                        timestamp: new Date().toISOString()
+                    },
+                    p_ip_address: null,
+                    p_user_agent: navigator.userAgent,
+                    p_referrer: document.referrer
+                })
+                
+                console.log('✅ تم تسجيل التواصل مع المورد')
+            } catch (e) {
+                console.error('Error tracking contact:', e)
+            }
+            
+            // فتح واتساب
+            window.open(`https://wa.me/${clean}?text=${encodeURIComponent(`مرحباً، مهتم بـ: ${name} (كيماتو)`)}`, '_blank')
         }
 
         // ===== LOAD CATEGORIES =====
@@ -1754,8 +1800,7 @@
             }
         }
 
-        // ===== ===== ===== ===== ===== ===== 
-        // ===== NEW: LOAD TOTAL PRODUCTS COUNT (صحيح) =====
+        // ===== LOAD TOTAL PRODUCTS COUNT =====
         async function loadTotalProductsCount() {
             try {
                 const { count, error } = await supabase
@@ -1779,7 +1824,7 @@
             }
         }
 
-        // ===== NEW: LOAD TOTAL REQUESTS COUNT (المشكلة اللي اتصلحت) =====
+        // ===== LOAD TOTAL REQUESTS COUNT =====
         async function loadTotalRequestsCount() {
             try {
                 const { count, error } = await supabase
@@ -1916,7 +1961,7 @@
             }
         }
 
-        // ===== LOAD PRODUCTS (مع دعم المنتجات المميزة) =====
+        // ===== LOAD PRODUCTS =====
         async function loadProducts() {
             const container = document.getElementById('productsList')
             if (!container) return
@@ -1978,7 +2023,7 @@
                 const items = await Promise.all(products.map(async (p) => {
                     const { data: profile } = await supabase
                         .from('profiles')
-                        .select('full_name, company_name, phone')
+                        .select('id, full_name, company_name, phone')
                         .eq('id', p.supplier_id)
                         .single()
 
@@ -1993,7 +2038,6 @@
                         `<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy" decoding="async">` :
                         `<div class="card-img-placeholder"><div>${p.catIcon}</div><span>${p.name?.substring(0, 20) || ''}</span></div>`
 
-                    // ===== NEW: علامة مميز =====
                     const featuredBadge = p.is_featured ? `<span class="featured-badge">⭐ مميز</span>` : ''
                     const featuredClass = p.is_featured ? ' featured' : ''
 
@@ -2007,7 +2051,9 @@
                                 <div class="card-supplier"><i class="fas fa-building" style="margin-left:4px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
                                 <div class="card-actions">
                                     <a href="product-details.html?id=${p.id}" class="btn btn-detail"><i class="fas fa-info-circle"></i> تفاصيل</a>
-                                    <a href="${getWhatsApp(p.profile?.phone, p.name)}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
+                                    <button class="btn btn-whatsapp" onclick="trackAndOpenWhatsApp('${p.profile?.id || ''}', '${p.id}', '${p.profile?.phone || ''}', '${p.name ? p.name.replace(/'/g, "\\'") : ''}')">
+                                        <i class="fab fa-whatsapp"></i> واتساب
+                                    </button>
                                     <button class="btn btn-share" onclick="shareProduct('${p.id}', '${p.name ? p.name.replace(/'/g, "\\'") : ''}')"><i class="fas fa-share-alt"></i></button>
                                 </div>
                             </div>
@@ -2016,8 +2062,6 @@
                 }).join('')
 
                 generateSchema(products)
-
-                // ===== NEW: تحميل المنتجات المميزة =====
                 loadFeaturedProducts()
 
             } catch (error) {
@@ -2032,7 +2076,7 @@
             }
         }
 
-        // ===== NEW: LOAD FEATURED PRODUCTS =====
+        // ===== LOAD FEATURED PRODUCTS =====
         async function loadFeaturedProducts() {
             try {
                 const { data: featured } = await supabase
@@ -2056,7 +2100,7 @@
                 const items = await Promise.all(featured.map(async (p) => {
                     const { data: profile } = await supabase
                         .from('profiles')
-                        .select('full_name, company_name, phone')
+                        .select('id, full_name, company_name, phone')
                         .eq('id', p.supplier_id)
                         .single()
                     return { ...p, profile }
@@ -2078,7 +2122,9 @@
                                 <div class="card-supplier"><i class="fas fa-building" style="margin-left:4px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
                                 <div class="card-actions">
                                     <a href="product-details.html?id=${p.id}" class="btn btn-detail"><i class="fas fa-info-circle"></i> تفاصيل</a>
-                                    <a href="${getWhatsApp(p.profile?.phone, p.name)}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
+                                    <button class="btn btn-whatsapp" onclick="trackAndOpenWhatsApp('${p.profile?.id || ''}', '${p.id}', '${p.profile?.phone || ''}', '${p.name ? p.name.replace(/'/g, "\\'") : ''}')">
+                                        <i class="fab fa-whatsapp"></i> واتساب
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -2147,7 +2193,7 @@
             try {
                 const { data } = await supabase
                     .from('purchase_requests')
-                    .select('*, profiles(full_name, company_name, phone)')
+                    .select('*, profiles(id, full_name, company_name, phone)')
                     .eq('status', 'open')
                     .order('created_at', { ascending: false })
                     .limit(6)
@@ -2174,7 +2220,9 @@
                             <div class="card-supplier"><i class="fas fa-user"></i> ${r.profiles?.company_name || r.profiles?.full_name || 'عميل'}</div>
                             <div class="card-actions">
                                 <a href="request-details.html?id=${r.id}" class="btn btn-detail"><i class="fas fa-info-circle"></i> تفاصيل</a>
-                                <a href="${getWhatsApp(r.profiles?.phone, r.product_name)}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
+                                <button class="btn btn-whatsapp" onclick="trackAndOpenWhatsApp('${r.profiles?.id || ''}', null, '${r.profiles?.phone || ''}', '${r.product_name ? r.product_name.replace(/'/g, "\\'") : ''}')">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </button>
                             </div>
                         </div>
                     </div>
@@ -2185,14 +2233,14 @@
             }
         }
 
-        // ===== NEW: LOAD BLOG POSTS =====
+        // ===== LOAD BLOG POSTS =====
         async function loadBlogPosts() {
             try {
                 const { data } = await supabase
                     .from('blog_posts')
                     .select('id, title, slug, excerpt, image_url, created_at')
                     .eq('status', 'published')
-                    .order('created_at', { ascending: false })
+                    .order('published_at', { ascending: false })
                     .limit(3)
 
                 const container = document.getElementById('blogPostsList')
@@ -2413,7 +2461,7 @@
             btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
         }
 
-        // ===== GENERATE SITEMAP (محسّن) =====
+        // ===== GENERATE SITEMAP =====
         async function generateSitemap() {
             try {
                 const { data: products } = await supabase
@@ -2454,7 +2502,7 @@
 
                 sitemap += '</urlset>'
                 localStorage.setItem('sitemap', sitemap)
-                console.log('✅ Sitemap generated with', (products?.length || 0) + (blogPosts?.length || 0), 'items')
+                console.log('✅ Sitemap generated')
             } catch (error) {
                 console.error('Error generating sitemap:', error)
             }
@@ -2491,6 +2539,9 @@
             }, 3600000)
         }
 
+        // ===== EXPOSE TRACK FUNCTION TO GLOBAL =====
+        window.trackAndOpenWhatsApp = trackAndOpenWhatsApp
+
         // ===== INIT =====
         async function init() {
             setupDropdown()
@@ -2500,16 +2551,15 @@
 
             await loadAllProductsForSuggestions()
 
-            // ===== NEW: تحميل كل العدادات بشكل منفصل =====
             await Promise.all([
                 loadTotalProductsCount(),
-                loadTotalRequestsCount(),  // <-- الحل الجديد
+                loadTotalRequestsCount(),
                 loadSupplierCount()
             ])
 
             await loadProducts()
             await loadRequests()
-            await loadBlogPosts()  // <-- NEW
+            await loadBlogPosts()
             await generateSitemap()
             setupScrollTop()
             setupRealtime()
