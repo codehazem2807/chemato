@@ -219,6 +219,12 @@
                 background: #f1c40f;
                 color: #1a1a2e;
             }
+            .card-views {
+                background: rgba(0,0,0,0.6) !important;
+            }
+            .contact-stats {
+                background: rgba(37,211,102,0.7) !important;
+            }
         }
 
         /* ===== Animations ===== */
@@ -469,7 +475,7 @@
             box-shadow: 0 16px 48px rgba(10, 37, 56, 0.2);
         }
 
-        /* ===== NEW: خلفية كيماوية متحركة ===== */
+        /* ===== خلفية كيماوية متحركة ===== */
         .hero-bg-icons {
             position: absolute;
             top: 0;
@@ -567,13 +573,13 @@
             margin-bottom: 16px;
         }
 
-        /* ===== NEW: منطقة الإحصائيات بخلفية كيماوية ===== */
+        /* ===== منطقة الإحصائيات بخلفية كيماوية ===== */
         .stats-wrapper {
             position: relative;
             border-radius: 60px;
             padding: 4px;
             margin: 8px auto 18px;
-            max-width: 700px;
+            max-width: 850px;
             background: linear-gradient(135deg, #1a5276, #2e86c1);
             overflow: hidden;
         }
@@ -644,9 +650,9 @@
         .stats {
             display: flex;
             justify-content: center;
-            gap: 50px;
+            gap: 30px;
             flex-wrap: wrap;
-            padding: 16px 30px;
+            padding: 16px 24px;
             background: rgba(255, 255, 255, 0.08);
             border-radius: 56px;
             border: 1px solid rgba(255, 255, 255, 0.1);
@@ -663,14 +669,14 @@
         }
 
         .stat-icon {
-            font-size: 1.4rem;
+            font-size: 1.3rem;
             display: block;
             margin-bottom: 2px;
             opacity: 0.8;
         }
 
         .stat-number {
-            font-size: 2rem;
+            font-size: 1.8rem;
             font-weight: 900;
             background: linear-gradient(135deg, #ffffff, #2ecc71);
             -webkit-background-clip: text;
@@ -686,7 +692,7 @@
         }
 
         .stat-label {
-            font-size: 0.8rem;
+            font-size: 0.75rem;
             opacity: 0.7;
             display: block;
             color: rgba(255, 255, 255, 0.9);
@@ -1063,7 +1069,7 @@
             border-color: #3498db;
         }
 
-        /* ===== NEW: علامة "مشاهدة" على البطاقة ===== */
+        /* ===== علامات المشاهدات والتواصلات ===== */
         .card-views {
             position: absolute;
             top: 8px;
@@ -1081,6 +1087,26 @@
             z-index: 5;
         }
         .card-views i {
+            font-size: 0.6rem;
+        }
+
+        .contact-stats {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            background: rgba(37, 211, 102, 0.85);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 5;
+        }
+        .contact-stats i {
             font-size: 0.6rem;
         }
 
@@ -1288,7 +1314,7 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* ===== Scroll Top ===== */
+        /* ===== Scroll Top (مرفوع للأعلى) ===== */
         .scroll-top {
             position: fixed;
             bottom: 100px;
@@ -1398,13 +1424,15 @@
                 border-radius: 30px;
             }
             .stats {
-                gap: 20px;
-                padding: 12px 16px;
+                gap: 16px;
+                padding: 10px 14px;
                 max-width: 100%;
                 border-radius: 26px;
+                flex-wrap: wrap;
             }
-            .stat-number { font-size: 1.5rem; }
-            .stat-icon { font-size: 1.2rem; }
+            .stat-number { font-size: 1.4rem; }
+            .stat-icon { font-size: 1.1rem; }
+            .stat-label { font-size: 0.65rem; }
             .btn-primary {
                 padding: 11px 24px;
                 font-size: 0.85rem;
@@ -1486,14 +1514,14 @@
             .hero h1 { font-size: 1.5rem; }
             .hero p { font-size: 0.85rem; }
             .stats {
-                gap: 14px;
-                padding: 10px 12px;
+                gap: 12px;
+                padding: 8px 10px;
                 border-radius: 20px;
                 flex-wrap: wrap;
             }
-            .stat-number { font-size: 1.2rem; }
-            .stat-label { font-size: 0.6rem; }
-            .stat-icon { font-size: 1rem; }
+            .stat-number { font-size: 1.1rem; }
+            .stat-label { font-size: 0.55rem; }
+            .stat-icon { font-size: 0.9rem; }
             .btn-primary {
                 padding: 10px 18px;
                 font-size: 0.8rem;
@@ -1556,6 +1584,10 @@
             }
             .stats-wrapper .stats-bg-icons .icon {
                 font-size: 1.2rem !important;
+            }
+            .card-views, .contact-stats {
+                font-size: 0.55rem;
+                padding: 2px 8px;
             }
         }
 
@@ -1621,7 +1653,7 @@
 
         <!-- ===== HERO ===== -->
         <section class="hero animate delay-1">
-            <!-- ===== NEW: خلفية كيماوية متحركة ===== -->
+            <!-- خلفية كيماوية متحركة -->
             <div class="hero-bg-icons">
                 <span class="icon-float">🧪</span>
                 <span class="icon-float rotate">⚗️</span>
@@ -1637,7 +1669,7 @@
                 <h1>🏭 <span class="highlight">سوق الكيماويات</span> في مصر</h1>
                 <p>بيع واشتري صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
 
-                <!-- ===== NEW: منطقة الإحصائيات بخلفية كيماوية ===== -->
+                <!-- منطقة الإحصائيات بخلفية كيماوية -->
                 <div class="stats-wrapper">
                     <div class="stats-bg-icons">
                         <span class="icon">🧪</span>
@@ -1661,6 +1693,16 @@
                             <span class="stat-icon">🚛</span>
                             <span class="stat-number" id="totalSuppliers">0</span>
                             <span class="stat-label">الموردين</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">👁️</span>
+                            <span class="stat-number" id="totalViews">0</span>
+                            <span class="stat-label">إجمالي المشاهدات</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">💬</span>
+                            <span class="stat-number" id="totalContacts">0</span>
+                            <span class="stat-label">تواصلات واتساب</span>
                         </div>
                     </div>
                 </div>
@@ -1716,6 +1758,7 @@
                 <option value="price-high">الأعلى سعراً</option>
                 <option value="name">الاسم</option>
                 <option value="popular">الأكثر مشاهدة</option>
+                <option value="most_contacted">الأكثر تواصلاً</option>
             </select>
         </div>
 
@@ -1822,7 +1865,8 @@
         let suggestionsTimeout = null
         let selectedSuggestionIndex = -1
         let allProductsForSuggestions = []
-        let viewTrackedProducts = new Set() // لمنع تكرار تتبع المشاهدات
+        let viewTrackedProducts = new Set()
+        let contactCounts = {}
 
         // ===== SHARE FUNCTION =====
         window.sharePage = async function() {
@@ -1947,7 +1991,7 @@
 
         // ===== WHATSAPP (مع تتبع التواصل) =====
         async function trackAndOpenWhatsApp(supplierId, productId, phone, name) {
-            if (!phone) return '#'
+            if (!phone) return
             
             let clean = phone.replace(/\D/g, '')
             if (!clean.startsWith('20')) clean = '20' + clean
@@ -1977,7 +2021,26 @@
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(`مرحباً، مهتم بـ: ${name} (كيماتو)`)}`, '_blank')
         }
 
-        // ===== ===== NEW: تتبع المشاهدات ===== =====
+        // ===== LOAD CONTACT COUNTS =====
+        async function loadContactCounts(productIds) {
+            try {
+                const { data } = await supabase
+                    .from('supplier_contacts')
+                    .select('product_id')
+                    .in('product_id', productIds)
+                    .eq('contact_type', 'whatsapp')
+
+                if (data) {
+                    data.forEach(item => {
+                        contactCounts[item.product_id] = (contactCounts[item.product_id] || 0) + 1
+                    })
+                }
+            } catch (e) {
+                console.error('Error loading contact counts:', e)
+            }
+        }
+
+        // ===== تتبع المشاهدات =====
         async function trackProductView(productId, supplierId) {
             if (!productId) return
             if (viewTrackedProducts.has(productId)) return
@@ -1985,7 +2048,6 @@
             viewTrackedProducts.add(productId)
             
             try {
-                // تسجيل مشاهدة في جدول supplier_contacts
                 await supabase.rpc('log_supplier_contact', {
                     p_supplier_id: supplierId,
                     p_product_id: productId,
@@ -2244,6 +2306,9 @@
                     case 'popular':
                         query = query.order('views', { ascending: false }).order('created_at', { ascending: false })
                         break
+                    case 'most_contacted':
+                        query = query.order('contact_count', { ascending: false, nullsLast: true })
+                        break
                     default:
                         query = query.order('created_at', { ascending: false })
                 }
@@ -2257,6 +2322,10 @@
                     return
                 }
 
+                // Load contact counts
+                const productIds = products.map(p => p.id)
+                await loadContactCounts(productIds)
+
                 const items = await Promise.all(products.map(async (p) => {
                     const { data: profile } = await supabase
                         .from('profiles')
@@ -2266,10 +2335,10 @@
 
                     let catName = p.category || 'كيماويات',
                         catIcon = '🧪'
-                    return { ...p, profile, catName, catIcon }
+                    return { ...p, profile, catName, catIcon, contactCount: contactCounts[p.id] || 0 }
                 }))
 
-                // ===== NEW: تتبع المشاهدات لكل منتج يظهر في الصفحة =====
+                // تتبع المشاهدات لكل منتج يظهر في الصفحة
                 items.forEach(p => {
                     trackProductView(p.id, p.supplier_id)
                 })
@@ -2283,12 +2352,13 @@
                     const featuredBadge = p.is_featured ? `<span class="featured-badge">⭐ مميز</span>` : ''
                     const featuredClass = p.is_featured ? ' featured' : ''
 
-                    // ===== NEW: عدد المشاهدات =====
                     const viewsCount = p.views || 0
+                    const contactCount = p.contactCount || 0
 
                     return `
                         <div class="card${featuredClass}" style="animation-delay:${i * 0.05}s;">
                             ${viewsCount > 0 ? `<div class="card-views"><i class="fas fa-eye"></i> ${viewsCount}</div>` : ''}
+                            ${contactCount > 0 ? `<div class="contact-stats"><i class="fab fa-whatsapp"></i> ${contactCount}</div>` : ''}
                             ${imgHtml}
                             <div class="card-body">
                                 <span class="card-badge">${p.catIcon} ${p.catName}</span>
@@ -2343,16 +2413,20 @@
 
                 if (section) section.style.display = 'block'
 
+                // Load contact counts for featured products
+                const featuredIds = featured.map(p => p.id)
+                await loadContactCounts(featuredIds)
+
                 const items = await Promise.all(featured.map(async (p) => {
                     const { data: profile } = await supabase
                         .from('profiles')
                         .select('id, full_name, company_name, phone')
                         .eq('id', p.supplier_id)
                         .single()
-                    return { ...p, profile }
+                    return { ...p, profile, contactCount: contactCounts[p.id] || 0 }
                 }))
 
-                // ===== NEW: تتبع المشاهدات للمنتجات المميزة =====
+                // تتبع المشاهدات للمنتجات المميزة
                 items.forEach(p => {
                     trackProductView(p.id, p.supplier_id)
                 })
@@ -2364,10 +2438,12 @@
                         `<div class="card-img-placeholder"><div>⭐</div><span>${p.name?.substring(0, 20) || ''}</span></div>`
 
                     const viewsCount = p.views || 0
+                    const contactCount = p.contactCount || 0
 
                     return `
                         <div class="card featured" style="animation-delay:0s;">
                             ${viewsCount > 0 ? `<div class="card-views"><i class="fas fa-eye"></i> ${viewsCount}</div>` : ''}
+                            ${contactCount > 0 ? `<div class="contact-stats"><i class="fab fa-whatsapp"></i> ${contactCount}</div>` : ''}
                             ${imgHtml}
                             <div class="card-body">
                                 <span class="card-badge">⭐ مميز</span>
@@ -2547,6 +2623,42 @@
                 }
             } catch (error) {
                 console.error('Error loading supplier count:', error)
+            }
+        }
+
+        // ===== LOAD TOTAL VIEWS & CONTACTS =====
+        async function loadTotalStats() {
+            try {
+                // Total views
+                const { count: viewCount } = await supabase
+                    .from('supplier_contacts')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('contact_type', 'view')
+
+                const viewsElement = document.getElementById('totalViews')
+                if (viewsElement) {
+                    viewsElement.textContent = viewCount || 0
+                    viewsElement.classList.remove('updated')
+                    void viewsElement.offsetWidth
+                    viewsElement.classList.add('updated')
+                }
+
+                // Total WhatsApp contacts
+                const { count: contactCount } = await supabase
+                    .from('supplier_contacts')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('contact_type', 'whatsapp')
+
+                const contactsElement = document.getElementById('totalContacts')
+                if (contactsElement) {
+                    contactsElement.textContent = contactCount || 0
+                    contactsElement.classList.remove('updated')
+                    void contactsElement.offsetWidth
+                    contactsElement.classList.add('updated')
+                }
+
+            } catch (e) {
+                console.error('Error loading total stats:', e)
             }
         }
 
@@ -2809,7 +2921,8 @@
             await Promise.all([
                 loadTotalProductsCount(),
                 loadTotalRequestsCount(),
-                loadSupplierCount()
+                loadSupplierCount(),
+                loadTotalStats()
             ])
 
             await loadProducts()
