@@ -5,8 +5,9 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>كيماتو | جميع الموردين</title>
     
-    <meta name="description" content="استعرض جميع موردي المواد الكيماوية في مصر" />
+    <meta name="description" content="استعرض جميع موردي المواد الكيماوية في مصر مع تقييماتهم وتواصلاتهم" />
     <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="موردين كيماويات,مصر,كيماويات,مواد خام,موردين" />
     
     <link rel="icon" type="image/x-icon" href="logo.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
@@ -33,6 +34,7 @@
             --text-dark: #0c2d4a;
             --white: #ffffff;
             --danger: #e53e3e;
+            --whatsapp: #25D366;
             --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
             --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
             --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
@@ -48,9 +50,7 @@
                 --text-dark: #e0e0e0;
                 --white: #16213e;
             }
-            body {
-                background: #1a1a2e !important;
-            }
+            body { background: #1a1a2e !important; }
             .navbar { background: #0a1a2a !important; }
             .page-header { background: linear-gradient(135deg, #0a1a2a, #1a4a6e) !important; }
             .supplier-card { background: #16213e !important; border-color: #0f3460 !important; }
@@ -71,6 +71,9 @@
             .footer-links a { color: #5a9bc7 !important; }
             .no-results { background: #16213e !important; color: #a0aec0 !important; }
             .no-results i { color: #2a3a4a !important; }
+            .supplier-rating-badge { background: rgba(241,196,15,0.15) !important; color: #f1c40f !important; }
+            .contact-stats-badge { background: rgba(37,211,102,0.15) !important; color: #25D366 !important; }
+            .views-stats-badge { background: rgba(52,152,219,0.15) !important; color: #3498db !important; }
         }
 
         body {
@@ -95,16 +98,22 @@
             100% { opacity: 1; transform: translateY(0); }
         }
 
+        @keyframes floatBubble {
+            0% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-20px) scale(1.1); opacity: 0.5; }
+            100% { transform: translateY(0) scale(1); opacity: 0.3; }
+        }
+
         .skeleton-loader {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
             gap: 25px;
         }
         .skeleton-card {
             background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;
-            height: 280px;
+            height: 320px;
             border-radius: var(--radius-md);
         }
         @media (prefers-color-scheme: dark) {
@@ -253,13 +262,82 @@
             color: white;
             text-align: center;
             box-shadow: 0 24px 64px rgba(12,45,74,0.25);
+            position: relative;
+            overflow: hidden;
         }
+
+        .page-header .bg-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .page-header .bg-icons .icon {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.06;
+            animation: floatBubble 8s ease-in-out infinite;
+        }
+        .page-header .bg-icons .icon:nth-child(1) { top: 10%; left: 5%; font-size: 3rem; animation-delay: 0s; }
+        .page-header .bg-icons .icon:nth-child(2) { bottom: 15%; right: 8%; font-size: 3.5rem; animation-delay: 2s; }
+        .page-header .bg-icons .icon:nth-child(3) { top: 50%; left: 40%; font-size: 4rem; animation-delay: 1s; opacity: 0.04; }
+        .page-header .bg-icons .icon:nth-child(4) { bottom: 30%; left: 10%; font-size: 2.5rem; animation-delay: 3s; }
+        .page-header .bg-icons .icon:nth-child(5) { top: 20%; right: 15%; font-size: 2.8rem; animation-delay: 1.5s; }
+
+        .page-header .content {
+            position: relative;
+            z-index: 1;
+        }
+
         .page-header h1 {
             font-size: 2.5rem;
             margin-bottom: 10px;
         }
         .page-header h1 i { color: #3498db; }
         .page-header p { font-size: 1.1rem; opacity: 0.9; }
+
+        /* ===== Stats Row ===== */
+        .stats-row {
+            display: flex;
+            justify-content: center;
+            gap: 30px;
+            flex-wrap: wrap;
+            padding: 12px 20px;
+            background: rgba(255,255,255,0.08);
+            border-radius: 50px;
+            margin-top: 12px;
+            border: 1px solid rgba(255,255,255,0.06);
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stats-row .stat {
+            text-align: center;
+        }
+        .stats-row .stat .number {
+            font-size: 1.5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #ffffff, #2ecc71);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            display: block;
+        }
+        .stats-row .stat .label {
+            font-size: 0.7rem;
+            opacity: 0.7;
+            display: block;
+            color: rgba(255,255,255,0.9);
+        }
+
         .results-count {
             margin-top: 15px;
             font-size: 0.9rem;
@@ -320,6 +398,7 @@
         .search-btn:hover {
             background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
         }
+
         .city-filter {
             padding: 12px 18px;
             border: 1px solid var(--gray);
@@ -337,10 +416,27 @@
             box-shadow: 0 0 0 2px rgba(52,152,219,0.15);
         }
 
+        .sort-select {
+            padding: 12px 18px;
+            border: 1px solid var(--gray);
+            border-radius: 50px;
+            background: var(--white);
+            cursor: pointer;
+            min-width: 150px;
+            font-size: 0.9rem;
+            outline: none;
+            font-family: inherit;
+            color: var(--text-dark);
+        }
+        .sort-select:focus {
+            border-color: #3498db;
+            box-shadow: 0 0 0 2px rgba(52,152,219,0.15);
+        }
+
         /* ===== شبكة الموردين ===== */
         .suppliers-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(340px, 1fr));
+            grid-template-columns: repeat(auto-fill, minmax(360px, 1fr));
             gap: 25px;
         }
         .supplier-card {
@@ -355,12 +451,31 @@
             animation: fadeUp 0.5s ease forwards;
             opacity: 0;
             padding: 24px;
+            position: relative;
         }
         .supplier-card:hover {
             transform: translateY(-8px);
             box-shadow: var(--shadow-lg);
             border-color: #3498db;
         }
+
+        /* ===== Supplier Ranking Badge ===== */
+        .supplier-rank {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: rgba(52,152,219,0.9);
+            color: #fff;
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 700;
+            z-index: 5;
+        }
+        .supplier-rank.top1 { background: rgba(241, 196, 15, 0.9); }
+        .supplier-rank.top2 { background: rgba(192, 192, 192, 0.8); }
+        .supplier-rank.top3 { background: rgba(205, 127, 50, 0.9); }
+
         .supplier-header {
             display: flex;
             align-items: center;
@@ -379,12 +494,36 @@
             color: white;
             flex-shrink: 0;
             box-shadow: 0 4px 16px rgba(0,0,0,0.1);
+            position: relative;
         }
+
+        /* ===== Rating badge on avatar ===== */
+        .avatar-rating {
+            position: absolute;
+            bottom: -4px;
+            right: -4px;
+            background: #f1c40f;
+            color: #fff;
+            border-radius: 50%;
+            width: 22px;
+            height: 22px;
+            font-size: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 2px solid var(--white);
+            font-weight: 700;
+        }
+
         .supplier-info { flex: 1; min-width: 0; }
         .supplier-name {
             font-size: 1.15rem;
             font-weight: 800;
             color: var(--primary-dark);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .supplier-company {
             font-size: 0.9rem;
@@ -398,9 +537,11 @@
         }
         .supplier-city i { color: #3498db; margin-left: 4px; }
 
+        /* ===== Supplier Stats ===== */
         .supplier-stats {
-            display: flex;
-            gap: 20px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 8px;
             padding: 12px 0;
             border-top: 1px solid var(--gray);
             border-bottom: 1px solid var(--gray);
@@ -408,21 +549,23 @@
         }
         .stat-item {
             text-align: center;
-            flex: 1;
             color: var(--text-light);
         }
         .stat-item .number {
-            font-size: 1.3rem;
+            font-size: 1.2rem;
             font-weight: 800;
             color: var(--primary-dark);
             display: block;
+            line-height: 1.3;
         }
         .stat-item .label {
-            font-size: 0.7rem;
+            font-size: 0.6rem;
             font-weight: 600;
             opacity: 0.7;
+            display: block;
         }
 
+        /* ===== Supplier Badges ===== */
         .supplier-badges {
             display: flex;
             gap: 8px;
@@ -439,6 +582,54 @@
         }
         .supplier-badge i { margin-left: 4px; }
 
+        /* ===== Rating Badge ===== */
+        .supplier-rating-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(241, 196, 15, 0.12);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #f39c12;
+        }
+        .supplier-rating-badge i { color: #f1c40f; font-size: 0.65rem; }
+        .supplier-rating-badge .count {
+            font-weight: 400;
+            font-size: 0.6rem;
+            color: var(--gray-dark);
+        }
+
+        /* ===== Contact Stats Badge ===== */
+        .contact-stats-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(37, 211, 102, 0.12);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #25D366;
+        }
+        .contact-stats-badge i { color: #25D366; font-size: 0.65rem; }
+
+        /* ===== Views Stats Badge ===== */
+        .views-stats-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            background: rgba(52, 152, 219, 0.12);
+            padding: 2px 12px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+        .views-stats-badge i { color: #3498db; font-size: 0.65rem; }
+
+        /* ===== Supplier Actions ===== */
         .supplier-actions {
             display: flex;
             gap: 10px;
@@ -571,6 +762,11 @@
         }
 
         /* ===== استجابة ===== */
+        @media (max-width: 1024px) {
+            .suppliers-grid { grid-template-columns: repeat(2, 1fr); }
+            .skeleton-loader { grid-template-columns: repeat(2, 1fr); }
+        }
+
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
@@ -585,6 +781,12 @@
             .page-header { padding: 24px 16px; }
             .page-header h1 { font-size: 1.6rem; }
             .page-header p { font-size: 0.95rem; }
+            .stats-row {
+                gap: 16px;
+                padding: 10px 14px;
+                max-width: 100%;
+            }
+            .stats-row .stat .number { font-size: 1.1rem; }
             .search-filter-bar {
                 flex-direction: column;
                 border-radius: 28px;
@@ -593,11 +795,14 @@
             }
             .search-input-wrapper { width: 100%; }
             .city-filter { width: 100%; min-width: unset; }
+            .sort-select { width: 100%; min-width: unset; }
             .search-btn { padding: 0 16px; font-size: 0.85rem; }
             .suppliers-grid { grid-template-columns: 1fr; gap: 20px; }
             .dropdown-content { left: auto; right: 0; min-width: 170px; }
             .footer-links { gap: 12px; }
             .footer-links a { font-size: 12px; }
+            .supplier-stats { grid-template-columns: repeat(2, 1fr); }
+            .supplier-rank { font-size: 0.55rem; padding: 1px 10px; }
         }
 
         @media (max-width: 480px) {
@@ -605,10 +810,12 @@
             .supplier-card { padding: 18px; }
             .supplier-avatar { width: 48px; height: 48px; font-size: 1.3rem; }
             .supplier-name { font-size: 1rem; }
-            .supplier-stats { gap: 12px; }
-            .stat-item .number { font-size: 1.1rem; }
+            .supplier-stats { gap: 8px; }
+            .stat-item .number { font-size: 1rem; }
             .supplier-actions { flex-direction: column; }
             .skeleton-loader { grid-template-columns: 1fr; }
+            .skeleton-card { height: 280px; }
+            .avatar-rating { width: 18px; height: 18px; font-size: 0.4rem; }
         }
 
         @media (hover: none) {
@@ -639,6 +846,7 @@
         <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
         <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
         <a href="chemato-suppliers.html" class="active"><i class="fas fa-truck"></i> الموردين</a>
+        <a href="blog.html"><i class="fas fa-newspaper"></i> المدونة</a>
         <div class="dropdown">
             <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
             <div class="dropdown-content" id="dropdownContent"></div>
@@ -648,9 +856,34 @@
 
 <div class="container">
     <div class="page-header">
-        <h1><i class="fas fa-truck"></i> جميع الموردين</h1>
-        <p>استعرض جميع موردي المواد الكيماوية في مصر وتواصل معهم مباشرة</p>
-        <div class="results-count" id="resultsCount">📊 جاري التحميل...</div>
+        <div class="bg-icons">
+            <span class="icon">🧪</span>
+            <span class="icon">⚗️</span>
+            <span class="icon">🔬</span>
+            <span class="icon">🧫</span>
+            <span class="icon">🧴</span>
+        </div>
+        <div class="content">
+            <h1><i class="fas fa-truck"></i> جميع الموردين</h1>
+            <p>استعرض جميع موردي المواد الكيماوية في مصر وتواصل معهم مباشرة</p>
+            
+            <div class="stats-row">
+                <div class="stat">
+                    <span class="number" id="totalSuppliers">0</span>
+                    <span class="label">إجمالي الموردين</span>
+                </div>
+                <div class="stat">
+                    <span class="number" id="totalProducts">0</span>
+                    <span class="label">إجمالي المنتجات</span>
+                </div>
+                <div class="stat">
+                    <span class="number" id="totalViews">0</span>
+                    <span class="label">إجمالي المشاهدات</span>
+                </div>
+            </div>
+
+            <div class="results-count" id="resultsCount">📊 جاري التحميل...</div>
+        </div>
     </div>
 
     <div class="search-filter-bar">
@@ -660,6 +893,12 @@
         </div>
         <select id="cityFilter" class="city-filter">
             <option value="all">📍 جميع المدن</option>
+        </select>
+        <select id="sortBy" class="sort-select">
+            <option value="products">📦 الأكثر منتجات</option>
+            <option value="rating">⭐ الأعلى تقييماً</option>
+            <option value="views">👁️ الأكثر مشاهدة</option>
+            <option value="contacts">💬 الأكثر تواصلاً</option>
         </select>
     </div>
 
@@ -683,6 +922,7 @@
         <a href="all-products.html">جميع المنتجات</a>
         <a href="all-requests.html">جميع الطلبات</a>
         <a href="chemato-suppliers.html">الموردين</a>
+        <a href="blog.html">المدونة</a>
         <a href="auth.html">تسجيل الدخول</a>
     </div>
     <div>© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
@@ -698,6 +938,8 @@
 
     let currentSearch = ''
     let currentCity = 'all'
+    let currentSort = 'products'
+    let allSuppliers = []
 
     // ========== TOAST ==========
     function showToast(icon, title, desc, type = 'info') {
@@ -772,6 +1014,46 @@
         return `https://wa.me/${formatted}?text=${encodeURIComponent(message)}`
     }
 
+    // ========== LOAD SUPPLIER RATING ==========
+    async function loadSupplierRating(supplierId) {
+        try {
+            const { data, error } = await supabase
+                .from('reviews')
+                .select('rating')
+                .eq('supplier_id', supplierId)
+                .eq('review_type', 'supplier')
+
+            if (error || !data || data.length === 0) {
+                return { avg: 0, count: 0 }
+            }
+
+            const sum = data.reduce((acc, r) => acc + (r.rating || 0), 0)
+            const avg = data.length > 0 ? (sum / data.length).toFixed(1) : '0'
+
+            return { avg, count: data.length }
+        } catch (e) {
+            console.error('Error loading supplier rating:', e)
+            return { avg: 0, count: 0 }
+        }
+    }
+
+    // ========== LOAD CONTACT COUNT ==========
+    async function loadContactCount(supplierId) {
+        try {
+            const { count, error } = await supabase
+                .from('supplier_contacts')
+                .select('*', { count: 'exact', head: true })
+                .eq('supplier_id', supplierId)
+                .eq('contact_type', 'whatsapp')
+
+            if (error) return 0
+            return count || 0
+        } catch (e) {
+            console.error('Error loading contact count:', e)
+            return 0
+        }
+    }
+
     // ========== LOAD SUPPLIERS ==========
     async function loadSuppliers() {
         const container = document.getElementById('suppliersContainer')
@@ -782,7 +1064,6 @@
         `
 
         try {
-            // جلب الموردين من قاعدة البيانات
             let query = supabase
                 .from('profiles')
                 .select('*')
@@ -812,7 +1093,6 @@
                 return
             }
 
-            // لو مفيش موردين
             if (!suppliers || suppliers.length === 0) {
                 container.innerHTML = `
                     <div class="no-results">
@@ -822,11 +1102,12 @@
                     </div>
                 `
                 document.getElementById('resultsCount').innerHTML = '📊 0 مورد'
+                document.getElementById('totalSuppliers').textContent = '0'
                 return
             }
 
-            // جلب إحصائيات كل مورد (عدد المنتجات والمشاهدات)
-            const suppliersWithStats = await Promise.all(suppliers.map(async (supplier) => {
+            // جلب إحصائيات كل مورد
+            const suppliersWithStats = await Promise.all(suppliers.map(async (supplier, index) => {
                 try {
                     // عدد المنتجات النشطة
                     const { count: productCount } = await supabase
@@ -844,7 +1125,13 @@
 
                     const views = viewsData?.reduce((sum, p) => sum + (p.views_count || 0), 0) || 0
 
-                    // جلب التصنيفات (أقصى 3)
+                    // تقييم المورد
+                    const rating = await loadSupplierRating(supplier.id)
+
+                    // عدد تواصلات واتساب
+                    const contacts = await loadContactCount(supplier.id)
+
+                    // التصنيفات
                     const { data: products } = await supabase
                         .from('products')
                         .select('category')
@@ -858,15 +1145,44 @@
                     })
                     const badges = Array.from(categories).slice(0, 3)
 
-                    return { ...supplier, productCount: productCount || 0, views, badges }
+                    return { 
+                        ...supplier, 
+                        productCount: productCount || 0, 
+                        views, 
+                        rating,
+                        contacts,
+                        badges,
+                        rank: index + 1
+                    }
                 } catch (e) {
                     console.error('Error getting stats for supplier:', supplier.id, e)
-                    return { ...supplier, productCount: 0, views: 0, badges: [] }
+                    return { ...supplier, productCount: 0, views: 0, rating: { avg: 0, count: 0 }, contacts: 0, badges: [], rank: index + 1 }
                 }
             }))
 
-            // ترتيب حسب عدد المنتجات (الأكثر أولاً)
-            suppliersWithStats.sort((a, b) => b.productCount - a.productCount)
+            allSuppliers = suppliersWithStats
+
+            // ترتيب حسب الخيار المختار
+            switch (currentSort) {
+                case 'rating':
+                    suppliersWithStats.sort((a, b) => parseFloat(b.rating.avg) - parseFloat(a.rating.avg))
+                    break
+                case 'views':
+                    suppliersWithStats.sort((a, b) => b.views - a.views)
+                    break
+                case 'contacts':
+                    suppliersWithStats.sort((a, b) => b.contacts - a.contacts)
+                    break
+                default: // products
+                    suppliersWithStats.sort((a, b) => b.productCount - a.productCount)
+            }
+
+            // تحديث الإحصائيات العامة
+            const totalProducts = suppliersWithStats.reduce((sum, s) => sum + s.productCount, 0)
+            const totalViews = suppliersWithStats.reduce((sum, s) => sum + s.views, 0)
+            document.getElementById('totalSuppliers').textContent = suppliers.length
+            document.getElementById('totalProducts').textContent = totalProducts
+            document.getElementById('totalViews').textContent = totalViews
 
             const colors = ['#1a4a6e', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e', '#6a4a9e']
             const getColor = (name) => {
@@ -881,14 +1197,31 @@
                 const companyName = supplier.company_name || 'مورد مستقل'
                 const city = supplier.city || 'مدينة غير محددة'
 
+                // ترتيب المورد
+                let rankClass = ''
+                let rankText = ''
+                if (index === 0 && currentSort === 'products') { rankClass = 'top1'; rankText = '🥇' }
+                else if (index === 1 && currentSort === 'products') { rankClass = 'top2'; rankText = '🥈' }
+                else if (index === 2 && currentSort === 'products') { rankClass = 'top3'; rankText = '🥉' }
+
+                const ratingText = supplier.rating.count > 0 ? `${supplier.rating.avg} ⭐` : 'لا تقييم'
+                const ratingCount = supplier.rating.count > 0 ? `(${supplier.rating.count})` : ''
+
                 return `
                     <div class="supplier-card" style="animation-delay:${(index % 6) * 0.05}s;">
+                        ${rankText ? `<div class="supplier-rank ${rankClass}">${rankText}</div>` : ''}
+                        
                         <div class="supplier-header">
                             <div class="supplier-avatar" style="background:${avatarColor};">
                                 ${initial}
+                                ${supplier.rating.count > 0 ? `<div class="avatar-rating">⭐</div>` : ''}
                             </div>
                             <div class="supplier-info">
-                                <div class="supplier-name">${supplier.full_name || 'مورد'}</div>
+                                <div class="supplier-name">
+                                    ${supplier.full_name || 'مورد'}
+                                    ${supplier.rating.count > 0 ? 
+                                        `<span class="supplier-rating-badge"><i class="fas fa-star"></i> ${supplier.rating.avg}</span>` : ''}
+                                </div>
                                 <div class="supplier-company"><i class="fas fa-building"></i> ${companyName}</div>
                                 <div class="supplier-city"><i class="fas fa-map-marker-alt"></i> ${city}</div>
                             </div>
@@ -897,15 +1230,19 @@
                         <div class="supplier-stats">
                             <div class="stat-item">
                                 <span class="number">${supplier.productCount}</span>
-                                <span class="label">منتج</span>
+                                <span class="label">📦 منتجات</span>
                             </div>
                             <div class="stat-item">
                                 <span class="number">${supplier.views}</span>
-                                <span class="label">مشاهدة</span>
+                                <span class="label">👁️ مشاهدات</span>
                             </div>
                             <div class="stat-item">
-                                <span class="number">${supplier.phone ? '📱' : '📧'}</span>
-                                <span class="label">${supplier.phone ? 'متاح' : 'بريد'}</span>
+                                <span class="number">${supplier.contacts}</span>
+                                <span class="label">💬 تواصل</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="number">${supplier.rating.count > 0 ? supplier.rating.avg : '—'}</span>
+                                <span class="label">⭐ تقييم</span>
                             </div>
                         </div>
 
@@ -988,6 +1325,11 @@
 
     document.getElementById('cityFilter').addEventListener('change', (e) => {
         currentCity = e.target.value
+        loadSuppliers()
+    })
+
+    document.getElementById('sortBy').addEventListener('change', (e) => {
+        currentSort = e.target.value
         loadSuppliers()
     })
 
