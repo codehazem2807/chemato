@@ -1352,51 +1352,6 @@
         }
     }
 
-    // ========== LOAD PRODUCT RATINGS (المعدلة - بدون join) ==========
-    async function loadProductRatings(productIds) {
-        try {
-            if (!productIds || productIds.length === 0) {
-                return {}
-            }
-            
-            const { data, error } = await supabase
-                .from('reviews')
-                .select('product_id, rating')
-                .in('product_id', productIds)
-                .eq('review_type', 'product')
-
-            if (error) {
-                console.warn('⚠️ خطأ في جلب تقييمات المنتجات:', error.message)
-                return {}
-            }
-
-            if (!data || data.length === 0) {
-                return {}
-            }
-
-            const ratingsMap = {}
-            data.forEach(r => {
-                if (!ratingsMap[r.product_id]) {
-                    ratingsMap[r.product_id] = { sum: 0, count: 0 }
-                }
-                ratingsMap[r.product_id].sum += (r.rating || 0)
-                ratingsMap[r.product_id].count += 1
-            })
-
-            const result = {}
-            Object.keys(ratingsMap).forEach(id => {
-                result[id] = {
-                    avg: (ratingsMap[id].sum / ratingsMap[id].count).toFixed(1),
-                    count: ratingsMap[id].count
-                }
-            })
-            return result
-        } catch (e) {
-            console.error('❌ خطأ في loadProductRatings:', e)
-            return {}
-        }
-    }
-
     // ========== LOAD SUPPLIER PROFILE ==========
     async function loadSupplierProfile() {
         if (!supplierId) {
@@ -1484,7 +1439,7 @@
         }
     }
 
-    // ========== LOAD SUPPLIER PRODUCTS ==========
+    // ========== LOAD SUPPLIER PRODUCTS (المعدلة بالكامل) ==========
     async function loadSupplierProducts() {
         const container = document.getElementById('productsContainer')
         container.innerHTML = `
@@ -1515,18 +1470,40 @@
 
             supplierProducts = products || []
 
+            // ===== جلب التقييمات (بدون join) =====
             let ratingsMap = {}
-            const productIds = supplierProducts.map(p => p.id)
-            
-            if (productIds.length > 0) {
-                try {
-                    ratingsMap = await loadProductRatings(productIds)
-                } catch (e) {
-                    console.warn('⚠️ فشل جلب التقييمات:', e)
-                    ratingsMap = {}
+            try {
+                const productIds = supplierProducts.map(p => p.id)
+                if (productIds.length > 0) {
+                    const { data: ratingsData, error: ratingsError } = await supabase
+                        .from('reviews')
+                        .select('product_id, rating')
+                        .in('product_id', productIds)
+                        .eq('review_type', 'product')
+
+                    if (!ratingsError && ratingsData && ratingsData.length > 0) {
+                        const tempMap = {}
+                        ratingsData.forEach(r => {
+                            if (!tempMap[r.product_id]) {
+                                tempMap[r.product_id] = { sum: 0, count: 0 }
+                            }
+                            tempMap[r.product_id].sum += (r.rating || 0)
+                            tempMap[r.product_id].count += 1
+                        })
+                        Object.keys(tempMap).forEach(id => {
+                            ratingsMap[id] = {
+                                avg: (tempMap[id].sum / tempMap[id].count).toFixed(1),
+                                count: tempMap[id].count
+                            }
+                        })
+                    }
                 }
+            } catch (e) {
+                console.warn('⚠️ فشل جلب التقييمات:', e)
+                ratingsMap = {}
             }
 
+            // ===== جلب التصنيفات =====
             const productsWithDetails = await Promise.all(supplierProducts.map(async (p) => {
                 let categoryName = p.category || 'مواد كيماوية'
                 let categoryIcon = '🧪'
@@ -1547,6 +1524,7 @@
                 return { ...p, categoryName, categoryIcon, rating }
             }))
 
+            // ===== تحديث الإحصائيات =====
             const total = supplierProducts.length
             const views = supplierProducts.reduce((sum, p) => sum + (p.views_count || 0), 0)
             const active = supplierProducts.filter(p => p.status === 'active').length
@@ -1562,12 +1540,14 @@
             document.getElementById('activeProducts').textContent = active
             document.getElementById('categoriesCount').textContent = categoriesList.length
 
+            // ===== تحديث بادجة المشاهدات =====
             const viewsBadge = document.getElementById('viewsBadge')
             if (viewsBadge && views > 0) {
                 viewsBadge.style.display = 'inline-flex'
                 document.getElementById('viewsValue').textContent = views
             }
 
+            // ===== عرض التصنيفات =====
             if (categoriesList.length > 0) {
                 document.getElementById('categoriesSection').style.display = 'block'
                 document.getElementById('categoriesTags').innerHTML = categoriesList.map(cat => 
@@ -1575,6 +1555,7 @@
                 ).join('')
             }
 
+            // ===== عرض المنتجات =====
             if (supplierProducts.length === 0) {
                 container.innerHTML = `
                     <div class="no-results">
