@@ -45,17 +45,11 @@
       "@type": "Organization",
       "name": "كيماتو",
       "url": "https://chemato.vercel.app",
-      "logo": "https://chemato.vercel.app/logo.png",
-      "contactPoint": {
-        "@type": "ContactPoint",
-        "telephone": "+201234567890",
-        "contactType": "customer service",
-        "availableLanguage": ["Arabic"]
-      }
+      "logo": "https://chemato.vercel.app/logo.png"
     }
     </script>
 
-    <!-- OneSignal (مع تعديل موضع الزر) -->
+    <!-- OneSignal -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -69,7 +63,7 @@
                     theme: 'default', 
                     size: 'medium', 
                     showCredit: false,
-                    offset: { bottom: '80px', right: '20px' }  // <-- رفع الزر للأعلى
+                    offset: { bottom: '80px', right: '20px' }
                 },
                 serviceWorkerParam: { scope: '/' },
                 serviceWorkerPath: 'OneSignalSDKWorker.js',
@@ -87,7 +81,7 @@
     </script>
 
     <!-- Preload -->
-    <link rel="preload" href="logo.png" as="image">
+    <link rel="preload" href="logo.png" as="image" />
     <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -245,8 +239,19 @@
         }
 
         @keyframes floatIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(5deg); }
+        }
+
+        @keyframes floatBubble {
+            0% { transform: translateY(0) scale(1); opacity: 0.3; }
+            50% { transform: translateY(-30px) scale(1.2); opacity: 0.6; }
+            100% { transform: translateY(0) scale(1); opacity: 0.3; }
+        }
+
+        @keyframes rotateSlow {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
         }
 
         .animate {
@@ -464,22 +469,77 @@
             box-shadow: 0 16px 48px rgba(10, 37, 56, 0.2);
         }
 
-        .hero::before {
-            content: '🧪';
+        /* ===== NEW: خلفية كيماوية متحركة ===== */
+        .hero-bg-icons {
             position: absolute;
-            font-size: 16rem;
-            opacity: 0.04;
-            left: -30px;
-            bottom: -50px;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
         }
 
-        .hero::after {
-            content: '🔬';
+        .hero-bg-icons .icon-float {
             position: absolute;
-            font-size: 12rem;
-            opacity: 0.04;
-            right: -20px;
-            top: -30px;
+            font-size: 2.5rem;
+            opacity: 0.08;
+            animation: floatBubble 6s ease-in-out infinite;
+        }
+
+        .hero-bg-icons .icon-float:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            font-size: 3.5rem;
+            animation-delay: 0s;
+        }
+        .hero-bg-icons .icon-float:nth-child(2) {
+            top: 20%;
+            right: 8%;
+            font-size: 4rem;
+            animation-delay: 1s;
+        }
+        .hero-bg-icons .icon-float:nth-child(3) {
+            bottom: 30%;
+            left: 12%;
+            font-size: 3rem;
+            animation-delay: 2s;
+        }
+        .hero-bg-icons .icon-float:nth-child(4) {
+            bottom: 15%;
+            right: 5%;
+            font-size: 3.8rem;
+            animation-delay: 0.5s;
+        }
+        .hero-bg-icons .icon-float:nth-child(5) {
+            top: 50%;
+            left: 50%;
+            font-size: 5rem;
+            animation-delay: 1.5s;
+            opacity: 0.05;
+        }
+        .hero-bg-icons .icon-float:nth-child(6) {
+            top: 5%;
+            left: 30%;
+            font-size: 2rem;
+            animation-delay: 2.5s;
+        }
+        .hero-bg-icons .icon-float:nth-child(7) {
+            bottom: 40%;
+            right: 20%;
+            font-size: 2.8rem;
+            animation-delay: 0.8s;
+        }
+        .hero-bg-icons .icon-float:nth-child(8) {
+            top: 60%;
+            left: 8%;
+            font-size: 2.2rem;
+            animation-delay: 3s;
+        }
+
+        .hero-bg-icons .icon-float.rotate {
+            animation: rotateSlow 20s linear infinite;
         }
 
         .hero-content {
@@ -507,28 +567,112 @@
             margin-bottom: 16px;
         }
 
+        /* ===== NEW: منطقة الإحصائيات بخلفية كيماوية ===== */
+        .stats-wrapper {
+            position: relative;
+            border-radius: 60px;
+            padding: 4px;
+            margin: 8px auto 18px;
+            max-width: 700px;
+            background: linear-gradient(135deg, #1a5276, #2e86c1);
+            overflow: hidden;
+        }
+
+        .stats-wrapper::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle at 30% 50%, rgba(52, 152, 219, 0.15) 0%, transparent 60%),
+                        radial-gradient(circle at 70% 50%, rgba(46, 204, 113, 0.1) 0%, transparent 60%);
+            animation: rotateSlow 30s linear infinite;
+            pointer-events: none;
+        }
+
+        .stats-wrapper .stats-bg-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .stats-wrapper .stats-bg-icons .icon {
+            position: absolute;
+            font-size: 2.5rem;
+            opacity: 0.06;
+            animation: floatBubble 8s ease-in-out infinite;
+        }
+
+        .stats-wrapper .stats-bg-icons .icon:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            font-size: 3rem;
+            animation-delay: 0s;
+        }
+        .stats-wrapper .stats-bg-icons .icon:nth-child(2) {
+            bottom: 10%;
+            right: 5%;
+            font-size: 2.8rem;
+            animation-delay: 2s;
+        }
+        .stats-wrapper .stats-bg-icons .icon:nth-child(3) {
+            top: 50%;
+            left: 40%;
+            font-size: 4rem;
+            animation-delay: 1s;
+            opacity: 0.04;
+        }
+        .stats-wrapper .stats-bg-icons .icon:nth-child(4) {
+            bottom: 30%;
+            left: 15%;
+            font-size: 2rem;
+            animation-delay: 3s;
+        }
+        .stats-wrapper .stats-bg-icons .icon:nth-child(5) {
+            top: 20%;
+            right: 15%;
+            font-size: 2.2rem;
+            animation-delay: 1.5s;
+        }
+
         .stats {
             display: flex;
             justify-content: center;
             gap: 50px;
             flex-wrap: wrap;
-            padding: 14px 30px;
-            background: rgba(255, 255, 255, 0.06);
-            border-radius: 50px;
-            margin: 8px auto 18px;
-            border: 1px solid rgba(255, 255, 255, 0.06);
-            max-width: 650px;
+            padding: 16px 30px;
+            background: rgba(255, 255, 255, 0.08);
+            border-radius: 56px;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            position: relative;
+            z-index: 1;
+            backdrop-filter: blur(4px);
         }
 
         .stat-item {
             text-align: center;
             cursor: default;
+            position: relative;
+            z-index: 1;
+        }
+
+        .stat-icon {
+            font-size: 1.4rem;
+            display: block;
+            margin-bottom: 2px;
+            opacity: 0.8;
         }
 
         .stat-number {
             font-size: 2rem;
             font-weight: 900;
-            background: linear-gradient(135deg, #3498db, #2ecc71);
+            background: linear-gradient(135deg, #ffffff, #2ecc71);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
             background-clip: text;
@@ -543,8 +687,9 @@
 
         .stat-label {
             font-size: 0.8rem;
-            opacity: 0.6;
+            opacity: 0.7;
             display: block;
+            color: rgba(255, 255, 255, 0.9);
         }
 
         .hero-buttons {
@@ -918,6 +1063,27 @@
             border-color: #3498db;
         }
 
+        /* ===== NEW: علامة "مشاهدة" على البطاقة ===== */
+        .card-views {
+            position: absolute;
+            top: 8px;
+            left: 8px;
+            background: rgba(0, 0, 0, 0.5);
+            backdrop-filter: blur(4px);
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 5;
+        }
+        .card-views i {
+            font-size: 0.6rem;
+        }
+
         .card-img {
             width: 100%;
             height: 170px;
@@ -1122,10 +1288,10 @@
             background: rgba(255, 255, 255, 0.2);
         }
 
-        /* ===== Scroll Top (مرفوع للأعلى عشان ما يتداخلش مع OneSignal) ===== */
+        /* ===== Scroll Top ===== */
         .scroll-top {
             position: fixed;
-            bottom: 100px;  /* <-- مرفوع للأعلى عشان ما يتداخلش مع زر الإشعارات */
+            bottom: 100px;
             right: 24px;
             width: 44px;
             height: 44px;
@@ -1228,12 +1394,17 @@
             }
             .hero h1 { font-size: 1.8rem; }
             .hero p { font-size: 0.95rem; }
-            .stats {
-                gap: 30px;
-                padding: 10px 18px;
-                max-width: 100%;
+            .stats-wrapper {
+                border-radius: 30px;
             }
-            .stat-number { font-size: 1.6rem; }
+            .stats {
+                gap: 20px;
+                padding: 12px 16px;
+                max-width: 100%;
+                border-radius: 26px;
+            }
+            .stat-number { font-size: 1.5rem; }
+            .stat-icon { font-size: 1.2rem; }
             .btn-primary {
                 padding: 11px 24px;
                 font-size: 0.85rem;
@@ -1293,11 +1464,17 @@
                 max-height: 240px;
             }
             .scroll-top {
-                bottom: 80px;  /* <-- مرفوع للأعلى في الموبايل */
+                bottom: 80px;
                 right: 16px;
                 width: 40px;
                 height: 40px;
                 font-size: 1rem;
+            }
+            .hero-bg-icons .icon-float {
+                font-size: 1.5rem !important;
+            }
+            .stats-wrapper .stats-bg-icons .icon {
+                font-size: 1.5rem !important;
             }
         }
 
@@ -1309,12 +1486,14 @@
             .hero h1 { font-size: 1.5rem; }
             .hero p { font-size: 0.85rem; }
             .stats {
-                gap: 20px;
-                padding: 8px 14px;
-                border-radius: 30px;
+                gap: 14px;
+                padding: 10px 12px;
+                border-radius: 20px;
+                flex-wrap: wrap;
             }
-            .stat-number { font-size: 1.3rem; }
-            .stat-label { font-size: 0.65rem; }
+            .stat-number { font-size: 1.2rem; }
+            .stat-label { font-size: 0.6rem; }
+            .stat-icon { font-size: 1rem; }
             .btn-primary {
                 padding: 10px 18px;
                 font-size: 0.8rem;
@@ -1371,6 +1550,12 @@
                 width: 36px;
                 height: 36px;
                 font-size: 0.9rem;
+            }
+            .hero-bg-icons .icon-float {
+                font-size: 1.2rem !important;
+            }
+            .stats-wrapper .stats-bg-icons .icon {
+                font-size: 1.2rem !important;
             }
         }
 
@@ -1436,22 +1621,47 @@
 
         <!-- ===== HERO ===== -->
         <section class="hero animate delay-1">
+            <!-- ===== NEW: خلفية كيماوية متحركة ===== -->
+            <div class="hero-bg-icons">
+                <span class="icon-float">🧪</span>
+                <span class="icon-float rotate">⚗️</span>
+                <span class="icon-float">🔬</span>
+                <span class="icon-float rotate">🧫</span>
+                <span class="icon-float">🧴</span>
+                <span class="icon-float">💧</span>
+                <span class="icon-float rotate">⚛️</span>
+                <span class="icon-float">🧪</span>
+            </div>
+
             <div class="hero-content">
                 <h1>🏭 <span class="highlight">سوق الكيماويات</span> في مصر</h1>
                 <p>بيع واشتري صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
 
-                <div class="stats">
-                    <div class="stat-item">
-                        <span class="stat-number" id="totalProducts">0</span>
-                        <span class="stat-label">إجمالي المنتجات</span>
+                <!-- ===== NEW: منطقة الإحصائيات بخلفية كيماوية ===== -->
+                <div class="stats-wrapper">
+                    <div class="stats-bg-icons">
+                        <span class="icon">🧪</span>
+                        <span class="icon">⚗️</span>
+                        <span class="icon rotate">🔬</span>
+                        <span class="icon">🧫</span>
+                        <span class="icon">🧴</span>
                     </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="totalRequests">0</span>
-                        <span class="stat-label">طلبات الشراء</span>
-                    </div>
-                    <div class="stat-item">
-                        <span class="stat-number" id="totalSuppliers">0</span>
-                        <span class="stat-label">الموردين</span>
+                    <div class="stats">
+                        <div class="stat-item">
+                            <span class="stat-icon">📦</span>
+                            <span class="stat-number" id="totalProducts">0</span>
+                            <span class="stat-label">إجمالي المنتجات</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">📋</span>
+                            <span class="stat-number" id="totalRequests">0</span>
+                            <span class="stat-label">طلبات الشراء</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-icon">🚛</span>
+                            <span class="stat-number" id="totalSuppliers">0</span>
+                            <span class="stat-label">الموردين</span>
+                        </div>
                     </div>
                 </div>
 
@@ -1564,7 +1774,7 @@
 
     </main>
 
-    <!-- ===== SCROLL TOP (مرفوع للأعلى) ===== -->
+    <!-- ===== SCROLL TOP ===== -->
     <button class="scroll-top" id="scrollTopBtn"><i class="fas fa-chevron-up"></i></button>
 
     <!-- ===== TOAST ===== -->
@@ -1612,6 +1822,7 @@
         let suggestionsTimeout = null
         let selectedSuggestionIndex = -1
         let allProductsForSuggestions = []
+        let viewTrackedProducts = new Set() // لمنع تكرار تتبع المشاهدات
 
         // ===== SHARE FUNCTION =====
         window.sharePage = async function() {
@@ -1741,7 +1952,6 @@
             let clean = phone.replace(/\D/g, '')
             if (!clean.startsWith('20')) clean = '20' + clean
             
-            // ===== NEW: تسجيل التواصل =====
             try {
                 const { data: { user } } = await supabase.auth.getUser()
                 
@@ -1764,8 +1974,35 @@
                 console.error('Error tracking contact:', e)
             }
             
-            // فتح واتساب
             window.open(`https://wa.me/${clean}?text=${encodeURIComponent(`مرحباً، مهتم بـ: ${name} (كيماتو)`)}`, '_blank')
+        }
+
+        // ===== ===== NEW: تتبع المشاهدات ===== =====
+        async function trackProductView(productId, supplierId) {
+            if (!productId) return
+            if (viewTrackedProducts.has(productId)) return
+            
+            viewTrackedProducts.add(productId)
+            
+            try {
+                // تسجيل مشاهدة في جدول supplier_contacts
+                await supabase.rpc('log_supplier_contact', {
+                    p_supplier_id: supplierId,
+                    p_product_id: productId,
+                    p_buyer_id: null,
+                    p_contact_type: 'view',
+                    p_contact_data: { 
+                        timestamp: new Date().toISOString(),
+                        page: 'homepage'
+                    },
+                    p_user_agent: navigator.userAgent,
+                    p_referrer: document.referrer
+                })
+                
+                console.log('✅ تم تسجيل مشاهدة للمنتج:', productId)
+            } catch (e) {
+                console.error('Error tracking view:', e)
+            }
         }
 
         // ===== LOAD CATEGORIES =====
@@ -2032,6 +2269,11 @@
                     return { ...p, profile, catName, catIcon }
                 }))
 
+                // ===== NEW: تتبع المشاهدات لكل منتج يظهر في الصفحة =====
+                items.forEach(p => {
+                    trackProductView(p.id, p.supplier_id)
+                })
+
                 container.innerHTML = items.map((p, i) => {
                     const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold')
                     const imgHtml = hasImage ?
@@ -2041,8 +2283,12 @@
                     const featuredBadge = p.is_featured ? `<span class="featured-badge">⭐ مميز</span>` : ''
                     const featuredClass = p.is_featured ? ' featured' : ''
 
+                    // ===== NEW: عدد المشاهدات =====
+                    const viewsCount = p.views || 0
+
                     return `
                         <div class="card${featuredClass}" style="animation-delay:${i * 0.05}s;">
+                            ${viewsCount > 0 ? `<div class="card-views"><i class="fas fa-eye"></i> ${viewsCount}</div>` : ''}
                             ${imgHtml}
                             <div class="card-body">
                                 <span class="card-badge">${p.catIcon} ${p.catName}</span>
@@ -2106,14 +2352,22 @@
                     return { ...p, profile }
                 }))
 
+                // ===== NEW: تتبع المشاهدات للمنتجات المميزة =====
+                items.forEach(p => {
+                    trackProductView(p.id, p.supplier_id)
+                })
+
                 container.innerHTML = items.map((p) => {
                     const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold')
                     const imgHtml = hasImage ?
                         `<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy" decoding="async">` :
                         `<div class="card-img-placeholder"><div>⭐</div><span>${p.name?.substring(0, 20) || ''}</span></div>`
 
+                    const viewsCount = p.views || 0
+
                     return `
                         <div class="card featured" style="animation-delay:0s;">
+                            ${viewsCount > 0 ? `<div class="card-views"><i class="fas fa-eye"></i> ${viewsCount}</div>` : ''}
                             ${imgHtml}
                             <div class="card-body">
                                 <span class="card-badge">⭐ مميز</span>
@@ -2539,8 +2793,9 @@
             }, 3600000)
         }
 
-        // ===== EXPOSE TRACK FUNCTION TO GLOBAL =====
+        // ===== EXPOSE FUNCTIONS TO GLOBAL =====
         window.trackAndOpenWhatsApp = trackAndOpenWhatsApp
+        window.trackProductView = trackProductView
 
         // ===== INIT =====
         async function init() {
