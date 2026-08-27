@@ -3,18 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>كيماتو | سوق المواد الكيماوية في مصر</title>
-    <meta name="description" content="كيماتو هو سوق المواد الكيماوية في مصر. بيع وشراء كاوية صودا، حمض كبريتيك، مذيبات، وكل المواد الخام." />
+    <title>كيماتو | سوق المواد الكيماوية في مصر | تواصل مع موردين الصودا الكاوية والمذيبات</title>
+    
+    <!-- ===== NEW: تحسين الميتا للبحث ===== -->
+    <meta name="description" content="كيماتو - أول منصة B2B للمواد الكيماوية في مصر. بيع وشراء صودا كاوية، حمض كبريتيك، مذيبات وكل المواد الخام. تواصل مباشر مع الموردين والمعامل." />
     <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="كيماويات,كيماتو,كيما,سهم كيما,مورد,مواد كيماوية,خام,صودا كاوية,حمض كبريتيك,مذيبات,مصر" />
-    <meta property="og:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
-    <meta property="og:description" content="سوق المواد الكيماوية في مصر. تواصل مباشر مع الموردين." />
+    <meta name="keywords" content="كيماويات,كيماتو,سوق الكيماويات,صودا كاوية,حمض كبريتيك,مذيبات,مواد خام,موردين كيماويات,مصر,كيما,سهم كيما" />
+    
+    <!-- ===== NEW: Open Graph محسّن ===== -->
+    <meta property="og:title" content="كيماتو | سوق المواد الكيماوية في مصر | تواصل مع الموردين" />
+    <meta property="og:description" content="أول منصة B2B للمواد الكيماوية في مصر. اعرض منتجك مجاناً وتواصل مع آلاف العملاء والموردين." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chemato.vercel.app/" />
     <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
-    <meta name="twitter:description" content="سوق المواد الكيماوية في مصر. تواصل مباشر مع الموردين." />
+    <meta name="twitter:description" content="أول منصة B2B للمواد الكيماوية في مصر" />
     <meta name="twitter:image" content="https://chemato.vercel.app/logo.png" />
     <link rel="canonical" href="https://chemato.vercel.app/" />
     <link rel="icon" type="image/x-icon" href="logo.ico" />
@@ -22,26 +26,42 @@
     <link rel="apple-touch-icon" href="logo.png" />
     <meta name="theme-color" content="#0c2d4a" />
 
+    <!-- ===== Schema محسّن ===== -->
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "كيماتو",
       "url": "https://chemato.vercel.app",
-      "description": "سوق المواد الكيماوية في مصر"
+      "description": "سوق المواد الكيماوية في مصر",
+      "potentialAction": {
+        "@type": "SearchAction",
+        "target": "https://chemato.vercel.app/?search={search_term_string}",
+        "query-input": "required name=search_term_string"
+      }
     }
     </script>
     <script type="application/ld+json">
     {
       "@context": "https://schema.org",
-      "@type": "BreadcrumbList",
-      "itemListElement": [
-        {"@type": "ListItem", "position": 1, "name": "الرئيسية", "item": "https://chemato.vercel.app/"},
-        {"@type": "ListItem", "position": 2, "name": "المنتجات"}
+      "@type": "Organization",
+      "name": "كيماتو",
+      "url": "https://chemato.vercel.app",
+      "logo": "https://chemato.vercel.app/logo.png",
+      "contactPoint": {
+        "@type": "ContactPoint",
+        "telephone": "+201234567890",
+        "contactType": "customer service",
+        "availableLanguage": ["Arabic"]
+      },
+      "sameAs": [
+        "https://www.facebook.com/chemato",
+        "https://www.instagram.com/chemato"
       ]
     }
     </script>
 
+    <!-- ===== OneSignal ===== -->
     <script src="https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.page.js" defer></script>
     <script>
         window.OneSignalDeferred = window.OneSignalDeferred || [];
@@ -56,6 +76,7 @@
         });
     </script>
 
+    <!-- ===== Google Analytics (بدل الـ X بالرقم الحقيقي) ===== -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
     <script>
         window.dataLayer = window.dataLayer || [];
@@ -64,6 +85,7 @@
         gtag('config', 'G-XXXXXXXXXX');
     </script>
 
+    <!-- ===== Preload ===== -->
     <link rel="preload" href="logo.png" as="image">
     <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
@@ -73,6 +95,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
 
     <style>
+        /* ===== كل الـ CSS الموجود هنا زي ما هو ===== */
         * {
             margin: 0;
             padding: 0;
@@ -211,6 +234,11 @@
             100% { background-position: 200% 0; }
         }
 
+        @keyframes floatIcon {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-6px); }
+        }
+
         .animate {
             animation: fadeUp 0.6s ease forwards;
             opacity: 0;
@@ -237,6 +265,51 @@
             }
         }
 
+        /* ===== NEW: شريط المنتجات المميزة ===== */
+        .featured-section {
+            background: linear-gradient(135deg, #fef9e7, #fdebd0);
+            border-radius: 20px;
+            padding: 16px 20px;
+            margin: 16px 0 20px;
+            border: 2px solid #f39c12;
+            position: relative;
+        }
+        .featured-section::before {
+            content: '⭐ مُختار من كيماتو';
+            position: absolute;
+            top: -12px;
+            right: 20px;
+            background: #f39c12;
+            color: #fff;
+            padding: 2px 16px;
+            border-radius: 30px;
+            font-weight: 700;
+            font-size: 0.75rem;
+        }
+        @media (prefers-color-scheme: dark) {
+            .featured-section {
+                background: linear-gradient(135deg, #1a2a1a, #2a2a1a);
+                border-color: #f1c40f;
+            }
+            .featured-section::before {
+                background: #f1c40f;
+                color: #1a1a2e;
+            }
+        }
+
+        /* ===== NEW: تاج "مميز" على البطاقة ===== */
+        .featured-badge {
+            background: #f39c12;
+            color: #fff;
+            padding: 2px 10px;
+            border-radius: 30px;
+            font-size: 0.6rem;
+            font-weight: 700;
+            margin-right: 6px;
+            display: inline-block;
+        }
+
+        /* ===== باقي الـ CSS زي ما هو ===== */
         .navbar {
             background: linear-gradient(135deg, #0a2538, #143b57);
             padding: 12px 32px;
@@ -522,7 +595,6 @@
             border: 1px solid rgba(255, 255, 255, 0.08);
         }
 
-        /* ===== SEARCH WITH SUGGESTIONS - FIXED ===== */
         .search-container {
             position: relative;
             max-width: 720px;
@@ -583,7 +655,6 @@
             transform: scale(1.01);
         }
 
-        /* Suggestions Box - Fixed visibility */
         .suggestions-box {
             position: absolute;
             top: calc(100% + 8px);
@@ -679,16 +750,6 @@
         .suggestion-view-all:hover {
             background: #eef5fa !important;
         }
-
-        @media (prefers-color-scheme: dark) {
-            .suggestion-view-all {
-                background: #1a2a3a !important;
-            }
-            .suggestion-view-all:hover {
-                background: #1a2a3a !important;
-            }
-        }
-        /* ===== END SEARCH ===== */
 
         .filters-wrapper {
             display: flex;
@@ -802,11 +863,6 @@
             animation: floatIcon 3s ease-in-out infinite;
         }
 
-        @keyframes floatIcon {
-            0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-6px); }
-        }
-
         .section-header a {
             font-size: 0.8rem;
             background: #e8edf3;
@@ -840,12 +896,23 @@
             flex-direction: column;
             animation: fadeUp 0.5s ease forwards;
             opacity: 0;
+            position: relative;
         }
 
         .card:hover {
             transform: translateY(-8px);
             box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06);
             border-color: #3498db;
+        }
+
+        /* ===== NEW: حدود ذهبية للمنتجات المميزة ===== */
+        .card.featured {
+            border: 2px solid #f39c12;
+            box-shadow: 0 8px 30px rgba(243, 156, 18, 0.15);
+        }
+        .card.featured:hover {
+            border-color: #e67e22;
+            box-shadow: 0 20px 48px rgba(243, 156, 18, 0.2);
         }
 
         .card-img {
@@ -1275,6 +1342,15 @@
             .suggestion-item .sub-text {
                 font-size: 0.65rem;
             }
+            .featured-section {
+                padding: 12px 14px;
+            }
+            .featured-section::before {
+                font-size: 0.6rem;
+                top: -10px;
+                right: 12px;
+                padding: 1px 12px;
+            }
         }
 
         @media (hover: none) {
@@ -1309,7 +1385,7 @@
     <header class="navbar animate">
         <div class="logo">
             <a href="/">
-                <img src="logo.png" alt="كيماتو" width="44" height="44" />
+                <img src="logo.png" alt="كيماتو - سوق الكيماويات في مصر" width="44" height="44" />
                 <span class="logo-text">
                     <span class="blue">كيماتو</span>
                     <span class="gray">| سوق الكيماويات</span>
@@ -1320,7 +1396,9 @@
             <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
             <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
             <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
-            <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>  <!-- ✅ زر الموردين -->
+            <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
+            <!-- ===== NEW: رابط المدونة ===== -->
+            <a href="blog.html"><i class="fas fa-newspaper"></i> المدونة</a>
             <div class="dropdown">
                 <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
                 <div class="dropdown-content" id="dropdownContent">
@@ -1374,7 +1452,7 @@
             </div>
         </section>
 
-        <!-- ===== SEARCH WITH SUGGESTIONS ===== -->
+        <!-- ===== SEARCH ===== -->
         <div class="search-container animate delay-1">
             <div class="search-wrapper">
                 <input type="text" id="searchInput" placeholder="🔍 ابحث عن منتج... مثل: صودا كاوية، حمض كبريتيك" autocomplete="off" />
@@ -1407,7 +1485,17 @@
                 <option value="price-low">الأقل سعراً</option>
                 <option value="price-high">الأعلى سعراً</option>
                 <option value="name">الاسم</option>
+                <option value="popular">الأكثر مشاهدة</option> <!-- ===== NEW ===== -->
             </select>
+        </div>
+
+        <!-- ===== NEW: المنتجات المميزة ===== -->
+        <div id="featuredContainer" class="featured-section animate delay-2" style="display:none;">
+            <div class="section-header" style="margin-top:4px;">
+                <h2 style="border-right-color:#f39c12;"><i class="fas fa-star" style="color:#f39c12;"></i> منتجات مميزة</h2>
+                <a href="all-products.html?featured=true">عرض الكل ←</a>
+            </div>
+            <div id="featuredProductsList" class="grid"></div>
         </div>
 
         <!-- ===== PRODUCTS ===== -->
@@ -1439,6 +1527,17 @@
             </div>
         </section>
 
+        <!-- ===== NEW: قسم المدونة (آخر المقالات) ===== -->
+        <section>
+            <div class="section-header animate delay-3">
+                <h2><i class="fas fa-newspaper" style="color:#e67e22;"></i> أحدث المقالات</h2>
+                <a href="blog.html">عرض الكل ←</a>
+            </div>
+            <div id="blogPostsList" class="grid">
+                <div class="loader">⏳ جاري التحميل...</div>
+            </div>
+        </section>
+
         <div class="seo-hidden">
             <h2>كيماويات - كيماتو - كيما - سهم كيما - مواد كيماوية - صودا كاوية - حمض كبريتيك - مذيبات - مصر</h2>
         </div>
@@ -1458,6 +1557,7 @@
             <a href="all-products.html">المنتجات</a>
             <a href="all-requests.html">الطلبات</a>
             <a href="chemato-suppliers.html">الموردين</a>
+            <a href="blog.html">المدونة</a> <!-- ===== NEW ===== -->
             <a href="auth.html">تسجيل الدخول</a>
             <a href="supplier-dashboard.html">للموردين</a>
             <a href="buyer-dashboard.html">للعملاء</a>
@@ -1465,6 +1565,7 @@
         <div class="footer-copy">© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
     </footer>
 
+    <!-- ===== SERVICE WORKER ===== -->
     <script>
         if ('serviceWorker' in navigator) {
             navigator.serviceWorker.register('/sw.js')
@@ -1613,12 +1714,12 @@
             setTimeout(() => toast.remove(), 7000)
         }
 
-        // ===== WHATSAPP =====
+        // ===== WHATSAPP (محسّن) =====
         function getWhatsApp(phone, name) {
-            if (!phone) return '#'
-            const clean = phone.replace(/\D/g, '')
-            const formatted = clean.startsWith('20') ? clean : `20${clean}`
-            return `https://wa.me/${formatted}?text=${encodeURIComponent(`مرحباً، مهتم بـ: ${name} (كيماتو)`)}`
+            if (!phone) return '#';
+            let clean = phone.replace(/\D/g, '');
+            if (!clean.startsWith('20')) clean = '20' + clean;
+            return `https://wa.me/${clean}?text=${encodeURIComponent(`مرحباً، مهتم بـ: ${name} (كيماتو)`)}`;
         }
 
         // ===== LOAD CATEGORIES =====
@@ -1653,7 +1754,8 @@
             }
         }
 
-        // ===== LOAD TOTAL PRODUCTS COUNT =====
+        // ===== ===== ===== ===== ===== ===== 
+        // ===== NEW: LOAD TOTAL PRODUCTS COUNT (صحيح) =====
         async function loadTotalProductsCount() {
             try {
                 const { count, error } = await supabase
@@ -1677,6 +1779,30 @@
             }
         }
 
+        // ===== NEW: LOAD TOTAL REQUESTS COUNT (المشكلة اللي اتصلحت) =====
+        async function loadTotalRequestsCount() {
+            try {
+                const { count, error } = await supabase
+                    .from('purchase_requests')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('status', 'open')
+
+                if (!error) {
+                    const element = document.getElementById('totalRequests')
+                    if (element) {
+                        element.textContent = count || 0
+                        element.classList.remove('updated')
+                        void element.offsetWidth
+                        element.classList.add('updated')
+                    }
+                }
+                return count || 0
+            } catch (e) {
+                console.error('Error loading requests count:', e)
+                return 0
+            }
+        }
+
         // ===== LOAD ALL PRODUCTS FOR SUGGESTIONS =====
         async function loadAllProductsForSuggestions() {
             try {
@@ -1694,13 +1820,10 @@
             }
         }
 
-        // ===== SUGGESTIONS - FIXED VISIBILITY =====
+        // ===== SUGGESTIONS =====
         function showSuggestions(query) {
             const box = document.getElementById('suggestionsBox')
-            if (!box) {
-                console.error('❌ suggestionsBox not found')
-                return
-            }
+            if (!box) return
 
             if (!query || query.length < 1) {
                 box.classList.remove('show')
@@ -1719,8 +1842,6 @@
             }
 
             let html = ''
-            
-            // "View all results" option
             html += `
                 <div class="suggestion-item suggestion-view-all" data-action="view-all" data-query="${query}">
                     <span class="text">🔍 عرض جميع النتائج لـ "<span class="highlight">${query}</span>"</span>
@@ -1728,7 +1849,6 @@
                 </div>
             `
 
-            // Product suggestions - clean, no icons
             results.forEach(p => {
                 const priceText = p.price ? `${p.price.toLocaleString()} ج.م` : 'سعر عند الطلب'
                 html += `
@@ -1742,7 +1862,6 @@
             box.innerHTML = html
             box.classList.add('show')
             selectedSuggestionIndex = -1
-            console.log('✅ Suggestions shown for:', query)
         }
 
         function highlightMatch(text, query) {
@@ -1757,7 +1876,6 @@
             selectedSuggestionIndex = -1
         }
 
-        // ===== SUGGESTIONS KEYBOARD NAVIGATION =====
         function navigateSuggestions(direction) {
             const box = document.getElementById('suggestionsBox')
             if (!box || !box.classList.contains('show')) return
@@ -1798,7 +1916,7 @@
             }
         }
 
-        // ===== LOAD PRODUCTS =====
+        // ===== LOAD PRODUCTS (مع دعم المنتجات المميزة) =====
         async function loadProducts() {
             const container = document.getElementById('productsList')
             if (!container) return
@@ -1841,6 +1959,9 @@
                     case 'name':
                         query = query.order('name', { ascending: true })
                         break
+                    case 'popular':
+                        query = query.order('views', { ascending: false }).order('created_at', { ascending: false })
+                        break
                     default:
                         query = query.order('created_at', { ascending: false })
                 }
@@ -1872,12 +1993,16 @@
                         `<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy" decoding="async">` :
                         `<div class="card-img-placeholder"><div>${p.catIcon}</div><span>${p.name?.substring(0, 20) || ''}</span></div>`
 
+                    // ===== NEW: علامة مميز =====
+                    const featuredBadge = p.is_featured ? `<span class="featured-badge">⭐ مميز</span>` : ''
+                    const featuredClass = p.is_featured ? ' featured' : ''
+
                     return `
-                        <div class="card" style="animation-delay:${i * 0.05}s;">
+                        <div class="card${featuredClass}" style="animation-delay:${i * 0.05}s;">
                             ${imgHtml}
                             <div class="card-body">
                                 <span class="card-badge">${p.catIcon} ${p.catName}</span>
-                                <h3>${p.name ? p.name.substring(0, 35) : ''}</h3>
+                                <h3>${p.name ? p.name.substring(0, 35) : ''} ${featuredBadge}</h3>
                                 <div class="card-price">${p.price ? p.price.toLocaleString() + ' ج.م / ' + (p.unit || '') : 'سعر عند الطلب'}</div>
                                 <div class="card-supplier"><i class="fas fa-building" style="margin-left:4px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
                                 <div class="card-actions">
@@ -1891,6 +2016,10 @@
                 }).join('')
 
                 generateSchema(products)
+
+                // ===== NEW: تحميل المنتجات المميزة =====
+                loadFeaturedProducts()
+
             } catch (error) {
                 console.error('Error loading products:', error)
                 container.innerHTML = `
@@ -1900,6 +2029,64 @@
                     </div>
                 `
                 showToast('⚠️', 'خطأ', 'حدث مشكلة في تحميل المنتجات');
+            }
+        }
+
+        // ===== NEW: LOAD FEATURED PRODUCTS =====
+        async function loadFeaturedProducts() {
+            try {
+                const { data: featured } = await supabase
+                    .from('products')
+                    .select('*')
+                    .eq('status', 'active')
+                    .eq('is_featured', true)
+                    .order('created_at', { ascending: false })
+                    .limit(4)
+
+                const container = document.getElementById('featuredProductsList')
+                const section = document.getElementById('featuredContainer')
+
+                if (!featured?.length || !container) {
+                    if (section) section.style.display = 'none'
+                    return
+                }
+
+                if (section) section.style.display = 'block'
+
+                const items = await Promise.all(featured.map(async (p) => {
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('full_name, company_name, phone')
+                        .eq('id', p.supplier_id)
+                        .single()
+                    return { ...p, profile }
+                }))
+
+                container.innerHTML = items.map((p) => {
+                    const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold')
+                    const imgHtml = hasImage ?
+                        `<img class="card-img" src="${p.image_url}" alt="${p.name}" loading="lazy" decoding="async">` :
+                        `<div class="card-img-placeholder"><div>⭐</div><span>${p.name?.substring(0, 20) || ''}</span></div>`
+
+                    return `
+                        <div class="card featured" style="animation-delay:0s;">
+                            ${imgHtml}
+                            <div class="card-body">
+                                <span class="card-badge">⭐ مميز</span>
+                                <h3>${p.name ? p.name.substring(0, 35) : ''}</h3>
+                                <div class="card-price">${p.price ? p.price.toLocaleString() + ' ج.م / ' + (p.unit || '') : 'سعر عند الطلب'}</div>
+                                <div class="card-supplier"><i class="fas fa-building" style="margin-left:4px;"></i> ${p.profile?.company_name || p.profile?.full_name || 'مورد'}</div>
+                                <div class="card-actions">
+                                    <a href="product-details.html?id=${p.id}" class="btn btn-detail"><i class="fas fa-info-circle"></i> تفاصيل</a>
+                                    <a href="${getWhatsApp(p.profile?.phone, p.name)}" target="_blank" class="btn btn-whatsapp"><i class="fab fa-whatsapp"></i> واتساب</a>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }).join('')
+
+            } catch (e) {
+                console.error('Error loading featured products:', e)
             }
         }
 
@@ -1993,11 +2180,51 @@
                     </div>
                 `).join('')
 
-                const count = data.length
-                const el = document.getElementById('totalRequests')
-                if (el) el.textContent = count
             } catch (error) {
                 console.error('Error loading requests:', error)
+            }
+        }
+
+        // ===== NEW: LOAD BLOG POSTS =====
+        async function loadBlogPosts() {
+            try {
+                const { data } = await supabase
+                    .from('blog_posts')
+                    .select('id, title, slug, excerpt, image_url, created_at')
+                    .eq('status', 'published')
+                    .order('created_at', { ascending: false })
+                    .limit(3)
+
+                const container = document.getElementById('blogPostsList')
+                if (!container) return
+
+                if (!data?.length) {
+                    container.innerHTML =
+                        `<div class="no-results"><i class="fas fa-newspaper" style="font-size:2rem;display:block;margin-bottom:8px;"></i>لا توجد مقالات حالياً</div>`
+                    return
+                }
+
+                container.innerHTML = data.map((post) => `
+                    <div class="card" style="animation-delay:0s;">
+                        ${post.image_url ? `<img class="card-img" src="${post.image_url}" alt="${post.title}" loading="lazy" decoding="async">` : 
+                        `<div class="card-img-placeholder" style="background:linear-gradient(145deg,#e8f0fe,#d4e4f7);"><div>📰</div><span>${post.title?.substring(0, 20) || ''}</span></div>`}
+                        <div class="card-body">
+                            <span class="card-badge"><i class="fas fa-newspaper"></i> مقال</span>
+                            <h3>${post.title ? post.title.substring(0, 35) : ''}</h3>
+                            <p style="font-size:0.8rem;color:#64748b;margin:4px 0 8px;line-height:1.4;flex:1;">${post.excerpt ? post.excerpt.substring(0, 60) : ''}</p>
+                            <div class="card-actions">
+                                <a href="blog-post.html?slug=${post.slug || post.id}" class="btn btn-detail"><i class="fas fa-book-open"></i> اقرأ المزيد</a>
+                            </div>
+                        </div>
+                    </div>
+                `).join('')
+
+            } catch (e) {
+                console.error('Error loading blog posts:', e)
+                const container = document.getElementById('blogPostsList')
+                if (container) {
+                    container.innerHTML = `<div class="no-results">⚠️ حدث خطأ في تحميل المقالات</div>`
+                }
             }
         }
 
@@ -2051,15 +2278,10 @@
                 .subscribe()
         }
 
-        // ===== SEARCH WITH SUGGESTIONS - EVENT HANDLERS =====
+        // ===== SEARCH EVENTS =====
         const searchBtn = document.getElementById('searchBtn')
         const searchInput = document.getElementById('searchInput')
         const suggestionsBox = document.getElementById('suggestionsBox')
-
-        // Ensure suggestions box exists
-        if (!suggestionsBox) {
-            console.error('❌ suggestionsBox not found in DOM')
-        }
 
         if (searchInput) {
             searchInput.addEventListener('input', (e) => {
@@ -2087,7 +2309,6 @@
             })
 
             searchInput.addEventListener('blur', () => {
-                // Delay to allow click on suggestion
                 setTimeout(() => {
                     hideSuggestions()
                 }, 300)
@@ -2144,7 +2365,7 @@
                 if (query) {
                     document.title = `نتائج: ${query} - كيماتو`
                 } else {
-                    document.title = 'كيماتو | سوق المواد الكيماوية في مصر'
+                    document.title = 'كيماتو | سوق المواد الكيماوية في مصر | تواصل مع الموردين'
                 }
             })
         }
@@ -2192,7 +2413,7 @@
             btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }))
         }
 
-        // ===== SITEMAP =====
+        // ===== GENERATE SITEMAP (محسّن) =====
         async function generateSitemap() {
             try {
                 const { data: products } = await supabase
@@ -2201,12 +2422,19 @@
                     .eq('status', 'active')
                     .limit(50)
 
+                const { data: blogPosts } = await supabase
+                    .from('blog_posts')
+                    .select('id, slug, updated_at')
+                    .eq('status', 'published')
+                    .limit(50)
+
                 const base = 'https://chemato.vercel.app'
                 let sitemap = '<?xml version="1.0" encoding="UTF-8"?>\n<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n'
 
-                const pages = ['', 'all-products.html', 'all-requests.html', 'chemato-suppliers.html', 'auth.html']
+                const pages = ['', 'all-products.html', 'all-requests.html', 'chemato-suppliers.html', 'auth.html', 'blog.html']
                 pages.forEach(p => {
-                    sitemap += `<url><loc>${base}/${p}</loc><priority>${p === '' ? '1.0' : '0.8'}</priority></url>\n`
+                    const priority = p === '' ? '1.0' : '0.8'
+                    sitemap += `<url><loc>${base}/${p}</loc><priority>${priority}</priority></url>\n`
                 })
 
                 if (products) {
@@ -2216,8 +2444,17 @@
                     })
                 }
 
+                if (blogPosts) {
+                    blogPosts.forEach(p => {
+                        const slug = p.slug || p.id
+                        sitemap +=
+                            `<url><loc>${base}/blog-post.html?slug=${slug}</loc><lastmod>${p.updated_at || new Date().toISOString()}</lastmod><priority>0.5</priority></url>\n`
+                    })
+                }
+
                 sitemap += '</urlset>'
                 localStorage.setItem('sitemap', sitemap)
+                console.log('✅ Sitemap generated with', (products?.length || 0) + (blogPosts?.length || 0), 'items')
             } catch (error) {
                 console.error('Error generating sitemap:', error)
             }
@@ -2261,16 +2498,18 @@
             await checkUser()
             await loadCategories()
 
-            // Load products for suggestions FIRST
             await loadAllProductsForSuggestions()
 
+            // ===== NEW: تحميل كل العدادات بشكل منفصل =====
             await Promise.all([
                 loadTotalProductsCount(),
-                loadRequests(),
+                loadTotalRequestsCount(),  // <-- الحل الجديد
                 loadSupplierCount()
             ])
 
             await loadProducts()
+            await loadRequests()
+            await loadBlogPosts()  // <-- NEW
             await generateSitemap()
             setupScrollTop()
             setupRealtime()
