@@ -40,7 +40,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
     
     <style>
-        /* ===== CSS كامل ===== */
         * { 
             margin: 0; 
             padding: 0; 
@@ -94,6 +93,7 @@
             .featured-section::before { background: #f1c40f !important; color: #1a1a2e !important; }
             .card-views { background: rgba(0,0,0,0.6) !important; }
             .contact-stats { background: rgba(37,211,102,0.7) !important; }
+            .product-rating { background: rgba(241,196,15,0.15) !important; color: #f1c40f !important; }
         }
 
         @keyframes fadeUp {
@@ -282,7 +282,7 @@
             padding: 0 20px;
         }
 
-        /* ===== Page Header ===== */
+        /* ===== Page Header with Chemical Background ===== */
         .page-header {
             background: linear-gradient(135deg, #0c2d4a, #1a4a6e);
             border-radius: 32px;
@@ -349,14 +349,14 @@
         .stats-row {
             display: flex;
             justify-content: center;
-            gap: 40px;
+            gap: 30px;
             flex-wrap: wrap;
-            padding: 16px 24px;
+            padding: 14px 20px;
             background: rgba(255,255,255,0.08);
             border-radius: 50px;
             margin-top: 12px;
             border: 1px solid rgba(255,255,255,0.06);
-            max-width: 700px;
+            max-width: 800px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
@@ -368,7 +368,7 @@
         }
 
         .stats-row .stat .number {
-            font-size: 1.6rem;
+            font-size: 1.5rem;
             font-weight: 900;
             background: linear-gradient(135deg, #ffffff, #2ecc71);
             -webkit-background-clip: text;
@@ -389,7 +389,7 @@
             position: relative;
             flex: 3;
             min-width: 200px;
-            z-index: 99999; /* <-- مفتاح الحل */
+            z-index: 99999;
         }
 
         .search-filter-bar {
@@ -481,7 +481,7 @@
             max-height: 350px;
             overflow-y: auto;
             display: none !important;
-            z-index: 999999; /* <-- مفتاح الحل - أعلى من كل شيء */
+            z-index: 999999;
         }
 
         .suggestions-box.show {
@@ -601,7 +601,7 @@
             margin: 0 0 24px 0;
             border: 2px solid #f39c12;
             position: relative;
-            z-index: 1; /* <-- أقل من search-container */
+            z-index: 1;
         }
 
         .featured-section::before {
@@ -662,7 +662,7 @@
             border-color: #3498db;
         }
 
-        /* ===== Views & Contact Badges ===== */
+        /* ===== Views & Contact & Rating Badges ===== */
         .card-views {
             position: absolute;
             top: 12px;
@@ -700,6 +700,28 @@
             z-index: 5;
         }
         .contact-stats i {
+            font-size: 0.6rem;
+        }
+
+        /* ===== NEW: Product Rating Badge ===== */
+        .product-rating {
+            position: absolute;
+            top: 48px;
+            left: 12px;
+            background: rgba(241, 196, 15, 0.9);
+            backdrop-filter: blur(6px);
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: 20px;
+            font-size: 0.65rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+            z-index: 5;
+        }
+        .product-rating i {
+            color: #fff;
             font-size: 0.6rem;
         }
 
@@ -834,6 +856,16 @@
 
         .product-contacts i {
             margin-left: 2px;
+        }
+
+        .product-rating-text {
+            font-size: 12px;
+            color: #f39c12;
+            font-weight: 600;
+        }
+
+        .product-rating-text i {
+            color: #f1c40f;
         }
 
         .btn-group {
@@ -1120,12 +1152,12 @@
                 font-size: 0.95rem;
             }
             .stats-row {
-                gap: 20px;
-                padding: 10px 16px;
+                gap: 16px;
+                padding: 10px 14px;
                 max-width: 100%;
             }
             .stats-row .stat .number {
-                font-size: 1.2rem;
+                font-size: 1.1rem;
             }
             .search-filter-bar {
                 flex-direction: column;
@@ -1208,6 +1240,14 @@
             .page-header .bg-icons .icon {
                 font-size: 1.5rem !important;
             }
+            .card-views, .contact-stats, .product-rating {
+                font-size: 0.55rem;
+                padding: 2px 8px;
+            }
+            .product-rating {
+                top: 42px;
+                left: 8px;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1232,14 +1272,6 @@
             .suggestion-item .sub-text {
                 font-size: 0.65rem;
             }
-            .card-views {
-                font-size: 0.55rem;
-                padding: 2px 8px;
-            }
-            .contact-stats {
-                font-size: 0.55rem;
-                padding: 2px 8px;
-            }
             .featured-section {
                 padding: 12px 14px;
             }
@@ -1255,6 +1287,16 @@
                 width: 36px;
                 height: 36px;
                 font-size: 0.9rem;
+            }
+            .stats-row {
+                gap: 10px;
+                padding: 8px 10px;
+            }
+            .stats-row .stat .number {
+                font-size: 1rem;
+            }
+            .stats-row .stat .label {
+                font-size: 0.55rem;
             }
         }
 
@@ -1356,6 +1398,7 @@
             <option value="price_desc">💰 السعر: من الأعلى</option>
             <option value="popular">👁️ الأكثر مشاهدة</option>
             <option value="most_contacted">💬 الأكثر تواصلاً</option>
+            <option value="top_rated">⭐ الأعلى تقييماً</option>
         </select>
     </div>
 
@@ -1423,6 +1466,7 @@
     let selectedSuggestionIndex = -1
     let viewTrackedProducts = new Set()
     let contactCounts = {}
+    let productRatings = {}
 
     // ========== TOAST ==========
     function showToast(icon, title, desc) {
@@ -1749,9 +1793,40 @@
         }
     }
 
+    // ========== LOAD PRODUCT RATINGS ==========
+    async function loadProductRatings(productIds) {
+        try {
+            const { data } = await supabase
+                .from('reviews')
+                .select('product_id, rating')
+                .in('product_id', productIds)
+                .eq('review_type', 'product')
+
+            if (data) {
+                const ratingsMap = {}
+                data.forEach(r => {
+                    if (!ratingsMap[r.product_id]) {
+                        ratingsMap[r.product_id] = { sum: 0, count: 0 }
+                    }
+                    ratingsMap[r.product_id].sum += r.rating
+                    ratingsMap[r.product_id].count += 1
+                })
+                Object.keys(ratingsMap).forEach(id => {
+                    productRatings[id] = {
+                        avg: (ratingsMap[id].sum / ratingsMap[id].count).toFixed(1),
+                        count: ratingsMap[id].count
+                    }
+                })
+            }
+        } catch (e) {
+            console.error('Error loading product ratings:', e)
+        }
+    }
+
     // ========== LOAD STATS ==========
     async function loadStats() {
         try {
+            // Total products
             const { count: productCount } = await supabase
                 .from('products')
                 .select('*', { count: 'exact', head: true })
@@ -1759,6 +1834,7 @@
             
             document.getElementById('totalProducts').textContent = productCount || 0
 
+            // Total suppliers
             const { count: supplierCount } = await supabase
                 .from('profiles')
                 .select('*', { count: 'exact', head: true })
@@ -1766,6 +1842,7 @@
             
             document.getElementById('totalSuppliers').textContent = supplierCount || 0
 
+            // Total views
             const { count: viewCount } = await supabase
                 .from('supplier_contacts')
                 .select('*', { count: 'exact', head: true })
@@ -1773,6 +1850,7 @@
             
             document.getElementById('totalViews').textContent = viewCount || 0
 
+            // Total WhatsApp contacts
             const { count: contactCount } = await supabase
                 .from('supplier_contacts')
                 .select('*', { count: 'exact', head: true })
@@ -1836,6 +1914,9 @@
                 case 'most_contacted':
                     query = query.order('contact_count', { ascending: false, nullsLast: true })
                     break
+                case 'top_rated':
+                    query = query.order('avg_rating', { ascending: false, nullsLast: true })
+                    break
                 default:
                     query = query.order('created_at', { ascending: false })
             }
@@ -1867,8 +1948,14 @@
             }
             
             const productIds = products.map(p => p.id)
-            await loadContactCounts(productIds)
             
+            // Load contact counts and ratings
+            await Promise.all([
+                loadContactCounts(productIds),
+                loadProductRatings(productIds)
+            ])
+            
+            // Track views
             products.forEach(p => {
                 if (p.id && p.supplier_id) {
                     trackProductView(p.id, p.supplier_id)
@@ -1884,6 +1971,8 @@
                 const whatsappLink = getWhatsAppLink(p.profiles?.phone, p.name)
                 const viewsCount = p.views_count || 0
                 const contactCount = contactCounts[p.id] || 0
+                const rating = productRatings[p.id]
+                const ratingText = rating && rating.count > 0 ? `${rating.avg} ⭐` : ''
 
                 const categoryInfo = allCategories.find(c => c.id === p.category_id)
                 const categoryName = categoryInfo?.name || p.category || 'كيماويات'
@@ -1899,6 +1988,7 @@
                         <div class="product-img-wrapper" onclick="window.location.href='product-details.html?id=${p.id}'">
                             ${viewsCount > 0 ? `<div class="card-views"><i class="fas fa-eye"></i> ${viewsCount}</div>` : ''}
                             ${contactCount > 0 ? `<div class="contact-stats"><i class="fab fa-whatsapp"></i> ${contactCount}</div>` : ''}
+                            ${ratingText ? `<div class="product-rating"><i class="fas fa-star"></i> ${ratingText}</div>` : ''}
                             ${isFeatured ? `<div class="contact-stats" style="right:auto;left:12px;background:rgba(243,156,18,0.85);color:#fff;"><i class="fas fa-star"></i> مميز</div>` : ''}
                             ${imageHtml}
                         </div>
@@ -1912,6 +2002,7 @@
                             <div class="product-meta">
                                 <span class="product-views"><i class="fas fa-eye"></i> ${viewsCount} مشاهدة</span>
                                 ${contactCount > 0 ? `<span class="product-contacts"><i class="fab fa-whatsapp"></i> ${contactCount} تواصل</span>` : ''}
+                                ${ratingText ? `<span class="product-rating-text"><i class="fas fa-star"></i> ${ratingText}</span>` : ''}
                             </div>
                             
                             <div class="btn-group">
@@ -1930,6 +2021,7 @@
                 `
             }).join('')
             
+            // Pagination
             const totalPages = Math.ceil(totalCount / itemsPerPage)
             let paginationHtml = ''
             
@@ -1954,6 +2046,7 @@
             
             document.getElementById('pagination').innerHTML = paginationHtml
 
+            // Load featured products
             loadFeaturedProducts()
 
         } catch (e) {
@@ -1991,7 +2084,10 @@
             if (section) section.style.display = 'block'
 
             const featuredIds = featured.map(p => p.id)
-            await loadContactCounts(featuredIds)
+            await Promise.all([
+                loadContactCounts(featuredIds),
+                loadProductRatings(featuredIds)
+            ])
 
             featured.forEach(p => {
                 if (p.id && p.supplier_id) {
@@ -2007,6 +2103,8 @@
 
                 const viewsCount = p.views_count || 0
                 const contactCount = contactCounts[p.id] || 0
+                const rating = productRatings[p.id]
+                const ratingText = rating && rating.count > 0 ? `${rating.avg} ⭐` : ''
                 const whatsappLink = getWhatsAppLink(p.profiles?.phone, p.name)
                 
                 const whatsappHandler = `event.stopPropagation(); trackWhatsAppContact('${p.id}', '${p.supplier_id}', '${p.profiles?.phone || ''}', '${p.name.replace(/'/g, "\\'")}'); window.open('${whatsappLink}', '_blank');`
@@ -2016,6 +2114,7 @@
                         <div class="product-img-wrapper" style="height:160px;">
                             ${viewsCount > 0 ? `<div class="card-views"><i class="fas fa-eye"></i> ${viewsCount}</div>` : ''}
                             ${contactCount > 0 ? `<div class="contact-stats"><i class="fab fa-whatsapp"></i> ${contactCount}</div>` : ''}
+                            ${ratingText ? `<div class="product-rating"><i class="fas fa-star"></i> ${ratingText}</div>` : ''}
                             ${imgHtml}
                         </div>
                         <div class="product-info" style="padding:12px 16px;">
@@ -2026,6 +2125,7 @@
                             <div class="product-meta" style="font-size:0.65rem;gap:8px;margin-top:4px;">
                                 <span class="product-views"><i class="fas fa-eye"></i> ${viewsCount}</span>
                                 ${contactCount > 0 ? `<span class="product-contacts"><i class="fab fa-whatsapp"></i> ${contactCount}</span>` : ''}
+                                ${ratingText ? `<span class="product-rating-text"><i class="fas fa-star"></i> ${ratingText}</span>` : ''}
                             </div>
                             <div class="btn-group" style="margin-top:8px;">
                                 <a href="product-details.html?id=${p.id}" class="btn btn-details" style="font-size:0.7rem;padding:6px 12px;" onclick="event.stopPropagation();">
@@ -2210,6 +2310,7 @@
         await loadProducts()
         setupScrollTop()
         
+        // Add share page button
         const resultsCount = document.querySelector('.results-count')
         if (resultsCount) {
             const shareBtn = document.createElement('button')
