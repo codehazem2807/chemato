@@ -1306,9 +1306,24 @@
         return `https://wa.me/${formatted}?text=${encodeURIComponent(message)}`
     }
 
-    // ========== LOAD SUPPLIER RATING ==========
+    // ========== PLACEHOLDER ==========
+    function getPlaceholderHTML(productName, categoryIcon = '🧪') {
+        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e']
+        const colorIndex = (productName?.length || 0) % colors.length
+        const bgColor = colors[colorIndex]
+        return `
+            <div class="product-img-placeholder" style="background:linear-gradient(145deg, ${bgColor}22, ${bgColor}44);">
+                <div style="font-size:4rem;opacity:0.75;">${categoryIcon}</div>
+                <span>${productName ? productName.substring(0, 28) : 'منتج'}</span>
+            </div>
+        `
+    }
+
+    // ========== LOAD SUPPLIER RATING (المعدلة - بدون join) ==========
     async function loadSupplierRating(supplierId) {
         try {
+            if (!supplierId) return { avg: 0, count: 0 }
+
             const { data, error } = await supabase
                 .from('reviews')
                 .select('rating')
@@ -1346,7 +1361,7 @@
         }
     }
 
-    // ========== LOAD PRODUCT RATINGS ==========
+    // ========== LOAD PRODUCT RATINGS (المعدلة - بدون join) ==========
     async function loadProductRatings(productIds) {
         try {
             if (!productIds || productIds.length === 0) return {}
@@ -1380,19 +1395,6 @@
             console.error('Error loading product ratings:', e)
             return {}
         }
-    }
-
-    // ========== PLACEHOLDER ==========
-    function getPlaceholderHTML(productName, categoryIcon = '🧪') {
-        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e']
-        const colorIndex = (productName?.length || 0) % colors.length
-        const bgColor = colors[colorIndex]
-        return `
-            <div class="product-img-placeholder" style="background:linear-gradient(145deg, ${bgColor}22, ${bgColor}44);">
-                <div style="font-size:4rem;opacity:0.75;">${categoryIcon}</div>
-                <span>${productName ? productName.substring(0, 28) : 'منتج'}</span>
-            </div>
-        `
     }
 
     // ========== LOAD SUPPLIER PROFILE ==========
