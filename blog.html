@@ -1,0 +1,877 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>المدونة | كيماتو - سوق المواد الكيماوية في مصر</title>
+    <meta name="description" content="اقرأ أحدث المقالات عن سوق الكيماويات في مصر، أسعار الصودا الكاوية، أفضل الموردين، ونصائح الشراء." />
+    <meta name="robots" content="index, follow" />
+    <link rel="canonical" href="https://chemato.vercel.app/blog.html" />
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
+    <link rel="apple-touch-icon" href="logo.png" />
+    <meta name="theme-color" content="#0c2d4a" />
+
+    <!-- Schema -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Blog",
+      "name": "مدونة كيماتو",
+      "url": "https://chemato.vercel.app/blog.html",
+      "description": "أحدث المقالات عن سوق الكيماويات في مصر"
+    }
+    </script>
+
+    <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Cairo', 'Tahoma', sans-serif;
+        }
+
+        body {
+            background: #f0f4f8;
+            color: #1a2634;
+            min-height: 100vh;
+        }
+
+        @media (prefers-color-scheme: dark) {
+            body {
+                background: #1a1a2e;
+                color: #e0e0e0;
+            }
+            .card {
+                background: #16213e;
+                border-color: #0f3460;
+            }
+            .card-body h3 {
+                color: #e0e0e0;
+            }
+            .card-img-placeholder {
+                background: linear-gradient(145deg, #1a2a3a, #0f1f2f);
+                color: #7ec8e3;
+            }
+            .card-img-placeholder span {
+                background: #0a1a2a;
+                color: #e0e0e0;
+            }
+            .search-wrapper {
+                background: #16213e;
+                border-color: #0f3460;
+            }
+            .search-wrapper input {
+                background: #1a2a3a;
+                color: #e0e0e0;
+            }
+            .search-wrapper input:focus {
+                background: #1a2a3a;
+            }
+            .search-wrapper input::placeholder {
+                color: #6a7a8a;
+            }
+            .section-header h2 {
+                color: #e0e0e0;
+            }
+            .filter-chip {
+                background: #1a2a3a;
+                color: #e0e0e0;
+            }
+            .filter-chip.active {
+                background: #1a4a6e;
+                color: #fff;
+            }
+            .footer {
+                background: #0a1a2a;
+            }
+            .dropdown-content {
+                background: #16213e;
+            }
+            .dropdown-content a {
+                color: #e0e0e0;
+                border-bottom-color: #1a2a3a;
+            }
+            .dropdown-content a:hover {
+                background: #1a2a3a;
+            }
+            .no-results {
+                background: #16213e;
+                color: #a0aec0;
+            }
+        }
+
+        @keyframes fadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes shimmer {
+            0% { background-position: -200% 0; }
+            100% { background-position: 200% 0; }
+        }
+
+        .animate {
+            animation: fadeUp 0.6s ease forwards;
+            opacity: 0;
+        }
+        .delay-1 { animation-delay: 0.1s; }
+        .delay-2 { animation-delay: 0.2s; }
+
+        .skeleton-loader {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+        .skeleton-card {
+            background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            height: 320px;
+            border-radius: 20px;
+        }
+        @media (prefers-color-scheme: dark) {
+            .skeleton-card {
+                background: linear-gradient(90deg, #2a2a3e 25%, #3a3a4e 50%, #2a2a3e 75%);
+            }
+        }
+
+        .navbar {
+            background: linear-gradient(135deg, #0a2538, #143b57);
+            padding: 12px 32px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            position: sticky;
+            top: 0;
+            z-index: 100;
+            border-bottom: 2px solid rgba(52, 152, 219, 0.2);
+            backdrop-filter: blur(12px);
+        }
+
+        .logo a {
+            text-decoration: none;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            border: 2px solid #3498db;
+            object-fit: cover;
+        }
+
+        .logo-text {
+            font-weight: 800;
+            font-size: 20px;
+            color: #fff;
+        }
+        .logo-text .blue { color: #3498db; }
+        .logo-text .gray { color: #9bb7d4; font-weight: 400; }
+
+        .nav-links {
+            display: flex;
+            gap: 6px;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+
+        .nav-links a {
+            color: rgba(255, 255, 255, 0.85);
+            text-decoration: none;
+            padding: 7px 18px;
+            border-radius: 30px;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid transparent;
+        }
+
+        .nav-links a:hover {
+            background: #3498db;
+            color: #fff;
+            transform: translateY(-1px);
+        }
+        .nav-links a.active {
+            background: #3498db;
+            color: #fff;
+        }
+
+        .dropdown {
+            position: relative;
+        }
+
+        .dropdown-btn {
+            background: rgba(255, 255, 255, 0.08);
+            color: #fff;
+            padding: 7px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: 600;
+            border: 1px solid rgba(255, 255, 255, 0.06);
+            font-size: 0.9rem;
+            font-family: inherit;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+        }
+
+        .dropdown-btn:hover {
+            background: #3498db;
+        }
+
+        .dropdown-content {
+            display: none;
+            position: absolute;
+            top: 110%;
+            left: 0;
+            background: #fff;
+            min-width: 200px;
+            border-radius: 16px;
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.12);
+            overflow: hidden;
+            z-index: 1000;
+        }
+
+        .dropdown-content.show {
+            display: block;
+            animation: fadeUp 0.2s ease;
+        }
+
+        .dropdown-content a {
+            color: #1a2634;
+            padding: 12px 20px;
+            text-decoration: none;
+            display: block;
+            font-size: 0.9rem;
+            font-weight: 500;
+            border-bottom: 1px solid #f0f2f5;
+            transition: 0.2s;
+        }
+
+        .dropdown-content a:hover {
+            background: #eef5fa;
+            padding-right: 28px;
+        }
+
+        .main-container {
+            max-width: 1300px;
+            margin: 0 auto;
+            padding: 0 24px 30px;
+        }
+
+        .page-header {
+            background: linear-gradient(135deg, #0a2538 0%, #1a4a6e 100%);
+            border-radius: 32px;
+            padding: 40px 44px;
+            margin-top: 20px;
+            color: #fff;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .page-header h1 {
+            font-size: 2.4rem;
+            font-weight: 900;
+        }
+
+        .page-header p {
+            font-size: 1.05rem;
+            opacity: 0.85;
+            margin-top: 8px;
+        }
+
+        .search-container {
+            position: relative;
+            max-width: 600px;
+            margin: 16px auto 0;
+        }
+
+        .search-wrapper {
+            background: #fff;
+            border-radius: 60px;
+            padding: 4px 6px 4px 4px;
+            display: flex;
+            gap: 6px;
+            box-shadow: 0 8px 28px rgba(0, 0, 0, 0.1);
+            border: 2px solid transparent;
+            transition: all 0.3s;
+        }
+
+        .search-wrapper:focus-within {
+            border-color: #3498db;
+        }
+
+        .search-wrapper input {
+            flex: 1;
+            padding: 14px 22px;
+            border: none;
+            border-radius: 50px;
+            font-size: 0.95rem;
+            background: #f8fafc;
+            outline: none;
+            font-family: inherit;
+        }
+
+        .search-wrapper button {
+            background: linear-gradient(135deg, #3498db, #2176ae);
+            border: none;
+            padding: 0 28px;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 0.95rem;
+            cursor: pointer;
+            color: #fff;
+            transition: all 0.3s;
+            font-family: inherit;
+            min-height: 50px;
+        }
+
+        .search-wrapper button:hover {
+            background: #0a2538;
+        }
+
+        .filters {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin: 16px 0;
+        }
+
+        .filter-chip {
+            background: #e8edf3;
+            padding: 6px 20px;
+            border-radius: 30px;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.8rem;
+            font-weight: 600;
+            color: #1a2634;
+            border: 2px solid transparent;
+            user-select: none;
+            min-height: 36px;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .filter-chip:hover {
+            background: #d0dce8;
+        }
+
+        .filter-chip.active {
+            background: #1a4a6e;
+            color: #fff;
+            border-color: #3498db;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px 0 14px;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .section-header h2 {
+            font-size: 1.3rem;
+            color: #0a2538;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-right: 4px solid #3498db;
+            padding-right: 12px;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 20px;
+        }
+
+        .card {
+            background: #fff;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+            transition: all 0.4s;
+            border: 1px solid rgba(52, 152, 219, 0.06);
+            display: flex;
+            flex-direction: column;
+            animation: fadeUp 0.5s ease forwards;
+            opacity: 0;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 20px 48px rgba(0, 0, 0, 0.06);
+            border-color: #3498db;
+        }
+
+        .card-img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: linear-gradient(145deg, #e6edf4, #f0f6fb);
+        }
+
+        .card-img-placeholder {
+            width: 100%;
+            height: 200px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            font-size: 4rem;
+            background: linear-gradient(145deg, #e6edf4, #f0f6fb);
+            color: #1a4a6e;
+        }
+
+        .card-img-placeholder span {
+            background: rgba(255, 255, 255, 0.85);
+            padding: 3px 14px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: #0a2538;
+            margin-top: 4px;
+        }
+
+        .card-body {
+            padding: 14px 16px 16px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card-badge {
+            display: inline-block;
+            background: #ecf3f8;
+            padding: 2px 12px;
+            border-radius: 30px;
+            font-size: 0.7rem;
+            font-weight: 600;
+            color: #1a4a6e;
+            align-self: flex-start;
+            margin-bottom: 4px;
+        }
+
+        .card-body h3 {
+            font-size: 1.05rem;
+            font-weight: 700;
+            color: #0a2538;
+            margin-bottom: 4px;
+        }
+
+        .card-body p {
+            font-size: 0.85rem;
+            color: #64748b;
+            line-height: 1.5;
+            margin: 4px 0 8px;
+            flex: 1;
+        }
+
+        .card-meta {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            display: flex;
+            gap: 12px;
+            margin-bottom: 8px;
+        }
+
+        .card-actions .btn {
+            display: inline-block;
+            padding: 8px 20px;
+            border-radius: 30px;
+            text-decoration: none;
+            font-weight: 700;
+            font-size: 0.8rem;
+            transition: all 0.3s;
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+            color: #fff;
+            background: linear-gradient(135deg, #1a4a6e, #0a2538);
+        }
+
+        .card-actions .btn:hover {
+            background: #3498db;
+            transform: translateY(-1px);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            background: #fff;
+            border-radius: 24px;
+            color: #64748b;
+            grid-column: 1 / -1;
+        }
+
+        .pagination {
+            display: flex;
+            justify-content: center;
+            gap: 8px;
+            margin: 24px 0;
+            flex-wrap: wrap;
+        }
+
+        .pagination button {
+            padding: 8px 16px;
+            border-radius: 30px;
+            border: 1px solid #ddd;
+            background: #fff;
+            cursor: pointer;
+            transition: 0.3s;
+            font-family: inherit;
+            font-weight: 600;
+        }
+
+        .pagination button:hover {
+            background: #1a4a6e;
+            color: #fff;
+            border-color: #1a4a6e;
+        }
+
+        .pagination button.active {
+            background: #1a4a6e;
+            color: #fff;
+            border-color: #1a4a6e;
+        }
+
+        .footer {
+            background: linear-gradient(135deg, #0a2538, #143b57);
+            color: #fff;
+            text-align: center;
+            padding: 24px 20px;
+            margin-top: 30px;
+            border-top: 3px solid #3498db;
+        }
+
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+            margin-bottom: 10px;
+        }
+
+        .footer-links a {
+            color: #5a9bc7;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #fff;
+        }
+
+        .footer-copy {
+            opacity: 0.5;
+            font-size: 0.8rem;
+        }
+
+        @media (max-width: 768px) {
+            .navbar {
+                padding: 10px 16px;
+                flex-direction: column;
+                gap: 8px;
+            }
+            .page-header {
+                padding: 28px 20px;
+            }
+            .page-header h1 { font-size: 1.8rem; }
+            .grid {
+                grid-template-columns: 1fr;
+            }
+            .search-wrapper {
+                flex-direction: column;
+                border-radius: 28px;
+                padding: 8px;
+            }
+            .search-wrapper button {
+                padding: 12px;
+                justify-content: center;
+                min-height: 44px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Navbar -->
+    <header class="navbar animate">
+        <div class="logo">
+            <a href="/">
+                <img src="logo.png" alt="كيماتو" width="44" height="44" />
+                <span class="logo-text"><span class="blue">كيماتو</span><span class="gray">| سوق الكيماويات</span></span>
+            </a>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+            <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+            <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+            <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
+            <a href="blog.html" class="active"><i class="fas fa-newspaper"></i> المدونة</a>
+            <div class="dropdown">
+                <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
+                <div class="dropdown-content" id="dropdownContent">
+                    <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                    <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                    <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                    <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <!-- Main -->
+    <main class="main-container">
+        
+        <!-- Header -->
+        <section class="page-header animate delay-1">
+            <h1>📰 مدونة كيماتو</h1>
+            <p>آخر المقالات والنصائح عن سوق المواد الكيماوية في مصر</p>
+            
+            <!-- Search -->
+            <div class="search-container">
+                <div class="search-wrapper">
+                    <input type="text" id="searchInput" placeholder="🔍 ابحث في المقالات..." autocomplete="off" />
+                    <button id="searchBtn"><i class="fas fa-search"></i> بحث</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters -->
+        <div class="filters animate delay-2">
+            <span class="filter-chip active" data-category="all">الكل</span>
+            <span class="filter-chip" data-category="دليل شراء">🛒 دليل شراء</span>
+            <span class="filter-chip" data-category="موردين">🏢 موردين</span>
+            <span class="filter-chip" data-category="أسعار">💰 أسعار</span>
+            <span class="filter-chip" data-category="ريادة أعمال">🚀 ريادة أعمال</span>
+            <span class="filter-chip" data-category="أخبار">📰 أخبار</span>
+        </div>
+
+        <!-- Posts Grid -->
+        <section>
+            <div class="section-header">
+                <h2><i class="fas fa-newspaper"></i> جميع المقالات</h2>
+                <span id="postsCount" style="font-size:0.85rem;color:#64748b;"></span>
+            </div>
+            <div id="postsList" class="grid">
+                <div class="skeleton-loader">
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                    <div class="skeleton-card"></div>
+                </div>
+            </div>
+            <div class="pagination" id="pagination"></div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="footer-links">
+            <a href="index.html">الرئيسية</a>
+            <a href="all-products.html">المنتجات</a>
+            <a href="all-requests.html">الطلبات</a>
+            <a href="chemato-suppliers.html">الموردين</a>
+            <a href="blog.html">المدونة</a>
+            <a href="auth.html">تسجيل الدخول</a>
+        </div>
+        <div class="footer-copy">© 2026 كيماتو - سوق المواد الكيماوية في مصر</div>
+    </footer>
+
+    <!-- Supabase -->
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+
+        const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+
+        let currentCategory = 'all'
+        let currentSearch = ''
+        let currentPage = 1
+        const postsPerPage = 9
+        let totalPosts = 0
+
+        // ===== Dropdown =====
+        function setupDropdown() {
+            const toggle = document.getElementById('dropdownToggle')
+            const content = document.getElementById('dropdownContent')
+            if (toggle && content) {
+                toggle.addEventListener('click', (e) => {
+                    e.stopPropagation()
+                    content.classList.toggle('show')
+                })
+                document.addEventListener('click', () => content.classList.remove('show'))
+            }
+        }
+        setupDropdown()
+
+        // ===== Filters =====
+        document.querySelectorAll('.filter-chip').forEach(chip => {
+            chip.addEventListener('click', () => {
+                document.querySelectorAll('.filter-chip').forEach(c => c.classList.remove('active'))
+                chip.classList.add('active')
+                currentCategory = chip.dataset.category
+                currentPage = 1
+                loadPosts()
+            })
+        })
+
+        // ===== Search =====
+        const searchInput = document.getElementById('searchInput')
+        const searchBtn = document.getElementById('searchBtn')
+
+        searchBtn.addEventListener('click', () => {
+            currentSearch = searchInput.value.trim()
+            currentPage = 1
+            loadPosts()
+        })
+
+        searchInput.addEventListener('keypress', (e) => {
+            if (e.key === 'Enter') {
+                currentSearch = searchInput.value.trim()
+                currentPage = 1
+                loadPosts()
+            }
+        })
+
+        // ===== Load Posts =====
+        async function loadPosts() {
+            const container = document.getElementById('postsList')
+            container.innerHTML = `
+                <div class="skeleton-loader">
+                    ${Array(6).fill(0).map(() => '<div class="skeleton-card"></div>').join('')}
+                </div>
+            `
+
+            try {
+                let query = supabase
+                    .from('blog_posts')
+                    .select('*', { count: 'exact' })
+                    .eq('status', 'published')
+                    .order('published_at', { ascending: false })
+
+                if (currentCategory !== 'all') {
+                    query = query.eq('category', currentCategory)
+                }
+
+                if (currentSearch) {
+                    query = query.or(`title.ilike.%${currentSearch}%,excerpt.ilike.%${currentSearch}%,content.ilike.%${currentSearch}%`)
+                }
+
+                const from = (currentPage - 1) * postsPerPage
+                const to = from + postsPerPage - 1
+
+                const { data: posts, count, error } = await query
+                    .range(from, to)
+
+                if (error) throw error
+
+                totalPosts = count || 0
+                document.getElementById('postsCount').textContent = `(${totalPosts} مقال)`
+
+                if (!posts?.length) {
+                    container.innerHTML = `<div class="no-results"><i class="fas fa-newspaper" style="font-size:2.5rem;display:block;margin-bottom:8px;"></i>لا توجد مقالات</div>`
+                    document.getElementById('pagination').innerHTML = ''
+                    return
+                }
+
+                container.innerHTML = posts.map((post, i) => {
+                    const hasImage = post.image_url && post.image_url.trim()
+                    const imgHtml = hasImage ?
+                        `<img class="card-img" src="${post.image_url}" alt="${post.title}" loading="lazy" decoding="async">` :
+                        `<div class="card-img-placeholder"><div>📰</div><span>${post.title?.substring(0, 20) || ''}</span></div>`
+
+                    const date = new Date(post.published_at || post.created_at)
+                    const formattedDate = date.toLocaleDateString('ar-EG')
+
+                    return `
+                        <div class="card" style="animation-delay:${i * 0.05}s;">
+                            ${imgHtml}
+                            <div class="card-body">
+                                <span class="card-badge">${post.category || 'عام'}</span>
+                                <h3>${post.title || ''}</h3>
+                                <p>${post.excerpt || ''}</p>
+                                <div class="card-meta">
+                                    <span><i class="fas fa-calendar"></i> ${formattedDate}</span>
+                                    ${post.tags?.length ? `<span><i class="fas fa-tags"></i> ${post.tags.slice(0, 2).join('، ')}</span>` : ''}
+                                </div>
+                                <div class="card-actions">
+                                    <a href="blog-post.html?slug=${post.slug || post.id}" class="btn"><i class="fas fa-book-open"></i> اقرأ المزيد</a>
+                                </div>
+                            </div>
+                        </div>
+                    `
+                }).join('')
+
+                renderPagination()
+
+            } catch (error) {
+                console.error('Error loading posts:', error)
+                container.innerHTML = `<div class="no-results">⚠️ حدث خطأ في تحميل المقالات</div>`
+            }
+        }
+
+        // ===== Pagination =====
+        function renderPagination() {
+            const container = document.getElementById('pagination')
+            const totalPages = Math.ceil(totalPosts / postsPerPage)
+
+            if (totalPages <= 1) {
+                container.innerHTML = ''
+                return
+            }
+
+            let html = ''
+            html += `<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled style="opacity:0.4;cursor:not-allowed;"' : ''}>السابق</button>`
+
+            for (let i = 1; i <= totalPages; i++) {
+                html += `<button onclick="changePage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`
+            }
+
+            html += `<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled style="opacity:0.4;cursor:not-allowed;"' : ''}>التالي</button>`
+
+            container.innerHTML = html
+        }
+
+        window.changePage = function(page) {
+            const totalPages = Math.ceil(totalPosts / postsPerPage)
+            if (page < 1 || page > totalPages) return
+            currentPage = page
+            loadPosts()
+            window.scrollTo({ top: 300, behavior: 'smooth' })
+        }
+
+        // ===== Init =====
+        loadPosts()
+    </script>
+
+</body>
+</html>
