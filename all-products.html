@@ -384,11 +384,12 @@
             color: rgba(255,255,255,0.9);
         }
 
-        /* ===== Search ===== */
+        /* ===== Search with FIXED z-index ===== */
         .search-container {
             position: relative;
             flex: 3;
             min-width: 200px;
+            z-index: 99999; /* <-- مفتاح الحل */
         }
 
         .search-filter-bar {
@@ -467,6 +468,7 @@
             background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
         }
 
+        /* ===== Suggestions Box with MAX z-index ===== */
         .suggestions-box {
             position: absolute;
             top: calc(100% + 8px);
@@ -479,7 +481,7 @@
             max-height: 350px;
             overflow-y: auto;
             display: none !important;
-            z-index: 10000;
+            z-index: 999999; /* <-- مفتاح الحل - أعلى من كل شيء */
         }
 
         .suggestions-box.show {
@@ -599,6 +601,7 @@
             margin: 0 0 24px 0;
             border: 2px solid #f39c12;
             position: relative;
+            z-index: 1; /* <-- أقل من search-container */
         }
 
         .featured-section::before {
@@ -635,6 +638,8 @@
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 30px;
+            position: relative;
+            z-index: 1;
         }
 
         .product-card {
@@ -678,7 +683,6 @@
             font-size: 0.6rem;
         }
 
-        /* ===== Contact Stats Badge (WhatsApp) ===== */
         .contact-stats {
             position: absolute;
             top: 12px;
@@ -1287,9 +1291,7 @@
         <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
         <a href="all-products.html" class="active"><i class="fas fa-flask"></i> المنتجات</a>
         <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
-        <!-- ===== NEW: زر الموردين ===== -->
         <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
-        <!-- ===== NEW: زر المدونة ===== -->
         <a href="blog.html"><i class="fas fa-newspaper"></i> المدونة</a>
         <div class="dropdown">
             <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
@@ -1750,7 +1752,6 @@
     // ========== LOAD STATS ==========
     async function loadStats() {
         try {
-            // Total products
             const { count: productCount } = await supabase
                 .from('products')
                 .select('*', { count: 'exact', head: true })
@@ -1758,7 +1759,6 @@
             
             document.getElementById('totalProducts').textContent = productCount || 0
 
-            // Total suppliers
             const { count: supplierCount } = await supabase
                 .from('profiles')
                 .select('*', { count: 'exact', head: true })
@@ -1766,7 +1766,6 @@
             
             document.getElementById('totalSuppliers').textContent = supplierCount || 0
 
-            // Total views
             const { count: viewCount } = await supabase
                 .from('supplier_contacts')
                 .select('*', { count: 'exact', head: true })
@@ -1774,7 +1773,6 @@
             
             document.getElementById('totalViews').textContent = viewCount || 0
 
-            // Total WhatsApp contacts
             const { count: contactCount } = await supabase
                 .from('supplier_contacts')
                 .select('*', { count: 'exact', head: true })
@@ -1868,11 +1866,9 @@
                 return
             }
             
-            // Load contact counts for these products
             const productIds = products.map(p => p.id)
             await loadContactCounts(productIds)
             
-            // Track views
             products.forEach(p => {
                 if (p.id && p.supplier_id) {
                     trackProductView(p.id, p.supplier_id)
@@ -1896,7 +1892,6 @@
                 const isFeatured = p.is_featured || false
                 const featuredClass = isFeatured ? ' featured' : ''
 
-                // WhatsApp click handler
                 const whatsappHandler = `event.stopPropagation(); trackWhatsAppContact('${p.id}', '${p.supplier_id}', '${p.profiles?.phone || ''}', '${p.name.replace(/'/g, "\\'")}'); window.open('${whatsappLink}', '_blank');`
 
                 return `
@@ -1935,7 +1930,6 @@
                 `
             }).join('')
             
-            // Pagination
             const totalPages = Math.ceil(totalCount / itemsPerPage)
             let paginationHtml = ''
             
@@ -1960,7 +1954,6 @@
             
             document.getElementById('pagination').innerHTML = paginationHtml
 
-            // Load featured products
             loadFeaturedProducts()
 
         } catch (e) {
@@ -1997,11 +1990,9 @@
 
             if (section) section.style.display = 'block'
 
-            // Load contact counts for featured products
             const featuredIds = featured.map(p => p.id)
             await loadContactCounts(featuredIds)
 
-            // Track views
             featured.forEach(p => {
                 if (p.id && p.supplier_id) {
                     trackProductView(p.id, p.supplier_id)
@@ -2219,7 +2210,6 @@
         await loadProducts()
         setupScrollTop()
         
-        // Add share page button
         const resultsCount = document.querySelector('.results-count')
         if (resultsCount) {
             const shareBtn = document.createElement('button')
