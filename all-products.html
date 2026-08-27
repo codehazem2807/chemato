@@ -40,6 +40,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet" />
     
     <style>
+        /* ===== CSS كامل ===== */
         * { 
             margin: 0; 
             padding: 0; 
@@ -89,14 +90,10 @@
             .suggestion-view-all { background: #1a2a3a !important; }
             .suggestion-view-all:hover { background: #1a2a3a !important; }
             .suggestion-empty { color: #6a7a8a !important; }
-            .price-alert-btn { color: #7ec8e3 !important; border-color: rgba(126,200,227,0.2) !important; }
-            .price-alert-btn:hover { background: #3498db !important; color: #fff !important; }
-            .price-alert-btn.active { background: #2ecc71 !important; color: #fff !important; }
             .featured-section { background: linear-gradient(135deg, #1a2a1a, #2a2a1a) !important; border-color: #f1c40f !important; }
             .featured-section::before { background: #f1c40f !important; color: #1a1a2e !important; }
-            .supplier-stats { background: rgba(255,255,255,0.05) !important; }
-            .review-badge { background: #1a2a3a !important; color: #7ec8e3 !important; }
             .card-views { background: rgba(0,0,0,0.6) !important; }
+            .contact-stats { background: rgba(37,211,102,0.7) !important; }
         }
 
         @keyframes fadeUp {
@@ -131,7 +128,7 @@
             background: linear-gradient(90deg, #e0e0e0 25%, #f0f0f0 50%, #e0e0e0 75%);
             background-size: 200% 100%;
             animation: shimmer 1.5s infinite;
-            height: 380px;
+            height: 400px;
             border-radius: 28px;
         }
         @media (prefers-color-scheme: dark) {
@@ -181,7 +178,7 @@
 
         .nav-links {
             display: flex;
-            gap: 8px;
+            gap: 6px;
             align-items: center;
             flex-wrap: wrap;
         }
@@ -189,11 +186,11 @@
         .nav-links > a {
             color: rgba(255,255,255,0.85);
             text-decoration: none;
-            padding: 7px 18px;
+            padding: 7px 16px;
             border-radius: 30px;
             transition: 0.3s;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             background: rgba(255,255,255,0.05);
             border: 1px solid transparent;
         }
@@ -204,6 +201,11 @@
             transform: translateY(-2px);
             box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
+        
+        .nav-links > a.active {
+            background: #3498db;
+            color: #fff;
+        }
 
         .dropdown {
             position: relative;
@@ -213,16 +215,16 @@
         .dropdown-btn {
             background: rgba(255,255,255,0.08);
             color: #fff;
-            padding: 7px 18px;
+            padding: 7px 16px;
             border-radius: 30px;
             cursor: pointer;
             font-weight: 600;
-            font-size: 0.9rem;
+            font-size: 0.85rem;
             font-family: inherit;
             border: 1px solid rgba(255,255,255,0.06);
             display: flex;
             align-items: center;
-            gap: 8px;
+            gap: 6px;
             transition: 0.3s;
         }
 
@@ -280,7 +282,7 @@
             padding: 0 20px;
         }
 
-        /* ===== Page Header with Chemical Background ===== */
+        /* ===== Page Header ===== */
         .page-header {
             background: linear-gradient(135deg, #0c2d4a, #1a4a6e);
             border-radius: 32px;
@@ -354,7 +356,7 @@
             border-radius: 50px;
             margin-top: 12px;
             border: 1px solid rgba(255,255,255,0.06);
-            max-width: 600px;
+            max-width: 700px;
             margin-left: auto;
             margin-right: auto;
             position: relative;
@@ -619,17 +621,6 @@
             margin-top: 8px;
         }
 
-        .featured-badge {
-            background: #f39c12;
-            color: #fff;
-            padding: 2px 10px;
-            border-radius: 30px;
-            font-size: 0.6rem;
-            font-weight: 700;
-            margin-right: 6px;
-            display: inline-block;
-        }
-
         .product-card.featured {
             border: 2px solid #f39c12;
             box-shadow: 0 8px 30px rgba(243, 156, 18, 0.15);
@@ -666,7 +657,7 @@
             border-color: #3498db;
         }
 
-        /* ===== Views Badge ===== */
+        /* ===== Views & Contact Badges ===== */
         .card-views {
             position: absolute;
             top: 12px;
@@ -687,14 +678,14 @@
             font-size: 0.6rem;
         }
 
-        /* ===== Rating Badge ===== */
-        .rating-badge {
+        /* ===== Contact Stats Badge (WhatsApp) ===== */
+        .contact-stats {
             position: absolute;
             top: 12px;
             right: 12px;
-            background: rgba(0, 0, 0, 0.6);
+            background: rgba(37, 211, 102, 0.85);
             backdrop-filter: blur(6px);
-            color: #f1c40f;
+            color: #fff;
             padding: 3px 12px;
             border-radius: 20px;
             font-size: 0.65rem;
@@ -704,8 +695,8 @@
             gap: 4px;
             z-index: 5;
         }
-        .rating-badge i {
-            color: #f1c40f;
+        .contact-stats i {
+            font-size: 0.6rem;
         }
 
         .product-img-wrapper {
@@ -808,32 +799,6 @@
             font-weight: 800;
         }
 
-        .price-alert-btn {
-            background: rgba(52,152,219,0.08);
-            border: 1px solid rgba(52,152,219,0.2);
-            border-radius: 30px;
-            padding: 4px 12px;
-            font-size: 0.7rem;
-            cursor: pointer;
-            color: #3498db;
-            font-weight: 600;
-            transition: 0.3s;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            gap: 4px;
-        }
-        .price-alert-btn:hover {
-            background: #3498db;
-            color: #fff;
-            border-color: #3498db;
-        }
-        .price-alert-btn.active {
-            background: #2ecc71;
-            color: #fff;
-            border-color: #2ecc71;
-        }
-
         .product-supplier {
             color: #64748b;
             font-size: 14px;
@@ -857,13 +822,13 @@
             color: #94a3b8;
         }
 
-        .supplier-rating {
+        .product-contacts {
             font-size: 12px;
-            color: #f1c40f;
+            color: #25D366;
             font-weight: 600;
         }
 
-        .supplier-rating i {
+        .product-contacts i {
             margin-left: 2px;
         }
 
@@ -1127,8 +1092,19 @@
         @media (max-width: 768px) {
             .navbar {
                 flex-direction: column;
-                gap: 12px;
+                gap: 8px;
                 padding: 12px 16px;
+            }
+            .nav-links {
+                justify-content: center;
+            }
+            .nav-links > a {
+                padding: 5px 12px;
+                font-size: 0.75rem;
+            }
+            .dropdown-btn {
+                padding: 5px 12px;
+                font-size: 0.75rem;
             }
             .page-header h1 {
                 font-size: 1.6rem;
@@ -1180,14 +1156,6 @@
             }
             .btn-group .btn {
                 min-width: unset;
-            }
-            .nav-links a {
-                padding: 5px 12px;
-                font-size: 0.8rem;
-            }
-            .dropdown-btn {
-                padding: 5px 12px;
-                font-size: 0.8rem;
             }
             .logo-text {
                 font-size: 16px;
@@ -1264,7 +1232,7 @@
                 font-size: 0.55rem;
                 padding: 2px 8px;
             }
-            .rating-badge {
+            .contact-stats {
                 font-size: 0.55rem;
                 padding: 2px 8px;
             }
@@ -1317,8 +1285,12 @@
     </div>
     <div class="nav-links">
         <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-        <a href="all-products.html"><i class="fas fa-flask"></i> جميع المنتجات</a>
-        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> جميع الطلبات</a>
+        <a href="all-products.html" class="active"><i class="fas fa-flask"></i> المنتجات</a>
+        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+        <!-- ===== NEW: زر الموردين ===== -->
+        <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
+        <!-- ===== NEW: زر المدونة ===== -->
+        <a href="blog.html"><i class="fas fa-newspaper"></i> المدونة</a>
         <div class="dropdown">
             <button class="dropdown-btn" id="dropdownToggle"><i class="fas fa-user-circle"></i> القائمة</button>
             <div class="dropdown-content" id="dropdownContent"></div>
@@ -1353,6 +1325,10 @@
                     <span class="number" id="totalViews">0</span>
                     <span class="label">إجمالي المشاهدات</span>
                 </div>
+                <div class="stat">
+                    <span class="number" id="totalContacts">0</span>
+                    <span class="label">تواصلات واتساب</span>
+                </div>
             </div>
 
             <div class="results-count" id="resultsCount">📊 جاري التحميل...</div>
@@ -1377,7 +1353,7 @@
             <option value="price_asc">💰 السعر: من الأقل</option>
             <option value="price_desc">💰 السعر: من الأعلى</option>
             <option value="popular">👁️ الأكثر مشاهدة</option>
-            <option value="top_rated">⭐ الأعلى تقييماً</option>
+            <option value="most_contacted">💬 الأكثر تواصلاً</option>
         </select>
     </div>
 
@@ -1416,6 +1392,8 @@
         <a href="index.html">الرئيسية</a>
         <a href="all-products.html">جميع المنتجات</a>
         <a href="all-requests.html">جميع الطلبات</a>
+        <a href="chemato-suppliers.html">الموردين</a>
+        <a href="blog.html">المدونة</a>
         <a href="auth.html">تسجيل الدخول</a>
         <a href="supplier-dashboard.html">للموردين</a>
         <a href="buyer-dashboard.html">للعملاء</a>
@@ -1438,11 +1416,11 @@
     let currentSort = 'newest'
     const itemsPerPage = 12
     let allCategories = []
-    let isPriceAlertActive = {}
     let allProductsForSuggestions = []
     let suggestionsTimeout = null
     let selectedSuggestionIndex = -1
-    let viewTrackedProducts = new Set() // منع تكرار تتبع المشاهدات
+    let viewTrackedProducts = new Set()
+    let contactCounts = {}
 
     // ========== TOAST ==========
     function showToast(icon, title, desc) {
@@ -1462,7 +1440,7 @@
         setTimeout(() => toast.remove(), 5000)
     }
 
-    // ========== SHARE PRODUCT ==========
+    // ========== SHARE ==========
     window.shareProduct = function(productId, productName) {
         const url = `${window.location.origin}/product-details.html?id=${productId}`
         if (navigator.share) {
@@ -1480,7 +1458,6 @@
         }
     }
 
-    // ========== SHARE PAGE ==========
     window.sharePage = function() {
         if (navigator.share) {
             navigator.share({
@@ -1700,47 +1677,30 @@
         return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`
     }
 
-    // ========== PRICE ALERT ==========
-    window.setPriceAlert = async function(productId, productName, targetPrice) {
+    // ========== TRACK WHATSAPP CONTACT ==========
+    async function trackWhatsAppContact(productId, supplierId, phone, productName) {
+        if (!phone) return
+        
         try {
             const { data: { user } } = await supabase.auth.getUser()
-            if (!user) {
-                showToast('🔒', 'تسجيل الدخول مطلوب', 'يرجى تسجيل الدخول لتفعيل تنبيه السعر')
-                window.location.href = 'auth.html'
-                return
-            }
-
-            const { data: existing } = await supabase
-                .from('price_alerts')
-                .select('id')
-                .eq('product_id', productId)
-                .eq('user_id', user.id)
-                .eq('active', true)
-                .single()
-
-            if (existing) {
-                await supabase
-                    .from('price_alerts')
-                    .update({ active: false })
-                    .eq('id', existing.id)
-                showToast('🔕', 'تم إلغاء التنبيه', `لن يتم إعلامك عند انخفاض سعر ${productName}`)
-                isPriceAlertActive[productId] = false
-                return
-            }
-
-            await supabase
-                .from('price_alerts')
-                .insert({
-                    product_id: productId,
-                    user_id: user.id,
-                    target_price: targetPrice || 0,
-                    active: true
-                })
-            showToast('🔔', 'تم تفعيل التنبيه!', `سيتم إعلامك عند انخفاض سعر ${productName}`)
-            isPriceAlertActive[productId] = true
+            
+            await supabase.rpc('log_supplier_contact', {
+                p_supplier_id: supplierId,
+                p_product_id: productId,
+                p_buyer_id: user?.id || null,
+                p_contact_type: 'whatsapp',
+                p_contact_data: {
+                    phone: phone,
+                    product_name: productName,
+                    timestamp: new Date().toISOString()
+                },
+                p_user_agent: navigator.userAgent,
+                p_referrer: document.referrer
+            })
+            
+            console.log('✅ تم تسجيل تواصل واتساب للمنتج:', productId)
         } catch (e) {
-            console.error('Error setting price alert:', e)
-            showToast('⚠️', 'حدث خطأ', 'لم نتمكن من تفعيل التنبيه، حاول مرة أخرى')
+            console.error('Error tracking WhatsApp contact:', e)
         }
     }
 
@@ -1768,19 +1728,23 @@
         }
     }
 
-    // ========== PLACEHOLDER ==========
-    function getPlaceholderHTML(productName, categoryIcon = '🧪') {
-        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e'];
-        const colorIndex = (productName?.length || 0) % colors.length;
-        const bgColor = colors[colorIndex];
-        
-        return `
-            <div class="product-img-placeholder" style="background:linear-gradient(145deg, ${bgColor}22, ${bgColor}44);">
-                <div style="font-size:4.5rem;opacity:0.75;">${categoryIcon}</div>
-                <span>${productName ? productName.substring(0, 28) : 'منتج'}</span>
-                <div class="first-letter">${productName ? productName.substring(0,1).toUpperCase() : 'K'}</div>
-            </div>
-        `;
+    // ========== LOAD CONTACT COUNTS ==========
+    async function loadContactCounts(productIds) {
+        try {
+            const { data } = await supabase
+                .from('supplier_contacts')
+                .select('product_id, contact_type')
+                .in('product_id', productIds)
+                .eq('contact_type', 'whatsapp')
+
+            if (data) {
+                data.forEach(item => {
+                    contactCounts[item.product_id] = (contactCounts[item.product_id] || 0) + 1
+                })
+            }
+        } catch (e) {
+            console.error('Error loading contact counts:', e)
+        }
     }
 
     // ========== LOAD STATS ==========
@@ -1802,7 +1766,7 @@
             
             document.getElementById('totalSuppliers').textContent = supplierCount || 0
 
-            // Total views (from supplier_contacts)
+            // Total views
             const { count: viewCount } = await supabase
                 .from('supplier_contacts')
                 .select('*', { count: 'exact', head: true })
@@ -1810,9 +1774,32 @@
             
             document.getElementById('totalViews').textContent = viewCount || 0
 
+            // Total WhatsApp contacts
+            const { count: contactCount } = await supabase
+                .from('supplier_contacts')
+                .select('*', { count: 'exact', head: true })
+                .eq('contact_type', 'whatsapp')
+            
+            document.getElementById('totalContacts').textContent = contactCount || 0
+
         } catch (e) {
             console.error('Error loading stats:', e)
         }
+    }
+
+    // ========== PLACEHOLDER ==========
+    function getPlaceholderHTML(productName, categoryIcon = '🧪') {
+        const colors = ['#1a4a6e', '#0c2d4a', '#2d7a9e', '#3a8aaa', '#1a5f7a', '#4a7a9e'];
+        const colorIndex = (productName?.length || 0) % colors.length;
+        const bgColor = colors[colorIndex];
+        
+        return `
+            <div class="product-img-placeholder" style="background:linear-gradient(145deg, ${bgColor}22, ${bgColor}44);">
+                <div style="font-size:4.5rem;opacity:0.75;">${categoryIcon}</div>
+                <span>${productName ? productName.substring(0, 28) : 'منتج'}</span>
+                <div class="first-letter">${productName ? productName.substring(0,1).toUpperCase() : 'K'}</div>
+            </div>
+        `;
     }
 
     // ========== LOAD PRODUCTS ==========
@@ -1848,8 +1835,8 @@
                 case 'popular':
                     query = query.order('views_count', { ascending: false })
                     break
-                case 'top_rated':
-                    query = query.order('avg_rating', { ascending: false, nullsLast: true })
+                case 'most_contacted':
+                    query = query.order('contact_count', { ascending: false, nullsLast: true })
                     break
                 default:
                     query = query.order('created_at', { ascending: false })
@@ -1881,42 +1868,11 @@
                 return
             }
             
-            // Check price alerts for current user
-            const { data: { user } } = await supabase.auth.getUser()
-            if (user) {
-                const { data: alerts } = await supabase
-                    .from('price_alerts')
-                    .select('product_id')
-                    .eq('user_id', user.id)
-                    .eq('active', true)
-                alerts?.forEach(a => { isPriceAlertActive[a.product_id] = true })
-            }
-
-            // Get reviews for supplier ratings
-            const supplierIds = products.map(p => p.supplier_id).filter(id => id)
-            let supplierRatings = {}
-            if (supplierIds.length) {
-                const { data: reviewsData } = await supabase
-                    .from('reviews')
-                    .select('supplier_id, rating')
-                    .in('supplier_id', supplierIds)
-                
-                if (reviewsData) {
-                    const ratingsMap = {}
-                    reviewsData.forEach(r => {
-                        if (!ratingsMap[r.supplier_id]) {
-                            ratingsMap[r.supplier_id] = { sum: 0, count: 0 }
-                        }
-                        ratingsMap[r.supplier_id].sum += r.rating
-                        ratingsMap[r.supplier_id].count += 1
-                    })
-                    Object.keys(ratingsMap).forEach(id => {
-                        supplierRatings[id] = (ratingsMap[id].sum / ratingsMap[id].count).toFixed(1)
-                    })
-                }
-            }
+            // Load contact counts for these products
+            const productIds = products.map(p => p.id)
+            await loadContactCounts(productIds)
             
-            // Track views for each product
+            // Track views
             products.forEach(p => {
                 if (p.id && p.supplier_id) {
                     trackProductView(p.id, p.supplier_id)
@@ -1930,10 +1886,8 @@
                     : getPlaceholderHTML(p.name, p.category_icon || '🧪')
                 
                 const whatsappLink = getWhatsAppLink(p.profiles?.phone, p.name)
-                const isAlertActive = isPriceAlertActive[p.id] || false
-                const priceValue = p.price || 0
                 const viewsCount = p.views_count || 0
-                const supplierRating = supplierRatings[p.supplier_id] || '0'
+                const contactCount = contactCounts[p.id] || 0
 
                 const categoryInfo = allCategories.find(c => c.id === p.category_id)
                 const categoryName = categoryInfo?.name || p.category || 'كيماويات'
@@ -1942,12 +1896,15 @@
                 const isFeatured = p.is_featured || false
                 const featuredClass = isFeatured ? ' featured' : ''
 
+                // WhatsApp click handler
+                const whatsappHandler = `event.stopPropagation(); trackWhatsAppContact('${p.id}', '${p.supplier_id}', '${p.profiles?.phone || ''}', '${p.name.replace(/'/g, "\\'")}'); window.open('${whatsappLink}', '_blank');`
+
                 return `
                     <div class="product-card${featuredClass}" style="animation-delay:${(index % 6) * 0.05}s;">
                         <div class="product-img-wrapper" onclick="window.location.href='product-details.html?id=${p.id}'">
                             ${viewsCount > 0 ? `<div class="card-views"><i class="fas fa-eye"></i> ${viewsCount}</div>` : ''}
-                            ${parseFloat(supplierRating) > 0 ? `<div class="rating-badge"><i class="fas fa-star"></i> ${supplierRating}</div>` : ''}
-                            ${isFeatured ? `<div class="rating-badge" style="right:auto;left:12px;background:rgba(243,156,18,0.85);color:#fff;"><i class="fas fa-star"></i> مميز</div>` : ''}
+                            ${contactCount > 0 ? `<div class="contact-stats"><i class="fab fa-whatsapp"></i> ${contactCount}</div>` : ''}
+                            ${isFeatured ? `<div class="contact-stats" style="right:auto;left:12px;background:rgba(243,156,18,0.85);color:#fff;"><i class="fas fa-star"></i> مميز</div>` : ''}
                             ${imageHtml}
                         </div>
                         <div class="product-info">
@@ -1955,25 +1912,18 @@
                             <h3 class="product-name">${p.name}</h3>
                             <div class="product-price-wrapper">
                                 <span class="product-price">${p.price ? p.price.toLocaleString() + ' جنيه / ' + (p.unit || '') : '💰 سعر عند الطلب'}</span>
-                                ${p.price ? `
-                                    <button class="price-alert-btn ${isAlertActive ? 'active' : ''}" 
-                                            onclick="event.stopPropagation(); setPriceAlert('${p.id}', '${p.name.replace(/'/g, "\\'")}', ${priceValue})">
-                                        <i class="fas ${isAlertActive ? 'fa-bell-slash' : 'fa-bell'}"></i>
-                                        ${isAlertActive ? 'إلغاء' : 'تنبيه'}
-                                    </button>
-                                ` : ''}
                             </div>
                             <div class="product-supplier"><i class="fas fa-building"></i> ${p.profiles?.company_name || p.profiles?.full_name || 'مورد'}</div>
                             <div class="product-meta">
                                 <span class="product-views"><i class="fas fa-eye"></i> ${viewsCount} مشاهدة</span>
-                                ${parseFloat(supplierRating) > 0 ? `<span class="supplier-rating"><i class="fas fa-star"></i> ${supplierRating}</span>` : ''}
+                                ${contactCount > 0 ? `<span class="product-contacts"><i class="fab fa-whatsapp"></i> ${contactCount} تواصل</span>` : ''}
                             </div>
                             
                             <div class="btn-group">
                                 <a href="product-details.html?id=${p.id}" class="btn btn-details" onclick="event.stopPropagation();">
                                     <i class="fas fa-info-circle"></i> تفاصيل
                                 </a>
-                                <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" onclick="event.stopPropagation();">
+                                <a href="#" class="btn btn-whatsapp" onclick="${whatsappHandler}">
                                     <i class="fab fa-whatsapp"></i> واتساب
                                 </a>
                                 <button class="btn btn-share" onclick="event.stopPropagation(); shareProduct('${p.id}', '${p.name.replace(/'/g, "\\'")}')">
@@ -2010,7 +1960,7 @@
             
             document.getElementById('pagination').innerHTML = paginationHtml
 
-            // Load featured products (separate from main list)
+            // Load featured products
             loadFeaturedProducts()
 
         } catch (e) {
@@ -2047,7 +1997,11 @@
 
             if (section) section.style.display = 'block'
 
-            // Track views for featured products
+            // Load contact counts for featured products
+            const featuredIds = featured.map(p => p.id)
+            await loadContactCounts(featuredIds)
+
+            // Track views
             featured.forEach(p => {
                 if (p.id && p.supplier_id) {
                     trackProductView(p.id, p.supplier_id)
@@ -2061,12 +2015,16 @@
                     `<div class="product-img-placeholder" style="height:160px;font-size:3rem;"><div>⭐</div><span>${p.name?.substring(0, 20) || ''}</span></div>`
 
                 const viewsCount = p.views_count || 0
+                const contactCount = contactCounts[p.id] || 0
                 const whatsappLink = getWhatsAppLink(p.profiles?.phone, p.name)
+                
+                const whatsappHandler = `event.stopPropagation(); trackWhatsAppContact('${p.id}', '${p.supplier_id}', '${p.profiles?.phone || ''}', '${p.name.replace(/'/g, "\\'")}'); window.open('${whatsappLink}', '_blank');`
 
                 return `
                     <div class="product-card featured" style="animation-delay:0s;cursor:pointer;" onclick="window.location.href='product-details.html?id=${p.id}'">
                         <div class="product-img-wrapper" style="height:160px;">
                             ${viewsCount > 0 ? `<div class="card-views"><i class="fas fa-eye"></i> ${viewsCount}</div>` : ''}
+                            ${contactCount > 0 ? `<div class="contact-stats"><i class="fab fa-whatsapp"></i> ${contactCount}</div>` : ''}
                             ${imgHtml}
                         </div>
                         <div class="product-info" style="padding:12px 16px;">
@@ -2074,11 +2032,15 @@
                             <h3 class="product-name" style="font-size:0.95rem;">${p.name}</h3>
                             <div class="product-price" style="font-size:1.1rem;">${p.price ? p.price.toLocaleString() + ' ج.م' : 'سعر عند الطلب'}</div>
                             <div class="product-supplier" style="font-size:0.75rem;">${p.profiles?.company_name || p.profiles?.full_name || 'مورد'}</div>
+                            <div class="product-meta" style="font-size:0.65rem;gap:8px;margin-top:4px;">
+                                <span class="product-views"><i class="fas fa-eye"></i> ${viewsCount}</span>
+                                ${contactCount > 0 ? `<span class="product-contacts"><i class="fab fa-whatsapp"></i> ${contactCount}</span>` : ''}
+                            </div>
                             <div class="btn-group" style="margin-top:8px;">
                                 <a href="product-details.html?id=${p.id}" class="btn btn-details" style="font-size:0.7rem;padding:6px 12px;" onclick="event.stopPropagation();">
                                     <i class="fas fa-info-circle"></i> تفاصيل
                                 </a>
-                                <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp" style="font-size:0.7rem;padding:6px 12px;" onclick="event.stopPropagation();">
+                                <a href="#" class="btn btn-whatsapp" style="font-size:0.7rem;padding:6px 12px;" onclick="${whatsappHandler}">
                                     <i class="fab fa-whatsapp"></i> واتساب
                                 </a>
                             </div>
@@ -2091,6 +2053,9 @@
             console.error('Error loading featured products:', e)
         }
     }
+
+    // ========== EXPOSE TRACK FUNCTION ==========
+    window.trackWhatsAppContact = trackWhatsAppContact
 
     // ========== PAGINATION ==========
     window.goToPage = function(page) {
@@ -2254,7 +2219,7 @@
         await loadProducts()
         setupScrollTop()
         
-        // Add share page button to header
+        // Add share page button
         const resultsCount = document.querySelector('.results-count')
         if (resultsCount) {
             const shareBtn = document.createElement('button')
