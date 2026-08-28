@@ -1594,11 +1594,12 @@
         }
     }
 
-    // ========== LOAD SUPPLIER PROFILE ==========
+    // ========== LOAD SUPPLIER PROFILE (المعدلة - مع التحقق من العناصر) ==========
     async function loadSupplierProfile() {
         if (!supplierId) {
             showToast('⚠️', 'خطأ', 'لم يتم تحديد المورد', 'error')
-            document.getElementById('profileName').textContent = 'لم يتم تحديد المورد'
+            const nameEl = document.getElementById('profileName')
+            if (nameEl) nameEl.textContent = 'لم يتم تحديد المورد'
             return
         }
 
@@ -1611,13 +1612,15 @@
 
             if (error || !supplier) {
                 showToast('❌', 'خطأ', 'لم نتمكن من العثور على المورد', 'error')
-                document.getElementById('profileName').textContent = 'مورد غير موجود'
+                const nameEl = document.getElementById('profileName')
+                if (nameEl) nameEl.textContent = 'مورد غير موجود'
                 return
             }
 
             if (supplier.user_type !== 'supplier') {
                 showToast('⚠️', 'تنبيه', 'هذا المستخدم ليس مورداً', 'error')
-                document.getElementById('profileName').textContent = 'ليس مورداً'
+                const nameEl = document.getElementById('profileName')
+                if (nameEl) nameEl.textContent = 'ليس مورداً'
                 return
             }
 
@@ -1633,43 +1636,75 @@
             const avatarColor = colors[colorIndex]
             const initial = supplier.full_name?.charAt(0)?.toUpperCase() || 'م'
 
+            // ===== تحديث العناصر مع التحقق من وجودها =====
             const avatarEl = document.getElementById('profileAvatar')
-            avatarEl.textContent = initial
-            avatarEl.style.background = avatarColor
+            if (avatarEl) {
+                avatarEl.textContent = initial
+                avatarEl.style.background = avatarColor
+            }
 
             const avatarRatingBadge = document.getElementById('avatarRatingBadge')
-            if (rating.count > 0) {
-                avatarRatingBadge.style.display = 'flex'
+            if (avatarRatingBadge) {
+                avatarRatingBadge.style.display = rating.count > 0 ? 'flex' : 'none'
             }
 
-            document.getElementById('profileName').textContent = supplier.full_name || 'مورد'
-            document.getElementById('profileCompany').innerHTML = `<i class="fas fa-building"></i> ${supplier.company_name || 'مورد مستقل'}`
-            document.getElementById('profileCity').innerHTML = `<i class="fas fa-map-marker-alt"></i> ${supplier.city || 'مدينة غير محددة'}`
+            const nameEl = document.getElementById('profileName')
+            if (nameEl) nameEl.textContent = supplier.full_name || 'مورد'
+
+            const companyEl = document.getElementById('profileCompany')
+            if (companyEl) companyEl.innerHTML = `<i class="fas fa-building"></i> ${supplier.company_name || 'مورد مستقل'}`
+
+            const cityEl = document.getElementById('profileCity')
+            if (cityEl) cityEl.innerHTML = `<i class="fas fa-map-marker-alt"></i> ${supplier.city || 'مدينة غير محددة'}`
             
-            if (supplier.bio) {
-                document.getElementById('profileBio').textContent = supplier.bio
-            }
+            const bioEl = document.getElementById('profileBio')
+            if (bioEl && supplier.bio) bioEl.textContent = supplier.bio
 
-            if (rating.count > 0) {
-                document.getElementById('ratingBadge').style.display = 'inline-flex'
-                document.getElementById('ratingValue').textContent = `${rating.avg} (${rating.count})`
+            // ===== تحديث البادجات =====
+            const ratingBadge = document.getElementById('ratingBadge')
+            const ratingValue = document.getElementById('ratingValue')
+            if (ratingBadge && ratingValue) {
+                if (rating.count > 0) {
+                    ratingBadge.style.display = 'inline-flex'
+                    ratingValue.textContent = `${rating.avg} (${rating.count})`
+                } else {
+                    ratingBadge.style.display = 'none'
+                }
             }
             
-            if (contacts > 0) {
-                document.getElementById('contactBadge').style.display = 'inline-flex'
-                document.getElementById('contactValue').textContent = contacts
+            const contactBadge = document.getElementById('contactBadge')
+            const contactValue = document.getElementById('contactValue')
+            if (contactBadge && contactValue) {
+                if (contacts > 0) {
+                    contactBadge.style.display = 'inline-flex'
+                    contactValue.textContent = contacts
+                } else {
+                    contactBadge.style.display = 'none'
+                }
             }
 
-            const whatsappLink = getWhatsAppLink(supplier.phone, supplier.full_name)
-            document.getElementById('whatsappBtn').href = whatsappLink
-            if (!supplier.phone) {
-                document.getElementById('whatsappBtn').style.display = 'none'
+            // ===== تحديث واتساب =====
+            const whatsappBtn = document.getElementById('whatsappBtn')
+            if (whatsappBtn) {
+                const whatsappLink = getWhatsAppLink(supplier.phone, supplier.full_name)
+                whatsappBtn.href = whatsappLink
+                whatsappBtn.style.display = supplier.phone ? 'inline-flex' : 'none'
             }
 
-            document.getElementById('infoPhone').textContent = supplier.phone || 'غير متاح'
-            document.getElementById('infoEmail').textContent = supplier.email || 'غير متاح'
-            document.getElementById('infoJoined').textContent = supplier.created_at ? new Date(supplier.created_at).toLocaleDateString('ar-EG') : 'غير متاح'
-            document.getElementById('infoType').textContent = 'مورد ✓'
+            // ===== تحديث المعلومات الإضافية =====
+            const infoPhone = document.getElementById('infoPhone')
+            if (infoPhone) infoPhone.textContent = supplier.phone || 'غير متاح'
+
+            const infoEmail = document.getElementById('infoEmail')
+            if (infoEmail) infoEmail.textContent = supplier.email || 'غير متاح'
+
+            const infoJoined = document.getElementById('infoJoined')
+            if (infoJoined) {
+                infoJoined.textContent = supplier.created_at ? new Date(supplier.created_at).toLocaleDateString('ar-EG') : 'غير متاح'
+            }
+
+            const infoType = document.getElementById('infoType')
+            if (infoType) infoType.textContent = 'مورد ✓'
 
             document.title = `${supplier.full_name || 'مورد'} | ملف المورد - كيماتو`
 
@@ -1817,10 +1852,13 @@
         }
     }
 
-    // ========== LOAD SUPPLIER REVIEWS (المعدلة - شغالة 100%) ==========
+    // ========== LOAD SUPPLIER REVIEWS (شغالة 100%) ==========
     async function loadSupplierReviews() {
         const container = document.getElementById('reviewsContainer')
-        if (!container) return
+        if (!container) {
+            console.error('reviewsContainer not found')
+            return
+        }
 
         try {
             console.log('🔍 جاري تحميل تقييمات المورد:', supplierId)
@@ -1838,7 +1876,8 @@
                 container.innerHTML = `
                     <div class="no-reviews">
                         <i class="fas fa-exclamation-circle"></i>
-                        <p>حدث خطأ في تحميل التقييمات: ${error.message}</p>
+                        <p>حدث خطأ في تحميل التقييمات</p>
+                        <p style="font-size:0.8rem;color:var(--gray-dark);">${error.message}</p>
                     </div>
                 `
                 return
@@ -1859,7 +1898,7 @@
                 return
             }
 
-            // 3️⃣ جلب أسماء المستخدمين
+            // 3️⃣ جلب أسماء المستخدمين (استعلام منفصل)
             const userIds = reviews.map(r => r.user_id).filter(id => id)
             let userMap = {}
             
@@ -1869,7 +1908,11 @@
                     .select('id, full_name')
                     .in('id', userIds)
                 
-                if (!usersError && users) {
+                if (usersError) {
+                    console.warn('⚠️ خطأ في جلب أسماء المستخدمين:', usersError)
+                }
+                
+                if (users && users.length > 0) {
                     userMap = users.reduce((acc, u) => {
                         acc[u.id] = u.full_name || 'مستخدم'
                         return acc
@@ -1888,11 +1931,12 @@
             renderReviews(reviewsWithUsers)
 
         } catch (e) {
-            console.error('❌ خطأ في loadSupplierReviews:', e)
+            console.error('❌ خطأ غير متوقع:', e)
             container.innerHTML = `
                 <div class="no-reviews">
                     <i class="fas fa-exclamation-circle"></i>
                     <p>حدث خطأ في تحميل التقييمات</p>
+                    <p style="font-size:0.8rem;color:var(--gray-dark);">${e.message || 'خطأ غير معروف'}</p>
                 </div>
             `
         }
@@ -2024,9 +2068,16 @@
             // تحديث بادجة التقييم
             const ratingData = await loadSupplierRating(supplierId)
             if (ratingData.count > 0) {
-                document.getElementById('ratingBadge').style.display = 'inline-flex'
-                document.getElementById('ratingValue').textContent = `${ratingData.avg} (${ratingData.count})`
-                document.getElementById('avatarRatingBadge').style.display = 'flex'
+                const ratingBadge = document.getElementById('ratingBadge')
+                const ratingValue = document.getElementById('ratingValue')
+                if (ratingBadge && ratingValue) {
+                    ratingBadge.style.display = 'inline-flex'
+                    ratingValue.textContent = `${ratingData.avg} (${ratingData.count})`
+                }
+                const avatarRatingBadge = document.getElementById('avatarRatingBadge')
+                if (avatarRatingBadge) {
+                    avatarRatingBadge.style.display = 'flex'
+                }
             }
         } catch (e) {
             console.error('Error submitting review:', e)
