@@ -265,7 +265,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* إضافة تأثير زوم للخلفية */
         @keyframes zoomBg {
             from { transform: scale(1.1); }
             to { transform: scale(1); }
@@ -485,32 +484,106 @@
             box-shadow: 0 16px 48px rgba(10, 37, 56, 0.2);
             min-height: 380px;
             
-            /* الخلفية الجديدة */
+            /* الخلفية الأساسية */
             background-image: url('chemato.png');
             background-size: cover;
             background-position: center;
             background-repeat: no-repeat;
+            background-color: #0a2538; /* خلفية احتياطية */
             
             /* تأثير الزوم عند التحميل */
             animation: zoomBg 8s ease-out forwards;
         }
 
-        /* طبقة شفافة لضمان قراءة النصوص */
-        .hero::before {
+        /* أيقونات الخلفية المتحركة (تظهر خلف الصورة) */
+        .hero-bg-icons {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            overflow: hidden;
+            pointer-events: none;
+            z-index: 0;
+            opacity: 0.15; /* خفيفة جداً بحيث لا تخفي الصورة */
+        }
+
+        .hero-bg-icons .icon-float {
+            position: absolute;
+            font-size: 2.5rem;
+            animation: floatBubble 6s ease-in-out infinite;
+        }
+
+        .hero-bg-icons .icon-float:nth-child(1) {
+            top: 10%;
+            left: 5%;
+            font-size: 3.5rem;
+            animation-delay: 0s;
+        }
+        .hero-bg-icons .icon-float:nth-child(2) {
+            top: 20%;
+            right: 8%;
+            font-size: 4rem;
+            animation-delay: 1s;
+        }
+        .hero-bg-icons .icon-float:nth-child(3) {
+            bottom: 30%;
+            left: 12%;
+            font-size: 3rem;
+            animation-delay: 2s;
+        }
+        .hero-bg-icons .icon-float:nth-child(4) {
+            bottom: 15%;
+            right: 5%;
+            font-size: 3.8rem;
+            animation-delay: 0.5s;
+        }
+        .hero-bg-icons .icon-float:nth-child(5) {
+            top: 50%;
+            left: 50%;
+            font-size: 5rem;
+            animation-delay: 1.5s;
+            opacity: 0.05;
+        }
+        .hero-bg-icons .icon-float:nth-child(6) {
+            top: 5%;
+            left: 30%;
+            font-size: 2rem;
+            animation-delay: 2.5s;
+        }
+        .hero-bg-icons .icon-float:nth-child(7) {
+            bottom: 40%;
+            right: 20%;
+            font-size: 2.8rem;
+            animation-delay: 0.8s;
+        }
+        .hero-bg-icons .icon-float:nth-child(8) {
+            top: 60%;
+            left: 8%;
+            font-size: 2.2rem;
+            animation-delay: 3s;
+        }
+
+        .hero-bg-icons .icon-float.rotate {
+            animation: rotateSlow 20s linear infinite;
+        }
+
+        /* طبقة شفافة فوق الصورة لتحسين القراءة */
+        .hero::after {
             content: '';
             position: absolute;
             top: 0;
             left: 0;
             right: 0;
             bottom: 0;
-            background: rgba(10, 37, 56, 0.6);
-            z-index: 0;
+            background: rgba(10, 37, 56, 0.5);
             backdrop-filter: blur(2px);
+            z-index: 1;
         }
 
         .hero-content {
             position: relative;
-            z-index: 1;
+            z-index: 2;
         }
 
         .hero h1 {
@@ -540,10 +613,11 @@
             padding: 4px;
             margin: 8px auto 18px;
             max-width: 850px;
-            background: rgba(26, 82, 118, 0.7);
-            backdrop-filter: blur(6px);
-            border: 1px solid rgba(255,255,255,0.1);
+            background: rgba(10, 37, 56, 0.7);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(255,255,255,0.15);
             overflow: hidden;
+            z-index: 2;
         }
 
         .stats-wrapper::before {
@@ -582,7 +656,7 @@
             font-size: 1.3rem;
             display: block;
             margin-bottom: 2px;
-            opacity: 0.8;
+            opacity: 0.9;
         }
 
         .stat-number {
@@ -603,9 +677,10 @@
 
         .stat-label {
             font-size: 0.75rem;
-            opacity: 0.7;
+            opacity: 0.8;
             display: block;
-            color: rgba(255, 255, 255, 0.9);
+            color: rgba(255, 255, 255, 0.95);
+            font-weight: 600;
         }
 
         .hero-buttons {
@@ -1459,6 +1534,9 @@
                 height: 40px;
                 font-size: 1rem;
             }
+            .hero-bg-icons .icon-float {
+                font-size: 1.5rem !important;
+            }
             .card-views, .contact-stats, .product-rating {
                 font-size: 0.55rem;
                 padding: 2px 8px;
@@ -1543,6 +1621,9 @@
                 height: 36px;
                 font-size: 0.9rem;
             }
+            .hero-bg-icons .icon-float {
+                font-size: 1.2rem !important;
+            }
         }
 
         @media (hover: none) {
@@ -1607,6 +1688,18 @@
 
         <!-- ===== HERO ===== -->
         <section class="hero animate delay-1">
+            <!-- أيقونات الخلفية المتحركة (تظهر خلف الصورة أو عند فشل تحميلها) -->
+            <div class="hero-bg-icons">
+                <span class="icon-float">🧪</span>
+                <span class="icon-float rotate">⚗️</span>
+                <span class="icon-float">🔬</span>
+                <span class="icon-float rotate">🧫</span>
+                <span class="icon-float">🧴</span>
+                <span class="icon-float">💧</span>
+                <span class="icon-float rotate">⚛️</span>
+                <span class="icon-float">🧪</span>
+            </div>
+
             <div class="hero-content">
                 <h1>🏭 <span class="highlight">سوق الكيماويات</span> في مصر</h1>
                 <p>بيع واشتري صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام</p>
