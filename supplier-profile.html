@@ -809,7 +809,7 @@
             color: var(--text-dark);
         }
 
-        /* ===== NEW: قسم التقييمات والمراجعات ===== */
+        /* ===== قسم التقييمات والمراجعات ===== */
         .reviews-section {
             background: var(--white);
             border-radius: var(--radius-md);
@@ -948,7 +948,7 @@
             color: var(--gray);
         }
 
-        /* ===== NEW: نموذج إضافة تقييم ===== */
+        /* ===== نموذج إضافة تقييم ===== */
         .review-form {
             background: var(--gray-light);
             border-radius: var(--radius-sm);
@@ -1387,7 +1387,7 @@
 
         <div id="reviewsContainer">
             <div class="no-reviews">
-                <i class="fas fa-star"></i>
+                <i class="fas fa-spinner fa-spin"></i>
                 <p>جاري تحميل التقييمات...</p>
             </div>
         </div>
@@ -1817,18 +1817,15 @@
         }
     }
 
-    // ========== LOAD SUPPLIER REVIEWS (المعدلة - بدون join) ==========
+    // ========== LOAD SUPPLIER REVIEWS (المعدلة - شغالة 100%) ==========
     async function loadSupplierReviews() {
         const container = document.getElementById('reviewsContainer')
-        if (!container) {
-            console.warn('⚠️ reviewsContainer not found')
-            return
-        }
+        if (!container) return
 
         try {
             console.log('🔍 جاري تحميل تقييمات المورد:', supplierId)
             
-            // الخطوة 1: جلب التقييمات فقط (بدون join)
+            // 1️⃣ جلب التقييمات فقط (من غير join)
             const { data: reviews, error } = await supabase
                 .from('reviews')
                 .select('*')
@@ -1849,12 +1846,20 @@
 
             console.log('✅ تم جلب التقييمات:', reviews?.length || 0)
 
+            // 2️⃣ لو مفيش تقييمات
             if (!reviews || reviews.length === 0) {
-                renderReviews([])
+                container.innerHTML = `
+                    <div class="no-reviews">
+                        <i class="fas fa-star"></i>
+                        <p>لا توجد تقييمات لهذا المورد بعد</p>
+                        <p style="font-size:0.8rem;color:var(--gray-dark);">كن أول من يقيم هذا المورد!</p>
+                    </div>
+                `
+                updateReviewSummary([])
                 return
             }
 
-            // الخطوة 2: جلب أسماء المستخدمين بشكل منفصل
+            // 3️⃣ جلب أسماء المستخدمين
             const userIds = reviews.map(r => r.user_id).filter(id => id)
             let userMap = {}
             
@@ -1870,17 +1875,16 @@
                         return acc
                     }, {})
                     console.log('👤 تم جلب أسماء المستخدمين:', Object.keys(userMap).length)
-                } else if (usersError) {
-                    console.warn('⚠️ خطأ في جلب أسماء المستخدمين:', usersError)
                 }
             }
 
-            // دمج البيانات
+            // 4️⃣ دمج البيانات
             const reviewsWithUsers = reviews.map(r => ({
                 ...r,
                 user_name: userMap[r.user_id] || 'مستخدم'
             }))
 
+            // 5️⃣ عرض التقييمات
             renderReviews(reviewsWithUsers)
 
         } catch (e) {
@@ -1894,26 +1898,13 @@
         }
     }
 
-    // ========== RENDER REVIEWS (المعدلة) ==========
-    function renderReviews(reviews) {
-        const container = document.getElementById('reviewsContainer')
+    // ========== UPDATE REVIEW SUMMARY ==========
+    function updateReviewSummary(reviews) {
         const avgRatingEl = document.getElementById('avgRating')
         const ratingCountEl = document.getElementById('ratingCount')
         const starsContainer = document.getElementById('ratingStars')
 
-        if (!container) {
-            console.warn('⚠️ reviewsContainer not found')
-            return
-        }
-
         if (!reviews || reviews.length === 0) {
-            container.innerHTML = `
-                <div class="no-reviews">
-                    <i class="fas fa-star"></i>
-                    <p>لا توجد تقييمات لهذا المورد بعد</p>
-                    <p style="font-size:0.8rem;color:var(--gray-dark);">كن أول من يقيم هذا المورد!</p>
-                </div>
-            `
             if (avgRatingEl) avgRatingEl.textContent = '0'
             if (ratingCountEl) ratingCountEl.textContent = '(0)'
             if (starsContainer) {
@@ -1935,6 +1926,26 @@
             for (let i = 0; i < 5; i++) {
                 starsContainer.innerHTML += `<span class="star ${i < fullStars ? 'filled' : ''}">★</span>`
             }
+        }
+    }
+
+    // ========== RENDER REVIEWS ==========
+    function renderReviews(reviews) {
+        const container = document.getElementById('reviewsContainer')
+        if (!container) return
+
+        // تحديث الملخص
+        updateReviewSummary(reviews)
+
+        if (!reviews || reviews.length === 0) {
+            container.innerHTML = `
+                <div class="no-reviews">
+                    <i class="fas fa-star"></i>
+                    <p>لا توجد تقييمات لهذا المورد بعد</p>
+                    <p style="font-size:0.8rem;color:var(--gray-dark);">كن أول من يقيم هذا المورد!</p>
+                </div>
+            `
+            return
         }
 
         container.innerHTML = reviews.map(review => {
@@ -2007,8 +2018,10 @@
             if (commentEl) commentEl.value = ''
             if (ratingEl) ratingEl.value = '5'
 
-            // إعادة تحميل التقييمات والإحصائيات
+            // إعادة تحميل التقييمات
             await loadSupplierReviews()
+            
+            // تحديث بادجة التقييم
             const ratingData = await loadSupplierRating(supplierId)
             if (ratingData.count > 0) {
                 document.getElementById('ratingBadge').style.display = 'inline-flex'
