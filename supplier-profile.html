@@ -1817,13 +1817,10 @@
         }
     }
 
-    // ========== LOAD SUPPLIER REVIEWS (شغالة 100%) ==========
+    // ========== LOAD SUPPLIER REVIEWS (المعدلة - شغالة 100%) ==========
     async function loadSupplierReviews() {
         const container = document.getElementById('reviewsContainer')
-        if (!container) {
-            console.error('reviewsContainer not found')
-            return
-        }
+        if (!container) return
 
         try {
             console.log('🔍 جاري تحميل تقييمات المورد:', supplierId)
@@ -1841,8 +1838,7 @@
                 container.innerHTML = `
                     <div class="no-reviews">
                         <i class="fas fa-exclamation-circle"></i>
-                        <p>حدث خطأ في تحميل التقييمات</p>
-                        <p style="font-size:0.8rem;color:var(--gray-dark);">${error.message}</p>
+                        <p>حدث خطأ في تحميل التقييمات: ${error.message}</p>
                     </div>
                 `
                 return
@@ -1863,7 +1859,7 @@
                 return
             }
 
-            // 3️⃣ جلب أسماء المستخدمين (استعلام منفصل)
+            // 3️⃣ جلب أسماء المستخدمين
             const userIds = reviews.map(r => r.user_id).filter(id => id)
             let userMap = {}
             
@@ -1873,11 +1869,7 @@
                     .select('id, full_name')
                     .in('id', userIds)
                 
-                if (usersError) {
-                    console.warn('⚠️ خطأ في جلب أسماء المستخدمين:', usersError)
-                }
-                
-                if (users && users.length > 0) {
+                if (!usersError && users) {
                     userMap = users.reduce((acc, u) => {
                         acc[u.id] = u.full_name || 'مستخدم'
                         return acc
@@ -1896,12 +1888,11 @@
             renderReviews(reviewsWithUsers)
 
         } catch (e) {
-            console.error('❌ خطأ غير متوقع:', e)
+            console.error('❌ خطأ في loadSupplierReviews:', e)
             container.innerHTML = `
                 <div class="no-reviews">
                     <i class="fas fa-exclamation-circle"></i>
                     <p>حدث خطأ في تحميل التقييمات</p>
-                    <p style="font-size:0.8rem;color:var(--gray-dark);">${e.message || 'خطأ غير معروف'}</p>
                 </div>
             `
         }
