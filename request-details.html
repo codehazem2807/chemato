@@ -132,11 +132,6 @@
             0%, 100% { opacity: 1; transform: scale(1); }
             50% { opacity: 0.75; transform: scale(1.02); }
         }
-        @keyframes ringPulse {
-            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.6); }
-            70% { box-shadow: 0 0 0 12px rgba(46, 204, 113, 0); }
-            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
-        }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
@@ -510,7 +505,7 @@
         .card-body { padding: 20px 22px; }
 
         /* ============================================================
-           INFO GRID (تفاصيل الطلب)
+           INFO GRID
            ============================================================ */
         .info-grid {
             display: grid;
@@ -585,7 +580,6 @@
             color: var(--c-accent-dark);
         }
 
-        /* الوصف */
         .description-box {
             background: linear-gradient(135deg, rgba(230, 126, 34, 0.06), rgba(230, 126, 34, 0.02));
             padding: 16px 20px;
@@ -611,7 +605,7 @@
         }
 
         /* ============================================================
-           OWNER CARD (صاحب الطلب)
+           OWNER CARD
            ============================================================ */
         .owner-card {
             background: linear-gradient(135deg, rgba(44, 122, 184, 0.06), rgba(44, 122, 184, 0.02));
@@ -1022,7 +1016,6 @@
             transform: translateY(-1px);
         }
 
-        /* Empty offers */
         .offers-empty {
             text-align: center;
             padding: 40px 20px;
@@ -1228,7 +1221,7 @@
         }
 
         /* ============================================================
-           MINI REQUEST CARDS (Similar)
+           MINI CARDS (Similar)
            ============================================================ */
         .similar-list {
             display: flex;
@@ -1342,16 +1335,6 @@
         .btn-back-home:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 32px rgba(10, 37, 64, 0.35);
-        }
-
-        /* ============================================================
-           SKELETON
-           ============================================================ */
-        .skeleton {
-            background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: var(--r-md);
         }
 
         /* ============================================================
@@ -1679,33 +1662,11 @@
                     </div>
                 </form>
             </div>
-        </div>
-    </div>
-
-    <!-- TOAST -->
-    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
-
-    <!-- FOOTER -->
-    <footer class="footer" role="contentinfo">
-        <div class="footer-inner">
-            <div class="footer-links">
-                <a href="index.html">الرئيسية</a>
-                <a href="all-products.html">المنتجات</a>
-                <a href="all-requests.html">الطلبات</a>
-                <a href="chemato-suppliers.html">الموردين</a>
-                <a href="blog.html">المدونة</a>
-                <a href="auth.html">تسجيل الدخول</a>
-                <a href="supplier-dashboard.html">للموردين</a>
-                <a href="buyer-dashboard.html">للعملاء</a>
-            </div>
-            <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
-        </div>
-    </footer>
-        <script type="module">
+        </div>    <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
         const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTcwMjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
 
         const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
             auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
@@ -1745,6 +1706,7 @@
         };
 
         const sanitizePhone = (p) => p ? String(p).replace(/\D/g, '') : '';
+
         const isValidUUID = (id) =>
             id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
 
@@ -2041,80 +2003,138 @@
         };
 
         // ============================================================
+        // FETCH SUPPLIERS MAP
+        // ============================================================
+        const fetchSuppliersMap = async (supplierIds) => {
+            const map = {};
+            if (!supplierIds.length || !supabase) return map;
+            try {
+                const { data, error } = await supabase
+                    .from('profiles')
+                    .select('id, full_name, company_name, phone, whatsapp, city, is_verified, avatar_url, user_type')
+                    .in('id', supplierIds);
+
+                if (error) {
+                    console.warn('Suppliers fetch error:', error.message);
+                    return map;
+                }
+                (data || []).forEach(s => { map[s.id] = s; });
+            } catch (e) {
+                console.warn('Suppliers fetch exception:', e.message);
+            }
+            return map;
+        };
+
+        // ============================================================
+        // LOAD OFFERS
+        // ============================================================
+        const loadOffers = async () => {
+            try {
+                console.log('🔄 Fetching offers for request:', state.requestId);
+
+                const { data: offers, error: offersError } = await supabase
+                    .from('offers')
+                    .select('*')
+                    .eq('request_id', state.requestId)
+                    .order('price', { ascending: true });
+
+                if (offersError) {
+                    console.warn('⚠️ Offers fetch error:', offersError.message, offersError.code);
+                    return [];
+                }
+
+                if (!offers || !offers.length) {
+                    console.log('ℹ️ No offers found');
+                    return [];
+                }
+
+                console.log(`✅ Found ${offers.length} offers`);
+
+                const supplierIds = [...new Set(offers.map(o => o.supplier_id).filter(Boolean))];
+                const suppliersMap = await fetchSuppliersMap(supplierIds);
+
+                const enriched = offers.map(offer => ({
+                    ...offer,
+                    supplier: suppliersMap[offer.supplier_id] || null,
+                }));
+
+                return enriched;
+
+            } catch (err) {
+                console.error('❌ Load offers exception:', err);
+                return [];
+            }
+        };
+
+        // ============================================================
         // LOAD REQUEST
         // ============================================================
         const loadRequest = async () => {
-            if (!state.requestId) {
-                renderError('لم يتم تحديد الطلب', 'الرابط غير صحيح أو ناقص.');
+            if (!state.requestId || !isValidUUID(state.requestId)) {
+                renderError('رابط غير صحيح', 'الطلب المطلوب غير موجود أو الرابط خطأ.');
                 return;
             }
 
             try {
-                // 1. جلب الطلب
+                console.log('🔄 Loading request:', state.requestId);
+
                 const { data: request, error } = await supabase
                     .from('purchase_requests')
-                    .select(`
-                        *,
-                        buyer:profiles!buyer_id(
-                            id, full_name, company_name, phone, whatsapp, city, address,
-                            is_verified, user_type, avatar_url
-                        )
-                    `)
+                    .select('*')
                     .eq('id', state.requestId)
                     .single();
 
                 if (error || !request) {
+                    console.error('❌ Request fetch error:', error);
                     renderError('الطلب غير موجود', 'ربما تم حذفه أو انتهت صلاحيته.');
                     return;
                 }
 
-                state.request = request;
+                console.log('✅ Request loaded:', request.product_name);
+
+                let buyerData = null;
+                if (request.buyer_id) {
+                    const { data: buyer } = await supabase
+                        .from('profiles')
+                        .select('id, full_name, company_name, phone, whatsapp, city, address, is_verified, user_type, avatar_url')
+                        .eq('id', request.buyer_id)
+                        .single();
+                    buyerData = buyer;
+                }
+
+                state.request = { ...request, buyer: buyerData };
                 state.isOwnRequest = state.user && request.buyer_id === state.user.id;
 
-                // 2. زيادة المشاهدات (بدون انتظار)
-                supabase.rpc('increment_request_views', { request_id: state.requestId })
-                    .then(() => {})
-                    .catch(() => {
-                        // fallback: update مباشر
-                        supabase.from('purchase_requests')
-                            .update({ views_count: (request.views_count || 0) + 1 })
-                            .eq('id', state.requestId)
-                            .then(() => {});
-                    });
+                // زيادة المشاهدات
+                try {
+                    supabase.rpc('increment_request_views', { request_id: state.requestId })
+                        .then(() => {})
+                        .catch(() => {
+                            supabase.from('purchase_requests')
+                                .update({ views_count: (request.views_count || 0) + 1 })
+                                .eq('id', state.requestId)
+                                .then(() => {});
+                        });
+                } catch (e) { /* silent */ }
 
-                // 3. جلب العروض
-                const { data: offers } = await supabase
-                    .from('offers')
-                    .select(`
-                        *,
-                        supplier:profiles!supplier_id(
-                            id, full_name, company_name, phone, whatsapp, city,
-                            is_verified, avatar_url
-                        )
-                    `)
-                    .eq('request_id', state.requestId)
-                    .order('price', { ascending: true });
+                // جلب العروض
+                state.offers = await loadOffers();
 
-                state.offers = offers || [];
                 state.hasUserOffered = state.user
                     ? state.offers.some(o => o.supplier_id === state.user.id)
                     : false;
 
-                // 4. تحديث الـ breadcrumb
-                document.getElementById('breadcrumbCurrent').textContent =
-                    request.product_name?.substring(0, 40) || 'تفاصيل الطلب';
+                const bc = document.getElementById('breadcrumbCurrent');
+                if (bc) bc.textContent = request.product_name?.substring(0, 40) || 'تفاصيل الطلب';
 
-                // 5. تحديث عنوان الصفحة
                 document.title = `${request.product_name} | كيماتو - طلب شراء`;
 
-                // 6. Render
                 renderRequestPage();
 
-                // 7. جلب طلبات مشابهة (بعد الرندر عشان الصفحة ظهرت)
                 loadSimilarRequests().catch(() => {});
 
             } catch (err) {
-                console.error('Load request error:', err);
+                console.error('❌ Load request exception:', err);
                 renderError('حدث خطأ', 'تعذر تحميل تفاصيل الطلب. حاول تحديث الصفحة.');
             }
         };
@@ -2127,7 +2147,7 @@
             try {
                 let query = supabase
                     .from('purchase_requests')
-                    .select('id, product_name, quantity_needed, created_at, status, location')
+                    .select('id, product_name, quantity_needed, created_at, status, location, category')
                     .eq('status', 'open')
                     .neq('id', state.requestId)
                     .order('created_at', { ascending: false })
@@ -2194,7 +2214,6 @@
             const waMessage = encodeURIComponent(`مرحباً، بخصوص طلبكم على كيماتو: ${r.product_name}`);
             const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMessage}` : '';
 
-            // Budget display
             let budgetText = 'غير محدد';
             if (r.budget_min || r.budget_max) {
                 const min = r.budget_min ? Number(r.budget_min).toLocaleString('ar-EG') : '';
@@ -2204,16 +2223,15 @@
                 else budgetText = `حتى ${max} ج.م`;
             }
 
-            // Offers stats
             const offersCount = state.offers.length;
-            const bestPrice = offersCount > 0
-                ? Math.min(...state.offers.filter(o => o.status !== 'rejected').map(o => Number(o.price)).filter(p => p > 0))
+            const validOffers = state.offers.filter(o => o.status !== 'rejected');
+            const bestPrice = validOffers.length > 0
+                ? Math.min(...validOffers.map(o => Number(o.price)).filter(p => p > 0))
                 : null;
             const acceptedOffer = state.offers.find(o => o.status === 'accepted');
 
             document.getElementById('pageContent').innerHTML = `
 
-                <!-- HEADER CARD -->
                 <section class="request-header-card animate-in">
                     <div class="header-bg-icons" aria-hidden="true">
                         <span class="icon-float">📋</span>
@@ -2238,17 +2256,12 @@
 
                             <div class="header-actions-top">
                                 <button class="header-icon-btn ${isWishlisted ? 'active' : ''}"
-                                        id="wishlistBtn"
-                                        type="button"
-                                        aria-label="حفظ في المفضلة"
-                                        title="حفظ في المفضلة">
+                                        id="wishlistBtn" type="button"
+                                        aria-label="حفظ في المفضلة" title="حفظ في المفضلة">
                                     <i class="fas fa-heart"></i>
                                 </button>
-                                <button class="header-icon-btn"
-                                        id="shareBtn"
-                                        type="button"
-                                        aria-label="مشاركة"
-                                        title="مشاركة">
+                                <button class="header-icon-btn" id="shareBtn" type="button"
+                                        aria-label="مشاركة" title="مشاركة">
                                     <i class="fas fa-share-alt"></i>
                                 </button>
                             </div>
@@ -2291,13 +2304,10 @@
                     </div>
                 </section>
 
-                <!-- CONTENT LAYOUT -->
                 <div class="content-layout">
 
-                    <!-- MAIN COLUMN -->
                     <div class="main-column">
 
-                        <!-- تفاصيل الطلب -->
                         <section class="card animate-in" style="animation-delay: 0.05s;">
                             <div class="card-header">
                                 <div class="card-title">
@@ -2394,7 +2404,6 @@
                             </div>
                         </section>
 
-                        <!-- العروض -->
                         <section class="card animate-in" id="offersSection" style="animation-delay: 0.1s;">
                             <div class="card-header">
                                 <div class="card-title">
@@ -2413,10 +2422,8 @@
 
                     </div>
 
-                    <!-- SIDE COLUMN -->
                     <aside class="side-column">
 
-                        <!-- صاحب الطلب -->
                         <section class="card owner-card animate-in" style="animation-delay: 0.15s;">
                             <div class="card-header">
                                 <div class="card-title">
@@ -2478,7 +2485,6 @@
                             </div>
                         </section>
 
-                        <!-- طلبات مشابهة -->
                         <section class="card animate-in" id="similarSection" style="display: none; animation-delay: 0.2s;">
                             <div class="card-header">
                                 <div class="card-title">
@@ -2495,29 +2501,24 @@
                 </div>
             `;
 
-            // Re-init dynamic content
             bindPageEvents();
         };
 
         const renderOfferButton = () => {
-            // لو إنت صاحب الطلب → مفيش زرار
             if (state.isOwnRequest) return '';
 
-            // لو مش مسجّل
             if (!state.user) {
                 return `<button class="btn-offer-submit" id="openOfferBtn" type="button">
                             <i class="fas fa-paper-plane"></i> قدّم عرض
                         </button>`;
             }
 
-            // لو مش مورد
             if (!state.isSupplier) {
                 return `<button class="btn-offer-submit" id="openOfferBtn" type="button" style="opacity: 0.7;">
                             <i class="fas fa-info-circle"></i> للموردين فقط
                         </button>`;
             }
 
-            // لو قدّم عرض بالفعل
             if (state.hasUserOffered) {
                 return `<span style="font-size:0.78rem; color: var(--c-accent-dark); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
                             <i class="fas fa-check-circle"></i> قدّمت عرضاً
@@ -2530,7 +2531,6 @@
         };
 
         const renderOffersContent = (bestPrice, acceptedOffer) => {
-            // حالة الطلب مغلق / مطابق
             if (state.request.status === 'closed' || state.request.status === 'expired') {
                 if (!state.offers.length) {
                     return `
@@ -2558,7 +2558,6 @@
                 `;
             }
 
-            // Stats bar
             const validOffers = state.offers.filter(o => o.status !== 'rejected');
             const avgPrice = validOffers.length
                 ? validOffers.reduce((s, o) => s + Number(o.price), 0) / validOffers.length
@@ -2691,10 +2690,8 @@
         // PAGE EVENTS
         // ============================================================
         const bindPageEvents = () => {
-            // Wishlist
             document.getElementById('wishlistBtn')?.addEventListener('click', toggleWishlist);
 
-            // Share
             document.getElementById('shareBtn')?.addEventListener('click', async () => {
                 const url = window.location.href;
                 const title = state.request?.product_name || 'طلب شراء';
@@ -2712,7 +2709,6 @@
                 }
             });
 
-            // Copy buttons
             document.querySelectorAll('[data-copy]').forEach(btn => {
                 btn.addEventListener('click', async () => {
                     const text = btn.dataset.copy;
@@ -2725,25 +2721,20 @@
                 });
             });
 
-            // Open offer modal
             const openOfferHandler = () => {
-                // لو مش مسجّل
                 if (!state.user) {
                     showToast('🔒', 'سجّل دخولك', 'لازم تكون مسجّل كمورد لتقديم عرض',
                         'تسجيل الدخول', 'auth.html?redirect=offer', 'warning');
                     return;
                 }
-                // لو مش مورد
                 if (!state.isSupplier) {
                     showToast('⚠️', 'غير مسموح', 'فقط الموردين يقدروا يقدّموا عروض', null, null, 'warning');
                     return;
                 }
-                // لو قدّم قبل كده
                 if (state.hasUserOffered) {
                     showToast('ℹ️', 'قدّمت عرضاً بالفعل', 'لا يمكنك تقديم أكثر من عرض على نفس الطلب', null, null, 'info');
                     return;
                 }
-                // لو الطلب مش مفتوح
                 if (state.request.status !== 'open') {
                     showToast('⚠️', 'الطلب مغلق', 'لا يمكن تقديم عرض على طلب غير مفتوح', null, null, 'warning');
                     return;
@@ -2754,7 +2745,6 @@
             document.getElementById('openOfferBtn')?.addEventListener('click', openOfferHandler);
             document.getElementById('openOfferBtnEmpty')?.addEventListener('click', openOfferHandler);
 
-            // Accept / Reject offer buttons
             document.querySelectorAll('[data-action="accept-offer"], [data-action="reject-offer"]').forEach(btn => {
                 btn.addEventListener('click', () => {
                     const action = btn.dataset.action;
@@ -2774,7 +2764,7 @@
             const notice = document.getElementById('offerNotice');
 
             form?.reset();
-            notice.style.display = 'none';
+            if (notice) notice.style.display = 'none';
 
             modal.classList.add('show');
             setTimeout(() => document.getElementById('offerPrice')?.focus(), 300);
@@ -2791,7 +2781,6 @@
             form.addEventListener('submit', async (e) => {
                 e.preventDefault();
 
-                // Validations
                 if (!state.user) {
                     showToast('🔒', 'سجّل دخولك أولاً', '', null, null, 'warning');
                     return;
@@ -2827,23 +2816,31 @@
                         status: 'pending',
                     };
 
-                    const { data: inserted, error } = await supabase
+                    console.log('📤 Submitting offer:', insertData);
+
+                    const { error } = await supabase
                         .from('offers')
                         .insert(insertData)
                         .select()
                         .single();
 
-                    if (error) throw error;
+                    if (error) {
+                        console.error('❌ Offer insert error:', error);
+                        throw error;
+                    }
 
                     showToast('✅', 'تم إرسال عرضك!', 'صاحب الطلب هيتواصل معك قريباً', null, null, 'success');
                     closeOfferModal();
 
-                    // إعادة تحميل العروض
                     setTimeout(() => loadRequest(), 800);
 
                 } catch (err) {
                     console.error('Offer submit error:', err);
-                    showToast('⚠️', 'خطأ', err.message || 'تعذر إرسال العرض', null, null, 'error');
+                    let errorMsg = err.message || 'تعذر إرسال العرض';
+                    if (err.code === '23505' || errorMsg.includes('duplicate')) {
+                        errorMsg = 'قدّمت عرضاً على هذا الطلب بالفعل';
+                    }
+                    showToast('⚠️', 'خطأ', errorMsg, null, null, 'error');
                 } finally {
                     submitBtn.disabled = false;
                     submitBtn.innerHTML = originalText;
@@ -2869,7 +2866,6 @@
             if (!confirm('هل أنت متأكد من قبول هذا العرض؟ سيتم رفض باقي العروض تلقائياً.')) return;
 
             try {
-                // 1. قبول العرض
                 const { error: acceptErr } = await supabase
                     .from('offers')
                     .update({ status: 'accepted' })
@@ -2877,14 +2873,12 @@
 
                 if (acceptErr) throw acceptErr;
 
-                // 2. رفض باقي العروض
                 await supabase
                     .from('offers')
                     .update({ status: 'rejected' })
                     .eq('request_id', state.requestId)
                     .neq('id', offerId);
 
-                // 3. تحديث حالة الطلب
                 await supabase
                     .from('purchase_requests')
                     .update({ status: 'matched' })
@@ -2892,7 +2886,6 @@
 
                 showToast('✅', 'تم قبول العرض!', 'تم إشعار المورد ورفض باقي العروض', null, null, 'success');
 
-                // إعادة تحميل
                 setTimeout(() => loadRequest(), 600);
 
             } catch (err) {
@@ -2962,37 +2955,25 @@
         const init = async () => {
             console.log('🚀 كيماتو | تفاصيل الطلب');
 
-            // Get request id from URL
             const urlParams = new URLSearchParams(window.location.search);
             state.requestId = urlParams.get('id');
+            console.log('📍 Request ID from URL:', state.requestId);
 
-            // Theme
             initTheme();
-
-            // Navbar
             initNavbar();
-
-            // Offer form
             initOfferForm();
-
-            // Wishlist local
             loadWishlistLocal();
 
-            // Auth
             await checkUser();
 
-            // Sync wishlist if logged in
             if (state.user) {
                 await syncWishlistFromDB();
             }
 
-            // Load request
             await loadRequest();
 
-            // Realtime
             if (state.requestId) setupRealtime();
 
-            // Keyboard ESC closes modal
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape') {
                     closeOfferModal();
@@ -3003,7 +2984,6 @@
             console.log('✅ جاهز');
         };
 
-        // Auth state changes
         supabase.auth.onAuthStateChange(async () => {
             await checkUser();
             if (state.user) await syncWishlistFromDB();
@@ -3019,3 +2999,25 @@
     </script>
 </body>
 </html>
+    </div>
+
+    <!-- TOAST -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="all-products.html">المنتجات</a>
+                <a href="all-requests.html">الطلبات</a>
+                <a href="chemato-suppliers.html">الموردين</a>
+                <a href="blog.html">المدونة</a>
+                <a href="auth.html">تسجيل الدخول</a>
+                <a href="supplier-dashboard.html">للموردين</a>
+                <a href="buyer-dashboard.html">للعملاء</a>
+            </div>
+            <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
+        </div>
+    </footer>
+    
