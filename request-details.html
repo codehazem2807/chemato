@@ -1,1317 +1,3021 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>كيماتو | تفاصيل الطلب</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+
+    <title>كيماتو | تفاصيل طلب الشراء</title>
+    <meta name="description" content="تفاصيل طلب شراء المواد الكيماوية على كيماتو — شاهد العروض من الموردين وقدّم عرضك الآن." />
+    <meta name="robots" content="index, follow" />
+    <meta name="keywords" content="طلبات شراء,كيماويات,كيماتو,عروض أسعار,RFQ,مواد خام,مصر" />
+
+    <meta property="og:title" content="كيماتو | تفاصيل طلب الشراء" />
+    <meta property="og:description" content="شاهد تفاصيل الطلب والعروض من الموردين على كيماتو." />
+    <meta property="og:type" content="article" />
+    <meta property="og:url" content="https://chemato.vercel.app/request-details.html" />
+    <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
+    <meta property="og:locale" content="ar_EG" />
+    <meta property="og:site_name" content="كيماتو" />
+
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="كيماتو | تفاصيل طلب الشراء" />
+    <meta name="twitter:description" content="شاهد تفاصيل الطلب والعروض من الموردين." />
+    <meta name="twitter:image" content="https://chemato.vercel.app/logo.png" />
+
+    <link rel="canonical" href="https://chemato.vercel.app/request-details.html" />
+    <link rel="icon" type="image/x-icon" href="logo.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
+    <link rel="apple-touch-icon" href="logo-192.png" />
+    <meta name="theme-color" content="#0a2540" />
+
+    <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
+    <link rel="preconnect" href="https://cdn.jsdelivr.net" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
+
+    <link rel="preload" href="/logo-192.png" as="image" />
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" as="style" />
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
         :root {
-            --primary-dark: #0c2d4a;
-            --primary: #1a4a6e;
-            --primary-light: #2d7a9e;
-            --accent: #3498db;
-            --accent-dark: #2c81ba;
-            --gray-light: #f8fafc;
-            --gray: #e2e8f0;
-            --gray-dark: #64748b;
-            --text-dark: #0c2d4a;
-            --text-light: #475569;
-            --white: #ffffff;
-            --danger: #e53e3e;
-            --success: #2a9d8f;
-            --warning: #f4a261;
-            --whatsapp: #25D366;
-            --whatsapp-dark: #128C7E;
-            --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
-            --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
-            --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
-            --radius-sm: 16px;
-            --radius-md: 24px;
-            --radius-lg: 32px;
+            --c-primary-50:  #eef6fc;
+            --c-primary-100: #d4e7f5;
+            --c-primary-500: #2c7ab8;
+            --c-primary-600: #1d5b8e;
+            --c-primary-700: #144167;
+            --c-primary-800: #0d2e4a;
+            --c-primary-900: #0a2540;
+            --c-accent:      #2ecc71;
+            --c-accent-dark: #22a95c;
+            --c-warning:     #f39c12;
+            --c-danger:      #e74c3c;
+            --c-whatsapp:    #25D366;
+            --c-purple:      #8b5cf6;
+            --c-verified:    #1e88e5;
+            --c-request:     #e67e22;
+            --c-request-dark:#d35400;
+            --c-bg:          #f6f8fb;
+            --c-surface:     #ffffff;
+            --c-surface-2:   #f9fbfd;
+            --c-border:      #e3eaf2;
+            --c-text:        #0a1f33;
+            --c-text-muted:  #5a6b7e;
+            --c-text-sub:    #8595a8;
+            --sh-sm:  0 1px 3px rgba(10, 37, 64, 0.06);
+            --sh-md:  0 4px 16px rgba(10, 37, 64, 0.08);
+            --sh-lg:  0 12px 32px rgba(10, 37, 64, 0.10);
+            --sh-xl:  0 20px 48px rgba(10, 37, 64, 0.14);
+            --r-sm: 8px;
+            --r-md: 14px;
+            --r-lg: 20px;
+            --r-xl: 28px;
+            --r-full: 999px;
+            --t-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+            --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+            --t-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+            --container: 1320px;
+            --header-h: 68px;
         }
 
+        [data-theme="dark"] {
+            --c-bg:         #0a1520;
+            --c-surface:    #101e2e;
+            --c-surface-2:  #16273a;
+            --c-border:     #1f3349;
+            --c-text:       #e8eef5;
+            --c-text-muted: #9fb1c4;
+            --c-text-sub:   #6e8298;
+            --sh-sm:  0 1px 3px rgba(0, 0, 0, 0.3);
+            --sh-md:  0 4px 16px rgba(0, 0, 0, 0.35);
+            --sh-lg:  0 12px 32px rgba(0, 0, 0, 0.45);
+            --sh-xl:  0 20px 48px rgba(0, 0, 0, 0.55);
+        }
+
+        *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
         body {
-            font-family: 'Cairo', 'Tahoma', sans-serif;
-            background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
+            font-family: 'Cairo', system-ui, -apple-system, sans-serif;
+            background: var(--c-bg);
+            color: var(--c-text);
+            line-height: 1.6;
             min-height: 100vh;
-            color: var(--text-dark);
+            overflow-x: hidden;
+            transition: background-color var(--t-base), color var(--t-base);
+        }
+        img { max-width: 100%; display: block; }
+        button { font-family: inherit; cursor: pointer; border: none; background: none; }
+        a { color: inherit; text-decoration: none; }
+        input, select, textarea { font-family: inherit; }
+
+        :focus-visible { outline: 3px solid var(--c-primary-500); outline-offset: 2px; border-radius: var(--r-sm); }
+
+        .skip-link {
+            position: absolute; top: -100px; right: 16px;
+            background: var(--c-primary-900); color: #fff;
+            padding: 12px 20px; border-radius: var(--r-md);
+            z-index: 9999; transition: top var(--t-fast);
+        }
+        .skip-link:focus { top: 16px; }
+
+        @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.3); } 50% { transform: scale(1); } 75% { transform: scale(1.2); } 100% { transform: scale(1); } }
+        @keyframes badgePop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes countdownPulse {
+            0%, 100% { opacity: 1; transform: scale(1); }
+            50% { opacity: 0.75; transform: scale(1.02); }
+        }
+        @keyframes ringPulse {
+            0% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.6); }
+            70% { box-shadow: 0 0 0 12px rgba(46, 204, 113, 0); }
+            100% { box-shadow: 0 0 0 0 rgba(46, 204, 113, 0); }
         }
 
-        /* ========== الهيدر ========== */
+        .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
+
+        /* ============================================================
+           NAVBAR
+           ============================================================ */
         .navbar {
-            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
-            padding: 14px 40px;
+            position: sticky; top: 0; z-index: 100;
+            background: rgba(10, 37, 64, 0.85);
+            backdrop-filter: saturate(180%) blur(20px);
+            -webkit-backdrop-filter: saturate(180%) blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 0 24px;
+            height: var(--header-h);
+        }
+        .navbar-inner {
+            max-width: var(--container); width: 100%;
+            margin: 0 auto; height: 100%;
+            display: flex; justify-content: space-between;
+            align-items: center; gap: 16px;
+        }
+        .logo a { display: flex; align-items: center; gap: 10px; color: #fff; }
+        .logo img { width: 42px; height: 42px; border-radius: 50%; border: 2px solid rgba(230, 126, 34, 0.5); object-fit: cover; background: #fff; }
+        .logo-text { font-weight: 800; font-size: 19px; color: #fff; white-space: nowrap; }
+        .logo-text .blue { color: #5eb8ee; }
+        .logo-text .gray { color: rgba(255, 255, 255, 0.6); font-weight: 400; font-size: 0.9em; }
+
+        .nav-links { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
+        .nav-links a, .dropdown-btn {
+            color: rgba(255, 255, 255, 0.85);
+            padding: 8px 16px;
+            border-radius: var(--r-full);
+            font-weight: 600; font-size: 0.88rem;
+            transition: all var(--t-fast);
+            display: inline-flex; align-items: center; gap: 6px;
+            background: transparent;
+        }
+        .nav-links a:hover, .dropdown-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
+        .nav-links a.active { background: rgba(230, 126, 34, 0.18); color: #ffb877; }
+
+        .theme-toggle {
+            width: 40px; height: 40px; border-radius: 50%;
+            background: rgba(255, 255, 255, 0.08); color: #fff;
+            display: inline-flex; align-items: center; justify-content: center;
+            font-size: 1rem; transition: all var(--t-fast);
+        }
+        .theme-toggle:hover { background: rgba(255, 255, 255, 0.15); transform: rotate(15deg); }
+
+        .dropdown { position: relative; }
+        .dropdown-content {
+            position: absolute; top: calc(100% + 8px); left: 0;
+            background: var(--c-surface); min-width: 220px;
+            border-radius: var(--r-md); box-shadow: var(--sh-xl);
+            border: 1px solid var(--c-border); overflow: hidden;
+            opacity: 0; visibility: hidden;
+            transform: translateY(-8px);
+            transition: all var(--t-base); z-index: 1000;
+        }
+        .dropdown-content.show { opacity: 1; visibility: visible; transform: translateY(0); }
+        .dropdown-content a {
+            color: var(--c-text); padding: 12px 18px;
+            display: flex; align-items: center; gap: 10px;
+            font-size: 0.9rem; font-weight: 500;
+            border-bottom: 1px solid var(--c-border);
+            transition: all var(--t-fast);
+        }
+        .dropdown-content a:last-child { border-bottom: none; }
+        .dropdown-content a:hover { background: var(--c-surface-2); color: var(--c-primary-600); padding-right: 24px; }
+        .dropdown-content a.logout { color: var(--c-danger); }
+
+        .menu-toggle {
+            display: none; width: 42px; height: 42px;
+            border-radius: var(--r-md);
+            background: rgba(255, 255, 255, 0.08); color: #fff;
+            align-items: center; justify-content: center; font-size: 1.1rem;
+        }
+
+        /* ============================================================
+           MAIN
+           ============================================================ */
+        .main-container { max-width: 1200px; margin: 0 auto; padding: 20px 24px 60px; }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            margin-bottom: 16px;
+            font-size: 0.85rem;
+            color: var(--c-text-muted);
+            flex-wrap: wrap;
+        }
+        .breadcrumb a {
+            color: var(--c-primary-600);
+            font-weight: 600;
+            transition: all var(--t-fast);
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+        }
+        .breadcrumb a:hover { color: var(--c-request-dark); }
+        .breadcrumb i {
+            font-size: 0.7rem;
+            opacity: 0.5;
+        }
+
+        /* ============================================================
+           HEADER CARD
+           ============================================================ */
+        .request-header-card {
+            position: relative;
+            border-radius: var(--r-xl);
+            padding: 36px 40px 32px;
+            overflow: hidden;
+            background:
+                radial-gradient(ellipse at top right, rgba(230, 126, 34, 0.25), transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(46, 204, 113, 0.10), transparent 50%),
+                linear-gradient(135deg, #1a2942 0%, #2c1810 100%);
+            color: #fff;
+            box-shadow: var(--sh-xl);
+            margin-bottom: 24px;
+        }
+        .request-header-card::before {
+            content: '';
+            position: absolute; inset: 0;
+            background-image:
+                radial-gradient(circle at 20% 20%, rgba(255,255,255,0.05) 1px, transparent 1px),
+                radial-gradient(circle at 80% 60%, rgba(255,255,255,0.05) 1px, transparent 1px);
+            background-size: 40px 40px, 60px 60px;
+            pointer-events: none;
+        }
+
+        .header-bg-icons {
+            position: absolute; inset: 0;
+            overflow: hidden; pointer-events: none;
+        }
+        .header-bg-icons .icon-float {
+            position: absolute; font-size: 2.5rem;
+            opacity: 0.07;
+            animation: pulse 4s ease-in-out infinite;
+        }
+        .header-bg-icons .icon-float:nth-child(1) { top: 15%; left: 5%; animation-delay: 0s; }
+        .header-bg-icons .icon-float:nth-child(2) { bottom: 20%; right: 8%; animation-delay: 1s; font-size: 3rem; }
+        .header-bg-icons .icon-float:nth-child(3) { top: 60%; left: 15%; animation-delay: 2s; font-size: 2rem; }
+
+        .header-content { position: relative; z-index: 1; }
+
+        .header-top-row {
             display: flex;
             justify-content: space-between;
-            align-items: center;
+            align-items: flex-start;
+            gap: 16px;
             flex-wrap: wrap;
-            gap: 15px;
-            color: white;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            box-shadow: 0 8px 32px rgba(12,45,74,0.25);
-            border-bottom: 2px solid rgba(52,152,219,0.30);
+            margin-bottom: 16px;
         }
 
-        .logo a {
-            text-decoration: none;
-        }
-
-        .logo-content {
+        .header-badges {
             display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
             align-items: center;
-            gap: 12px;
+        }
+
+        .status-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            border-radius: var(--r-full);
+            font-size: 0.78rem;
             font-weight: 800;
-            font-size: 22px;
+            backdrop-filter: blur(10px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
         }
+        .status-pill.open { background: linear-gradient(135deg, #2ecc71, #22a95c); color: #fff; }
+        .status-pill.matched { background: linear-gradient(135deg, #2c7ab8, #1d5b8e); color: #fff; }
+        .status-pill.closed { background: linear-gradient(135deg, #64748b, #475569); color: #fff; }
+        .status-pill.expired { background: linear-gradient(135deg, #e74c3c, #c0392b); color: #fff; }
 
-        .logo-img {
-            width: 50px;
-            height: 50px;
+        .status-pill .dot {
+            width: 7px; height: 7px;
             border-radius: 50%;
-            border: 3px solid #3498db;
-            object-fit: cover;
-            box-shadow: 0 4px 16px rgba(52,152,219,0.35);
+            background: #fff;
+            animation: pulse 2s ease-in-out infinite;
         }
 
-        .logo-text span:first-child { color: #3498db; }
-        .logo-text span:last-child { color: #b0c9d9; font-size: 16px; }
+        .deadline-pill {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 7px 16px;
+            border-radius: var(--r-full);
+            font-size: 0.78rem;
+            font-weight: 800;
+            backdrop-filter: blur(10px);
+            background: rgba(255, 255, 255, 0.12);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            color: #fff;
+        }
+        .deadline-pill.urgent {
+            background: linear-gradient(135deg, #e74c3c, #c0392b);
+            border-color: transparent;
+            animation: countdownPulse 2s ease-in-out infinite;
+        }
+        .deadline-pill.soon {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            border-color: transparent;
+        }
 
-        .nav-links {
+        .header-actions-top {
             display: flex;
             gap: 8px;
+        }
+        .header-icon-btn {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.12);
+            color: #fff;
+            display: inline-flex;
             align-items: center;
-            flex-wrap: wrap;
+            justify-content: center;
+            font-size: 0.9rem;
+            transition: all var(--t-fast);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            backdrop-filter: blur(10px);
         }
-
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 20px;
-            border-radius: 40px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.06);
-            font-size: 14px;
-        }
-
-        .nav-links a:hover {
-            background: #3498db;
-            color: white;
+        .header-icon-btn:hover {
+            background: rgba(255, 255, 255, 0.22);
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
         }
-
-        /* ========== القائمة المنسدلة ========== */
-        .dropdown {
-            position: relative;
-            display: inline-block;
+        .header-icon-btn.active {
+            background: var(--c-danger);
+            border-color: var(--c-danger);
         }
+        .header-icon-btn.active i { animation: heartBeat 0.6s ease; }
 
-        .dropdown-btn {
-            background: rgba(255,255,255,0.08);
-            color: white;
-            padding: 8px 22px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
+        .request-title-row {
+            margin-bottom: 12px;
+        }
+        .request-category-chip {
+            display: inline-flex;
             align-items: center;
-            gap: 8px;
-            border: 1px solid rgba(255,255,255,0.08);
-            font-size: 14px;
-            font-family: inherit;
-        }
-
-        .dropdown-btn:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
-        }
-
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 24px 56px rgba(0,0,0,0.12);
-            border-radius: 20px;
-            z-index: 1000;
-            overflow: hidden;
-            margin-top: 8px;
-            border: 1px solid rgba(52,152,219,0.15);
-        }
-
-        .dropdown-content.show {
-            display: block;
-            animation: dropFade 0.25s ease;
-        }
-
-        @keyframes dropFade {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
-
-        .dropdown-content a {
-            color: var(--text-dark);
-            padding: 14px 22px;
-            text-decoration: none;
-            display: block;
-            transition: 0.2s;
-            font-size: 14px;
-            font-weight: 500;
-            border-bottom: 1px solid var(--gray);
-        }
-
-        .dropdown-content a:hover {
-            background: #ebf5fb;
-            color: var(--primary);
-        }
-
-        .dropdown-content .logout-item {
-            color: var(--danger);
-            border-top: 1px solid var(--gray);
-        }
-
-        .dropdown-content .logout-item:hover {
-            background: #fee2e2;
-        }
-
-        /* ========== المحتوى الرئيسي ========== */
-        .container {
-            max-width: 1000px;
-            margin: 30px auto;
-            padding: 0 20px;
-        }
-
-        /* بطاقة الطلب */
-        .request-card {
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            overflow: hidden;
-            box-shadow: 0 12px 36px rgba(12,45,74,0.06);
-            border: 1px solid rgba(52,152,219,0.06);
-        }
-
-        /* رأس الطلب */
-        .request-header {
-            background: linear-gradient(135deg, var(--primary-dark), var(--primary));
-            padding: 24px 28px;
-            color: white;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .request-header::after {
-            content: "📋";
-            position: absolute;
-            font-size: 8rem;
-            opacity: 0.06;
-            left: -10px;
-            bottom: -30px;
-        }
-
-        @media (min-width: 768px) {
-            .request-header {
-                padding: 30px 35px;
-            }
-        }
-
-        .request-status {
-            display: inline-block;
-            padding: 6px 18px;
-            border-radius: 30px;
-            font-size: 12px;
+            gap: 6px;
+            background: rgba(230, 126, 34, 0.18);
+            border: 1px solid rgba(230, 126, 34, 0.3);
+            color: #ffb877;
+            padding: 4px 14px;
+            border-radius: var(--r-full);
+            font-size: 0.72rem;
             font-weight: 700;
             margin-bottom: 12px;
-            position: relative;
-            z-index: 1;
-        }
-
-        @media (min-width: 768px) {
-            .request-status {
-                font-size: 14px;
-                padding: 8px 22px;
-            }
-        }
-
-        .status-open {
-            background: var(--success);
-            color: white;
-        }
-
-        .status-matched {
-            background: var(--warning);
-            color: var(--text-dark);
-        }
-
-        .status-closed {
-            background: var(--gray-dark);
-            color: white;
         }
 
         .request-title {
-            font-size: 1.3rem;
+            font-size: clamp(1.4rem, 3vw, 2.2rem);
+            font-weight: 900;
+            line-height: 1.2;
             margin-bottom: 8px;
-            font-weight: 800;
-            position: relative;
-            z-index: 1;
+            letter-spacing: -0.5px;
         }
 
-        @media (min-width: 768px) {
-            .request-title {
-                font-size: 1.8rem;
-            }
+        .request-cas-line {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.85rem;
+            font-weight: 700;
+            color: #b794f6;
+            background: rgba(139, 92, 246, 0.15);
+            border: 1px solid rgba(139, 92, 246, 0.3);
+            padding: 4px 12px;
+            border-radius: var(--r-sm);
+            direction: ltr;
+            letter-spacing: 0.5px;
         }
 
-        .request-meta {
+        .header-meta-row {
             display: flex;
+            gap: 16px;
             flex-wrap: wrap;
-            gap: 15px;
-            margin-top: 12px;
-            font-size: 12px;
-            opacity: 0.85;
-            position: relative;
-            z-index: 1;
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
         }
-
-        @media (min-width: 768px) {
-            .request-meta {
-                font-size: 14px;
-                gap: 25px;
-            }
-        }
-
-        .request-meta i {
-            margin-left: 5px;
-        }
-
-        /* محتوى الطلب */
-        .request-content {
-            padding: 24px;
-        }
-
-        @media (min-width: 768px) {
-            .request-content {
-                padding: 35px;
-            }
-        }
-
-        /* أقسام المعلومات */
-        .info-section {
-            margin-bottom: 30px;
-        }
-
-        .section-title {
-            font-size: 1.1rem;
-            color: var(--primary-dark);
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid var(--gray);
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            font-weight: 700;
-        }
-
-        @media (min-width: 768px) {
-            .section-title {
-                font-size: 1.3rem;
-            }
-        }
-
-        .section-title i {
-            color: #3498db;
-        }
-
-        .info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 15px;
-        }
-
-        @media (min-width: 640px) {
-            .info-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .info-item {
-            background: var(--gray-light);
-            padding: 16px 18px;
-            border-radius: var(--radius-sm);
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            border: 1px solid rgba(52,152,219,0.06);
-            transition: all 0.3s ease;
-        }
-
-        .info-item:hover {
-            border-color: #3498db;
-            box-shadow: var(--shadow-sm);
-        }
-
-        .info-icon {
-            width: 45px;
-            height: 45px;
-            background: linear-gradient(145deg, #e6edf4, #f0f6fb);
-            border-radius: 25px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            flex-shrink: 0;
-            transition: 0.3s;
-        }
-
-        .info-item:hover .info-icon {
-            background: linear-gradient(145deg, #3498db, #2c81ba);
-        }
-
-        .info-item:hover .info-icon i {
-            color: white;
-        }
-
-        @media (min-width: 768px) {
-            .info-icon {
-                width: 50px;
-                height: 50px;
-            }
-        }
-
-        .info-icon i {
-            font-size: 20px;
-            color: var(--primary);
-            transition: 0.3s;
-        }
-
-        @media (min-width: 768px) {
-            .info-icon i {
-                font-size: 24px;
-            }
-        }
-
-        .info-label {
-            font-size: 12px;
-            color: var(--gray-dark);
-        }
-
-        @media (min-width: 768px) {
-            .info-label {
-                font-size: 13px;
-            }
-        }
-
-        .info-value {
-            font-size: 14px;
-            font-weight: 700;
-            color: var(--text-dark);
-        }
-
-        @media (min-width: 768px) {
-            .info-value {
-                font-size: 16px;
-            }
-        }
-
-        /* وصف الطلب */
-        .description-box {
-            background: var(--gray-light);
-            padding: 18px 20px;
-            border-radius: var(--radius-sm);
-            margin-top: 15px;
-            border-right: 4px solid #3498db;
-        }
-
-        .description-box .label {
-            font-size: 12px;
-            color: var(--gray-dark);
-            font-weight: 600;
-            display: block;
-            margin-bottom: 8px;
-        }
-
-        .description-box p {
-            line-height: 1.8;
-            color: var(--text-light);
-            font-size: 14px;
-        }
-
-        @media (min-width: 768px) {
-            .description-box p {
-                font-size: 15px;
-            }
-        }
-
-        /* معلومات العميل */
-        .buyer-section {
-            background: linear-gradient(145deg, #eef2f7, #e6edf4);
-            border-radius: var(--radius-md);
-            padding: 20px;
-            margin: 25px 0;
-            border: 1px solid rgba(52,152,219,0.08);
-        }
-
-        @media (min-width: 768px) {
-            .buyer-section {
-                padding: 25px;
-            }
-        }
-
-        .buyer-header {
-            display: flex;
-            align-items: center;
-            gap: 15px;
-            margin-bottom: 20px;
-            flex-wrap: wrap;
-        }
-
-        .buyer-avatar {
-            width: 55px;
-            height: 55px;
-            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
-            border-radius: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: white;
-            font-size: 22px;
-            font-weight: 800;
-            flex-shrink: 0;
-            box-shadow: 0 4px 16px rgba(26,74,110,0.15);
-        }
-
-        @media (min-width: 768px) {
-            .buyer-avatar {
-                width: 65px;
-                height: 65px;
-                font-size: 26px;
-            }
-        }
-
-        .buyer-name {
-            font-size: 1.1rem;
-            font-weight: 800;
-            color: var(--primary-dark);
-        }
-
-        @media (min-width: 768px) {
-            .buyer-name {
-                font-size: 1.3rem;
-            }
-        }
-
-        .buyer-type {
-            font-size: 12px;
-            color: var(--gray-dark);
-        }
-
-        .buyer-info-grid {
-            display: grid;
-            grid-template-columns: 1fr;
-            gap: 12px;
-        }
-
-        @media (min-width: 640px) {
-            .buyer-info-grid {
-                grid-template-columns: repeat(2, 1fr);
-            }
-        }
-
-        .buyer-info-item {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            padding: 12px 16px;
-            background: var(--white);
-            border-radius: var(--radius-sm);
-            transition: all 0.3s ease;
-            border: 1px solid rgba(52,152,219,0.06);
-        }
-
-        .buyer-info-item:hover {
-            border-color: #3498db;
-            transform: translateX(-3px);
-        }
-
-        .buyer-info-item i {
-            width: 35px;
-            height: 35px;
-            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
-            color: white;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 14px;
-            flex-shrink: 0;
-        }
-
-        @media (min-width: 768px) {
-            .buyer-info-item i {
-                width: 38px;
-                height: 38px;
-                font-size: 16px;
-            }
-        }
-
-        .buyer-info-item .info-text {
-            font-size: 14px;
-            color: var(--text-light);
-            word-break: break-word;
-        }
-
-        .buyer-info-item .copy-btn {
-            background: none;
-            border: none;
-            cursor: pointer;
-            margin-right: auto;
-            color: var(--primary);
-            font-size: 14px;
-            transition: 0.3s;
-            padding: 4px 8px;
-            border-radius: 20px;
-        }
-
-        .buyer-info-item .copy-btn:hover {
-            background: var(--gray-light);
-            color: #3498db;
-        }
-
-        /* ===== أزرار التواصل ===== */
-        .action-buttons {
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            margin-top: 25px;
-        }
-
-        @media (min-width: 640px) {
-            .action-buttons {
-                flex-direction: row;
-                gap: 15px;
-            }
-        }
-
-        .btn {
-            flex: 1;
-            padding: 14px 20px;
-            border: none;
-            border-radius: 60px;
-            font-size: 1rem;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            text-decoration: none;
-            font-family: inherit;
-            min-height: 54px;
-        }
-
-        @media (min-width: 768px) {
-            .btn {
-                padding: 16px 24px;
-                font-size: 1.05rem;
-                min-height: 60px;
-            }
-        }
-
-        .btn-whatsapp {
-            background: linear-gradient(145deg, #25D366, #128C7E);
-            color: white;
-            box-shadow: 0 4px 16px rgba(37,211,102,0.25);
-        }
-
-        .btn-whatsapp:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(37,211,102,0.35);
-        }
-
-        .btn-whatsapp i {
-            font-size: 1.4rem;
-        }
-
-        .btn-call {
-            background: linear-gradient(145deg, #3498db, #2c81ba);
-            color: white;
-            box-shadow: 0 4px 16px rgba(52,152,219,0.25);
-        }
-
-        .btn-call:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(52,152,219,0.35);
-        }
-
-        .btn-call i {
-            font-size: 1.2rem;
-        }
-
-        .btn-copy {
-            background: linear-gradient(145deg, #64748b, #475569);
-            color: white;
-            box-shadow: 0 4px 16px rgba(100,116,139,0.2);
-        }
-
-        .btn-copy:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(100,116,139,0.3);
-        }
-
-        /* ===== زر العودة ===== */
-        .back-link {
+        .meta-item {
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            margin-top: 25px;
-            color: var(--primary);
-            text-decoration: none;
-            padding: 10px 24px;
-            background: var(--white);
-            border-radius: 40px;
-            font-size: 14px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(52,152,219,0.06);
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.75);
+            font-weight: 500;
+        }
+        .meta-item i {
+            color: #ffb877;
+            font-size: 0.9rem;
+        }
+        .meta-item strong {
+            color: #fff;
+            font-weight: 800;
         }
 
-        @media (min-width: 768px) {
-            .back-link {
-                margin-top: 30px;
-                padding: 12px 30px;
-                font-size: 16px;
-            }
+        /* ============================================================
+           TWO COLUMN LAYOUT
+           ============================================================ */
+        .content-layout {
+            display: grid;
+            grid-template-columns: 1fr 360px;
+            gap: 24px;
+            align-items: start;
         }
 
-        .back-link:hover {
-            background: linear-gradient(145deg, #3498db, #2c81ba);
-            color: white;
-            transform: translateX(-5px);
-            box-shadow: 0 8px 24px rgba(52,152,219,0.25);
+        .main-column {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            min-width: 0;
         }
 
-        .back-link i {
-            transition: 0.3s;
+        .side-column {
+            display: flex;
+            flex-direction: column;
+            gap: 20px;
+            position: sticky;
+            top: calc(var(--header-h) + 20px);
         }
 
-        .back-link:hover i {
-            transform: translateX(-5px);
+        /* ============================================================
+           CARD BASE
+           ============================================================ */
+        .card {
+            background: var(--c-surface);
+            border-radius: var(--r-lg);
+            border: 1px solid var(--c-border);
+            box-shadow: var(--sh-sm);
+            overflow: hidden;
         }
 
-        .text-center {
-            text-align: center;
+        .card-header {
+            padding: 18px 22px;
+            border-bottom: 1px solid var(--c-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            flex-wrap: wrap;
+        }
+        .card-title {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--c-text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .card-title i {
+            color: var(--c-request);
+            font-size: 1.05rem;
+        }
+        .card-title .count-badge {
+            background: var(--c-request);
+            color: #fff;
+            padding: 1px 9px;
+            border-radius: var(--r-full);
+            font-size: 0.7rem;
+            font-weight: 800;
+            margin-right: 4px;
         }
 
-        /* ===== رسالة منبثقة ===== */
-        .toast {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: var(--primary-dark);
-            color: white;
-            padding: 12px 24px;
-            border-radius: 40px;
-            font-weight: 700;
-            z-index: 1000;
-            font-size: 14px;
-            animation: slideUp 0.4s ease, fadeOut 2s ease 1s forwards;
-            box-shadow: var(--shadow-lg);
+        .card-body { padding: 20px 22px; }
+
+        /* ============================================================
+           INFO GRID (تفاصيل الطلب)
+           ============================================================ */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
         }
 
-        @media (min-width: 768px) {
-            .toast {
-                bottom: 30px;
-                padding: 14px 30px;
-                font-size: 16px;
-            }
+        .info-item {
+            background: var(--c-surface-2);
+            padding: 14px 16px;
+            border-radius: var(--r-md);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            border: 1px solid var(--c-border);
+            transition: all var(--t-fast);
+        }
+        .info-item:hover {
+            border-color: var(--c-request);
+            transform: translateY(-2px);
+            box-shadow: var(--sh-sm);
         }
 
-        @keyframes slideUp {
-            0% { opacity: 0; transform: translateX(-50%) translateY(20px); }
-            100% { opacity: 1; transform: translateX(-50%) translateY(0); }
-        }
-
-        @keyframes fadeOut {
-            0% { opacity: 1; }
-            100% { opacity: 0; visibility: hidden; }
-        }
-
-        /* ===== حالة التحميل والخطأ ===== */
-        .loader {
-            text-align: center;
-            padding: 60px 20px;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            font-size: 1.1rem;
-            color: var(--primary);
-            font-weight: 600;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(52,152,219,0.06);
-        }
-
-        @media (min-width: 768px) {
-            .loader {
-                padding: 80px;
-                font-size: 1.3rem;
-            }
-        }
-
-        .loader .spinner {
-            display: inline-block;
+        .info-icon {
             width: 40px;
             height: 40px;
-            border: 4px solid var(--gray);
-            border-top: 4px solid #3498db;
             border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin-bottom: 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .error-box {
-            text-align: center;
-            padding: 50px 20px;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            color: var(--danger);
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(229,62,62,0.10);
-        }
-
-        @media (min-width: 768px) {
-            .error-box {
-                padding: 70px;
-            }
-        }
-
-        .error-box i {
-            font-size: 4rem;
-            margin-bottom: 15px;
-            color: #fee2e2;
-        }
-
-        .error-box h2 {
-            font-size: 1.5rem;
-            margin-bottom: 10px;
-        }
-
-        @media (min-width: 768px) {
-            .error-box h2 {
-                font-size: 2rem;
-            }
-        }
-
-        .error-box p {
-            color: var(--text-light);
-        }
-
-        /* ===== الفوتر ===== */
-        .footer {
-            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
-            color: white;
-            text-align: center;
-            padding: 35px 20px;
-            margin-top: 60px;
-            border-top: 4px solid #3498db;
-        }
-
-        .footer-links {
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.12), rgba(230, 126, 34, 0.04));
+            color: var(--c-request-dark);
             display: flex;
+            align-items: center;
             justify-content: center;
-            gap: 30px;
-            margin-bottom: 20px;
+            font-size: 1rem;
+            flex-shrink: 0;
+            transition: all var(--t-fast);
+        }
+        .info-item:hover .info-icon {
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
+            color: #fff;
+            transform: rotate(-8deg) scale(1.05);
+        }
+
+        .info-text-wrapper {
+            flex: 1;
+            min-width: 0;
+        }
+        .info-label {
+            font-size: 0.72rem;
+            color: var(--c-text-sub);
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .info-value {
+            font-size: 0.95rem;
+            font-weight: 800;
+            color: var(--c-text);
+            margin-top: 2px;
+            word-break: break-word;
+        }
+        .info-value.highlight {
+            color: var(--c-request-dark);
+            font-size: 1.05rem;
+        }
+        .info-value.cas {
+            font-family: 'Courier New', monospace;
+            direction: ltr;
+            letter-spacing: 0.5px;
+            color: var(--c-purple);
+        }
+        .info-value.budget {
+            color: var(--c-accent-dark);
+        }
+
+        /* الوصف */
+        .description-box {
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.06), rgba(230, 126, 34, 0.02));
+            padding: 16px 20px;
+            border-radius: var(--r-md);
+            border-right: 4px solid var(--c-request);
+            margin-top: 16px;
+        }
+        .description-box .label {
+            font-size: 0.72rem;
+            color: var(--c-request-dark);
+            font-weight: 800;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+        }
+        .description-box p {
+            line-height: 1.7;
+            color: var(--c-text-muted);
+            font-size: 0.9rem;
+        }
+
+        /* ============================================================
+           OWNER CARD (صاحب الطلب)
+           ============================================================ */
+        .owner-card {
+            background: linear-gradient(135deg, rgba(44, 122, 184, 0.06), rgba(44, 122, 184, 0.02));
+            border: 1.5px solid rgba(44, 122, 184, 0.15);
+        }
+
+        .owner-header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .owner-avatar {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--c-primary-700), var(--c-primary-900));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.3rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            text-transform: uppercase;
+            box-shadow: 0 6px 16px rgba(10, 37, 64, 0.2);
+        }
+        .owner-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .owner-name {
+            font-size: 1rem;
+            font-weight: 800;
+            color: var(--c-text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .owner-type {
+            font-size: 0.75rem;
+            color: var(--c-text-sub);
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .verified-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 3px;
+            background: linear-gradient(135deg, #1e88e5, #1565c0);
+            color: #fff;
+            font-size: 0.6rem;
+            padding: 2px 8px;
+            border-radius: var(--r-full);
+            font-weight: 800;
+            box-shadow: 0 2px 8px rgba(30, 136, 229, 0.3);
+        }
+
+        .owner-contact-list {
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+            margin-bottom: 14px;
+        }
+        .owner-contact-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 10px 12px;
+            background: var(--c-surface);
+            border-radius: var(--r-md);
+            border: 1px solid var(--c-border);
+            font-size: 0.85rem;
+            color: var(--c-text-muted);
+            transition: all var(--t-fast);
+        }
+        .owner-contact-item:hover {
+            border-color: var(--c-primary-500);
+        }
+        .owner-contact-item i {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--c-primary-600), var(--c-primary-800));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.72rem;
+            flex-shrink: 0;
+        }
+        .owner-contact-item .text {
+            flex: 1;
+            min-width: 0;
+            word-break: break-word;
+            color: var(--c-text);
+            font-weight: 600;
+        }
+        .owner-contact-item .copy-btn {
+            background: var(--c-surface-2);
+            color: var(--c-text-muted);
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.7rem;
+            transition: all var(--t-fast);
+            flex-shrink: 0;
+        }
+        .owner-contact-item .copy-btn:hover {
+            background: var(--c-primary-600);
+            color: #fff;
+        }
+
+        .owner-actions {
+            display: flex;
+            gap: 8px;
+        }
+
+        /* ============================================================
+           OFFERS SECTION
+           ============================================================ */
+        .offers-header-actions {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+        }
+
+        .btn-offer-submit {
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
+            color: #fff;
+            padding: 8px 18px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: 0.82rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--t-base);
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+        .btn-offer-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.45);
+        }
+
+        .offers-stats-bar {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 10px;
+            margin-bottom: 18px;
+        }
+        .offer-stat {
+            background: var(--c-surface-2);
+            border: 1px solid var(--c-border);
+            border-radius: var(--r-md);
+            padding: 12px;
+            text-align: center;
+        }
+        .offer-stat-label {
+            font-size: 0.68rem;
+            color: var(--c-text-sub);
+            font-weight: 700;
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            display: block;
+            margin-bottom: 4px;
+        }
+        .offer-stat-value {
+            font-size: 1.15rem;
+            font-weight: 900;
+            color: var(--c-text);
+            display: block;
+            font-variant-numeric: tabular-nums;
+        }
+        .offer-stat-value.best {
+            color: var(--c-accent-dark);
+        }
+
+        .offers-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .offer-card {
+            background: var(--c-surface);
+            border: 1.5px solid var(--c-border);
+            border-radius: var(--r-md);
+            padding: 16px 18px;
+            transition: all var(--t-base);
+            position: relative;
+            animation: cardIn 0.4s cubic-bezier(0.22, 1, 0.36, 1) backwards;
+        }
+        .offer-card:hover {
+            border-color: var(--c-request);
+            box-shadow: var(--sh-md);
+        }
+        .offer-card.is-best {
+            border-color: var(--c-accent);
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.04), var(--c-surface));
+        }
+        .offer-card.is-best::before {
+            content: '⭐ الأفضل سعراً';
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: var(--r-full);
+            font-size: 0.65rem;
+            font-weight: 800;
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.35);
+        }
+        .offer-card.accepted {
+            border-color: var(--c-accent);
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.08), var(--c-surface));
+            box-shadow: 0 8px 24px rgba(46, 204, 113, 0.15);
+        }
+        .offer-card.accepted::before {
+            content: '✅ مقبول';
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: var(--r-full);
+            font-size: 0.65rem;
+            font-weight: 800;
+        }
+        .offer-card.rejected {
+            opacity: 0.55;
+            background: var(--c-surface-2);
+        }
+        .offer-card.rejected::before {
+            content: '❌ مرفوض';
+            position: absolute;
+            top: -10px;
+            right: 16px;
+            background: linear-gradient(135deg, #94a3b8, #64748b);
+            color: #fff;
+            padding: 3px 12px;
+            border-radius: var(--r-full);
+            font-size: 0.65rem;
+            font-weight: 800;
+        }
+
+        .offer-card-top {
+            display: flex;
+            align-items: flex-start;
+            gap: 12px;
+            margin-bottom: 12px;
+        }
+
+        .offer-supplier-avatar {
+            width: 44px;
+            height: 44px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--c-primary-600), var(--c-primary-900));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+            font-weight: 800;
+            flex-shrink: 0;
+            text-transform: uppercase;
+        }
+
+        .offer-supplier-info {
+            flex: 1;
+            min-width: 0;
+        }
+        .offer-supplier-name {
+            font-size: 0.9rem;
+            font-weight: 800;
+            color: var(--c-text);
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            flex-wrap: wrap;
+        }
+        .offer-supplier-meta {
+            font-size: 0.72rem;
+            color: var(--c-text-sub);
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
-        .footer-links a {
-            color: #3498db;
-            text-decoration: none;
-            font-weight: 600;
-            transition: 0.3s;
-            font-size: 14px;
+        .offer-price-block {
+            text-align: left;
+            flex-shrink: 0;
+        }
+        .offer-price {
+            font-size: 1.2rem;
+            font-weight: 900;
+            color: var(--c-accent-dark);
+            font-variant-numeric: tabular-nums;
+            display: block;
+            line-height: 1;
+        }
+        .offer-price .currency {
+            font-size: 0.7rem;
+            font-weight: 700;
+            color: var(--c-text-sub);
+        }
+        .offer-time {
+            font-size: 0.7rem;
+            color: var(--c-text-sub);
+            margin-top: 3px;
         }
 
-        .footer-links a:hover {
-            color: white;
-            transform: translateY(-3px);
+        .offer-details-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 8px;
+            margin-bottom: 10px;
+        }
+        .offer-detail {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.8rem;
+            color: var(--c-text-muted);
+        }
+        .offer-detail i {
+            color: var(--c-request);
+            font-size: 0.75rem;
+            width: 14px;
+        }
+        .offer-detail strong {
+            color: var(--c-text);
         }
 
-        /* ===== استجابة ===== */
-        @media (max-width: 768px) {
-            .navbar {
-                flex-direction: column;
-                gap: 12px;
-                padding: 14px 20px;
-            }
-            
-            .logo-content {
-                font-size: 18px;
-            }
-            
-            .logo-img {
-                width: 40px;
-                height: 40px;
-            }
-            
-            .nav-links {
-                justify-content: center;
-            }
-            
-            .nav-links a {
-                padding: 6px 14px;
-                font-size: 12px;
-            }
-            
-            .container {
-                padding: 0 16px;
-                margin: 20px auto;
-            }
-            
-            .request-content {
-                padding: 18px;
-            }
-            
-            .request-header {
-                padding: 18px 20px;
-            }
-            
-            .request-title {
-                font-size: 1.1rem;
-            }
-            
-            .action-buttons {
-                flex-direction: column;
-            }
-            
-            .btn {
-                min-height: 50px;
-                padding: 12px 16px;
-                font-size: 0.95rem;
-            }
-            
-            .dropdown-content {
-                left: auto;
-                right: 0;
-            }
-            
-            .info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .buyer-info-grid {
-                grid-template-columns: 1fr;
-            }
-            
-            .buyer-section {
-                padding: 16px;
-            }
+        .offer-message {
+            background: var(--c-surface-2);
+            padding: 10px 14px;
+            border-radius: var(--r-md);
+            font-size: 0.82rem;
+            color: var(--c-text-muted);
+            line-height: 1.5;
+            margin-bottom: 12px;
+            border-right: 3px solid var(--c-request);
         }
 
-        @media (max-width: 480px) {
-            .request-title {
-                font-size: 1rem;
-            }
-            
-            .request-meta {
-                font-size: 11px;
-                gap: 10px;
-            }
-            
-            .info-item {
-                padding: 12px 14px;
-            }
-            
-            .info-icon {
-                width: 38px;
-                height: 38px;
-            }
-            
-            .info-icon i {
-                font-size: 16px;
-            }
-            
-            .info-value {
-                font-size: 13px;
-            }
-            
-            .buyer-avatar {
-                width: 45px;
-                height: 45px;
-                font-size: 18px;
-            }
-            
-            .buyer-name {
-                font-size: 1rem;
-            }
-            
-            .buyer-info-item {
-                padding: 10px 12px;
-            }
-            
-            .buyer-info-item i {
-                width: 30px;
-                height: 30px;
-                font-size: 12px;
-            }
-            
-            .buyer-info-item .info-text {
-                font-size: 13px;
-            }
-            
-            .description-box {
-                padding: 14px 16px;
-            }
-            
-            .description-box p {
-                font-size: 13px;
-            }
+        .offer-actions {
+            display: flex;
+            gap: 6px;
+            padding-top: 12px;
+            border-top: 1px solid var(--c-border);
+        }
+        .btn-offer-action {
+            flex: 1;
+            padding: 9px 14px;
+            border-radius: var(--r-md);
+            font-weight: 700;
+            font-size: 0.78rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--t-fast);
+            border: none;
+        }
+        .btn-accept {
+            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.25);
+        }
+        .btn-accept:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(46, 204, 113, 0.4);
+        }
+        .btn-reject {
+            background: var(--c-surface-2);
+            color: var(--c-danger);
+            border: 1px solid var(--c-border);
+        }
+        .btn-reject:hover {
+            background: rgba(231, 76, 60, 0.1);
+            border-color: var(--c-danger);
+        }
+        .btn-contact-supplier {
+            background: var(--c-whatsapp);
+            color: #fff;
+        }
+        .btn-contact-supplier:hover {
+            background: #1da851;
+            transform: translateY(-1px);
+        }
+        .btn-contact-call {
+            background: var(--c-primary-600);
+            color: #fff;
+        }
+        .btn-contact-call:hover {
+            background: var(--c-primary-800);
+            transform: translateY(-1px);
         }
 
-        .sr-only {
-            position: absolute;
-            width: 1px;
-            height: 1px;
-            padding: 0;
-            margin: -1px;
+        /* Empty offers */
+        .offers-empty {
+            text-align: center;
+            padding: 40px 20px;
+            background: var(--c-surface-2);
+            border-radius: var(--r-md);
+            border: 2px dashed var(--c-border);
+        }
+        .offers-empty i {
+            font-size: 3rem;
+            color: var(--c-request);
+            opacity: 0.35;
+            margin-bottom: 12px;
+        }
+        .offers-empty h4 {
+            font-size: 1rem;
+            color: var(--c-text);
+            margin-bottom: 6px;
+            font-weight: 800;
+        }
+        .offers-empty p {
+            font-size: 0.85rem;
+            color: var(--c-text-muted);
+            margin-bottom: 16px;
+        }
+
+        /* ============================================================
+           OFFER FORM (Modal)
+           ============================================================ */
+        .modal-overlay {
+            position: fixed;
+            inset: 0;
+            background: rgba(10, 20, 30, 0.7);
+            backdrop-filter: blur(8px);
+            -webkit-backdrop-filter: blur(8px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+            opacity: 0;
+            visibility: hidden;
+            transition: all var(--t-base);
+        }
+        .modal-overlay.show { opacity: 1; visibility: visible; }
+
+        .modal {
+            background: var(--c-surface);
+            border-radius: var(--r-xl);
+            box-shadow: var(--sh-xl);
+            max-width: 620px;
+            width: 100%;
+            max-height: 90vh;
             overflow: hidden;
-            clip: rect(0,0,0,0);
-            border: 0;
+            display: flex;
+            flex-direction: column;
+            transform: scale(0.95) translateY(20px);
+            transition: transform var(--t-base);
+        }
+        .modal-overlay.show .modal { transform: scale(1) translateY(0); }
+
+        .modal-header {
+            padding: 20px 24px;
+            border-bottom: 1px solid var(--c-border);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+        }
+        .modal-header h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--c-text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .modal-header h3 i { color: var(--c-request); }
+        .modal-close {
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            background: var(--c-surface-2);
+            color: var(--c-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all var(--t-fast);
+            font-size: 0.9rem;
+        }
+        .modal-close:hover { background: var(--c-danger); color: #fff; }
+
+        .modal-body {
+            padding: 24px;
+            overflow-y: auto;
+            flex: 1;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 14px;
+        }
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .form-group.full { grid-column: 1 / -1; }
+        .form-group label {
+            font-size: 0.82rem;
+            font-weight: 700;
+            color: var(--c-text);
+        }
+        .form-group label .req { color: var(--c-danger); }
+        .form-group label .hint {
+            font-size: 0.72rem;
+            color: var(--c-text-sub);
+            font-weight: 500;
+            margin-right: 4px;
+        }
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            padding: 11px 14px;
+            border-radius: var(--r-md);
+            border: 1.5px solid var(--c-border);
+            background: var(--c-surface-2);
+            color: var(--c-text);
+            font-size: 0.9rem;
+            transition: all var(--t-fast);
+        }
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            border-color: var(--c-request);
+            outline: none;
+            background: var(--c-surface);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.12);
+        }
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            grid-column: 1 / -1;
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+            margin-top: 8px;
+        }
+        .form-actions .btn {
+            padding: 11px 26px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: 0.88rem;
+            min-width: 120px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--t-base);
+        }
+        .form-actions .btn-cancel {
+            background: var(--c-surface-2);
+            color: var(--c-text-muted);
+            border: 1px solid var(--c-border);
+        }
+        .form-actions .btn-cancel:hover { background: var(--c-border); }
+        .form-actions .btn-submit {
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(230, 126, 34, 0.3);
+        }
+        .form-actions .btn-submit:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(230, 126, 34, 0.45);
+        }
+        .form-actions .btn-submit:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .form-notice {
+            background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.04));
+            border: 1.5px solid rgba(243, 156, 18, 0.3);
+            border-radius: var(--r-md);
+            padding: 12px 16px;
+            margin-bottom: 18px;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 0.82rem;
+            color: var(--c-text);
+            grid-column: 1 / -1;
+        }
+        .form-notice i {
+            color: var(--c-warning);
+            font-size: 1.1rem;
+            flex-shrink: 0;
+            margin-top: 2px;
+        }
+
+        /* ============================================================
+           MINI REQUEST CARDS (Similar)
+           ============================================================ */
+        .similar-list {
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+        .mini-card {
+            display: block;
+            background: var(--c-surface-2);
+            border: 1px solid var(--c-border);
+            border-radius: var(--r-md);
+            padding: 12px 14px;
+            transition: all var(--t-fast);
+            cursor: pointer;
+            text-decoration: none;
+            color: inherit;
+        }
+        .mini-card:hover {
+            border-color: var(--c-request);
+            background: var(--c-surface);
+            transform: translateX(-3px);
+        }
+        .mini-card-title {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--c-text);
+            margin-bottom: 6px;
+            display: -webkit-box;
+            -webkit-line-clamp: 1;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+        }
+        .mini-card-meta {
+            display: flex;
+            gap: 10px;
+            font-size: 0.72rem;
+            color: var(--c-text-sub);
+            flex-wrap: wrap;
+        }
+        .mini-card-meta i { color: var(--c-request); }
+
+        /* ============================================================
+           LOADING / ERROR
+           ============================================================ */
+        .page-loader {
+            text-align: center;
+            padding: 80px 20px;
+            background: var(--c-surface);
+            border-radius: var(--r-xl);
+            border: 1px solid var(--c-border);
+            color: var(--c-text-muted);
+            box-shadow: var(--sh-sm);
+        }
+        .page-loader .spinner {
+            display: inline-block;
+            width: 48px;
+            height: 48px;
+            border: 4px solid var(--c-border);
+            border-top-color: var(--c-request);
+            border-radius: 50%;
+            animation: spin 0.9s linear infinite;
+            margin-bottom: 16px;
+        }
+        .page-loader h3 {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: var(--c-text);
+            margin-bottom: 6px;
+        }
+        .page-loader p {
+            font-size: 0.88rem;
+        }
+
+        .error-state {
+            text-align: center;
+            padding: 60px 24px;
+            background: var(--c-surface);
+            border-radius: var(--r-xl);
+            border: 2px dashed var(--c-border);
+        }
+        .error-state i {
+            font-size: 3.5rem;
+            color: var(--c-danger);
+            opacity: 0.6;
+            margin-bottom: 16px;
+        }
+        .error-state h2 {
+            font-size: 1.3rem;
+            font-weight: 800;
+            color: var(--c-text);
+            margin-bottom: 8px;
+        }
+        .error-state p {
+            color: var(--c-text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 20px;
+        }
+        .btn-back-home {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(135deg, var(--c-primary-600), var(--c-primary-800));
+            color: #fff;
+            padding: 11px 26px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: 0.88rem;
+            transition: all var(--t-base);
+            box-shadow: 0 6px 20px rgba(10, 37, 64, 0.25);
+        }
+        .btn-back-home:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(10, 37, 64, 0.35);
+        }
+
+        /* ============================================================
+           SKELETON
+           ============================================================ */
+        .skeleton {
+            background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
+            background-size: 200% 100%;
+            animation: shimmer 1.5s infinite;
+            border-radius: var(--r-md);
+        }
+
+        /* ============================================================
+           TOAST
+           ============================================================ */
+        .toast-container {
+            position: fixed;
+            bottom: 24px;
+            left: 50%;
+            transform: translateX(-50%);
+            z-index: 9999;
+            width: min(420px, calc(100% - 32px));
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
+        }
+        .toast {
+            background: var(--c-surface);
+            border: 1px solid var(--c-border);
+            color: var(--c-text);
+            padding: 14px 18px;
+            border-radius: var(--r-md);
+            box-shadow: var(--sh-xl);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+            border-right: 4px solid var(--c-request);
+            pointer-events: auto;
+            transition: opacity var(--t-base), transform var(--t-base);
+        }
+        .toast.removing { opacity: 0; transform: translateX(20px); }
+        .toast .toast-icon { font-size: 1.5rem; flex-shrink: 0; line-height: 1; }
+        .toast .toast-content { flex: 1; min-width: 0; }
+        .toast .toast-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
+        .toast .toast-desc { font-size: 0.8rem; color: var(--c-text-muted); line-height: 1.4; }
+        .toast .toast-close {
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--c-surface-2);
+            color: var(--c-text-muted);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
+            transition: all var(--t-fast);
+        }
+        .toast .toast-close:hover { background: var(--c-danger); color: #fff; }
+        .toast.success { border-right-color: var(--c-accent); }
+        .toast.warning { border-right-color: var(--c-warning); }
+        .toast.error { border-right-color: var(--c-danger); }
+        .toast.info { border-right-color: var(--c-purple); }
+
+        /* ============================================================
+           FOOTER
+           ============================================================ */
+        .footer {
+            background: linear-gradient(180deg, var(--c-primary-900), #061a2e);
+            color: rgba(255, 255, 255, 0.8);
+            padding: 48px 24px 24px;
+            margin-top: 60px;
+        }
+        .footer-inner { max-width: var(--container); margin: 0 auto; }
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 20px;
+            margin-bottom: 24px;
+            padding-bottom: 24px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+        }
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.65);
+            font-size: 0.88rem;
+            font-weight: 500;
+            transition: color var(--t-fast);
+        }
+        .footer-links a:hover { color: #ffb877; }
+        .footer-copy {
+            text-align: center;
+            font-size: 0.82rem;
+            color: rgba(255, 255, 255, 0.4);
+        }
+
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
+        @media (max-width: 1024px) {
+            .content-layout { grid-template-columns: 1fr; }
+            .side-column { position: static; }
+        }
+
+        @media (max-width: 860px) {
+            .menu-toggle { display: inline-flex; }
+            .nav-links {
+                position: fixed;
+                top: var(--header-h);
+                left: 0; right: 0;
+                background: rgba(10, 37, 64, 0.98);
+                backdrop-filter: blur(20px);
+                flex-direction: column;
+                padding: 16px;
+                gap: 4px;
+                border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+                transform: translateY(-120%);
+                transition: transform var(--t-base);
+                max-height: calc(100vh - var(--header-h));
+                overflow-y: auto;
+                z-index: 99;
+            }
+            .nav-links.open { transform: translateY(0); }
+            .nav-links a, .dropdown-btn {
+                width: 100%;
+                justify-content: flex-start;
+                padding: 12px 16px;
+            }
+            .dropdown { width: 100%; }
+            .dropdown-content {
+                position: static;
+                transform: none;
+                box-shadow: none;
+                background: rgba(255, 255, 255, 0.05);
+                border: none;
+                max-height: 0;
+                overflow: hidden;
+                transition: max-height var(--t-base);
+                opacity: 1;
+                visibility: visible;
+            }
+            .dropdown-content.show { max-height: 400px; }
+            .dropdown-content a {
+                color: rgba(255, 255, 255, 0.85);
+                border-bottom-color: rgba(255, 255, 255, 0.05);
+            }
+        }
+
+        @media (max-width: 640px) {
+            .main-container { padding: 14px 14px 40px; }
+            .request-header-card { padding: 24px 18px 22px; border-radius: var(--r-lg); }
+            .request-title { font-size: 1.25rem; }
+            .header-top-row { flex-direction: column; align-items: flex-start; }
+            .header-actions-top { align-self: flex-end; margin-top: -44px; }
+
+            .info-grid { grid-template-columns: 1fr; }
+            .offers-stats-bar { grid-template-columns: 1fr; }
+            .offer-details-grid { grid-template-columns: 1fr; }
+            .form-grid { grid-template-columns: 1fr; }
+
+            .card-header { padding: 14px 16px; }
+            .card-body { padding: 16px; }
+
+            .owner-avatar { width: 44px; height: 44px; font-size: 1.1rem; }
+            .offer-supplier-avatar { width: 38px; height: 38px; font-size: 0.9rem; }
+
+            .offer-card-top { gap: 8px; }
+            .offer-price { font-size: 1rem; }
+
+            .btn-offer-submit { padding: 6px 12px; font-size: 0.72rem; }
+
+            .footer { padding: 32px 16px 20px; }
+            .footer-links { gap: 10px; }
+            .footer-links a { font-size: 0.78rem; }
+
+            .breadcrumb { font-size: 0.78rem; }
+        }
+
+        @media (prefers-reduced-motion: reduce) {
+            *, *::before, *::after {
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;
+            }
         }
     </style>
 </head>
 <body>
 
-<div class="navbar">
-    <div class="logo">
-        <a href="index.html" style="text-decoration:none;">
-            <div class="logo-content">
-                <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
-                     class="logo-img" alt="كيماتو">
-                <div class="logo-text">
-                    <span>كيماتو</span>
-                    <span> | تفاصيل الطلب</span>
-                </div>
+    <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
+
+    <!-- NAVBAR -->
+    <header class="navbar" role="banner">
+        <div class="navbar-inner">
+            <div class="logo">
+                <a href="/" aria-label="كيماتو">
+                    <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager"
+                         onerror="this.style.display='none'" />
+                    <span class="logo-text">
+                        <span class="blue">كيماتو</span>
+                        <span class="gray">| تفاصيل الطلب</span>
+                    </span>
+                </a>
             </div>
-        </a>
-    </div>
-    <div class="nav-links">
-        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-        <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
-        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
-        <div class="dropdown">
-            <button class="dropdown-btn"><i class="fas fa-user-circle"></i> القائمة</button>
-            <div class="dropdown-content" id="dropdownContent"></div>
+
+            <nav class="nav-links" id="navLinks" role="navigation" aria-label="التنقل">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+                <a href="all-requests.html" class="active"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+                <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
+                <a href="blog.html"><i class="fas fa-newspaper"></i> المدونة</a>
+
+                <div class="dropdown">
+                    <button class="dropdown-btn" id="dropdownToggle" aria-expanded="false" aria-haspopup="true">
+                        <i class="fas fa-user-circle"></i> القائمة
+                        <i class="fas fa-chevron-down" style="font-size:0.7em;"></i>
+                    </button>
+                    <div class="dropdown-content" id="dropdownContent" role="menu">
+                        <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                        <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                        <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                    </div>
+                </div>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي" title="الوضع الليلي">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-container" id="main">
+
+        <!-- Breadcrumb -->
+        <nav class="breadcrumb" aria-label="مسار التنقل">
+            <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+            <i class="fas fa-chevron-left"></i>
+            <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> طلبات الشراء</a>
+            <i class="fas fa-chevron-left"></i>
+            <span id="breadcrumbCurrent">تفاصيل الطلب</span>
+        </nav>
+
+        <!-- Content will be injected here -->
+        <div id="pageContent">
+            <div class="page-loader">
+                <div class="spinner"></div>
+                <h3>جاري تحميل تفاصيل الطلب...</h3>
+                <p>الرجاء الانتظار قليلاً</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- MODAL: تقديم عرض -->
+    <div class="modal-overlay" id="offerModal" role="dialog" aria-modal="true" aria-labelledby="offerModalTitle">
+        <div class="modal">
+            <div class="modal-header">
+                <h3 id="offerModalTitle">
+                    <i class="fas fa-paper-plane"></i>
+                    تقديم عرض سعر
+                </h3>
+                <button class="modal-close" id="closeOfferModalBtn" aria-label="إغلاق">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="offerForm" class="form-grid" novalidate>
+                    <div class="form-notice" id="offerNotice" style="display: none;">
+                        <i class="fas fa-info-circle"></i>
+                        <div>
+                            <strong>تنبيه:</strong> لازم تكون مسجّل دخول كمورد لتقديم عرض.
+                            <a href="auth.html?redirect=offer" style="color: var(--c-primary-600); font-weight: 700; text-decoration: underline;">تسجيل الدخول</a>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerPrice">
+                            السعر الإجمالي <span class="req">*</span>
+                            <span class="hint">(بالجنيه المصري)</span>
+                        </label>
+                        <input type="number" id="offerPrice" name="price" required
+                               min="1" step="0.01" placeholder="مثال: 5000" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerQuantity">
+                            الكمية المعروضة
+                            <span class="hint">(اختياري)</span>
+                        </label>
+                        <input type="text" id="offerQuantity" name="quantity_offered"
+                               placeholder="مثال: 500 كجم" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerDelivery">
+                            مدة التسليم
+                            <span class="hint">(اختياري)</span>
+                        </label>
+                        <input type="text" id="offerDelivery" name="delivery_time"
+                               placeholder="مثال: 7 أيام" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="offerUnit">
+                            سعر الوحدة
+                            <span class="hint">(اختياري)</span>
+                        </label>
+                        <input type="number" id="offerUnit" name="unit_price"
+                               min="0" step="0.01" placeholder="مثال: 45" />
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="offerMessage">
+                            رسالة للعميل
+                            <span class="hint">(اختياري)</span>
+                        </label>
+                        <textarea id="offerMessage" name="message"
+                                  placeholder="اذكر تفاصيل مهمة: شهادات، جودة، طريقة تغليف، شروط دفع..."></textarea>
+                    </div>
+
+                    <div class="form-actions">
+                        <button type="button" class="btn btn-cancel" id="cancelOfferBtn">إلغاء</button>
+                        <button type="submit" class="btn btn-submit" id="submitOfferBtn">
+                            <i class="fas fa-paper-plane"></i> إرسال العرض
+                        </button>
+                    </div>
+                </form>
+            </div>
         </div>
     </div>
-</div>
 
-<div class="container">
-    <div id="requestDetail">
-        <div class="loader">
-            <div class="spinner"></div>
-            <div>⏳ جاري تحميل تفاصيل الطلب...</div>
+    <!-- TOAST -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="all-products.html">المنتجات</a>
+                <a href="all-requests.html">الطلبات</a>
+                <a href="chemato-suppliers.html">الموردين</a>
+                <a href="blog.html">المدونة</a>
+                <a href="auth.html">تسجيل الدخول</a>
+                <a href="supplier-dashboard.html">للموردين</a>
+                <a href="buyer-dashboard.html">للعملاء</a>
+            </div>
+            <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
         </div>
-    </div>
-    <div class="text-center">
-        <a href="all-requests.html" class="back-link"><i class="fas fa-arrow-right"></i> العودة لجميع الطلبات</a>
-    </div>
-</div>
+    </footer>
+        <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-<div class="footer">
-    <div class="footer-links">
-        <a href="index.html">الرئيسية</a>
-        <a href="all-products.html">جميع المنتجات</a>
-        <a href="all-requests.html">جميع الطلبات</a>
-        <a href="auth.html">تسجيل الدخول</a>
-        <a href="supplier-dashboard.html">للموردين</a>
-        <a href="buyer-dashboard.html">للعملاء</a>
-    </div>
-    <div>© جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية</div>
-</div>
+        const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTcwMjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
 
-<script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+        });
 
-    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+        // ============================================================
+        // STATE
+        // ============================================================
+        const state = {
+            requestId: null,
+            request: null,
+            offers: [],
+            similarRequests: [],
+            user: null,
+            userProfile: null,
+            isOwnRequest: false,
+            isSupplier: false,
+            hasUserOffered: false,
+            wishlist: new Set(),
+            channel: null,
+        };
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+        const THEME_KEY = 'chemato-theme';
+        const WISHLIST_KEY = 'chemato-request-wishlist';
 
-    const urlParams = new URLSearchParams(window.location.search)
-    const requestId = urlParams.get('id')
+        // ============================================================
+        // UTILS
+        // ============================================================
+        const escapeHtml = (str) => {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        };
 
-    let currentUser = null
-    let currentProfile = null
+        const sanitizePhone = (p) => p ? String(p).replace(/\D/g, '') : '';
+        const isValidUUID = (id) =>
+            id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
 
-    // ========== القائمة المنسدلة ==========
-    function setupDropdown() {
-        const dropdownBtn = document.querySelector('.dropdown-btn')
-        const dropdownContent = document.getElementById('dropdownContent')
-        
-        if (dropdownBtn && dropdownContent) {
-            dropdownBtn.addEventListener('click', (e) => {
-                e.stopPropagation()
-                dropdownContent.classList.toggle('show')
-            })
-            document.addEventListener('click', () => {
-                dropdownContent.classList.remove('show')
-            })
-        }
-    }
+        const getDeadlineInfo = (deadline) => {
+            if (!deadline) return null;
+            const now = new Date();
+            now.setHours(0, 0, 0, 0);
+            const dl = new Date(deadline);
+            dl.setHours(0, 0, 0, 0);
+            const diffDays = Math.ceil((dl - now) / (1000 * 60 * 60 * 24));
 
-    async function updateDropdownContent() {
-        const { data: { user } } = await supabase.auth.getUser()
-        currentUser = user
-        const dropdownContent = document.getElementById('dropdownContent')
-        
-        if (user) {
-            const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
-            currentProfile = profile
-            dropdownContent.innerHTML = `
-                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
-                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
-                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-            `
-            const logoutLink = document.getElementById('logoutLink')
-            if (logoutLink) {
-                logoutLink.onclick = async (e) => {
-                    e.preventDefault()
-                    await supabase.auth.signOut()
-                    window.location.href = 'index.html'
+            if (diffDays < 0) return { text: 'انتهى الموعد', days: diffDays, cls: 'expired' };
+            if (diffDays === 0) return { text: 'اليوم آخر موعد!', days: 0, cls: 'urgent' };
+            if (diffDays === 1) return { text: 'باقي يوم', days: 1, cls: 'urgent' };
+            if (diffDays <= 3) return { text: `باقي ${diffDays} أيام`, days: diffDays, cls: 'urgent' };
+            if (diffDays <= 7) return { text: `باقي ${diffDays} أيام`, days: diffDays, cls: 'soon' };
+            return { text: `باقي ${diffDays} يوم`, days: diffDays, cls: 'ok' };
+        };
+
+        const getStatusInfo = (status) => {
+            const map = {
+                'open':     { text: 'مفتوح للعروض',   cls: 'open' },
+                'matched':  { text: 'تمت المطابقة',   cls: 'matched' },
+                'closed':   { text: 'مغلق',           cls: 'closed' },
+                'expired':  { text: 'منتهي',          cls: 'expired' },
+            };
+            return map[status] || map['open'];
+        };
+
+        const formatDate = (dateStr) => {
+            if (!dateStr) return '';
+            return new Date(dateStr).toLocaleDateString('ar-EG', {
+                year: 'numeric', month: 'long', day: 'numeric'
+            });
+        };
+
+        const formatDateTime = (dateStr) => {
+            if (!dateStr) return '';
+            const date = new Date(dateStr);
+            const now = new Date();
+            const diffMs = now - date;
+            const diffMin = Math.floor(diffMs / 60000);
+            const diffHrs = Math.floor(diffMs / 3600000);
+            const diffDays = Math.floor(diffMs / 86400000);
+
+            if (diffMin < 1) return 'الآن';
+            if (diffMin < 60) return `منذ ${diffMin} دقيقة`;
+            if (diffHrs < 24) return `منذ ${diffHrs} ساعة`;
+            if (diffDays < 7) return `منذ ${diffDays} يوم`;
+            return formatDate(dateStr);
+        };
+
+        // ============================================================
+        // THEME
+        // ============================================================
+        const updateThemeIcon = (theme) => {
+            const icon = document.getElementById('themeIcon');
+            if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        };
+
+        const initTheme = () => {
+            const saved = localStorage.getItem(THEME_KEY);
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeIcon(theme);
+
+            document.getElementById('themeToggle')?.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem(THEME_KEY, next);
+                updateThemeIcon(next);
+            });
+        };
+
+        // ============================================================
+        // TOAST
+        // ============================================================
+        const removeToast = (toast) => {
+            if (!toast || !toast.parentNode) return;
+            toast.classList.add('removing');
+            setTimeout(() => toast.remove(), 300);
+        };
+
+        const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = '') => {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            const iconEl = document.createElement('div');
+            iconEl.className = 'toast-icon';
+            iconEl.textContent = icon;
+
+            const content = document.createElement('div');
+            content.className = 'toast-content';
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'toast-title';
+            titleEl.textContent = title;
+
+            const descEl = document.createElement('div');
+            descEl.className = 'toast-desc';
+            descEl.textContent = desc + (linkText ? ' ' : '');
+
+            if (linkText && linkUrl) {
+                const link = document.createElement('a');
+                link.href = linkUrl;
+                link.textContent = linkText;
+                if (!linkUrl.startsWith('/') && !linkUrl.startsWith(window.location.origin)) {
+                    link.rel = 'noopener noreferrer';
+                    link.target = '_blank';
                 }
+                descEl.appendChild(link);
             }
-        } else {
-            dropdownContent.innerHTML = `
-                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
-            `
-        }
-    }
 
-    // ========== دالة إنشاء رابط واتساب ==========
-    function getWhatsAppLink(phone, productName) {
-        if (!phone) return '#'
-        const cleanPhone = phone.replace(/\D/g, '')
-        const formattedPhone = cleanPhone.startsWith('20') ? cleanPhone : `20${cleanPhone}`
-        const message = `مرحباً، أنا مهتم بتوفير: ${productName} (منصة كيماتو)`
-        return `https://wa.me/${formattedPhone}?text=${encodeURIComponent(message)}`
-    }
+            content.appendChild(titleEl);
+            content.appendChild(descEl);
 
-    // ========== عرض رسالة منبثقة ==========
-    function showToast(message) {
-        const toast = document.createElement('div')
-        toast.className = 'toast'
-        toast.innerHTML = `<i class="fas fa-check-circle"></i> ${message}`
-        document.body.appendChild(toast)
-        setTimeout(() => toast.remove(), 2500)
-    }
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'toast-close';
+            closeBtn.setAttribute('aria-label', 'إغلاق');
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            closeBtn.onclick = () => removeToast(toast);
 
-    // ========== نسخ النص ==========
-    window.copyToClipboard = (text) => {
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-            navigator.clipboard.writeText(text)
-            showToast('✅ تم نسخ الرقم بنجاح')
-        } else {
-            // Fallback
-            const textarea = document.createElement('textarea')
-            textarea.value = text
-            document.body.appendChild(textarea)
-            textarea.select()
-            document.execCommand('copy')
-            document.body.removeChild(textarea)
-            showToast('✅ تم نسخ الرقم بنجاح')
-        }
-    }
+            toast.appendChild(iconEl);
+            toast.appendChild(content);
+            toast.appendChild(closeBtn);
+            container.appendChild(toast);
 
-    // ========== فتح واتساب ==========
-    window.openWhatsApp = (phone, productName) => {
-        if (phone) {
-            const link = getWhatsAppLink(phone, productName)
-            window.open(link, '_blank')
-        } else {
-            showToast('⚠️ رقم الهاتف غير متاح')
-        }
-    }
+            setTimeout(() => removeToast(toast), 6000);
+        };
 
-    // ========== الاتصال ==========
-    window.makeCall = (phone) => {
-        if (phone) {
-            window.location.href = `tel:${phone}`
-        } else {
-            showToast('⚠️ رقم الهاتف غير متاح')
-        }
-    }
+        // ============================================================
+        // NAVBAR
+        // ============================================================
+        const initNavbar = () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
 
-    // ========== تحميل وعرض الطلب ==========
-    async function loadRequest() {
-        if (!requestId) {
-            document.getElementById('requestDetail').innerHTML = `
-                <div class="error-box">
-                    <i class="fas fa-exclamation-circle"></i>
-                    <h2>❌ خطأ</h2>
-                    <p>لم يتم تحديد الطلب المطلوب</p>
+            menuToggle?.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', isOpen);
+                menuToggle.innerHTML = isOpen
+                    ? '<i class="fas fa-times"></i>'
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            const dropdownToggle = document.getElementById('dropdownToggle');
+            const dropdownContent = document.getElementById('dropdownContent');
+
+            dropdownToggle?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = dropdownContent.classList.toggle('show');
+                dropdownToggle.setAttribute('aria-expanded', isOpen);
+            });
+
+            document.addEventListener('click', () => {
+                dropdownContent?.classList.remove('show');
+                dropdownToggle?.setAttribute('aria-expanded', 'false');
+            });
+        };
+
+        // ============================================================
+        // AUTH
+        // ============================================================
+        const checkUser = async () => {
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                state.user = user || null;
+
+                const dropdownContent = document.getElementById('dropdownContent');
+
+                if (user) {
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('id, full_name, company_name, user_type, phone, is_verified, city, whatsapp')
+                        .eq('id', user.id)
+                        .single();
+
+                    state.userProfile = profile || null;
+                    state.isSupplier = profile?.user_type === 'supplier';
+
+                    if (dropdownContent) {
+                        const dashboardUrl = profile?.user_type === 'supplier'
+                            ? 'supplier-dashboard.html'
+                            : 'buyer-dashboard.html';
+
+                        dropdownContent.innerHTML = `
+                            <a href="${dashboardUrl}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                            <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                            <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                        `;
+
+                        document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                            e.preventDefault();
+                            await supabase.auth.signOut();
+                            window.location.reload();
+                        });
+                    }
+                } else {
+                    state.userProfile = null;
+                    state.isSupplier = false;
+
+                    if (dropdownContent) {
+                        dropdownContent.innerHTML = `
+                            <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                            <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                            <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                            <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                        `;
+                    }
+                }
+            } catch (e) {
+                console.warn('Auth check failed:', e.message);
+            }
+        };
+
+        // ============================================================
+        // WISHLIST
+        // ============================================================
+        const loadWishlistLocal = () => {
+            try {
+                const stored = localStorage.getItem(WISHLIST_KEY);
+                if (stored) state.wishlist = new Set(JSON.parse(stored));
+            } catch (e) { /* silent */ }
+        };
+
+        const saveWishlistLocal = () => {
+            try {
+                localStorage.setItem(WISHLIST_KEY, JSON.stringify([...state.wishlist]));
+            } catch (e) { /* silent */ }
+        };
+
+        const syncWishlistFromDB = async () => {
+            if (!state.user) return;
+            try {
+                const local = [...state.wishlist];
+                if (local.length) {
+                    const inserts = local
+                        .filter(id => isValidUUID(id))
+                        .map(rid => ({ user_id: state.user.id, request_id: rid }));
+                    if (inserts.length) {
+                        await supabase.from('favorites').upsert(inserts, {
+                            onConflict: 'user_id,request_id',
+                            ignoreDuplicates: true,
+                        });
+                    }
+                    localStorage.removeItem(WISHLIST_KEY);
+                }
+
+                const { data } = await supabase
+                    .from('favorites')
+                    .select('request_id')
+                    .eq('user_id', state.user.id)
+                    .not('request_id', 'is', null);
+
+                state.wishlist = new Set((data || []).map(f => f.request_id));
+            } catch (e) { /* silent */ }
+        };
+
+        const toggleWishlist = async () => {
+            const rid = state.requestId;
+            if (!rid) return;
+
+            const wasWishlisted = state.wishlist.has(rid);
+            const btn = document.getElementById('wishlistBtn');
+
+            if (wasWishlisted) {
+                state.wishlist.delete(rid);
+                if (state.user) {
+                    await supabase.from('favorites').delete()
+                        .eq('user_id', state.user.id).eq('request_id', rid);
+                } else {
+                    saveWishlistLocal();
+                }
+                showToast('💔', 'أُزيل من المفضلة', '', null, null, 'info');
+                btn?.classList.remove('active');
+            } else {
+                state.wishlist.add(rid);
+                if (state.user) {
+                    await supabase.from('favorites').insert({
+                        user_id: state.user.id,
+                        request_id: rid,
+                    });
+                } else {
+                    saveWishlistLocal();
+                }
+                showToast('❤️', 'أُضيف للمفضلة', '', null, null, 'success');
+                btn?.classList.add('active');
+            }
+        };
+
+        // ============================================================
+        // LOAD REQUEST
+        // ============================================================
+        const loadRequest = async () => {
+            if (!state.requestId) {
+                renderError('لم يتم تحديد الطلب', 'الرابط غير صحيح أو ناقص.');
+                return;
+            }
+
+            try {
+                // 1. جلب الطلب
+                const { data: request, error } = await supabase
+                    .from('purchase_requests')
+                    .select(`
+                        *,
+                        buyer:profiles!buyer_id(
+                            id, full_name, company_name, phone, whatsapp, city, address,
+                            is_verified, user_type, avatar_url
+                        )
+                    `)
+                    .eq('id', state.requestId)
+                    .single();
+
+                if (error || !request) {
+                    renderError('الطلب غير موجود', 'ربما تم حذفه أو انتهت صلاحيته.');
+                    return;
+                }
+
+                state.request = request;
+                state.isOwnRequest = state.user && request.buyer_id === state.user.id;
+
+                // 2. زيادة المشاهدات (بدون انتظار)
+                supabase.rpc('increment_request_views', { request_id: state.requestId })
+                    .then(() => {})
+                    .catch(() => {
+                        // fallback: update مباشر
+                        supabase.from('purchase_requests')
+                            .update({ views_count: (request.views_count || 0) + 1 })
+                            .eq('id', state.requestId)
+                            .then(() => {});
+                    });
+
+                // 3. جلب العروض
+                const { data: offers } = await supabase
+                    .from('offers')
+                    .select(`
+                        *,
+                        supplier:profiles!supplier_id(
+                            id, full_name, company_name, phone, whatsapp, city,
+                            is_verified, avatar_url
+                        )
+                    `)
+                    .eq('request_id', state.requestId)
+                    .order('price', { ascending: true });
+
+                state.offers = offers || [];
+                state.hasUserOffered = state.user
+                    ? state.offers.some(o => o.supplier_id === state.user.id)
+                    : false;
+
+                // 4. تحديث الـ breadcrumb
+                document.getElementById('breadcrumbCurrent').textContent =
+                    request.product_name?.substring(0, 40) || 'تفاصيل الطلب';
+
+                // 5. تحديث عنوان الصفحة
+                document.title = `${request.product_name} | كيماتو - طلب شراء`;
+
+                // 6. Render
+                renderRequestPage();
+
+                // 7. جلب طلبات مشابهة (بعد الرندر عشان الصفحة ظهرت)
+                loadSimilarRequests().catch(() => {});
+
+            } catch (err) {
+                console.error('Load request error:', err);
+                renderError('حدث خطأ', 'تعذر تحميل تفاصيل الطلب. حاول تحديث الصفحة.');
+            }
+        };
+
+        // ============================================================
+        // LOAD SIMILAR REQUESTS
+        // ============================================================
+        const loadSimilarRequests = async () => {
+            if (!state.request) return;
+            try {
+                let query = supabase
+                    .from('purchase_requests')
+                    .select('id, product_name, quantity_needed, created_at, status, location')
+                    .eq('status', 'open')
+                    .neq('id', state.requestId)
+                    .order('created_at', { ascending: false })
+                    .limit(4);
+
+                if (state.request.category) {
+                    query = query.eq('category', state.request.category);
+                }
+
+                const { data } = await query;
+                state.similarRequests = data || [];
+
+                const section = document.getElementById('similarSection');
+                const list = document.getElementById('similarList');
+
+                if (state.similarRequests.length && section && list) {
+                    section.style.display = 'block';
+                    list.innerHTML = state.similarRequests.map(r => `
+                        <a href="request-details.html?id=${encodeURIComponent(r.id)}" class="mini-card">
+                            <div class="mini-card-title">📦 ${escapeHtml(r.product_name)}</div>
+                            <div class="mini-card-meta">
+                                <span><i class="fas fa-balance-scale"></i> ${escapeHtml(r.quantity_needed || 'غير محدد')}</span>
+                                ${r.location ? `<span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(r.location)}</span>` : ''}
+                                <span><i class="fas fa-clock"></i> ${formatDateTime(r.created_at)}</span>
+                            </div>
+                        </a>
+                    `).join('');
+                }
+            } catch (e) { /* silent */ }
+        };
+
+        // ============================================================
+        // RENDER
+        // ============================================================
+        const renderError = (title, desc) => {
+            document.getElementById('pageContent').innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h2>${escapeHtml(title)}</h2>
+                    <p>${escapeHtml(desc)}</p>
+                    <a href="all-requests.html" class="btn-back-home">
+                        <i class="fas fa-arrow-right"></i> العودة لجميع الطلبات
+                    </a>
                 </div>
-            `
-            return
-        }
+            `;
+        };
 
-        const { data, error } = await supabase
-            .from('purchase_requests')
-            .select('*, profiles(full_name, company_name, phone, city, address, user_type)')
-            .eq('id', requestId)
-            .single()
+        const renderRequestPage = () => {
+            const r = state.request;
+            const buyer = r.buyer || {};
+            const statusInfo = getStatusInfo(r.status);
+            const deadlineInfo = getDeadlineInfo(r.deadline);
+            const isWishlisted = state.wishlist.has(r.id);
 
-        if (error || !data) {
-            document.getElementById('requestDetail').innerHTML = `
-                <div class="error-box">
-                    <i class="fas fa-search-minus"></i>
-                    <h2>❌ عذراً</h2>
-                    <p>${error?.message || 'الطلب غير موجود أو تم حذفه'}</p>
-                </div>
-            `
-            return
-        }
+            const buyerName = buyer.company_name || buyer.full_name || 'عميل';
+            const buyerInitial = (buyerName || 'ع').charAt(0).toUpperCase();
+            const isVerifiedBuyer = buyer.is_verified === true;
 
-        const statusMap = {
-            'open': { text: '🟢 مفتوح للعروض', class: 'status-open' },
-            'matched': { text: '🟡 تم التوفيق مع مورد', class: 'status-matched' },
-            'closed': { text: '🔴 مغلق', class: 'status-closed' }
-        }
+            const rawPhone = buyer.phone || '';
+            const cleanPhone = sanitizePhone(rawPhone);
+            const phoneWithCountry = cleanPhone
+                ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
+                : '';
+            const waMessage = encodeURIComponent(`مرحباً، بخصوص طلبكم على كيماتو: ${r.product_name}`);
+            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMessage}` : '';
 
-        const buyerName = data.profiles?.company_name || data.profiles?.full_name || 'عميل'
-        const buyerInitial = buyerName.charAt(0)
-        const phoneNumber = data.profiles?.phone || ''
-        const whatsappLink = getWhatsAppLink(phoneNumber, data.product_name)
+            // Budget display
+            let budgetText = 'غير محدد';
+            if (r.budget_min || r.budget_max) {
+                const min = r.budget_min ? Number(r.budget_min).toLocaleString('ar-EG') : '';
+                const max = r.budget_max ? Number(r.budget_max).toLocaleString('ar-EG') : '';
+                if (min && max) budgetText = `${min} - ${max} ج.م`;
+                else if (min) budgetText = `من ${min} ج.م`;
+                else budgetText = `حتى ${max} ج.م`;
+            }
 
-        document.getElementById('requestDetail').innerHTML = `
-            <div class="request-card">
-                <div class="request-header">
-                    <span class="request-status ${statusMap[data.status]?.class}">${statusMap[data.status]?.text}</span>
-                    <h1 class="request-title">📦 طلب شراء: ${data.product_name}</h1>
-                    <div class="request-meta">
-                        <span><i class="fas fa-calendar-alt"></i> ${new Date(data.created_at).toLocaleDateString('ar-EG')}</span>
-                        <span><i class="fas fa-hashtag"></i> ${data.id.substring(0, 12)}...</span>
+            // Offers stats
+            const offersCount = state.offers.length;
+            const bestPrice = offersCount > 0
+                ? Math.min(...state.offers.filter(o => o.status !== 'rejected').map(o => Number(o.price)).filter(p => p > 0))
+                : null;
+            const acceptedOffer = state.offers.find(o => o.status === 'accepted');
+
+            document.getElementById('pageContent').innerHTML = `
+
+                <!-- HEADER CARD -->
+                <section class="request-header-card animate-in">
+                    <div class="header-bg-icons" aria-hidden="true">
+                        <span class="icon-float">📋</span>
+                        <span class="icon-float">🧪</span>
+                        <span class="icon-float">💰</span>
                     </div>
-                </div>
-                
-                <div class="request-content">
-                    <div class="info-section">
-                        <div class="section-title">
-                            <i class="fas fa-info-circle"></i>
-                            <span>تفاصيل الطلب</span>
-                        </div>
-                        <div class="info-grid">
-                            <div class="info-item">
-                                <div class="info-icon"><i class="fas fa-box"></i></div>
-                                <div>
-                                    <div class="info-label">المنتج المطلوب</div>
-                                    <div class="info-value">${data.product_name}</div>
-                                </div>
+
+                    <div class="header-content">
+                        <div class="header-top-row">
+                            <div class="header-badges">
+                                <span class="status-pill ${statusInfo.cls}">
+                                    <span class="dot"></span>
+                                    ${statusInfo.text}
+                                </span>
+                                ${deadlineInfo ? `
+                                    <span class="deadline-pill ${deadlineInfo.cls}">
+                                        <i class="fas fa-clock"></i>
+                                        ${deadlineInfo.text}
+                                    </span>
+                                ` : ''}
                             </div>
-                            <div class="info-item">
-                                <div class="info-icon"><i class="fas fa-balance-scale"></i></div>
-                                <div>
-                                    <div class="info-label">الكمية المطلوبة</div>
-                                    <div class="info-value">${data.quantity_needed || 'غير محدد'}</div>
-                                </div>
-                            </div>
-                            ${data.deadline ? `
-                            <div class="info-item">
-                                <div class="info-icon"><i class="fas fa-calendar-times"></i></div>
-                                <div>
-                                    <div class="info-label">آخر موعد للاستلام</div>
-                                    <div class="info-value">${new Date(data.deadline).toLocaleDateString('ar-EG')}</div>
-                                </div>
-                            </div>
-                            ` : ''}
-                        </div>
-                        
-                        ${data.description ? `
-                            <div class="description-box">
-                                <span class="label"><i class="fas fa-align-right"></i> وصف الطلب</span>
-                                <p>${data.description.replace(/\n/g, '<br>')}</p>
-                            </div>
-                        ` : ''}
-                    </div>
-                    
-                    <div class="buyer-section">
-                        <div class="buyer-header">
-                            <div class="buyer-avatar">${buyerInitial}</div>
-                            <div>
-                                <div class="buyer-name">${buyerName}</div>
-                                <div class="buyer-type">${data.profiles?.user_type === 'supplier' ? '🏭 مورد' : '🛒 عميل'}</div>
-                            </div>
-                        </div>
-                        
-                        <div class="buyer-info-grid">
-                            <div class="buyer-info-item">
-                                <i class="fas fa-city"></i>
-                                <div class="info-text">${data.profiles?.city || 'مدينة غير محددة'}</div>
-                            </div>
-                            <div class="buyer-info-item">
-                                <i class="fas fa-map-marker-alt"></i>
-                                <div class="info-text">${data.profiles?.address || 'عنوان غير محدد'}</div>
-                            </div>
-                            ${phoneNumber ? `
-                            <div class="buyer-info-item">
-                                <i class="fas fa-phone"></i>
-                                <div class="info-text" dir="ltr">${phoneNumber}</div>
-                                <button class="copy-btn" onclick="copyToClipboard('${phoneNumber}')" title="نسخ الرقم">
-                                    <i class="fas fa-copy"></i>
+
+                            <div class="header-actions-top">
+                                <button class="header-icon-btn ${isWishlisted ? 'active' : ''}"
+                                        id="wishlistBtn"
+                                        type="button"
+                                        aria-label="حفظ في المفضلة"
+                                        title="حفظ في المفضلة">
+                                    <i class="fas fa-heart"></i>
+                                </button>
+                                <button class="header-icon-btn"
+                                        id="shareBtn"
+                                        type="button"
+                                        aria-label="مشاركة"
+                                        title="مشاركة">
+                                    <i class="fas fa-share-alt"></i>
                                 </button>
                             </div>
+                        </div>
+
+                        <div class="request-title-row">
+                            ${r.category ? `
+                                <span class="request-category-chip">
+                                    <i class="fas fa-tag"></i> ${escapeHtml(r.category)}
+                                </span>
+                            ` : ''}
+                            <h1 class="request-title">📦 مطلوب: ${escapeHtml(r.product_name)}</h1>
+                            ${r.cas_number ? `
+                                <span class="request-cas-line">
+                                    <i class="fas fa-hashtag"></i> CAS ${escapeHtml(r.cas_number)}
+                                </span>
+                            ` : ''}
+                        </div>
+
+                        <div class="header-meta-row">
+                            <span class="meta-item">
+                                <i class="fas fa-calendar-alt"></i>
+                                نُشر <strong>${formatDateTime(r.created_at)}</strong>
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-eye"></i>
+                                <strong>${Number(r.views_count || 0).toLocaleString('ar-EG')}</strong> مشاهدة
+                            </span>
+                            <span class="meta-item">
+                                <i class="fas fa-comments"></i>
+                                <strong>${offersCount}</strong> عرض
+                            </span>
+                            ${r.location ? `
+                                <span class="meta-item">
+                                    <i class="fas fa-map-marker-alt"></i>
+                                    ${escapeHtml(r.location)}
+                                </span>
                             ` : ''}
                         </div>
                     </div>
-                    
-                    <div class="action-buttons">
-                        <a href="${whatsappLink}" target="_blank" class="btn btn-whatsapp">
-                            <i class="fab fa-whatsapp"></i> تواصل عبر واتساب
-                        </a>
-                        <a href="tel:${phoneNumber}" class="btn btn-call">
-                            <i class="fas fa-phone-alt"></i> اتصال
-                        </a>
-                        ${phoneNumber ? `
-                        <button class="btn btn-copy" onclick="copyToClipboard('${phoneNumber}')">
-                            <i class="fas fa-copy"></i> نسخ الرقم
-                        </button>
+                </section>
+
+                <!-- CONTENT LAYOUT -->
+                <div class="content-layout">
+
+                    <!-- MAIN COLUMN -->
+                    <div class="main-column">
+
+                        <!-- تفاصيل الطلب -->
+                        <section class="card animate-in" style="animation-delay: 0.05s;">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-info-circle"></i>
+                                    تفاصيل الطلب
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="info-grid">
+                                    <div class="info-item">
+                                        <div class="info-icon"><i class="fas fa-box"></i></div>
+                                        <div class="info-text-wrapper">
+                                            <div class="info-label">المنتج المطلوب</div>
+                                            <div class="info-value">${escapeHtml(r.product_name)}</div>
+                                        </div>
+                                    </div>
+
+                                    ${r.cas_number ? `
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-hashtag"></i></div>
+                                            <div class="info-text-wrapper">
+                                                <div class="info-label">رقم CAS</div>
+                                                <div class="info-value cas">${escapeHtml(r.cas_number)}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+
+                                    <div class="info-item">
+                                        <div class="info-icon"><i class="fas fa-balance-scale"></i></div>
+                                        <div class="info-text-wrapper">
+                                            <div class="info-label">الكمية المطلوبة</div>
+                                            <div class="info-value highlight">${escapeHtml(r.quantity_needed || 'غير محدد')}</div>
+                                        </div>
+                                    </div>
+
+                                    ${r.preferred_unit ? `
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-weight-hanging"></i></div>
+                                            <div class="info-text-wrapper">
+                                                <div class="info-label">وحدة القياس</div>
+                                                <div class="info-value">${escapeHtml(r.preferred_unit)}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+
+                                    <div class="info-item">
+                                        <div class="info-icon"><i class="fas fa-money-bill-wave"></i></div>
+                                        <div class="info-text-wrapper">
+                                            <div class="info-label">الميزانية</div>
+                                            <div class="info-value budget">${budgetText}</div>
+                                        </div>
+                                    </div>
+
+                                    ${r.category ? `
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-tag"></i></div>
+                                            <div class="info-text-wrapper">
+                                                <div class="info-label">الفئة</div>
+                                                <div class="info-value">${escapeHtml(r.category)}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+
+                                    ${r.location ? `
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+                                            <div class="info-text-wrapper">
+                                                <div class="info-label">موقع التسليم</div>
+                                                <div class="info-value">${escapeHtml(r.location)}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+
+                                    ${r.deadline ? `
+                                        <div class="info-item">
+                                            <div class="info-icon"><i class="fas fa-calendar-times"></i></div>
+                                            <div class="info-text-wrapper">
+                                                <div class="info-label">آخر موعد</div>
+                                                <div class="info-value">${formatDate(r.deadline)}</div>
+                                            </div>
+                                        </div>
+                                    ` : ''}
+                                </div>
+
+                                ${r.description ? `
+                                    <div class="description-box">
+                                        <span class="label">
+                                            <i class="fas fa-align-right"></i>
+                                            وصف / مواصفات إضافية
+                                        </span>
+                                        <p>${escapeHtml(r.description).replace(/\n/g, '<br>')}</p>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </section>
+
+                        <!-- العروض -->
+                        <section class="card animate-in" id="offersSection" style="animation-delay: 0.1s;">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-hand-holding-usd"></i>
+                                    العروض
+                                    <span class="count-badge" id="offersCountBadge">${offersCount}</span>
+                                </div>
+                                <div class="offers-header-actions">
+                                    ${renderOfferButton()}
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                ${renderOffersContent(bestPrice, acceptedOffer)}
+                            </div>
+                        </section>
+
+                    </div>
+
+                    <!-- SIDE COLUMN -->
+                    <aside class="side-column">
+
+                        <!-- صاحب الطلب -->
+                        <section class="card owner-card animate-in" style="animation-delay: 0.15s;">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-user-circle"></i>
+                                    صاحب الطلب
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="owner-header">
+                                    <div class="owner-avatar">${buyerInitial}</div>
+                                    <div class="owner-info">
+                                        <div class="owner-name">
+                                            ${escapeHtml(buyerName)}
+                                            ${isVerifiedBuyer ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
+                                        </div>
+                                        <div class="owner-type">
+                                            <i class="fas fa-shopping-cart"></i>
+                                            ${buyer.user_type === 'supplier' ? 'مورد' : 'عميل'}
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="owner-contact-list">
+                                    ${buyer.city ? `
+                                        <div class="owner-contact-item">
+                                            <i class="fas fa-city"></i>
+                                            <span class="text">${escapeHtml(buyer.city)}</span>
+                                        </div>
+                                    ` : ''}
+                                    ${buyer.address ? `
+                                        <div class="owner-contact-item">
+                                            <i class="fas fa-map-marker-alt"></i>
+                                            <span class="text">${escapeHtml(buyer.address)}</span>
+                                        </div>
+                                    ` : ''}
+                                    ${rawPhone ? `
+                                        <div class="owner-contact-item">
+                                            <i class="fas fa-phone"></i>
+                                            <span class="text" dir="ltr">${escapeHtml(rawPhone)}</span>
+                                            <button class="copy-btn" type="button" data-copy="${escapeHtml(rawPhone)}" title="نسخ">
+                                                <i class="fas fa-copy"></i>
+                                            </button>
+                                        </div>
+                                    ` : ''}
+                                </div>
+
+                                ${rawPhone ? `
+                                    <div class="owner-actions">
+                                        <a href="${waLink}" target="_blank" rel="noopener noreferrer"
+                                           class="btn-offer-action btn-contact-supplier">
+                                            <i class="fab fa-whatsapp"></i> واتساب
+                                        </a>
+                                        <a href="tel:${escapeHtml(rawPhone)}"
+                                           class="btn-offer-action btn-contact-call">
+                                            <i class="fas fa-phone"></i> اتصال
+                                        </a>
+                                    </div>
+                                ` : ''}
+                            </div>
+                        </section>
+
+                        <!-- طلبات مشابهة -->
+                        <section class="card animate-in" id="similarSection" style="display: none; animation-delay: 0.2s;">
+                            <div class="card-header">
+                                <div class="card-title">
+                                    <i class="fas fa-layer-group"></i>
+                                    طلبات مشابهة
+                                </div>
+                            </div>
+                            <div class="card-body">
+                                <div class="similar-list" id="similarList"></div>
+                            </div>
+                        </section>
+
+                    </aside>
+                </div>
+            `;
+
+            // Re-init dynamic content
+            bindPageEvents();
+        };
+
+        const renderOfferButton = () => {
+            // لو إنت صاحب الطلب → مفيش زرار
+            if (state.isOwnRequest) return '';
+
+            // لو مش مسجّل
+            if (!state.user) {
+                return `<button class="btn-offer-submit" id="openOfferBtn" type="button">
+                            <i class="fas fa-paper-plane"></i> قدّم عرض
+                        </button>`;
+            }
+
+            // لو مش مورد
+            if (!state.isSupplier) {
+                return `<button class="btn-offer-submit" id="openOfferBtn" type="button" style="opacity: 0.7;">
+                            <i class="fas fa-info-circle"></i> للموردين فقط
+                        </button>`;
+            }
+
+            // لو قدّم عرض بالفعل
+            if (state.hasUserOffered) {
+                return `<span style="font-size:0.78rem; color: var(--c-accent-dark); font-weight: 700; display: inline-flex; align-items: center; gap: 6px;">
+                            <i class="fas fa-check-circle"></i> قدّمت عرضاً
+                        </span>`;
+            }
+
+            return `<button class="btn-offer-submit" id="openOfferBtn" type="button">
+                        <i class="fas fa-paper-plane"></i> قدّم عرض
+                    </button>`;
+        };
+
+        const renderOffersContent = (bestPrice, acceptedOffer) => {
+            // حالة الطلب مغلق / مطابق
+            if (state.request.status === 'closed' || state.request.status === 'expired') {
+                if (!state.offers.length) {
+                    return `
+                        <div class="offers-empty">
+                            <i class="fas fa-lock"></i>
+                            <h4>الطلب مغلق</h4>
+                            <p>تم إغلاق هذا الطلب ولا يقبل عروضاً جديدة</p>
+                        </div>
+                    `;
+                }
+            }
+
+            if (!state.offers.length) {
+                return `
+                    <div class="offers-empty">
+                        <i class="fas fa-inbox"></i>
+                        <h4>لا توجد عروض بعد</h4>
+                        <p>كن أول مورد يقدّم عرضاً على هذا الطلب!</p>
+                        ${!state.isOwnRequest && state.isSupplier && !state.hasUserOffered ? `
+                            <button class="btn-offer-submit" id="openOfferBtnEmpty" type="button">
+                                <i class="fas fa-paper-plane"></i> قدّم عرضك الآن
+                            </button>
                         ` : ''}
                     </div>
-                </div>
-            </div>
-        `
-    }
+                `;
+            }
 
-    // ========== بدء التشغيل ==========
-    setupDropdown()
-    updateDropdownContent()
-    loadRequest()
-</script>
+            // Stats bar
+            const validOffers = state.offers.filter(o => o.status !== 'rejected');
+            const avgPrice = validOffers.length
+                ? validOffers.reduce((s, o) => s + Number(o.price), 0) / validOffers.length
+                : 0;
+
+            const statsBar = `
+                <div class="offers-stats-bar">
+                    <div class="offer-stat">
+                        <span class="offer-stat-label">عدد العروض</span>
+                        <span class="offer-stat-value">${state.offers.length}</span>
+                    </div>
+                    <div class="offer-stat">
+                        <span class="offer-stat-label">أقل سعر</span>
+                        <span class="offer-stat-value best">${bestPrice ? Number(bestPrice).toLocaleString('ar-EG') + ' ج.م' : '—'}</span>
+                    </div>
+                    <div class="offer-stat">
+                        <span class="offer-stat-label">متوسط السعر</span>
+                        <span class="offer-stat-value">${avgPrice ? Number(avgPrice.toFixed(0)).toLocaleString('ar-EG') + ' ج.م' : '—'}</span>
+                    </div>
+                </div>
+            `;
+
+            const offerCards = state.offers.map((offer, i) => renderOfferCard(offer, bestPrice, i)).join('');
+
+            return statsBar + `<div class="offers-list">${offerCards}</div>`;
+        };
+
+        const renderOfferCard = (offer, bestPrice, index) => {
+            const supplier = offer.supplier || {};
+            const supplierName = supplier.company_name || supplier.full_name || 'مورد';
+            const supplierInitial = (supplierName || 'م').charAt(0).toUpperCase();
+            const isVerified = supplier.is_verified === true;
+
+            const isBest = bestPrice && Number(offer.price) === Number(bestPrice) && offer.status !== 'rejected';
+            const isAccepted = offer.status === 'accepted';
+            const isRejected = offer.status === 'rejected';
+            const isPending = offer.status === 'pending' || !offer.status;
+
+            const supplierPhone = supplier.phone || '';
+            const cleanPhone = sanitizePhone(supplierPhone);
+            const phoneWithCountry = cleanPhone
+                ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
+                : '';
+            const waMsg = encodeURIComponent(`مرحباً، بخصوص عرضكم على طلب: ${state.request.product_name} (كيماتو)`);
+            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMsg}` : '';
+
+            let cardCls = 'offer-card';
+            if (isAccepted) cardCls += ' accepted';
+            else if (isRejected) cardCls += ' rejected';
+            else if (isBest) cardCls += ' is-best';
+
+            return `
+                <article class="${cardCls}" style="animation-delay: ${Math.min(index * 0.05, 0.3)}s;">
+                    <div class="offer-card-top">
+                        <div class="offer-supplier-avatar">${supplierInitial}</div>
+                        <div class="offer-supplier-info">
+                            <div class="offer-supplier-name">
+                                ${escapeHtml(supplierName)}
+                                ${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
+                            </div>
+                            <div class="offer-supplier-meta">
+                                ${supplier.city ? `<span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(supplier.city)}</span>` : ''}
+                                <span><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>
+                            </div>
+                        </div>
+                        <div class="offer-price-block">
+                            <span class="offer-price">
+                                ${Number(offer.price).toLocaleString('ar-EG')}
+                                <span class="currency">ج.م</span>
+                            </span>
+                            ${offer.unit_price ? `<div class="offer-time">${Number(offer.unit_price).toLocaleString('ar-EG')} ج.م/وحدة</div>` : ''}
+                        </div>
+                    </div>
+
+                    ${(offer.quantity_offered || offer.delivery_time) ? `
+                        <div class="offer-details-grid">
+                            ${offer.quantity_offered ? `
+                                <div class="offer-detail">
+                                    <i class="fas fa-box"></i>
+                                    <span>الكمية: <strong>${escapeHtml(offer.quantity_offered)}</strong></span>
+                                </div>
+                            ` : ''}
+                            ${offer.delivery_time ? `
+                                <div class="offer-detail">
+                                    <i class="fas fa-truck"></i>
+                                    <span>التسليم: <strong>${escapeHtml(offer.delivery_time)}</strong></span>
+                                </div>
+                            ` : ''}
+                        </div>
+                    ` : ''}
+
+                    ${offer.message ? `
+                        <div class="offer-message">
+                            <i class="fas fa-comment-dots" style="color: var(--c-request); margin-left: 6px;"></i>
+                            ${escapeHtml(offer.message)}
+                        </div>
+                    ` : ''}
+
+                    <div class="offer-actions">
+                        ${state.isOwnRequest && isPending ? `
+                            <button class="btn-offer-action btn-accept"
+                                    type="button"
+                                    data-action="accept-offer"
+                                    data-offer-id="${escapeHtml(offer.id)}">
+                                <i class="fas fa-check"></i> قبول العرض
+                            </button>
+                            <button class="btn-offer-action btn-reject"
+                                    type="button"
+                                    data-action="reject-offer"
+                                    data-offer-id="${escapeHtml(offer.id)}">
+                                <i class="fas fa-times"></i> رفض
+                            </button>
+                        ` : ''}
+                        ${supplierPhone ? `
+                            <a href="${waLink}" target="_blank" rel="noopener noreferrer"
+                               class="btn-offer-action btn-contact-supplier">
+                                <i class="fab fa-whatsapp"></i> تواصل
+                            </a>
+                            <a href="tel:${escapeHtml(supplierPhone)}"
+                               class="btn-offer-action btn-contact-call">
+                                <i class="fas fa-phone"></i> اتصال
+                            </a>
+                        ` : ''}
+                    </div>
+                </article>
+            `;
+        };
+
+        // ============================================================
+        // PAGE EVENTS
+        // ============================================================
+        const bindPageEvents = () => {
+            // Wishlist
+            document.getElementById('wishlistBtn')?.addEventListener('click', toggleWishlist);
+
+            // Share
+            document.getElementById('shareBtn')?.addEventListener('click', async () => {
+                const url = window.location.href;
+                const title = state.request?.product_name || 'طلب شراء';
+                if (navigator.share) {
+                    try {
+                        await navigator.share({ title, text: `📋 ${title} - كيماتو`, url });
+                        return;
+                    } catch (e) { if (e.name === 'AbortError') return; }
+                }
+                try {
+                    await navigator.clipboard.writeText(url);
+                    showToast('📋', 'تم النسخ!', 'تم نسخ رابط الطلب', null, null, 'success');
+                } catch {
+                    showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', null, null, 'error');
+                }
+            });
+
+            // Copy buttons
+            document.querySelectorAll('[data-copy]').forEach(btn => {
+                btn.addEventListener('click', async () => {
+                    const text = btn.dataset.copy;
+                    try {
+                        await navigator.clipboard.writeText(text);
+                        showToast('📋', 'تم النسخ!', text, null, null, 'success');
+                    } catch {
+                        showToast('⚠️', 'خطأ', 'تعذر النسخ', null, null, 'error');
+                    }
+                });
+            });
+
+            // Open offer modal
+            const openOfferHandler = () => {
+                // لو مش مسجّل
+                if (!state.user) {
+                    showToast('🔒', 'سجّل دخولك', 'لازم تكون مسجّل كمورد لتقديم عرض',
+                        'تسجيل الدخول', 'auth.html?redirect=offer', 'warning');
+                    return;
+                }
+                // لو مش مورد
+                if (!state.isSupplier) {
+                    showToast('⚠️', 'غير مسموح', 'فقط الموردين يقدروا يقدّموا عروض', null, null, 'warning');
+                    return;
+                }
+                // لو قدّم قبل كده
+                if (state.hasUserOffered) {
+                    showToast('ℹ️', 'قدّمت عرضاً بالفعل', 'لا يمكنك تقديم أكثر من عرض على نفس الطلب', null, null, 'info');
+                    return;
+                }
+                // لو الطلب مش مفتوح
+                if (state.request.status !== 'open') {
+                    showToast('⚠️', 'الطلب مغلق', 'لا يمكن تقديم عرض على طلب غير مفتوح', null, null, 'warning');
+                    return;
+                }
+                openOfferModal();
+            };
+
+            document.getElementById('openOfferBtn')?.addEventListener('click', openOfferHandler);
+            document.getElementById('openOfferBtnEmpty')?.addEventListener('click', openOfferHandler);
+
+            // Accept / Reject offer buttons
+            document.querySelectorAll('[data-action="accept-offer"], [data-action="reject-offer"]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const action = btn.dataset.action;
+                    const offerId = btn.dataset.offerId;
+                    if (action === 'accept-offer') handleAcceptOffer(offerId);
+                    else if (action === 'reject-offer') handleRejectOffer(offerId);
+                });
+            });
+        };
+
+        // ============================================================
+        // OFFER MODAL
+        // ============================================================
+        const openOfferModal = () => {
+            const modal = document.getElementById('offerModal');
+            const form = document.getElementById('offerForm');
+            const notice = document.getElementById('offerNotice');
+
+            form?.reset();
+            notice.style.display = 'none';
+
+            modal.classList.add('show');
+            setTimeout(() => document.getElementById('offerPrice')?.focus(), 300);
+        };
+
+        const closeOfferModal = () => {
+            document.getElementById('offerModal')?.classList.remove('show');
+        };
+
+        const initOfferForm = () => {
+            const form = document.getElementById('offerForm');
+            if (!form) return;
+
+            form.addEventListener('submit', async (e) => {
+                e.preventDefault();
+
+                // Validations
+                if (!state.user) {
+                    showToast('🔒', 'سجّل دخولك أولاً', '', null, null, 'warning');
+                    return;
+                }
+                if (!state.isSupplier) {
+                    showToast('⚠️', 'فقط الموردين', '', null, null, 'warning');
+                    return;
+                }
+                if (state.hasUserOffered) {
+                    showToast('ℹ️', 'قدّمت عرضاً بالفعل', '', null, null, 'info');
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submitOfferBtn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span> جاري الإرسال';
+
+                try {
+                    const formData = new FormData(form);
+                    const data = Object.fromEntries(formData);
+
+                    const price = Number(data.price);
+                    if (!price || price <= 0) throw new Error('السعر يجب أن يكون أكبر من صفر');
+
+                    const insertData = {
+                        request_id: state.requestId,
+                        supplier_id: state.user.id,
+                        price: price,
+                        quantity_offered: data.quantity_offered?.trim() || null,
+                        delivery_time: data.delivery_time?.trim() || null,
+                        message: data.message?.trim() || null,
+                        status: 'pending',
+                    };
+
+                    const { data: inserted, error } = await supabase
+                        .from('offers')
+                        .insert(insertData)
+                        .select()
+                        .single();
+
+                    if (error) throw error;
+
+                    showToast('✅', 'تم إرسال عرضك!', 'صاحب الطلب هيتواصل معك قريباً', null, null, 'success');
+                    closeOfferModal();
+
+                    // إعادة تحميل العروض
+                    setTimeout(() => loadRequest(), 800);
+
+                } catch (err) {
+                    console.error('Offer submit error:', err);
+                    showToast('⚠️', 'خطأ', err.message || 'تعذر إرسال العرض', null, null, 'error');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
+                }
+            });
+
+            document.getElementById('closeOfferModalBtn')?.addEventListener('click', closeOfferModal);
+            document.getElementById('cancelOfferBtn')?.addEventListener('click', closeOfferModal);
+            document.getElementById('offerModal')?.addEventListener('click', (e) => {
+                if (e.target.id === 'offerModal') closeOfferModal();
+            });
+        };
+
+        // ============================================================
+        // ACCEPT / REJECT OFFER
+        // ============================================================
+        const handleAcceptOffer = async (offerId) => {
+            if (!state.isOwnRequest) {
+                showToast('⚠️', 'غير مسموح', 'فقط صاحب الطلب يمكنه قبول العروض', null, null, 'warning');
+                return;
+            }
+
+            if (!confirm('هل أنت متأكد من قبول هذا العرض؟ سيتم رفض باقي العروض تلقائياً.')) return;
+
+            try {
+                // 1. قبول العرض
+                const { error: acceptErr } = await supabase
+                    .from('offers')
+                    .update({ status: 'accepted' })
+                    .eq('id', offerId);
+
+                if (acceptErr) throw acceptErr;
+
+                // 2. رفض باقي العروض
+                await supabase
+                    .from('offers')
+                    .update({ status: 'rejected' })
+                    .eq('request_id', state.requestId)
+                    .neq('id', offerId);
+
+                // 3. تحديث حالة الطلب
+                await supabase
+                    .from('purchase_requests')
+                    .update({ status: 'matched' })
+                    .eq('id', state.requestId);
+
+                showToast('✅', 'تم قبول العرض!', 'تم إشعار المورد ورفض باقي العروض', null, null, 'success');
+
+                // إعادة تحميل
+                setTimeout(() => loadRequest(), 600);
+
+            } catch (err) {
+                console.error('Accept offer error:', err);
+                showToast('⚠️', 'خطأ', err.message || 'تعذر قبول العرض', null, null, 'error');
+            }
+        };
+
+        const handleRejectOffer = async (offerId) => {
+            if (!state.isOwnRequest) {
+                showToast('⚠️', 'غير مسموح', 'فقط صاحب الطلب يمكنه رفض العروض', null, null, 'warning');
+                return;
+            }
+
+            if (!confirm('هل أنت متأكد من رفض هذا العرض؟')) return;
+
+            try {
+                const { error } = await supabase
+                    .from('offers')
+                    .update({ status: 'rejected' })
+                    .eq('id', offerId);
+
+                if (error) throw error;
+
+                showToast('🗑️', 'تم رفض العرض', '', null, null, 'info');
+                setTimeout(() => loadRequest(), 600);
+
+            } catch (err) {
+                console.error('Reject offer error:', err);
+                showToast('⚠️', 'خطأ', err.message || 'تعذر رفض العرض', null, null, 'error');
+            }
+        };
+
+        // ============================================================
+        // REALTIME
+        // ============================================================
+        const setupRealtime = () => {
+            if (state.channel) supabase.removeChannel(state.channel);
+            try {
+                state.channel = supabase
+                    .channel(`request_${state.requestId}_realtime`)
+                    .on('postgres_changes', {
+                        event: 'INSERT',
+                        schema: 'public',
+                        table: 'offers',
+                        filter: `request_id=eq.${state.requestId}`,
+                    }, (payload) => {
+                        const offer = payload.new;
+                        showToast('💰', 'عرض جديد!', `تم إضافة عرض بقيمة ${Number(offer.price).toLocaleString('ar-EG')} ج.م`, null, null, 'success');
+                        loadRequest();
+                    })
+                    .on('postgres_changes', {
+                        event: 'UPDATE',
+                        schema: 'public',
+                        table: 'offers',
+                        filter: `request_id=eq.${state.requestId}`,
+                    }, () => {
+                        loadRequest();
+                    })
+                    .subscribe();
+            } catch (e) { /* silent */ }
+        };
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        const init = async () => {
+            console.log('🚀 كيماتو | تفاصيل الطلب');
+
+            // Get request id from URL
+            const urlParams = new URLSearchParams(window.location.search);
+            state.requestId = urlParams.get('id');
+
+            // Theme
+            initTheme();
+
+            // Navbar
+            initNavbar();
+
+            // Offer form
+            initOfferForm();
+
+            // Wishlist local
+            loadWishlistLocal();
+
+            // Auth
+            await checkUser();
+
+            // Sync wishlist if logged in
+            if (state.user) {
+                await syncWishlistFromDB();
+            }
+
+            // Load request
+            await loadRequest();
+
+            // Realtime
+            if (state.requestId) setupRealtime();
+
+            // Keyboard ESC closes modal
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeOfferModal();
+                    document.querySelector('.dropdown-content')?.classList.remove('show');
+                }
+            });
+
+            console.log('✅ جاهز');
+        };
+
+        // Auth state changes
+        supabase.auth.onAuthStateChange(async () => {
+            await checkUser();
+            if (state.user) await syncWishlistFromDB();
+            else loadWishlistLocal();
+            await loadRequest();
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
 </body>
 </html>
