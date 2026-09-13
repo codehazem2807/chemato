@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <title>كيماتو | موردو المواد الكيماوية في مصر</title>
-    <meta name="description" content="تصفح أفضل موردي المواد الكيماوية في مصر — صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام. تواصل مباشر مع موردين موثّقين." />
+    <meta name="description" content="تصفح أفضل موردي المواد الكيماوية في مصر — صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام." />
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content="موردين كيماويات,موردين مواد خام,صودا كاوية,حمض كبريتيك,مذيبات,مصر,B2B,كيماتو" />
 
@@ -25,7 +25,7 @@
     <link rel="canonical" href="https://chemato.vercel.app/chemato-suppliers.html" />
     <link rel="icon" type="image/x-icon" href="logo.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
-    <link rel="apple-touch-icon" href="logo-192.png" />
+    <link rel="apple-touch-icon" href="logo.png" />
     <meta name="theme-color" content="#0a2540" />
 
     <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
@@ -33,9 +33,6 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-
-    <link rel="preload" href="/logo-192.png" as="image" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" as="style" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -66,8 +63,6 @@
             --c-whatsapp:    #25D366;
             --c-purple:      #8b5cf6;
             --c-verified:    #1e88e5;
-            --c-request:     #e67e22;
-            --c-request-dark:#d35400;
             --c-bg:          #f6f8fb;
             --c-surface:     #ffffff;
             --c-surface-2:   #f9fbfd;
@@ -147,13 +142,10 @@
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.3); } 50% { transform: scale(1); } 75% { transform: scale(1.2); } 100% { transform: scale(1); } }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
-        /* ============================================================
-           NAVBAR
-           ============================================================ */
+        /* NAVBAR */
         .navbar {
             position: sticky; top: 0; z-index: 100;
             background: rgba(10, 37, 64, 0.85);
@@ -225,14 +217,10 @@
             align-items: center; justify-content: center; font-size: 1.1rem;
         }
 
-        /* ============================================================
-           MAIN
-           ============================================================ */
+        /* MAIN */
         .main-container { max-width: var(--container); margin: 0 auto; padding: 20px 24px 60px; }
 
-        /* ============================================================
-           PAGE HEADER
-           ============================================================ */
+        /* PAGE HEADER */
         .page-header {
             position: relative;
             border-radius: var(--r-xl);
@@ -255,11 +243,7 @@
             background-size: 40px 40px, 60px 60px;
             pointer-events: none;
         }
-
-        .header-bg-icons {
-            position: absolute; inset: 0;
-            overflow: hidden; pointer-events: none; z-index: 0;
-        }
+        .header-bg-icons { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
         .header-bg-icons .icon-float {
             position: absolute; font-size: 2.4rem;
             opacity: 0.08; animation: float 6s ease-in-out infinite;
@@ -308,7 +292,6 @@
             max-width: 640px; margin: 0 auto 24px; line-height: 1.65;
         }
 
-        /* Stats bar */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -345,9 +328,7 @@
             font-weight: 500; margin-top: 2px;
         }
 
-        /* ============================================================
-           SEARCH SECTION
-           ============================================================ */
+        /* SEARCH */
         .search-section {
             margin-top: -24px;
             position: relative;
@@ -355,13 +336,7 @@
             padding: 0 4px;
             margin-bottom: 24px;
         }
-
-        .search-wrapper-outer {
-            position: relative;
-            max-width: 900px;
-            margin: 0 auto;
-        }
-
+        .search-wrapper-outer { position: relative; max-width: 900px; margin: 0 auto; }
         .search-wrapper {
             background: var(--c-surface);
             border-radius: var(--r-full);
@@ -376,55 +351,34 @@
             border-color: var(--c-verified);
             box-shadow: 0 12px 40px rgba(30, 136, 229, 0.2);
         }
-        .search-icon {
-            padding: 0 8px 0 20px;
-            color: var(--c-text-sub);
-            font-size: 1rem;
-            align-self: center;
-            flex-shrink: 0;
-        }
+        .search-icon { padding: 0 8px 0 20px; color: var(--c-text-sub); font-size: 1rem; align-self: center; flex-shrink: 0; }
         .search-wrapper input {
-            flex: 1;
-            padding: 14px 4px;
-            border: none;
-            background: transparent;
-            font-size: 0.95rem;
-            color: var(--c-text);
-            outline: none;
-            min-width: 0;
+            flex: 1; padding: 14px 4px;
+            border: none; background: transparent;
+            font-size: 0.95rem; color: var(--c-text);
+            outline: none; min-width: 0;
         }
         .search-wrapper input::placeholder { color: var(--c-text-sub); }
         .search-clear {
-            padding: 0 12px;
-            color: var(--c-text-sub);
-            font-size: 0.9rem;
-            display: none;
-            align-items: center;
-            transition: color var(--t-fast);
+            padding: 0 12px; color: var(--c-text-sub); font-size: 0.9rem;
+            display: none; align-items: center; transition: color var(--t-fast);
         }
         .search-clear.visible { display: flex; }
         .search-clear:hover { color: var(--c-danger); }
-
         .search-btn {
             background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700));
-            color: #fff;
-            padding: 0 28px;
+            color: #fff; padding: 0 28px;
             border-radius: var(--r-full);
-            font-weight: 700;
-            font-size: 0.92rem;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
+            font-weight: 700; font-size: 0.92rem;
+            display: inline-flex; align-items: center; gap: 8px;
             transition: all var(--t-base);
-            min-height: 48px;
-            flex-shrink: 0;
+            min-height: 48px; flex-shrink: 0;
         }
         .search-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 24px rgba(30, 136, 229, 0.4);
         }
 
-        /* Suggestions */
         .suggestions-box {
             position: absolute;
             top: calc(100% + 10px);
@@ -433,38 +387,24 @@
             border-radius: var(--r-lg);
             box-shadow: var(--sh-xl);
             border: 1px solid var(--c-border);
-            max-height: 420px;
-            overflow-y: auto;
-            opacity: 0;
-            visibility: hidden;
+            max-height: 420px; overflow-y: auto;
+            opacity: 0; visibility: hidden;
             transform: translateY(-8px);
-            transition: all var(--t-base);
-            z-index: 100;
+            transition: all var(--t-base); z-index: 100;
         }
-        .suggestions-box.show {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
+        .suggestions-box.show { opacity: 1; visibility: visible; transform: translateY(0); }
         .suggestion-item {
-            padding: 12px 20px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            padding: 12px 20px; cursor: pointer;
+            display: flex; align-items: center; gap: 12px;
             transition: background var(--t-fast);
             border-bottom: 1px solid var(--c-border);
         }
         .suggestion-item:last-child { border-bottom: none; }
         .suggestion-item:hover, .suggestion-item.active { background: var(--c-surface-2); }
         .suggestion-item .text {
-            flex: 1;
-            font-weight: 500;
-            font-size: 0.92rem;
-            color: var(--c-text);
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+            flex: 1; font-weight: 500; font-size: 0.92rem;
+            color: var(--c-text); overflow: hidden;
+            text-overflow: ellipsis; white-space: nowrap;
         }
         .suggestion-item .highlight { color: var(--c-primary-600); font-weight: 800; }
         .suggestion-item .sub-text { font-size: 0.75rem; color: var(--c-text-sub); flex-shrink: 0; }
@@ -489,21 +429,14 @@
             background: linear-gradient(90deg, rgba(44, 122, 184, 0.15), transparent);
         }
         .suggestion-empty {
-            padding: 24px;
-            text-align: center;
-            color: var(--c-text-muted);
-            font-size: 0.88rem;
+            padding: 24px; text-align: center;
+            color: var(--c-text-muted); font-size: 0.88rem;
         }
 
-        /* ============================================================
-           FILTERS
-           ============================================================ */
+        /* FILTERS */
         .filters-row {
-            display: flex;
-            justify-content: center;
-            gap: 10px;
-            flex-wrap: wrap;
-            margin-bottom: 20px;
+            display: flex; justify-content: center;
+            gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
         }
         .filter-select {
             background: var(--c-surface);
@@ -511,12 +444,9 @@
             border-radius: var(--r-full);
             border: 1.5px solid var(--c-border);
             color: var(--c-text);
-            font-size: 0.85rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all var(--t-fast);
-            min-width: 160px;
-            font-family: inherit;
+            font-size: 0.85rem; font-weight: 600;
+            cursor: pointer; transition: all var(--t-fast);
+            min-width: 160px; font-family: inherit;
         }
         .filter-select:focus {
             border-color: var(--c-verified);
@@ -524,9 +454,7 @@
             box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.12);
         }
 
-        /* ============================================================
-           FEATURED SECTION
-           ============================================================ */
+        /* FEATURED */
         .featured-section {
             position: relative;
             border-radius: var(--r-xl);
@@ -539,20 +467,14 @@
             background: linear-gradient(135deg, rgba(30, 136, 229, 0.08), rgba(30, 136, 229, 0.02));
         }
         .featured-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 16px;
-            gap: 12px;
-            flex-wrap: wrap;
+            display: flex; justify-content: space-between;
+            align-items: center; margin-bottom: 16px;
+            gap: 12px; flex-wrap: wrap;
         }
         .featured-title {
-            font-size: 1.15rem;
-            font-weight: 800;
+            font-size: 1.15rem; font-weight: 800;
             color: var(--c-text);
-            display: flex;
-            align-items: center;
-            gap: 10px;
+            display: flex; align-items: center; gap: 10px;
             padding-right: 14px;
             border-right: 4px solid var(--c-verified);
         }
@@ -563,40 +485,26 @@
             gap: 20px;
         }
 
-        /* ============================================================
-           RESULTS INFO
-           ============================================================ */
+        /* RESULTS */
         .results-info {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            gap: 12px;
-            flex-wrap: wrap;
-            margin-bottom: 18px;
+            display: flex; justify-content: space-between;
+            align-items: center; gap: 12px;
+            flex-wrap: wrap; margin-bottom: 18px;
             padding: 0 4px;
         }
         .results-count {
             color: var(--c-text-muted);
-            font-size: 0.88rem;
-            font-weight: 600;
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            font-size: 0.88rem; font-weight: 600;
+            display: flex; align-items: center; gap: 8px;
         }
-        .results-count strong {
-            color: var(--c-verified);
-            font-weight: 800;
-        }
+        .results-count strong { color: var(--c-verified); font-weight: 800; }
 
-        /* ============================================================
-           SUPPLIER CARDS GRID
-           ============================================================ */
+        /* SUPPLIER CARD */
         .suppliers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
-
         .supplier-card {
             background: var(--c-surface);
             border-radius: var(--r-lg);
@@ -604,8 +512,7 @@
             box-shadow: var(--sh-sm);
             transition: all var(--t-base);
             border: 1px solid var(--c-border);
-            display: flex;
-            flex-direction: column;
+            display: flex; flex-direction: column;
             position: relative;
             animation: cardIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
             height: 100%;
@@ -618,8 +525,6 @@
         [data-theme="dark"] .supplier-card:hover {
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
         }
-
-        /* Card header - gradient */
         .supplier-card-header {
             position: relative;
             padding: 24px 20px 60px;
@@ -628,7 +533,6 @@
                 linear-gradient(135deg, #0a1f3a, #1a2942);
             color: #fff;
         }
-
         .supplier-card-header::before {
             content: '';
             position: absolute; inset: 0;
@@ -637,82 +541,41 @@
             background-size: 30px 30px;
             pointer-events: none;
         }
-
         .supplier-badges-top {
-            position: absolute;
-            top: 12px;
-            right: 12px;
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            z-index: 3;
+            position: absolute; top: 12px; right: 12px;
+            display: flex; flex-direction: column;
+            gap: 6px; z-index: 3;
         }
-
         .badge-pill {
-            display: inline-flex;
-            align-items: center;
-            gap: 5px;
-            padding: 4px 10px;
-            border-radius: var(--r-full);
-            font-size: 0.65rem;
-            font-weight: 800;
+            display: inline-flex; align-items: center; gap: 5px;
+            padding: 4px 10px; border-radius: var(--r-full);
+            font-size: 0.65rem; font-weight: 800;
             backdrop-filter: blur(10px);
             white-space: nowrap;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
         }
-        .badge-verified {
-            background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700));
-            color: #fff;
-        }
-        .badge-featured {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
-            color: #fff;
-        }
-        .badge-active {
-            background: rgba(46, 204, 113, 0.9);
-            color: #fff;
-        }
-
+        .badge-verified { background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700)); color: #fff; }
+        .badge-active { background: rgba(46, 204, 113, 0.9); color: #fff; }
         .supplier-avatar-wrapper {
-            position: relative;
-            z-index: 2;
-            display: flex;
-            align-items: center;
-            gap: 14px;
+            position: relative; z-index: 2;
+            display: flex; align-items: center; gap: 14px;
         }
-
         .supplier-avatar-lg {
-            width: 64px;
-            height: 64px;
-            border-radius: 50%;
+            width: 64px; height: 64px; border-radius: 50%;
             background: linear-gradient(135deg, #1e88e5, #0d47a1);
             color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            font-weight: 800;
-            flex-shrink: 0;
-            text-transform: uppercase;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1.5rem; font-weight: 800;
+            flex-shrink: 0; text-transform: uppercase;
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             border: 3px solid rgba(255, 255, 255, 0.15);
             overflow: hidden;
         }
-        .supplier-avatar-lg img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        .supplier-name-block {
-            flex: 1;
-            min-width: 0;
-        }
+        .supplier-avatar-lg img { width: 100%; height: 100%; object-fit: cover; }
+        .supplier-name-block { flex: 1; min-width: 0; }
         .supplier-name {
-            font-size: 1rem;
-            font-weight: 800;
-            color: #fff;
-            line-height: 1.3;
+            font-size: 1rem; font-weight: 800;
+            color: #fff; line-height: 1.3;
             margin-bottom: 4px;
             display: -webkit-box;
             -webkit-line-clamp: 2;
@@ -722,20 +585,13 @@
         .supplier-location-mini {
             font-size: 0.75rem;
             color: rgba(255, 255, 255, 0.75);
-            display: flex;
-            align-items: center;
-            gap: 4px;
+            display: flex; align-items: center; gap: 4px;
         }
-
-        /* Card body */
         .supplier-card-body {
             padding: 0 20px 20px;
-            flex: 1;
-            display: flex;
-            flex-direction: column;
+            flex: 1; display: flex; flex-direction: column;
             margin-top: -36px;
         }
-
         .supplier-stats-row {
             display: grid;
             grid-template-columns: repeat(3, 1fr);
@@ -746,48 +602,30 @@
             box-shadow: 0 4px 16px rgba(10, 37, 64, 0.08);
             border: 1px solid var(--c-border);
             margin-bottom: 14px;
-            position: relative;
-            z-index: 2;
+            position: relative; z-index: 2;
         }
-        .supplier-stat {
-            text-align: center;
-        }
+        .supplier-stat { text-align: center; }
         .supplier-stat-value {
-            display: block;
-            font-size: 1.1rem;
-            font-weight: 900;
-            color: var(--c-text);
-            line-height: 1;
-            font-variant-numeric: tabular-nums;
+            display: block; font-size: 1.1rem;
+            font-weight: 900; color: var(--c-text);
+            line-height: 1; font-variant-numeric: tabular-nums;
         }
         .supplier-stat-value.accent { color: var(--c-accent-dark); }
         .supplier-stat-value.primary { color: var(--c-verified); }
         .supplier-stat-label {
-            display: block;
-            font-size: 0.62rem;
-            color: var(--c-text-sub);
-            font-weight: 700;
-            margin-top: 4px;
-            text-transform: uppercase;
+            display: block; font-size: 0.62rem;
+            color: var(--c-text-sub); font-weight: 700;
+            margin-top: 4px; text-transform: uppercase;
             letter-spacing: 0.3px;
         }
-
-        /* Featured products preview */
-        .supplier-featured-preview {
-            display: flex;
-            gap: 6px;
-            margin-bottom: 14px;
-        }
+        .supplier-featured-preview { display: flex; gap: 6px; margin-bottom: 14px; }
         .supplier-product-thumb {
-            flex: 1;
-            aspect-ratio: 1 / 1;
+            flex: 1; aspect-ratio: 1 / 1;
             border-radius: var(--r-md);
             background: var(--c-surface-2);
             overflow: hidden;
             border: 1px solid var(--c-border);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             font-size: 1.5rem;
             transition: all var(--t-fast);
             position: relative;
@@ -796,51 +634,28 @@
             border-color: var(--c-verified);
             transform: scale(1.05);
         }
-        .supplier-product-thumb img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Actions */
+        .supplier-product-thumb img { width: 100%; height: 100%; object-fit: cover; }
         .supplier-actions {
-            display: flex;
-            gap: 6px;
-            margin-top: auto;
-            padding-top: 12px;
+            display: flex; gap: 6px;
+            margin-top: auto; padding-top: 12px;
             border-top: 1px solid var(--c-border);
         }
-
         .btn-supplier {
-            flex: 1;
-            min-height: 40px;
+            flex: 1; min-height: 40px;
             padding: 8px 10px;
             border-radius: var(--r-md);
-            font-weight: 700;
-            font-size: 0.78rem;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            gap: 6px;
-            transition: all var(--t-fast);
-            text-decoration: none;
-            border: none;
-            white-space: nowrap;
-            cursor: pointer;
+            font-weight: 700; font-size: 0.78rem;
+            display: inline-flex; align-items: center; justify-content: center;
+            gap: 6px; transition: all var(--t-fast);
+            text-decoration: none; border: none;
+            white-space: nowrap; cursor: pointer;
         }
-        .btn-view-supplier {
-            background: var(--c-primary-900);
-            color: #fff;
-        }
+        .btn-view-supplier { background: var(--c-primary-900); color: #fff; }
         .btn-view-supplier:hover { background: var(--c-verified); }
-        .btn-wa {
-            background: var(--c-whatsapp);
-            color: #fff;
-        }
+        .btn-wa { background: var(--c-whatsapp); color: #fff; }
         .btn-wa:hover { background: #1da851; }
         .btn-icon-supplier {
-            flex: 0 0 auto;
-            width: 40px;
+            flex: 0 0 auto; width: 40px;
             background: var(--c-surface-2);
             color: var(--c-text-muted);
             border: 1px solid var(--c-border);
@@ -855,9 +670,7 @@
             color: #7ec8e3;
         }
 
-        /* ============================================================
-           SKELETON
-           ============================================================ */
+        /* SKELETON */
         .skeleton {
             background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
             background-size: 200% 100%;
@@ -873,14 +686,11 @@
         }
         .skeleton-card-inner {
             padding: 24px;
-            display: flex;
-            flex-direction: column;
-            gap: 12px;
-            height: 100%;
+            display: flex; flex-direction: column;
+            gap: 12px; height: 100%;
         }
-                /* ============================================================
-           EMPTY STATE
-           ============================================================ */
+
+        /* EMPTY STATE */
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
@@ -896,10 +706,8 @@
             margin-bottom: 16px;
         }
         .empty-state h3 {
-            font-size: 1.2rem;
-            color: var(--c-text);
-            margin-bottom: 8px;
-            font-weight: 800;
+            font-size: 1.2rem; color: var(--c-text);
+            margin-bottom: 8px; font-weight: 800;
         }
         .empty-state p {
             color: var(--c-text-muted);
@@ -907,15 +715,12 @@
             margin-bottom: 20px;
         }
         .empty-state .btn-reset-filters {
-            display: inline-flex;
-            align-items: center;
+            display: inline-flex; align-items: center;
             gap: 8px;
             background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700));
-            color: #fff;
-            padding: 12px 26px;
+            color: #fff; padding: 12px 26px;
             border-radius: var(--r-full);
-            font-weight: 700;
-            font-size: 0.9rem;
+            font-weight: 700; font-size: 0.9rem;
             transition: all var(--t-base);
             box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3);
         }
@@ -924,27 +729,17 @@
             box-shadow: 0 12px 32px rgba(30, 136, 229, 0.45);
         }
 
-        /* ============================================================
-           INFINITE SCROLL
-           ============================================================ */
+        /* INFINITE SCROLL */
         .infinite-sentinel { height: 20px; margin-top: 20px; }
         .infinite-loading {
-            display: flex;
-            justify-content: center;
-            padding: 24px;
-            color: var(--c-text-muted);
-            font-weight: 600;
-            font-size: 0.88rem;
-            align-items: center;
-            gap: 12px;
+            display: flex; justify-content: center;
+            padding: 24px; color: var(--c-text-muted);
+            font-weight: 600; font-size: 0.88rem;
+            align-items: center; gap: 12px;
         }
-        .infinite-loading .dots {
-            display: inline-flex;
-            gap: 4px;
-        }
+        .infinite-loading .dots { display: inline-flex; gap: 4px; }
         .infinite-loading .dots span {
-            width: 6px;
-            height: 6px;
+            width: 6px; height: 6px;
             border-radius: 50%;
             background: var(--c-verified);
             animation: pulse 1.4s ease-in-out infinite;
@@ -952,53 +747,37 @@
         .infinite-loading .dots span:nth-child(2) { animation-delay: 0.2s; }
         .infinite-loading .dots span:nth-child(3) { animation-delay: 0.4s; }
 
-        /* ============================================================
-           SCROLL TOP
-           ============================================================ */
+        /* SCROLL TOP */
         .scroll-top {
-            position: fixed;
-            bottom: 32px;
-            right: 24px;
-            width: 48px;
-            height: 48px;
+            position: fixed; bottom: 32px; right: 24px;
+            width: 48px; height: 48px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700));
-            color: #fff;
-            font-size: 1rem;
+            color: #fff; font-size: 1rem;
             box-shadow: var(--sh-lg);
-            display: flex;
-            align-items: center;
-            justify-content: center;
+            display: flex; align-items: center; justify-content: center;
             transition: all var(--t-base);
-            opacity: 0;
-            visibility: hidden;
+            opacity: 0; visibility: hidden;
             transform: translateY(16px);
             z-index: 90;
         }
         .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
+            opacity: 1; visibility: visible; transform: translateY(0);
         }
         .scroll-top:hover {
             transform: translateY(-4px);
             box-shadow: var(--sh-xl);
         }
 
-        /* ============================================================
-           TOAST
-           ============================================================ */
+        /* TOAST */
         .toast-container {
-            position: fixed;
-            bottom: 24px;
+            position: fixed; bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 9999;
             width: min(420px, calc(100% - 32px));
-            display: flex;
-            flex-direction: column;
-            gap: 10px;
-            pointer-events: none;
+            display: flex; flex-direction: column;
+            gap: 10px; pointer-events: none;
         }
         .toast {
             background: var(--c-surface);
@@ -1007,9 +786,7 @@
             padding: 14px 18px;
             border-radius: var(--r-md);
             box-shadow: var(--sh-xl);
-            display: flex;
-            align-items: center;
-            gap: 12px;
+            display: flex; align-items: center; gap: 12px;
             animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             border-right: 4px solid var(--c-verified);
             pointer-events: auto;
@@ -1020,18 +797,13 @@
         .toast .toast-content { flex: 1; min-width: 0; }
         .toast .toast-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
         .toast .toast-desc { font-size: 0.8rem; color: var(--c-text-muted); line-height: 1.4; }
-        .toast .toast-desc a { color: var(--c-primary-600); font-weight: 700; text-decoration: underline; }
         .toast .toast-close {
-            width: 26px;
-            height: 26px;
+            width: 26px; height: 26px;
             border-radius: 50%;
             background: var(--c-surface-2);
             color: var(--c-text-muted);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.75rem;
-            flex-shrink: 0;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 0.75rem; flex-shrink: 0;
             transition: all var(--t-fast);
         }
         .toast .toast-close:hover { background: var(--c-danger); color: #fff; }
@@ -1040,9 +812,7 @@
         .toast.error { border-right-color: var(--c-danger); }
         .toast.info { border-right-color: var(--c-purple); }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
+        /* FOOTER */
         .footer {
             background: linear-gradient(180deg, var(--c-primary-900), #061a2e);
             color: rgba(255, 255, 255, 0.8);
@@ -1051,35 +821,29 @@
         }
         .footer-inner { max-width: var(--container); margin: 0 auto; }
         .footer-links {
-            display: flex;
-            justify-content: center;
-            flex-wrap: wrap;
-            gap: 8px 20px;
+            display: flex; justify-content: center;
+            flex-wrap: wrap; gap: 8px 20px;
             margin-bottom: 24px;
             padding-bottom: 24px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         .footer-links a {
             color: rgba(255, 255, 255, 0.65);
-            font-size: 0.88rem;
-            font-weight: 500;
+            font-size: 0.88rem; font-weight: 500;
             transition: color var(--t-fast);
         }
         .footer-links a:hover { color: #7ec8e3; }
         .footer-copy {
-            text-align: center;
-            font-size: 0.82rem;
+            text-align: center; font-size: 0.82rem;
             color: rgba(255, 255, 255, 0.4);
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
-            .suppliers-grid,
-            .featured-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
+            .suppliers-grid, .featured-grid {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
         }
-
         @media (max-width: 860px) {
             .menu-toggle { display: inline-flex; }
             .nav-links {
@@ -1089,8 +853,7 @@
                 background: rgba(10, 37, 64, 0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
-                padding: 16px;
-                gap: 4px;
+                padding: 16px; gap: 4px;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 transform: translateY(-120%);
                 transition: transform var(--t-base);
@@ -1100,60 +863,47 @@
             }
             .nav-links.open { transform: translateY(0); }
             .nav-links a, .dropdown-btn {
-                width: 100%;
-                justify-content: flex-start;
+                width: 100%; justify-content: flex-start;
                 padding: 12px 16px;
             }
             .dropdown { width: 100%; }
             .dropdown-content {
-                position: static;
-                transform: none;
+                position: static; transform: none;
                 box-shadow: none;
                 background: rgba(255, 255, 255, 0.05);
-                border: none;
-                max-height: 0;
+                border: none; max-height: 0;
                 overflow: hidden;
                 transition: max-height var(--t-base);
-                opacity: 1;
-                visibility: visible;
+                opacity: 1; visibility: visible;
             }
             .dropdown-content.show { max-height: 400px; }
             .dropdown-content a {
                 color: rgba(255, 255, 255, 0.85);
                 border-bottom-color: rgba(255, 255, 255, 0.05);
             }
-
             .stats-bar { grid-template-columns: repeat(2, 1fr); }
             .stats-bar-item:nth-child(2) { border-left: none; }
             .stats-bar-item:nth-child(n+3) {
                 border-top: 1px solid rgba(255, 255, 255, 0.06);
             }
         }
-
         @media (max-width: 640px) {
             .main-container { padding: 14px 14px 40px; }
             .page-header { padding: 32px 20px 26px; border-radius: var(--r-lg); }
             .page-header h1 { font-size: 1.4rem; }
             .header-badge { font-size: 0.7rem; padding: 5px 12px; }
             .stats-bar { grid-template-columns: repeat(2, 1fr); }
-
             .search-wrapper { flex-wrap: wrap; padding: 6px; border-radius: var(--r-lg); }
             .search-icon { display: none; }
             .search-wrapper input { padding: 12px 16px; width: 100%; }
             .search-btn { width: 100%; justify-content: center; min-height: 46px; }
-
-            .suppliers-grid,
-            .featured-grid { grid-template-columns: 1fr; gap: 14px; }
-
+            .suppliers-grid, .featured-grid { grid-template-columns: 1fr; gap: 14px; }
             .filters-row { gap: 6px; }
             .filter-select { min-width: 120px; font-size: 0.78rem; padding: 8px 12px; }
-
             .footer { padding: 32px 16px 20px; }
             .footer-links { gap: 10px; }
             .footer-links a { font-size: 0.78rem; }
-
             .scroll-top { bottom: 20px; right: 16px; width: 42px; height: 42px; }
-
             .supplier-card-header { padding: 20px 16px 56px; }
             .supplier-card-body { padding: 0 16px 16px; }
             .supplier-avatar-lg { width: 56px; height: 56px; font-size: 1.3rem; }
@@ -1161,10 +911,12 @@
             .supplier-stats-row { padding: 10px; }
             .supplier-stat-value { font-size: 1rem; }
         }
-
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
-                animation-duration: 0.01ms !important;<body>
+                animation-duration: 0.01ms !important;
+                animation-iteration-count: 1 !important;
+                transition-duration: 0.01ms !important;
+                scroll-behavior: auto !important;<body>
 
     <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
 
@@ -1374,8 +1126,7 @@
             <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
         </div>
     </footer>
-
-    <script type="module">
+            <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
         const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
@@ -1645,21 +1396,41 @@
 
         const loadStats = async () => {
             try {
-                const [suppliersRes, verifiedRes, productsRes, citiesRes] = await Promise.all([
+                console.log('📊 Loading stats...');
+
+                const [suppliersRes, verifiedRes, productsRes] = await Promise.all([
                     supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier'),
                     supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier').eq('is_verified', true),
                     supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'active'),
-                    supabase.from('profiles').select('city').eq('user_type', 'supplier').not('city', 'is', null),
                 ]);
 
-                const cities = new Set((citiesRes.data || []).map(r => r.city).filter(Boolean));
+                const suppliersCount = suppliersRes.count || 0;
+                const verifiedCount = verifiedRes.count || 0;
+                const productsCount = productsRes.count || 0;
 
-                animateNumber(document.getElementById('statSuppliers'), suppliersRes.count || 0);
-                animateNumber(document.getElementById('statVerified'), verifiedRes.count || 0);
-                animateNumber(document.getElementById('statCities'), cities.size);
-                animateNumber(document.getElementById('statProducts'), productsRes.count || 0);
+                // Get unique cities
+                const { data: citiesData } = await supabase
+                    .from('profiles')
+                    .select('city')
+                    .eq('user_type', 'supplier')
+                    .not('city', 'is', null);
+
+                const uniqueCities = new Set((citiesData || []).map(r => r.city).filter(Boolean));
+
+                console.log(`✅ Stats: ${suppliersCount} suppliers, ${verifiedCount} verified, ${uniqueCities.size} cities, ${productsCount} products`);
+
+                animateNumber(document.getElementById('statSuppliers'), suppliersCount);
+                animateNumber(document.getElementById('statVerified'), verifiedCount);
+                animateNumber(document.getElementById('statCities'), uniqueCities.size);
+                animateNumber(document.getElementById('statProducts'), productsCount);
+
             } catch (e) {
-                console.warn('Stats load failed:', e.message);
+                console.warn('❌ Stats load failed:', e.message);
+                // Set default values
+                animateNumber(document.getElementById('statSuppliers'), 0);
+                animateNumber(document.getElementById('statVerified'), 0);
+                animateNumber(document.getElementById('statCities'), 0);
+                animateNumber(document.getElementById('statProducts'), 0);
             }
         };
 
@@ -1668,14 +1439,23 @@
         // ============================================================
         const loadCities = async () => {
             try {
-                const { data } = await supabase
+                console.log('🌆 Loading cities...');
+
+                const { data, error } = await supabase
                     .from('profiles')
                     .select('city')
                     .eq('user_type', 'supplier')
                     .not('city', 'is', null);
 
+                if (error) {
+                    console.warn('❌ Cities fetch error:', error.message);
+                    return;
+                }
+
                 const cities = [...new Set((data || []).map(r => r.city).filter(Boolean))].sort();
                 state.allCities = cities;
+
+                console.log(`✅ Found ${cities.length} cities`);
 
                 const select = document.getElementById('cityFilter');
                 if (!select) return;
@@ -1686,7 +1466,9 @@
                     option.textContent = `📍 ${city}`;
                     select.appendChild(option);
                 });
-            } catch (e) { /* silent */ }
+            } catch (e) {
+                console.warn('❌ Cities load exception:', e.message);
+            }
         };
 
         // ============================================================
@@ -1719,8 +1501,8 @@
             const sortMap = {
                 'newest': ['created_at', false],
                 'name': ['company_name', true],
-                'products': ['created_at', false], // fallback; will sort client-side by products count
-                'views': ['created_at', false],    // fallback; will sort client-side by products views
+                'products': ['created_at', false],
+                'views': ['created_at', false],
             };
             const [sortCol, asc] = sortMap[state.sort] || sortMap['newest'];
             query = query.order(sortCol, { ascending: asc, nullsFirst: false });
@@ -1734,6 +1516,7 @@
         const fetchProductsForSuppliers = async (supplierIds) => {
             const map = {};
             if (!supplierIds.length) return map;
+
             try {
                 const { data, error } = await supabase
                     .from('products')
@@ -1742,7 +1525,7 @@
                     .eq('status', 'active');
 
                 if (error) {
-                    console.warn('Products fetch error:', error.message);
+                    console.warn('⚠️ Products fetch error:', error.message);
                     return map;
                 }
 
@@ -1756,7 +1539,7 @@
                     if (p.is_featured) map[p.supplier_id].featured.push(p);
                 });
             } catch (e) {
-                console.warn('Products fetch exception:', e.message);
+                console.warn('⚠️ Products fetch exception:', e.message);
             }
             return map;
         };
@@ -1794,20 +1577,27 @@
                 state.suppliers = [];
                 renderSkeleton();
             } else {
-                infiniteLoading.style.display = 'flex';
+                if (infiniteLoading) infiniteLoading.style.display = 'flex';
             }
 
             try {
                 const from = state.page * state.pageSize;
                 const to = from + state.pageSize - 1;
 
+                console.log(`🔄 Loading suppliers: page ${state.page + 1} (${from} to ${to})`);
+
                 const query = buildQuery().range(from, to);
                 const { data, error, count } = await query;
 
-                if (error) throw error;
+                if (error) {
+                    console.error('❌ Suppliers query error:', error);
+                    throw error;
+                }
 
                 const suppliers = data || [];
                 state.total = count || 0;
+
+                console.log(`✅ Found ${suppliers.length} suppliers (total: ${state.total})`);
 
                 // Fetch products for these suppliers
                 const supplierIds = suppliers.map(s => s.id);
@@ -1837,20 +1627,23 @@
                 updateResultsCount();
 
             } catch (error) {
-                console.error('❌ Suppliers error:', error);
+                console.error('❌ Suppliers load exception:', error);
                 if (!append) {
                     container.innerHTML = `
                         <div class="empty-state">
                             <i class="fas fa-exclamation-triangle empty-icon" style="color: var(--c-danger);"></i>
                             <h3>حدث خطأ في التحميل</h3>
                             <p>${escapeHtml(error?.message || 'خطأ غير معروف')}</p>
+                            <button onclick="location.reload()" class="btn-reset-filters">
+                                <i class="fas fa-redo"></i> إعادة المحاولة
+                            </button>
                         </div>
                     `;
                 }
                 showToast('⚠️', 'خطأ', 'تعذر تحميل الموردين', null, null, 'error');
             } finally {
                 state.loading = false;
-                infiniteLoading.style.display = 'none';
+                if (infiniteLoading) infiniteLoading.style.display = 'none';
                 container?.setAttribute('aria-busy', 'false');
             }
         };
@@ -1870,9 +1663,7 @@
                         </button>
                     </div>
                 `;
-                document.getElementById('emptyResetBtn')?.addEventListener('click', () => {
-                    resetFilters();
-                });
+                document.getElementById('emptyResetBtn')?.addEventListener('click', resetFilters);
                 return;
             }
 
@@ -1891,7 +1682,7 @@
             const name = s.company_name || s.full_name || 'مورد';
             const initial = name.charAt(0).toUpperCase();
             const isVerified = s.is_verified === true;
-            const productsData = s.productsData || { products: [], count: 0, totalViews: 0, featured: [] };
+            const productsData = s.productsData || { products: [], count: 0, totalViews: 0 };
             const productsCount = productsData.count;
             const totalViews = productsData.totalViews;
 
@@ -1903,12 +1694,10 @@
             const waMessage = encodeURIComponent(`مرحباً، وجدتكم على منصة كيماتو وأرغب في الاستفسار عن منتجاتكم`);
             const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMessage}` : '';
 
-            // Featured products preview (up to 3)
             const featuredProducts = productsData.products.slice(0, 3);
 
             return `
                 <article class="supplier-card" style="animation-delay: ${Math.min(index * 0.05, 0.3)}s;" data-supplier-id="${escapeHtml(s.id)}">
-                    <!-- Header -->
                     <div class="supplier-card-header">
                         <div class="supplier-badges-top">
                             ${isVerified ? `
@@ -1925,9 +1714,9 @@
 
                         <div class="supplier-avatar-wrapper">
                             <div class="supplier-avatar-lg">
-                                ${s.avatar_url ? `
+                                ${s.avatar_url && /^https?:\/\//i.test(s.avatar_url) ? `
                                     <img src="${escapeHtml(s.avatar_url)}" alt="${escapeHtml(name)}"
-                                         onerror="this.onerror=null;this.parentElement.innerHTML='${initial}';" />
+                                         onerror="this.onerror=null;this.parentElement.textContent='${initial}';" />
                                 ` : initial}
                             </div>
                             <div class="supplier-name-block">
@@ -1942,9 +1731,7 @@
                         </div>
                     </div>
 
-                    <!-- Body -->
                     <div class="supplier-card-body">
-                        <!-- Stats row -->
                         <div class="supplier-stats-row">
                             <div class="supplier-stat">
                                 <span class="supplier-stat-value primary">${formatNumber(productsCount)}</span>
@@ -1960,7 +1747,6 @@
                             </div>
                         </div>
 
-                        <!-- Featured products preview -->
                         ${featuredProducts.length > 0 ? `
                             <div class="supplier-featured-preview">
                                 ${featuredProducts.map(p => {
@@ -1969,7 +1755,7 @@
                                         <div class="supplier-product-thumb" title="${escapeHtml(p.name)}">
                                             ${hasImg ? `
                                                 <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}" loading="lazy"
-                                                     onerror="this.onerror=null;this.parentElement.innerHTML='🧪';" />
+                                                     onerror="this.onerror=null;this.parentElement.textContent='🧪';" />
                                             ` : '🧪'}
                                         </div>
                                     `;
@@ -1986,7 +1772,6 @@
                             </div>
                         `}
 
-                        <!-- Actions -->
                         <div class="supplier-actions">
                             <a href="supplier-profile.html?id=${encodeURIComponent(s.id)}"
                                class="btn-supplier btn-view-supplier">
@@ -2036,6 +1821,7 @@
                     .limit(300);
 
                 state.suggestions = data || [];
+                console.log(`✅ Loaded ${state.suggestions.length} suggestions`);
             } catch (e) {
                 state.suggestions = [];
             }
@@ -2246,7 +2032,6 @@
             state.page = 0;
             state.hasMore = true;
             loadSuppliers();
-            loadFeaturedSuppliers();
         };
 
         // ============================================================
@@ -2254,14 +2039,23 @@
         // ============================================================
         const loadFeaturedSuppliers = async () => {
             try {
-                const { data: suppliers } = await supabase
+                console.log('⭐ Loading featured suppliers...');
+
+                const { data: suppliers, error } = await supabase
                     .from('profiles')
                     .select('id, full_name, company_name, city, phone, whatsapp, is_verified, created_at, avatar_url')
                     .eq('user_type', 'supplier')
                     .eq('is_verified', true)
-                    .limit(4);
+                    .limit(6);
+
+                if (error) {
+                    console.warn('❌ Featured fetch error:', error.message);
+                    document.getElementById('featuredSection').style.display = 'none';
+                    return;
+                }
 
                 if (!suppliers?.length) {
+                    console.log('ℹ️ No verified suppliers');
                     document.getElementById('featuredSection').style.display = 'none';
                     return;
                 }
@@ -2269,15 +2063,21 @@
                 const supplierIds = suppliers.map(s => s.id);
                 const productsMap = await fetchProductsForSuppliers(supplierIds);
 
-                const enriched = suppliers.map(s => ({
-                    ...s,
-                    productsData: productsMap[s.id] || { products: [], count: 0, totalViews: 0, featured: [] },
-                })).filter(s => s.productsData.count > 0);
+                const enriched = suppliers
+                    .map(s => ({
+                        ...s,
+                        productsData: productsMap[s.id] || { products: [], count: 0, totalViews: 0, featured: [] },
+                    }))
+                    .filter(s => s.productsData.count > 0)
+                    .slice(0, 4);
 
                 if (!enriched.length) {
+                    console.log('ℹ️ No featured suppliers with products');
                     document.getElementById('featuredSection').style.display = 'none';
                     return;
                 }
+
+                console.log(`✅ Featured: ${enriched.length} suppliers`);
 
                 const grid = document.getElementById('featuredGrid');
                 const section = document.getElementById('featuredSection');
@@ -2285,7 +2085,9 @@
                 if (grid) grid.innerHTML = enriched.map((s, i) => renderSupplierCard(s, i)).join('');
 
             } catch (e) {
-                document.getElementById('featuredSection').style.display = 'none';
+                console.warn('❌ Featured exception:', e.message);
+                const section = document.getElementById('featuredSection');
+                if (section) section.style.display = 'none';
             }
         };
 
@@ -2303,9 +2105,8 @@
                     e.preventDefault();
                     handleShare(btn.dataset.supplierId, btn.dataset.supplierName);
                 } else if (action === 'whatsapp') {
-                    // Log contact
                     const supplierId = btn.dataset.supplierId;
-                    if (isValidUUID(supplierId)) {
+                    if (isValidUUID(supplierId) && state.user) {
                         logContact(supplierId).catch(() => {});
                     }
                 }
@@ -2392,6 +2193,7 @@
                             const name = payload.new.company_name || payload.new.full_name || 'مورد جديد';
                             showToast('🏭', 'مورد جديد!', `انضم: ${name}`, 'عرض', 'chemato-suppliers.html', 'success');
                             loadStats();
+                            loadSuppliers();
                         }
                     })
                     .subscribe();
@@ -2430,16 +2232,13 @@
 
             const input = document.getElementById('searchInput');
             if (input && state.search) input.value = state.search;
-        };
 
-        const updateURL = () => {
-            const params = new URLSearchParams();
-            if (state.search) params.set('search', state.search);
-            if (state.cityFilter !== 'all') params.set('city', state.cityFilter);
-            if (state.verifiedFilter !== 'all') params.set('verified', state.verifiedFilter);
-            if (state.sort !== 'products') params.set('sort', state.sort);
-            const qs = params.toString();
-            history.replaceState({}, '', qs ? `?${qs}` : window.location.pathname);
+            const citySel = document.getElementById('cityFilter');
+            if (citySel && state.cityFilter !== 'all') citySel.value = state.cityFilter;
+            const verifSel = document.getElementById('verifiedFilter');
+            if (verifSel && state.verifiedFilter !== 'all') verifSel.value = state.verifiedFilter;
+            const sortSel = document.getElementById('sortFilter');
+            if (sortSel && state.sort !== 'products') sortSel.value = state.sort;
         };
 
         // ============================================================
@@ -2475,7 +2274,9 @@
             setupRealtime();
 
             setTimeout(() => {
-                showToast('👋', 'أهلاً بك!', 'تصفح أفضل موردي المواد الكيماوية في مصر', null, null, 'info');
+                if (state.total > 0) {
+                    showToast('👋', 'أهلاً بك!', `${state.total} مورد متاح على كيماتو`, null, null, 'info');
+                }
             }, 1500);
 
             console.log('✅ جاهز');
@@ -2493,9 +2294,6 @@
     </script>
 </body>
 </html>
-                animation-iteration-count: 1 !important;
-                transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
             }
         }
     </style>
