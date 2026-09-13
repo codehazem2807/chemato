@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <title>كيماتو | لوحة المشتري</title>
-    <meta name="description" content="لوحة تحكم المشتري على كيماتو — إدارة طلباتك، متابعة العروض، والمفضلة." />
+    <title>كيماتو | لوحة المورد</title>
+    <meta name="description" content="لوحة تحكم المورد على كيماتو — إدارة منتجاتك، عروضك، والعملاء المحتملين." />
     <meta name="robots" content="noindex, nofollow" />
 
     <link rel="icon" type="image/x-icon" href="logo.ico" />
@@ -113,12 +113,11 @@
         @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.3); } 50% { transform: scale(1); } 75% { transform: scale(1.2); } 100% { transform: scale(1); } }
         @keyframes badgePop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
         /* ============================================================
-           TOP NAVBAR
+           NAVBAR
            ============================================================ */
         .navbar {
             position: sticky; top: 0; z-index: 100;
@@ -136,24 +135,18 @@
             align-items: center; gap: 16px;
         }
         .logo a { display: flex; align-items: center; gap: 10px; color: #fff; }
-        .logo img { width: 42px; height: 42px; border-radius: 50%; border: 2px solid rgba(46, 204, 113, 0.5); object-fit: cover; background: #fff; }
+        .logo img { width: 42px; height: 42px; border-radius: 50%; border: 2px solid rgba(230, 126, 34, 0.5); object-fit: cover; background: #fff; }
         .logo-text { font-weight: 800; font-size: 19px; color: #fff; white-space: nowrap; }
         .logo-text .blue { color: #5eb8ee; }
         .logo-text .gray { color: rgba(255, 255, 255, 0.6); font-weight: 400; font-size: 0.9em; }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .nav-right { display: flex; align-items: center; gap: 10px; }
 
         .nav-action-btn {
             width: 40px; height: 40px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.08);
             color: #fff;
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
+            display: inline-flex; align-items: center; justify-content: center;
             font-size: 1rem;
             transition: all var(--t-fast);
             position: relative;
@@ -181,13 +174,9 @@
         }
         .nav-action-btn .notif-badge.show { display: flex; }
 
-        .nav-user-menu {
-            position: relative;
-        }
+        .nav-user-menu { position: relative; }
         .nav-user-btn {
-            display: flex;
-            align-items: center;
-            gap: 8px;
+            display: flex; align-items: center; gap: 8px;
             padding: 5px 12px 5px 5px;
             border-radius: var(--r-full);
             background: rgba(255, 255, 255, 0.08);
@@ -195,20 +184,13 @@
             transition: all var(--t-fast);
             font-family: inherit;
         }
-        .nav-user-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
+        .nav-user-btn:hover { background: rgba(255, 255, 255, 0.15); }
         .nav-user-avatar {
-            width: 32px;
-            height: 32px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            width: 32px; height: 32px; border-radius: 50%;
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
             color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 800;
-            font-size: 0.85rem;
+            display: flex; align-items: center; justify-content: center;
+            font-weight: 800; font-size: 0.85rem;
             text-transform: uppercase;
         }
         .nav-user-name {
@@ -330,9 +312,9 @@
             color: var(--c-text);
         }
         .sidebar-link.active {
-            background: linear-gradient(135deg, var(--c-primary-700), var(--c-primary-900));
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
             color: #fff;
-            box-shadow: 0 6px 20px rgba(10, 37, 64, 0.25);
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.3);
         }
         .sidebar-link i {
             width: 20px;
@@ -358,6 +340,41 @@
             color: var(--c-text-muted);
         }
 
+        /* Verification banner */
+        .verif-banner {
+            background: linear-gradient(135deg, rgba(30, 136, 229, 0.1), rgba(30, 136, 229, 0.03));
+            border: 1.5px solid rgba(30, 136, 229, 0.25);
+            border-radius: var(--r-md);
+            padding: 12px 14px;
+            margin-top: 12px;
+            font-size: 0.78rem;
+            color: var(--c-text);
+            line-height: 1.5;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
+        }
+        .verif-banner .icon-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-weight: 800;
+            color: var(--c-verified);
+        }
+        .verif-banner .icon-row i { font-size: 1rem; }
+        .verif-banner a {
+            color: var(--c-verified);
+            font-weight: 800;
+            text-decoration: underline;
+            font-size: 0.78rem;
+        }
+
+        .verif-done {
+            background: linear-gradient(135deg, rgba(46, 204, 113, 0.1), rgba(46, 204, 113, 0.03));
+            border-color: rgba(46, 204, 113, 0.25);
+        }
+        .verif-done .icon-row { color: var(--c-accent-dark); }
+
         /* Main Content */
         .dashboard-main {
             display: flex;
@@ -381,9 +398,7 @@
             align-items: center;
             gap: 12px;
         }
-        .page-title i {
-            color: var(--c-accent);
-        }
+        .page-title i { color: var(--c-request); }
         .page-subtitle {
             font-size: 0.88rem;
             color: var(--c-text-muted);
@@ -399,15 +414,33 @@
             border-radius: var(--r-full);
             font-weight: 700;
             font-size: 0.88rem;
-            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
             color: #fff;
-            box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+            box-shadow: 0 6px 20px rgba(230, 126, 34, 0.3);
             transition: all var(--t-base);
             border: none;
         }
         .btn-primary:hover {
             transform: translateY(-2px);
-            box-shadow: 0 12px 32px rgba(46, 204, 113, 0.45);
+            box-shadow: 0 12px 32px rgba(230, 126, 34, 0.45);
+        }
+
+        .btn-secondary {
+            padding: 11px 24px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: 0.88rem;
+            background: var(--c-surface-2);
+            color: var(--c-text-muted);
+            border: 1px solid var(--c-border);
+            transition: all var(--t-base);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-secondary:hover {
+            background: var(--c-border);
+            color: var(--c-text);
         }
 
         /* ============================================================
@@ -434,7 +467,7 @@
         .stat-card:hover {
             transform: translateY(-4px);
             box-shadow: var(--sh-md);
-            border-color: var(--c-primary-500);
+            border-color: var(--c-request);
         }
         .stat-card::before {
             content: '';
@@ -443,15 +476,15 @@
             right: 0;
             width: 4px;
             height: 100%;
-            background: var(--stat-color, var(--c-accent));
+            background: var(--stat-color, var(--c-request));
         }
 
         .stat-icon {
             width: 48px;
             height: 48px;
             border-radius: var(--r-md);
-            background: var(--stat-bg, rgba(46, 204, 113, 0.12));
-            color: var(--stat-color, var(--c-accent));
+            background: var(--stat-bg, rgba(230, 126, 34, 0.12));
+            color: var(--stat-color, var(--c-request));
             display: flex;
             align-items: center;
             justify-content: center;
@@ -459,10 +492,7 @@
             flex-shrink: 0;
         }
 
-        .stat-content {
-            flex: 1;
-            min-width: 0;
-        }
+        .stat-content { flex: 1; min-width: 0; }
         .stat-label {
             font-size: 0.78rem;
             color: var(--c-text-muted);
@@ -514,9 +544,7 @@
             align-items: center;
             gap: 10px;
         }
-        .section-card-title i {
-            color: var(--c-accent);
-        }
+        .section-card-title i { color: var(--c-request); }
         .section-card-title .count-badge {
             background: var(--c-surface-2);
             color: var(--c-text-muted);
@@ -526,13 +554,11 @@
             font-weight: 800;
         }
         .section-card-title .count-badge.accent {
-            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
             color: #fff;
         }
 
-        .section-card-body {
-            padding: 20px 22px;
-        }
+        .section-card-body { padding: 20px 22px; }
 
         .view-all-link {
             font-size: 0.82rem;
@@ -553,9 +579,8 @@
             border-color: transparent;
             transform: translateX(-3px);
         }
-
-        /* ============================================================
-           REQUEST ROW / OFFER ROW
+                /* ============================================================
+           ITEM LIST / ITEM ROW
            ============================================================ */
         .item-list {
             display: flex;
@@ -576,26 +601,26 @@
             position: relative;
         }
         .item-row:hover {
-            border-color: var(--c-primary-500);
+            border-color: var(--c-request);
             background: var(--c-surface);
             box-shadow: var(--sh-sm);
         }
         .item-row.is-new {
-            border-color: var(--c-accent);
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.04), var(--c-surface-2));
+            border-color: var(--c-request);
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.04), var(--c-surface-2));
         }
         .item-row.is-new::before {
             content: 'جديد';
             position: absolute;
             top: -8px;
             right: 16px;
-            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
             color: #fff;
             padding: 2px 10px;
             border-radius: var(--r-full);
             font-size: 0.62rem;
             font-weight: 800;
-            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.35);
+            box-shadow: 0 2px 8px rgba(230, 126, 34, 0.35);
         }
 
         .item-icon-wrapper {
@@ -609,6 +634,12 @@
             justify-content: center;
             font-size: 1.2rem;
             flex-shrink: 0;
+            overflow: hidden;
+        }
+        .item-icon-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
         .item-icon-wrapper.accent {
             background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(46, 204, 113, 0.05));
@@ -619,10 +650,7 @@
             color: var(--c-primary-600);
         }
 
-        .item-info {
-            flex: 1;
-            min-width: 200px;
-        }
+        .item-info { flex: 1; min-width: 200px; }
         .item-title {
             font-size: 0.92rem;
             font-weight: 800;
@@ -653,10 +681,7 @@
             font-weight: 700;
         }
 
-        .item-price-block {
-            text-align: left;
-            flex-shrink: 0;
-        }
+        .item-price-block { text-align: left; flex-shrink: 0; }
         .item-price {
             font-size: 1.15rem;
             font-weight: 900;
@@ -699,13 +724,13 @@
             cursor: pointer;
         }
         .item-action-btn.primary {
-            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
             color: #fff;
-            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.25);
+            box-shadow: 0 2px 8px rgba(230, 126, 34, 0.25);
         }
         .item-action-btn.primary:hover {
             transform: translateY(-1px);
-            box-shadow: 0 6px 16px rgba(46, 204, 113, 0.4);
+            box-shadow: 0 6px 16px rgba(230, 126, 34, 0.4);
         }
         .item-action-btn.secondary {
             background: var(--c-surface);
@@ -773,7 +798,7 @@
         }
         .empty-state i.empty-icon {
             font-size: 3rem;
-            color: var(--c-primary-500);
+            color: var(--c-request);
             opacity: 0.35;
             margin-bottom: 14px;
             display: block;
@@ -788,12 +813,144 @@
             font-size: 0.85rem;
             margin-bottom: 18px;
         }
-        .empty-state .btn-primary {
-            margin: 0 auto;
+        .empty-state .btn-primary { margin: 0 auto; }
+
+        /* ============================================================
+           PRODUCT GRID (Mini cards)
+           ============================================================ */
+        .products-grid-mini {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+            gap: 16px;
+        }
+
+        .mini-product {
+            background: var(--c-surface);
+            border: 1.5px solid var(--c-border);
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all var(--t-base);
+            position: relative;
+        }
+        .mini-product:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--sh-md);
+            border-color: var(--c-request);
+        }
+
+        .mini-product-media {
+            aspect-ratio: 16 / 10;
+            background: linear-gradient(145deg, var(--c-surface-2), var(--c-border));
+            overflow: hidden;
+            position: relative;
+        }
+        .mini-product-media img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+        .mini-product-placeholder {
+            width: 100%;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            background: linear-gradient(145deg, var(--c-primary-50), var(--c-primary-100));
+            color: var(--c-primary-700);
+        }
+        [data-theme="dark"] .mini-product-placeholder {
+            background: linear-gradient(145deg, var(--c-surface-2), var(--c-primary-900));
+            color: #7ec8e3;
+        }
+        .mini-product-placeholder .emoji { font-size: 2.5rem; }
+
+        .mini-product-status-badge {
+            position: absolute;
+            top: 8px;
+            right: 8px;
+            padding: 3px 10px;
+            border-radius: var(--r-full);
+            font-size: 0.65rem;
+            font-weight: 800;
+            backdrop-filter: blur(6px);
+            z-index: 2;
+        }
+        .mini-product-status-badge.active {
+            background: rgba(46, 204, 113, 0.95);
+            color: #fff;
+        }
+        .mini-product-status-badge.inactive {
+            background: rgba(0, 0, 0, 0.7);
+            color: #fff;
+        }
+        .mini-product-status-badge.featured {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: #fff;
+            top: auto;
+            bottom: 8px;
+        }
+
+        .mini-product-body {
+            padding: 12px 14px 14px;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+        }
+        .mini-product-title {
+            font-size: 0.88rem;
+            font-weight: 800;
+            color: var(--c-text);
+            line-height: 1.4;
+            display: -webkit-box;
+            -webkit-line-clamp: 2;
+            -webkit-box-orient: vertical;
+            overflow: hidden;
+            min-height: 2.5em;
+        }
+        .mini-product-specs {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            font-size: 0.68rem;
+        }
+        .mini-product-specs span {
+            background: var(--c-surface-2);
+            padding: 2px 8px;
+            border-radius: var(--r-sm);
+            font-weight: 700;
+            color: var(--c-text-muted);
+            border: 1px solid var(--c-border);
+        }
+        .mini-product-price {
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: var(--c-accent-dark);
+            font-variant-numeric: tabular-nums;
+            margin-top: auto;
+        }
+        [data-theme="dark"] .mini-product-price { color: #6ee7a0; }
+        .mini-product-price .currency {
+            font-size: 0.7rem;
+            color: var(--c-text-sub);
+        }
+        .mini-product-price.no-price {
+            font-size: 0.8rem;
+            color: var(--c-text-sub);
+        }
+
+        .mini-product-actions {
+            display: flex;
+            gap: 4px;
+            padding: 0 14px 14px;
         }
 
         /* ============================================================
-           OFFERS ACCORDION (تحت كل طلب)
+           OFFERS ACCORDION
            ============================================================ */
         .offers-accordion {
             max-height: 0;
@@ -805,7 +962,6 @@
             max-height: 2000px;
             margin-top: 14px;
         }
-
         .offers-accordion-inner {
             background: var(--c-surface);
             border: 1.5px dashed var(--c-border);
@@ -813,100 +969,66 @@
             padding: 14px;
         }
 
-        .offer-mini {
+        /* ============================================================
+           CONTACTS TABLE
+           ============================================================ */
+        .contacts-table-wrapper {
+            overflow-x: auto;
+            margin: 0 -22px -20px;
+        }
+        .contacts-table {
+            width: 100%;
+            border-collapse: separate;
+            border-spacing: 0;
+            font-size: 0.85rem;
+            min-width: 700px;
+        }
+        .contacts-table th {
             background: var(--c-surface-2);
-            border: 1px solid var(--c-border);
-            border-radius: var(--r-md);
-            padding: 12px 14px;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-            transition: all var(--t-fast);
-        }
-        .offer-mini:last-child { margin-bottom: 0; }
-        .offer-mini:hover {
-            border-color: var(--c-primary-500);
-        }
-        .offer-mini.is-best {
-            border-color: var(--c-accent);
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.04), var(--c-surface-2));
-        }
-        .offer-mini.is-best::before {
-            content: '⭐ الأفضل';
-            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
-            color: #fff;
-            padding: 2px 8px;
-            border-radius: var(--r-full);
-            font-size: 0.6rem;
-            font-weight: 800;
-            align-self: flex-start;
-        }
-
-        .offer-mini-supplier {
-            flex: 1;
-            min-width: 160px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .offer-mini-avatar {
-            width: 36px;
-            height: 36px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, var(--c-primary-600), var(--c-primary-900));
-            color: #fff;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.85rem;
-            font-weight: 800;
-            flex-shrink: 0;
-            text-transform: uppercase;
-        }
-        .offer-mini-info {
-            flex: 1;
-            min-width: 0;
-        }
-        .offer-mini-name {
-            font-size: 0.85rem;
+            padding: 12px 16px;
+            text-align: right;
             font-weight: 800;
             color: var(--c-text);
-            display: flex;
+            font-size: 0.78rem;
+            border-bottom: 1px solid var(--c-border);
+            text-transform: uppercase;
+            letter-spacing: 0.3px;
+            white-space: nowrap;
+        }
+        .contacts-table td {
+            padding: 12px 16px;
+            border-bottom: 1px solid var(--c-border);
+            color: var(--c-text-muted);
+            vertical-align: middle;
+        }
+        .contacts-table tr:hover td {
+            background: var(--c-surface-2);
+        }
+        .contacts-table tr:last-child td {
+            border-bottom: none;
+        }
+        .contact-type-pill {
+            display: inline-flex;
             align-items: center;
             gap: 4px;
-            flex-wrap: wrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
+            padding: 3px 10px;
+            border-radius: var(--r-full);
+            font-size: 0.68rem;
+            font-weight: 800;
         }
-        .offer-mini-meta {
-            font-size: 0.7rem;
-            color: var(--c-text-sub);
-            margin-top: 2px;
-        }
-
-        .offer-mini-price {
-            font-size: 1.05rem;
-            font-weight: 900;
-            color: var(--c-accent-dark);
-            font-variant-numeric: tabular-nums;
-            flex-shrink: 0;
-        }
-        [data-theme="dark"] .offer-mini-price { color: #6ee7a0; }
-        .offer-mini-price .currency {
-            font-size: 0.7rem;
-            color: var(--c-text-sub);
-        }
-
-        .offer-mini-actions {
-            display: flex;
-            gap: 6px;
-            flex-shrink: 0;
-        }
+        .contact-type-whatsapp { background: rgba(37, 211, 102, 0.12); color: var(--c-whatsapp); }
+        .contact-type-view { background: rgba(44, 122, 184, 0.12); color: var(--c-primary-600); }
+        .contact-type-phone { background: rgba(243, 156, 18, 0.12); color: var(--c-warning); }
+        .contact-type-inquiry { background: rgba(139, 92, 246, 0.12); color: var(--c-purple); }
+        .contact-type-request_quote { background: rgba(230, 126, 34, 0.12); color: var(--c-request-dark); }
+        [data-theme="dark"] .contact-type-whatsapp { background: rgba(37, 211, 102, 0.2); }
+        [data-theme="dark"] .contact-type-view { background: rgba(44, 122, 184, 0.2); }
+        [data-theme="dark"] .contact-type-phone { background: rgba(243, 156, 18, 0.2); }
+        [data-theme="dark"] .contact-type-inquiry { background: rgba(139, 92, 246, 0.2); }
+        [data-theme="dark"] .contact-type-request_quote { background: rgba(230, 126, 34, 0.2); }
 
         /* ============================================================
-           PROFILE SECTION
+           PROFILE FORM
            ============================================================ */
         .profile-form {
             display: grid;
@@ -926,6 +1048,12 @@
             color: var(--c-text);
         }
         .form-group label .req { color: var(--c-danger); }
+        .form-group label .hint {
+            font-size: 0.72rem;
+            color: var(--c-text-sub);
+            font-weight: 500;
+            margin-right: 4px;
+        }
         .form-group input,
         .form-group textarea,
         .form-group select {
@@ -940,10 +1068,10 @@
         .form-group input:focus,
         .form-group textarea:focus,
         .form-group select:focus {
-            border-color: var(--c-accent);
+            border-color: var(--c-request);
             outline: none;
             background: var(--c-surface);
-            box-shadow: 0 0 0 3px rgba(46, 204, 113, 0.12);
+            box-shadow: 0 0 0 3px rgba(230, 126, 34, 0.12);
         }
         .form-group input:disabled {
             opacity: 0.6;
@@ -960,23 +1088,6 @@
             gap: 10px;
             justify-content: flex-end;
             margin-top: 8px;
-        }
-                .btn-secondary {
-            padding: 11px 24px;
-            border-radius: var(--r-full);
-            font-weight: 700;
-            font-size: 0.88rem;
-            background: var(--c-surface-2);
-            color: var(--c-text-muted);
-            border: 1px solid var(--c-border);
-            transition: all var(--t-base);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .btn-secondary:hover {
-            background: var(--c-border);
-            color: var(--c-text);
         }
 
         /* ============================================================
@@ -1022,7 +1133,7 @@
             align-items: center;
             gap: 8px;
         }
-        .notif-header h4 i { color: var(--c-accent); }
+        .notif-header h4 i { color: var(--c-request); }
         .notif-mark-read {
             background: none;
             color: var(--c-primary-600);
@@ -1053,18 +1164,16 @@
             cursor: pointer;
         }
         .notif-item:last-child { border-bottom: none; }
-        .notif-item:hover {
-            background: var(--c-surface-2);
-        }
+        .notif-item:hover { background: var(--c-surface-2); }
         .notif-item.unread {
-            background: linear-gradient(90deg, rgba(46, 204, 113, 0.04), transparent);
+            background: linear-gradient(90deg, rgba(230, 126, 34, 0.04), transparent);
         }
         .notif-item.unread::before {
             content: '';
             width: 8px;
             height: 8px;
             border-radius: 50%;
-            background: var(--c-accent);
+            background: var(--c-request);
             flex-shrink: 0;
             margin-top: 8px;
         }
@@ -1076,22 +1185,7 @@
             background: transparent;
             flex-shrink: 0;
         }
-        .notif-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: var(--r-md);
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(46, 204, 113, 0.05));
-            color: var(--c-accent-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-        .notif-content {
-            flex: 1;
-            min-width: 0;
-        }
+        .notif-content { flex: 1; min-width: 0; }
         .notif-title {
             font-size: 0.85rem;
             font-weight: 800;
@@ -1135,7 +1229,7 @@
             background: var(--c-surface);
             border-radius: var(--r-xl);
             box-shadow: var(--sh-xl);
-            max-width: 620px;
+            max-width: 700px;
             width: 100%;
             max-height: 90vh;
             overflow: hidden;
@@ -1163,7 +1257,7 @@
             align-items: center;
             gap: 10px;
         }
-        .modal-header h3 i { color: var(--c-accent); }
+        .modal-header h3 i { color: var(--c-request); }
         .modal-close {
             width: 36px;
             height: 36px;
@@ -1197,7 +1291,7 @@
         }
 
         /* ============================================================
-           SKELETON LOADING
+           SKELETON
            ============================================================ */
         .skeleton {
             background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
@@ -1255,7 +1349,7 @@
             align-items: center;
             gap: 12px;
             animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
-            border-right: 4px solid var(--c-primary-500);
+            border-right: 4px solid var(--c-request);
             pointer-events: auto;
             transition: opacity var(--t-base), transform var(--t-base);
         }
@@ -1284,7 +1378,7 @@
         .toast.info { border-right-color: var(--c-purple); }
 
         /* ============================================================
-           MOBILE BOTTOM NAV
+           MOBILE NAV
            ============================================================ */
         .mobile-nav {
             display: none;
@@ -1317,16 +1411,14 @@
             border: none;
             cursor: pointer;
         }
-        .mobile-nav-item i {
-            font-size: 1.15rem;
-        }
+        .mobile-nav-item i { font-size: 1.15rem; }
         .mobile-nav-item.active {
-            color: var(--c-accent-dark);
-            background: rgba(46, 204, 113, 0.08);
+            color: var(--c-request-dark);
+            background: rgba(230, 126, 34, 0.08);
         }
         [data-theme="dark"] .mobile-nav-item.active {
-            color: #6ee7a0;
-            background: rgba(46, 204, 113, 0.15);
+            color: #ffb877;
+            background: rgba(230, 126, 34, 0.15);
         }
         .mobile-nav-item .count-pill {
             position: absolute;
@@ -1347,116 +1439,7 @@
         .mobile-nav-item .count-pill.show { display: flex; }
 
         /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 1024px) {
-            :root {
-                --sidebar-w: 100%;
-            }
-            .dashboard-layout {
-                grid-template-columns: 1fr;
-                padding: 16px;
-            }
-            .sidebar {
-                position: static;
-                display: none;
-            }
-            .sidebar.mobile-open {
-                display: block;
-                margin-bottom: 16px;
-            }
-            .profile-form {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 860px) {
-            .menu-toggle { display: inline-flex; }
-            .nav-user-name { display: none; }
-            .nav-user-btn {
-                padding: 4px;
-            }
-            .mobile-nav {
-                display: grid;
-            }
-            body {
-                padding-bottom: 72px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .navbar { padding: 0 12px; }
-            .dashboard-layout { padding: 12px; gap: 16px; }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            .stat-card {
-                padding: 14px;
-                gap: 10px;
-            }
-            .stat-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-            }
-            .stat-value { font-size: 1.3rem; }
-            .stat-label { font-size: 0.7rem; }
-
-            .section-card-header { padding: 14px 16px; }
-            .section-card-body { padding: 16px; }
-            .section-card-title { font-size: 0.95rem; }
-
-            .item-row {
-                padding: 12px;
-                gap: 10px;
-            }
-            .item-icon-wrapper {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
-            .item-title { font-size: 0.85rem; }
-            .item-meta { font-size: 0.7rem; gap: 8px; }
-            .item-price { font-size: 1rem; }
-            .item-actions {
-                width: 100%;
-                justify-content: flex-end;
-                margin-top: 6px;
-                padding-top: 10px;
-                border-top: 1px dashed var(--c-border);
-            }
-            .item-action-btn { padding: 7px 12px; font-size: 0.72rem; }
-
-            .page-title { font-size: 1.15rem; }
-            .page-title i { font-size: 1rem; }
-            .btn-primary { padding: 9px 18px; font-size: 0.82rem; }
-
-            .offer-mini {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-            .offer-mini-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
-
-            .notif-panel {
-                left: 12px;
-                right: 12px;
-                width: auto;
-                top: calc(var(--header-h) + 8px);
-            }
-
-            .modal-body { padding: 16px; }
-            .modal-header { padding: 14px 16px; }
-            .modal-header h3 { font-size: 0.95rem; }
-            .modal-footer { padding: 12px 16px; }
-        }
-
-        /* ============================================================
-           LOGIN REQUIRED STATE
+           LOGIN REQUIRED
            ============================================================ */
         .login-required-state {
             min-height: 70vh;
@@ -1471,8 +1454,8 @@
             width: 100px;
             height: 100px;
             border-radius: 50%;
-            background: linear-gradient(135deg, rgba(44, 122, 184, 0.12), rgba(44, 122, 184, 0.04));
-            color: var(--c-primary-600);
+            background: linear-gradient(135deg, rgba(230, 126, 34, 0.12), rgba(230, 126, 34, 0.04));
+            color: var(--c-request-dark);
             display: flex;
             align-items: center;
             justify-content: center;
@@ -1499,14 +1482,87 @@
         }
 
         /* ============================================================
-           MISC
+           RESPONSIVE
            ============================================================ */
-        .hidden { display: none !important; }
-        .text-truncate {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        @media (max-width: 1024px) {
+            :root { --sidebar-w: 100%; }
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+                padding: 16px;
+            }
+            .sidebar {
+                position: static;
+                display: none;
+            }
+            .sidebar.mobile-open {
+                display: block;
+                margin-bottom: 16px;
+            }
+            .profile-form { grid-template-columns: 1fr; }
         }
+
+        @media (max-width: 860px) {
+            .menu-toggle { display: inline-flex; }
+            .nav-user-name { display: none; }
+            .nav-user-btn { padding: 4px; }
+            .mobile-nav { display: grid; }
+            body { padding-bottom: 72px; }
+        }
+
+        @media (max-width: 640px) {
+            .navbar { padding: 0 12px; }
+            .dashboard-layout { padding: 12px; gap: 16px; }
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            .stat-card { padding: 14px; gap: 10px; }
+            .stat-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.1rem;
+            }
+            .stat-value { font-size: 1.3rem; }
+            .stat-label { font-size: 0.7rem; }
+
+            .section-card-header { padding: 14px 16px; }
+            .section-card-body { padding: 16px; }
+            .section-card-title { font-size: 0.95rem; }
+
+            .item-row { padding: 12px; gap: 10px; }
+            .item-icon-wrapper { width: 38px; height: 38px; font-size: 1rem; }
+            .item-title { font-size: 0.85rem; }
+            .item-meta { font-size: 0.7rem; gap: 8px; }
+            .item-price { font-size: 1rem; }
+            .item-actions {
+                width: 100%;
+                justify-content: flex-end;
+                margin-top: 6px;
+                padding-top: 10px;
+                border-top: 1px dashed var(--c-border);
+            }
+            .item-action-btn { padding: 7px 12px; font-size: 0.72rem; }
+
+            .page-title { font-size: 1.15rem; }
+            .page-title i { font-size: 1rem; }
+            .btn-primary { padding: 9px 18px; font-size: 0.82rem; }
+
+            .notif-panel {
+                left: 12px;
+                right: 12px;
+                width: auto;
+                top: calc(var(--header-h) + 8px);
+            }
+
+            .modal-body { padding: 16px; }
+            .modal-header { padding: 14px 16px; }
+            .modal-header h3 { font-size: 0.95rem; }
+            .modal-footer { padding: 12px 16px; }
+
+            .products-grid-mini { grid-template-columns: 1fr; gap: 12px; }
+        }
+
+        .hidden { display: none !important; }
 
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
@@ -1531,7 +1587,7 @@
                          onerror="this.style.display='none'" />
                     <span class="logo-text">
                         <span class="blue">كيماتو</span>
-                        <span class="gray">| لوحة المشتري</span>
+                        <span class="gray">| لوحة المورد</span>
                     </span>
                 </a>
             </div>
@@ -1574,15 +1630,13 @@
             <h4><i class="fas fa-bell"></i> الإشعارات</h4>
             <button class="notif-mark-read" id="notifMarkRead" type="button">تعليم الكل كمقروء</button>
         </div>
-        <div class="notif-list" id="notifList">
-            <!-- Notifications injected here -->
-        </div>
+        <div class="notif-list" id="notifList"></div>
     </div>
 
     <!-- MAIN -->
     <main class="dashboard-layout" id="main">
 
-        <!-- SIDEBAR (Right side in RTL = second in DOM) -->
+        <!-- SIDEBAR -->
         <aside class="sidebar" id="sidebar">
             <div class="sidebar-title">القائمة الرئيسية</div>
             <nav class="sidebar-nav" role="tablist">
@@ -1590,37 +1644,41 @@
                     <i class="fas fa-th-large"></i>
                     نظرة عامة
                 </button>
-                <button class="sidebar-link" data-section="requests" role="tab" aria-selected="false">
-                    <i class="fas fa-clipboard-list"></i>
-                    طلباتي
-                    <span class="count-pill" id="sidebarRequestsCount">0</span>
+                <button class="sidebar-link" data-section="products" role="tab" aria-selected="false">
+                    <i class="fas fa-flask"></i>
+                    منتجاتي
+                    <span class="count-pill" id="sidebarProductsCount">0</span>
                 </button>
-                <button class="sidebar-link" data-section="offers" role="tab" aria-selected="false">
+                <button class="sidebar-link" data-section="my-offers" role="tab" aria-selected="false">
                     <i class="fas fa-hand-holding-usd"></i>
-                    العروض المستلمة
+                    عروضي
                     <span class="count-pill" id="sidebarOffersCount">0</span>
                 </button>
-                <button class="sidebar-link" data-section="favorites" role="tab" aria-selected="false">
-                    <i class="fas fa-heart"></i>
-                    المفضلة
-                    <span class="count-pill" id="sidebarFavoritesCount">0</span>
+                <button class="sidebar-link" data-section="available-requests" role="tab" aria-selected="false">
+                    <i class="fas fa-bullhorn"></i>
+                    الطلبات المتاحة
+                    <span class="count-pill" id="sidebarAvailableCount">0</span>
+                </button>
+                <button class="sidebar-link" data-section="contacts" role="tab" aria-selected="false">
+                    <i class="fas fa-users"></i>
+                    العملاء المحتملون
                 </button>
                 <button class="sidebar-link" data-section="profile" role="tab" aria-selected="false">
                     <i class="fas fa-user-circle"></i>
                     الملف الشخصي
                 </button>
             </nav>
+
+            <!-- Verification banner -->
+            <div id="verifBannerSlot"></div>
         </aside>
 
         <!-- MAIN CONTENT -->
         <div class="dashboard-main" id="dashboardMain">
-
-            <!-- Content will be injected here -->
             <div class="skeleton skeleton-stat"></div>
             <div class="skeleton skeleton-stat"></div>
             <div class="skeleton skeleton-stat"></div>
             <div class="skeleton skeleton-stat"></div>
-
         </div>
 
     </main>
@@ -1631,75 +1689,141 @@
             <i class="fas fa-th-large"></i>
             <span>نظرة عامة</span>
         </button>
-        <button class="mobile-nav-item" data-section="requests" type="button">
-            <i class="fas fa-clipboard-list"></i>
-            <span>طلباتي</span>
-            <span class="count-pill" id="mobileRequestsCount">0</span>
+        <button class="mobile-nav-item" data-section="products" type="button">
+            <i class="fas fa-flask"></i>
+            <span>منتجاتي</span>
+            <span class="count-pill" id="mobileProductsCount">0</span>
         </button>
-        <button class="mobile-nav-item" data-section="offers" type="button">
+        <button class="mobile-nav-item" data-section="my-offers" type="button">
             <i class="fas fa-hand-holding-usd"></i>
-            <span>العروض</span>
+            <span>عروضي</span>
             <span class="count-pill" id="mobileOffersCount">0</span>
         </button>
-        <button class="mobile-nav-item" data-section="favorites" type="button">
-            <i class="fas fa-heart"></i>
-            <span>المفضلة</span>
+        <button class="mobile-nav-item" data-section="available-requests" type="button">
+            <i class="fas fa-bullhorn"></i>
+            <span>الطلبات</span>
+            <span class="count-pill" id="mobileAvailableCount">0</span>
         </button>
-        <button class="mobile-nav-item" data-section="profile" type="button">
-            <i class="fas fa-user-circle"></i>
-            <span>حسابي</span>
+        <button class="mobile-nav-item" data-section="contacts" type="button">
+            <i class="fas fa-users"></i>
+            <span>العملاء</span>
         </button>
     </nav>
 
-    <!-- MODAL: Edit Request -->
-    <div class="modal-overlay" id="editRequestModal" role="dialog" aria-modal="true">
+    <!-- MODAL: Add/Edit Product -->
+    <div class="modal-overlay" id="productModal" role="dialog" aria-modal="true" aria-labelledby="productModalTitle">
         <div class="modal">
             <div class="modal-header">
-                <h3><i class="fas fa-edit"></i> تعديل الطلب</h3>
-                <button class="modal-close" id="closeEditModal" type="button" aria-label="إغلاق">
+                <h3 id="productModalTitle"><i class="fas fa-flask"></i> إضافة منتج جديد</h3>
+                <button class="modal-close" id="closeProductModal" type="button" aria-label="إغلاق">
                     <i class="fas fa-times"></i>
                 </button>
             </div>
             <div class="modal-body">
-                <form id="editRequestForm" class="profile-form" novalidate>
+                <form id="productForm" class="profile-form" novalidate>
+                    <input type="hidden" id="productIdField" name="id" value="" />
+
                     <div class="form-group full">
-                        <label for="editProductName">اسم المنتج <span class="req">*</span></label>
-                        <input type="text" id="editProductName" name="product_name" required />
+                        <label for="pName">اسم المنتج <span class="req">*</span></label>
+                        <input type="text" id="pName" name="name" required placeholder="مثال: صودا كاوية 99%" />
                     </div>
+
                     <div class="form-group">
-                        <label for="editCasNumber">رقم CAS</label>
-                        <input type="text" id="editCasNumber" name="cas_number" dir="ltr" />
+                        <label for="pCas">رقم CAS <span class="hint">(اختياري)</span></label>
+                        <input type="text" id="pCas" name="cas_number" dir="ltr" placeholder="1310-73-2" />
                     </div>
+
                     <div class="form-group">
-                        <label for="editQuantity">الكمية <span class="req">*</span></label>
-                        <input type="text" id="editQuantity" name="quantity_needed" required placeholder="500 كجم" />
+                        <label for="pPurity">النقاء <span class="hint">(اختياري)</span></label>
+                        <input type="text" id="pPurity" name="purity" placeholder="99%" />
                     </div>
+
                     <div class="form-group">
-                        <label for="editBudgetMin">الميزانية من (ج.م)</label>
-                        <input type="number" id="editBudgetMin" name="budget_min" min="0" step="0.01" />
+                        <label for="pPrice">السعر <span class="req">*</span></label>
+                        <input type="number" id="pPrice" name="price" required min="0" step="0.01" placeholder="مثال: 500" />
                     </div>
+
                     <div class="form-group">
-                        <label for="editBudgetMax">الميزانية إلى (ج.م)</label>
-                        <input type="number" id="editBudgetMax" name="budget_max" min="0" step="0.01" />
+                        <label for="pUnit">الوحدة <span class="req">*</span></label>
+                        <select id="pUnit" name="unit" required>
+                            <option value="كجم">كجم</option>
+                            <option value="طن">طن</option>
+                            <option value="لتر">لتر</option>
+                            <option value="عبوة">عبوة</option>
+                            <option value="برميل">برميل</option>
+                        </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="editDeadline">الموعد النهائي</label>
-                        <input type="date" id="editDeadline" name="deadline" />
+                        <label for="pCategory">الفئة</label>
+                        <select id="pCategory" name="category">
+                            <option value="">— اختر فئة —</option>
+                        </select>
                     </div>
+
                     <div class="form-group">
-                        <label for="editLocation">موقع التسليم</label>
-                        <input type="text" id="editLocation" name="location" />
+                        <label for="pGrade">الدرجة</label>
+                        <select id="pGrade" name="grade">
+                            <option value="">— اختر درجة —</option>
+                            <option value="technical">تقني</option>
+                            <option value="analytical">تحليلي</option>
+                            <option value="acs">ACS</option>
+                            <option value="pharma">صيدلاني</option>
+                            <option value="food">غذائي</option>
+                        </select>
                     </div>
+
+                    <div class="form-group">
+                        <label for="pPackaging">التعبئة</label>
+                        <input type="text" id="pPackaging" name="packaging" placeholder="مثال: شيكارة 25 كجم" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pMoq">الحد الأدنى للطلب (MOQ)</label>
+                        <input type="text" id="pMoq" name="min_order_quantity" placeholder="مثال: 500 كجم" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pOrigin">بلد المنشأ</label>
+                        <input type="text" id="pOrigin" name="origin_country" placeholder="مثال: مصر" />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pStock">حالة المخزون</label>
+                        <select id="pStock" name="stock_status">
+                            <option value="available">متوفر</option>
+                            <option value="low">كمية محدودة</option>
+                            <option value="out">غير متوفر</option>
+                        </select>
+                    </div>
+
                     <div class="form-group full">
-                        <label for="editDescription">وصف إضافي</label>
-                        <textarea id="editDescription" name="description"></textarea>
+                        <label for="pImage">رابط الصورة <span class="hint">(اختياري)</span></label>
+                        <input type="url" id="pImage" name="image_url" dir="ltr" placeholder="https://..." />
+                    </div>
+
+                    <div class="form-group full">
+                        <label for="pDescription">وصف المنتج</label>
+                        <textarea id="pDescription" name="description" placeholder="اكتب تفاصيل المنتج، الاستخدامات، المواصفات..."></textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pMsds">رابط MSDS <span class="hint">(اختياري)</span></label>
+                        <input type="url" id="pMsds" name="msds_url" dir="ltr" placeholder="https://..." />
+                    </div>
+
+                    <div class="form-group">
+                        <label for="pFeatured">
+                            <input type="checkbox" id="pFeatured" name="is_featured" style="width: auto; margin-left: 6px;" />
+                            منتج مميز
+                        </label>
                     </div>
                 </form>
             </div>
             <div class="modal-footer">
-                <button class="btn-secondary" id="cancelEditModal" type="button">إلغاء</button>
-                <button class="btn-primary" id="saveEditModal" type="button">
-                    <i class="fas fa-save"></i> حفظ التعديلات
+                <button class="btn-secondary" id="cancelProductModal" type="button">إلغاء</button>
+                <button class="btn-primary" id="saveProductBtn" type="button">
+                    <i class="fas fa-save"></i> حفظ المنتج
                 </button>
             </div>
         </div>
@@ -1725,19 +1849,23 @@
             user: null,
             userProfile: null,
             activeSection: 'overview',
-            requests: [],
-            offersMap: {},       // { requestId: [offers] }
-            favorites: [],
-            favoritesProducts: [],
+            products: [],
+            myOffers: [],
+            availableRequests: [],
+            myOffersMapByRequest: {},
+            contacts: [],
+            categories: [],
             notifications: [],
             stats: {
-                totalRequests: 0,
-                openRequests: 0,
+                totalProducts: 0,
+                activeProducts: 0,
                 totalOffers: 0,
-                newOffers: 0,
-                favoritesCount: 0,
+                acceptedOffers: 0,
+                totalViews: 0,
+                totalContacts: 0,
+                totalWhatsapp: 0,
             },
-            editingRequestId: null,
+            editingProductId: null,
             channel: null,
             loadedSections: {},
         };
@@ -1787,7 +1915,7 @@
             return formatDate(dateStr);
         };
 
-        const getStatusInfo = (status) => {
+        const getRequestStatusInfo = (status) => {
             const map = {
                 'open':     { text: 'مفتوح',   cls: 'status-open',     icon: 'circle' },
                 'matched':  { text: 'تمت المطابقة', cls: 'status-matched',  icon: 'check-circle' },
@@ -1804,6 +1932,18 @@
                 'rejected': { text: 'مرفوض',       cls: 'status-rejected', icon: 'times-circle' },
             };
             return map[status] || map['pending'];
+        };
+
+        const getContactTypeInfo = (type) => {
+            const map = {
+                'whatsapp':      { text: 'واتساب',    cls: 'contact-type-whatsapp',  icon: 'fab fa-whatsapp' },
+                'phone':         { text: 'اتصال',      cls: 'contact-type-phone',     icon: 'fas fa-phone' },
+                'view':          { text: 'مشاهدة',     cls: 'contact-type-view',      icon: 'fas fa-eye' },
+                'inquiry':       { text: 'استفسار',    cls: 'contact-type-inquiry',   icon: 'fas fa-comment' },
+                'request_quote': { text: 'طلب عرض',    cls: 'contact-type-request_quote', icon: 'fas fa-file-invoice' },
+                'email':         { text: 'إيميل',      cls: 'contact-type-view',      icon: 'fas fa-envelope' },
+            };
+            return map[type] || map['view'];
         };
 
         // ============================================================
@@ -1884,7 +2024,8 @@
 
             setTimeout(() => removeToast(toast), 6000);
         };
-                // ============================================================
+
+        // ============================================================
         // AUTH GUARD
         // ============================================================
         const checkAuthAndLoad = async () => {
@@ -1899,20 +2040,21 @@
 
             const { data: profile } = await supabase
                 .from('profiles')
-                .select('id, full_name, company_name, phone, whatsapp, city, address, user_type, is_verified, avatar_url, created_at')
+                .select('id, full_name, company_name, phone, whatsapp, city, address, user_type, is_verified, avatar_url, created_at, commercial_register, tax_id')
                 .eq('id', user.id)
                 .single();
 
             state.userProfile = profile;
 
-            // Verify user is a buyer
-            if (profile?.user_type === 'supplier') {
-                showToast('⚠️', 'تنبيه', 'هذه اللوحة للمشترين. جاري تحويلك...', null, null, 'warning');
-                setTimeout(() => window.location.href = 'supplier-dashboard.html', 1500);
+            // Verify user is a supplier
+            if (profile?.user_type !== 'supplier') {
+                showToast('⚠️', 'تنبيه', 'هذه اللوحة للموردين. جاري تحويلك...', null, null, 'warning');
+                setTimeout(() => window.location.href = 'buyer-dashboard.html', 1500);
                 return false;
             }
 
             updateUserUI();
+            renderVerifBanner();
             return true;
         };
 
@@ -1922,16 +2064,16 @@
                 main.innerHTML = `
                     <div class="login-required-state">
                         <div class="big-icon">
-                            <i class="fas fa-lock"></i>
+                            <i class="fas fa-warehouse"></i>
                         </div>
-                        <h2>سجّل دخولك أولاً</h2>
-                        <p>عشان تقدر تشوف لوحة التحكم، الطلبات، العروض، والمفضلة، لازم تسجّل دخولك.</p>
+                        <h2>سجّل دخولك كمورد</h2>
+                        <p>عشان تدير منتجاتك، عروضك، والعملاء المحتملين، لازم تسجّل دخولك كمورد.</p>
                         <div class="login-required-actions">
-                            <a href="auth.html?redirect=buyer-dashboard" class="btn-primary">
+                            <a href="auth.html?redirect=supplier-dashboard" class="btn-primary">
                                 <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
                             </a>
-                            <a href="auth.html?type=buyer" class="btn-secondary">
-                                <i class="fas fa-user-plus"></i> حساب جديد
+                            <a href="auth.html?type=supplier" class="btn-secondary">
+                                <i class="fas fa-user-plus"></i> حساب مورد جديد
                             </a>
                         </div>
                     </div>
@@ -1947,7 +2089,7 @@
             const p = state.userProfile;
             if (!p) return;
 
-            const name = p.company_name || p.full_name || 'مستخدم';
+            const name = p.company_name || p.full_name || 'مورد';
             const initial = name.charAt(0).toUpperCase();
 
             const avatarEl = document.getElementById('userAvatar');
@@ -1956,8 +2098,42 @@
             if (nameEl) nameEl.textContent = name;
         };
 
+        const renderVerifBanner = () => {
+            const slot = document.getElementById('verifBannerSlot');
+            if (!slot) return;
+            const p = state.userProfile;
+
+            if (p?.is_verified) {
+                slot.innerHTML = `
+                    <div class="verif-banner verif-done">
+                        <div class="icon-row">
+                            <i class="fas fa-check-circle"></i>
+                            حساب موثّق
+                        </div>
+                        <div>حسابك موثّق، عملاؤك يثقون بك أكثر.</div>
+                    </div>
+                `;
+            } else {
+                slot.innerHTML = `
+                    <div class="verif-banner">
+                        <div class="icon-row">
+                            <i class="fas fa-shield-alt"></i>
+                            اطلب توثيق حسابك
+                        </div>
+                        <div>الحسابات الموثّقة تحصل على مشاهدات أكثر بـ 3 أضعاف.</div>
+                        <a href="#" id="requestVerifBtn">كيف أتوثّق؟ ←</a>
+                    </div>
+                `;
+                document.getElementById('requestVerifBtn')?.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    showToast('📞', 'للتوثيق', 'تواصل معنا عبر واتساب لإرسال السجل التجاري',
+                        'تواصل', 'https://wa.me/201000000000', 'info');
+                });
+            }
+        };
+
         // ============================================================
-        // NAVBAR & DROPDOWN
+        // NAVBAR
         // ============================================================
         const initNavbar = () => {
             const menuToggle = document.getElementById('menuToggle');
@@ -1996,7 +2172,6 @@
                 window.location.href = 'index.html';
             });
 
-            // Notifications
             document.getElementById('notifBtn')?.addEventListener('click', (e) => {
                 e.stopPropagation();
                 document.getElementById('notifPanel')?.classList.toggle('show');
@@ -2007,27 +2182,23 @@
         };
 
         // ============================================================
-        // SECTIONS NAVIGATION
+        // SECTION NAVIGATION
         // ============================================================
         const switchSection = (section) => {
             state.activeSection = section;
 
-            // Update sidebar active state
             document.querySelectorAll('.sidebar-link').forEach(link => {
                 const isActive = link.dataset.section === section;
                 link.classList.toggle('active', isActive);
                 link.setAttribute('aria-selected', isActive);
             });
 
-            // Update mobile nav active state
             document.querySelectorAll('.mobile-nav-item').forEach(item => {
                 item.classList.toggle('active', item.dataset.section === section);
             });
 
-            // Close mobile sidebar
             document.getElementById('sidebar')?.classList.remove('mobile-open');
 
-            // Load section content
             loadSection(section);
         };
 
@@ -2044,7 +2215,6 @@
             const main = document.getElementById('dashboardMain');
             if (!main) return;
 
-            // Show skeleton while loading (except cached sections)
             if (!state.loadedSections[section]) {
                 main.innerHTML = `
                     <div class="skeleton skeleton-row" style="height: 60px;"></div>
@@ -2059,205 +2229,323 @@
                 `;
             }
 
-            // Scroll to top
             window.scrollTo({ top: 0, behavior: 'smooth' });
 
             switch (section) {
-                case 'overview':
-                    await renderOverview();
-                    break;
-                case 'requests':
-                    await renderRequests();
-                    break;
-                case 'offers':
-                    await renderOffers();
-                    break;
-                case 'favorites':
-                    await renderFavorites();
-                    break;
-                case 'profile':
-                    renderProfile();
-                    break;
-                default:
-                    renderOverview();
+                case 'overview': await renderOverview(); break;
+                case 'products': await renderProducts(); break;
+                case 'my-offers': await renderMyOffers(); break;
+                case 'available-requests': await renderAvailableRequests(); break;
+                case 'contacts': await renderContacts(); break;
+                case 'profile': renderProfile(); break;
+                default: renderOverview();
             }
 
             state.loadedSections[section] = true;
         };
 
         // ============================================================
-        // FETCH DATA
+        // FETCHERS
         // ============================================================
-        const fetchMyRequests = async () => {
+        const fetchMyProducts = async () => {
             if (!state.user) return [];
             try {
                 const { data, error } = await supabase
-                    .from('purchase_requests')
+                    .from('products')
                     .select('*')
-                    .eq('buyer_id', state.user.id)
+                    .eq('supplier_id', state.user.id)
                     .order('created_at', { ascending: false });
 
                 if (error) throw error;
                 return data || [];
             } catch (e) {
-                console.error('Fetch requests error:', e);
+                console.error('Fetch products error:', e);
                 return [];
             }
         };
 
-        const fetchOffersForRequests = async (requestIds) => {
-            if (!requestIds.length) return {};
+        const fetchMyOffers = async () => {
+            if (!state.user) return [];
             try {
                 const { data, error } = await supabase
                     .from('offers')
                     .select('*')
-                    .in('request_id', requestIds)
-                    .order('price', { ascending: true });
-
-                if (error) throw error;
-
-                // Group by request_id
-                const map = {};
-                (data || []).forEach(offer => {
-                    if (!map[offer.request_id]) map[offer.request_id] = [];
-                    map[offer.request_id].push(offer);
-                });
-
-                // Fetch supplier info for all offers
-                const supplierIds = [...new Set((data || []).map(o => o.supplier_id).filter(Boolean))];
-                if (supplierIds.length) {
-                    const { data: suppliers } = await supabase
-                        .from('profiles')
-                        .select('id, full_name, company_name, phone, whatsapp, city, is_verified')
-                        .in('id', supplierIds);
-
-                    const suppliersMap = {};
-                    (suppliers || []).forEach(s => { suppliersMap[s.id] = s; });
-
-                    // Enrich offers with supplier data
-                    Object.keys(map).forEach(rid => {
-                        map[rid] = map[rid].map(o => ({
-                            ...o,
-                            supplier: suppliersMap[o.supplier_id] || null,
-                        }));
-                    });
-                }
-
-                return map;
-            } catch (e) {
-                console.error('Fetch offers error:', e);
-                return {};
-            }
-        };
-
-        const fetchFavorites = async () => {
-            if (!state.user) return [];
-            try {
-                const { data, error } = await supabase
-                    .from('favorites')
-                    .select('product_id, created_at')
-                    .eq('user_id', state.user.id)
-                    .not('product_id', 'is', null)
+                    .eq('supplier_id', state.user.id)
                     .order('created_at', { ascending: false });
 
                 if (error) throw error;
+                const offers = data || [];
 
-                const productIds = (data || []).map(f => f.product_id).filter(isValidUUID);
-                if (!productIds.length) return [];
+                // Fetch related requests
+                const requestIds = [...new Set(offers.map(o => o.request_id).filter(Boolean))];
+                if (requestIds.length) {
+                    const { data: requests } = await supabase
+                        .from('purchase_requests')
+                        .select('id, product_name, quantity_needed, buyer_id, status, location, budget_min, budget_max, created_at')
+                        .in('id', requestIds);
 
-                const { data: products } = await supabase
-                    .from('products')
-                    .select('id, name, price, image_url, cas_number, purity, unit, category, stock_status, status')
-                    .in('id', productIds);
+                    const requestsMap = {};
+                    (requests || []).forEach(r => { requestsMap[r.id] = r; });
 
-                // Preserve order
-                const productsMap = {};
-                (products || []).forEach(p => { productsMap[p.id] = p; });
+                    // Fetch buyers info
+                    const buyerIds = [...new Set((requests || []).map(r => r.buyer_id).filter(Boolean))];
+                    const buyersMap = {};
+                    if (buyerIds.length) {
+                        const { data: buyers } = await supabase
+                            .from('profiles')
+                            .select('id, full_name, company_name, city, is_verified, phone, whatsapp')
+                            .in('id', buyerIds);
+                        (buyers || []).forEach(b => { buyersMap[b.id] = b; });
+                    }
 
-                return productIds.map(pid => productsMap[pid]).filter(Boolean);
+                    return offers.map(o => ({
+                        ...o,
+                        request: requestsMap[o.request_id] || null,
+                        buyer: requestsMap[o.request_id] ? (buyersMap[requestsMap[o.request_id].buyer_id] || null) : null,
+                    }));
+                }
+
+                return offers;
             } catch (e) {
-                console.error('Fetch favorites error:', e);
+                console.error('Fetch offers error:', e);
                 return [];
+            }
+        };
+
+        const fetchAvailableRequests = async () => {
+            if (!state.user) return [];
+            try {
+                const { data: requests, error } = await supabase
+                    .from('purchase_requests')
+                    .select('id, product_name, quantity_needed, category, location, budget_min, budget_max, deadline, description, buyer_id, status, views_count, created_at')
+                    .eq('status', 'open')
+                    .order('created_at', { ascending: false })
+                    .limit(50);
+
+                if (error) throw error;
+                if (!requests?.length) return [];
+
+                // Fetch buyers
+                const buyerIds = [...new Set(requests.map(r => r.buyer_id).filter(Boolean))];
+                const buyersMap = {};
+                if (buyerIds.length) {
+                    const { data: buyers } = await supabase
+                        .from('profiles')
+                        .select('id, full_name, company_name, city, is_verified')
+                        .in('id', buyerIds);
+                    (buyers || []).forEach(b => { buyersMap[b.id] = b; });
+                }
+
+                // Check which requests I've already offered on
+                const myOffers = await fetchMyOffers();
+                const myOffersByRequest = {};
+                myOffers.forEach(o => { myOffersByRequest[o.request_id] = o; });
+
+                return requests.map(r => ({
+                    ...r,
+                    buyer: buyersMap[r.buyer_id] || null,
+                    myOffer: myOffersByRequest[r.id] || null,
+                }));
+            } catch (e) {
+                console.error('Fetch available requests error:', e);
+                return [];
+            }
+        };
+
+        const fetchContacts = async () => {
+            if (!state.user) return [];
+            try {
+                const { data: contacts, error } = await supabase
+                    .from('supplier_contacts')
+                    .select('*')
+                    .eq('supplier_id', state.user.id)
+                    .order('contact_date', { ascending: false })
+                    .limit(100);
+
+                if (error) throw error;
+                if (!contacts?.length) return [];
+
+                // Fetch product names
+                const productIds = [...new Set(contacts.map(c => c.product_id).filter(Boolean))];
+                const productsMap = {};
+                if (productIds.length) {
+                    const { data: products } = await supabase
+                        .from('products')
+                        .select('id, name')
+                        .in('id', productIds);
+                    (products || []).forEach(p => { productsMap[p.id] = p; });
+                }
+
+                // Fetch buyers
+                const buyerIds = [...new Set(contacts.map(c => c.buyer_id).filter(Boolean))];
+                const buyersMap = {};
+                if (buyerIds.length) {
+                    const { data: buyers } = await supabase
+                        .from('profiles')
+                        .select('id, full_name, company_name, phone, whatsapp, city, is_verified')
+                        .in('id', buyerIds);
+                    (buyers || []).forEach(b => { buyersMap[b.id] = b; });
+                }
+
+                return contacts.map(c => ({
+                    ...c,
+                    product: productsMap[c.product_id] || null,
+                    buyer: buyersMap[c.buyer_id] || null,
+                }));
+            } catch (e) {
+                console.error('Fetch contacts error:', e);
+                return [];
+            }
+        };
+
+        const fetchCategories = async () => {
+            try {
+                const { data } = await supabase
+                    .from('categories')
+                    .select('id, name, icon')
+                    .order('display_order');
+                state.categories = data || [];
+            } catch (e) {
+                state.categories = [];
             }
         };
 
         const fetchAllData = async () => {
             if (!state.user) return;
 
-            const requests = await fetchMyRequests();
-            state.requests = requests;
+            const [products, myOffers, availableRequests, contacts] = await Promise.all([
+                fetchMyProducts(),
+                fetchMyOffers(),
+                fetchAvailableRequests(),
+                fetchContacts(),
+            ]);
 
-            const requestIds = requests.map(r => r.id);
-            state.offersMap = await fetchOffersForRequests(requestIds);
-
-            state.favoritesProducts = await fetchFavorites();
+            state.products = products;
+            state.myOffers = myOffers;
+            state.availableRequests = availableRequests;
+            state.contacts = contacts;
 
             // Calculate stats
-            const allOffers = Object.values(state.offersMap).flat();
-            const newOffers = allOffers.filter(o => o.status === 'pending');
+            const totalViews = products.reduce((sum, p) => sum + (p.views || 0), 0);
+            const totalContacts = contacts.length;
+            const totalWhatsapp = contacts.filter(c => c.contact_type === 'whatsapp').length;
+            const acceptedOffers = myOffers.filter(o => o.status === 'accepted').length;
 
             state.stats = {
-                totalRequests: requests.length,
-                openRequests: requests.filter(r => r.status === 'open').length,
-                totalOffers: allOffers.length,
-                newOffers: newOffers.length,
-                favoritesCount: state.favoritesProducts.length,
+                totalProducts: products.length,
+                activeProducts: products.filter(p => p.status === 'active').length,
+                totalOffers: myOffers.length,
+                acceptedOffers,
+                totalViews,
+                totalContacts,
+                totalWhatsapp,
             };
 
-            // Update badges
             updateSidebarCounts();
-            buildNotifications(allOffers);
+            buildNotifications();
         };
 
         const updateSidebarCounts = () => {
-            const requestsCount = document.getElementById('sidebarRequestsCount');
-            const offersCount = document.getElementById('sidebarOffersCount');
-            const favoritesCount = document.getElementById('sidebarFavoritesCount');
-            const mobileRequestsCount = document.getElementById('mobileRequestsCount');
-            const mobileOffersCount = document.getElementById('mobileOffersCount');
+            const els = {
+                sidebarProductsCount: state.stats.totalProducts,
+                sidebarOffersCount: state.stats.totalOffers,
+                sidebarAvailableCount: state.availableRequests.filter(r => !r.myOffer).length,
+                mobileProductsCount: state.stats.totalProducts,
+                mobileOffersCount: state.stats.totalOffers,
+                mobileAvailableCount: state.availableRequests.filter(r => !r.myOffer).length,
+            };
 
-            if (requestsCount) requestsCount.textContent = state.stats.totalRequests;
-            if (offersCount) offersCount.textContent = state.stats.totalOffers;
-            if (favoritesCount) favoritesCount.textContent = state.stats.favoritesCount;
-            if (mobileRequestsCount) mobileRequestsCount.textContent = state.stats.totalRequests;
-            if (mobileOffersCount) mobileOffersCount.textContent = state.stats.totalOffers;
+            Object.entries(els).forEach(([id, val]) => {
+                const el = document.getElementById(id);
+                if (el) {
+                    el.textContent = val > 99 ? '99+' : val;
+                    el.classList.toggle('show', val > 0);
+                }
+            });
 
-            if (mobileRequestsCount) mobileRequestsCount.classList.toggle('show', state.stats.totalRequests > 0);
-            if (mobileOffersCount) mobileOffersCount.classList.toggle('show', state.stats.totalOffers > 0);
-
-            // Notification badge
+            // Notifications badge
             const notifCount = document.getElementById('notifCount');
+            const unread = state.notifications.filter(n => n.unread).length;
             if (notifCount) {
-                notifCount.textContent = state.stats.newOffers > 99 ? '99+' : state.stats.newOffers;
-                notifCount.classList.toggle('show', state.stats.newOffers > 0);
+                notifCount.textContent = unread > 99 ? '99+' : unread;
+                notifCount.classList.toggle('show', unread > 0);
             }
         };
 
         // ============================================================
         // NOTIFICATIONS
         // ============================================================
-        const buildNotifications = (offers) => {
-            const recent = offers
-                .filter(o => o.status === 'pending')
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .slice(0, 20);
+        const buildNotifications = () => {
+            const notifs = [];
 
-            state.notifications = recent.map(o => {
-                const request = state.requests.find(r => r.id === o.request_id);
-                const supplier = o.supplier;
-                const supplierName = supplier?.company_name || supplier?.full_name || 'مورد';
-                return {
-                    id: o.id,
-                    type: 'offer',
-                    title: '💰 عرض جديد',
-                    desc: `${supplierName} قدّم عرضاً بقيمة ${formatPrice(o.price)} ج.م على "${request?.product_name || 'طلبك'}"`,
-                    time: o.created_at,
+            // New available requests
+            const newRequests = state.availableRequests
+                .filter(r => !r.myOffer)
+                .slice(0, 5);
+
+            newRequests.forEach(r => {
+                notifs.push({
+                    id: `req-${r.id}`,
+                    type: 'request',
+                    title: '📢 طلب شراء جديد',
+                    desc: `مطلوب: ${r.product_name} — ${r.quantity_needed || 'كمية غير محددة'}`,
+                    time: r.created_at,
                     unread: true,
-                    requestId: o.request_id,
-                };
+                    link: `request-details.html?id=${r.id}`,
+                });
             });
 
+            // New contacts
+            const newContacts = state.contacts
+                .filter(c => c.contact_type === 'whatsapp' || c.contact_type === 'phone')
+                .slice(0, 3);
+
+            newContacts.forEach(c => {
+                const typeInfo = getContactTypeInfo(c.contact_type);
+                const buyerName = c.buyer?.company_name || c.buyer?.full_name || 'عميل';
+                notifs.push({
+                    id: `contact-${c.id}`,
+                    type: 'contact',
+                    title: `${typeInfo.icon.includes('whatsapp') ? '💬' : '📞'} ${typeInfo.text}`,
+                    desc: `${buyerName} — ${c.product?.name || 'منتج'}`,
+                    time: c.contact_date,
+                    unread: false,
+                    link: `product-details.html?id=${c.product_id}`,
+                });
+            });
+
+            // Accepted offers
+            const acceptedOffers = state.myOffers
+                .filter(o => o.status === 'accepted')
+                .slice(0, 3);
+
+            acceptedOffers.forEach(o => {
+                notifs.push({
+                    id: `offer-${o.id}`,
+                    type: 'offer',
+                    title: '✅ عرضك مقبول!',
+                    desc: `تم قبول عرضك على "${o.request?.product_name || 'طلب'}"`,
+                    time: o.created_at,
+                    unread: false,
+                    link: `request-details.html?id=${o.request_id}`,
+                });
+            });
+
+            // Sort by time desc
+            notifs.sort((a, b) => new Date(b.time) - new Date(a.time));
+
+            state.notifications = notifs;
             renderNotifications();
+            updateNotifBadge();
+        };
+
+        const updateNotifBadge = () => {
+            const badge = document.getElementById('notifCount');
+            const unread = state.notifications.filter(n => n.unread).length;
+            if (badge) {
+                badge.textContent = unread > 99 ? '99+' : unread;
+                badge.classList.toggle('show', unread > 0);
+            }
         };
 
         const renderNotifications = () => {
@@ -2275,7 +2563,7 @@
             }
 
             list.innerHTML = state.notifications.map(n => `
-                <div class="notif-item ${n.unread ? 'unread' : ''}" data-notif-id="${n.id}" data-request-id="${n.requestId}">
+                <div class="notif-item ${n.unread ? 'unread' : ''}" data-notif-id="${escapeHtml(n.id)}" data-link="${escapeHtml(n.link || '')}">
                     <div class="notif-content">
                         <div class="notif-title">${escapeHtml(n.title)}</div>
                         <div class="notif-desc">${escapeHtml(n.desc)}</div>
@@ -2284,13 +2572,11 @@
                 </div>
             `).join('');
 
-            // Click handler
             list.querySelectorAll('.notif-item').forEach(item => {
                 item.addEventListener('click', () => {
-                    const requestId = item.dataset.requestId;
-                    if (requestId) {
-                        document.getElementById('notifPanel')?.classList.remove('show');
-                        window.location.href = `request-details.html?id=${requestId}`;
+                    const link = item.dataset.link;
+                    if (link) {
+                        window.location.href = link;
                     }
                 });
             });
@@ -2299,11 +2585,9 @@
         const markAllNotificationsRead = () => {
             state.notifications = state.notifications.map(n => ({ ...n, unread: false }));
             renderNotifications();
-            const notifCount = document.getElementById('notifCount');
-            if (notifCount) notifCount.classList.remove('show');
+            updateNotifBadge();
             showToast('✅', 'تم التعليم', 'كل الإشعارات اتعلّمت كمقروءة', null, null, 'success');
         };
-
         // ============================================================
         // RENDER: OVERVIEW
         // ============================================================
@@ -2313,11 +2597,10 @@
 
             await fetchAllData();
 
-            const recentRequests = state.requests.slice(0, 3);
-            const recentOffers = Object.values(state.offersMap).flat()
-                .filter(o => o.status === 'pending')
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .slice(0, 3);
+            const recentOffers = state.myOffers.slice(0, 4);
+            const recentRequests = state.availableRequests
+                .filter(r => !r.myOffer)
+                .slice(0, 4);
 
             main.innerHTML = `
                 <div class="page-header-bar animate-in">
@@ -2326,217 +2609,742 @@
                             <i class="fas fa-th-large"></i>
                             نظرة عامة
                         </h1>
-                        <p class="page-subtitle">مرحباً ${escapeHtml(state.userProfile?.full_name || 'بك')} — دي ملخص نشاطك على كيماتو</p>
+                        <p class="page-subtitle">مرحباً ${escapeHtml(state.userProfile?.company_name || state.userProfile?.full_name || 'بك')} — دي ملخص نشاطك على كيماتو</p>
                     </div>
-                    <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                        <i class="fas fa-plus-circle"></i> اطلب عرض سعر جديد
+                    <button class="btn-primary" id="addProductQuickBtn" type="button">
+                        <i class="fas fa-plus-circle"></i> أضف منتج جديد
                     </button>
                 </div>
 
                 <!-- STATS -->
                 <div class="stats-grid animate-in" style="animation-delay: 0.05s;">
                     <div class="stat-card" style="--stat-color: var(--c-request); --stat-bg: rgba(230, 126, 34, 0.12);">
-                        <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                        <div class="stat-icon"><i class="fas fa-flask"></i></div>
                         <div class="stat-content">
-                            <div class="stat-label">إجمالي طلباتي</div>
-                            <div class="stat-value">${formatNumber(state.stats.totalRequests)}</div>
-                            <div class="stat-trend"><i class="fas fa-circle" style="color: var(--c-accent); font-size: 0.5rem;"></i> ${formatNumber(state.stats.openRequests)} مفتوح</div>
+                            <div class="stat-label">إجمالي منتجاتي</div>
+                            <div class="stat-value">${formatNumber(state.stats.totalProducts)}</div>
+                            <div class="stat-trend"><i class="fas fa-circle" style="color: var(--c-accent); font-size: 0.5rem;"></i> ${formatNumber(state.stats.activeProducts)} نشط</div>
                         </div>
                     </div>
 
                     <div class="stat-card" style="--stat-color: var(--c-accent); --stat-bg: rgba(46, 204, 113, 0.12);">
                         <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
                         <div class="stat-content">
-                            <div class="stat-label">العروض المستلمة</div>
+                            <div class="stat-label">عروضي</div>
                             <div class="stat-value">${formatNumber(state.stats.totalOffers)}</div>
-                            <div class="stat-trend"><i class="fas fa-bell" style="color: var(--c-warning); font-size: 0.6rem;"></i> ${formatNumber(state.stats.newOffers)} جديد</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card" style="--stat-color: var(--c-danger); --stat-bg: rgba(231, 76, 60, 0.12);">
-                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-label">المفضلة</div>
-                            <div class="stat-value">${formatNumber(state.stats.favoritesCount)}</div>
-                            <div class="stat-trend"><i class="fas fa-star" style="color: var(--c-warning); font-size: 0.6rem;"></i> منتجات محفوظة</div>
+                            <div class="stat-trend"><i class="fas fa-check-circle" style="color: var(--c-accent); font-size: 0.6rem;"></i> ${formatNumber(state.stats.acceptedOffers)} مقبول</div>
                         </div>
                     </div>
 
                     <div class="stat-card" style="--stat-color: var(--c-primary-600); --stat-bg: rgba(44, 122, 184, 0.12);">
-                        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
                         <div class="stat-content">
-                            <div class="stat-label">معدل العروض</div>
-                            <div class="stat-value">${state.stats.totalRequests > 0 ? (state.stats.totalOffers / state.stats.totalRequests).toFixed(1) : '0'}</div>
-                            <div class="stat-trend">عرض لكل طلب</div>
+                            <div class="stat-label">مشاهدات المنتجات</div>
+                            <div class="stat-value">${formatNumber(state.stats.totalViews)}</div>
+                            <div class="stat-trend">إجمالي الزيارات</div>
+                        </div>
+                    </div>
+
+                    <div class="stat-card" style="--stat-color: var(--c-whatsapp); --stat-bg: rgba(37, 211, 102, 0.12);">
+                        <div class="stat-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="stat-content">
+                            <div class="stat-label">تواصلات العملاء</div>
+                            <div class="stat-value">${formatNumber(state.stats.totalContacts)}</div>
+                            <div class="stat-trend"><i class="fab fa-whatsapp" style="font-size: 0.6rem;"></i> ${formatNumber(state.stats.totalWhatsapp)} واتساب</div>
                         </div>
                     </div>
                 </div>
 
-                <!-- RECENT REQUESTS -->
+                <!-- LATEST OFFERS -->
                 <div class="section-card animate-in" style="animation-delay: 0.1s;">
                     <div class="section-card-header">
                         <h2 class="section-card-title">
-                            <i class="fas fa-clipboard-list"></i>
-                            آخر طلباتي
-                            <span class="count-badge">${state.requests.length}</span>
-                        </h2>
-                        <button class="view-all-link" onclick="window.switchSection('requests')">
-                            عرض الكل <i class="fas fa-arrow-left"></i>
-                        </button>
-                    </div>
-                    <div class="section-card-body">
-                        ${recentRequests.length ? `
-                            <div class="item-list">
-                                ${recentRequests.map(r => renderRequestRow(r, state.offersMap[r.id] || [])).join('')}
-                            </div>
-                        ` : `
-                            <div class="empty-state">
-                                <i class="fas fa-clipboard-list empty-icon"></i>
-                                <h4>لسه مفيش طلبات</h4>
-                                <p>ابدأ بطلب عرض سعر لأول منتج محتاجه</p>
-                                <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                                    <i class="fas fa-plus-circle"></i> اطلب عرض سعر
-                                </button>
-                            </div>
-                        `}
-                    </div>
-                </div>
-
-                <!-- RECENT OFFERS -->
-                <div class="section-card animate-in" style="animation-delay: 0.15s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
                             <i class="fas fa-hand-holding-usd"></i>
-                            آخر العروض المستلمة
-                            ${state.stats.newOffers > 0 ? `<span class="count-badge accent">${state.stats.newOffers}</span>` : ''}
+                            آخر عروضي
+                            <span class="count-badge">${state.myOffers.length}</span>
                         </h2>
-                        <button class="view-all-link" onclick="window.switchSection('offers')">
+                        <button class="view-all-link" onclick="window.switchSection('my-offers')">
                             عرض الكل <i class="fas fa-arrow-left"></i>
                         </button>
                     </div>
                     <div class="section-card-body">
                         ${recentOffers.length ? `
                             <div class="item-list">
-                                ${recentOffers.map(o => {
-                                    const req = state.requests.find(r => r.id === o.request_id);
-                                    return renderOfferRow(o, req);
-                                }).join('')}
+                                ${recentOffers.map(o => renderMyOfferRow(o)).join('')}
                             </div>
                         ` : `
                             <div class="empty-state">
                                 <i class="fas fa-hand-holding-usd empty-icon"></i>
                                 <h4>لسه مفيش عروض</h4>
-                                <p>العروض من الموردين هتظهر هنا لما يردوا على طلباتك</p>
-                            </div>
-                        `}
-                    </div>
-                </div>
-            `;
-
-            bindRequestRowEvents();
-        };
-
-        // ============================================================
-        // RENDER: REQUESTS
-        // ============================================================
-        const renderRequests = async () => {
-            const main = document.getElementById('dashboardMain');
-            if (!main) return;
-
-            await fetchAllData();
-
-            main.innerHTML = `
-                <div class="page-header-bar animate-in">
-                    <div>
-                        <h1 class="page-title">
-                            <i class="fas fa-clipboard-list"></i>
-                            طلباتي
-                        </h1>
-                        <p class="page-subtitle">إدارة كل طلبات الشراء الخاصة بك</p>
-                    </div>
-                    <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                        <i class="fas fa-plus-circle"></i> طلب جديد
-                    </button>
-                </div>
-
-                <div class="section-card animate-in" style="animation-delay: 0.05s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-list"></i>
-                            القائمة الكاملة
-                            <span class="count-badge">${state.requests.length}</span>
-                        </h2>
-                    </div>
-                    <div class="section-card-body">
-                        ${state.requests.length ? `
-                            <div class="item-list">
-                                ${state.requests.map(r => renderRequestRow(r, state.offersMap[r.id] || [], true)).join('')}
-                            </div>
-                        ` : `
-                            <div class="empty-state">
-                                <i class="fas fa-clipboard-list empty-icon"></i>
-                                <h4>لسه مفيش طلبات</h4>
-                                <p>ابدأ بطلب عرض سعر لأول منتج محتاجه</p>
-                                <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                                    <i class="fas fa-plus-circle"></i> اطلب عرض سعر
+                                <p>قدّم عرضك الأول على طلب شراء متاح</p>
+                                <button class="btn-primary" onclick="window.switchSection('available-requests')">
+                                    <i class="fas fa-bullhorn"></i> شوف الطلبات المتاحة
                                 </button>
                             </div>
                         `}
                     </div>
                 </div>
+
+                <!-- AVAILABLE REQUESTS -->
+                <div class="section-card animate-in" style="animation-delay: 0.15s;">
+                    <div class="section-card-header">
+                        <h2 class="section-card-title">
+                            <i class="fas fa-bullhorn"></i>
+                            طلبات جديدة متاحة
+                            <span class="count-badge accent">${state.availableRequests.filter(r => !r.myOffer).length}</span>
+                        </h2>
+                        <button class="view-all-link" onclick="window.switchSection('available-requests')">
+                            عرض الكل <i class="fas fa-arrow-left"></i>
+                        </button>
+                    </div>
+                    <div class="section-card-body">
+                        ${recentRequests.length ? `
+                            <div class="item-list">
+                                ${recentRequests.map(r => renderAvailableRequestRow(r)).join('')}
+                            </div>
+                        ` : `
+                            <div class="empty-state">
+                                <i class="fas fa-bullhorn empty-icon"></i>
+                                <h4>مفيش طلبات جديدة</h4>
+                                <p>هتلاقي هنا طلبات الشراء اللي المشترين بيعملوها</p>
+                            </div>
+                        `}
+                    </div>
+                </div>
             `;
 
-            bindRequestRowEvents();
+            document.getElementById('addProductQuickBtn')?.addEventListener('click', () => {
+                switchSection('products');
+                setTimeout(() => openProductModal(), 300);
+            });
+
+            bindOverviewEvents();
+        };
+
+        const bindOverviewEvents = () => {
+            document.querySelectorAll('.offer-request-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const rid = btn.dataset.requestId;
+                    window.location.href = `request-details.html?id=${rid}`;
+                });
+            });
         };
 
         // ============================================================
-        // RENDER: OFFERS
+        // RENDER: MY PRODUCTS
         // ============================================================
-        const renderOffers = async () => {
+        const renderProducts = async () => {
+            const main = document.getElementById('dashboardMain');
+            if (!main) return;
+
+            await fetchAllData();
+            await fetchCategories();
+
+            main.innerHTML = `
+                <div class="page-header-bar animate-in">
+                    <div>
+                        <h1 class="page-title">
+                            <i class="fas fa-flask"></i>
+                            منتجاتي
+                        </h1>
+                        <p class="page-subtitle">إدارة كل المنتجات اللي بتقدمها</p>
+                    </div>
+                    <button class="btn-primary" id="addProductBtn" type="button">
+                        <i class="fas fa-plus-circle"></i> أضف منتج جديد
+                    </button>
+                </div>
+
+                ${state.products.length ? `
+                    <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                        <div class="section-card-header">
+                            <h2 class="section-card-title">
+                                <i class="fas fa-list"></i>
+                                القائمة الكاملة
+                                <span class="count-badge">${state.products.length}</span>
+                            </h2>
+                        </div>
+                        <div class="section-card-body">
+                            <div class="products-grid-mini">
+                                ${state.products.map(p => renderProductMini(p)).join('')}
+                            </div>
+                        </div>
+                    </div>
+                ` : `
+                    <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                        <div class="section-card-body">
+                            <div class="empty-state">
+                                <i class="fas fa-flask empty-icon"></i>
+                                <h4>لسه مفيش منتجات</h4>
+                                <p>ابدأ بإضافة أول منتج عشان العملاء يلاقوك</p>
+                                <button class="btn-primary" id="addFirstProductBtn" type="button">
+                                    <i class="fas fa-plus-circle"></i> أضف أول منتج
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `}
+
+                <!-- Products table (for detailed view) -->
+                ${state.products.length > 0 ? `
+                    <div class="section-card animate-in" style="animation-delay: 0.1s;">
+                        <div class="section-card-header">
+                            <h2 class="section-card-title">
+                                <i class="fas fa-table"></i>
+                                جدول تفصيلي
+                            </h2>
+                        </div>
+                        <div class="section-card-body" style="padding: 0;">
+                            <div class="contacts-table-wrapper" style="margin: 0;">
+                                <table class="contacts-table">
+                                    <thead>
+                                        <tr>
+                                            <th>المنتج</th>
+                                            <th>السعر</th>
+                                            <th>المخزون</th>
+                                            <th>المشاهدات</th>
+                                            <th>التواصلات</th>
+                                            <th>الحالة</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${state.products.map(p => `
+                                            <tr>
+                                                <td>
+                                                    <div style="display: flex; align-items: center; gap: 10px;">
+                                                        <div style="width: 40px; height: 40px; border-radius: var(--r-md); overflow: hidden; background: var(--c-surface-2); flex-shrink: 0;">
+                                                            ${p.image_url ? `
+                                                                <img src="${escapeHtml(p.image_url)}" alt="" style="width: 100%; height: 100%; object-fit: cover;" onerror="this.style.display='none';" />
+                                                            ` : `
+                                                                <div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🧪</div>
+                                                            `}
+                                                        </div>
+                                                        <div>
+                                                            <div style="font-weight: 800; color: var(--c-text); font-size: 0.85rem;">${escapeHtml(p.name)}</div>
+                                                            ${p.cas_number ? `<div style="font-size: 0.7rem; color: var(--c-purple); direction: ltr; font-family: monospace;">${escapeHtml(p.cas_number)}</div>` : ''}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>${p.price ? `<strong style="color: var(--c-accent-dark);">${formatPrice(p.price)} ج.م</strong>` : '—'}</td>
+                                                <td>
+                                                    ${p.stock_status === 'available' ? '<span class="status-badge status-open">متوفر</span>' :
+                                                      p.stock_status === 'low' ? '<span class="status-badge status-pending">محدود</span>' :
+                                                      '<span class="status-badge status-expired">غير متوفر</span>'}
+                                                </td>
+                                                <td>${formatNumber(p.views || 0)}</td>
+                                                <td>${formatNumber(p.contact_count || 0)}</td>
+                                                <td>
+                                                    ${p.status === 'active'
+                                                        ? '<span class="status-badge status-open">نشط</span>'
+                                                        : '<span class="status-badge status-closed">غير نشط</span>'}
+                                                </td>
+                                                <td>
+                                                    <div style="display: flex; gap: 4px; justify-content: flex-end;">
+                                                        <button class="item-action-btn secondary icon-only edit-product-btn" type="button" data-product-id="${escapeHtml(p.id)}" title="تعديل">
+                                                            <i class="fas fa-edit"></i>
+                                                        </button>
+                                                        <button class="item-action-btn danger icon-only delete-product-btn" type="button" data-product-id="${escapeHtml(p.id)}" data-product-name="${escapeHtml(p.name)}" title="حذف">
+                                                            <i class="fas fa-trash"></i>
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        `).join('')}
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                ` : ''}
+            `;
+
+            document.getElementById('addProductBtn')?.addEventListener('click', () => openProductModal());
+            document.getElementById('addFirstProductBtn')?.addEventListener('click', () => openProductModal());
+            bindProductEvents();
+        };
+
+        const renderProductMini = (p) => {
+            const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
+            const isActive = p.status === 'active';
+            const stockLabels = {
+                'available': { text: 'متوفر', cls: 'active' },
+                'low': { text: 'محدود', cls: 'inactive' },
+                'out': { text: 'غير متوفر', cls: 'inactive' },
+            };
+            const stock = stockLabels[p.stock_status] || stockLabels['available'];
+
+            return `
+                <div class="mini-product" data-product-id="${escapeHtml(p.id)}">
+                    <div class="mini-product-media">
+                        ${hasImage ? `
+                            <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}" loading="lazy"
+                                 onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'mini-product-placeholder\\'><span class=\\'emoji\\'>🧪</span></div>';" />
+                        ` : `
+                            <div class="mini-product-placeholder">
+                                <span class="emoji">🧪</span>
+                            </div>
+                        `}
+                        <span class="mini-product-status-badge ${stock.cls}">${stock.text}</span>
+                        ${p.is_featured ? `<span class="mini-product-status-badge featured">⭐ مميز</span>` : ''}
+                    </div>
+                    <div class="mini-product-body">
+                        <h3 class="mini-product-title">${escapeHtml(p.name)}</h3>
+                        <div class="mini-product-specs">
+                            ${p.cas_number ? `<span style="color: var(--c-purple);">CAS ${escapeHtml(p.cas_number)}</span>` : ''}
+                            ${p.purity ? `<span>${escapeHtml(p.purity)}</span>` : ''}
+                            ${p.packaging ? `<span>${escapeHtml(p.packaging)}</span>` : ''}
+                        </div>
+                        <div class="mini-product-price ${p.price ? '' : 'no-price'}">
+                            ${p.price ? `${formatPrice(p.price)} <span class="currency">ج.م</span>` : 'السعر عند الطلب'}
+                        </div>
+                    </div>
+                    <div class="mini-product-actions">
+                        <button class="item-action-btn secondary edit-product-btn" type="button" data-product-id="${escapeHtml(p.id)}" style="flex: 1;">
+                            <i class="fas fa-edit"></i> تعديل
+                        </button>
+                        <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="item-action-btn secondary icon-only" target="_blank" title="عرض في الموقع">
+                            <i class="fas fa-external-link-alt"></i>
+                        </a>
+                        <button class="item-action-btn danger icon-only delete-product-btn" type="button" data-product-id="${escapeHtml(p.id)}" data-product-name="${escapeHtml(p.name)}" title="حذف">
+                            <i class="fas fa-trash"></i>
+                        </button>
+                    </div>
+                </div>
+            `;
+        };
+
+        const bindProductEvents = () => {
+            document.querySelectorAll('.edit-product-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const pid = btn.dataset.productId;
+                    openProductModal(pid);
+                });
+            });
+
+            document.querySelectorAll('.delete-product-btn').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const pid = btn.dataset.productId;
+                    const name = btn.dataset.productName;
+                    deleteProduct(pid, name);
+                });
+            });
+        };
+
+        // ============================================================
+        // PRODUCT MODAL
+        // ============================================================
+        const openProductModal = (productId = null) => {
+            state.editingProductId = productId;
+
+            const title = document.getElementById('productModalTitle');
+            const form = document.getElementById('productForm');
+            const idField = document.getElementById('productIdField');
+
+            // Populate categories
+            const catSelect = document.getElementById('pCategory');
+            if (catSelect && state.categories.length) {
+                catSelect.innerHTML = '<option value="">— اختر فئة —</option>' +
+                    state.categories.map(c => `<option value="${escapeHtml(c.id)}">${c.icon || '📁'} ${escapeHtml(c.name)}</option>`).join('');
+            }
+
+            if (productId) {
+                const product = state.products.find(p => p.id === productId);
+                if (!product) return;
+
+                title.innerHTML = '<i class="fas fa-edit"></i> تعديل المنتج';
+                idField.value = productId;
+
+                document.getElementById('pName').value = product.name || '';
+                document.getElementById('pCas').value = product.cas_number || '';
+                document.getElementById('pPurity').value = product.purity || '';
+                document.getElementById('pPrice').value = product.price || '';
+                document.getElementById('pUnit').value = product.unit || 'كجم';
+                document.getElementById('pCategory').value = product.category_id || '';
+                document.getElementById('pGrade').value = product.grade || '';
+                document.getElementById('pPackaging').value = product.packaging || '';
+                document.getElementById('pMoq').value = product.min_order_quantity || '';
+                document.getElementById('pOrigin').value = product.origin_country || '';
+                document.getElementById('pStock').value = product.stock_status || 'available';
+                document.getElementById('pImage').value = product.image_url || '';
+                document.getElementById('pDescription').value = product.description || '';
+                document.getElementById('pMsds').value = product.msds_url || '';
+                document.getElementById('pFeatured').checked = product.is_featured === true;
+            } else {
+                title.innerHTML = '<i class="fas fa-plus-circle"></i> إضافة منتج جديد';
+                form.reset();
+                idField.value = '';
+            }
+
+            document.getElementById('productModal').classList.add('show');
+            setTimeout(() => document.getElementById('pName')?.focus(), 300);
+        };
+
+        const closeProductModal = () => {
+            document.getElementById('productModal').classList.remove('show');
+            state.editingProductId = null;
+            document.getElementById('productForm')?.reset();
+        };
+
+        const saveProduct = async () => {
+            if (!state.user) return;
+            const btn = document.getElementById('saveProductBtn');
+            const originalText = btn.innerHTML;
+            btn.disabled = true;
+            btn.innerHTML = '<span class="spinner"></span> جاري الحفظ...';
+
+            try {
+                const name = document.getElementById('pName').value.trim();
+                const price = document.getElementById('pPrice').value;
+                const unit = document.getElementById('pUnit').value;
+
+                if (!name) throw new Error('اسم المنتج مطلوب');
+                if (!price || Number(price) <= 0) throw new Error('السعر مطلوب وأكبر من صفر');
+                if (!unit) throw new Error('الوحدة مطلوبة');
+
+                const categoryId = document.getElementById('pCategory').value || null;
+                const categoryName = categoryId ? state.categories.find(c => c.id === categoryId)?.name : null;
+
+                const data = {
+                    supplier_id: state.user.id,
+                    name: name,
+                    cas_number: document.getElementById('pCas').value.trim() || null,
+                    purity: document.getElementById('pPurity').value.trim() || null,
+                    price: Number(price),
+                    unit: unit,
+                    category_id: categoryId,
+                    category: categoryName,
+                    grade: document.getElementById('pGrade').value || null,
+                    packaging: document.getElementById('pPackaging').value.trim() || null,
+                    min_order_quantity: document.getElementById('pMoq').value.trim() || null,
+                    origin_country: document.getElementById('pOrigin').value.trim() || null,
+                    stock_status: document.getElementById('pStock').value,
+                    image_url: document.getElementById('pImage').value.trim() || null,
+                    description: document.getElementById('pDescription').value.trim() || null,
+                    msds_url: document.getElementById('pMsds').value.trim() || null,
+                    is_featured: document.getElementById('pFeatured').checked,
+                    status: 'active',
+                };
+
+                let result;
+                if (state.editingProductId) {
+                    result = await supabase
+                        .from('products')
+                        .update(data)
+                        .eq('id', state.editingProductId)
+                        .eq('supplier_id', state.user.id);
+                } else {
+                    result = await supabase.from('products').insert(data);
+                }
+
+                if (result.error) throw result.error;
+
+                showToast('✅', 'تم الحفظ!', state.editingProductId ? 'تم تحديث المنتج' : 'تم إضافة المنتج بنجاح', null, null, 'success');
+                closeProductModal();
+                await fetchAllData();
+                loadSection('products');
+
+            } catch (err) {
+                console.error('Save product error:', err);
+                showToast('⚠️', 'خطأ', err.message || 'تعذر حفظ المنتج', null, null, 'error');
+            } finally {
+                btn.disabled = false;
+                btn.innerHTML = originalText;
+            }
+        };
+
+        const deleteProduct = async (productId, productName) => {
+            if (!confirm(`هل أنت متأكد من حذف "${productName}"؟`)) return;
+
+            try {
+                const { error } = await supabase
+                    .from('products')
+                    .delete()
+                    .eq('id', productId)
+                    .eq('supplier_id', state.user.id);
+
+                if (error) throw error;
+
+                showToast('🗑️', 'تم الحذف', `حُذف "${productName}"`, null, null, 'success');
+                await fetchAllData();
+                loadSection('products');
+            } catch (err) {
+                console.error('Delete product error:', err);
+                showToast('⚠️', 'خطأ', err.message || 'تعذر الحذف', null, null, 'error');
+            }
+        };
+
+        // ============================================================
+        // RENDER: MY OFFERS
+        // ============================================================
+        const renderMyOffers = async () => {
             const main = document.getElementById('dashboardMain');
             if (!main) return;
 
             await fetchAllData();
 
-            const allOffers = Object.values(state.offersMap).flat()
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+            // Group by status
+            const pending = state.myOffers.filter(o => o.status === 'pending' || !o.status);
+            const accepted = state.myOffers.filter(o => o.status === 'accepted');
+            const rejected = state.myOffers.filter(o => o.status === 'rejected');
 
             main.innerHTML = `
                 <div class="page-header-bar animate-in">
                     <div>
                         <h1 class="page-title">
                             <i class="fas fa-hand-holding-usd"></i>
-                            العروض المستلمة
+                            عروضي
                         </h1>
-                        <p class="page-subtitle">كل العروض من الموردين على طلباتك</p>
+                        <p class="page-subtitle">كل العروض اللي قدّمتها على طلبات الشراء</p>
                     </div>
                 </div>
 
-                <div class="section-card animate-in" style="animation-delay: 0.05s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-list"></i>
-                            كل العروض
-                            <span class="count-badge">${allOffers.length}</span>
-                        </h2>
-                    </div>
-                    <div class="section-card-body">
-                        ${allOffers.length ? `
-                            <div class="item-list">
-                                ${allOffers.map(o => {
-                                    const req = state.requests.find(r => r.id === o.request_id);
-                                    return renderOfferRow(o, req, true);
-                                }).join('')}
+                ${state.myOffers.length ? `
+                    <!-- Pending -->
+                    ${pending.length ? `
+                        <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                            <div class="section-card-header">
+                                <h2 class="section-card-title">
+                                    <i class="fas fa-clock"></i>
+                                    قيد المراجعة
+                                    <span class="count-badge">${pending.length}</span>
+                                </h2>
                             </div>
-                        ` : `
+                            <div class="section-card-body">
+                                <div class="item-list">
+                                    ${pending.map(o => renderMyOfferRow(o)).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- Accepted -->
+                    ${accepted.length ? `
+                        <div class="section-card animate-in" style="animation-delay: 0.1s;">
+                            <div class="section-card-header">
+                                <h2 class="section-card-title">
+                                    <i class="fas fa-check-circle" style="color: var(--c-accent);"></i>
+                                    مقبولة
+                                    <span class="count-badge accent">${accepted.length}</span>
+                                </h2>
+                            </div>
+                            <div class="section-card-body">
+                                <div class="item-list">
+                                    ${accepted.map(o => renderMyOfferRow(o)).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    <!-- Rejected -->
+                    ${rejected.length ? `
+                        <div class="section-card animate-in" style="animation-delay: 0.15s;">
+                            <div class="section-card-header">
+                                <h2 class="section-card-title">
+                                    <i class="fas fa-times-circle" style="color: var(--c-text-sub);"></i>
+                                    مرفوضة
+                                    <span class="count-badge">${rejected.length}</span>
+                                </h2>
+                            </div>
+                            <div class="section-card-body">
+                                <div class="item-list">
+                                    ${rejected.map(o => renderMyOfferRow(o)).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                ` : `
+                    <div class="section-card animate-in">
+                        <div class="section-card-body">
                             <div class="empty-state">
                                 <i class="fas fa-hand-holding-usd empty-icon"></i>
                                 <h4>لسه مفيش عروض</h4>
-                                <p>العروض من الموردين هتظهر هنا لما يردوا على طلباتك</p>
-                                <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                                    <i class="fas fa-plus-circle"></i> اطلب عرض سعر
+                                <p>قدّم عرضك الأول على طلب شراء متاح</p>
+                                <button class="btn-primary" onclick="window.switchSection('available-requests')">
+                                    <i class="fas fa-bullhorn"></i> شوف الطلبات المتاحة
                                 </button>
                             </div>
+                        </div>
+                    </div>
+                `}
+            `;
+        };
+
+        const renderMyOfferRow = (offer) => {
+            const statusInfo = getOfferStatusInfo(offer.status);
+            const req = offer.request;
+            const buyer = offer.buyer;
+            const buyerName = buyer?.company_name || buyer?.full_name || 'عميل';
+
+            return `
+                <div class="item-row">
+                    <div class="item-icon-wrapper accent">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title">${escapeHtml(req?.product_name || 'طلب شراء')}</div>
+                        <div class="item-meta">
+                            <span class="status-badge ${statusInfo.cls}">
+                                <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}
+                            </span>
+                            ${req?.quantity_needed ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(req.quantity_needed)}</span>` : ''}
+                            <span><i class="fas fa-user"></i> ${escapeHtml(buyerName)}</span>
+                            ${buyer?.city ? `<span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(buyer.city)}</span>` : ''}
+                            <span><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>
+                        </div>
+                        ${offer.message ? `
+                            <div style="font-size: 0.78rem; color: var(--c-text-muted); margin-top: 6px; padding: 8px 10px; background: var(--c-surface); border-radius: var(--r-sm); border-right: 3px solid var(--c-accent);">
+                                <i class="fas fa-comment-dots"></i> ${escapeHtml(offer.message).substring(0, 120)}${offer.message.length > 120 ? '...' : ''}
+                            </div>
+                        ` : ''}
+                    </div>
+                    <div class="item-price-block">
+                        <div class="item-price">
+                            ${formatPrice(offer.price)}
+                            <span class="currency">ج.م</span>
+                        </div>
+                        <div class="item-price-label">عرضك</div>
+                    </div>
+                    <div class="item-actions">
+                        <a href="request-details.html?id=${encodeURIComponent(offer.request_id)}" class="item-action-btn secondary">
+                            <i class="fas fa-info-circle"></i> تفاصيل الطلب
+                        </a>
+                        ${statusInfo.text === 'مقبول' && (buyer?.phone || buyer?.whatsapp) ? `
+                            <a href="https://wa.me/${(buyer.whatsapp || buyer.phone || '').replace(/\\D/g, '').replace(/^(?!20)/, '20')}"
+                               target="_blank" rel="noopener noreferrer"
+                               class="item-action-btn primary">
+                                <i class="fab fa-whatsapp"></i> تواصل
+                            </a>
+                        ` : ''}
+                    </div>
+                </div>
+            `;
+        };
+
+        // ============================================================
+        // RENDER: AVAILABLE REQUESTS
+        // ============================================================
+        const renderAvailableRequests = async () => {
+            const main = document.getElementById('dashboardMain');
+            if (!main) return;
+
+            await fetchAllData();
+
+            const notOffered = state.availableRequests.filter(r => !r.myOffer);
+            const offered = state.availableRequests.filter(r => r.myOffer);
+
+            main.innerHTML = `
+                <div class="page-header-bar animate-in">
+                    <div>
+                        <h1 class="page-title">
+                            <i class="fas fa-bullhorn"></i>
+                            الطلبات المتاحة
+                        </h1>
+                        <p class="page-subtitle">طلبات شراء من عملاء — قدّم عرضك الآن</p>
+                    </div>
+                </div>
+
+                ${state.availableRequests.length ? `
+                    ${notOffered.length ? `
+                        <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                            <div class="section-card-header">
+                                <h2 class="section-card-title">
+                                    <i class="fas fa-fire"></i>
+                                    جديدة لم تقدّم عليها
+                                    <span class="count-badge accent">${notOffered.length}</span>
+                                </h2>
+                            </div>
+                            <div class="section-card-body">
+                                <div class="item-list">
+                                    ${notOffered.map(r => renderAvailableRequestRow(r)).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+
+                    ${offered.length ? `
+                        <div class="section-card animate-in" style="animation-delay: 0.1s;">
+                            <div class="section-card-header">
+                                <h2 class="section-card-title">
+                                    <i class="fas fa-check-circle"></i>
+                                    قدّمت عليها عروض
+                                    <span class="count-badge">${offered.length}</span>
+                                </h2>
+                            </div>
+                            <div class="section-card-body">
+                                <div class="item-list">
+                                    ${offered.map(r => renderAvailableRequestRow(r)).join('')}
+                                </div>
+                            </div>
+                        </div>
+                    ` : ''}
+                ` : `
+                    <div class="section-card animate-in">
+                        <div class="section-card-body">
+                            <div class="empty-state">
+                                <i class="fas fa-bullhorn empty-icon"></i>
+                                <h4>مفيش طلبات متاحة حالياً</h4>
+                                <p>هتلاقي هنا طلبات الشراء اللي المشترين بيعملوها</p>
+                                <button class="btn-primary" onclick="window.location.href='all-requests.html'">
+                                    <i class="fas fa-clipboard-list"></i> تصفح كل الطلبات
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                `}
+            `;
+
+            bindOverviewEvents();
+        };
+
+        const renderAvailableRequestRow = (r) => {
+            const statusInfo = getRequestStatusInfo(r.status);
+            const buyer = r.buyer;
+            const buyerName = buyer?.company_name || buyer?.full_name || 'عميل';
+            const hasOffered = !!r.myOffer;
+
+            let budgetText = '';
+            if (r.budget_min || r.budget_max) {
+                const min = r.budget_min ? formatPrice(r.budget_min) : '';
+                const max = r.budget_max ? formatPrice(r.budget_max) : '';
+                if (min && max) budgetText = `${min} - ${max} ج.م`;
+                else if (min) budgetText = `من ${min} ج.م`;
+                else budgetText = `حتى ${max} ج.م`;
+            }
+
+            return `
+                <div class="item-row">
+                    <div class="item-icon-wrapper">
+                        <i class="fas fa-clipboard-list"></i>
+                    </div>
+                    <div class="item-info">
+                        <div class="item-title">📦 ${escapeHtml(r.product_name)}</div>
+                        <div class="item-meta">
+                            <span class="status-badge ${statusInfo.cls}">
+                                <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}
+                            </span>
+                            ${r.quantity_needed ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(r.quantity_needed)}</span>` : ''}
+                            ${budgetText ? `<span><i class="fas fa-money-bill-wave"></i> ${budgetText}</span>` : ''}
+                            ${r.location ? `<span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(r.location)}</span>` : ''}
+                            <span><i class="fas fa-user"></i> ${escapeHtml(buyerName)}</span>
+                            <span><i class="fas fa-clock"></i> ${formatDateTime(r.created_at)}</span>
+                        </div>
+                    </div>
+                    <div class="item-actions">
+                        ${hasOffered ? `
+                            <span class="status-badge ${getOfferStatusInfo(r.myOffer.status).cls}">
+                                <i class="fas fa-${getOfferStatusInfo(r.myOffer.status).icon}"></i>
+                                عرضك: ${formatPrice(r.myOffer.price)} ج.م
+                            </span>
+                            <a href="request-details.html?id=${encodeURIComponent(r.id)}" class="item-action-btn secondary">
+                                <i class="fas fa-info-circle"></i> التفاصيل
+                            </a>
+                        ` : `
+                            <button class="item-action-btn primary offer-request-btn" type="button" data-request-id="${escapeHtml(r.id)}">
+                                <i class="fas fa-paper-plane"></i> قدّم عرض
+                            </button>
+                            <a href="request-details.html?id=${encodeURIComponent(r.id)}" class="item-action-btn secondary">
+                                <i class="fas fa-info-circle"></i> التفاصيل
+                            </a>
                         `}
                     </div>
                 </div>
@@ -2544,53 +3352,140 @@
         };
 
         // ============================================================
-        // RENDER: FAVORITES
+        // RENDER: CONTACTS
         // ============================================================
-        const renderFavorites = async () => {
+        const renderContacts = async () => {
             const main = document.getElementById('dashboardMain');
             if (!main) return;
 
-            state.favoritesProducts = await fetchFavorites();
+            await fetchAllData();
+
+            // Group stats
+            const whatsappCount = state.contacts.filter(c => c.contact_type === 'whatsapp').length;
+            const phoneCount = state.contacts.filter(c => c.contact_type === 'phone').length;
+            const viewCount = state.contacts.filter(c => c.contact_type === 'view').length;
+            const inquiryCount = state.contacts.filter(c => c.contact_type === 'inquiry' || c.contact_type === 'request_quote').length;
 
             main.innerHTML = `
                 <div class="page-header-bar animate-in">
                     <div>
                         <h1 class="page-title">
-                            <i class="fas fa-heart"></i>
-                            المفضلة
+                            <i class="fas fa-users"></i>
+                            العملاء المحتملون
                         </h1>
-                        <p class="page-subtitle">المنتجات اللي حفظتها للرجوع لها</p>
+                        <p class="page-subtitle">كل اللي تواصلوا أو شافوا منتجاتك</p>
                     </div>
                 </div>
 
-                <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                <!-- Contact Stats -->
+                <div class="stats-grid animate-in" style="animation-delay: 0.05s;">
+                    <div class="stat-card" style="--stat-color: var(--c-whatsapp); --stat-bg: rgba(37, 211, 102, 0.12);">
+                        <div class="stat-icon"><i class="fab fa-whatsapp"></i></div>
+                        <div class="stat-content">
+                            <div class="stat-label">واتساب</div>
+                            <div class="stat-value">${formatNumber(whatsappCount)}</div>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--stat-color: var(--c-warning); --stat-bg: rgba(243, 156, 18, 0.12);">
+                        <div class="stat-icon"><i class="fas fa-phone"></i></div>
+                        <div class="stat-content">
+                            <div class="stat-label">اتصالات</div>
+                            <div class="stat-value">${formatNumber(phoneCount)}</div>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--stat-color: var(--c-primary-600); --stat-bg: rgba(44, 122, 184, 0.12);">
+                        <div class="stat-icon"><i class="fas fa-eye"></i></div>
+                        <div class="stat-content">
+                            <div class="stat-label">مشاهدات</div>
+                            <div class="stat-value">${formatNumber(viewCount)}</div>
+                        </div>
+                    </div>
+                    <div class="stat-card" style="--stat-color: var(--c-purple); --stat-bg: rgba(139, 92, 246, 0.12);">
+                        <div class="stat-icon"><i class="fas fa-comment-dots"></i></div>
+                        <div class="stat-content">
+                            <div class="stat-label">استفسارات</div>
+                            <div class="stat-value">${formatNumber(inquiryCount)}</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Contacts Table -->
+                <div class="section-card animate-in" style="animation-delay: 0.1s;">
                     <div class="section-card-header">
                         <h2 class="section-card-title">
-                            <i class="fas fa-heart"></i>
-                            منتجاتي المحفوظة
-                            <span class="count-badge">${state.favoritesProducts.length}</span>
+                            <i class="fas fa-list"></i>
+                            آخر 100 تواصل
+                            <span class="count-badge">${state.contacts.length}</span>
                         </h2>
                     </div>
-                    <div class="section-card-body">
-                        ${state.favoritesProducts.length ? `
-                            <div class="item-list">
-                                ${state.favoritesProducts.map(p => renderFavoriteRow(p)).join('')}
+                    <div class="section-card-body" style="padding: 0;">
+                        ${state.contacts.length ? `
+                            <div class="contacts-table-wrapper" style="margin: 0;">
+                                <table class="contacts-table">
+                                    <thead>
+                                        <tr>
+                                            <th>العميل</th>
+                                            <th>المنتج</th>
+                                            <th>نوع التواصل</th>
+                                            <th>المدينة</th>
+                                            <th>التاريخ</th>
+                                            <th></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        ${state.contacts.map(c => {
+                                            const typeInfo = getContactTypeInfo(c.contact_type);
+                                            const buyerName = c.buyer?.company_name || c.buyer?.full_name || 'زائر';
+                                            const rawPhone = c.buyer?.phone || c.buyer?.whatsapp || '';
+                                            const cleanPhone = sanitizePhone(rawPhone);
+                                            const phoneWithCountry = cleanPhone
+                                                ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
+                                                : '';
+
+                                            return `
+                                                <tr>
+                                                    <td>
+                                                        <div style="font-weight: 800; color: var(--c-text);">${escapeHtml(buyerName)}</div>
+                                                        ${c.buyer?.is_verified ? '<span class="status-badge status-accepted" style="font-size: 0.6rem; padding: 1px 6px;">موثّق</span>' : ''}
+                                                    </td>
+                                                    <td>
+                                                        ${c.product ? `
+                                                            <a href="product-details.html?id=${encodeURIComponent(c.product_id)}" style="color: var(--c-primary-600); font-weight: 700;">
+                                                                ${escapeHtml(c.product.name)}
+                                                            </a>
+                                                        ` : '—'}
+                                                    </td>
+                                                    <td>
+                                                        <span class="contact-type-pill ${typeInfo.cls}">
+                                                            <i class="${typeInfo.icon}"></i> ${typeInfo.text}
+                                                        </span>
+                                                    </td>
+                                                    <td>${escapeHtml(c.buyer?.city || '—')}</td>
+                                                    <td>${formatDateTime(c.contact_date)}</td>
+                                                    <td>
+                                                        ${phoneWithCountry && c.contact_type !== 'view' ? `
+                                                            <a href="https://wa.me/${phoneWithCountry}" target="_blank" rel="noopener noreferrer"
+                                                               class="item-action-btn primary" style="padding: 6px 10px; font-size: 0.72rem;">
+                                                                <i class="fab fa-whatsapp"></i> تواصل
+                                                            </a>
+                                                        ` : ''}
+                                                    </td>
+                                                </tr>
+                                            `;
+                                        }).join('')}
+                                    </tbody>
+                                </table>
                             </div>
                         ` : `
                             <div class="empty-state">
-                                <i class="fas fa-heart empty-icon"></i>
-                                <h4>المفضلة فاضية</h4>
-                                <p>اضغط ❤️ على أي منتج لحفظه هنا</p>
-                                <a href="all-products.html" class="btn-primary">
-                                    <i class="fas fa-flask"></i> تصفح المنتجات
-                                </a>
+                                <i class="fas fa-users empty-icon"></i>
+                                <h4>لسه مفيش تواصلات</h4>
+                                <p>لما العملاء يتواصلوا معاك، هتلاقيهم هنا</p>
                             </div>
                         `}
                     </div>
                 </div>
             `;
-
-            bindFavoriteEvents();
         };
 
         // ============================================================
@@ -2608,7 +3503,7 @@
                             <i class="fas fa-user-circle"></i>
                             الملف الشخصي
                         </h1>
-                        <p class="page-subtitle">بياناتك الأساسية على كيماتو</p>
+                        <p class="page-subtitle">بياناتك كمورد على كيماتو</p>
                     </div>
                 </div>
 
@@ -2616,40 +3511,34 @@
                     <div class="section-card-header">
                         <h2 class="section-card-title">
                             <i class="fas fa-user-edit"></i>
-                            البيانات الشخصية
+                            البيانات الأساسية
                         </h2>
                     </div>
                     <div class="section-card-body">
                         <form id="profileForm" class="profile-form" novalidate>
                             <div class="form-group full">
                                 <label for="profFullName">الاسم الكامل</label>
-                                <input type="text" id="profFullName" name="full_name"
-                                       value="${escapeHtml(p.full_name || '')}" disabled />
+                                <input type="text" id="profFullName" value="${escapeHtml(p.full_name || '')}" disabled />
                             </div>
                             <div class="form-group full">
-                                <label for="profCompany">اسم الشركة</label>
-                                <input type="text" id="profCompany" name="company_name"
-                                       value="${escapeHtml(p.company_name || '')}" />
+                                <label for="profCompany">اسم الشركة <span class="req">*</span></label>
+                                <input type="text" id="profCompany" value="${escapeHtml(p.company_name || '')}" placeholder="اسم شركتك" />
                             </div>
                             <div class="form-group">
                                 <label for="profPhone">رقم الهاتف</label>
-                                <input type="tel" id="profPhone" name="phone" dir="ltr"
-                                       value="${escapeHtml(p.phone || '')}" placeholder="+20 1XX XXX XXXX" />
+                                <input type="tel" id="profPhone" dir="ltr" value="${escapeHtml(p.phone || '')}" placeholder="+20 1XX XXX XXXX" />
                             </div>
                             <div class="form-group">
                                 <label for="profWhatsapp">واتساب</label>
-                                <input type="tel" id="profWhatsapp" name="whatsapp" dir="ltr"
-                                       value="${escapeHtml(p.whatsapp || '')}" placeholder="+20 1XX XXX XXXX" />
+                                <input type="tel" id="profWhatsapp" dir="ltr" value="${escapeHtml(p.whatsapp || '')}" placeholder="+20 1XX XXX XXXX" />
                             </div>
                             <div class="form-group">
                                 <label for="profCity">المدينة</label>
-                                <input type="text" id="profCity" name="city"
-                                       value="${escapeHtml(p.city || '')}" placeholder="مثل: القاهرة" />
+                                <input type="text" id="profCity" value="${escapeHtml(p.city || '')}" placeholder="مثل: القاهرة" />
                             </div>
                             <div class="form-group">
                                 <label for="profAddress">العنوان</label>
-                                <input type="text" id="profAddress" name="address"
-                                       value="${escapeHtml(p.address || '')}" />
+                                <input type="text" id="profAddress" value="${escapeHtml(p.address || '')}" />
                             </div>
                             <div class="form-actions">
                                 <button type="submit" class="btn-primary" id="saveProfileBtn">
@@ -2671,7 +3560,7 @@
                         <div style="display: grid; gap: 12px; font-size: 0.88rem;">
                             <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
                                 <span style="color: var(--c-text-muted); font-weight: 700;">نوع الحساب</span>
-                                <span style="font-weight: 800;">🛒 مشتري</span>
+                                <span style="font-weight: 800;">🏭 مورد</span>
                             </div>
                             <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
                                 <span style="color: var(--c-text-muted); font-weight: 700;">حالة التحقق</span>
@@ -2713,6 +3602,7 @@
                 if (error) throw error;
 
                 state.userProfile = { ...state.userProfile, ...updates };
+                updateUserUI();
                 showToast('✅', 'تم الحفظ', 'تم تحديث بياناتك بنجاح', null, null, 'success');
             } catch (err) {
                 console.error('Save profile error:', err);
@@ -2722,438 +3612,26 @@
                 btn.innerHTML = originalText;
             }
         };
-                // ============================================================
-        // RENDER: REQUEST ROW
-        // ============================================================
-        const renderRequestRow = (r, offers = [], showActions = false) => {
-            const status = getStatusInfo(r.status);
-            const offersCount = offers.length;
-            const pendingOffers = offers.filter(o => o.status === 'pending').length;
-            const bestPrice = offers.length
-                ? Math.min(...offers.filter(o => o.status !== 'rejected').map(o => Number(o.price)).filter(p => p > 0))
-                : null;
-
-            let budgetText = '';
-            if (r.budget_min || r.budget_max) {
-                const min = r.budget_min ? formatPrice(r.budget_min) : '';
-                const max = r.budget_max ? formatPrice(r.budget_max) : '';
-                if (min && max) budgetText = `${min} - ${max} ج.م`;
-                else if (min) budgetText = `من ${min} ج.م`;
-                else budgetText = `حتى ${max} ج.م`;
-            }
-
-            const hasNewOffers = pendingOffers > 0;
-
-            return `
-                <div class="item-row ${hasNewOffers ? 'is-new' : ''}" data-request-id="${escapeHtml(r.id)}">
-                    <div class="item-icon-wrapper">
-                        <i class="fas fa-clipboard-list"></i>
-                    </div>
-                    <div class="item-info">
-                        <div class="item-title">📦 ${escapeHtml(r.product_name)}</div>
-                        <div class="item-meta">
-                            <span class="status-badge ${status.cls}">
-                                <i class="fas fa-${status.icon}"></i> ${status.text}
-                            </span>
-                            ${r.quantity_needed ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(r.quantity_needed)}</span>` : ''}
-                            ${budgetText ? `<span><i class="fas fa-money-bill-wave"></i> ${budgetText}</span>` : ''}
-                            ${offersCount > 0 ? `<span class="highlight"><i class="fas fa-comments"></i> ${offersCount} عرض</span>` : ''}
-                            <span><i class="fas fa-clock"></i> ${formatDateTime(r.created_at)}</span>
-                        </div>
-                    </div>
-                    ${bestPrice ? `
-                        <div class="item-price-block">
-                            <div class="item-price">
-                                ${formatPrice(bestPrice)}
-                                <span class="currency">ج.م</span>
-                            </div>
-                            <div class="item-price-label">أقل سعر</div>
-                        </div>
-                    ` : ''}
-                    <div class="item-actions">
-                        ${offersCount > 0 ? `
-                            <button class="item-action-btn primary toggle-offers-btn"
-                                    type="button"
-                                    data-request-id="${escapeHtml(r.id)}">
-                                <i class="fas fa-eye"></i> عرض العروض (${offersCount})
-                            </button>
-                        ` : ''}
-                        <a href="request-details.html?id=${encodeURIComponent(r.id)}" class="item-action-btn secondary">
-                            <i class="fas fa-info-circle"></i> تفاصيل
-                        </a>
-                        ${showActions ? `
-                            <button class="item-action-btn secondary icon-only edit-request-btn"
-                                    type="button"
-                                    data-request-id="${escapeHtml(r.id)}"
-                                    title="تعديل">
-                                <i class="fas fa-edit"></i>
-                            </button>
-                            ${r.status === 'open' ? `
-                                <button class="item-action-btn danger icon-only delete-request-btn"
-                                        type="button"
-                                        data-request-id="${escapeHtml(r.id)}"
-                                        data-request-name="${escapeHtml(r.product_name)}"
-                                        title="حذف">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            ` : ''}
-                        ` : ''}
-                    </div>
-
-                    ${offersCount > 0 ? `
-                        <div class="offers-accordion" id="offers-${escapeHtml(r.id)}">
-                            <div class="offers-accordion-inner">
-                                ${offers.map(o => renderOfferMini(o, bestPrice)).join('')}
-                            </div>
-                        </div>
-                    ` : ''}
-                </div>
-            `;
-        };
 
         // ============================================================
-        // RENDER: OFFER MINI (داخل accordion)
+        // MODAL BINDINGS
         // ============================================================
-        const renderOfferMini = (offer, bestPrice) => {
-            const supplier = offer.supplier || {};
-            const supplierName = supplier.company_name || supplier.full_name || 'مورد';
-            const supplierInitial = (supplierName || 'م').charAt(0).toUpperCase();
-            const isVerified = supplier.is_verified === true;
-            const isBest = bestPrice && Number(offer.price) === Number(bestPrice) && offer.status !== 'rejected';
-            const statusInfo = getOfferStatusInfo(offer.status);
+        const initModals = () => {
+            document.getElementById('closeProductModal')?.addEventListener('click', closeProductModal);
+            document.getElementById('cancelProductModal')?.addEventListener('click', closeProductModal);
+            document.getElementById('saveProductBtn')?.addEventListener('click', saveProduct);
 
-            const rawPhone = supplier.phone || supplier.whatsapp || '';
-            const cleanPhone = sanitizePhone(rawPhone);
-            const phoneWithCountry = cleanPhone
-                ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
-                : '';
-            const waMsg = encodeURIComponent(`مرحباً، بخصوص عرضكم بقيمة ${formatPrice(offer.price)} ج.م على كيماتو`);
-            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMsg}` : '';
-
-            return `
-                <div class="offer-mini ${isBest ? 'is-best' : ''}">
-                    <div class="offer-mini-supplier">
-                        <div class="offer-mini-avatar">${supplierInitial}</div>
-                        <div class="offer-mini-info">
-                            <div class="offer-mini-name">
-                                ${escapeHtml(supplierName)}
-                                ${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i></span>' : ''}
-                            </div>
-                            <div class="offer-mini-meta">
-                                <span class="status-badge ${statusInfo.cls}" style="font-size: 0.6rem; padding: 1px 6px;">
-                                    <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}
-                                </span>
-                                ${offer.delivery_time ? `<span style="margin-right: 6px;"><i class="fas fa-truck"></i> ${escapeHtml(offer.delivery_time)}</span>` : ''}
-                                ${offer.created_at ? `<span style="margin-right: 6px;"><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>` : ''}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="offer-mini-price">
-                        ${formatPrice(offer.price)}
-                        <span class="currency">ج.م</span>
-                    </div>
-                    <div class="offer-mini-actions">
-                        ${waLink ? `
-                            <a href="${waLink}" target="_blank" rel="noopener noreferrer"
-                               class="item-action-btn primary"
-                               title="تواصل واتساب">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        ` : ''}
-                        <a href="request-details.html?id=${encodeURIComponent(offer.request_id)}"
-                           class="item-action-btn secondary"
-                           title="عرض التفاصيل">
-                            <i class="fas fa-info-circle"></i>
-                        </a>
-                    </div>
-                </div>
-            `;
-        };
-
-        // ============================================================
-        // RENDER: OFFER ROW (صفحة العروض)
-        // ============================================================
-        const renderOfferRow = (offer, request, showDetails = false) => {
-            const supplier = offer.supplier || {};
-            const supplierName = supplier.company_name || supplier.full_name || 'مورد';
-            const supplierInitial = (supplierName || 'م').charAt(0).toUpperCase();
-            const isVerified = supplier.is_verified === true;
-            const statusInfo = getOfferStatusInfo(offer.status);
-
-            const rawPhone = supplier.phone || supplier.whatsapp || '';
-            const cleanPhone = sanitizePhone(rawPhone);
-            const phoneWithCountry = cleanPhone
-                ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
-                : '';
-            const waMsg = encodeURIComponent(`مرحباً، بخصوص عرضكم على كيماتو`);
-            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMsg}` : '';
-
-            return `
-                <div class="item-row">
-                    <div class="item-icon-wrapper supplier">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </div>
-                    <div class="item-info">
-                        <div class="item-title">
-                            ${escapeHtml(supplierName)}
-                            ${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
-                        </div>
-                        <div class="item-meta">
-                            <span class="status-badge ${statusInfo.cls}">
-                                <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}
-                            </span>
-                            ${request ? `<span><i class="fas fa-box"></i> ${escapeHtml(request.product_name)}</span>` : ''}
-                            ${offer.quantity_offered ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(offer.quantity_offered)}</span>` : ''}
-                            ${offer.delivery_time ? `<span><i class="fas fa-truck"></i> ${escapeHtml(offer.delivery_time)}</span>` : ''}
-                            <span><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>
-                        </div>
-                        ${offer.message ? `
-                            <div style="font-size: 0.78rem; color: var(--c-text-muted); margin-top: 6px; padding: 8px 10px; background: var(--c-surface); border-radius: var(--r-sm); border-right: 3px solid var(--c-accent);">
-                                <i class="fas fa-comment-dots"></i> ${escapeHtml(offer.message).substring(0, 120)}${offer.message.length > 120 ? '...' : ''}
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div class="item-price-block">
-                        <div class="item-price">
-                            ${formatPrice(offer.price)}
-                            <span class="currency">ج.م</span>
-                        </div>
-                        <div class="item-price-label">السعر المعروض</div>
-                    </div>
-                    <div class="item-actions">
-                        ${waLink ? `
-                            <a href="${waLink}" target="_blank" rel="noopener noreferrer"
-                               class="item-action-btn primary"
-                               title="تواصل واتساب">
-                                <i class="fab fa-whatsapp"></i> تواصل
-                            </a>
-                        ` : ''}
-                        ${request ? `
-                            <a href="request-details.html?id=${encodeURIComponent(request.id)}"
-                               class="item-action-btn secondary">
-                                <i class="fas fa-info-circle"></i> تفاصيل الطلب
-                            </a>
-                        ` : ''}
-                    </div>
-                </div>
-            `;
-        };
-
-        // ============================================================
-        // RENDER: FAVORITE ROW
-        // ============================================================
-        const renderFavoriteRow = (p) => {
-            const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
-            const isOutOfStock = p.stock_status === 'out';
-            const isInactive = p.status !== 'active';
-
-            return `
-                <div class="item-row" data-product-id="${escapeHtml(p.id)}">
-                    <div class="item-icon-wrapper accent" style="overflow: hidden; padding: 0;">
-                        ${hasImage ? `
-                            <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}"
-                                 style="width: 100%; height: 100%; object-fit: cover;"
-                                 onerror="this.onerror=null;this.parentElement.innerHTML='<i class=\\'fas fa-flask\\' style=\\'font-size: 1.2rem;\\'></i>';" />
-                        ` : `
-                            <i class="fas fa-flask"></i>
-                        `}
-                    </div>
-                    <div class="item-info">
-                        <div class="item-title">${escapeHtml(p.name)}</div>
-                        <div class="item-meta">
-                            ${p.cas_number ? `<span style="font-family: monospace; direction: ltr;"><i class="fas fa-hashtag"></i> ${escapeHtml(p.cas_number)}</span>` : ''}
-                            ${p.purity ? `<span><i class="fas fa-percentage"></i> ${escapeHtml(p.purity)}</span>` : ''}
-                            ${p.category ? `<span><i class="fas fa-tag"></i> ${escapeHtml(p.category)}</span>` : ''}
-                            ${isOutOfStock ? `<span class="status-badge status-expired"><i class="fas fa-times-circle"></i> غير متوفر</span>` : ''}
-                            ${isInactive ? `<span class="status-badge status-closed"><i class="fas fa-lock"></i> غير نشط</span>` : ''}
-                        </div>
-                    </div>
-                    <div class="item-price-block">
-                        ${p.price ? `
-                            <div class="item-price">
-                                ${formatPrice(p.price)}
-                                <span class="currency">ج.م</span>
-                            </div>
-                            ${p.unit ? `<div class="item-price-label">/ ${escapeHtml(p.unit)}</div>` : ''}
-                        ` : `
-                            <div class="item-price" style="font-size: 0.85rem; color: var(--c-text-sub);">عند الطلب</div>
-                        `}
-                    </div>
-                    <div class="item-actions">
-                        <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="item-action-btn primary">
-                            <i class="fas fa-info-circle"></i> تفاصيل
-                        </a>
-                        <button class="item-action-btn danger icon-only remove-favorite-btn"
-                                type="button"
-                                data-product-id="${escapeHtml(p.id)}"
-                                data-product-name="${escapeHtml(p.name)}"
-                                title="إزالة من المفضلة">
-                            <i class="fas fa-heart-broken"></i>
-                        </button>
-                    </div>
-                </div>
-            `;
-        };
-
-        // ============================================================
-        // BIND: Request Row Events
-        // ============================================================
-        const bindRequestRowEvents = () => {
-            // Toggle offers accordion
-            document.querySelectorAll('.toggle-offers-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const rid = btn.dataset.requestId;
-                    const acc = document.getElementById(`offers-${rid}`);
-                    if (acc) {
-                        const isOpen = acc.classList.toggle('open');
-                        const icon = btn.querySelector('i');
-                        if (icon) {
-                            icon.className = isOpen ? 'fas fa-eye-slash' : 'fas fa-eye';
-                        }
-                    }
-                });
+            document.getElementById('productModal')?.addEventListener('click', (e) => {
+                if (e.target.id === 'productModal') closeProductModal();
             });
 
-            // Edit request
-            document.querySelectorAll('.edit-request-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const rid = btn.dataset.requestId;
-                    openEditRequestModal(rid);
-                });
+            document.addEventListener('keydown', (e) => {
+                if (e.key === 'Escape') {
+                    closeProductModal();
+                    document.getElementById('notifPanel')?.classList.remove('show');
+                    document.getElementById('userDropdown')?.classList.remove('show');
+                }
             });
-
-            // Delete request
-            document.querySelectorAll('.delete-request-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const rid = btn.dataset.requestId;
-                    const name = btn.dataset.requestName;
-                    deleteRequest(rid, name);
-                });
-            });
-        };
-
-        // ============================================================
-        // BIND: Favorite Events
-        // ============================================================
-        const bindFavoriteEvents = () => {
-            document.querySelectorAll('.remove-favorite-btn').forEach(btn => {
-                btn.addEventListener('click', async () => {
-                    const pid = btn.dataset.productId;
-                    const name = btn.dataset.productName;
-                    if (!confirm(`هل تريد إزالة "${name}" من المفضلة؟`)) return;
-
-                    try {
-                        const { error } = await supabase
-                            .from('favorites')
-                            .delete()
-                            .eq('user_id', state.user.id)
-                            .eq('product_id', pid);
-
-                        if (error) throw error;
-
-                        showToast('💔', 'تم الحذف', `أُزيل "${name}" من المفضلة`, null, null, 'info');
-                        renderFavorites();
-                    } catch (err) {
-                        showToast('⚠️', 'خطأ', 'تعذر الحذف', null, null, 'error');
-                    }
-                });
-            });
-        };
-
-        // ============================================================
-        // EDIT REQUEST MODAL
-        // ============================================================
-        const openEditRequestModal = (requestId) => {
-            const request = state.requests.find(r => r.id === requestId);
-            if (!request) return;
-
-            state.editingRequestId = requestId;
-
-            document.getElementById('editProductName').value = request.product_name || '';
-            document.getElementById('editCasNumber').value = request.cas_number || '';
-            document.getElementById('editQuantity').value = request.quantity_needed || '';
-            document.getElementById('editBudgetMin').value = request.budget_min || '';
-            document.getElementById('editBudgetMax').value = request.budget_max || '';
-            document.getElementById('editDeadline').value = request.deadline || '';
-            document.getElementById('editLocation').value = request.location || '';
-            document.getElementById('editDescription').value = request.description || '';
-
-            document.getElementById('editRequestModal').classList.add('show');
-        };
-
-        const closeEditModal = () => {
-            document.getElementById('editRequestModal').classList.remove('show');
-            state.editingRequestId = null;
-        };
-
-        const saveEditRequest = async () => {
-            if (!state.editingRequestId) return;
-            const btn = document.getElementById('saveEditModal');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> جاري الحفظ...';
-
-            try {
-                const productName = document.getElementById('editProductName').value.trim();
-                const quantity = document.getElementById('editQuantity').value.trim();
-
-                if (!productName) throw new Error('اسم المنتج مطلوب');
-                if (!quantity) throw new Error('الكمية مطلوبة');
-
-                const updates = {
-                    product_name: productName,
-                    cas_number: document.getElementById('editCasNumber').value.trim() || null,
-                    quantity_needed: quantity,
-                    budget_min: document.getElementById('editBudgetMin').value ? Number(document.getElementById('editBudgetMin').value) : null,
-                    budget_max: document.getElementById('editBudgetMax').value ? Number(document.getElementById('editBudgetMax').value) : null,
-                    deadline: document.getElementById('editDeadline').value || null,
-                    location: document.getElementById('editLocation').value.trim() || null,
-                    description: document.getElementById('editDescription').value.trim() || null,
-                };
-
-                const { error } = await supabase
-                    .from('purchase_requests')
-                    .update(updates)
-                    .eq('id', state.editingRequestId)
-                    .eq('buyer_id', state.user.id);
-
-                if (error) throw error;
-
-                showToast('✅', 'تم الحفظ', 'تم تحديث الطلب بنجاح', null, null, 'success');
-                closeEditModal();
-                await fetchAllData();
-                loadSection(state.activeSection);
-            } catch (err) {
-                console.error('Edit request error:', err);
-                showToast('⚠️', 'خطأ', err.message || 'تعذر حفظ التعديلات', null, null, 'error');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-            }
-        };
-
-        // ============================================================
-        // DELETE REQUEST
-        // ============================================================
-        const deleteRequest = async (requestId, name) => {
-            if (!confirm(`هل أنت متأكد من حذف طلب "${name}"؟ لا يمكن التراجع.`)) return;
-
-            try {
-                const { error } = await supabase
-                    .from('purchase_requests')
-                    .delete()
-                    .eq('id', requestId)
-                    .eq('buyer_id', state.user.id);
-
-                if (error) throw error;
-
-                showToast('🗑️', 'تم الحذف', `حُذف طلب "${name}" بنجاح`, null, null, 'success');
-                await fetchAllData();
-                loadSection(state.activeSection);
-            } catch (err) {
-                console.error('Delete request error:', err);
-                showToast('⚠️', 'خطأ', err.message || 'تعذر حذف الطلب', null, null, 'error');
-            }
         };
 
         // ============================================================
@@ -3163,19 +3641,16 @@
             if (state.channel) supabase.removeChannel(state.channel);
             try {
                 state.channel = supabase
-                    .channel('buyer_dashboard_realtime')
+                    .channel('supplier_dashboard_realtime')
                     .on('postgres_changes', {
                         event: 'INSERT',
                         schema: 'public',
-                        table: 'offers',
+                        table: 'purchase_requests',
                     }, (payload) => {
-                        const offer = payload.new;
-                        // Check if this offer is on one of my requests
-                        const myRequest = state.requests.find(r => r.id === offer.request_id);
-                        if (myRequest) {
-                            showToast('💰', 'عرض جديد!', `عرض بقيمة ${formatPrice(offer.price)} ج.م على "${myRequest.product_name}"`,
-                                'عرض التفاصيل', `request-details.html?id=${offer.request_id}`, 'success');
-                            // Refresh current section
+                        const req = payload.new;
+                        if (req.status === 'open') {
+                            showToast('📢', 'طلب شراء جديد!', `مطلوب: ${req.product_name}`,
+                                'قدّم عرض', 'all-requests.html', 'success');
                             loadSection(state.activeSection);
                         }
                     })
@@ -3183,7 +3658,25 @@
                         event: 'UPDATE',
                         schema: 'public',
                         table: 'offers',
-                    }, () => {
+                        filter: `supplier_id=eq.${state.user?.id}`,
+                    }, (payload) => {
+                        const oldStatus = payload.old?.status;
+                        const newStatus = payload.new?.status;
+                        if (oldStatus !== newStatus && newStatus === 'accepted') {
+                            showToast('🎉', 'مبروك!', 'تم قبول عرضك', null, null, 'success');
+                        }
+                        loadSection(state.activeSection);
+                    })
+                    .on('postgres_changes', {
+                        event: 'INSERT',
+                        schema: 'public',
+                        table: 'supplier_contacts',
+                        filter: `supplier_id=eq.${state.user?.id}`,
+                    }, (payload) => {
+                        const contact = payload.new;
+                        if (contact.contact_type === 'whatsapp' || contact.contact_type === 'phone') {
+                            showToast('💬', 'تواصل جديد!', 'عميل جديد تواصل معك', null, null, 'success');
+                        }
                         loadSection(state.activeSection);
                     })
                     .subscribe();
@@ -3191,28 +3684,7 @@
         };
 
         // ============================================================
-        // MODAL BINDINGS
-        // ============================================================
-        const initModals = () => {
-            document.getElementById('closeEditModal')?.addEventListener('click', closeEditModal);
-            document.getElementById('cancelEditModal')?.addEventListener('click', closeEditModal);
-            document.getElementById('saveEditModal')?.addEventListener('click', saveEditRequest);
-
-            document.getElementById('editRequestModal')?.addEventListener('click', (e) => {
-                if (e.target.id === 'editRequestModal') closeEditModal();
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeEditModal();
-                    document.getElementById('notifPanel')?.classList.remove('show');
-                    document.getElementById('userDropdown')?.classList.remove('show');
-                }
-            });
-        };
-
-        // ============================================================
-        // EXPOSE FUNCTIONS GLOBALLY (for inline onclick)
+        // EXPOSE GLOBALLY
         // ============================================================
         window.switchSection = switchSection;
 
@@ -3220,27 +3692,24 @@
         // INIT
         // ============================================================
         const init = async () => {
-            console.log('🚀 كيماتو | لوحة المشتري');
+            console.log('🚀 كيماتو | لوحة المورد');
 
             initTheme();
             initNavbar();
             initSidebar();
             initModals();
 
-            // Check auth + load initial data
             const isAuthed = await checkAuthAndLoad();
             if (!isAuthed) return;
 
-            // Load default section
+            await fetchCategories();
             await loadSection('overview');
 
-            // Realtime
             setupRealtime();
 
             console.log('✅ جاهز');
         };
 
-        // Handle auth changes
         supabase.auth.onAuthStateChange(async (event) => {
             if (event === 'SIGNED_OUT') {
                 window.location.href = 'index.html';
@@ -3250,7 +3719,6 @@
             }
         });
 
-        // Run
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
@@ -3259,3 +3727,4 @@
     </script>
 </body>
 </html>
+        
