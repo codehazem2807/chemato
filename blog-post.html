@@ -14,7 +14,7 @@
     <meta property="og:site_name" content="كيماتو" />
     <meta property="og:title" id="ogTitle" content="المقال | كيماتو" />
     <meta property="og:description" id="ogDescription" content="اقرأ المقال كاملاً" />
-    <meta property="og:url" id="ogUrl" content="https://chemato.vercel.app/blog-post.html" />
+    <meta property="og:url" id="ogUrl" content="https://chemato.vercel.app/" />
     <meta property="og:image" id="ogImage" content="https://chemato.vercel.app/logo.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
@@ -26,7 +26,7 @@
     <meta name="twitter:description" id="twDescription" content="اقرأ المقال كاملاً" />
     <meta name="twitter:image" id="twImage" content="https://chemato.vercel.app/logo.png" />
 
-    <link rel="canonical" id="pageCanonical" href="https://chemato.vercel.app/blog-post.html" />
+    <link rel="canonical" id="pageCanonical" href="https://chemato.vercel.app/" />
     <link rel="icon" type="image/x-icon" href="logo.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
     <link rel="apple-touch-icon" href="logo.png" />
@@ -1190,6 +1190,26 @@
         });
 
         // ============================================================
+        // GET SLUG — يدعم الشكلين:
+        //   /blog-post.html?slug=xxx
+        //   /blog/xxx
+        // ============================================================
+        const getSlug = () => {
+            // 1. من query string
+            const urlParams = new URLSearchParams(window.location.search);
+            const qSlug = urlParams.get('slug');
+            if (qSlug) return qSlug;
+
+            // 2. من pathname: /blog/xxx
+            const pathMatch = window.location.pathname.match(/\/blog\/([^\/\?#]+)/);
+            if (pathMatch && pathMatch[1]) {
+                return decodeURIComponent(pathMatch[1]);
+            }
+
+            return null;
+        };
+
+        // ============================================================
         // STATE
         // ============================================================
         const state = {
@@ -1439,7 +1459,6 @@
             });
             container.innerHTML = html;
 
-            // Smooth scroll
             container.querySelectorAll('.toc-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
@@ -1451,7 +1470,6 @@
                 });
             });
 
-            // Active state
             if ('IntersectionObserver' in window) {
                 const observer = new IntersectionObserver((entries) => {
                     entries.forEach(entry => {
@@ -1465,6 +1483,68 @@
                 }, { rootMargin: '-100px 0px -70% 0px', threshold: 0 });
                 headings.forEach(h => observer.observe(h));
             }
+        };
+
+        // ============================================================
+        // UPDATE META TAGS (بعد التحميل — للحالات الديناميكية)
+        // ============================================================
+        const updateMetaTags = (post) => {
+            const title = post.title || 'مقال';
+            const description = (post.excerpt || post.title || '').substring(0, 160);
+            const image = (post.image_url && /^https?:\/\//i.test(post.image_url))
+                ? post.image_url
+                : 'https://chemato.vercel.app/logo.png';
+            const canonicalUrl = `https://chemato.vercel.app/blog/${encodeURIComponent(post.slug || post.id)}`;
+
+            document.title = `${title} | كيماتو`;
+
+            const setMeta = (id, content) => {
+                const el = document.getElementById(id);
+                if (el) el.setAttribute('content', content);
+            };
+
+            setMeta('pageDescription', description);
+            setMeta('ogTitle', title);
+            setMeta('ogDescription', description);
+            setMeta('ogImage', image);
+            setMeta('ogUrl', canonicalUrl);
+            setMeta('twTitle', title);
+            setMeta('twDescription', description);
+            setMeta('twImage', image);
+
+            const canonical = document.getElementById('pageCanonical');
+            if (canonical) canonical.setAttribute('href', canonicalUrl);
+
+            try {
+                const schema = document.createElement('script');
+                schema.type = 'application/ld+json';
+                schema.textContent = JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": title,
+                    "description": description,
+                    "image": image,
+                    "datePublished": post.published_at || post.created_at,
+                    "dateModified": post.updated_at || post.created_at,
+                    "author": {
+                        "@type": "Person",
+                        "name": post.author_name || "كيماتو"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "كيماتو",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://chemato.vercel.app/logo.png"
+                        }
+                    },
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": canonicalUrl
+                    }
+                });
+                document.head.appendChild(schema);
+            } catch (e) { /* silent */ }
         };
 
         // ============================================================
@@ -1501,85 +1581,18 @@
                 updateMetaTags(post);
                 renderPost(post);
 
-                // Update views (fire and forget)
                 supabase
                     .from('blog_posts')
                     .update({ views: (post.views || 0) + 1 })
                     .eq('id', post.id)
                     .then(() => {});
 
-                // Load related posts
                 loadRelatedPosts(post);
 
             } catch (e) {
                 console.error('Load post error:', e);
                 renderError('حدث خطأ', 'تعذر تحميل المقال. حاول تحديث الصفحة.');
             }
-        };
-
-        // ============================================================
-        // UPDATE META TAGS
-        // ============================================================
-        const updateMetaTags = (post) => {
-            const title = post.title || 'مقال';
-            const description = (post.excerpt || post.title || '').substring(0, 160);
-            const image = (post.image_url && /^https?:\/\//i.test(post.image_url))
-                ? post.image_url
-                : 'https://chemato.vercel.app/logo.png';
-            const canonicalUrl = `https://chemato.vercel.app/blog-post.html?slug=${encodeURIComponent(post.slug || post.id)}`;
-
-            // Page title
-            document.title = `${title} | كيماتو`;
-
-            // Meta description
-            const setMetaContent = (id, content) => {
-                const el = document.getElementById(id);
-                if (el) el.setAttribute('content', content);
-            };
-
-            setMetaContent('pageDescription', description);
-            setMetaContent('ogTitle', title);
-            setMetaContent('ogDescription', description);
-            setMetaContent('ogImage', image);
-            setMetaContent('ogUrl', canonicalUrl);
-            setMetaContent('twTitle', title);
-            setMetaContent('twDescription', description);
-            setMetaContent('twImage', image);
-
-            const canonical = document.getElementById('pageCanonical');
-            if (canonical) canonical.setAttribute('href', canonicalUrl);
-
-            // Schema.org
-            try {
-                const schema = document.createElement('script');
-                schema.type = 'application/ld+json';
-                schema.textContent = JSON.stringify({
-                    "@context": "https://schema.org",
-                    "@type": "Article",
-                    "headline": title,
-                    "description": description,
-                    "image": image,
-                    "datePublished": post.published_at || post.created_at,
-                    "dateModified": post.updated_at || post.created_at,
-                    "author": {
-                        "@type": "Person",
-                        "name": post.author_name || "كيماتو"
-                    },
-                    "publisher": {
-                        "@type": "Organization",
-                        "name": "كيماتو",
-                        "logo": {
-                            "@type": "ImageObject",
-                            "url": "https://chemato.vercel.app/logo.png"
-                        }
-                    },
-                    "mainEntityOfPage": {
-                        "@type": "WebPage",
-                        "@id": canonicalUrl
-                    }
-                });
-                document.head.appendChild(schema);
-            } catch (e) { /* silent */ }
         };
 
         // ============================================================
@@ -1600,7 +1613,6 @@
                     <i class="fas fa-arrow-right"></i> العودة إلى المدونة
                 </a>
 
-                <!-- HERO -->
                 <section class="post-hero animate-in">
                     <div class="post-hero-bg-icons" aria-hidden="true">
                         <span class="icon-float">📰</span>
@@ -1641,14 +1653,12 @@
                     </div>
                 </section>
 
-                <!-- FEATURED IMAGE -->
                 ${hasImage ? `
                     <div class="post-featured-image animate-in" style="animation-delay: 0.05s;">
                         <img src="${escapeHtml(post.image_url)}" alt="${escapeHtml(post.title)}" loading="eager" />
                     </div>
                 ` : ''}
 
-                <!-- LAYOUT -->
                 <div class="post-layout">
                     <div class="post-main">
                         <article class="post-content animate-in" style="animation-delay: 0.1s;">
@@ -1727,7 +1737,6 @@
                     </aside>
                 </div>
 
-                <!-- RELATED -->
                 <section class="related-section animate-in" id="relatedSection" style="display: none; animation-delay: 0.3s;">
                     <div class="related-header">
                         <i class="fas fa-newspaper"></i>
@@ -1838,7 +1847,11 @@
         };
 
         const handleShare = async (type) => {
-            const url = window.location.href;
+            // استخدم الرابط الجميل الجديد لو على Vercel
+            const slug = state.post?.slug || state.slug;
+            const url = slug
+                ? `https://chemato.vercel.app/blog/${encodeURIComponent(slug)}`
+                : window.location.href;
             const title = state.post?.title || document.title;
 
             try {
@@ -1871,8 +1884,8 @@
         const init = async () => {
             console.log('🚀 كيماتو | المقال');
 
-            const urlParams = new URLSearchParams(window.location.search);
-            state.slug = urlParams.get('slug');
+            state.slug = getSlug();
+            console.log('📍 Slug:', state.slug);
 
             initTheme();
             initNavbar();
