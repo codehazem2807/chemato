@@ -6,16 +6,21 @@
 
     <title id="pageTitle">المقال | كيماتو</title>
     <meta name="description" id="pageDescription" content="اقرأ المقال كاملاً على كيماتو" />
-    <meta name="robots" content="index, follow" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#0a2540" />
 
+    <!-- Open Graph -->
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="كيماتو" />
     <meta property="og:title" id="ogTitle" content="المقال | كيماتو" />
     <meta property="og:description" id="ogDescription" content="اقرأ المقال كاملاً" />
     <meta property="og:url" id="ogUrl" content="https://chemato.vercel.app/blog-post.html" />
     <meta property="og:image" id="ogImage" content="https://chemato.vercel.app/logo.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:locale" content="ar_EG" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" id="twTitle" content="المقال | كيماتو" />
     <meta name="twitter:description" id="twDescription" content="اقرأ المقال كاملاً" />
@@ -234,7 +239,7 @@
             transform: translateX(-3px);
         }
 
-        /* HERO HEADER */
+        /* HERO */
         .post-hero {
             position: relative;
             border-radius: var(--r-xl);
@@ -346,7 +351,7 @@
             gap: 16px;
         }
 
-        /* ARTICLE CONTENT */
+        /* CONTENT */
         .post-content {
             background: var(--c-surface);
             border-radius: var(--r-lg);
@@ -532,7 +537,7 @@
             transform: translateY(-2px);
         }
 
-        /* SHARE SECTION */
+        /* SHARE */
         .share-section {
             display: flex;
             align-items: center;
@@ -575,7 +580,7 @@
         .share-btn.linkedin { background: var(--c-linkedin); }
         .share-btn.copy { background: var(--c-text-muted); }
 
-        /* AUTHOR CARD */
+        /* AUTHOR */
         .author-card {
             background: linear-gradient(135deg, rgba(30, 136, 229, 0.04), rgba(46, 204, 113, 0.02));
             border: 1.5px solid var(--c-border);
@@ -701,7 +706,7 @@
             flex-wrap: wrap;
         }
 
-        /* RELATED POSTS */
+        /* RELATED */
         .related-section {
             margin-top: 48px;
         }
@@ -1192,7 +1197,6 @@
             post: null,
             relatedPosts: [],
             user: null,
-            tocItems: [],
         };
 
         const THEME_KEY = 'chemato-theme';
@@ -1404,57 +1408,42 @@
         };
 
         // ============================================================
-        // BUILD TOC FROM CONTENT
+        // BUILD TOC
         // ============================================================
-        const buildTOC = (content) => {
+        const buildTOC = () => {
             const container = document.getElementById('tocList');
+            const card = document.getElementById('tocCard');
             if (!container) return;
 
-            const temp = document.createElement('div');
-            temp.innerHTML = content;
+            const contentEl = document.querySelector('.post-content');
+            if (!contentEl) return;
 
-            const headings = temp.querySelectorAll('h2, h3');
+            const headings = contentEl.querySelectorAll('h2, h3');
             if (!headings.length) {
-                const card = document.getElementById('tocCard');
                 if (card) card.style.display = 'none';
                 return;
             }
 
-            const items = [];
+            let html = '';
             headings.forEach((h, i) => {
                 const id = `heading-${i}`;
-                h.setAttribute('id', id);
-                items.push({
-                    id,
-                    text: h.textContent.trim().substring(0, 60),
-                    level: h.tagName === 'H2' ? 2 : 3,
-                });
+                h.id = id;
+                const level = h.tagName === 'H2' ? 2 : 3;
+                const text = h.textContent.trim().substring(0, 60);
+                html += `
+                    <a href="#${id}" class="toc-link ${level === 3 ? 'h3' : ''}" data-target="${id}">
+                        <i class="fas fa-circle" style="font-size: 0.4rem; opacity: 0.6;"></i>
+                        ${escapeHtml(text)}
+                    </a>
+                `;
             });
+            container.innerHTML = html;
 
-            // Update actual content with IDs
-            const contentEl = document.querySelector('.post-content');
-            if (contentEl) {
-                const realHeadings = contentEl.querySelectorAll('h2, h3');
-                realHeadings.forEach((h, i) => {
-                    h.setAttribute('id', `heading-${i}`);
-                });
-            }
-
-            state.tocItems = items;
-
-            container.innerHTML = items.map(item => `
-                <a href="#${item.id}" class="toc-link ${item.level === 3 ? 'h3' : ''}" data-target="${item.id}">
-                    <i class="fas fa-${item.level === 2 ? 'circle' : 'circle-notch'}" style="font-size: 0.4rem; opacity: 0.6;"></i>
-                    ${escapeHtml(item.text)}
-                </a>
-            `).join('');
-
-            // Smooth scroll to headings
+            // Smooth scroll
             container.querySelectorAll('.toc-link').forEach(link => {
                 link.addEventListener('click', (e) => {
                     e.preventDefault();
-                    const targetId = link.dataset.target;
-                    const target = document.getElementById(targetId);
+                    const target = document.getElementById(link.dataset.target);
                     if (target) {
                         const top = target.getBoundingClientRect().top + window.scrollY - 90;
                         window.scrollTo({ top, behavior: 'smooth' });
@@ -1462,30 +1451,20 @@
                 });
             });
 
-            // IntersectionObserver for active state
-            setupTOCActiveState();
-        };
-
-        const setupTOCActiveState = () => {
-            if (!('IntersectionObserver' in window)) return;
-
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const id = entry.target.id;
-                        document.querySelectorAll('.toc-link').forEach(link => {
-                            link.classList.toggle('active', link.dataset.target === id);
-                        });
-                    }
-                });
-            }, {
-                rootMargin: '-100px 0px -70% 0px',
-                threshold: 0,
-            });
-
-            document.querySelectorAll('.post-content h2, .post-content h3').forEach(h => {
-                observer.observe(h);
-            });
+            // Active state
+            if ('IntersectionObserver' in window) {
+                const observer = new IntersectionObserver((entries) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            const id = entry.target.id;
+                            container.querySelectorAll('.toc-link').forEach(l => {
+                                l.classList.toggle('active', l.dataset.target === id);
+                            });
+                        }
+                    });
+                }, { rootMargin: '-100px 0px -70% 0px', threshold: 0 });
+                headings.forEach(h => observer.observe(h));
+            }
         };
 
         // ============================================================
@@ -1519,13 +1498,10 @@
                 console.log('✅ Post loaded:', post.title);
                 state.post = post;
 
-                // Update meta
                 updateMetaTags(post);
-
-                // Render
                 renderPost(post);
 
-                // Update views
+                // Update views (fire and forget)
                 supabase
                     .from('blog_posts')
                     .update({ views: (post.views || 0) + 1 })
@@ -1541,53 +1517,74 @@
             }
         };
 
+        // ============================================================
+        // UPDATE META TAGS
+        // ============================================================
         const updateMetaTags = (post) => {
-            document.title = `${post.title} | كيماتو`;
-            const desc = post.excerpt || post.title;
+            const title = post.title || 'مقال';
+            const description = (post.excerpt || post.title || '').substring(0, 160);
+            const image = (post.image_url && /^https?:\/\//i.test(post.image_url))
+                ? post.image_url
+                : 'https://chemato.vercel.app/logo.png';
+            const canonicalUrl = `https://chemato.vercel.app/blog-post.html?slug=${encodeURIComponent(post.slug || post.id)}`;
 
-            const setMeta = (id, content) => {
+            // Page title
+            document.title = `${title} | كيماتو`;
+
+            // Meta description
+            const setMetaContent = (id, content) => {
                 const el = document.getElementById(id);
-                if (el) el.content = content;
+                if (el) el.setAttribute('content', content);
             };
 
-            setMeta('pageDescription', desc);
-            setMeta('ogTitle', post.title);
-            setMeta('ogDescription', desc);
-            setMeta('twTitle', post.title);
-            setMeta('twDescription', desc);
+            setMetaContent('pageDescription', description);
+            setMetaContent('ogTitle', title);
+            setMetaContent('ogDescription', description);
+            setMetaContent('ogImage', image);
+            setMetaContent('ogUrl', canonicalUrl);
+            setMetaContent('twTitle', title);
+            setMetaContent('twDescription', description);
+            setMetaContent('twImage', image);
 
             const canonical = document.getElementById('pageCanonical');
-            if (canonical) canonical.href = `https://chemato.vercel.app/blog-post.html?slug=${post.slug || post.id}`;
+            if (canonical) canonical.setAttribute('href', canonicalUrl);
 
-            const ogUrl = document.getElementById('ogUrl');
-            if (ogUrl) ogUrl.content = `https://chemato.vercel.app/blog-post.html?slug=${post.slug || post.id}`;
-
-            if (post.image_url) {
-                setMeta('ogImage', post.image_url);
-                setMeta('twImage', post.image_url);
-            }
-
-            // Schema
+            // Schema.org
             try {
                 const schema = document.createElement('script');
                 schema.type = 'application/ld+json';
                 schema.textContent = JSON.stringify({
                     "@context": "https://schema.org",
                     "@type": "Article",
-                    "headline": post.title,
-                    "description": desc,
-                    "image": post.image_url || undefined,
+                    "headline": title,
+                    "description": description,
+                    "image": image,
                     "datePublished": post.published_at || post.created_at,
                     "dateModified": post.updated_at || post.created_at,
                     "author": {
                         "@type": "Person",
                         "name": post.author_name || "كيماتو"
+                    },
+                    "publisher": {
+                        "@type": "Organization",
+                        "name": "كيماتو",
+                        "logo": {
+                            "@type": "ImageObject",
+                            "url": "https://chemato.vercel.app/logo.png"
+                        }
+                    },
+                    "mainEntityOfPage": {
+                        "@type": "WebPage",
+                        "@id": canonicalUrl
                     }
                 });
                 document.head.appendChild(schema);
             } catch (e) { /* silent */ }
         };
 
+        // ============================================================
+        // RENDER POST
+        // ============================================================
         const renderPost = (post) => {
             const container = document.getElementById('pageContent');
             if (!container) return;
@@ -1638,7 +1635,7 @@
                             </span>
                             <span class="post-meta-item">
                                 <i class="fas fa-eye"></i>
-                                <strong id="viewsCount">${Number(post.views || 0).toLocaleString('ar-EG')}</strong> مشاهدة
+                                <strong>${Number(post.views || 0).toLocaleString('ar-EG')}</strong> مشاهدة
                             </span>
                         </div>
                     </div>
@@ -1660,7 +1657,7 @@
                             ${tags.length > 0 ? `
                                 <div class="post-tags">
                                     <span class="tags-label"><i class="fas fa-tags"></i> الوسوم:</span>
-                                    ${tags.map(t => `<a href="blog.html?tag=${encodeURIComponent(t)}" class="tag">#${escapeHtml(t)}</a>`).join('')}
+                                    ${tags.map(t => `<span class="tag">#${escapeHtml(t)}</span>`).join('')}
                                 </div>
                             ` : ''}
 
@@ -1686,7 +1683,6 @@
                     </div>
 
                     <aside class="post-sidebar">
-                        <!-- AUTHOR -->
                         <div class="author-card animate-in" style="animation-delay: 0.15s;">
                             <div class="author-card-header">
                                 <div class="author-avatar">${authorInitial}</div>
@@ -1700,7 +1696,6 @@
                             </p>
                         </div>
 
-                        <!-- TOC -->
                         <div class="toc-card animate-in" id="tocCard" style="animation-delay: 0.2s;">
                             <div class="toc-title">
                                 <i class="fas fa-list-ul"></i>
@@ -1709,7 +1704,6 @@
                             <div class="toc-list" id="tocList"></div>
                         </div>
 
-                        <!-- SIDEBAR SHARE -->
                         <div class="sidebar-share animate-in" style="animation-delay: 0.25s;">
                             <div class="sidebar-share-title">
                                 <i class="fas fa-share-alt"></i>
@@ -1733,7 +1727,7 @@
                     </aside>
                 </div>
 
-                <!-- RELATED POSTS -->
+                <!-- RELATED -->
                 <section class="related-section animate-in" id="relatedSection" style="display: none; animation-delay: 0.3s;">
                     <div class="related-header">
                         <i class="fas fa-newspaper"></i>
@@ -1743,10 +1737,7 @@
                 </section>
             `;
 
-            // Build TOC from actual content
-            buildTOC(post.content || '');
-
-            // Bind share buttons
+            buildTOC();
             bindShareButtons();
         };
 
@@ -1785,7 +1776,6 @@
 
                 let { data } = await query;
 
-                // If no posts in same category, fetch any recent
                 if (!data || data.length === 0) {
                     const fallback = await supabase
                         .from('blog_posts')
@@ -1797,11 +1787,7 @@
                     data = fallback.data;
                 }
 
-                if (!data || data.length === 0) {
-                    const section = document.getElementById('relatedSection');
-                    if (section) section.style.display = 'none';
-                    return;
-                }
+                if (!data || data.length === 0) return;
 
                 state.relatedPosts = data;
 
