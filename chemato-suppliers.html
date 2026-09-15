@@ -1,52 +1,27 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
     <title>كيماتو | موردو المواد الكيماوية في مصر</title>
-    <meta name="description" content="تصفح أفضل موردي المواد الكيماوية في مصر — صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام." />
+    
+    <meta name="description" content="استعرض أفضل موردي المواد الكيماوية في مصر — صودا كاوية، حمض كبريتيك، مذيبات. تواصل مباشر مع موردين موثّقين." />
     <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="موردين كيماويات,موردين مواد خام,صودا كاوية,حمض كبريتيك,مذيبات,مصر,B2B,كيماتو" />
-
-    <meta property="og:title" content="كيماتو | موردو المواد الكيماوية" />
-    <meta property="og:description" content="تصفح أفضل موردي المواد الكيماوية في مصر." />
-    <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://chemato.vercel.app/chemato-suppliers.html" />
-    <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
-    <meta property="og:locale" content="ar_EG" />
-    <meta property="og:site_name" content="كيماتو" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="كيماتو | موردو المواد الكيماوية" />
-    <meta name="twitter:description" content="تصفح أفضل موردي المواد الكيماوية في مصر." />
-    <meta name="twitter:image" content="https://chemato.vercel.app/logo.png" />
-
-    <link rel="canonical" href="https://chemato.vercel.app/chemato-suppliers.html" />
+    <meta name="keywords" content="موردين كيماويات,مصر,كيماويات,مواد خام,موردين موثوقين,صودا كاوية,حمض كبريتيك" />
+    
     <link rel="icon" type="image/x-icon" href="logo.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
     <link rel="apple-touch-icon" href="logo.png" />
     <meta name="theme-color" content="#0a2540" />
-
+    
     <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "موردو المواد الكيماوية في مصر",
-      "description": "تصفح أفضل موردي المواد الكيماوية في مصر",
-      "url": "https://chemato.vercel.app/chemato-suppliers.html"
-    }
-    </script>
-
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    
     <style>
         :root {
             --c-primary-50:  #eef6fc;
@@ -63,6 +38,7 @@
             --c-whatsapp:    #25D366;
             --c-purple:      #8b5cf6;
             --c-verified:    #1e88e5;
+            --c-gold:        #f1c40f;
             --c-bg:          #f6f8fb;
             --c-surface:     #ffffff;
             --c-surface-2:   #f9fbfd;
@@ -85,7 +61,7 @@
             --container: 1320px;
             --header-h: 68px;
         }
-
+        
         [data-theme="dark"] {
             --c-bg:         #0a1520;
             --c-surface:    #101e2e;
@@ -99,9 +75,10 @@
             --sh-lg:  0 12px 32px rgba(0, 0, 0, 0.45);
             --sh-xl:  0 20px 48px rgba(0, 0, 0, 0.55);
         }
-
+        
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
         html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
+        
         body {
             font-family: 'Cairo', system-ui, -apple-system, sans-serif;
             background: var(--c-bg);
@@ -111,12 +88,18 @@
             overflow-x: hidden;
             transition: background-color var(--t-base), color var(--t-base);
         }
+        
         img { max-width: 100%; display: block; }
         button { font-family: inherit; cursor: pointer; border: none; background: none; }
         a { color: inherit; text-decoration: none; }
         input, select, textarea { font-family: inherit; }
-        :focus-visible { outline: 3px solid var(--c-primary-500); outline-offset: 2px; border-radius: var(--r-sm); }
-
+        
+        :focus-visible {
+            outline: 3px solid var(--c-primary-500);
+            outline-offset: 2px;
+            border-radius: var(--r-sm);
+        }
+        
         .skip-link {
             position: absolute; top: -100px; right: 16px;
             background: var(--c-primary-900); color: #fff;
@@ -124,17 +107,10 @@
             z-index: 9999; transition: top var(--t-fast);
         }
         .skip-link:focus { top: 16px; }
-
-        .reading-progress {
-            position: fixed; top: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--c-verified), var(--c-accent));
-            z-index: 9999; width: 0;
-            transition: width 0.1s linear;
-            pointer-events: none;
-            box-shadow: 0 0 8px rgba(30, 136, 229, 0.5);
-        }
-
+        
+        /* ============================================================
+           ANIMATIONS
+           ============================================================ */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -142,13 +118,21 @@
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-
+        @keyframes badgePop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes crownShine {
+            0%, 100% { transform: scale(1) rotate(0deg); }
+            25% { transform: scale(1.15) rotate(-5deg); }
+            75% { transform: scale(1.15) rotate(5deg); }
+        }
+        
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
-
-        /* NAVBAR */
+        
+        /* ============================================================
+           NAVBAR
+           ============================================================ */
         .navbar {
             position: sticky; top: 0; z-index: 100;
-            background: rgba(10, 37, 64, 0.85);
+            background: rgba(10, 37, 64, 0.88);
             backdrop-filter: saturate(180%) blur(20px);
             -webkit-backdrop-filter: saturate(180%) blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
@@ -166,7 +150,7 @@
         .logo-text { font-weight: 800; font-size: 19px; color: #fff; white-space: nowrap; }
         .logo-text .blue { color: #5eb8ee; }
         .logo-text .gray { color: rgba(255, 255, 255, 0.6); font-weight: 400; font-size: 0.9em; }
-
+        
         .nav-links { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
         .nav-links a, .dropdown-btn {
             color: rgba(255, 255, 255, 0.85);
@@ -179,7 +163,7 @@
         }
         .nav-links a:hover, .dropdown-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
         .nav-links a.active { background: rgba(30, 136, 229, 0.18); color: #7ec8e3; }
-
+        
         .theme-toggle {
             width: 40px; height: 40px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.08); color: #fff;
@@ -187,7 +171,7 @@
             font-size: 1rem; transition: all var(--t-fast);
         }
         .theme-toggle:hover { background: rgba(255, 255, 255, 0.15); transform: rotate(15deg); }
-
+        
         .dropdown { position: relative; }
         .dropdown-content {
             position: absolute; top: calc(100% + 8px); left: 0;
@@ -209,32 +193,37 @@
         .dropdown-content a:last-child { border-bottom: none; }
         .dropdown-content a:hover { background: var(--c-surface-2); color: var(--c-primary-600); padding-right: 24px; }
         .dropdown-content a.logout { color: var(--c-danger); }
-
+        
         .menu-toggle {
             display: none; width: 42px; height: 42px;
             border-radius: var(--r-md);
             background: rgba(255, 255, 255, 0.08); color: #fff;
             align-items: center; justify-content: center; font-size: 1.1rem;
         }
-
-        /* MAIN */
+        
+        /* ============================================================
+           MAIN
+           ============================================================ */
         .main-container { max-width: var(--container); margin: 0 auto; padding: 20px 24px 60px; }
-
-        /* PAGE HEADER */
-        .page-header {
+        
+        /* ============================================================
+           HERO
+           ============================================================ */
+        .hero {
             position: relative;
             border-radius: var(--r-xl);
-            padding: 48px 40px 40px;
+            padding: 56px 48px 48px;
             overflow: hidden;
             background:
-                radial-gradient(ellipse at top right, rgba(30, 136, 229, 0.20), transparent 50%),
-                radial-gradient(ellipse at bottom left, rgba(46, 204, 113, 0.10), transparent 50%),
+                radial-gradient(ellipse at top right, rgba(30, 136, 229, 0.25), transparent 50%),
+                radial-gradient(ellipse at bottom left, rgba(46, 204, 113, 0.12), transparent 50%),
                 linear-gradient(135deg, #0a1f3a 0%, #1a2942 100%);
             color: #fff;
             box-shadow: var(--sh-xl);
             text-align: center;
+            margin-bottom: 24px;
         }
-        .page-header::before {
+        .hero::before {
             content: '';
             position: absolute; inset: 0;
             background-image:
@@ -243,22 +232,25 @@
             background-size: 40px 40px, 60px 60px;
             pointer-events: none;
         }
-        .header-bg-icons { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-        .header-bg-icons .icon-float {
+        .hero-bg-icons {
+            position: absolute; inset: 0;
+            overflow: hidden; pointer-events: none; z-index: 0;
+        }
+        .hero-bg-icons .icon-float {
             position: absolute; font-size: 2.4rem;
             opacity: 0.08; animation: float 6s ease-in-out infinite;
         }
-        .header-bg-icons .icon-float.rotate { animation: rotateSlow 30s linear infinite; }
-        .header-bg-icons .icon-float:nth-child(1) { top: 12%; left: 6%; font-size: 3rem; animation-delay: 0s; }
-        .header-bg-icons .icon-float:nth-child(2) { top: 18%; right: 8%; font-size: 3.6rem; animation-delay: 1s; }
-        .header-bg-icons .icon-float:nth-child(3) { bottom: 30%; left: 10%; font-size: 2.6rem; animation-delay: 2s; }
-        .header-bg-icons .icon-float:nth-child(4) { bottom: 12%; right: 6%; font-size: 3rem; animation-delay: 0.5s; }
-        .header-bg-icons .icon-float:nth-child(5) { top: 50%; left: 50%; font-size: 5rem; animation-delay: 1.5s; opacity: 0.04; }
-        .header-bg-icons .icon-float:nth-child(6) { top: 6%; left: 32%; font-size: 1.8rem; animation-delay: 2.5s; }
-
-        .header-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
-
-        .header-badge {
+        .hero-bg-icons .icon-float.rotate { animation: rotateSlow 30s linear infinite; }
+        .hero-bg-icons .icon-float:nth-child(1) { top: 12%; left: 6%; font-size: 3rem; animation-delay: 0s; }
+        .hero-bg-icons .icon-float:nth-child(2) { top: 18%; right: 8%; font-size: 3.6rem; animation-delay: 1s; }
+        .hero-bg-icons .icon-float:nth-child(3) { bottom: 30%; left: 10%; font-size: 2.6rem; animation-delay: 2s; }
+        .hero-bg-icons .icon-float:nth-child(4) { bottom: 12%; right: 6%; font-size: 3rem; animation-delay: 0.5s; }
+        .hero-bg-icons .icon-float:nth-child(5) { top: 50%; left: 50%; font-size: 5rem; animation-delay: 1.5s; opacity: 0.04; }
+        .hero-bg-icons .icon-float:nth-child(6) { top: 6%; left: 32%; font-size: 1.8rem; animation-delay: 2.5s; }
+        
+        .hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
+        
+        .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
             background: rgba(30, 136, 229, 0.18);
             border: 1px solid rgba(30, 136, 229, 0.35);
@@ -267,68 +259,83 @@
             font-size: 0.78rem; font-weight: 700;
             margin-bottom: 18px;
         }
-        .header-badge .dot {
+        .hero-badge .dot {
             width: 7px; height: 7px; border-radius: 50%;
             background: var(--c-verified);
             box-shadow: 0 0 0 4px rgba(30, 136, 229, 0.2);
             animation: pulse 2s ease-in-out infinite;
         }
-
-        .page-header h1 {
-            font-size: clamp(1.6rem, 4vw, 2.6rem);
+        
+        .hero h1 {
+            font-size: clamp(1.7rem, 4.5vw, 2.8rem);
             font-weight: 900; line-height: 1.15;
-            margin-bottom: 12px; letter-spacing: -0.5px;
+            margin-bottom: 14px; letter-spacing: -0.5px;
         }
-        .page-header h1 .highlight {
+        .hero h1 .highlight {
             background: linear-gradient(135deg, #7ec8e3 0%, #2ecc71 100%);
             -webkit-background-clip: text;
             background-clip: text;
             -webkit-text-fill-color: transparent;
             color: transparent;
         }
-        .page-header p.subtitle {
-            font-size: clamp(0.92rem, 1.5vw, 1.05rem);
+        .hero p.subtitle {
+            font-size: clamp(0.95rem, 1.6vw, 1.1rem);
             color: rgba(255, 255, 255, 0.8);
-            max-width: 640px; margin: 0 auto 24px; line-height: 1.65;
+            max-width: 640px; margin: 0 auto 28px; line-height: 1.65;
         }
-
-        .stats-bar {
+        
+        .hero-stats {
             display: grid;
-            grid-template-columns: repeat(4, 1fr);
+            grid-template-columns: repeat(3, 1fr);
             gap: 2px;
             background: rgba(0, 0, 0, 0.25);
             backdrop-filter: blur(12px);
             border-radius: var(--r-lg);
             padding: 4px;
             border: 1px solid rgba(255, 255, 255, 0.08);
-            max-width: 720px;
+            max-width: 640px;
             margin: 0 auto;
         }
-        .stats-bar-item {
+        .hero-stat {
             text-align: center;
-            padding: 14px 8px;
-            border-left: 1px solid rgba(255, 255, 255, 0.06);
+            padding: 18px 12px;
             border-radius: calc(var(--r-lg) - 4px);
             transition: background var(--t-fast);
+            position: relative;
         }
-        .stats-bar-item:last-child { border-left: none; }
-        .stats-bar-item:hover { background: rgba(255, 255, 255, 0.04); }
-        .stats-bar-icon { display: block; font-size: 1.05rem; margin-bottom: 4px; opacity: 0.85; }
-        .stats-bar-number {
+        .hero-stat + .hero-stat::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 20%;
+            height: 60%;
+            width: 1px;
+            background: rgba(255, 255, 255, 0.08);
+        }
+        .hero-stat:hover { background: rgba(255, 255, 255, 0.05); }
+        .hero-stat-icon {
+            display: block; font-size: 1.3rem; margin-bottom: 8px; opacity: 0.85;
+        }
+        .hero-stat-number {
             display: block;
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
+            font-size: clamp(1.4rem, 2.5vw, 1.9rem);
             font-weight: 900; line-height: 1.15;
             font-variant-numeric: tabular-nums;
-            color: #fff;
+            background: linear-gradient(135deg, #ffffff, #7ec8e3);
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            color: transparent;
         }
-        .stats-bar-number.updated { animation: pulse 0.6s ease; }
-        .stats-bar-label {
-            display: block; font-size: 0.68rem;
+        .hero-stat-number.updated { animation: pulse 0.6s ease; }
+        .hero-stat-label {
+            display: block; font-size: 0.72rem;
             color: rgba(255, 255, 255, 0.65);
             font-weight: 500; margin-top: 2px;
         }
-
-        /* SEARCH */
+        
+        /* ============================================================
+           SEARCH BAR
+           ============================================================ */
         .search-section {
             margin-top: -24px;
             position: relative;
@@ -336,175 +343,173 @@
             padding: 0 4px;
             margin-bottom: 24px;
         }
-        .search-wrapper-outer { position: relative; max-width: 900px; margin: 0 auto; }
+        
         .search-wrapper {
             background: var(--c-surface);
             border-radius: var(--r-full);
-            padding: 5px;
+            padding: 6px;
             display: flex;
             gap: 6px;
             box-shadow: var(--sh-lg);
             border: 2px solid transparent;
             transition: all var(--t-base);
+            max-width: 900px;
+            margin: 0 auto;
         }
         .search-wrapper:focus-within {
             border-color: var(--c-verified);
             box-shadow: 0 12px 40px rgba(30, 136, 229, 0.2);
         }
-        .search-icon { padding: 0 8px 0 20px; color: var(--c-text-sub); font-size: 1rem; align-self: center; flex-shrink: 0; }
+        .search-icon {
+            padding: 0 8px 0 20px;
+            color: var(--c-text-sub);
+            font-size: 1rem;
+            align-self: center;
+            flex-shrink: 0;
+        }
         .search-wrapper input {
-            flex: 1; padding: 14px 4px;
-            border: none; background: transparent;
-            font-size: 0.95rem; color: var(--c-text);
-            outline: none; min-width: 0;
+            flex: 1;
+            padding: 14px 4px;
+            border: none;
+            background: transparent;
+            font-size: 0.95rem;
+            color: var(--c-text);
+            outline: none;
+            min-width: 0;
         }
         .search-wrapper input::placeholder { color: var(--c-text-sub); }
         .search-clear {
-            padding: 0 12px; color: var(--c-text-sub); font-size: 0.9rem;
-            display: none; align-items: center; transition: color var(--t-fast);
+            padding: 0 12px;
+            color: var(--c-text-sub);
+            font-size: 0.9rem;
+            display: none;
+            align-items: center;
+            transition: color var(--t-fast);
         }
         .search-clear.visible { display: flex; }
         .search-clear:hover { color: var(--c-danger); }
         .search-btn {
             background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700));
-            color: #fff; padding: 0 28px;
+            color: #fff;
+            padding: 0 28px;
             border-radius: var(--r-full);
-            font-weight: 700; font-size: 0.92rem;
-            display: inline-flex; align-items: center; gap: 8px;
+            font-weight: 700;
+            font-size: 0.92rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             transition: all var(--t-base);
-            min-height: 48px; flex-shrink: 0;
+            min-height: 48px;
+            flex-shrink: 0;
         }
         .search-btn:hover {
             transform: scale(1.02);
             box-shadow: 0 8px 24px rgba(30, 136, 229, 0.4);
         }
-
-        .suggestions-box {
-            position: absolute;
-            top: calc(100% + 10px);
-            left: 0; right: 0;
-            background: var(--c-surface);
-            border-radius: var(--r-lg);
-            box-shadow: var(--sh-xl);
-            border: 1px solid var(--c-border);
-            max-height: 420px; overflow-y: auto;
-            opacity: 0; visibility: hidden;
-            transform: translateY(-8px);
-            transition: all var(--t-base); z-index: 100;
-        }
-        .suggestions-box.show { opacity: 1; visibility: visible; transform: translateY(0); }
-        .suggestion-item {
-            padding: 12px 20px; cursor: pointer;
-            display: flex; align-items: center; gap: 12px;
-            transition: background var(--t-fast);
-            border-bottom: 1px solid var(--c-border);
-        }
-        .suggestion-item:last-child { border-bottom: none; }
-        .suggestion-item:hover, .suggestion-item.active { background: var(--c-surface-2); }
-        .suggestion-item .text {
-            flex: 1; font-weight: 500; font-size: 0.92rem;
-            color: var(--c-text); overflow: hidden;
-            text-overflow: ellipsis; white-space: nowrap;
-        }
-        .suggestion-item .highlight { color: var(--c-primary-600); font-weight: 800; }
-        .suggestion-item .sub-text { font-size: 0.75rem; color: var(--c-text-sub); flex-shrink: 0; }
-        .suggestion-item .badge {
-            background: var(--c-primary-50);
-            color: var(--c-primary-700);
-            padding: 3px 10px;
-            border-radius: var(--r-full);
-            font-size: 0.68rem;
-            font-weight: 700;
-            flex-shrink: 0;
-        }
-        [data-theme="dark"] .suggestion-item .badge {
-            background: rgba(44, 122, 184, 0.2);
-            color: #7ec8e3;
-        }
-        .suggestion-view-all {
-            background: linear-gradient(90deg, var(--c-primary-50), transparent);
-            border-bottom: 2px solid var(--c-primary-500) !important;
-        }
-        [data-theme="dark"] .suggestion-view-all {
-            background: linear-gradient(90deg, rgba(44, 122, 184, 0.15), transparent);
-        }
-        .suggestion-empty {
-            padding: 24px; text-align: center;
-            color: var(--c-text-muted); font-size: 0.88rem;
-        }
-
-        /* FILTERS */
+        
+        /* ============================================================
+           FILTERS
+           ============================================================ */
         .filters-row {
-            display: flex; justify-content: center;
-            gap: 10px; flex-wrap: wrap; margin-bottom: 20px;
+            display: flex;
+            justify-content: center;
+            gap: 10px;
+            flex-wrap: wrap;
+            margin-bottom: 24px;
         }
         .filter-select {
             background: var(--c-surface);
-            padding: 9px 16px;
+            padding: 10px 18px;
             border-radius: var(--r-full);
             border: 1.5px solid var(--c-border);
             color: var(--c-text);
-            font-size: 0.85rem; font-weight: 600;
-            cursor: pointer; transition: all var(--t-fast);
-            min-width: 160px; font-family: inherit;
+            font-size: 0.85rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all var(--t-fast);
+            min-width: 170px;
+            font-family: inherit;
         }
+        .filter-select:hover { border-color: var(--c-verified); }
         .filter-select:focus {
             border-color: var(--c-verified);
             outline: none;
             box-shadow: 0 0 0 3px rgba(30, 136, 229, 0.12);
         }
-
-        /* FEATURED */
+        
+        /* ============================================================
+           FEATURED SUPPLIERS
+           ============================================================ */
         .featured-section {
             position: relative;
             border-radius: var(--r-xl);
             padding: 24px;
-            margin: 12px 0 24px;
-            background: linear-gradient(135deg, rgba(30, 136, 229, 0.06), rgba(30, 136, 229, 0.02));
-            border: 1.5px solid rgba(30, 136, 229, 0.2);
+            margin: 0 0 24px;
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.06), rgba(241, 196, 15, 0.02));
+            border: 1.5px solid rgba(241, 196, 15, 0.25);
         }
         [data-theme="dark"] .featured-section {
-            background: linear-gradient(135deg, rgba(30, 136, 229, 0.08), rgba(30, 136, 229, 0.02));
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.08), rgba(241, 196, 15, 0.02));
         }
         .featured-header {
-            display: flex; justify-content: space-between;
-            align-items: center; margin-bottom: 16px;
-            gap: 12px; flex-wrap: wrap;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 18px;
+            gap: 12px;
+            flex-wrap: wrap;
         }
         .featured-title {
-            font-size: 1.15rem; font-weight: 800;
+            font-size: 1.1rem;
+            font-weight: 800;
             color: var(--c-text);
-            display: flex; align-items: center; gap: 10px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
             padding-right: 14px;
-            border-right: 4px solid var(--c-verified);
+            border-right: 4px solid var(--c-gold);
         }
-        .featured-title i { color: var(--c-verified); }
+        .featured-title i { color: var(--c-gold); animation: crownShine 3s ease-in-out infinite; }
         .featured-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
-            gap: 20px;
+            gap: 18px;
         }
-
-        /* RESULTS */
+        
+        /* ============================================================
+           RESULTS INFO
+           ============================================================ */
         .results-info {
-            display: flex; justify-content: space-between;
-            align-items: center; gap: 12px;
-            flex-wrap: wrap; margin-bottom: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            margin-bottom: 18px;
             padding: 0 4px;
         }
         .results-count {
             color: var(--c-text-muted);
-            font-size: 0.88rem; font-weight: 600;
-            display: flex; align-items: center; gap: 8px;
+            font-size: 0.9rem;
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
-        .results-count strong { color: var(--c-verified); font-weight: 800; }
-
-        /* SUPPLIER CARD */
+        .results-count strong {
+            color: var(--c-verified);
+            font-weight: 800;
+        }
+        
+        /* ============================================================
+           SUPPLIERS GRID
+           ============================================================ */
         .suppliers-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
             gap: 20px;
         }
+        
         .supplier-card {
             background: var(--c-surface);
             border-radius: var(--r-lg);
@@ -512,7 +517,8 @@
             box-shadow: var(--sh-sm);
             transition: all var(--t-base);
             border: 1px solid var(--c-border);
-            display: flex; flex-direction: column;
+            display: flex;
+            flex-direction: column;
             position: relative;
             animation: cardIn 0.5s cubic-bezier(0.22, 1, 0.36, 1) backwards;
             height: 100%;
@@ -525,6 +531,7 @@
         [data-theme="dark"] .supplier-card:hover {
             box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6);
         }
+        
         .supplier-card-header {
             position: relative;
             padding: 24px 20px 60px;
@@ -536,33 +543,50 @@
         .supplier-card-header::before {
             content: '';
             position: absolute; inset: 0;
-            background-image:
-                radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06) 1px, transparent 1px);
+            background-image: radial-gradient(circle at 20% 30%, rgba(255,255,255,0.06) 1px, transparent 1px);
             background-size: 30px 30px;
             pointer-events: none;
         }
+        
         .supplier-badges-top {
-            position: absolute; top: 12px; right: 12px;
-            display: flex; flex-direction: column;
-            gap: 6px; z-index: 3;
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            z-index: 3;
         }
+        
         .badge-pill {
-            display: inline-flex; align-items: center; gap: 5px;
-            padding: 4px 10px; border-radius: var(--r-full);
-            font-size: 0.65rem; font-weight: 800;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            padding: 4px 10px;
+            border-radius: var(--r-full);
+            font-size: 0.65rem;
+            font-weight: 800;
             backdrop-filter: blur(10px);
             white-space: nowrap;
             box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+            animation: badgePop 0.4s ease;
         }
-        .badge-verified { background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700)); color: #fff; }
-        .badge-active { background: rgba(46, 204, 113, 0.9); color: #fff; }
+        .badge-verified {
+            background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700));
+            color: #fff;
+        }
+        .badge-gold {
+            background: linear-gradient(135deg, #f39c12, #e67e22);
+            color: #fff;
+        }
+        
         .supplier-avatar-wrapper {
             position: relative; z-index: 2;
             display: flex; align-items: center; gap: 14px;
         }
+        
         .supplier-avatar-lg {
             width: 64px; height: 64px; border-radius: 50%;
-            background: linear-gradient(135deg, #1e88e5, #0d47a1);
             color: #fff;
             display: flex; align-items: center; justify-content: center;
             font-size: 1.5rem; font-weight: 800;
@@ -570,8 +594,28 @@
             box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
             border: 3px solid rgba(255, 255, 255, 0.15);
             overflow: hidden;
+            position: relative;
         }
         .supplier-avatar-lg img { width: 100%; height: 100%; object-fit: cover; }
+        
+        .avatar-rank-badge {
+            position: absolute;
+            top: -6px;
+            right: -6px;
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: var(--c-gold);
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.85rem;
+            font-weight: 900;
+            border: 2px solid #fff;
+            box-shadow: 0 4px 12px rgba(241, 196, 15, 0.4);
+        }
+        
         .supplier-name-block { flex: 1; min-width: 0; }
         .supplier-name {
             font-size: 1rem; font-weight: 800;
@@ -587,90 +631,126 @@
             color: rgba(255, 255, 255, 0.75);
             display: flex; align-items: center; gap: 4px;
         }
+        
         .supplier-card-body {
             padding: 0 20px 20px;
-            flex: 1; display: flex; flex-direction: column;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
             margin-top: -36px;
         }
+        
         .supplier-stats-row {
             display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 8px;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 4px;
             background: var(--c-surface);
             border-radius: var(--r-md);
-            padding: 12px;
+            padding: 12px 8px;
             box-shadow: 0 4px 16px rgba(10, 37, 64, 0.08);
             border: 1px solid var(--c-border);
             margin-bottom: 14px;
-            position: relative; z-index: 2;
+            position: relative;
+            z-index: 2;
         }
-        .supplier-stat { text-align: center; }
+        .supplier-stat {
+            text-align: center;
+            padding: 0 2px;
+            position: relative;
+        }
+        .supplier-stat + .supplier-stat::before {
+            content: '';
+            position: absolute;
+            right: 0; top: 15%;
+            height: 70%;
+            width: 1px;
+            background: var(--c-border);
+        }
         .supplier-stat-value {
-            display: block; font-size: 1.1rem;
-            font-weight: 900; color: var(--c-text);
-            line-height: 1; font-variant-numeric: tabular-nums;
+            display: block;
+            font-size: 1.05rem;
+            font-weight: 900;
+            color: var(--c-text);
+            line-height: 1;
+            font-variant-numeric: tabular-nums;
         }
         .supplier-stat-value.accent { color: var(--c-accent-dark); }
         .supplier-stat-value.primary { color: var(--c-verified); }
+        .supplier-stat-value.gold { color: #d4a017; }
         .supplier-stat-label {
-            display: block; font-size: 0.62rem;
-            color: var(--c-text-sub); font-weight: 700;
-            margin-top: 4px; text-transform: uppercase;
-            letter-spacing: 0.3px;
+            display: block;
+            font-size: 0.6rem;
+            color: var(--c-text-sub);
+            font-weight: 700;
+            margin-top: 5px;
         }
-        .supplier-featured-preview { display: flex; gap: 6px; margin-bottom: 14px; }
-        .supplier-product-thumb {
-            flex: 1; aspect-ratio: 1 / 1;
-            border-radius: var(--r-md);
-            background: var(--c-surface-2);
-            overflow: hidden;
-            border: 1px solid var(--c-border);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 1.5rem;
-            transition: all var(--t-fast);
-            position: relative;
+        
+        .supplier-categories {
+            display: flex;
+            gap: 6px;
+            flex-wrap: wrap;
+            margin-bottom: 14px;
         }
-        .supplier-product-thumb:hover {
-            border-color: var(--c-verified);
-            transform: scale(1.05);
+        .category-chip {
+            background: var(--c-primary-50);
+            color: var(--c-primary-700);
+            padding: 3px 10px;
+            border-radius: var(--r-full);
+            font-size: 0.68rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
         }
-        .supplier-product-thumb img { width: 100%; height: 100%; object-fit: cover; }
-        .supplier-actions {
-            display: flex; gap: 6px;
-            margin-top: auto; padding-top: 12px;
-            border-top: 1px solid var(--c-border);
+        [data-theme="dark"] .category-chip {
+            background: rgba(44, 122, 184, 0.15);
+            color: #7ec8e3;
         }
-        .btn-supplier {
-            flex: 1; min-height: 40px;
-            padding: 8px 10px;
-            border-radius: var(--r-md);
-            font-weight: 700; font-size: 0.78rem;
-            display: inline-flex; align-items: center; justify-content: center;
-            gap: 6px; transition: all var(--t-fast);
-            text-decoration: none; border: none;
-            white-space: nowrap; cursor: pointer;
-        }
-        .btn-view-supplier { background: var(--c-primary-900); color: #fff; }
-        .btn-view-supplier:hover { background: var(--c-verified); }
-        .btn-wa { background: var(--c-whatsapp); color: #fff; }
-        .btn-wa:hover { background: #1da851; }
-        .btn-icon-supplier {
-            flex: 0 0 auto; width: 40px;
+        .category-chip.more {
             background: var(--c-surface-2);
             color: var(--c-text-muted);
             border: 1px solid var(--c-border);
         }
-        .btn-icon-supplier:hover {
-            background: var(--c-primary-50);
-            color: var(--c-verified);
-            border-color: var(--c-verified);
+        
+        .supplier-actions {
+            display: flex;
+            gap: 8px;
+            margin-top: auto;
+            padding-top: 14px;
+            border-top: 1px solid var(--c-border);
         }
-        [data-theme="dark"] .btn-icon-supplier:hover {
-            background: rgba(30, 136, 229, 0.15);
-            color: #7ec8e3;
+        
+        .btn-supplier {
+            flex: 1;
+            min-height: 42px;
+            padding: 9px 12px;
+            border-radius: var(--r-md);
+            font-weight: 700;
+            font-size: 0.8rem;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+            transition: all var(--t-fast);
+            text-decoration: none;
+            border: none;
+            white-space: nowrap;
+            cursor: pointer;
         }
-
-        /* SKELETON */
+        .btn-view-supplier {
+            background: var(--c-primary-900);
+            color: #fff;
+        }
+        .btn-view-supplier:hover { background: var(--c-verified); }
+        .btn-wa {
+            background: var(--c-whatsapp);
+            color: #fff;
+        }
+        .btn-wa:hover { background: #1da851; }
+        
+        /* ============================================================
+           SKELETON
+           ============================================================ */
         .skeleton {
             background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
             background-size: 200% 100%;
@@ -686,11 +766,15 @@
         }
         .skeleton-card-inner {
             padding: 24px;
-            display: flex; flex-direction: column;
-            gap: 12px; height: 100%;
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            height: 100%;
         }
-
-        /* EMPTY STATE */
+        
+        /* ============================================================
+           EMPTY STATE
+           ============================================================ */
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
@@ -706,8 +790,10 @@
             margin-bottom: 16px;
         }
         .empty-state h3 {
-            font-size: 1.2rem; color: var(--c-text);
-            margin-bottom: 8px; font-weight: 800;
+            font-size: 1.2rem;
+            color: var(--c-text);
+            margin-bottom: 8px;
+            font-weight: 800;
         }
         .empty-state p {
             color: var(--c-text-muted);
@@ -715,12 +801,15 @@
             margin-bottom: 20px;
         }
         .empty-state .btn-reset-filters {
-            display: inline-flex; align-items: center;
+            display: inline-flex;
+            align-items: center;
             gap: 8px;
             background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700));
-            color: #fff; padding: 12px 26px;
+            color: #fff;
+            padding: 12px 26px;
             border-radius: var(--r-full);
-            font-weight: 700; font-size: 0.9rem;
+            font-weight: 700;
+            font-size: 0.9rem;
             transition: all var(--t-base);
             box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3);
         }
@@ -728,56 +817,54 @@
             transform: translateY(-2px);
             box-shadow: 0 12px 32px rgba(30, 136, 229, 0.45);
         }
-
-        /* INFINITE SCROLL */
-        .infinite-sentinel { height: 20px; margin-top: 20px; }
-        .infinite-loading {
-            display: flex; justify-content: center;
-            padding: 24px; color: var(--c-text-muted);
-            font-weight: 600; font-size: 0.88rem;
-            align-items: center; gap: 12px;
-        }
-        .infinite-loading .dots { display: inline-flex; gap: 4px; }
-        .infinite-loading .dots span {
-            width: 6px; height: 6px;
-            border-radius: 50%;
-            background: var(--c-verified);
-            animation: pulse 1.4s ease-in-out infinite;
-        }
-        .infinite-loading .dots span:nth-child(2) { animation-delay: 0.2s; }
-        .infinite-loading .dots span:nth-child(3) { animation-delay: 0.4s; }
-
-        /* SCROLL TOP */
+        
+        /* ============================================================
+           SCROLL TOP
+           ============================================================ */
         .scroll-top {
-            position: fixed; bottom: 32px; right: 24px;
-            width: 48px; height: 48px;
+            position: fixed;
+            bottom: 32px;
+            right: 24px;
+            width: 48px;
+            height: 48px;
             border-radius: 50%;
             background: linear-gradient(135deg, var(--c-verified), var(--c-primary-700));
-            color: #fff; font-size: 1rem;
+            color: #fff;
+            font-size: 1rem;
             box-shadow: var(--sh-lg);
-            display: flex; align-items: center; justify-content: center;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             transition: all var(--t-base);
-            opacity: 0; visibility: hidden;
+            opacity: 0;
+            visibility: hidden;
             transform: translateY(16px);
             z-index: 90;
         }
         .scroll-top.visible {
-            opacity: 1; visibility: visible; transform: translateY(0);
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
         }
         .scroll-top:hover {
             transform: translateY(-4px);
             box-shadow: var(--sh-xl);
         }
-
-        /* TOAST */
+        
+        /* ============================================================
+           TOAST
+           ============================================================ */
         .toast-container {
-            position: fixed; bottom: 24px;
+            position: fixed;
+            bottom: 24px;
             left: 50%;
             transform: translateX(-50%);
             z-index: 9999;
             width: min(420px, calc(100% - 32px));
-            display: flex; flex-direction: column;
-            gap: 10px; pointer-events: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            pointer-events: none;
         }
         .toast {
             background: var(--c-surface);
@@ -786,7 +873,9 @@
             padding: 14px 18px;
             border-radius: var(--r-md);
             box-shadow: var(--sh-xl);
-            display: flex; align-items: center; gap: 12px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
             animation: fadeUp 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             border-right: 4px solid var(--c-verified);
             pointer-events: auto;
@@ -798,12 +887,16 @@
         .toast .toast-title { font-weight: 700; font-size: 0.9rem; margin-bottom: 2px; }
         .toast .toast-desc { font-size: 0.8rem; color: var(--c-text-muted); line-height: 1.4; }
         .toast .toast-close {
-            width: 26px; height: 26px;
+            width: 26px;
+            height: 26px;
             border-radius: 50%;
             background: var(--c-surface-2);
             color: var(--c-text-muted);
-            display: flex; align-items: center; justify-content: center;
-            font-size: 0.75rem; flex-shrink: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            flex-shrink: 0;
             transition: all var(--t-fast);
         }
         .toast .toast-close:hover { background: var(--c-danger); color: #fff; }
@@ -811,8 +904,10 @@
         .toast.warning { border-right-color: var(--c-warning); }
         .toast.error { border-right-color: var(--c-danger); }
         .toast.info { border-right-color: var(--c-purple); }
-
-        /* FOOTER */
+        
+        /* ============================================================
+           FOOTER
+           ============================================================ */
         .footer {
             background: linear-gradient(180deg, var(--c-primary-900), #061a2e);
             color: rgba(255, 255, 255, 0.8);
@@ -821,29 +916,35 @@
         }
         .footer-inner { max-width: var(--container); margin: 0 auto; }
         .footer-links {
-            display: flex; justify-content: center;
-            flex-wrap: wrap; gap: 8px 20px;
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px 20px;
             margin-bottom: 24px;
             padding-bottom: 24px;
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
         }
         .footer-links a {
             color: rgba(255, 255, 255, 0.65);
-            font-size: 0.88rem; font-weight: 500;
+            font-size: 0.88rem;
+            font-weight: 500;
             transition: color var(--t-fast);
         }
         .footer-links a:hover { color: #7ec8e3; }
         .footer-copy {
-            text-align: center; font-size: 0.82rem;
+            text-align: center;
+            font-size: 0.82rem;
             color: rgba(255, 255, 255, 0.4);
         }
-
-        /* RESPONSIVE */
+        
+        /* ============================================================
+           RESPONSIVE
+           ============================================================ */
         @media (max-width: 1024px) {
-            .suppliers-grid, .featured-grid {
-                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            }
+            .suppliers-grid,
+            .featured-grid { grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); }
         }
+        
         @media (max-width: 860px) {
             .menu-toggle { display: inline-flex; }
             .nav-links {
@@ -853,7 +954,8 @@
                 background: rgba(10, 37, 64, 0.98);
                 backdrop-filter: blur(20px);
                 flex-direction: column;
-                padding: 16px; gap: 4px;
+                padding: 16px;
+                gap: 4px;
                 border-bottom: 1px solid rgba(255, 255, 255, 0.1);
                 transform: translateY(-120%);
                 transition: transform var(--t-base);
@@ -863,70 +965,84 @@
             }
             .nav-links.open { transform: translateY(0); }
             .nav-links a, .dropdown-btn {
-                width: 100%; justify-content: flex-start;
+                width: 100%;
+                justify-content: flex-start;
                 padding: 12px 16px;
             }
             .dropdown { width: 100%; }
             .dropdown-content {
-                position: static; transform: none;
+                position: static;
+                transform: none;
                 box-shadow: none;
                 background: rgba(255, 255, 255, 0.05);
-                border: none; max-height: 0;
+                border: none;
+                max-height: 0;
                 overflow: hidden;
                 transition: max-height var(--t-base);
-                opacity: 1; visibility: visible;
+                opacity: 1;
+                visibility: visible;
             }
             .dropdown-content.show { max-height: 400px; }
             .dropdown-content a {
                 color: rgba(255, 255, 255, 0.85);
                 border-bottom-color: rgba(255, 255, 255, 0.05);
             }
-            .stats-bar { grid-template-columns: repeat(2, 1fr); }
-            .stats-bar-item:nth-child(2) { border-left: none; }
-            .stats-bar-item:nth-child(n+3) {
-                border-top: 1px solid rgba(255, 255, 255, 0.06);
-            }
+            
+            .hero-stats { grid-template-columns: 1fr; }
+            .hero-stat + .hero-stat::before { display: none; }
+            .hero-stat + .hero-stat { border-top: 1px solid rgba(255, 255, 255, 0.08); }
         }
+        
         @media (max-width: 640px) {
             .main-container { padding: 14px 14px 40px; }
-            .page-header { padding: 32px 20px 26px; border-radius: var(--r-lg); }
-            .page-header h1 { font-size: 1.4rem; }
-            .header-badge { font-size: 0.7rem; padding: 5px 12px; }
-            .stats-bar { grid-template-columns: repeat(2, 1fr); }
+            .hero { padding: 36px 20px 30px; border-radius: var(--r-lg); }
+            .hero h1 { font-size: 1.5rem; }
+            .hero-badge { font-size: 0.7rem; padding: 5px 12px; }
+            
             .search-wrapper { flex-wrap: wrap; padding: 6px; border-radius: var(--r-lg); }
             .search-icon { display: none; }
             .search-wrapper input { padding: 12px 16px; width: 100%; }
             .search-btn { width: 100%; justify-content: center; min-height: 46px; }
-            .suppliers-grid, .featured-grid { grid-template-columns: 1fr; gap: 14px; }
-            .filters-row { gap: 6px; }
-            .filter-select { min-width: 120px; font-size: 0.78rem; padding: 8px 12px; }
+            
+            .suppliers-grid,
+            .featured-grid { grid-template-columns: 1fr; gap: 14px; }
+            
+            .filters-row { gap: 8px; }
+            .filter-select { min-width: 130px; font-size: 0.78rem; padding: 9px 14px; flex: 1; }
+            
             .footer { padding: 32px 16px 20px; }
             .footer-links { gap: 10px; }
             .footer-links a { font-size: 0.78rem; }
+            
             .scroll-top { bottom: 20px; right: 16px; width: 42px; height: 42px; }
+            
             .supplier-card-header { padding: 20px 16px 56px; }
             .supplier-card-body { padding: 0 16px 16px; }
             .supplier-avatar-lg { width: 56px; height: 56px; font-size: 1.3rem; }
             .supplier-name { font-size: 0.92rem; }
-            .supplier-stats-row { padding: 10px; }
-            .supplier-stat-value { font-size: 1rem; }
+            .supplier-stats-row { padding: 10px 6px; }
+            .supplier-stat-value { font-size: 0.95rem; }
         }
+        
         @media (prefers-reduced-motion: reduce) {
             *, *::before, *::after {
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;<body>
+                scroll-behavior: auto !important;
+            }
+        }
+    </style>
+</head>
+<body>
 
     <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
-
-    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
 
     <!-- NAVBAR -->
     <header class="navbar" role="banner">
         <div class="navbar-inner">
             <div class="logo">
-                <a href="/" aria-label="كيماتو">
+                <a href="index.html" aria-label="كيماتو">
                     <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager"
                          onerror="this.style.display='none'" />
                     <span class="logo-text">
@@ -948,12 +1064,7 @@
                         <i class="fas fa-user-circle"></i> القائمة
                         <i class="fas fa-chevron-down" style="font-size:0.7em;"></i>
                     </button>
-                    <div class="dropdown-content" id="dropdownContent" role="menu">
-                        <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                        <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                        <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
-                    </div>
+                    <div class="dropdown-content" id="dropdownContent" role="menu"></div>
                 </div>
 
                 <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي" title="الوضع الليلي">
@@ -970,9 +1081,9 @@
     <!-- MAIN -->
     <main class="main-container" id="main">
 
-        <!-- PAGE HEADER -->
-        <section class="page-header animate-in" aria-labelledby="pageTitle">
-            <div class="header-bg-icons" aria-hidden="true">
+        <!-- HERO -->
+        <section class="hero animate-in" aria-labelledby="heroTitle">
+            <div class="hero-bg-icons" aria-hidden="true">
                 <span class="icon-float">🏭</span>
                 <span class="icon-float rotate">⚙️</span>
                 <span class="icon-float">🚛</span>
@@ -981,13 +1092,13 @@
                 <span class="icon-float">🧪</span>
             </div>
 
-            <div class="header-content">
-                <div class="header-badge">
+            <div class="hero-content">
+                <div class="hero-badge">
                     <span class="dot"></span>
                     <span>شبكة موردين المواد الكيماوية</span>
                 </div>
 
-                <h1 id="pageTitle">
+                <h1 id="heroTitle">
                     🏭 <span class="highlight">موردو المواد</span> الكيماوية
                 </h1>
 
@@ -995,26 +1106,21 @@
                     تصفح أفضل موردي المواد الخام في مصر — صودا كاوية، حمض كبريتيك، مذيبات — مع تواصل مباشر وأسعار تنافسية
                 </p>
 
-                <div class="stats-bar" role="list">
-                    <div class="stats-bar-item" role="listitem">
-                        <span class="stats-bar-icon" aria-hidden="true">🏢</span>
-                        <span class="stats-bar-number" id="statSuppliers">—</span>
-                        <span class="stats-bar-label">مورد</span>
+                <div class="hero-stats" role="list">
+                    <div class="hero-stat" role="listitem">
+                        <span class="hero-stat-icon" aria-hidden="true">🏢</span>
+                        <span class="hero-stat-number" id="statSuppliers">—</span>
+                        <span class="hero-stat-label">مورد</span>
                     </div>
-                    <div class="stats-bar-item" role="listitem">
-                        <span class="stats-bar-icon" aria-hidden="true">✅</span>
-                        <span class="stats-bar-number" id="statVerified">—</span>
-                        <span class="stats-bar-label">موثّق</span>
+                    <div class="hero-stat" role="listitem">
+                        <span class="hero-stat-icon" aria-hidden="true">📦</span>
+                        <span class="hero-stat-number" id="statProducts">—</span>
+                        <span class="hero-stat-label">منتج</span>
                     </div>
-                    <div class="stats-bar-item" role="listitem">
-                        <span class="stats-bar-icon" aria-hidden="true">📍</span>
-                        <span class="stats-bar-number" id="statCities">—</span>
-                        <span class="stats-bar-label">مدينة</span>
-                    </div>
-                    <div class="stats-bar-item" role="listitem">
-                        <span class="stats-bar-icon" aria-hidden="true">📦</span>
-                        <span class="stats-bar-number" id="statProducts">—</span>
-                        <span class="stats-bar-label">منتج</span>
+                    <div class="hero-stat" role="listitem">
+                        <span class="hero-stat-icon" aria-hidden="true">👁️</span>
+                        <span class="hero-stat-number" id="statViews">—</span>
+                        <span class="hero-stat-label">مشاهدة</span>
                     </div>
                 </div>
             </div>
@@ -1022,27 +1128,22 @@
 
         <!-- SEARCH -->
         <div class="search-section animate-in" style="animation-delay: 0.1s;">
-            <div class="search-wrapper-outer">
-                <div class="search-wrapper" role="search">
-                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
-                    <input
-                        type="text"
-                        id="searchInput"
-                        placeholder="ابحث باسم المورد أو الشركة أو المدينة..."
-                        autocomplete="off"
-                        maxlength="100"
-                        aria-label="البحث"
-                        aria-autocomplete="list"
-                        aria-controls="suggestionsBox"
-                    />
-                    <button class="search-clear" id="clearSearch" type="button" aria-label="مسح البحث">
-                        <i class="fas fa-times"></i>
-                    </button>
-                    <button class="search-btn" id="searchBtn" type="button">
-                        <i class="fas fa-search" aria-hidden="true"></i> بحث
-                    </button>
-                </div>
-                <div class="suggestions-box" id="suggestionsBox" role="listbox"></div>
+            <div class="search-wrapper" role="search">
+                <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                <input
+                    type="text"
+                    id="searchInput"
+                    placeholder="ابحث باسم المورد أو الشركة أو المدينة..."
+                    autocomplete="off"
+                    maxlength="100"
+                    aria-label="البحث"
+                />
+                <button class="search-clear" id="clearSearch" type="button" aria-label="مسح البحث">
+                    <i class="fas fa-times"></i>
+                </button>
+                <button class="search-btn" id="searchBtn" type="button">
+                    <i class="fas fa-search" aria-hidden="true"></i> بحث
+                </button>
             </div>
         </div>
 
@@ -1055,14 +1156,14 @@
             <select class="filter-select" id="verifiedFilter" aria-label="حالة التحقق">
                 <option value="all">👥 كل الموردين</option>
                 <option value="verified">✅ الموثّقين فقط</option>
-                <option value="unverified">⏳ غير الموثّقين</option>
             </select>
 
             <select class="filter-select" id="sortFilter" aria-label="ترتيب">
                 <option value="products">📦 الأكثر منتجات</option>
-                <option value="newest">🕐 الأحدث</option>
-                <option value="name">🔤 الاسم (أ - ي)</option>
+                <option value="rating">⭐ الأعلى تقييماً</option>
                 <option value="views">👁️ الأكثر مشاهدة</option>
+                <option value="contacts">💬 الأكثر تواصلاً</option>
+                <option value="newest">🕐 الأحدث</option>
             </select>
         </div>
 
@@ -1070,8 +1171,8 @@
         <section id="featuredSection" class="featured-section animate-in" style="display: none; animation-delay: 0.18s;">
             <div class="featured-header">
                 <h2 class="featured-title">
-                    <i class="fas fa-star"></i>
-                    موردون موثّقون مميزون
+                    <i class="fas fa-crown"></i>
+                    موردون مميزون
                 </h2>
             </div>
             <div class="featured-grid" id="featuredGrid"></div>
@@ -1087,17 +1188,43 @@
 
         <!-- SUPPLIERS GRID -->
         <div id="suppliersList" class="suppliers-grid" aria-live="polite" aria-busy="true">
-            <!-- Skeleton will be injected here -->
-        </div>
-
-        <!-- INFINITE SCROLL SENTINEL -->
-        <div class="infinite-sentinel" id="infiniteSentinel"></div>
-
-        <div id="infiniteLoading" class="infinite-loading" style="display: none;">
-            <span>جاري تحميل المزيد</span>
-            <div class="dots">
-                <span></span><span></span><span></span>
-            </div>
+            <!-- Skeleton -->
+            <div class="skeleton-card"><div class="skeleton-card-inner">
+                <div class="skeleton" style="height: 60px; width: 60px; border-radius: 50%;"></div>
+                <div class="skeleton" style="height: 16px; width: 70%;"></div>
+                <div class="skeleton" style="height: 12px; width: 40%;"></div>
+                <div class="skeleton" style="height: 60px; width: 100%; margin-top: 12px;"></div>
+            </div></div>
+            <div class="skeleton-card"><div class="skeleton-card-inner">
+                <div class="skeleton" style="height: 60px; width: 60px; border-radius: 50%;"></div>
+                <div class="skeleton" style="height: 16px; width: 70%;"></div>
+                <div class="skeleton" style="height: 12px; width: 40%;"></div>
+                <div class="skeleton" style="height: 60px; width: 100%; margin-top: 12px;"></div>
+            </div></div>
+            <div class="skeleton-card"><div class="skeleton-card-inner">
+                <div class="skeleton" style="height: 60px; width: 60px; border-radius: 50%;"></div>
+                <div class="skeleton" style="height: 16px; width: 70%;"></div>
+                <div class="skeleton" style="height: 12px; width: 40%;"></div>
+                <div class="skeleton" style="height: 60px; width: 100%; margin-top: 12px;"></div>
+            </div></div>
+            <div class="skeleton-card"><div class="skeleton-card-inner">
+                <div class="skeleton" style="height: 60px; width: 60px; border-radius: 50%;"></div>
+                <div class="skeleton" style="height: 16px; width: 70%;"></div>
+                <div class="skeleton" style="height: 12px; width: 40%;"></div>
+                <div class="skeleton" style="height: 60px; width: 100%; margin-top: 12px;"></div>
+            </div></div>
+            <div class="skeleton-card"><div class="skeleton-card-inner">
+                <div class="skeleton" style="height: 60px; width: 60px; border-radius: 50%;"></div>
+                <div class="skeleton" style="height: 16px; width: 70%;"></div>
+                <div class="skeleton" style="height: 12px; width: 40%;"></div>
+                <div class="skeleton" style="height: 60px; width: 100%; margin-top: 12px;"></div>
+            </div></div>
+            <div class="skeleton-card"><div class="skeleton-card-inner">
+                <div class="skeleton" style="height: 60px; width: 60px; border-radius: 50%;"></div>
+                <div class="skeleton" style="height: 16px; width: 70%;"></div>
+                <div class="skeleton" style="height: 12px; width: 40%;"></div>
+                <div class="skeleton" style="height: 60px; width: 100%; margin-top: 12px;"></div>
+            </div></div>
         </div>
 
     </main>
@@ -1126,7 +1253,8 @@
             <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
         </div>
     </footer>
-            <script type="module">
+
+    <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
         const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
@@ -1144,20 +1272,11 @@
             cityFilter: 'all',
             verifiedFilter: 'all',
             sort: 'products',
-
-            page: 0,
-            pageSize: 12,
-            total: 0,
             suppliers: [],
             featuredSuppliers: [],
-            suggestions: [],
             allCities: [],
-
             user: null,
             loading: false,
-            hasMore: true,
-            selectedSuggestionIndex: -1,
-            channel: null,
         };
 
         const THEME_KEY = 'chemato-theme';
@@ -1176,21 +1295,7 @@
         };
 
         const sanitizePhone = (p) => p ? String(p).replace(/\D/g, '') : '';
-        const isValidUUID = (id) =>
-            id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
-
-        const sanitizeSearch = (s) =>
-            String(s || '').trim().slice(0, 100).replace(/[<>'"]/g, '');
-
         const formatNumber = (n) => Number(n || 0).toLocaleString('ar-EG');
-
-        const debounce = (fn, delay = 300) => {
-            let timer;
-            return (...args) => {
-                clearTimeout(timer);
-                timer = setTimeout(() => fn(...args), delay);
-            };
-        };
 
         // ============================================================
         // THEME
@@ -1225,7 +1330,7 @@
             setTimeout(() => toast.remove(), 300);
         };
 
-        const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = '') => {
+        const showToast = (icon, title, desc, type = '') => {
             const container = document.getElementById('toastContainer');
             if (!container) return;
 
@@ -1245,18 +1350,7 @@
 
             const descEl = document.createElement('div');
             descEl.className = 'toast-desc';
-            descEl.textContent = desc + (linkText ? ' ' : '');
-
-            if (linkText && linkUrl) {
-                const link = document.createElement('a');
-                link.href = linkUrl;
-                link.textContent = linkText;
-                if (!linkUrl.startsWith('/') && !linkUrl.startsWith(window.location.origin)) {
-                    link.rel = 'noopener noreferrer';
-                    link.target = '_blank';
-                }
-                descEl.appendChild(link);
-            }
+            descEl.textContent = desc;
 
             content.appendChild(titleEl);
             content.appendChild(descEl);
@@ -1273,23 +1367,6 @@
             container.appendChild(toast);
 
             setTimeout(() => removeToast(toast), 6000);
-        };
-
-        // ============================================================
-        // READING PROGRESS
-        // ============================================================
-        const initReadingProgress = () => {
-            const bar = document.getElementById('readingProgress');
-            if (!bar) return;
-            const update = () => {
-                const winScroll = document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-                bar.style.width = scrolled + '%';
-            };
-            window.addEventListener('scroll', update, { passive: true });
-            window.addEventListener('resize', update, { passive: true });
-            update();
         };
 
         // ============================================================
@@ -1323,7 +1400,7 @@
         };
 
         // ============================================================
-        // AUTH CHECK
+        // AUTH
         // ============================================================
         const checkUser = async () => {
             try {
@@ -1331,40 +1408,37 @@
                 state.user = user || null;
 
                 const dropdownContent = document.getElementById('dropdownContent');
+                if (!dropdownContent) return;
 
                 if (user) {
                     const { data: profile } = await supabase
                         .from('profiles')
-                        .select('user_type, full_name, company_name')
+                        .select('user_type')
                         .eq('id', user.id)
                         .single();
 
-                    if (dropdownContent) {
-                        const dashboardUrl = profile?.user_type === 'supplier'
-                            ? 'supplier-dashboard.html'
-                            : 'buyer-dashboard.html';
+                    const dashboardUrl = profile?.user_type === 'supplier'
+                        ? 'supplier-dashboard.html'
+                        : 'buyer-dashboard.html';
 
-                        dropdownContent.innerHTML = `
-                            <a href="${dashboardUrl}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
-                            <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
-                            <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-                        `;
+                    dropdownContent.innerHTML = `
+                        <a href="${dashboardUrl}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                        <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                    `;
 
-                        document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
-                            e.preventDefault();
-                            await supabase.auth.signOut();
-                            window.location.reload();
-                        });
-                    }
+                    document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        await supabase.auth.signOut();
+                        window.location.reload();
+                    });
                 } else {
-                    if (dropdownContent) {
-                        dropdownContent.innerHTML = `
-                            <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                            <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                            <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                            <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
-                        `;
-                    }
+                    dropdownContent.innerHTML = `
+                        <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                        <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                        <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                    `;
                 }
             } catch (e) {
                 console.warn('Auth check failed:', e.message);
@@ -1372,7 +1446,7 @@
         };
 
         // ============================================================
-        // STATS
+        // ANIMATE NUMBER
         // ============================================================
         const animateNumber = (el, target) => {
             if (!el) return;
@@ -1394,68 +1468,19 @@
             requestAnimationFrame(step);
         };
 
-        const loadStats = async () => {
-            try {
-                console.log('📊 Loading stats...');
-
-                const [suppliersRes, verifiedRes, productsRes] = await Promise.all([
-                    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier'),
-                    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier').eq('is_verified', true),
-                    supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'active'),
-                ]);
-
-                const suppliersCount = suppliersRes.count || 0;
-                const verifiedCount = verifiedRes.count || 0;
-                const productsCount = productsRes.count || 0;
-
-                // Get unique cities
-                const { data: citiesData } = await supabase
-                    .from('profiles')
-                    .select('city')
-                    .eq('user_type', 'supplier')
-                    .not('city', 'is', null);
-
-                const uniqueCities = new Set((citiesData || []).map(r => r.city).filter(Boolean));
-
-                console.log(`✅ Stats: ${suppliersCount} suppliers, ${verifiedCount} verified, ${uniqueCities.size} cities, ${productsCount} products`);
-
-                animateNumber(document.getElementById('statSuppliers'), suppliersCount);
-                animateNumber(document.getElementById('statVerified'), verifiedCount);
-                animateNumber(document.getElementById('statCities'), uniqueCities.size);
-                animateNumber(document.getElementById('statProducts'), productsCount);
-
-            } catch (e) {
-                console.warn('❌ Stats load failed:', e.message);
-                // Set default values
-                animateNumber(document.getElementById('statSuppliers'), 0);
-                animateNumber(document.getElementById('statVerified'), 0);
-                animateNumber(document.getElementById('statCities'), 0);
-                animateNumber(document.getElementById('statProducts'), 0);
-            }
-        };
-
         // ============================================================
-        // LOAD CITIES (for filter)
+        // LOAD CITIES
         // ============================================================
         const loadCities = async () => {
             try {
-                console.log('🌆 Loading cities...');
-
-                const { data, error } = await supabase
+                const { data } = await supabase
                     .from('profiles')
                     .select('city')
                     .eq('user_type', 'supplier')
                     .not('city', 'is', null);
 
-                if (error) {
-                    console.warn('❌ Cities fetch error:', error.message);
-                    return;
-                }
-
                 const cities = [...new Set((data || []).map(r => r.city).filter(Boolean))].sort();
                 state.allCities = cities;
-
-                console.log(`✅ Found ${cities.length} cities`);
 
                 const select = document.getElementById('cityFilter');
                 if (!select) return;
@@ -1466,235 +1491,275 @@
                     option.textContent = `📍 ${city}`;
                     select.appendChild(option);
                 });
-            } catch (e) {
-                console.warn('❌ Cities load exception:', e.message);
-            }
+            } catch (e) { /* silent */ }
         };
 
         // ============================================================
-        // BUILD QUERY
+        // FETCH SUPPLIER STATS
         // ============================================================
-        const buildQuery = () => {
-            let query = supabase
-                .from('profiles')
-                .select('id, full_name, company_name, city, phone, whatsapp, is_verified, created_at, avatar_url', { count: 'exact' })
-                .eq('user_type', 'supplier');
-
-            // Search - name or company or city
-            if (state.search) {
-                query = query.or(`company_name.ilike.%${state.search}%,full_name.ilike.%${state.search}%,city.ilike.%${state.search}%`);
-            }
-
-            // City filter
-            if (state.cityFilter !== 'all') {
-                query = query.eq('city', state.cityFilter);
-            }
-
-            // Verified filter
-            if (state.verifiedFilter === 'verified') {
-                query = query.eq('is_verified', true);
-            } else if (state.verifiedFilter === 'unverified') {
-                query = query.eq('is_verified', false);
-            }
-
-            // Sort
-            const sortMap = {
-                'newest': ['created_at', false],
-                'name': ['company_name', true],
-                'products': ['created_at', false],
-                'views': ['created_at', false],
-            };
-            const [sortCol, asc] = sortMap[state.sort] || sortMap['newest'];
-            query = query.order(sortCol, { ascending: asc, nullsFirst: false });
-
-            return query;
-        };
-
-        // ============================================================
-        // FETCH PRODUCTS FOR SUPPLIERS
-        // ============================================================
-        const fetchProductsForSuppliers = async (supplierIds) => {
+        const fetchSupplierStats = async (supplierIds) => {
             const map = {};
             if (!supplierIds.length) return map;
 
             try {
-                const { data, error } = await supabase
+                // Fetch all products for these suppliers in one query
+                const { data: products } = await supabase
                     .from('products')
-                    .select('id, name, image_url, price, supplier_id, views, status, is_featured')
+                    .select('id, supplier_id, views_count, category, status')
                     .in('supplier_id', supplierIds)
                     .eq('status', 'active');
 
-                if (error) {
-                    console.warn('⚠️ Products fetch error:', error.message);
-                    return map;
-                }
-
-                (data || []).forEach(p => {
+                (products || []).forEach(p => {
                     if (!map[p.supplier_id]) {
-                        map[p.supplier_id] = { products: [], count: 0, totalViews: 0, featured: [] };
+                        map[p.supplier_id] = {
+                            productCount: 0,
+                            views: 0,
+                            categories: new Set(),
+                        };
                     }
-                    map[p.supplier_id].products.push(p);
-                    map[p.supplier_id].count++;
-                    map[p.supplier_id].totalViews += (p.views || 0);
-                    if (p.is_featured) map[p.supplier_id].featured.push(p);
+                    map[p.supplier_id].productCount++;
+                    map[p.supplier_id].views += (p.views_count || 0);
+                    if (p.category) map[p.supplier_id].categories.add(p.category);
                 });
+
+                // Fetch ratings
+                const { data: reviews } = await supabase
+                    .from('reviews')
+                    .select('supplier_id, rating')
+                    .in('supplier_id', supplierIds)
+                    .eq('review_type', 'supplier');
+
+                const ratingsMap = {};
+                (reviews || []).forEach(r => {
+                    if (!ratingsMap[r.supplier_id]) ratingsMap[r.supplier_id] = { sum: 0, count: 0 };
+                    ratingsMap[r.supplier_id].sum += r.rating;
+                    ratingsMap[r.supplier_id].count++;
+                });
+
+                // Fetch contacts
+                const { data: contacts } = await supabase
+                    .from('supplier_contacts')
+                    .select('supplier_id, contact_type')
+                    .in('supplier_id', supplierIds);
+
+                const contactsMap = {};
+                (contacts || []).forEach(c => {
+                    if (!contactsMap[c.supplier_id]) contactsMap[c.supplier_id] = 0;
+                    if (c.contact_type === 'whatsapp' || c.contact_type === 'phone') {
+                        contactsMap[c.supplier_id]++;
+                    }
+                });
+
+                // Merge
+                Object.keys(map).forEach(sid => {
+                    const stats = map[sid];
+                    const rating = ratingsMap[sid];
+                    stats.ratingAvg = rating ? (rating.sum / rating.count).toFixed(1) : 0;
+                    stats.ratingCount = rating ? rating.count : 0;
+                    stats.contacts = contactsMap[sid] || 0;
+                    stats.categories = [...stats.categories];
+                });
+
+                return map;
             } catch (e) {
-                console.warn('⚠️ Products fetch exception:', e.message);
+                console.warn('Stats fetch error:', e.message);
+                return map;
             }
-            return map;
         };
 
         // ============================================================
         // LOAD SUPPLIERS
         // ============================================================
-        const renderSkeleton = () => {
-            const container = document.getElementById('suppliersList');
-            if (!container) return;
-            container.setAttribute('aria-busy', 'true');
-            container.innerHTML = Array(6).fill(0).map(() => `
-                <div class="skeleton-card">
-                    <div class="skeleton-card-inner">
-                        <div class="skeleton" style="height: 60px; width: 60px; border-radius: 50%;"></div>
-                        <div class="skeleton" style="height: 16px; width: 70%;"></div>
-                        <div class="skeleton" style="height: 12px; width: 40%;"></div>
-                        <div class="skeleton" style="height: 60px; width: 100%; margin-top: 12px;"></div>
-                        <div class="skeleton" style="height: 12px; width: 90%;"></div>
-                        <div class="skeleton" style="height: 12px; width: 60%;"></div>
-                    </div>
-                </div>
-            `).join('');
-        };
-
-        const loadSuppliers = async ({ append = false } = {}) => {
+        const loadSuppliers = async () => {
             if (state.loading) return;
             state.loading = true;
 
             const container = document.getElementById('suppliersList');
-            const infiniteLoading = document.getElementById('infiniteLoading');
-
-            if (!append) {
-                state.page = 0;
-                state.suppliers = [];
-                renderSkeleton();
-            } else {
-                if (infiniteLoading) infiniteLoading.style.display = 'flex';
-            }
+            const resultsCount = document.getElementById('resultsCount');
 
             try {
-                const from = state.page * state.pageSize;
-                const to = from + state.pageSize - 1;
+                let query = supabase
+                    .from('profiles')
+                    .select('id, full_name, company_name, city, phone, whatsapp, is_verified, avatar_url, created_at')
+                    .eq('user_type', 'supplier');
 
-                console.log(`🔄 Loading suppliers: page ${state.page + 1} (${from} to ${to})`);
-
-                const query = buildQuery().range(from, to);
-                const { data, error, count } = await query;
-
-                if (error) {
-                    console.error('❌ Suppliers query error:', error);
-                    throw error;
+                if (state.search) {
+                    query = query.or(`company_name.ilike.%${state.search}%,full_name.ilike.%${state.search}%,city.ilike.%${state.search}%`);
                 }
 
-                const suppliers = data || [];
-                state.total = count || 0;
-
-                console.log(`✅ Found ${suppliers.length} suppliers (total: ${state.total})`);
-
-                // Fetch products for these suppliers
-                const supplierIds = suppliers.map(s => s.id);
-                const productsMap = await fetchProductsForSuppliers(supplierIds);
-
-                // Enrich suppliers
-                let enriched = suppliers.map(s => ({
-                    ...s,
-                    productsData: productsMap[s.id] || { products: [], count: 0, totalViews: 0, featured: [] },
-                }));
-
-                // Client-side sort for products/views
-                if (state.sort === 'products') {
-                    enriched.sort((a, b) => b.productsData.count - a.productsData.count);
-                } else if (state.sort === 'views') {
-                    enriched.sort((a, b) => b.productsData.totalViews - a.productsData.totalViews);
+                if (state.cityFilter !== 'all') {
+                    query = query.eq('city', state.cityFilter);
                 }
 
-                if (append) {
-                    state.suppliers = [...state.suppliers, ...enriched];
-                } else {
-                    state.suppliers = enriched;
+                if (state.verifiedFilter === 'verified') {
+                    query = query.eq('is_verified', true);
                 }
 
-                renderSuppliers(enriched, !append);
-                state.hasMore = state.suppliers.length < state.total;
-                updateResultsCount();
+                const { data: suppliers, error } = await query;
 
-            } catch (error) {
-                console.error('❌ Suppliers load exception:', error);
-                if (!append) {
+                if (error) throw error;
+
+                if (!suppliers?.length) {
                     container.innerHTML = `
                         <div class="empty-state">
-                            <i class="fas fa-exclamation-triangle empty-icon" style="color: var(--c-danger);"></i>
-                            <h3>حدث خطأ في التحميل</h3>
-                            <p>${escapeHtml(error?.message || 'خطأ غير معروف')}</p>
-                            <button onclick="location.reload()" class="btn-reset-filters">
-                                <i class="fas fa-redo"></i> إعادة المحاولة
+                            <i class="fas fa-users empty-icon"></i>
+                            <h3>لا يوجد موردين</h3>
+                            <p>لم نجد أي موردين يطابقون معايير البحث</p>
+                            <button class="btn-reset-filters" id="emptyResetBtn" type="button">
+                                <i class="fas fa-redo"></i> إعادة تعيين الفلاتر
                             </button>
                         </div>
                     `;
+                    document.getElementById('emptyResetBtn')?.addEventListener('click', resetFilters);
+                    if (resultsCount) resultsCount.innerHTML = `<i class="fas fa-info-circle"></i> <span>0 مورد</span>`;
+                    state.loading = false;
+                    return;
                 }
-                showToast('⚠️', 'خطأ', 'تعذر تحميل الموردين', null, null, 'error');
+
+                // Fetch stats
+                const supplierIds = suppliers.map(s => s.id);
+                const statsMap = await fetchSupplierStats(supplierIds);
+
+                // Enrich
+                const enriched = suppliers.map(s => {
+                    const stats = statsMap[s.id] || {};
+                    return {
+                        ...s,
+                        productCount: stats.productCount || 0,
+                        views: stats.views || 0,
+                        ratingAvg: stats.ratingAvg || 0,
+                        ratingCount: stats.ratingCount || 0,
+                        contacts: stats.contacts || 0,
+                        categories: stats.categories || [],
+                    };
+                });
+
+                // Sort
+                enriched.sort((a, b) => {
+                    switch (state.sort) {
+                        case 'rating': return parseFloat(b.ratingAvg) - parseFloat(a.ratingAvg);
+                        case 'views': return b.views - a.views;
+                        case 'contacts': return b.contacts - a.contacts;
+                        case 'newest': return new Date(b.created_at) - new Date(a.created_at);
+                        default: return b.productCount - a.productCount;
+                    }
+                });
+
+                state.suppliers = enriched;
+
+                // Update stats bar
+                const totalProducts = enriched.reduce((sum, s) => sum + s.productCount, 0);
+                const totalViews = enriched.reduce((sum, s) => sum + s.views, 0);
+                animateNumber(document.getElementById('statSuppliers'), enriched.length);
+                animateNumber(document.getElementById('statProducts'), totalProducts);
+                animateNumber(document.getElementById('statViews'), totalViews);
+
+                renderSuppliers(enriched);
+
+                if (resultsCount) {
+                    resultsCount.innerHTML = `<i class="fas fa-truck"></i> <span>عرض <strong>${enriched.length}</strong> مورد</span>`;
+                }
+
+                // Load featured
+                loadFeatured(enriched);
+
+            } catch (e) {
+                console.error('Load suppliers error:', e);
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle empty-icon" style="color: var(--c-danger);"></i>
+                        <h3>حدث خطأ</h3>
+                        <p>${escapeHtml(e.message || 'تعذر تحميل الموردين')}</p>
+                        <button class="btn-reset-filters" onclick="location.reload()" type="button">
+                            <i class="fas fa-redo"></i> إعادة المحاولة
+                        </button>
+                    </div>
+                `;
             } finally {
                 state.loading = false;
-                if (infiniteLoading) infiniteLoading.style.display = 'none';
                 container?.setAttribute('aria-busy', 'false');
             }
         };
 
-        const renderSuppliers = (suppliers, replace = true) => {
+        // ============================================================
+        // LOAD FEATURED
+        // ============================================================
+        const loadFeatured = (suppliers) => {
+            const section = document.getElementById('featuredSection');
+            const grid = document.getElementById('featuredGrid');
+            if (!section || !grid) return;
+
+            const featured = suppliers
+                .filter(s => s.is_verified && s.productCount > 0)
+                .sort((a, b) => b.productCount - a.productCount)
+                .slice(0, 3);
+
+            if (!featured.length) {
+                section.style.display = 'none';
+                return;
+            }
+
+            section.style.display = 'block';
+            grid.innerHTML = featured.map((s, i) => renderSupplierCard(s, i, true)).join('');
+        };
+
+        // ============================================================
+        // RENDER SUPPLIERS
+        // ============================================================
+        const renderSuppliers = (suppliers) => {
             const container = document.getElementById('suppliersList');
             if (!container) return;
 
             if (!suppliers.length) {
                 container.innerHTML = `
                     <div class="empty-state">
-                        <i class="fas fa-truck empty-icon"></i>
+                        <i class="fas fa-users empty-icon"></i>
                         <h3>لا يوجد موردين</h3>
                         <p>لم نجد أي موردين يطابقون معايير البحث</p>
-                        <button class="btn-reset-filters" id="emptyResetBtn" type="button">
-                            <i class="fas fa-redo"></i> إعادة تعيين الفلاتر
-                        </button>
                     </div>
                 `;
-                document.getElementById('emptyResetBtn')?.addEventListener('click', resetFilters);
                 return;
             }
 
-            const html = suppliers.map((s, i) => renderSupplierCard(s, i)).join('');
-
-            if (replace) {
-                container.innerHTML = html;
-            } else {
-                const temp = document.createElement('div');
-                temp.innerHTML = html;
-                while (temp.firstChild) container.appendChild(temp.firstChild);
-            }
+            container.innerHTML = suppliers.map((s, i) => renderSupplierCard(s, i, false)).join('');
         };
 
-        const renderSupplierCard = (s, index = 0) => {
+        const renderSupplierCard = (s, index = 0, isFeatured = false) => {
             const name = s.company_name || s.full_name || 'مورد';
-            const initial = name.charAt(0).toUpperCase();
+            const initial = (name || 'م').charAt(0).toUpperCase();
             const isVerified = s.is_verified === true;
-            const productsData = s.productsData || { products: [], count: 0, totalViews: 0 };
-            const productsCount = productsData.count;
-            const totalViews = productsData.totalViews;
 
             const rawPhone = s.phone || s.whatsapp || '';
             const cleanPhone = sanitizePhone(rawPhone);
             const phoneWithCountry = cleanPhone
                 ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
                 : '';
-            const waMessage = encodeURIComponent(`مرحباً، وجدتكم على منصة كيماتو وأرغب في الاستفسار عن منتجاتكم`);
+            const waMessage = encodeURIComponent(`مرحباً، وجدتكم على كيماتو وأرغب في الاستفسار`);
             const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMessage}` : '';
 
-            const featuredProducts = productsData.products.slice(0, 3);
+            // Avatar gradient based on name length
+            const gradients = [
+                'linear-gradient(135deg, #1e88e5, #0d47a1)',
+                'linear-gradient(135deg, #2ecc71, #229954)',
+                'linear-gradient(135deg, #8b5cf6, #6d28d9)',
+                'linear-gradient(135deg, #e67e22, #d35400)',
+                'linear-gradient(135deg, #e74c3c, #c0392b)',
+                'linear-gradient(135deg, #16a085, #0e6655)',
+            ];
+            const avatarBg = gradients[(name.length || 0) % gradients.length];
+
+            // Featured badge
+            let rankBadge = '';
+            if (isFeatured && index === 0) {
+                rankBadge = `<span class="badge-pill badge-gold"><i class="fas fa-crown"></i> الأكثر تميزاً</span>`;
+            } else if (isFeatured && index === 1) {
+                rankBadge = `<span class="badge-pill badge-gold"><i class="fas fa-medal"></i> مميز</span>`;
+            } else if (isFeatured && index === 2) {
+                rankBadge = `<span class="badge-pill badge-gold"><i class="fas fa-star"></i> مميز</span>`;
+            }
+
+            const hasRating = s.ratingCount > 0;
+            const ratingDisplay = hasRating ? s.ratingAvg : '—';
 
             return `
                 <article class="supplier-card" style="animation-delay: ${Math.min(index * 0.05, 0.3)}s;" data-supplier-id="${escapeHtml(s.id)}">
@@ -1705,19 +1770,16 @@
                                     <i class="fas fa-check-circle"></i> موثّق
                                 </span>
                             ` : ''}
-                            ${productsCount > 0 ? `
-                                <span class="badge-pill badge-active">
-                                    <i class="fas fa-circle" style="font-size: 0.5rem;"></i> نشط
-                                </span>
-                            ` : ''}
+                            ${rankBadge}
                         </div>
 
                         <div class="supplier-avatar-wrapper">
-                            <div class="supplier-avatar-lg">
+                            <div class="supplier-avatar-lg" style="background: ${avatarBg};">
                                 ${s.avatar_url && /^https?:\/\//i.test(s.avatar_url) ? `
                                     <img src="${escapeHtml(s.avatar_url)}" alt="${escapeHtml(name)}"
                                          onerror="this.onerror=null;this.parentElement.textContent='${initial}';" />
                                 ` : initial}
+                                ${isFeatured && index === 0 ? `<div class="avatar-rank-badge">👑</div>` : ''}
                             </div>
                             <div class="supplier-name-block">
                                 <h3 class="supplier-name">${escapeHtml(name)}</h3>
@@ -1726,7 +1788,12 @@
                                         <i class="fas fa-map-marker-alt"></i>
                                         ${escapeHtml(s.city)}
                                     </div>
-                                ` : ''}
+                                ` : `
+                                    <div class="supplier-location-mini" style="opacity: 0.6;">
+                                        <i class="fas fa-map-marker-alt"></i>
+                                        مصر
+                                    </div>
+                                `}
                             </div>
                         </div>
                     </div>
@@ -1734,43 +1801,35 @@
                     <div class="supplier-card-body">
                         <div class="supplier-stats-row">
                             <div class="supplier-stat">
-                                <span class="supplier-stat-value primary">${formatNumber(productsCount)}</span>
+                                <span class="supplier-stat-value primary">${formatNumber(s.productCount)}</span>
                                 <span class="supplier-stat-label">منتج</span>
                             </div>
                             <div class="supplier-stat">
-                                <span class="supplier-stat-value accent">${formatNumber(totalViews)}</span>
+                                <span class="supplier-stat-value accent">${formatNumber(s.views)}</span>
                                 <span class="supplier-stat-label">مشاهدة</span>
                             </div>
                             <div class="supplier-stat">
-                                <span class="supplier-stat-value">${new Date(s.created_at).getFullYear()}</span>
-                                <span class="supplier-stat-label">انضم</span>
+                                <span class="supplier-stat-value">${formatNumber(s.contacts)}</span>
+                                <span class="supplier-stat-label">تواصل</span>
+                            </div>
+                            <div class="supplier-stat">
+                                <span class="supplier-stat-value gold">${ratingDisplay}</span>
+                                <span class="supplier-stat-label">⭐ تقييم</span>
                             </div>
                         </div>
 
-                        ${featuredProducts.length > 0 ? `
-                            <div class="supplier-featured-preview">
-                                ${featuredProducts.map(p => {
-                                    const hasImg = p.image_url && /^https?:\/\//i.test(p.image_url);
-                                    return `
-                                        <div class="supplier-product-thumb" title="${escapeHtml(p.name)}">
-                                            ${hasImg ? `
-                                                <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}" loading="lazy"
-                                                     onerror="this.onerror=null;this.parentElement.textContent='🧪';" />
-                                            ` : '🧪'}
-                                        </div>
-                                    `;
-                                }).join('')}
-                                ${Array(Math.max(0, 3 - featuredProducts.length)).fill(0).map(() => `
-                                    <div class="supplier-product-thumb" style="opacity: 0.4;">🧪</div>
+                        ${s.categories && s.categories.length > 0 ? `
+                            <div class="supplier-categories">
+                                ${s.categories.slice(0, 3).map(c => `
+                                    <span class="category-chip">
+                                        <i class="fas fa-tag"></i> ${escapeHtml(c)}
+                                    </span>
                                 `).join('')}
+                                ${s.categories.length > 3 ? `
+                                    <span class="category-chip more">+${s.categories.length - 3}</span>
+                                ` : ''}
                             </div>
-                        ` : `
-                            <div class="supplier-featured-preview">
-                                <div class="supplier-product-thumb" style="opacity: 0.3;">📦</div>
-                                <div class="supplier-product-thumb" style="opacity: 0.3;">📦</div>
-                                <div class="supplier-product-thumb" style="opacity: 0.3;">📦</div>
-                            </div>
-                        `}
+                        ` : ''}
 
                         <div class="supplier-actions">
                             <a href="supplier-profile.html?id=${encodeURIComponent(s.id)}"
@@ -1779,182 +1838,78 @@
                             </a>
                             ${waLink ? `
                                 <a href="${waLink}" target="_blank" rel="noopener noreferrer"
-                                   class="btn-supplier btn-wa"
-                                   data-action="whatsapp"
-                                   data-supplier-id="${escapeHtml(s.id)}">
+                                   class="btn-supplier btn-wa">
                                     <i class="fab fa-whatsapp"></i> واتساب
                                 </a>
                             ` : ''}
-                            <button class="btn-supplier btn-icon-supplier"
-                                    type="button"
-                                    data-action="share"
-                                    data-supplier-id="${escapeHtml(s.id)}"
-                                    data-supplier-name="${escapeHtml(name)}"
-                                    aria-label="مشاركة">
-                                <i class="fas fa-share-alt"></i>
-                            </button>
                         </div>
                     </div>
                 </article>
             `;
         };
 
-        const updateResultsCount = () => {
-            const el = document.getElementById('resultsCount');
-            if (!el) return;
-            if (state.total === 0) {
-                el.innerHTML = `<i class="fas fa-info-circle"></i> <span>لا توجد نتائج</span>`;
-                return;
-            }
-            el.innerHTML = `<i class="fas fa-truck"></i> <span>عرض <strong>${state.suppliers.length.toLocaleString('ar-EG')}</strong> من أصل <strong>${state.total.toLocaleString('ar-EG')}</strong> مورد</span>`;
-        };
-
         // ============================================================
-        // SUGGESTIONS
+        // FILTERS
         // ============================================================
-        const loadSuggestions = async () => {
-            try {
-                const { data } = await supabase
-                    .from('profiles')
-                    .select('id, full_name, company_name, city')
-                    .eq('user_type', 'supplier')
-                    .limit(300);
+        const resetFilters = () => {
+            state.search = '';
+            state.cityFilter = 'all';
+            state.verifiedFilter = 'all';
+            state.sort = 'products';
 
-                state.suggestions = data || [];
-                console.log(`✅ Loaded ${state.suggestions.length} suggestions`);
-            } catch (e) {
-                state.suggestions = [];
-            }
+            const input = document.getElementById('searchInput');
+            if (input) input.value = '';
+            document.getElementById('clearSearch')?.classList.remove('visible');
+            const citySel = document.getElementById('cityFilter');
+            if (citySel) citySel.value = 'all';
+            const verifSel = document.getElementById('verifiedFilter');
+            if (verifSel) verifSel.value = 'all';
+            const sortSel = document.getElementById('sortFilter');
+            if (sortSel) sortSel.value = 'products';
+
+            loadSuppliers();
+            showToast('🔄', 'تم إعادة التعيين', 'كل الفلاتر رجعت افتراضي', 'info');
         };
 
-        const highlightMatch = (text, query) => {
-            if (!text || !query) return escapeHtml(text);
-            const safeText = escapeHtml(text);
-            const safeQuery = query.replace(/[.*+?^${}()|[\]\\]/g, '\\$&');
-            try {
-                return safeText.replace(new RegExp(`(${safeQuery})`, 'gi'), '<span class="highlight">$1</span>');
-            } catch { return safeText; }
-        };
-
-        const showSuggestions = (query) => {
-            const box = document.getElementById('suggestionsBox');
-            if (!box) return;
-
-            if (!query || query.length < 1) {
-                box.classList.remove('show');
-                return;
-            }
-
-            const lower = query.toLowerCase();
-            const results = state.suggestions
-                .filter(s => {
-                    const name = (s.company_name || s.full_name || '').toLowerCase();
-                    const city = (s.city || '').toLowerCase();
-                    return name.includes(lower) || city.includes(lower);
-                })
-                .slice(0, 8);
-
-            if (!results.length) {
-                box.innerHTML = `<div class="suggestion-empty">🔍 لا توجد نتائج لـ "${escapeHtml(query)}"</div>`;
-                box.classList.add('show');
-                return;
-            }
-
-            const safeQuery = escapeHtml(query);
-            let html = `
-                <div class="suggestion-item suggestion-view-all" data-action="view-all" data-query="${safeQuery}" role="option">
-                    <span class="text">🔍 عرض كل النتائج لـ "<span class="highlight">${safeQuery}</span>"</span>
-                    <span class="badge">${results.length}</span>
-                </div>
-            `;
-
-            results.forEach(s => {
-                const name = s.company_name || s.full_name || 'مورد';
-                const city = s.city ? `<span class="sub-text"><i class="fas fa-map-marker-alt"></i> ${escapeHtml(s.city)}</span>` : '';
-                html += `
-                    <div class="suggestion-item" data-supplier-id="${escapeHtml(s.id)}" role="option">
-                        <span class="text">${highlightMatch(name, query)}</span>
-                        ${city}
-                    </div>
-                `;
+        const initFilters = () => {
+            document.getElementById('cityFilter')?.addEventListener('change', (e) => {
+                state.cityFilter = e.target.value;
+                loadSuppliers();
             });
 
-            box.innerHTML = html;
-            box.classList.add('show');
-            state.selectedSuggestionIndex = -1;
-        };
+            document.getElementById('verifiedFilter')?.addEventListener('change', (e) => {
+                state.verifiedFilter = e.target.value;
+                loadSuppliers();
+            });
 
-        const hideSuggestions = () => {
-            document.getElementById('suggestionsBox')?.classList.remove('show');
-            state.selectedSuggestionIndex = -1;
-        };
-
-        const navigateSuggestions = (direction) => {
-            const box = document.getElementById('suggestionsBox');
-            if (!box?.classList.contains('show')) return;
-            const items = box.querySelectorAll('.suggestion-item');
-            if (!items.length) return;
-            items.forEach(el => el.classList.remove('active'));
-            if (direction === 'down') {
-                state.selectedSuggestionIndex = Math.min(state.selectedSuggestionIndex + 1, items.length - 1);
-            } else {
-                state.selectedSuggestionIndex = Math.max(state.selectedSuggestionIndex - 1, 0);
-            }
-            if (state.selectedSuggestionIndex >= 0) {
-                items[state.selectedSuggestionIndex].classList.add('active');
-                items[state.selectedSuggestionIndex].scrollIntoView({ block: 'nearest' });
-            }
-        };
-
-        const selectCurrentSuggestion = () => {
-            const box = document.getElementById('suggestionsBox');
-            if (!box?.classList.contains('show')) return;
-            const items = box.querySelectorAll('.suggestion-item');
-            if (!items.length) return;
-            const idx = state.selectedSuggestionIndex >= 0 ? state.selectedSuggestionIndex : 0;
-            items[idx]?.click();
+            document.getElementById('sortFilter')?.addEventListener('change', (e) => {
+                state.sort = e.target.value;
+                loadSuppliers();
+            });
         };
 
         // ============================================================
         // SEARCH
         // ============================================================
-        const performSearch = () => {
-            const input = document.getElementById('searchInput');
-            state.search = sanitizeSearch(input?.value || '');
-            hideSuggestions();
-            resetAndLoad();
-        };
-
         const initSearch = () => {
             const input = document.getElementById('searchInput');
             const btn = document.getElementById('searchBtn');
             const clearBtn = document.getElementById('clearSearch');
-            const box = document.getElementById('suggestionsBox');
 
-            const debouncedShow = debounce((q) => showSuggestions(q), 200);
+            const performSearch = () => {
+                state.search = (input?.value || '').trim().slice(0, 100);
+                loadSuppliers();
+            };
 
-            input?.addEventListener('input', (e) => {
-                const q = e.target.value.trim();
-                clearBtn?.classList.toggle('visible', e.target.value.length > 0);
-                if (q.length >= 1) debouncedShow(q);
-                else hideSuggestions();
+            input?.addEventListener('input', () => {
+                clearBtn?.classList.toggle('visible', input.value.length > 0);
             });
-
-            input?.addEventListener('focus', () => {
-                const q = input.value.trim();
-                if (q.length >= 1) showSuggestions(q);
-            });
-
-            input?.addEventListener('blur', () => setTimeout(hideSuggestions, 250));
 
             input?.addEventListener('keydown', (e) => {
-                if (e.key === 'ArrowDown') { e.preventDefault(); navigateSuggestions('down'); }
-                else if (e.key === 'ArrowUp') { e.preventDefault(); navigateSuggestions('up'); }
-                else if (e.key === 'Enter') {
+                if (e.key === 'Enter') {
                     e.preventDefault();
-                    if (box?.classList.contains('show')) selectCurrentSuggestion();
-                    else performSearch();
-                } else if (e.key === 'Escape') hideSuggestions();
+                    performSearch();
+                }
             });
 
             btn?.addEventListener('click', performSearch);
@@ -1963,205 +1918,9 @@
                 if (input) input.value = '';
                 state.search = '';
                 clearBtn.classList.remove('visible');
-                hideSuggestions();
-                resetAndLoad();
+                loadSuppliers();
                 input?.focus();
             });
-
-            box?.addEventListener('click', (e) => {
-                const item = e.target.closest('.suggestion-item');
-                if (!item) return;
-
-                if (item.dataset.action === 'view-all') {
-                    const q = item.dataset.query || '';
-                    if (input) input.value = q;
-                    state.search = sanitizeSearch(q);
-                    hideSuggestions();
-                    resetAndLoad();
-                } else if (item.dataset.supplierId) {
-                    window.location.href = `supplier-profile.html?id=${encodeURIComponent(item.dataset.supplierId)}`;
-                }
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.search-wrapper-outer')) hideSuggestions();
-            });
-        };
-
-        // ============================================================
-        // FILTERS
-        // ============================================================
-        const initFilters = () => {
-            document.getElementById('cityFilter')?.addEventListener('change', (e) => {
-                state.cityFilter = e.target.value;
-                resetAndLoad();
-            });
-
-            document.getElementById('verifiedFilter')?.addEventListener('change', (e) => {
-                state.verifiedFilter = e.target.value;
-                resetAndLoad();
-            });
-
-            document.getElementById('sortFilter')?.addEventListener('change', (e) => {
-                state.sort = e.target.value;
-                resetAndLoad();
-            });
-        };
-
-        const resetFilters = () => {
-            state.cityFilter = 'all';
-            state.verifiedFilter = 'all';
-            state.sort = 'products';
-            state.search = '';
-
-            const citySel = document.getElementById('cityFilter');
-            if (citySel) citySel.value = 'all';
-            const verifSel = document.getElementById('verifiedFilter');
-            if (verifSel) verifSel.value = 'all';
-            const sortSel = document.getElementById('sortFilter');
-            if (sortSel) sortSel.value = 'products';
-            const input = document.getElementById('searchInput');
-            if (input) input.value = '';
-            document.getElementById('clearSearch')?.classList.remove('visible');
-
-            resetAndLoad();
-            showToast('🔄', 'تم إعادة التعيين', 'كل الفلاتر رجعت افتراضي', null, null, 'info');
-        };
-
-        const resetAndLoad = () => {
-            state.page = 0;
-            state.hasMore = true;
-            loadSuppliers();
-        };
-
-        // ============================================================
-        // FEATURED SUPPLIERS
-        // ============================================================
-        const loadFeaturedSuppliers = async () => {
-            try {
-                console.log('⭐ Loading featured suppliers...');
-
-                const { data: suppliers, error } = await supabase
-                    .from('profiles')
-                    .select('id, full_name, company_name, city, phone, whatsapp, is_verified, created_at, avatar_url')
-                    .eq('user_type', 'supplier')
-                    .eq('is_verified', true)
-                    .limit(6);
-
-                if (error) {
-                    console.warn('❌ Featured fetch error:', error.message);
-                    document.getElementById('featuredSection').style.display = 'none';
-                    return;
-                }
-
-                if (!suppliers?.length) {
-                    console.log('ℹ️ No verified suppliers');
-                    document.getElementById('featuredSection').style.display = 'none';
-                    return;
-                }
-
-                const supplierIds = suppliers.map(s => s.id);
-                const productsMap = await fetchProductsForSuppliers(supplierIds);
-
-                const enriched = suppliers
-                    .map(s => ({
-                        ...s,
-                        productsData: productsMap[s.id] || { products: [], count: 0, totalViews: 0, featured: [] },
-                    }))
-                    .filter(s => s.productsData.count > 0)
-                    .slice(0, 4);
-
-                if (!enriched.length) {
-                    console.log('ℹ️ No featured suppliers with products');
-                    document.getElementById('featuredSection').style.display = 'none';
-                    return;
-                }
-
-                console.log(`✅ Featured: ${enriched.length} suppliers`);
-
-                const grid = document.getElementById('featuredGrid');
-                const section = document.getElementById('featuredSection');
-                if (section) section.style.display = 'block';
-                if (grid) grid.innerHTML = enriched.map((s, i) => renderSupplierCard(s, i)).join('');
-
-            } catch (e) {
-                console.warn('❌ Featured exception:', e.message);
-                const section = document.getElementById('featuredSection');
-                if (section) section.style.display = 'none';
-            }
-        };
-
-        // ============================================================
-        // CARD ACTIONS
-        // ============================================================
-        const initCardActions = () => {
-            document.addEventListener('click', async (e) => {
-                const btn = e.target.closest('[data-action]');
-                if (!btn) return;
-
-                const action = btn.dataset.action;
-
-                if (action === 'share') {
-                    e.preventDefault();
-                    handleShare(btn.dataset.supplierId, btn.dataset.supplierName);
-                } else if (action === 'whatsapp') {
-                    const supplierId = btn.dataset.supplierId;
-                    if (isValidUUID(supplierId) && state.user) {
-                        logContact(supplierId).catch(() => {});
-                    }
-                }
-            });
-        };
-
-        const handleShare = async (supplierId, name) => {
-            const url = `${window.location.origin}/supplier-profile.html?id=${encodeURIComponent(supplierId)}`;
-            if (navigator.share) {
-                try {
-                    await navigator.share({
-                        title: name || 'مورد',
-                        text: `تحقق من ${name || 'هذا المورد'} على كيماتو`,
-                        url,
-                    });
-                    return;
-                } catch (e) { if (e.name === 'AbortError') return; }
-            }
-            try {
-                await navigator.clipboard.writeText(url);
-                showToast('📋', 'تم النسخ!', `تم نسخ رابط ${name || 'المورد'}`, null, null, 'success');
-            } catch {
-                showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', null, null, 'error');
-            }
-        };
-
-        const logContact = async (supplierId) => {
-            if (!state.user || !isValidUUID(supplierId)) return;
-            try {
-                await supabase.from('supplier_contacts').insert({
-                    supplier_id: supplierId,
-                    buyer_id: state.user.id,
-                    contact_type: 'whatsapp',
-                    contact_data: { page: window.location.pathname, timestamp: new Date().toISOString() },
-                });
-            } catch (e) { /* silent */ }
-        };
-
-        // ============================================================
-        // INFINITE SCROLL
-        // ============================================================
-        const initInfiniteScroll = () => {
-            const sentinel = document.getElementById('infiniteSentinel');
-            if (!sentinel || !('IntersectionObserver' in window)) return;
-
-            let isLoading = false;
-            const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !isLoading && state.hasMore && !state.loading) {
-                    isLoading = true;
-                    state.page += 1;
-                    loadSuppliers({ append: true }).finally(() => { isLoading = false; });
-                }
-            }, { rootMargin: '400px' });
-
-            observer.observe(sentinel);
         };
 
         // ============================================================
@@ -2177,71 +1936,6 @@
         };
 
         // ============================================================
-        // REALTIME
-        // ============================================================
-        const setupRealtime = () => {
-            if (state.channel) supabase.removeChannel(state.channel);
-            try {
-                state.channel = supabase
-                    .channel('suppliers_realtime')
-                    .on('postgres_changes', {
-                        event: 'INSERT',
-                        schema: 'public',
-                        table: 'profiles',
-                    }, (payload) => {
-                        if (payload.new?.user_type === 'supplier') {
-                            const name = payload.new.company_name || payload.new.full_name || 'مورد جديد';
-                            showToast('🏭', 'مورد جديد!', `انضم: ${name}`, 'عرض', 'chemato-suppliers.html', 'success');
-                            loadStats();
-                            loadSuppliers();
-                        }
-                    })
-                    .subscribe();
-            } catch (e) { /* silent */ }
-        };
-
-        // ============================================================
-        // KEYBOARD SHORTCUTS
-        // ============================================================
-        const initKeyboardShortcuts = () => {
-            document.addEventListener('keydown', (e) => {
-                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
-                    e.preventDefault();
-                    document.getElementById('searchInput')?.focus();
-                }
-                if (e.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
-                    e.preventDefault();
-                    document.getElementById('searchInput')?.focus();
-                }
-                if (e.key === 'Escape') {
-                    hideSuggestions();
-                    document.querySelector('.dropdown-content')?.classList.remove('show');
-                }
-            });
-        };
-
-        // ============================================================
-        // READ URL
-        // ============================================================
-        const readURL = () => {
-            const params = new URLSearchParams(window.location.search);
-            state.search = sanitizeSearch(params.get('search') || '');
-            state.cityFilter = params.get('city') || 'all';
-            state.verifiedFilter = params.get('verified') || 'all';
-            state.sort = params.get('sort') || 'products';
-
-            const input = document.getElementById('searchInput');
-            if (input && state.search) input.value = state.search;
-
-            const citySel = document.getElementById('cityFilter');
-            if (citySel && state.cityFilter !== 'all') citySel.value = state.cityFilter;
-            const verifSel = document.getElementById('verifiedFilter');
-            if (verifSel && state.verifiedFilter !== 'all') verifSel.value = state.verifiedFilter;
-            const sortSel = document.getElementById('sortFilter');
-            if (sortSel && state.sort !== 'products') sortSel.value = state.sort;
-        };
-
-        // ============================================================
         // INIT
         // ============================================================
         const init = async () => {
@@ -2249,41 +1943,22 @@
 
             initTheme();
             initNavbar();
-            initReadingProgress();
-            initSearch();
             initFilters();
-            initCardActions();
-            initInfiniteScroll();
+            initSearch();
             initScrollTop();
-            initKeyboardShortcuts();
-
-            readURL();
 
             await Promise.all([
                 checkUser(),
-                loadStats(),
                 loadCities(),
-                loadSuggestions(),
             ]);
 
-            await Promise.all([
-                loadFeaturedSuppliers(),
-                loadSuppliers(),
-            ]);
-
-            setupRealtime();
-
-            setTimeout(() => {
-                if (state.total > 0) {
-                    showToast('👋', 'أهلاً بك!', `${state.total} مورد متاح على كيماتو`, null, null, 'info');
-                }
-            }, 1500);
+            await loadSuppliers();
 
             console.log('✅ جاهز');
         };
 
-        supabase.auth.onAuthStateChange(async () => {
-            await checkUser();
+        supabase.auth.onAuthStateChange(() => {
+            checkUser();
         });
 
         if (document.readyState === 'loading') {
@@ -2294,7 +1969,3 @@
     </script>
 </body>
 </html>
-            }
-        }
-    </style>
-</head>
