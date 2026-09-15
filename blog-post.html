@@ -6,10 +6,9 @@
 
     <title id="pageTitle">المقال | كيماتو</title>
     <meta name="description" id="pageDescription" content="اقرأ المقال كاملاً على كيماتو" />
-    <meta name="robots" content="index, follow, max-image-preview:large" />
+    <meta name="robots" content="index, follow" />
     <meta name="theme-color" content="#0a2540" />
 
-    <!-- Open Graph -->
     <meta property="og:type" content="article" />
     <meta property="og:site_name" content="كيماتو" />
     <meta property="og:title" id="ogTitle" content="المقال | كيماتو" />
@@ -20,7 +19,6 @@
     <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ar_EG" />
 
-    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" id="twTitle" content="المقال | كيماتو" />
     <meta name="twitter:description" id="twDescription" content="اقرأ المقال كاملاً" />
@@ -42,39 +40,35 @@
 
     <style>
         :root {
-            --c-primary-50:  #eef6fc;
+            --c-primary-50: #eef6fc;
             --c-primary-100: #d4e7f5;
             --c-primary-500: #2c7ab8;
             --c-primary-600: #1d5b8e;
             --c-primary-700: #144167;
             --c-primary-800: #0d2e4a;
             --c-primary-900: #0a2540;
-            --c-accent:      #2ecc71;
+            --c-accent: #2ecc71;
             --c-accent-dark: #22a95c;
-            --c-warning:     #f39c12;
-            --c-danger:      #e74c3c;
-            --c-whatsapp:    #25D366;
-            --c-purple:      #8b5cf6;
-            --c-verified:    #1e88e5;
-            --c-facebook:    #1877f2;
-            --c-twitter:     #000000;
-            --c-linkedin:    #0a66c2;
-            --c-bg:          #f6f8fb;
-            --c-surface:     #ffffff;
-            --c-surface-2:   #f9fbfd;
-            --c-border:      #e3eaf2;
-            --c-text:        #0a1f33;
-            --c-text-muted:  #5a6b7e;
-            --c-text-sub:    #8595a8;
-            --sh-sm:  0 1px 3px rgba(10, 37, 64, 0.06);
-            --sh-md:  0 4px 16px rgba(10, 37, 64, 0.08);
-            --sh-lg:  0 12px 32px rgba(10, 37, 64, 0.10);
-            --sh-xl:  0 20px 48px rgba(10, 37, 64, 0.14);
-            --r-sm: 8px;
-            --r-md: 14px;
-            --r-lg: 20px;
-            --r-xl: 28px;
-            --r-full: 999px;
+            --c-warning: #f39c12;
+            --c-danger: #e74c3c;
+            --c-whatsapp: #25D366;
+            --c-purple: #8b5cf6;
+            --c-verified: #1e88e5;
+            --c-facebook: #1877f2;
+            --c-twitter: #000000;
+            --c-linkedin: #0a66c2;
+            --c-bg: #f6f8fb;
+            --c-surface: #ffffff;
+            --c-surface-2: #f9fbfd;
+            --c-border: #e3eaf2;
+            --c-text: #0a1f33;
+            --c-text-muted: #5a6b7e;
+            --c-text-sub: #8595a8;
+            --sh-sm: 0 1px 3px rgba(10, 37, 64, 0.06);
+            --sh-md: 0 4px 16px rgba(10, 37, 64, 0.08);
+            --sh-lg: 0 12px 32px rgba(10, 37, 64, 0.10);
+            --sh-xl: 0 20px 48px rgba(10, 37, 64, 0.14);
+            --r-sm: 8px; --r-md: 14px; --r-lg: 20px; --r-xl: 28px; --r-full: 999px;
             --t-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
             --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
             --t-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -83,17 +77,17 @@
         }
 
         [data-theme="dark"] {
-            --c-bg:         #0a1520;
-            --c-surface:    #101e2e;
-            --c-surface-2:  #16273a;
-            --c-border:     #1f3349;
-            --c-text:       #e8eef5;
+            --c-bg: #0a1520;
+            --c-surface: #101e2e;
+            --c-surface-2: #16273a;
+            --c-border: #1f3349;
+            --c-text: #e8eef5;
             --c-text-muted: #9fb1c4;
-            --c-text-sub:   #6e8298;
-            --sh-sm:  0 1px 3px rgba(0, 0, 0, 0.3);
-            --sh-md:  0 4px 16px rgba(0, 0, 0, 0.35);
-            --sh-lg:  0 12px 32px rgba(0, 0, 0, 0.45);
-            --sh-xl:  0 20px 48px rgba(0, 0, 0, 0.55);
+            --c-text-sub: #6e8298;
+            --sh-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+            --sh-md: 0 4px 16px rgba(0, 0, 0, 0.35);
+            --sh-lg: 0 12px 32px rgba(0, 0, 0, 0.45);
+            --sh-xl: 0 20px 48px rgba(0, 0, 0, 0.55);
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -137,7 +131,6 @@
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
         @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -1190,21 +1183,16 @@
         });
 
         // ============================================================
-        // GET SLUG — يدعم الشكلين:
-        //   /blog-post.html?slug=xxx
-        //   /blog/xxx
+        // GET SLUG from URL
         // ============================================================
         const getSlug = () => {
-            // 1. من query string
             const urlParams = new URLSearchParams(window.location.search);
             const qSlug = urlParams.get('slug');
             if (qSlug) return qSlug;
 
-            // 2. من pathname: /blog/xxx
+            // دعم /blog/xxx
             const pathMatch = window.location.pathname.match(/\/blog\/([^\/\?#]+)/);
-            if (pathMatch && pathMatch[1]) {
-                return decodeURIComponent(pathMatch[1]);
-            }
+            if (pathMatch && pathMatch[1]) return decodeURIComponent(pathMatch[1]);
 
             return null;
         };
@@ -1220,6 +1208,7 @@
         };
 
         const THEME_KEY = 'chemato-theme';
+        const SITE_URL = 'https://chemato.vercel.app';
 
         // ============================================================
         // UTILS
@@ -1249,6 +1238,8 @@
             const minutes = Math.max(1, Math.ceil(words / 200));
             return `${minutes} دقيقة`;
         };
+
+        const stripHtml = (html) => String(html || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
 
         // ============================================================
         // THEME
@@ -1486,15 +1477,15 @@
         };
 
         // ============================================================
-        // UPDATE META TAGS (بعد التحميل — للحالات الديناميكية)
+        // UPDATE META TAGS (من JavaScript)
         // ============================================================
         const updateMetaTags = (post) => {
             const title = post.title || 'مقال';
-            const description = (post.excerpt || post.title || '').substring(0, 160);
+            const description = (post.excerpt || stripHtml(post.content).substring(0, 160) || '').substring(0, 160);
             const image = (post.image_url && /^https?:\/\//i.test(post.image_url))
                 ? post.image_url
-                : 'https://chemato.vercel.app/logo.png';
-            const canonicalUrl = `https://chemato.vercel.app/blog/${encodeURIComponent(post.slug || post.id)}`;
+                : `${SITE_URL}/logo.png`;
+            const canonicalUrl = `${SITE_URL}/blog-post.html?slug=${encodeURIComponent(post.slug || post.id)}`;
 
             document.title = `${title} | كيماتو`;
 
@@ -1515,6 +1506,7 @@
             const canonical = document.getElementById('pageCanonical');
             if (canonical) canonical.setAttribute('href', canonicalUrl);
 
+            // Schema.org
             try {
                 const schema = document.createElement('script');
                 schema.type = 'application/ld+json';
@@ -1535,7 +1527,7 @@
                         "name": "كيماتو",
                         "logo": {
                             "@type": "ImageObject",
-                            "url": "https://chemato.vercel.app/logo.png"
+                            "url": `${SITE_URL}/logo.png`
                         }
                     },
                     "mainEntityOfPage": {
@@ -1581,6 +1573,7 @@
                 updateMetaTags(post);
                 renderPost(post);
 
+                // Update views
                 supabase
                     .from('blog_posts')
                     .update({ views: (post.views || 0) + 1 })
@@ -1847,11 +1840,7 @@
         };
 
         const handleShare = async (type) => {
-            // استخدم الرابط الجميل الجديد لو على Vercel
-            const slug = state.post?.slug || state.slug;
-            const url = slug
-                ? `https://chemato.vercel.app/blog/${encodeURIComponent(slug)}`
-                : window.location.href;
+            const url = window.location.href;
             const title = state.post?.title || document.title;
 
             try {
