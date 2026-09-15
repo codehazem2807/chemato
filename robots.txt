@@ -1,0 +1,9 @@
+User-agent: *
+Allow: /
+
+Disallow: /api/
+Disallow: /buyer-dashboard.html
+Disallow: /supplier-dashboard.html
+Disallow: /profile.html
+
+Sitemap: https://chemato.vercel.app/sitemap.xml
