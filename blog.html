@@ -1155,7 +1155,252 @@
             .filter-chip { padding: 6px 14px; font-size: 0.75rem; }
 
             .featured-section { padding: 16px; }
-            .featured-main-body { padding: 16px 18px 20px; }
+    <body>
+
+    <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
+
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar" role="banner">
+        <div class="navbar-inner">
+            <div class="logo">
+                <a href="index.html" aria-label="كيماتو">
+                    <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager"
+                         onerror="this.style.display='none'" />
+                    <span class="logo-text">
+                        <span class="blue">كيماتو</span>
+                        <span class="gray">| المدونة</span>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="nav-links" id="navLinks" role="navigation" aria-label="التنقل">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+                <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+                <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
+                <a href="blog.html" class="active"><i class="fas fa-newspaper"></i> المدونة</a>
+
+                <div class="dropdown">
+                    <button class="dropdown-btn" id="dropdownToggle" aria-expanded="false" aria-haspopup="true">
+                        <i class="fas fa-user-circle"></i> القائمة
+                        <i class="fas fa-chevron-down" style="font-size:0.7em;"></i>
+                    </button>
+                    <div class="dropdown-content" id="dropdownContent" role="menu"></div>
+                </div>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي" title="الوضع الليلي">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-container" id="main">
+
+        <!-- HERO -->
+        <section class="hero animate-in" aria-labelledby="heroTitle">
+            <div class="hero-bg-icons" aria-hidden="true">
+                <span class="icon-float">📰</span>
+                <span class="icon-float rotate">📖</span>
+                <span class="icon-float">✍️</span>
+                <span class="icon-float rotate">🧪</span>
+                <span class="icon-float">💡</span>
+                <span class="icon-float">📊</span>
+            </div>
+
+            <div class="hero-content">
+                <div class="hero-badge">
+                    <span class="dot"></span>
+                    <span>مدونة كيماتو — مقالات سوق الكيماويات</span>
+                </div>
+
+                <h1 id="heroTitle">
+                    📰 <span class="highlight">مقالات</span> عن سوق الكيماويات
+                </h1>
+
+                <p class="subtitle">
+                    اقرأ أحدث المقالات، الأدلة، والنصائح عن سوق المواد الكيماوية في مصر — أسعار، موردين، دراسات، وأخبار الصناعة
+                </p>
+
+                <!-- Search -->
+                <div class="search-wrapper" role="search">
+                    <i class="fas fa-search search-icon" aria-hidden="true"></i>
+                    <input
+                        type="text"
+                        id="searchInput"
+                        placeholder="ابحث في المقالات..."
+                        autocomplete="off"
+                        maxlength="100"
+                        aria-label="البحث في المقالات"
+                    />
+                    <button class="search-clear" id="clearSearch" type="button" aria-label="مسح البحث">
+                        <i class="fas fa-times"></i>
+                    </button>
+                    <button class="search-btn" id="searchBtn" type="button">
+                        <i class="fas fa-search" aria-hidden="true"></i> بحث
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- FILTERS -->
+        <section class="filters-section animate-in" style="animation-delay: 0.1s;">
+            <div class="filters-label">
+                <i class="fas fa-filter"></i>
+                تصفية حسب الفئة
+            </div>
+            <div class="filters" id="filterButtons" role="tablist">
+                <button class="filter-chip active" data-category="all" role="tab" aria-selected="true">
+                    <i class="fas fa-globe"></i> الكل
+                </button>
+                <button class="filter-chip" data-category="دليل شراء" role="tab" aria-selected="false">
+                    <i class="fas fa-shopping-cart"></i> دليل شراء
+                </button>
+                <button class="filter-chip" data-category="موردين" role="tab" aria-selected="false">
+                    <i class="fas fa-building"></i> موردين
+                </button>
+                <button class="filter-chip" data-category="أسعار" role="tab" aria-selected="false">
+                    <i class="fas fa-money-bill-wave"></i> أسعار
+                </button>
+                <button class="filter-chip" data-category="ريادة أعمال" role="tab" aria-selected="false">
+                    <i class="fas fa-rocket"></i> ريادة أعمال
+                </button>
+                <button class="filter-chip" data-category="أخبار" role="tab" aria-selected="false">
+                    <i class="fas fa-bullhorn"></i> أخبار
+                </button>
+            </div>
+        </section>
+
+        <!-- FEATURED POSTS -->
+        <section id="featuredSection" class="featured-section animate-in" style="display: none; animation-delay: 0.15s;">
+            <div class="featured-header">
+                <i class="fas fa-star"></i>
+                <h2>مقالات مميزة</h2>
+            </div>
+            <div class="featured-grid" id="featuredGrid"></div>
+        </section>
+
+        <!-- POSTS SECTION -->
+        <section aria-labelledby="postsTitle">
+            <div class="section-header">
+                <h2 class="section-title" id="postsTitle">
+                    <i class="fas fa-newspaper"></i>
+                    جميع المقالات
+                </h2>
+                <span class="results-count" id="resultsCount">
+                    <i class="fas fa-spinner fa-spin"></i> جاري التحميل...
+                </span>
+            </div>
+
+            <!-- Posts Grid -->
+            <div id="postsList" class="posts-grid" aria-live="polite" aria-busy="true">
+                <!-- Skeleton -->
+                <div class="skeleton-card">
+                    <div class="skeleton-card-inner">
+                        <div class="skeleton skeleton-media"></div>
+                        <div class="skeleton-body">
+                            <div class="skeleton skeleton-line w-30"></div>
+                            <div class="skeleton skeleton-line h-20 w-90"></div>
+                            <div class="skeleton skeleton-line w-60"></div>
+                            <div class="skeleton skeleton-line w-90"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-card-inner">
+                        <div class="skeleton skeleton-media"></div>
+                        <div class="skeleton-body">
+                            <div class="skeleton skeleton-line w-30"></div>
+                            <div class="skeleton skeleton-line h-20 w-90"></div>
+                            <div class="skeleton skeleton-line w-60"></div>
+                            <div class="skeleton skeleton-line w-90"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-card-inner">
+                        <div class="skeleton skeleton-media"></div>
+                        <div class="skeleton-body">
+                            <div class="skeleton skeleton-line w-30"></div>
+                            <div class="skeleton skeleton-line h-20 w-90"></div>
+                            <div class="skeleton skeleton-line w-60"></div>
+                            <div class="skeleton skeleton-line w-90"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-card-inner">
+                        <div class="skeleton skeleton-media"></div>
+                        <div class="skeleton-body">
+                            <div class="skeleton skeleton-line w-30"></div>
+                            <div class="skeleton skeleton-line h-20 w-90"></div>
+                            <div class="skeleton skeleton-line w-60"></div>
+                            <div class="skeleton skeleton-line w-90"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-card-inner">
+                        <div class="skeleton skeleton-media"></div>
+                        <div class="skeleton-body">
+                            <div class="skeleton skeleton-line w-30"></div>
+                            <div class="skeleton skeleton-line h-20 w-90"></div>
+                            <div class="skeleton skeleton-line w-60"></div>
+                            <div class="skeleton skeleton-line w-90"></div>
+                        </div>
+                    </div>
+                </div>
+                <div class="skeleton-card">
+                    <div class="skeleton-card-inner">
+                        <div class="skeleton skeleton-media"></div>
+                        <div class="skeleton-body">
+                            <div class="skeleton skeleton-line w-30"></div>
+                            <div class="skeleton skeleton-line h-20 w-90"></div>
+                            <div class="skeleton skeleton-line w-60"></div>
+                            <div class="skeleton skeleton-line w-90"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination"></div>
+        </section>
+
+    
+            </main>
+
+    <!-- SCROLL TOP -->
+    <button class="scroll-top" id="scrollTopBtn" aria-label="العودة للأعلى" type="button">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- TOAST -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="all-products.html">المنتجات</a>
+                <a href="all-requests.html">الطلبات</a>
+                <a href="chemato-suppliers.html">الموردين</a>
+                <a href="blog.html">المدونة</a>
+                <a href="auth.html">تسجيل الدخول</a>
+                <a href="supplier-dashboard.html">للموردين</a>
+                <a href="buyer-dashboard.html">للعملاء</a>
+            </div>
+            <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
+        </div>
+    </footer>        .featured-main-body { padding: 16px 18px 20px; }
             .featured-main-title { font-size: 1.15rem; }
             .featured-side { flex-direction: column; }
 
@@ -1180,3 +1425,730 @@
         }
     </style>
 </head>
+    
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+        const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+        });
+
+        // ============================================================
+        // STATE
+        // ============================================================
+        const state = {
+            search: '',
+            category: 'all',
+            page: 1,
+            pageSize: 9,
+            total: 0,
+            posts: [],
+            featured: [],
+            user: null,
+        };
+
+        const THEME_KEY = 'chemato-theme';
+
+        // ============================================================
+        // UTILS
+        // ============================================================
+        const escapeHtml = (str) => {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        };
+
+        const formatDate = (dateStr) => {
+            if (!dateStr) return '';
+            return new Date(dateStr).toLocaleDateString('ar-EG', {
+                year: 'numeric', month: 'short', day: 'numeric'
+            });
+        };
+
+        const readingTime = (content) => {
+            if (!content) return '1 دقيقة';
+            const words = String(content).replace(/<[^>]*>/g, '').split(/\s+/).length;
+            const minutes = Math.max(1, Math.ceil(words / 200));
+            return `${minutes} دقيقة`;
+        };
+
+        // ============================================================
+        // THEME
+        // ============================================================
+        const updateThemeIcon = (theme) => {
+            const icon = document.getElementById('themeIcon');
+            if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        };
+
+        const initTheme = () => {
+            const saved = localStorage.getItem(THEME_KEY);
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeIcon(theme);
+
+            document.getElementById('themeToggle')?.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem(THEME_KEY, next);
+                updateThemeIcon(next);
+            });
+        };
+
+        // ============================================================
+        // TOAST
+        // ============================================================
+        const removeToast = (toast) => {
+            if (!toast || !toast.parentNode) return;
+            toast.classList.add('removing');
+            setTimeout(() => toast.remove(), 300);
+        };
+
+        const showToast = (icon, title, desc, type = '') => {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            const iconEl = document.createElement('div');
+            iconEl.className = 'toast-icon';
+            iconEl.textContent = icon;
+
+            const content = document.createElement('div');
+            content.className = 'toast-content';
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'toast-title';
+            titleEl.textContent = title;
+
+            const descEl = document.createElement('div');
+            descEl.className = 'toast-desc';
+            descEl.textContent = desc;
+
+            content.appendChild(titleEl);
+            content.appendChild(descEl);
+
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'toast-close';
+            closeBtn.setAttribute('aria-label', 'إغلاق');
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            closeBtn.onclick = () => removeToast(toast);
+
+            toast.appendChild(iconEl);
+            toast.appendChild(content);
+            toast.appendChild(closeBtn);
+            container.appendChild(toast);
+
+            setTimeout(() => removeToast(toast), 5000);
+        };
+
+        // ============================================================
+        // NAVBAR
+        // ============================================================
+        const initNavbar = () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle?.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', isOpen);
+                menuToggle.innerHTML = isOpen
+                    ? '<i class="fas fa-times"></i>'
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            const dropdownToggle = document.getElementById('dropdownToggle');
+            const dropdownContent = document.getElementById('dropdownContent');
+
+            dropdownToggle?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = dropdownContent.classList.toggle('show');
+                dropdownToggle.setAttribute('aria-expanded', isOpen);
+            });
+
+            document.addEventListener('click', () => {
+                dropdownContent?.classList.remove('show');
+                dropdownToggle?.setAttribute('aria-expanded', 'false');
+            });
+        };
+
+        // ============================================================
+        // AUTH
+        // ============================================================
+        const checkUser = async () => {
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                state.user = user || null;
+
+                const dropdownContent = document.getElementById('dropdownContent');
+                if (!dropdownContent) return;
+
+                if (user) {
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('user_type, full_name, company_name')
+                        .eq('id', user.id)
+                        .single();
+
+                    const name = profile?.company_name || profile?.full_name || 'مستخدم';
+                    const dashboardUrl = profile?.user_type === 'supplier'
+                        ? 'supplier-dashboard.html'
+                        : 'buyer-dashboard.html';
+
+                    dropdownContent.innerHTML = `
+                        <a href="${dashboardUrl}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                        <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                    `;
+
+                    document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        await supabase.auth.signOut();
+                        window.location.reload();
+                    });
+                } else {
+                    dropdownContent.innerHTML = `
+                        <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                        <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                        <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                    `;
+                }
+            } catch (e) {
+                console.warn('Auth check failed:', e.message);
+            }
+        };
+
+        // ============================================================
+        // READING PROGRESS
+        // ============================================================
+        const initReadingProgress = () => {
+            const bar = document.getElementById('readingProgress');
+            if (!bar) return;
+            const update = () => {
+                const winScroll = document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+                bar.style.width = scrolled + '%';
+            };
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update, { passive: true });
+            update();
+        };
+
+        // ============================================================
+        // SCROLL TOP
+        // ============================================================
+        const initScrollTop = () => {
+            const btn = document.getElementById('scrollTopBtn');
+            if (!btn) return;
+            const onScroll = () => btn.classList.toggle('visible', window.scrollY > 400);
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+            btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        };
+
+        // ============================================================
+        // FEATURED POSTS
+        // ============================================================
+        const loadFeatured = async () => {
+            try {
+                const { data, error } = await supabase
+                    .from('blog_posts')
+                    .select('id, title, slug, excerpt, image_url, category, is_featured, published_at, created_at, views, author_name')
+                    .eq('status', 'published')
+                    .eq('is_featured', true)
+                    .order('published_at', { ascending: false })
+                    .limit(4);
+
+                const section = document.getElementById('featuredSection');
+                const grid = document.getElementById('featuredGrid');
+
+                if (error || !data || data.length === 0) {
+                    if (section) section.style.display = 'none';
+                    return;
+                }
+
+                state.featured = data;
+
+                if (section) section.style.display = 'block';
+
+                const mainPost = data[0];
+                const sidePosts = data.slice(1, 4);
+
+                const hasMainImage = mainPost.image_url && /^https?:\/\//i.test(mainPost.image_url);
+                const mainImgHtml = hasMainImage
+                    ? `<img src="${escapeHtml(mainPost.image_url)}" alt="${escapeHtml(mainPost.title)}" loading="lazy" />`
+                    : `<div class="featured-main-placeholder">📰</div>`;
+
+                let sideHtml = '';
+                if (sidePosts.length > 0) {
+                    sideHtml = sidePosts.map(p => {
+                        const hasImg = p.image_url && /^https?:\/\//i.test(p.image_url);
+                        return `
+                            <a href="blog-post.html?slug=${encodeURIComponent(p.slug || p.id)}" class="featured-mini">
+                                <div class="featured-mini-media">
+                                    ${hasImg
+                                        ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.title)}" loading="lazy" />`
+                                        : '📰'}
+                                </div>
+                                <div class="featured-mini-body">
+                                    <div class="featured-mini-title">${escapeHtml(p.title)}</div>
+                                    <div class="featured-mini-meta">
+                                        <span><i class="fas fa-clock"></i> ${formatDate(p.published_at || p.created_at)}</span>
+                                    </div>
+                                </div>
+                            </a>
+                        `;
+                    }).join('');
+                }
+
+                grid.innerHTML = `
+                    <a href="blog-post.html?slug=${encodeURIComponent(mainPost.slug || mainPost.id)}" class="featured-main">
+                        <div class="featured-main-media">
+                            ${mainImgHtml}
+                            <div class="featured-main-badge">
+                                <i class="fas fa-star"></i> مميز
+                            </div>
+                        </div>
+                        <div class="featured-main-body">
+                            <div class="featured-main-category">
+                                <i class="fas fa-tag"></i> ${escapeHtml(mainPost.category || 'عام')}
+                            </div>
+                            <h3 class="featured-main-title">${escapeHtml(mainPost.title)}</h3>
+                            ${mainPost.excerpt ? `<p class="featured-main-excerpt">${escapeHtml(mainPost.excerpt)}</p>` : ''}
+                            <div class="featured-mini-meta">
+                                <span><i class="fas fa-calendar"></i> ${formatDate(mainPost.published_at || mainPost.created_at)}</span>
+                                ${mainPost.author_name ? `<span><i class="fas fa-user"></i> ${escapeHtml(mainPost.author_name)}</span>` : ''}
+                                <span><i class="fas fa-eye"></i> ${Number(mainPost.views || 0).toLocaleString('ar-EG')}</span>
+                            </div>
+                        </div>
+                    </a>
+                    <div class="featured-side">
+                        ${sideHtml}
+                    </div>
+                `;
+
+            } catch (e) {
+                console.warn('Featured load error:', e.message);
+                const section = document.getElementById('featuredSection');
+                if (section) section.style.display = 'none';
+            }
+        };
+
+        // ============================================================
+        // LOAD POSTS
+        // ============================================================
+        const renderPostsSkeleton = () => {
+            const container = document.getElementById('postsList');
+            if (!container) return;
+            container.setAttribute('aria-busy', 'true');
+
+            let html = '';
+            for (let i = 0; i < 6; i++) {
+                html += `
+                    <div class="skeleton-card">
+                        <div class="skeleton-card-inner">
+                            <div class="skeleton skeleton-media"></div>
+                            <div class="skeleton-body">
+                                <div class="skeleton skeleton-line w-30"></div>
+                                <div class="skeleton skeleton-line h-20 w-90"></div>
+                                <div class="skeleton skeleton-line w-60"></div>
+                                <div class="skeleton skeleton-line w-90"></div>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }
+            container.innerHTML = html;
+        };
+
+        const loadPosts = async () => {
+            const container = document.getElementById('postsList');
+            if (!container) return;
+
+            renderPostsSkeleton();
+
+            try {
+                let query = supabase
+                    .from('blog_posts')
+                    .select('id, title, slug, excerpt, image_url, category, tags, views, author_name, published_at, created_at, content', { count: 'exact' })
+                    .eq('status', 'published')
+                    .order('published_at', { ascending: false, nullsFirst: false });
+
+                if (state.category !== 'all') {
+                    query = query.eq('category', state.category);
+                }
+
+                if (state.search) {
+                    const q = state.search.replace(/[%_,()]/g, '');
+                    query = query.or(`title.ilike.%${q}%,excerpt.ilike.%${q}%`);
+                }
+
+                const from = (state.page - 1) * state.pageSize;
+                const to = from + state.pageSize - 1;
+
+                const { data, error, count } = await query.range(from, to);
+
+                if (error) throw error;
+
+                state.total = count || 0;
+                state.posts = data || [];
+
+                if (!state.posts.length) {
+                    renderEmpty();
+                    updateResultsCount();
+                    renderPagination();
+                    return;
+                }
+
+                renderPosts(state.posts);
+                updateResultsCount();
+                renderPagination();
+
+            } catch (e) {
+                console.error('Load posts error:', e);
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <i class="fas fa-exclamation-triangle empty-icon" style="color: var(--c-danger);"></i>
+                        <h3>حدث خطأ في التحميل</h3>
+                        <p>${escapeHtml(e.message || 'تعذر تحميل المقالات')}</p>
+                        <button class="btn-reset-filters" onclick="location.reload()" type="button">
+                            <i class="fas fa-redo"></i> إعادة المحاولة
+                        </button>
+                    </div>
+                `;
+            } finally {
+                container.setAttribute('aria-busy', 'false');
+            }
+        };
+
+        const renderEmpty = () => {
+            const container = document.getElementById('postsList');
+            if (!container) return;
+
+            const hasFilters = state.search || state.category !== 'all';
+
+            container.innerHTML = `
+                <div class="empty-state">
+                    <i class="fas fa-newspaper empty-icon"></i>
+                    <h3>${hasFilters ? 'لا توجد نتائج' : 'لا توجد مقالات'}</h3>
+                    <p>${hasFilters ? 'لم نجد أي مقالات تطابق معايير البحث' : 'لسه مفيش مقالات منشورة'}</p>
+                    ${hasFilters ? `
+                        <button class="btn-reset-filters" id="emptyResetBtn" type="button">
+                            <i class="fas fa-redo"></i> إعادة تعيين الفلاتر
+                        </button>
+                    ` : ''}
+                </div>
+            `;
+
+            document.getElementById('emptyResetBtn')?.addEventListener('click', resetFilters);
+        };
+
+        const renderPosts = (posts) => {
+            const container = document.getElementById('postsList');
+            if (!container) return;
+
+            container.innerHTML = posts.map((p, i) => renderPostCard(p, i)).join('');
+        };
+
+        const renderPostCard = (p, index = 0) => {
+            const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
+            const imgHtml = hasImage
+                ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'post-card-placeholder\\'><span>📰</span></div>';" />`
+                : `<div class="post-card-placeholder">
+                        📰
+                        <span>${escapeHtml((p.title || '').substring(0, 30))}</span>
+                   </div>`;
+
+            const readTime = readingTime(p.content || p.excerpt);
+            const tags = Array.isArray(p.tags) ? p.tags.slice(0, 3) : [];
+
+            return `
+                <a href="blog-post.html?slug=${encodeURIComponent(p.slug || p.id)}"
+                   class="post-card"
+                   style="animation-delay: ${Math.min(index * 0.05, 0.4)}s;">
+                    <div class="post-card-media">
+                        ${imgHtml}
+                        <div class="post-card-category">
+                            <i class="fas fa-tag"></i> ${escapeHtml(p.category || 'عام')}
+                        </div>
+                    </div>
+                    <div class="post-card-body">
+                        <h3 class="post-card-title">${escapeHtml(p.title)}</h3>
+                        ${p.excerpt ? `<p class="post-card-excerpt">${escapeHtml(p.excerpt)}</p>` : ''}
+                        ${tags.length > 0 ? `
+                            <div class="post-card-tags">
+                                ${tags.map(t => `<span class="post-card-tag">#${escapeHtml(t)}</span>`).join('')}
+                            </div>
+                        ` : ''}
+                        <div class="post-card-meta">
+                            <span><i class="fas fa-calendar"></i> ${formatDate(p.published_at || p.created_at)}</span>
+                            <span><i class="fas fa-clock"></i> ${readTime}</span>
+                            <span><i class="fas fa-eye"></i> ${Number(p.views || 0).toLocaleString('ar-EG')}</span>
+                        </div>
+                        <div class="post-card-footer">
+                            <span class="read-more">
+                                اقرأ المزيد
+                                <i class="fas fa-arrow-left"></i>
+                            </span>
+                        </div>
+                    </div>
+                </a>
+            `;
+        };
+
+        const updateResultsCount = () => {
+            const el = document.getElementById('resultsCount');
+            if (!el) return;
+            if (state.total === 0) {
+                el.innerHTML = `<i class="fas fa-info-circle"></i> لا توجد نتائج`;
+                return;
+            }
+            const shown = state.posts.length;
+            el.innerHTML = `<i class="fas fa-newspaper"></i> عرض <strong>${shown}</strong> من أصل <strong>${state.total}</strong> مقال`;
+        };
+
+        // ============================================================
+        // PAGINATION
+        // ============================================================
+        const renderPagination = () => {
+            const container = document.getElementById('pagination');
+            if (!container) return;
+
+            const totalPages = Math.ceil(state.total / state.pageSize);
+
+            if (totalPages <= 1) {
+                container.innerHTML = '';
+                return;
+            }
+
+            let html = '';
+
+            // Previous
+            html += `<button type="button" data-page="${state.page - 1}" ${state.page === 1 ? 'disabled' : ''}>
+                        <i class="fas fa-chevron-right"></i> السابق
+                     </button>`;
+
+            // Pages
+            const maxVisible = 5;
+            let startPage = Math.max(1, state.page - Math.floor(maxVisible / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+
+            if (endPage - startPage + 1 < maxVisible) {
+                startPage = Math.max(1, endPage - maxVisible + 1);
+            }
+
+            if (startPage > 1) {
+                html += `<button type="button" data-page="1">1</button>`;
+                if (startPage > 2) html += `<span class="ellipsis">...</span>`;
+            }
+
+            for (let i = startPage; i <= endPage; i++) {
+                html += `<button type="button" data-page="${i}" class="${i === state.page ? 'active' : ''}">${i}</button>`;
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) html += `<span class="ellipsis">...</span>`;
+                html += `<button type="button" data-page="${totalPages}">${totalPages}</button>`;
+            }
+
+            // Next
+            html += `<button type="button" data-page="${state.page + 1}" ${state.page === totalPages ? 'disabled' : ''}>
+                        التالي <i class="fas fa-chevron-left"></i>
+                     </button>`;
+
+            container.innerHTML = html;
+
+            // Bind
+            container.querySelectorAll('button[data-page]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    const page = Number(btn.dataset.page);
+                    if (page < 1 || page > totalPages || page === state.page) return;
+                    state.page = page;
+                    loadPosts();
+                    const postsSection = document.getElementById('postsTitle');
+                    if (postsSection) {
+                        window.scrollTo({
+                            top: postsSection.offsetTop - 100,
+                            behavior: 'smooth'
+                        });
+                    }
+                });
+            });
+        };
+
+        // ============================================================
+        // SEARCH
+        // ============================================================
+        const performSearch = () => {
+            const input = document.getElementById('searchInput');
+            state.search = (input?.value || '').trim().slice(0, 100);
+            state.page = 1;
+            loadPosts();
+        };
+
+        const initSearch = () => {
+            const input = document.getElementById('searchInput');
+            const btn = document.getElementById('searchBtn');
+            const clearBtn = document.getElementById('clearSearch');
+
+            input?.addEventListener('input', () => {
+                clearBtn?.classList.toggle('visible', input.value.length > 0);
+            });
+
+            input?.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter') {
+                    e.preventDefault();
+                    performSearch();
+                }
+            });
+
+            btn?.addEventListener('click', performSearch);
+
+            clearBtn?.addEventListener('click', () => {
+                if (input) input.value = '';
+                state.search = '';
+                clearBtn.classList.remove('visible');
+                state.page = 1;
+                loadPosts();
+                input?.focus();
+            });
+        };
+
+        // ============================================================
+        // FILTERS
+        // ============================================================
+        const initFilters = () => {
+            document.querySelectorAll('.filter-chip').forEach(chip => {
+                chip.addEventListener('click', () => {
+                    document.querySelectorAll('.filter-chip').forEach(c => {
+                        c.classList.remove('active');
+                        c.setAttribute('aria-selected', 'false');
+                    });
+                    chip.classList.add('active');
+                    chip.setAttribute('aria-selected', 'true');
+
+                    state.category = chip.dataset.category || 'all';
+                    state.page = 1;
+                    loadPosts();
+                });
+            });
+        };
+
+        const resetFilters = () => {
+            state.search = '';
+            state.category = 'all';
+            state.page = 1;
+
+            const input = document.getElementById('searchInput');
+            if (input) input.value = '';
+            document.getElementById('clearSearch')?.classList.remove('visible');
+
+            document.querySelectorAll('.filter-chip').forEach(c => {
+                const isAll = c.dataset.category === 'all';
+                c.classList.toggle('active', isAll);
+                c.setAttribute('aria-selected', isAll);
+            });
+
+            loadPosts();
+            showToast('🔄', 'تم إعادة التعيين', 'كل الفلاتر رجعت افتراضي', 'info');
+        };
+
+        // ============================================================
+        // KEYBOARD SHORTCUTS
+        // ============================================================
+        const initKeyboardShortcuts = () => {
+            document.addEventListener('keydown', (e) => {
+                if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
+                    e.preventDefault();
+                    document.getElementById('searchInput')?.focus();
+                }
+                if (e.key === '/' && !['INPUT', 'TEXTAREA', 'SELECT'].includes(document.activeElement.tagName)) {
+                    e.preventDefault();
+                    document.getElementById('searchInput')?.focus();
+                }
+                if (e.key === 'Escape') {
+                    document.querySelector('.dropdown-content')?.classList.remove('show');
+                }
+            });
+        };
+
+        // ============================================================
+        // READ URL
+        // ============================================================
+        const readURL = () => {
+            const params = new URLSearchParams(window.location.search);
+            const search = params.get('search');
+            const category = params.get('category');
+
+            if (search) {
+                state.search = search.trim().slice(0, 100);
+                const input = document.getElementById('searchInput');
+                if (input) input.value = state.search;
+                document.getElementById('clearSearch')?.classList.add('visible');
+            }
+
+            if (category) {
+                state.category = category;
+                document.querySelectorAll('.filter-chip').forEach(c => {
+                    const isActive = c.dataset.category === category;
+                    c.classList.toggle('active', isActive);
+                    c.setAttribute('aria-selected', isActive);
+                });
+            }
+        };
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        const init = async () => {
+            console.log('🚀 كيماتو | المدونة');
+
+            initTheme();
+            initNavbar();
+            initReadingProgress();
+            initScrollTop();
+            initSearch();
+            initFilters();
+            initKeyboardShortcuts();
+
+            readURL();
+
+            await checkUser();
+
+            await Promise.all([
+                loadFeatured(),
+                loadPosts(),
+            ]);
+
+            setTimeout(() => {
+                if (state.total > 0) {
+                    showToast('📰', 'أهلاً بك!', `${state.total} مقال متاح للقراءة`, 'info');
+                }
+            }, 1500);
+
+            console.log('✅ جاهز');
+        };
+
+        supabase.auth.onAuthStateChange(() => {
+            checkUser();
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
