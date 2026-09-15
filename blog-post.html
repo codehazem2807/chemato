@@ -50,8 +50,9 @@
             --c-danger:      #e74c3c;
             --c-whatsapp:    #25D366;
             --c-purple:      #8b5cf6;
+            --c-verified:    #1e88e5;
             --c-facebook:    #1877f2;
-            --c-twitter:     #000;
+            --c-twitter:     #000000;
             --c-linkedin:    #0a66c2;
             --c-bg:          #f6f8fb;
             --c-surface:     #ffffff;
@@ -73,7 +74,6 @@
             --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
             --t-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
             --container: 1320px;
-            --content-w: 760px;
             --header-h: 68px;
         }
 
@@ -109,11 +109,7 @@
         a { color: inherit; text-decoration: none; }
         input, select, textarea { font-family: inherit; }
 
-        :focus-visible {
-            outline: 3px solid var(--c-primary-500);
-            outline-offset: 2px;
-            border-radius: var(--r-sm);
-        }
+        :focus-visible { outline: 3px solid var(--c-primary-500); outline-offset: 2px; border-radius: var(--r-sm); }
 
         .skip-link {
             position: absolute; top: -100px; right: 16px;
@@ -123,35 +119,26 @@
         }
         .skip-link:focus { top: 16px; }
 
-        /* ============================================================
-           ANIMATIONS
-           ============================================================ */
+        .reading-progress {
+            position: fixed; top: 0; right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, var(--c-verified), var(--c-accent));
+            z-index: 9999; width: 0;
+            transition: width 0.1s linear;
+            pointer-events: none;
+            box-shadow: 0 0 10px rgba(46, 204, 113, 0.5);
+        }
+
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
+        @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
         @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
-        /* ============================================================
-           READING PROGRESS
-           ============================================================ */
-        .reading-progress {
-            position: fixed;
-            top: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--c-verified, #1e88e5), var(--c-accent));
-            z-index: 9999;
-            width: 0;
-            transition: width 0.1s linear;
-            pointer-events: none;
-            box-shadow: 0 0 10px rgba(46, 204, 113, 0.6);
-        }
-
-        /* ============================================================
-           NAVBAR
-           ============================================================ */
+        /* NAVBAR */
         .navbar {
             position: sticky; top: 0; z-index: 100;
             background: rgba(10, 37, 64, 0.88);
@@ -223,14 +210,9 @@
             align-items: center; justify-content: center; font-size: 1.1rem;
         }
 
-        /* ============================================================
-           MAIN
-           ============================================================ */
+        /* MAIN */
         .main-container { max-width: var(--container); margin: 0 auto; padding: 20px 24px 60px; }
 
-        /* ============================================================
-           BACK BUTTON
-           ============================================================ */
         .back-btn {
             display: inline-flex;
             align-items: center;
@@ -252,9 +234,7 @@
             transform: translateX(-3px);
         }
 
-        /* ============================================================
-           HERO HEADER
-           ============================================================ */
+        /* HERO HEADER */
         .post-hero {
             position: relative;
             border-radius: var(--r-xl);
@@ -277,6 +257,20 @@
             background-size: 40px 40px, 60px 60px;
             pointer-events: none;
         }
+        .post-hero-bg-icons {
+            position: absolute; inset: 0;
+            overflow: hidden; pointer-events: none; z-index: 0;
+        }
+        .post-hero-bg-icons .icon-float {
+            position: absolute; font-size: 2.4rem;
+            opacity: 0.08; animation: float 6s ease-in-out infinite;
+        }
+        .post-hero-bg-icons .icon-float.rotate { animation: rotateSlow 30s linear infinite; }
+        .post-hero-bg-icons .icon-float:nth-child(1) { top: 12%; left: 6%; font-size: 3rem; animation-delay: 0s; }
+        .post-hero-bg-icons .icon-float:nth-child(2) { top: 18%; right: 8%; font-size: 3.6rem; animation-delay: 1s; }
+        .post-hero-bg-icons .icon-float:nth-child(3) { bottom: 30%; left: 10%; font-size: 2.6rem; animation-delay: 2s; }
+        .post-hero-bg-icons .icon-float:nth-child(4) { bottom: 12%; right: 6%; font-size: 3rem; animation-delay: 0.5s; }
+
         .post-hero-content { position: relative; z-index: 1; max-width: 900px; margin: 0 auto; }
 
         .post-category {
@@ -319,9 +313,7 @@
         .post-meta-item i { color: #7ec8e3; font-size: 0.85rem; }
         .post-meta-item strong { color: #fff; font-weight: 800; }
 
-        /* ============================================================
-           FEATURED IMAGE
-           ============================================================ */
+        /* FEATURED IMAGE */
         .post-featured-image {
             border-radius: var(--r-lg);
             overflow: hidden;
@@ -336,9 +328,7 @@
             object-fit: cover;
         }
 
-        /* ============================================================
-           LAYOUT
-           ============================================================ */
+        /* LAYOUT */
         .post-layout {
             display: grid;
             grid-template-columns: 1fr 300px;
@@ -356,9 +346,7 @@
             gap: 16px;
         }
 
-        /* ============================================================
-           ARTICLE CONTENT
-           ============================================================ */
+        /* ARTICLE CONTENT */
         .post-content {
             background: var(--c-surface);
             border-radius: var(--r-lg);
@@ -505,9 +493,7 @@
             margin: 32px 0;
         }
 
-        /* ============================================================
-           TAGS
-           ============================================================ */
+        /* TAGS */
         .post-tags {
             display: flex;
             gap: 8px;
@@ -546,9 +532,7 @@
             transform: translateY(-2px);
         }
 
-        /* ============================================================
-           SHARE SECTION (Inline)
-           ============================================================ */
+        /* SHARE SECTION */
         .share-section {
             display: flex;
             align-items: center;
@@ -591,9 +575,7 @@
         .share-btn.linkedin { background: var(--c-linkedin); }
         .share-btn.copy { background: var(--c-text-muted); }
 
-        /* ============================================================
-           AUTHOR CARD
-           ============================================================ */
+        /* AUTHOR CARD */
         .author-card {
             background: linear-gradient(135deg, rgba(30, 136, 229, 0.04), rgba(46, 204, 113, 0.02));
             border: 1.5px solid var(--c-border);
@@ -638,9 +620,7 @@
             line-height: 1.6;
         }
 
-        /* ============================================================
-           TOC
-           ============================================================ */
+        /* TOC */
         .toc-card {
             background: var(--c-surface);
             border: 1.5px solid var(--c-border);
@@ -663,6 +643,8 @@
             display: flex;
             flex-direction: column;
             gap: 2px;
+            max-height: 400px;
+            overflow-y: auto;
         }
         .toc-link {
             display: flex;
@@ -696,9 +678,7 @@
             font-weight: 500;
         }
 
-        /* ============================================================
-           SIDEBAR SHARE
-           ============================================================ */
+        /* SIDEBAR SHARE */
         .sidebar-share {
             background: var(--c-surface);
             border: 1.5px solid var(--c-border);
@@ -721,9 +701,7 @@
             flex-wrap: wrap;
         }
 
-        /* ============================================================
-           RELATED POSTS
-           ============================================================ */
+        /* RELATED POSTS */
         .related-section {
             margin-top: 48px;
         }
@@ -831,9 +809,7 @@
             padding-top: 6px;
         }
 
-        /* ============================================================
-           LOADER
-           ============================================================ */
+        /* LOADER */
         .page-loader {
             text-align: center;
             padding: 80px 20px;
@@ -861,9 +837,7 @@
         }
         .page-loader p { font-size: 0.88rem; }
 
-        /* ============================================================
-           ERROR / NOT FOUND
-           ============================================================ */
+        /* ERROR */
         .error-state {
             text-align: center;
             padding: 60px 24px;
@@ -908,26 +882,7 @@
             box-shadow: 0 12px 32px rgba(10, 37, 64, 0.35);
         }
 
-        /* ============================================================
-           SKELETON
-           ============================================================ */
-        .skeleton {
-            background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
-            background-size: 200% 100%;
-            animation: shimmer 1.5s infinite;
-            border-radius: var(--r-md);
-        }
-        .skeleton-line { height: 16px; margin-bottom: 12px; border-radius: 6px; }
-        .skeleton-line.w-30 { width: 30%; }
-        .skeleton-line.w-60 { width: 60%; }
-        .skeleton-line.w-80 { width: 80%; }
-        .skeleton-line.w-100 { width: 100%; }
-        .skeleton-line.h-30 { height: 30px; }
-        .skeleton-hero { height: 180px; border-radius: var(--r-xl); margin-bottom: 24px; }
-
-        /* ============================================================
-           SCROLL TOP
-           ============================================================ */
+        /* SCROLL TOP */
         .scroll-top {
             position: fixed;
             bottom: 32px;
@@ -958,9 +913,7 @@
             box-shadow: var(--sh-xl);
         }
 
-        /* ============================================================
-           TOAST
-           ============================================================ */
+        /* TOAST */
         .toast-container {
             position: fixed;
             bottom: 24px;
@@ -1012,9 +965,7 @@
         .toast.error { border-right-color: var(--c-danger); }
         .toast.info { border-right-color: var(--c-purple); }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
+        /* FOOTER */
         .footer {
             background: linear-gradient(180deg, var(--c-primary-900), #061a2e);
             color: rgba(255, 255, 255, 0.8);
@@ -1044,9 +995,7 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
             .post-layout {
                 grid-template-columns: 1fr;
@@ -1056,13 +1005,7 @@
                 position: static;
                 order: -1;
             }
-            .post-sidebar .sidebar-share,
-            .post-sidebar .author-card {
-                display: none;
-            }
-            .toc-card {
-                display: none;
-            }
+            .toc-card { display: none; }
         }
 
         @media (max-width: 860px) {
@@ -1147,3 +1090,824 @@
         }
     </style>
 </head>
+<body>
+
+    <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
+
+    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
+
+    <!-- NAVBAR -->
+    <header class="navbar" role="banner">
+        <div class="navbar-inner">
+            <div class="logo">
+                <a href="index.html" aria-label="كيماتو">
+                    <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager"
+                         onerror="this.style.display='none'" />
+                    <span class="logo-text">
+                        <span class="blue">كيماتو</span>
+                        <span class="gray">| المقال</span>
+                    </span>
+                </a>
+            </div>
+
+            <nav class="nav-links" id="navLinks" role="navigation" aria-label="التنقل">
+                <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+                <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+                <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+                <a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردين</a>
+                <a href="blog.html" class="active"><i class="fas fa-newspaper"></i> المدونة</a>
+
+                <div class="dropdown">
+                    <button class="dropdown-btn" id="dropdownToggle" aria-expanded="false" aria-haspopup="true">
+                        <i class="fas fa-user-circle"></i> القائمة
+                        <i class="fas fa-chevron-down" style="font-size:0.7em;"></i>
+                    </button>
+                    <div class="dropdown-content" id="dropdownContent" role="menu"></div>
+                </div>
+
+                <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي" title="الوضع الليلي">
+                    <i class="fas fa-moon" id="themeIcon"></i>
+                </button>
+            </nav>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- MAIN -->
+    <main class="main-container" id="main">
+
+        <div id="pageContent">
+            <div class="page-loader">
+                <div class="spinner"></div>
+                <h3>جاري تحميل المقال...</h3>
+                <p>الرجاء الانتظار قليلاً</p>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- SCROLL TOP -->
+    <button class="scroll-top" id="scrollTopBtn" aria-label="العودة للأعلى" type="button">
+        <i class="fas fa-chevron-up"></i>
+    </button>
+
+    <!-- TOAST -->
+    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+    <!-- FOOTER -->
+    <footer class="footer" role="contentinfo">
+        <div class="footer-inner">
+            <div class="footer-links">
+                <a href="index.html">الرئيسية</a>
+                <a href="all-products.html">المنتجات</a>
+                <a href="all-requests.html">الطلبات</a>
+                <a href="chemato-suppliers.html">الموردين</a>
+                <a href="blog.html">المدونة</a>
+                <a href="auth.html">تسجيل الدخول</a>
+                <a href="supplier-dashboard.html">للموردين</a>
+                <a href="buyer-dashboard.html">للعملاء</a>
+            </div>
+            <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
+        </div>
+    </footer>
+
+    <script type="module">
+        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+        const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
+        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
+
+        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+            auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+        });
+
+        // ============================================================
+        // STATE
+        // ============================================================
+        const state = {
+            slug: null,
+            post: null,
+            relatedPosts: [],
+            user: null,
+            tocItems: [],
+        };
+
+        const THEME_KEY = 'chemato-theme';
+
+        // ============================================================
+        // UTILS
+        // ============================================================
+        const escapeHtml = (str) => {
+            if (str === null || str === undefined) return '';
+            return String(str)
+                .replace(/&/g, '&amp;')
+                .replace(/</g, '&lt;')
+                .replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;')
+                .replace(/'/g, '&#039;');
+        };
+
+        const formatDate = (dateStr) => {
+            if (!dateStr) return '';
+            try {
+                return new Date(dateStr).toLocaleDateString('ar-EG', {
+                    year: 'numeric', month: 'long', day: 'numeric'
+                });
+            } catch { return ''; }
+        };
+
+        const readingTime = (content) => {
+            if (!content) return '1 دقيقة';
+            const words = String(content).replace(/<[^>]*>/g, '').split(/\s+/).length;
+            const minutes = Math.max(1, Math.ceil(words / 200));
+            return `${minutes} دقيقة`;
+        };
+
+        // ============================================================
+        // THEME
+        // ============================================================
+        const updateThemeIcon = (theme) => {
+            const icon = document.getElementById('themeIcon');
+            if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+        };
+
+        const initTheme = () => {
+            const saved = localStorage.getItem(THEME_KEY);
+            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            const theme = saved || (prefersDark ? 'dark' : 'light');
+            document.documentElement.setAttribute('data-theme', theme);
+            updateThemeIcon(theme);
+
+            document.getElementById('themeToggle')?.addEventListener('click', () => {
+                const current = document.documentElement.getAttribute('data-theme');
+                const next = current === 'dark' ? 'light' : 'dark';
+                document.documentElement.setAttribute('data-theme', next);
+                localStorage.setItem(THEME_KEY, next);
+                updateThemeIcon(next);
+            });
+        };
+
+        // ============================================================
+        // TOAST
+        // ============================================================
+        const removeToast = (toast) => {
+            if (!toast || !toast.parentNode) return;
+            toast.classList.add('removing');
+            setTimeout(() => toast.remove(), 300);
+        };
+
+        const showToast = (icon, title, desc, type = '') => {
+            const container = document.getElementById('toastContainer');
+            if (!container) return;
+
+            const toast = document.createElement('div');
+            toast.className = `toast ${type}`;
+
+            const iconEl = document.createElement('div');
+            iconEl.className = 'toast-icon';
+            iconEl.textContent = icon;
+
+            const content = document.createElement('div');
+            content.className = 'toast-content';
+
+            const titleEl = document.createElement('div');
+            titleEl.className = 'toast-title';
+            titleEl.textContent = title;
+
+            const descEl = document.createElement('div');
+            descEl.className = 'toast-desc';
+            descEl.textContent = desc;
+
+            content.appendChild(titleEl);
+            content.appendChild(descEl);
+
+            const closeBtn = document.createElement('button');
+            closeBtn.className = 'toast-close';
+            closeBtn.setAttribute('aria-label', 'إغلاق');
+            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+            closeBtn.onclick = () => removeToast(toast);
+
+            toast.appendChild(iconEl);
+            toast.appendChild(content);
+            toast.appendChild(closeBtn);
+            container.appendChild(toast);
+
+            setTimeout(() => removeToast(toast), 5000);
+        };
+
+        // ============================================================
+        // NAVBAR
+        // ============================================================
+        const initNavbar = () => {
+            const menuToggle = document.getElementById('menuToggle');
+            const navLinks = document.getElementById('navLinks');
+
+            menuToggle?.addEventListener('click', () => {
+                const isOpen = navLinks.classList.toggle('open');
+                menuToggle.setAttribute('aria-expanded', isOpen);
+                menuToggle.innerHTML = isOpen
+                    ? '<i class="fas fa-times"></i>'
+                    : '<i class="fas fa-bars"></i>';
+            });
+
+            const dropdownToggle = document.getElementById('dropdownToggle');
+            const dropdownContent = document.getElementById('dropdownContent');
+
+            dropdownToggle?.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const isOpen = dropdownContent.classList.toggle('show');
+                dropdownToggle.setAttribute('aria-expanded', isOpen);
+            });
+
+            document.addEventListener('click', () => {
+                dropdownContent?.classList.remove('show');
+                dropdownToggle?.setAttribute('aria-expanded', 'false');
+            });
+        };
+
+        // ============================================================
+        // AUTH
+        // ============================================================
+        const checkUser = async () => {
+            try {
+                const { data: { user } } = await supabase.auth.getUser();
+                state.user = user || null;
+
+                const dropdownContent = document.getElementById('dropdownContent');
+                if (!dropdownContent) return;
+
+                if (user) {
+                    const { data: profile } = await supabase
+                        .from('profiles')
+                        .select('user_type')
+                        .eq('id', user.id)
+                        .single();
+
+                    const dashboardUrl = profile?.user_type === 'supplier'
+                        ? 'supplier-dashboard.html'
+                        : 'buyer-dashboard.html';
+
+                    dropdownContent.innerHTML = `
+                        <a href="${dashboardUrl}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                        <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                        <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                    `;
+
+                    document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                        e.preventDefault();
+                        await supabase.auth.signOut();
+                        window.location.reload();
+                    });
+                } else {
+                    dropdownContent.innerHTML = `
+                        <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                        <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+                        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+                        <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                    `;
+                }
+            } catch (e) {
+                console.warn('Auth check failed:', e.message);
+            }
+        };
+
+        // ============================================================
+        // READING PROGRESS
+        // ============================================================
+        const initReadingProgress = () => {
+            const bar = document.getElementById('readingProgress');
+            if (!bar) return;
+            const update = () => {
+                const winScroll = document.documentElement.scrollTop;
+                const height = document.documentElement.scrollHeight - window.innerHeight;
+                const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
+                bar.style.width = scrolled + '%';
+            };
+            window.addEventListener('scroll', update, { passive: true });
+            window.addEventListener('resize', update, { passive: true });
+            update();
+        };
+
+        // ============================================================
+        // SCROLL TOP
+        // ============================================================
+        const initScrollTop = () => {
+            const btn = document.getElementById('scrollTopBtn');
+            if (!btn) return;
+            const onScroll = () => btn.classList.toggle('visible', window.scrollY > 400);
+            window.addEventListener('scroll', onScroll, { passive: true });
+            onScroll();
+            btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+        };
+
+        // ============================================================
+        // BUILD TOC FROM CONTENT
+        // ============================================================
+        const buildTOC = (content) => {
+            const container = document.getElementById('tocList');
+            if (!container) return;
+
+            const temp = document.createElement('div');
+            temp.innerHTML = content;
+
+            const headings = temp.querySelectorAll('h2, h3');
+            if (!headings.length) {
+                const card = document.getElementById('tocCard');
+                if (card) card.style.display = 'none';
+                return;
+            }
+
+            const items = [];
+            headings.forEach((h, i) => {
+                const id = `heading-${i}`;
+                h.setAttribute('id', id);
+                items.push({
+                    id,
+                    text: h.textContent.trim().substring(0, 60),
+                    level: h.tagName === 'H2' ? 2 : 3,
+                });
+            });
+
+            // Update actual content with IDs
+            const contentEl = document.querySelector('.post-content');
+            if (contentEl) {
+                const realHeadings = contentEl.querySelectorAll('h2, h3');
+                realHeadings.forEach((h, i) => {
+                    h.setAttribute('id', `heading-${i}`);
+                });
+            }
+
+            state.tocItems = items;
+
+            container.innerHTML = items.map(item => `
+                <a href="#${item.id}" class="toc-link ${item.level === 3 ? 'h3' : ''}" data-target="${item.id}">
+                    <i class="fas fa-${item.level === 2 ? 'circle' : 'circle-notch'}" style="font-size: 0.4rem; opacity: 0.6;"></i>
+                    ${escapeHtml(item.text)}
+                </a>
+            `).join('');
+
+            // Smooth scroll to headings
+            container.querySelectorAll('.toc-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    const targetId = link.dataset.target;
+                    const target = document.getElementById(targetId);
+                    if (target) {
+                        const top = target.getBoundingClientRect().top + window.scrollY - 90;
+                        window.scrollTo({ top, behavior: 'smooth' });
+                    }
+                });
+            });
+
+            // IntersectionObserver for active state
+            setupTOCActiveState();
+        };
+
+        const setupTOCActiveState = () => {
+            if (!('IntersectionObserver' in window)) return;
+
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const id = entry.target.id;
+                        document.querySelectorAll('.toc-link').forEach(link => {
+                            link.classList.toggle('active', link.dataset.target === id);
+                        });
+                    }
+                });
+            }, {
+                rootMargin: '-100px 0px -70% 0px',
+                threshold: 0,
+            });
+
+            document.querySelectorAll('.post-content h2, .post-content h3').forEach(h => {
+                observer.observe(h);
+            });
+        };
+
+        // ============================================================
+        // LOAD POST
+        // ============================================================
+        const loadPost = async () => {
+            const container = document.getElementById('pageContent');
+            if (!container) return;
+
+            if (!state.slug) {
+                renderError('رابط غير صحيح', 'لم يتم تحديد المقال المطلوب.');
+                return;
+            }
+
+            try {
+                console.log('🔄 Loading post:', state.slug);
+
+                const { data: post, error } = await supabase
+                    .from('blog_posts')
+                    .select('*')
+                    .eq('slug', state.slug)
+                    .eq('status', 'published')
+                    .single();
+
+                if (error || !post) {
+                    console.error('Post fetch error:', error);
+                    renderError('المقال غير موجود', 'ربما تم حذفه أو لم يتم نشره بعد.');
+                    return;
+                }
+
+                console.log('✅ Post loaded:', post.title);
+                state.post = post;
+
+                // Update meta
+                updateMetaTags(post);
+
+                // Render
+                renderPost(post);
+
+                // Update views
+                supabase
+                    .from('blog_posts')
+                    .update({ views: (post.views || 0) + 1 })
+                    .eq('id', post.id)
+                    .then(() => {});
+
+                // Load related posts
+                loadRelatedPosts(post);
+
+            } catch (e) {
+                console.error('Load post error:', e);
+                renderError('حدث خطأ', 'تعذر تحميل المقال. حاول تحديث الصفحة.');
+            }
+        };
+
+        const updateMetaTags = (post) => {
+            document.title = `${post.title} | كيماتو`;
+            const desc = post.excerpt || post.title;
+
+            const setMeta = (id, content) => {
+                const el = document.getElementById(id);
+                if (el) el.content = content;
+            };
+
+            setMeta('pageDescription', desc);
+            setMeta('ogTitle', post.title);
+            setMeta('ogDescription', desc);
+            setMeta('twTitle', post.title);
+            setMeta('twDescription', desc);
+
+            const canonical = document.getElementById('pageCanonical');
+            if (canonical) canonical.href = `https://chemato.vercel.app/blog-post.html?slug=${post.slug || post.id}`;
+
+            const ogUrl = document.getElementById('ogUrl');
+            if (ogUrl) ogUrl.content = `https://chemato.vercel.app/blog-post.html?slug=${post.slug || post.id}`;
+
+            if (post.image_url) {
+                setMeta('ogImage', post.image_url);
+                setMeta('twImage', post.image_url);
+            }
+
+            // Schema
+            try {
+                const schema = document.createElement('script');
+                schema.type = 'application/ld+json';
+                schema.textContent = JSON.stringify({
+                    "@context": "https://schema.org",
+                    "@type": "Article",
+                    "headline": post.title,
+                    "description": desc,
+                    "image": post.image_url || undefined,
+                    "datePublished": post.published_at || post.created_at,
+                    "dateModified": post.updated_at || post.created_at,
+                    "author": {
+                        "@type": "Person",
+                        "name": post.author_name || "كيماتو"
+                    }
+                });
+                document.head.appendChild(schema);
+            } catch (e) { /* silent */ }
+        };
+
+        const renderPost = (post) => {
+            const container = document.getElementById('pageContent');
+            if (!container) return;
+
+            const authorName = post.author_name || 'كيماتو';
+            const authorInitial = (authorName || 'ك').charAt(0).toUpperCase();
+            const hasImage = post.image_url && /^https?:\/\//i.test(post.image_url);
+            const tags = Array.isArray(post.tags) ? post.tags : [];
+            const readTime = readingTime(post.content);
+
+            container.innerHTML = `
+                <a href="blog.html" class="back-btn animate-in">
+                    <i class="fas fa-arrow-right"></i> العودة إلى المدونة
+                </a>
+
+                <!-- HERO -->
+                <section class="post-hero animate-in">
+                    <div class="post-hero-bg-icons" aria-hidden="true">
+                        <span class="icon-float">📰</span>
+                        <span class="icon-float rotate">📖</span>
+                        <span class="icon-float">✍️</span>
+                        <span class="icon-float rotate">💡</span>
+                    </div>
+
+                    <div class="post-hero-content">
+                        ${post.category ? `
+                            <span class="post-category">
+                                <i class="fas fa-tag"></i> ${escapeHtml(post.category)}
+                            </span>
+                        ` : ''}
+
+                        <h1>${escapeHtml(post.title)}</h1>
+
+                        <div class="post-hero-meta">
+                            <span class="post-meta-item">
+                                <i class="fas fa-calendar"></i>
+                                ${formatDate(post.published_at || post.created_at)}
+                            </span>
+                            ${authorName ? `
+                                <span class="post-meta-item">
+                                    <i class="fas fa-user"></i>
+                                    <strong>${escapeHtml(authorName)}</strong>
+                                </span>
+                            ` : ''}
+                            <span class="post-meta-item">
+                                <i class="fas fa-clock"></i>
+                                ${readTime} قراءة
+                            </span>
+                            <span class="post-meta-item">
+                                <i class="fas fa-eye"></i>
+                                <strong id="viewsCount">${Number(post.views || 0).toLocaleString('ar-EG')}</strong> مشاهدة
+                            </span>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- FEATURED IMAGE -->
+                ${hasImage ? `
+                    <div class="post-featured-image animate-in" style="animation-delay: 0.05s;">
+                        <img src="${escapeHtml(post.image_url)}" alt="${escapeHtml(post.title)}" loading="eager" />
+                    </div>
+                ` : ''}
+
+                <!-- LAYOUT -->
+                <div class="post-layout">
+                    <div class="post-main">
+                        <article class="post-content animate-in" style="animation-delay: 0.1s;">
+                            ${post.content || post.excerpt || '<p>لا يوجد محتوى متاح.</p>'}
+
+                            ${tags.length > 0 ? `
+                                <div class="post-tags">
+                                    <span class="tags-label"><i class="fas fa-tags"></i> الوسوم:</span>
+                                    ${tags.map(t => `<a href="blog.html?tag=${encodeURIComponent(t)}" class="tag">#${escapeHtml(t)}</a>`).join('')}
+                                </div>
+                            ` : ''}
+
+                            <div class="share-section">
+                                <span class="share-label"><i class="fas fa-share-alt"></i> شارك المقال:</span>
+                                <button class="share-btn facebook" data-share="facebook" type="button" aria-label="فيسبوك">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="share-btn twitter" data-share="twitter" type="button" aria-label="تويتر">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button class="share-btn whatsapp" data-share="whatsapp" type="button" aria-label="واتساب">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                                <button class="share-btn linkedin" data-share="linkedin" type="button" aria-label="لينكد إن">
+                                    <i class="fab fa-linkedin-in"></i>
+                                </button>
+                                <button class="share-btn copy" data-share="copy" type="button" aria-label="نسخ الرابط">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </article>
+                    </div>
+
+                    <aside class="post-sidebar">
+                        <!-- AUTHOR -->
+                        <div class="author-card animate-in" style="animation-delay: 0.15s;">
+                            <div class="author-card-header">
+                                <div class="author-avatar">${authorInitial}</div>
+                                <div class="author-info">
+                                    <div class="author-name">${escapeHtml(authorName)}</div>
+                                    <div class="author-role">محرر في كيماتو</div>
+                                </div>
+                            </div>
+                            <p class="author-bio">
+                                ننشر مقالات متخصصة عن سوق المواد الكيميائية في مصر والشرق الأوسط.
+                            </p>
+                        </div>
+
+                        <!-- TOC -->
+                        <div class="toc-card animate-in" id="tocCard" style="animation-delay: 0.2s;">
+                            <div class="toc-title">
+                                <i class="fas fa-list-ul"></i>
+                                محتويات المقال
+                            </div>
+                            <div class="toc-list" id="tocList"></div>
+                        </div>
+
+                        <!-- SIDEBAR SHARE -->
+                        <div class="sidebar-share animate-in" style="animation-delay: 0.25s;">
+                            <div class="sidebar-share-title">
+                                <i class="fas fa-share-alt"></i>
+                                شارك المقال
+                            </div>
+                            <div class="sidebar-share-buttons">
+                                <button class="share-btn facebook" data-share="facebook" type="button" aria-label="فيسبوك">
+                                    <i class="fab fa-facebook-f"></i>
+                                </button>
+                                <button class="share-btn twitter" data-share="twitter" type="button" aria-label="تويتر">
+                                    <i class="fab fa-twitter"></i>
+                                </button>
+                                <button class="share-btn whatsapp" data-share="whatsapp" type="button" aria-label="واتساب">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                                <button class="share-btn copy" data-share="copy" type="button" aria-label="نسخ الرابط">
+                                    <i class="fas fa-link"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </aside>
+                </div>
+
+                <!-- RELATED POSTS -->
+                <section class="related-section animate-in" id="relatedSection" style="display: none; animation-delay: 0.3s;">
+                    <div class="related-header">
+                        <i class="fas fa-newspaper"></i>
+                        <h2>مقالات ذات صلة</h2>
+                    </div>
+                    <div class="related-grid" id="relatedGrid"></div>
+                </section>
+            `;
+
+            // Build TOC from actual content
+            buildTOC(post.content || '');
+
+            // Bind share buttons
+            bindShareButtons();
+        };
+
+        const renderError = (title, desc) => {
+            const container = document.getElementById('pageContent');
+            if (!container) return;
+
+            container.innerHTML = `
+                <div class="error-state">
+                    <i class="fas fa-newspaper"></i>
+                    <h2>${escapeHtml(title)}</h2>
+                    <p>${escapeHtml(desc)}</p>
+                    <a href="blog.html" class="btn-back-home">
+                        <i class="fas fa-arrow-right"></i> العودة للمدونة
+                    </a>
+                </div>
+            `;
+        };
+
+        // ============================================================
+        // RELATED POSTS
+        // ============================================================
+        const loadRelatedPosts = async (post) => {
+            try {
+                let query = supabase
+                    .from('blog_posts')
+                    .select('id, title, slug, excerpt, image_url, category, published_at, created_at')
+                    .eq('status', 'published')
+                    .neq('id', post.id)
+                    .order('published_at', { ascending: false, nullsFirst: false })
+                    .limit(3);
+
+                if (post.category) {
+                    query = query.eq('category', post.category);
+                }
+
+                let { data } = await query;
+
+                // If no posts in same category, fetch any recent
+                if (!data || data.length === 0) {
+                    const fallback = await supabase
+                        .from('blog_posts')
+                        .select('id, title, slug, excerpt, image_url, category, published_at, created_at')
+                        .eq('status', 'published')
+                        .neq('id', post.id)
+                        .order('published_at', { ascending: false, nullsFirst: false })
+                        .limit(3);
+                    data = fallback.data;
+                }
+
+                if (!data || data.length === 0) {
+                    const section = document.getElementById('relatedSection');
+                    if (section) section.style.display = 'none';
+                    return;
+                }
+
+                state.relatedPosts = data;
+
+                const section = document.getElementById('relatedSection');
+                const grid = document.getElementById('relatedGrid');
+                if (!section || !grid) return;
+
+                section.style.display = 'block';
+
+                grid.innerHTML = data.map(p => {
+                    const hasImg = p.image_url && /^https?:\/\//i.test(p.image_url);
+                    return `
+                        <a href="blog-post.html?slug=${encodeURIComponent(p.slug || p.id)}" class="related-card">
+                            <div class="related-card-media">
+                                ${hasImg
+                                    ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.title)}" loading="lazy" />`
+                                    : `<div class="related-card-placeholder">📰</div>`}
+                            </div>
+                            <div class="related-card-body">
+                                ${p.category ? `
+                                    <span class="related-card-category">
+                                        <i class="fas fa-tag"></i> ${escapeHtml(p.category)}
+                                    </span>
+                                ` : ''}
+                                <h3 class="related-card-title">${escapeHtml(p.title)}</h3>
+                                <div class="related-card-meta">
+                                    <span><i class="fas fa-calendar"></i> ${formatDate(p.published_at || p.created_at)}</span>
+                                </div>
+                            </div>
+                        </a>
+                    `;
+                }).join('');
+
+            } catch (e) {
+                console.warn('Related posts error:', e.message);
+            }
+        };
+
+        // ============================================================
+        // SHARE
+        // ============================================================
+        const bindShareButtons = () => {
+            document.querySelectorAll('[data-share]').forEach(btn => {
+                btn.addEventListener('click', () => {
+                    handleShare(btn.dataset.share);
+                });
+            });
+        };
+
+        const handleShare = async (type) => {
+            const url = window.location.href;
+            const title = state.post?.title || document.title;
+
+            try {
+                switch (type) {
+                    case 'facebook':
+                        window.open(`https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+                        break;
+                    case 'twitter':
+                        window.open(`https://twitter.com/intent/tweet?text=${encodeURIComponent(title)}&url=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+                        break;
+                    case 'whatsapp':
+                        window.open(`https://wa.me/?text=${encodeURIComponent(`${title}\n${url}`)}`, '_blank', 'noopener,noreferrer');
+                        break;
+                    case 'linkedin':
+                        window.open(`https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`, '_blank', 'noopener,noreferrer');
+                        break;
+                    case 'copy':
+                        await navigator.clipboard.writeText(url);
+                        showToast('📋', 'تم النسخ!', 'تم نسخ رابط المقال', 'success');
+                        break;
+                }
+            } catch (e) {
+                console.warn('Share error:', e.message);
+            }
+        };
+
+        // ============================================================
+        // INIT
+        // ============================================================
+        const init = async () => {
+            console.log('🚀 كيماتو | المقال');
+
+            const urlParams = new URLSearchParams(window.location.search);
+            state.slug = urlParams.get('slug');
+
+            initTheme();
+            initNavbar();
+            initReadingProgress();
+            initScrollTop();
+
+            await checkUser();
+            await loadPost();
+
+            console.log('✅ جاهز');
+        };
+
+        supabase.auth.onAuthStateChange(() => {
+            checkUser();
+        });
+
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', init);
+        } else {
+            init();
+        }
+    </script>
+</body>
+</html>
