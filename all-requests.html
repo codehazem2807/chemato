@@ -12,49 +12,22 @@
     <meta property="og:title" content="كيماتو | جميع طلبات الشراء" />
     <meta property="og:description" content="استعرض طلبات شراء المواد الكيماوية في مصر. تواصل مباشر مع العملاء." />
     <meta property="og:type" content="website" />
-    <meta property="og:url" content="https://chemato.vercel.app/all-requests.html" />
-    <meta property="og:image" content="https://chemato.vercel.app/api/og?title=طلبات%20الشراء" />
     <meta property="og:locale" content="ar_EG" />
     <meta property="og:site_name" content="كيماتو" />
-
-    <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="كيماتو | جميع طلبات الشراء" />
-    <meta name="twitter:description" content="استعرض طلبات شراء المواد الكيماوية في مصر." />
-    <meta name="twitter:image" content="https://chemato.vercel.app/api/og?title=طلبات%20الشراء" />
 
     <link rel="canonical" href="https://chemato.vercel.app/all-requests.html" />
     <link rel="icon" type="image/x-icon" href="logo.ico" />
     <link rel="icon" type="image/png" sizes="32x32" href="logo.png" />
     <link rel="apple-touch-icon" href="logo-192.png" />
     <meta name="theme-color" content="#0a2540" />
-    <meta name="referrer" content="strict-origin-when-cross-origin" />
-
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="كيماتو" />
 
     <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-
-    <link rel="preload" href="/logo-192.png" as="image" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" as="style" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
-
-    <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "CollectionPage",
-      "name": "جميع طلبات الشراء في مصر",
-      "description": "استعرض جميع طلبات شراء المواد الكيماوية في مصر",
-      "url": "https://chemato.vercel.app/all-requests.html"
-    }
-    </script>
 
     <style>
         :root {
@@ -70,6 +43,8 @@
             --c-warning:     #f39c12;
             --c-danger:      #e74c3c;
             --c-whatsapp:    #25D366;
+            --c-chat:        #8b5cf6;
+            --c-chat-dark:   #7c3aed;
             --c-purple:      #8b5cf6;
             --c-verified:    #1e88e5;
             --c-request:     #e67e22;
@@ -136,25 +111,13 @@
         }
         .skip-link:focus { top: 16px; }
 
-        .reading-progress {
-            position: fixed; top: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--c-request), var(--c-accent));
-            z-index: 9999; width: 0;
-            transition: width 0.1s linear;
-            pointer-events: none;
-            box-shadow: 0 0 8px rgba(230, 126, 34, 0.5);
-        }
-
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-        @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.3); } 50% { transform: scale(1); } 75% { transform: scale(1.2); } 100% { transform: scale(1); } }
-        @keyframes badgePop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
         @keyframes countdownPulse {
             0%, 100% { opacity: 1; }
             50% { opacity: 0.6; }
@@ -162,9 +125,7 @@
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
-        /* ============================================================
-           NAVBAR
-           ============================================================ */
+        /* NAVBAR */
         .navbar {
             position: sticky; top: 0; z-index: 100;
             background: rgba(10, 37, 64, 0.85);
@@ -204,7 +165,6 @@
             background: rgba(255, 255, 255, 0.08); color: #fff;
             display: inline-flex; align-items: center; justify-content: center;
             font-size: 1rem; transition: all var(--t-fast);
-            position: relative;
         }
         .theme-toggle:hover { background: rgba(255, 255, 255, 0.15); transform: rotate(15deg); }
 
@@ -237,14 +197,10 @@
             align-items: center; justify-content: center; font-size: 1.1rem;
         }
 
-        /* ============================================================
-           MAIN CONTAINER
-           ============================================================ */
+        /* MAIN */
         .main-container { max-width: var(--container); margin: 0 auto; padding: 20px 24px 60px; }
 
-        /* ============================================================
-           PAGE HEADER
-           ============================================================ */
+        /* PAGE HEADER */
         .page-header {
             position: relative;
             border-radius: var(--r-xl);
@@ -383,16 +339,13 @@
             font-variant-numeric: tabular-nums;
             color: #fff;
         }
-        .stats-bar-number.updated { animation: pulse 0.6s ease; }
         .stats-bar-label {
             display: block; font-size: 0.68rem;
             color: rgba(255, 255, 255, 0.65);
             font-weight: 500; margin-top: 2px;
         }
 
-        /* ============================================================
-           SEARCH + FILTERS BAR
-           ============================================================ */
+        /* SEARCH */
         .search-section {
             margin-top: -24px;
             position: relative;
@@ -575,9 +528,7 @@
             font-size: 0.88rem;
         }
 
-        /* ============================================================
-           TABS
-           ============================================================ */
+        /* TABS */
         .tabs-wrapper {
             display: flex;
             justify-content: center;
@@ -601,7 +552,6 @@
             align-items: center;
             gap: 7px;
             white-space: nowrap;
-            position: relative;
         }
         .tab-chip:hover {
             border-color: var(--c-request);
@@ -629,9 +579,7 @@
             color: var(--c-text-muted);
         }
 
-        /* ============================================================
-           ADVANCED FILTERS
-           ============================================================ */
+        /* FILTERS */
         .filters-row {
             display: flex;
             justify-content: center;
@@ -729,9 +677,7 @@
             margin-bottom: 5px;
         }
 
-        /* ============================================================
-           RESULTS INFO
-           ============================================================ */
+        /* RESULTS INFO */
         .results-info {
             display: flex;
             justify-content: space-between;
@@ -754,17 +700,7 @@
             font-weight: 800;
         }
 
-        .sort-info {
-            color: var(--c-text-sub);
-            font-size: 0.8rem;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-
-        /* ============================================================
-           REQUEST CARDS GRID
-           ============================================================ */
+        /* REQUESTS GRID */
         .requests-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
@@ -1071,6 +1007,7 @@
             gap: 6px;
             padding-top: 12px;
             border-top: 1px solid var(--c-border);
+            flex-wrap: wrap;
         }
 
         .btn-action {
@@ -1096,6 +1033,18 @@
             color: #fff;
         }
         .btn-details:hover { background: var(--c-primary-600); }
+
+        /* 🆕 زر تواصل عبر الموقع */
+        .btn-chat {
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
+        }
+        .btn-chat:hover {
+            background: linear-gradient(135deg, var(--c-chat-dark), #6d28d9);
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+        }
 
         .btn-offer {
             background: linear-gradient(135deg, var(--c-request), var(--c-request-dark));
@@ -1133,9 +1082,7 @@
         }
         .btn-icon.active i { animation: heartBeat 0.6s ease; }
 
-        /* ============================================================
-           SKELETON
-           ============================================================ */
+        /* SKELETON */
         .skeleton-card {
             background: var(--c-surface);
             border-radius: var(--r-lg);
@@ -1156,9 +1103,7 @@
         .skeleton-line.w-90 { width: 90%; }
         .skeleton-line.h-20 { height: 20px; }
 
-        /* ============================================================
-           EMPTY STATE
-           ============================================================ */
+        /* EMPTY STATE */
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
@@ -1202,9 +1147,7 @@
             box-shadow: 0 12px 32px rgba(230, 126, 34, 0.45);
         }
 
-        /* ============================================================
-           INFINITE SCROLL
-           ============================================================ */
+        /* INFINITE SCROLL */
         .infinite-sentinel { height: 20px; margin-top: 20px; }
         .infinite-loading {
             display: flex;
@@ -1230,9 +1173,7 @@
         .infinite-loading .dots span:nth-child(2) { animation-delay: 0.2s; }
         .infinite-loading .dots span:nth-child(3) { animation-delay: 0.4s; }
 
-        /* ============================================================
-           FLOATING ACTION BUTTON
-           ============================================================ */
+        /* FAB */
         .fab-create {
             position: fixed;
             bottom: 90px;
@@ -1257,9 +1198,7 @@
             box-shadow: 0 16px 40px rgba(230, 126, 34, 0.55);
         }
 
-        /* ============================================================
-           SCROLL TOP
-           ============================================================ */
+        /* SCROLL TOP */
         .scroll-top {
             position: fixed;
             bottom: 24px;
@@ -1290,9 +1229,7 @@
             box-shadow: var(--sh-xl);
         }
 
-        /* ============================================================
-           TOAST
-           ============================================================ */
+        /* TOAST */
         .toast-container {
             position: fixed;
             bottom: 24px;
@@ -1344,9 +1281,7 @@
         .toast.error { border-right-color: var(--c-danger); }
         .toast.info { border-right-color: var(--c-purple); }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
+        /* FOOTER */
         .footer {
             background: linear-gradient(180deg, var(--c-primary-900), #061a2e);
             color: rgba(255, 255, 255, 0.8);
@@ -1376,9 +1311,7 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
             .requests-grid { grid-template-columns: repeat(auto-fill, minmax(290px, 1fr)); }
             .advanced-panel-inner { grid-template-columns: 1fr 1fr; }
@@ -1467,9 +1400,6 @@
             .footer { padding: 32px 16px 20px; }
             .footer-links { gap: 10px; }
             .footer-links a { font-size: 0.78rem; }
-
-            .request-actions { flex-wrap: wrap; }
-            .btn-icon { flex: 0 0 auto; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1486,13 +1416,10 @@
 
     <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
 
-    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
-
-    <!-- NAVBAR -->
     <header class="navbar" role="banner">
         <div class="navbar-inner">
             <div class="logo">
-                <a href="/" aria-label="كيماتو">
+                <a href="index.html" aria-label="كيماتو">
                     <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager"
                          onerror="this.style.display='none'" />
                     <span class="logo-text">
@@ -1533,7 +1460,6 @@
         </div>
     </header>
 
-    <!-- MAIN -->
     <main class="main-container" id="main">
 
         <!-- PAGE HEADER -->
@@ -1659,7 +1585,7 @@
             </button>
         </div>
 
-        <!-- FILTERS ROW -->
+        <!-- FILTERS -->
         <div class="filters-row animate-in" style="animation-delay: 0.2s;">
             <select class="filter-select" id="categoryFilter" aria-label="الفئة">
                 <option value="all">📂 كل الفئات</option>
@@ -1688,7 +1614,7 @@
             </button>
         </div>
 
-        <!-- ADVANCED FILTERS PANEL -->
+        <!-- ADVANCED FILTERS -->
         <div class="advanced-panel" id="advancedPanel">
             <div class="advanced-panel-inner">
                 <div>
@@ -1715,7 +1641,7 @@
                     </select>
                 </div>
                 <div style="display: flex; align-items: flex-end;">
-                    <button id="resetFiltersBtn" class="btn-icon" style="width: 100%; background: var(--c-surface-2); border-radius: var(--r-md); color: var(--c-text-muted); font-weight: 700; font-size: 0.85rem; padding: 11px; border: 1.5px solid var(--c-border);">
+                    <button id="resetFiltersBtn" type="button" style="width: 100%; background: var(--c-surface-2); border-radius: var(--r-md); color: var(--c-text-muted); font-weight: 700; font-size: 0.85rem; padding: 11px; border: 1.5px solid var(--c-border); display: flex; align-items: center; justify-content: center; gap: 6px;">
                         <i class="fas fa-redo"></i> إعادة تعيين
                     </button>
                 </div>
@@ -1728,13 +1654,10 @@
                 <i class="fas fa-spinner fa-spin"></i>
                 <span>جاري التحميل...</span>
             </div>
-            <div class="sort-info" id="sortInfo"></div>
         </div>
 
         <!-- REQUESTS GRID -->
-        <div id="requestsContainer" class="requests-grid" aria-live="polite" aria-busy="true">
-            <!-- Skeleton will be injected here -->
-        </div>
+        <div id="requestsContainer" class="requests-grid" aria-live="polite" aria-busy="true"></div>
 
         <!-- INFINITE SCROLL SENTINEL -->
         <div class="infinite-sentinel" id="infiniteSentinel"></div>
@@ -1748,20 +1671,16 @@
 
     </main>
 
-    <!-- FAB: Create Request -->
     <button class="fab-create" id="fabCreate" type="button" aria-label="أنشئ طلب شراء" title="أنشئ طلب شراء">
         <i class="fas fa-plus"></i>
     </button>
 
-    <!-- SCROLL TOP -->
     <button class="scroll-top" id="scrollTopBtn" aria-label="العودة للأعلى" type="button">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- TOAST -->
     <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-    <!-- FOOTER -->
     <footer class="footer" role="contentinfo">
         <div class="footer-inner">
             <div class="footer-links">
@@ -1777,7 +1696,8 @@
             <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
         </div>
     </footer>
-        <script type="module">
+
+    <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
         const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
@@ -1791,31 +1711,24 @@
         // STATE
         // ============================================================
         const state = {
-            // Filters
             search: '',
-            searchMode: 'name', // 'name' | 'cas'
-            tab: 'open',        // 'open' | 'matched' | 'closed' | 'all' | 'mine'
+            searchMode: 'name',
+            tab: 'open',
             categoryId: 'all',
             budgetFilter: 'all',
             sort: 'newest',
             cityFilter: '',
             deadlineFilter: 'all',
             offersFilter: 'all',
-
-            // Data
             page: 0,
             pageSize: 12,
             total: 0,
             requests: [],
             suggestions: [],
             allCategories: [],
-
-            // User
             user: null,
             userProfile: null,
-            wishlist: new Set(), // request ids محفوظة
-
-            // UI
+            wishlist: new Set(),
             loading: false,
             hasMore: true,
             selectedSuggestionIndex: -1,
@@ -1846,11 +1759,6 @@
         const sanitizeSearch = (s) =>
             String(s || '').trim().slice(0, 100).replace(/[<>'"]/g, '');
 
-        const isValidCasFormat = (s) => {
-            if (!s) return false;
-            return /^\d{2,7}-\d{2}-\d$/.test(String(s).trim());
-        };
-
         const debounce = (fn, delay = 300) => {
             let timer;
             return (...args) => {
@@ -1859,7 +1767,14 @@
             };
         };
 
-        // حساب الأيام المتبقية للموعد النهائي
+        // 🆕 بناء رابط المحادثة
+        const buildMessageUrl = (userId, { requestId = null, productId = null } = {}) => {
+            const params = new URLSearchParams({ to: userId });
+            if (requestId) params.set('request', requestId);
+            if (productId) params.set('product', productId);
+            return `messages.html?${params.toString()}`;
+        };
+
         const getDeadlineStatus = (deadline) => {
             if (!deadline) return null;
             const now = new Date();
@@ -1868,21 +1783,11 @@
             dl.setHours(0, 0, 0, 0);
             const diffDays = Math.ceil((dl - now) / (1000 * 60 * 60 * 24));
 
-            if (diffDays < 0) {
-                return { type: 'expired', text: 'متأخر', days: diffDays, class: 'badge-status-expired' };
-            }
-            if (diffDays === 0) {
-                return { type: 'urgent', text: 'اليوم آخر موعد!', days: 0, class: 'badge-deadline-urgent' };
-            }
-            if (diffDays === 1) {
-                return { type: 'urgent', text: 'باقي يوم', days: 1, class: 'badge-deadline-urgent' };
-            }
-            if (diffDays <= 3) {
-                return { type: 'soon', text: `باقي ${diffDays} أيام`, days: diffDays, class: 'badge-deadline-urgent' };
-            }
-            if (diffDays <= 7) {
-                return { type: 'soon', text: `باقي ${diffDays} أيام`, days: diffDays, class: 'badge-deadline-soon' };
-            }
+            if (diffDays < 0) return { type: 'expired', text: 'متأخر', days: diffDays, class: 'badge-status-expired' };
+            if (diffDays === 0) return { type: 'urgent', text: 'اليوم آخر موعد!', days: 0, class: 'badge-deadline-urgent' };
+            if (diffDays === 1) return { type: 'urgent', text: 'باقي يوم', days: 1, class: 'badge-deadline-urgent' };
+            if (diffDays <= 3) return { type: 'soon', text: `باقي ${diffDays} أيام`, days: diffDays, class: 'badge-deadline-urgent' };
+            if (diffDays <= 7) return { type: 'soon', text: `باقي ${diffDays} أيام`, days: diffDays, class: 'badge-deadline-soon' };
             return { type: 'ok', text: `باقي ${diffDays} يوم`, days: diffDays, class: 'badge-deadline-ok' };
         };
 
@@ -1996,23 +1901,6 @@
         };
 
         // ============================================================
-        // READING PROGRESS
-        // ============================================================
-        const initReadingProgress = () => {
-            const bar = document.getElementById('readingProgress');
-            if (!bar) return;
-            const update = () => {
-                const winScroll = document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-                bar.style.width = scrolled + '%';
-            };
-            window.addEventListener('scroll', update, { passive: true });
-            window.addEventListener('resize', update, { passive: true });
-            update();
-        };
-
-        // ============================================================
         // NAVBAR
         // ============================================================
         const initNavbar = () => {
@@ -2062,7 +1950,6 @@
 
                     state.userProfile = profile || null;
 
-                    // إظهار تبويب "طلباتي"
                     if (myRequestsTab) myRequestsTab.style.display = 'inline-flex';
 
                     if (dropdownContent) {
@@ -2072,6 +1959,7 @@
 
                         dropdownContent.innerHTML = `
                             <a href="${dashboardUrl}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                            <a href="messages.html"><i class="fas fa-comments"></i> المحادثات</a>
                             <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
                             <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
                         `;
@@ -2119,9 +2007,6 @@
                 if (progress < 1) requestAnimationFrame(step);
                 else {
                     el.textContent = target.toLocaleString('ar-EG');
-                    el.classList.remove('updated');
-                    void el.offsetWidth;
-                    el.classList.add('updated');
                 }
             };
             requestAnimationFrame(step);
@@ -2129,7 +2014,6 @@
 
         const loadStats = async () => {
             try {
-                // Count by status
                 const [openRes, matchedRes, closedRes, offersRes, buyersRes] = await Promise.all([
                     supabase.from('purchase_requests').select('*', { count: 'exact', head: true }).eq('status', 'open'),
                     supabase.from('purchase_requests').select('*', { count: 'exact', head: true }).eq('status', 'matched'),
@@ -2149,7 +2033,6 @@
                 animateNumber(document.getElementById('statOffers'), offersCount);
                 animateNumber(document.getElementById('statBuyers'), buyersCount);
 
-                // Update tab counts
                 document.getElementById('countOpen').textContent = openCount > 99 ? '99+' : openCount;
                 document.getElementById('countMatched').textContent = matchedCount > 99 ? '99+' : matchedCount;
                 document.getElementById('countClosed').textContent = closedCount > 99 ? '99+' : closedCount;
@@ -2355,9 +2238,8 @@
             else if (state.tab === 'closed') query = query.in('status', ['closed', 'expired']);
             else if (state.tab === 'mine') {
                 if (state.user) query = query.eq('buyer_id', state.user.id);
-                else query = query.eq('buyer_id', '00000000-0000-0000-0000-000000000000'); // empty result
+                else query = query.eq('buyer_id', '00000000-0000-0000-0000-000000000000');
             }
-            // 'all' = no filter
 
             // Search
             if (state.search) {
@@ -2370,7 +2252,7 @@
 
             // Category
             if (state.categoryId && state.categoryId !== 'all') {
-                query = query.eq('category', state.categoryId);
+                query = query.eq('category_id', state.categoryId);
             }
 
             // Budget
@@ -2380,13 +2262,12 @@
                 } else {
                     const [min, max] = state.budgetFilter.split('-').map(Number);
                     if (!isNaN(min) && !isNaN(max)) {
-                        // overlap logic: budget_max >= min AND budget_min <= max
                         query = query.gte('budget_max', min).lte('budget_min', max);
                     }
                 }
             }
 
-            // City filter (from advanced)
+            // City filter
             if (state.cityFilter) {
                 query = query.ilike('location', `%${state.cityFilter}%`);
             }
@@ -2422,7 +2303,6 @@
                 'deadline': ['deadline', true],
                 'budget-high': ['budget_max', false],
                 'budget-low': ['budget_min', true],
-                'most_offers': ['offers_count', false],
             };
             const [sortCol, asc] = sortMap[state.sort] || sortMap['newest'];
             query = query.order(sortCol, { ascending: asc, nullsFirst: false });
@@ -2457,7 +2337,7 @@
                 let requests = data || [];
                 state.total = count || 0;
 
-                // ✨ جلب عدد العروض لكل طلب (باستخدام RPC أو group by)
+                // Fetch offers count in batch
                 if (requests.length) {
                     const requestIds = requests.map(r => r.id);
                     try {
@@ -2480,7 +2360,7 @@
                     }
                 }
 
-                // Filter by offers filter (client-side, since it's not a DB column)
+                // Offers filter (client-side)
                 if (state.offersFilter !== 'all') {
                     requests = requests.filter(r => {
                         const c = r.offers_count || 0;
@@ -2567,6 +2447,7 @@
             const buyerCity = escapeHtml(buyer.city || '');
             const buyerPhone = buyer.phone || '';
             const isVerifiedBuyer = buyer.is_verified === true;
+            const buyerId = buyer.id;
 
             const isOwn = state.user && r.buyer_id === state.user.id;
             const isWishlisted = state.wishlist.has(r.id);
@@ -2600,7 +2481,10 @@
             const cleanPhone = sanitizePhone(buyerPhone);
             const phoneWithCountry = cleanPhone ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone) : '';
             const waMessage = encodeURIComponent(`مرحباً، أرى طلبكم على كيماتو: ${r.product_name}. أريد تقديم عرض.`);
-            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMessage}` : '#';
+            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMessage}` : '';
+
+            // 🆕 Chat link
+            const chatUrl = buyerId ? buildMessageUrl(buyerId, { requestId: r.id }) : '';
 
             return `
                 <article class="request-card ${isOwn ? 'is-own' : ''}"
@@ -2669,21 +2553,23 @@
                                class="btn-action btn-details">
                                 <i class="fas fa-info-circle"></i> تفاصيل
                             </a>
-                            ${phoneWithCountry ? `
-                                <a href="${waLink}" target="_blank" rel="noopener noreferrer"
-                                   class="btn-action btn-wa"
-                                   data-action="whatsapp"
-                                   data-request-id="${escapeHtml(r.id)}"
-                                   data-name="${escapeHtml(r.product_name)}">
-                                    <i class="fab fa-whatsapp"></i> تواصل
+                            
+                            ${!isOwn && chatUrl ? `
+                                <a href="${chatUrl}" class="btn-action btn-chat"
+                                   title="تواصل عبر الموقع" data-action="chat"
+                                   data-request-id="${escapeHtml(r.id)}">
+                                    <i class="fas fa-comments"></i> تواصل
                                 </a>
-                            ` : `
+                            ` : ''}
+                            
+                            ${!isOwn ? `
                                 <button class="btn-action btn-offer" type="button"
                                         data-action="offer"
                                         data-request-id="${escapeHtml(r.id)}">
                                     <i class="fas fa-paper-plane"></i> عرض
                                 </button>
-                            `}
+                            ` : ''}
+
                             <button class="btn-action btn-icon ${isWishlisted ? 'active' : ''}"
                                     type="button"
                                     data-action="wishlist"
@@ -2735,13 +2621,21 @@
                     handleShare(requestId, btn.dataset.requestName);
                 } else if (action === 'offer') {
                     e.preventDefault();
-                    // لو مش مسجّل، يروح لتسجيل الدخول
                     if (!state.user) {
-                        showToast('🔒', 'سجّل دخولك', 'لازم تكون مسجّل كمورد لتقديم عرض', 'تسجيل الدخول', 'auth.html?redirect=offer', 'warning');
+                        showToast('🔒', 'سجّل دخولك', 'لازم تكون مسجّل كمورد لتقديم عرض', 'تسجيل الدخول', 'auth.html?redirect=' + encodeURIComponent(`request-details.html?id=${requestId}`), 'warning');
                         return;
                     }
-                    // يروح لصفحة التفاصيل
                     window.location.href = `request-details.html?id=${encodeURIComponent(requestId)}#offer`;
+                } else if (action === 'chat') {
+                    // السماح بالمرور الطبيعي للرابط
+                    if (!state.user) {
+                        e.preventDefault();
+                        const chatUrl = btn.getAttribute('href');
+                        showToast('🔐', 'سجّل دخولك', 'لازم تسجل دخول للتواصل عبر الموقع', 'تسجيل الدخول', `auth.html?redirect=${encodeURIComponent(chatUrl)}`, 'warning');
+                        setTimeout(() => {
+                            window.location.href = `auth.html?redirect=${encodeURIComponent(chatUrl)}`;
+                        }, 1200);
+                    }
                 }
             });
         };
@@ -2751,24 +2645,12 @@
 
             if (wasWishlisted) {
                 state.wishlist.delete(requestId);
-                if (state.user) {
-                    await supabase.from('favorites').delete()
-                        .eq('user_id', state.user.id).eq('request_id', requestId);
-                } else {
-                    saveWishlistLocal();
-                }
+                saveWishlistLocal();
                 showToast('💔', 'أُزيل من المفضلة', requestName || 'الطلب', null, null, 'info');
                 btn?.classList.remove('active');
             } else {
                 state.wishlist.add(requestId);
-                if (state.user) {
-                    await supabase.from('favorites').insert({
-                        user_id: state.user.id,
-                        request_id: requestId,
-                    });
-                } else {
-                    saveWishlistLocal();
-                }
+                saveWishlistLocal();
                 showToast('❤️', 'أُضيف للمفضلة', requestName || 'الطلب', null, null, 'success');
                 btn?.classList.add('active');
             }
@@ -2784,35 +2666,6 @@
             try {
                 const stored = localStorage.getItem(WISHLIST_KEY);
                 if (stored) state.wishlist = new Set(JSON.parse(stored));
-            } catch (e) { /* silent */ }
-        };
-
-        const syncWishlistFromDB = async () => {
-            if (!state.user) return;
-            try {
-                // رفع اللي في localStorage
-                const local = [...state.wishlist];
-                if (local.length) {
-                    const inserts = local
-                        .filter(id => isValidUUID(id))
-                        .map(rid => ({ user_id: state.user.id, request_id: rid }));
-                    if (inserts.length) {
-                        await supabase.from('favorites').upsert(inserts, {
-                            onConflict: 'user_id,request_id',
-                            ignoreDuplicates: true,
-                        });
-                    }
-                    localStorage.removeItem(WISHLIST_KEY);
-                }
-
-                // جلب من DB
-                const { data } = await supabase
-                    .from('favorites')
-                    .select('request_id')
-                    .eq('user_id', state.user.id)
-                    .not('request_id', 'is', null);
-
-                state.wishlist = new Set((data || []).map(f => f.request_id));
             } catch (e) { /* silent */ }
         };
 
@@ -2982,7 +2835,6 @@
                 resetAndLoad();
             });
 
-            // Advanced toggle
             const advToggle = document.getElementById('advancedToggle');
             const advPanel = document.getElementById('advancedPanel');
             advToggle?.addEventListener('click', () => {
@@ -2990,7 +2842,6 @@
                 advToggle.setAttribute('aria-expanded', open);
             });
 
-            // Advanced filters
             document.getElementById('cityFilter')?.addEventListener('input', debounce((e) => {
                 state.cityFilter = e.target.value.trim();
                 resetAndLoad();
@@ -3006,7 +2857,6 @@
                 resetAndLoad();
             });
 
-            // Reset
             document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
                 state.categoryId = 'all';
                 state.budgetFilter = 'all';
@@ -3056,7 +2906,7 @@
         };
 
         // ============================================================
-        // SCROLL TOP + FAB
+        // SCROLL TOP
         // ============================================================
         const initScrollTop = () => {
             const btn = document.getElementById('scrollTopBtn');
@@ -3068,7 +2918,7 @@
         };
 
         // ============================================================
-        // CREATE REQUEST (Redirect to RFQ form on index)
+        // CREATE REQUEST
         // ============================================================
         const initCreateRequest = () => {
             const handler = () => {
@@ -3076,7 +2926,6 @@
                     showToast('🔒', 'سجّل دخولك أولاً', 'محتاج تسجّل دخولك لإنشاء طلب شراء', 'تسجيل الدخول', 'auth.html?redirect=rfq', 'warning');
                     return;
                 }
-                // لو المستخدم مورد، نوجهه للرئيسية عشان يستخدم فورم RFQ
                 window.location.href = 'index.html?action=rfq';
             };
 
@@ -3111,7 +2960,7 @@
         };
 
         // ============================================================
-        // REALTIME
+        // REALTIME (بدون refresh مزعج)
         // ============================================================
         const setupRealtime = () => {
             if (state.channel) supabase.removeChannel(state.channel);
@@ -3120,9 +2969,8 @@
                     .channel('requests_realtime')
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'purchase_requests' }, (payload) => {
                         const name = payload.new?.product_name || 'طلب جديد';
-                        showToast('🆕', 'طلب شراء جديد!', `مطلوب: ${name}`, 'عرض', 'all-requests.html', 'success');
+                        showToast('🆕', 'طلب شراء جديد!', `مطلوب: ${name}`, 'عرض الطلب', `request-details.html?id=${payload.new.id}`, 'success');
                         loadStats();
-                        resetAndLoad();
                     })
                     .subscribe();
             } catch (e) { /* silent */ }
@@ -3154,18 +3002,13 @@
         const init = async () => {
             console.log('🚀 كيماتو | طلبات الشراء');
 
-            // Load saved prefs
             loadWishlistLocal();
             state.searchMode = localStorage.getItem(SEARCH_MODE_KEY) || 'name';
             state.sort = 'newest';
             state.tab = 'open';
 
-            // Theme
             initTheme();
-
-            // UI Setup
             initNavbar();
-            initReadingProgress();
             initSearchModes();
             initSearch();
             initFilters();
@@ -3177,15 +3020,8 @@
             initSharePage();
             initKeyboardShortcuts();
 
-            // Data
             await checkUser();
 
-            // Sync wishlist if logged in
-            if (state.user) {
-                await syncWishlistFromDB();
-            }
-
-            // Load parallel data
             await Promise.all([
                 loadStats(),
                 loadCategories(),
@@ -3194,33 +3030,25 @@
 
             if (state.user) loadMyRequestsCount();
 
-            // Load requests
             await loadRequests();
 
-            // Realtime
             setupRealtime();
 
             console.log('✅ جاهز');
 
-            // Auto refresh stats
             setInterval(loadStats, 60000);
         };
 
-        // Auth state change
         supabase.auth.onAuthStateChange(async (event) => {
             if (event === 'SIGNED_IN' || event === 'SIGNED_OUT') {
                 await checkUser();
                 if (state.user) {
-                    await syncWishlistFromDB();
                     loadMyRequestsCount();
-                } else {
-                    loadWishlistLocal();
                 }
                 resetAndLoad();
             }
         });
 
-        // Run init
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', init);
         } else {
