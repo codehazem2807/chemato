@@ -1,657 +1,1363 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>كيماتو | إضافة منتج جديد</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+<title>كيماتو | إضافة منتج جديد</title>
+<meta name="description" content="أضف منتجك الكيماوي على كيماتو — منصة B2B للمواد الكيماوية في مصر" />
+<meta name="robots" content="noindex, nofollow" />
+<link rel="icon" type="image/png" href="logo.png" />
+<meta name="theme-color" content="#0a2540" />
 
-        :root {
-            --primary-dark: #0c2d4a;
-            --primary: #1a4a6e;
-            --accent: #3498db;
-            --gray-light: #f8fafc;
-            --gray: #e2e8f0;
-            --gray-dark: #64748b;
-            --text-dark: #0c2d4a;
-            --white: #ffffff;
-            --danger: #e53e3e;
-            --success: #2a9d8f;
-            --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
-            --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
-            --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
-            --radius-sm: 16px;
-            --radius-md: 24px;
-            --radius-lg: 32px;
-        }
+<link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
+<link rel="preconnect" href="https://cdn.jsdelivr.net" />
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-        body {
-            font-family: 'Cairo', 'Tahoma', sans-serif;
-            background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
-            min-height: 100vh;
-            color: var(--text-dark);
-            padding: 20px;
-        }
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-        @media (min-width: 768px) {
-            body { padding: 40px 20px; }
-        }
+<style>
+/* ============================================================
+   CHEMOTO 3.1 — Design System (same as index.html)
+   ============================================================ */
+:root {
+    --c-primary-50:#eef6fc; --c-primary-100:#d4e7f5; --c-primary-500:#2c7ab8;
+    --c-primary-600:#1d5b8e; --c-primary-700:#144167; --c-primary-800:#0d2e4a; --c-primary-900:#0a2540;
+    --c-accent:#2ecc71; --c-accent-dark:#22a95c; --c-warning:#f39c12; --c-danger:#e74c3c;
+    --c-whatsapp:#25D366; --c-purple:#8b5cf6; --c-verified:#1e88e5;
+    --c-lab-green:#00A86B; --c-safety-orange:#FF6B35;
+    --c-bg:#f6f8fb; --c-surface:#ffffff; --c-surface-2:#f9fbfd; --c-border:#e3eaf2;
+    --c-text:#0a1f33; --c-text-muted:#5a6b7e; --c-text-sub:#8595a8;
+    --sh-sm:0 1px 3px rgba(10,37,64,0.06); --sh-md:0 4px 16px rgba(10,37,64,0.08);
+    --sh-lg:0 12px 32px rgba(10,37,64,0.10); --sh-xl:0 20px 48px rgba(10,37,64,0.14);
+    --sh-2xl:0 32px 64px rgba(10,37,64,0.18);
+    --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-full:999px;
+    --t-fast:150ms cubic-bezier(0.4,0,0.2,1); --t-base:250ms cubic-bezier(0.4,0,0.2,1);
+    --t-slow:400ms cubic-bezier(0.4,0,0.2,1); --t-spring:400ms cubic-bezier(0.34,1.56,0.64,1);
+    --container:1320px; --header-h:68px;
+}
+[data-theme="dark"] {
+    --c-bg:#0a1520; --c-surface:#101e2e; --c-surface-2:#16273a; --c-border:#1f3349;
+    --c-text:#e8eef5; --c-text-muted:#9fb1c4; --c-text-sub:#6e8298;
+    --sh-sm:0 1px 3px rgba(0,0,0,0.3); --sh-md:0 4px 16px rgba(0,0,0,0.35);
+    --sh-lg:0 12px 32px rgba(0,0,0,0.45); --sh-xl:0 20px 48px rgba(0,0,0,0.55);
+    --sh-2xl:0 32px 64px rgba(0,0,0,0.65);
+}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--c-bg);color:var(--c-text);line-height:1.6;min-height:100vh;overflow-x:hidden;transition:background-color var(--t-base),color var(--t-base)}
+img{max-width:100%;display:block}
+button{font-family:inherit;cursor:pointer;border:none;background:none}
+a{color:inherit;text-decoration:none}
+input,select,textarea{font-family:inherit}
+:focus-visible{outline:3px solid var(--c-primary-500);outline-offset:2px;border-radius:var(--r-sm)}
 
-        .navbar {
-            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
-            padding: 14px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            color: white;
-            border-radius: 60px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(12,45,74,0.25);
-            border-bottom: 2px solid rgba(52,152,219,0.30);
-        }
+@keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
+@keyframes spin{to{transform:rotate(360deg)}}
+@keyframes badgePop{0%{transform:scale(0.5);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
+@keyframes skeletonWave{0%{background-position:200% 0}100%{background-position:-200% 0}}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
+.animate-in{animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) backwards}
 
-        .logo a {
-            text-decoration: none;
-        }
+/* NAVBAR */
+.navbar{position:sticky;top:0;z-index:100;background:rgba(10,37,64,0.85);backdrop-filter:saturate(180%) blur(20px);-webkit-backdrop-filter:saturate(180%) blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);padding:0 24px;height:var(--header-h)}
+.navbar-inner{max-width:var(--container);width:100%;margin:0 auto;height:100%;display:flex;justify-content:space-between;align-items:center;gap:16px}
+.logo a{display:flex;align-items:center;gap:10px;color:#fff}
+.logo img{width:42px;height:42px;border-radius:50%;border:2px solid rgba(46,204,113,0.5);object-fit:cover;background:#fff}
+.logo-text{font-weight:800;font-size:19px;color:#fff;white-space:nowrap}
+.logo-text .blue{color:#5eb8ee}
+.logo-text .gray{color:rgba(255,255,255,0.6);font-weight:400;font-size:0.9em}
+.nav-links{display:flex;gap:4px;align-items:center;flex-wrap:wrap}
+.nav-links a,.dropdown-btn{color:rgba(255,255,255,0.85);padding:8px 16px;border-radius:var(--r-full);font-weight:600;font-size:0.88rem;transition:all var(--t-fast);display:inline-flex;align-items:center;gap:6px;background:transparent;font-family:inherit}
+.nav-links a:hover,.dropdown-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
+.nav-links a.active{background:rgba(46,204,113,0.15);color:#5eb8ee}
+.icon-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--t-fast);position:relative}
+.icon-btn:hover{background:rgba(255,255,255,0.15)}
+.icon-btn.rotate:hover{transform:rotate(15deg)}
+.count-badge{position:absolute;top:-4px;right:-4px;background:var(--c-danger);color:#fff;min-width:18px;height:18px;padding:0 4px;border-radius:9px;font-size:0.65rem;font-weight:700;display:none;align-items:center;justify-content:center;border:2px solid rgba(10,37,64,0.85);animation:badgePop 0.4s ease}
+.count-badge.show{display:flex}
+.dropdown{position:relative}
+.dropdown-content{position:absolute;top:calc(100% + 8px);left:0;background:var(--c-surface);min-width:240px;border-radius:var(--r-md);box-shadow:var(--sh-xl);border:1px solid var(--c-border);overflow:hidden;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all var(--t-base);z-index:1000}
+.dropdown-content.show{opacity:1;visibility:visible;transform:translateY(0)}
+.dropdown-content a{color:var(--c-text);padding:12px 18px;display:flex;align-items:center;gap:10px;font-size:0.9rem;font-weight:500;border-bottom:1px solid var(--c-border);transition:all var(--t-fast)}
+.dropdown-content a:last-child{border-bottom:none}
+.dropdown-content a:hover{background:var(--c-surface-2);color:var(--c-primary-600);padding-right:24px}
+.dropdown-content a.logout{color:var(--c-danger)}
+.menu-toggle{display:none;width:42px;height:42px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:#fff;align-items:center;justify-content:center;font-size:1.1rem}
 
-        .logo-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 800;
-            font-size: 20px;
-        }
+.main-container{max-width:1320px;margin:0 auto;padding:24px 24px 60px}
 
-        .logo-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #3498db;
-            object-fit: cover;
-        }
+/* PAGE HEADER */
+.page-header{text-align:center;margin-bottom:32px;padding:40px 24px;background:linear-gradient(135deg,#0a2540 0%,#144167 40%,#0d2e4a 100%);border-radius:var(--r-xl);color:#fff;position:relative;overflow:hidden;box-shadow:var(--sh-xl)}
+.page-header::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 20% 20%,rgba(46,204,113,0.15) 0%,transparent 50%),radial-gradient(circle at 80% 80%,rgba(94,184,238,0.15) 0%,transparent 50%);pointer-events:none}
+.page-header::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");background-size:56px 100px;opacity:0.5;pointer-events:none}
+.page-header-content{position:relative;z-index:2}
+.page-header h1{font-size:clamp(1.5rem,4vw,2.2rem);font-weight:900;margin-bottom:8px;display:flex;align-items:center;justify-content:center;gap:12px;flex-wrap:wrap}
+.page-header h1 i{color:#5eb8ee}
+.page-header p{color:rgba(255,255,255,0.8);font-size:0.95rem;max-width:600px;margin:0 auto}
+.page-header-badges{display:flex;justify-content:center;gap:8px;flex-wrap:wrap;margin-top:16px}
+.header-badge{display:inline-flex;align-items:center;gap:6px;background:rgba(255,255,255,0.1);border:1px solid rgba(255,255,255,0.15);backdrop-filter:blur(10px);padding:6px 14px;border-radius:var(--r-full);font-size:0.78rem;font-weight:600;color:#bfe4f7}
+.header-badge i{color:#2ecc71}
 
-        .logo-text span:first-child { color: #3498db; }
-        .logo-text span:last-child { color: #b0c9d9; font-size: 14px; }
+/* LAYOUT */
+.form-layout{display:grid;grid-template-columns:1fr 340px;gap:24px;align-items:start}
+@media (max-width:1024px){.form-layout{grid-template-columns:1fr}}
 
-        .nav-links {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+/* FORM CONTAINER */
+.form-container{background:var(--c-surface);border-radius:var(--r-xl);padding:32px;box-shadow:var(--sh-lg);border:1px solid var(--c-border)}
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 40px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.06);
-            font-size: 14px;
-        }
+/* SECTION CARD */
+.form-section{background:var(--c-surface-2);border-radius:var(--r-lg);padding:24px;margin-bottom:24px;border:1px solid var(--c-border);position:relative;transition:all var(--t-base)}
+.form-section:hover{border-color:var(--c-primary-500);box-shadow:var(--sh-md)}
+.form-section:last-of-type{margin-bottom:0}
 
-        .nav-links a:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
-        }
+.section-title{display:flex;align-items:center;gap:12px;margin-bottom:20px;padding-bottom:12px;border-bottom:2px solid var(--c-border)}
+.section-title .section-num{width:36px;height:36px;border-radius:50%;background:linear-gradient(135deg,var(--c-accent),var(--c-accent-dark));color:#fff;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:0.95rem;flex-shrink:0;box-shadow:0 4px 12px rgba(46,204,113,0.3)}
+.section-title h3{font-size:1.05rem;font-weight:800;color:var(--c-text);display:flex;align-items:center;gap:8px;flex:1}
+.section-title h3 i{color:var(--c-primary-600);font-size:1.1rem}
+.section-title .section-hint{font-size:0.75rem;font-weight:600;color:var(--c-text-sub);background:var(--c-surface);padding:4px 10px;border-radius:var(--r-full);border:1px solid var(--c-border)}
 
-        .form-container {
-            max-width: 800px;
-            margin: 0 auto;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 35px 30px;
-            box-shadow: 0 12px 36px rgba(12,45,74,0.06);
-            border: 1px solid rgba(52,152,219,0.06);
-        }
+/* FORM FIELDS */
+.form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:16px}
+.form-group{display:flex;flex-direction:column;gap:6px}
+.form-group.full{grid-column:1 / -1}
+.form-group.half{grid-column:span 1}
 
-        @media (min-width: 768px) {
-            .form-container { padding: 45px 40px; }
-        }
+.form-group label{font-size:0.82rem;font-weight:700;color:var(--c-text);display:flex;align-items:center;gap:6px}
+.form-group label .req{color:var(--c-danger);font-size:1rem}
+.form-group label .hint{font-weight:400;font-size:0.72rem;color:var(--c-text-sub);margin-right:auto}
+.form-group label i{color:var(--c-primary-600);font-size:0.85rem}
 
-        .form-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
+.form-input,.form-textarea,.form-select{padding:12px 16px;border-radius:var(--r-md);border:1.5px solid var(--c-border);background:var(--c-surface);color:var(--c-text);font-size:0.9rem;font-family:inherit;transition:all var(--t-fast);width:100%}
+.form-input:focus,.form-textarea:focus,.form-select:focus{border-color:var(--c-primary-500);outline:none;box-shadow:0 0 0 3px rgba(44,122,184,0.1)}
+.form-input::placeholder,.form-textarea::placeholder{color:var(--c-text-sub)}
+.form-textarea{min-height:100px;resize:vertical;line-height:1.6}
+.form-select{cursor:pointer;appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235a6b7e' d='M6 9L1 4h10z'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:left 16px center;padding-left:40px}
 
-        .form-header h1 {
-            color: var(--primary-dark);
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-weight: 800;
-        }
+.input-hint{font-size:0.72rem;color:var(--c-text-sub);margin-top:2px;display:flex;align-items:center;gap:4px}
 
-        @media (min-width: 768px) {
-            .form-header h1 { font-size: 2.2rem; }
-        }
+/* HELPER TEXT */
+.helper-text{font-size:0.78rem;color:var(--c-text-muted);margin-top:4px;line-height:1.4;display:flex;align-items:flex-start;gap:6px}
+.helper-text i{color:var(--c-primary-600);margin-top:3px;flex-shrink:0}
 
-        .form-header h1 i { color: #3498db; }
+/* IMAGE UPLOAD */
+.image-upload-zone{border:2px dashed var(--c-border);border-radius:var(--r-lg);padding:32px;text-align:center;cursor:pointer;transition:all var(--t-base);background:var(--c-surface)}
+.image-upload-zone:hover,.image-upload-zone.dragover{border-color:var(--c-accent);background:rgba(46,204,113,0.04);transform:translateY(-2px)}
+.image-upload-zone i{font-size:42px;color:var(--c-primary-500);margin-bottom:12px;display:block;opacity:0.7}
+.image-upload-zone p{color:var(--c-text);font-weight:700;font-size:0.95rem;margin-bottom:4px}
+.image-upload-zone .hint{font-size:0.78rem;color:var(--c-text-sub);font-weight:500}
+.image-upload-zone input{display:none}
 
-        .form-header p {
-            color: var(--gray-dark);
-            margin-top: 8px;
-            font-size: 0.95rem;
-        }
+/* IMAGES PREVIEW GRID */
+.images-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:12px;margin-top:16px}
+.image-preview-item{position:relative;aspect-ratio:1;border-radius:var(--r-md);overflow:hidden;background:var(--c-surface-2);border:2px solid var(--c-border);transition:all var(--t-base);cursor:pointer}
+.image-preview-item:hover{border-color:var(--c-primary-500);transform:scale(1.03);box-shadow:var(--sh-md)}
+.image-preview-item img{width:100%;height:100%;object-fit:cover}
+.image-preview-item.primary{border-color:var(--c-accent);box-shadow:0 0 0 3px rgba(46,204,113,0.2)}
+.image-preview-item.primary::after{content:'الصورة الرئيسية';position:absolute;bottom:0;left:0;right:0;background:linear-gradient(transparent,rgba(46,204,113,0.9));color:#fff;font-size:0.65rem;font-weight:700;text-align:center;padding:6px 4px 4px}
+.image-remove-btn{position:absolute;top:6px;right:6px;width:26px;height:26px;border-radius:50%;background:rgba(231,76,60,0.95);color:#fff;display:flex;align-items:center;justify-content:center;font-size:0.7rem;cursor:pointer;border:none;opacity:0;transition:all var(--t-fast);z-index:2}
+.image-preview-item:hover .image-remove-btn{opacity:1}
+.image-remove-btn:hover{transform:scale(1.15);background:var(--c-danger)}
 
-        .form-group {
-            margin-bottom: 22px;
-        }
+/* FILE UPLOAD */
+.file-upload{display:flex;align-items:center;gap:12px;padding:14px 18px;background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-md);cursor:pointer;transition:all var(--t-fast);width:100%}
+.file-upload:hover{border-color:var(--c-primary-500);background:var(--c-surface-2)}
+.file-upload i{font-size:1.3rem;color:var(--c-primary-600)}
+.file-upload .file-info{flex:1;text-align:right}
+.file-upload .file-name{font-weight:700;font-size:0.88rem;color:var(--c-text);display:block}
+.file-upload .file-hint{font-size:0.72rem;color:var(--c-text-sub)}
+.file-upload.has-file{border-color:var(--c-accent);background:rgba(46,204,113,0.04)}
+.file-upload.has-file i{color:var(--c-accent)}
 
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 700;
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
+/* BUTTONS */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:var(--r-full);font-weight:700;font-size:0.9rem;transition:all var(--t-base);border:2px solid transparent;font-family:inherit;cursor:pointer;white-space:nowrap}
+.btn:active{transform:scale(0.97)}
+.btn:disabled{opacity:0.6;cursor:not-allowed;transform:none !important}
+.btn-primary{background:linear-gradient(135deg,var(--c-accent),var(--c-accent-dark));color:#fff;box-shadow:0 6px 20px rgba(46,204,113,0.3)}
+.btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 32px rgba(46,204,113,0.45)}
+.btn-outline{background:transparent;border-color:var(--c-border);color:var(--c-text)}
+.btn-outline:hover:not(:disabled){background:var(--c-surface-2);border-color:var(--c-primary-500);color:var(--c-primary-600)}
+.btn-ghost{background:transparent;color:var(--c-text-muted);padding:8px 12px;font-size:0.82rem}
+.btn-ghost:hover{color:var(--c-primary-600);background:var(--c-surface-2)}
+.btn-lg{padding:16px 32px;font-size:1rem}
 
-        .required::after {
-            content: '*';
-            color: var(--danger);
-            margin-right: 4px;
-        }
+.form-actions{display:flex;gap:12px;justify-content:flex-end;margin-top:24px;padding-top:24px;border-top:2px solid var(--c-border);flex-wrap:wrap}
 
-        input, select, textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--gray);
-            border-radius: 30px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: var(--gray-light);
-            font-family: inherit;
-        }
+/* SIDEBAR */
+.sidebar{position:sticky;top:calc(var(--header-h) + 24px);display:flex;flex-direction:column;gap:20px}
+@media (max-width:1024px){.sidebar{position:static}}
 
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #3498db;
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(52,152,219,0.10);
-        }
+.sidebar-card{background:var(--c-surface);border-radius:var(--r-lg);padding:20px;border:1px solid var(--c-border);box-shadow:var(--sh-sm)}
+.sidebar-card h4{font-size:0.95rem;font-weight:800;color:var(--c-text);margin-bottom:14px;display:flex;align-items:center;gap:8px;padding-bottom:10px;border-bottom:1px solid var(--c-border)}
+.sidebar-card h4 i{color:var(--c-primary-600)}
 
-        textarea {
-            border-radius: 24px;
-            resize: vertical;
-            min-height: 100px;
-        }
+/* PREVIEW CARD */
+.preview-card{position:relative;border-radius:var(--r-md);overflow:hidden;background:linear-gradient(145deg,var(--c-surface-2),var(--c-border))}
+.preview-card-media{aspect-ratio:16/10;background:linear-gradient(145deg,var(--c-primary-50),var(--c-primary-100));display:flex;align-items:center;justify-content:center;font-size:3rem;position:relative;overflow:hidden}
+.preview-card-media img{width:100%;height:100%;object-fit:cover}
+.preview-card-body{padding:14px;background:var(--c-surface);display:flex;flex-direction:column;gap:6px}
+.preview-card-category{font-size:0.68rem;font-weight:700;color:var(--c-primary-700);background:var(--c-primary-50);padding:3px 10px;border-radius:var(--r-full);align-self:flex-start}
+.preview-card-title{font-size:0.95rem;font-weight:700;color:var(--c-text);line-height:1.4;min-height:2.6em;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.preview-card-specs{display:flex;flex-wrap:wrap;gap:4px}
+.preview-spec{font-size:0.65rem;font-weight:700;padding:2px 8px;border-radius:var(--r-sm);background:var(--c-surface-2);color:var(--c-text-muted);border:1px solid var(--c-border)}
+.preview-spec.cas{background:rgba(139,92,246,0.08);color:var(--c-purple);font-family:monospace;direction:ltr}
+.preview-spec.purity{background:rgba(46,204,113,0.08);color:var(--c-accent-dark)}
+.preview-card-price{font-size:1.1rem;font-weight:800;color:var(--c-primary-700);display:flex;align-items:baseline;gap:4px;margin-top:4px}
+.preview-card-price .currency{font-size:0.7rem;font-weight:600;color:var(--c-text-sub)}
 
-        .image-upload {
-            border: 2px dashed #cbd5e1;
-            border-radius: 24px;
-            padding: 30px;
-            text-align: center;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            background: var(--gray-light);
-        }
+/* CHECKLIST */
+.checklist{list-style:none;display:flex;flex-direction:column;gap:10px}
+.checklist li{display:flex;align-items:center;gap:10px;font-size:0.85rem;color:var(--c-text-muted);font-weight:500}
+.checklist .check-icon{width:22px;height:22px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:0.65rem;background:var(--c-border);color:var(--c-text-sub);flex-shrink:0;transition:all var(--t-fast)}
+.checklist li.done{color:var(--c-text)}
+.checklist li.done .check-icon{background:var(--c-accent);color:#fff}
 
-        .image-upload:hover {
-            border-color: #3498db;
-            background: #f0f7fe;
-        }
+/* TIPS */
+.tip-box{background:linear-gradient(135deg,rgba(46,204,113,0.06),rgba(94,184,238,0.04));border:1.5px solid rgba(46,204,113,0.2);border-radius:var(--r-md);padding:14px;font-size:0.82rem;color:var(--c-text);line-height:1.6}
+.tip-box i{color:var(--c-accent);font-size:1rem;margin-left:6px}
 
-        .image-upload i {
-            font-size: 48px;
-            color: #94a3b8;
-            margin-bottom: 10px;
-        }
+/* TOAST */
+.toast-container{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;width:min(420px,calc(100% - 32px));display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.toast{background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border:1px solid var(--c-border);color:var(--c-text);padding:14px 18px;border-radius:var(--r-lg);box-shadow:var(--sh-xl);display:flex;align-items:center;gap:12px;animation:fadeUp 0.4s cubic-bezier(0.22,1,0.36,1);border-right:4px solid var(--c-primary-500);pointer-events:auto;transition:opacity var(--t-base),transform var(--t-base)}
+[data-theme="dark"] .toast{background:rgba(16,30,46,0.95)}
+.toast.removing{opacity:0;transform:translateX(20px)}
+.toast .toast-icon{font-size:1.5rem;flex-shrink:0}
+.toast .toast-content{flex:1;min-width:0}
+.toast .toast-title{font-weight:700;font-size:0.9rem;margin-bottom:2px}
+.toast .toast-desc{font-size:0.8rem;color:var(--c-text-muted);line-height:1.4}
+.toast .toast-close{width:26px;height:26px;border-radius:50%;background:var(--c-surface-2);color:var(--c-text-muted);display:flex;align-items:center;justify-content:center;font-size:0.75rem;flex-shrink:0;transition:all var(--t-fast);cursor:pointer;border:none}
+.toast .toast-close:hover{background:var(--c-danger);color:#fff}
+.toast.success{border-right-color:var(--c-accent)}
+.toast.warning{border-right-color:var(--c-warning)}
+.toast.error{border-right-color:var(--c-danger)}
+.toast.info{border-right-color:var(--c-purple)}
 
-        .image-upload p {
-            color: var(--gray-dark);
-            font-size: 14px;
-        }
+/* FOOTER */
+.footer{background:linear-gradient(180deg,var(--c-primary-900),#061a2e);color:rgba(255,255,255,0.8);padding:48px 24px 24px;margin-top:60px}
+.footer-inner{max-width:var(--container);margin:0 auto}
+.footer-links{display:flex;justify-content:center;flex-wrap:wrap;gap:8px 20px;margin-bottom:24px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.08)}
+.footer-links a{color:rgba(255,255,255,0.65);font-size:0.88rem;font-weight:500;transition:color var(--t-fast)}
+.footer-links a:hover{color:#5eb8ee}
+.footer-copy{text-align:center;font-size:0.82rem;color:rgba(255,255,255,0.4)}
 
-        .image-upload .hint {
-            font-size: 12px;
-            margin-top: 5px;
-            color: #94a3b8;
-        }
-
-        .image-preview {
-            margin-top: 15px;
-            text-align: center;
-            display: none;
-        }
-
-        .image-preview img {
-            max-width: 200px;
-            max-height: 200px;
-            border-radius: 16px;
-            border: 3px solid #3498db;
-            padding: 4px;
-            background: white;
-        }
-
-        .remove-image {
-            background: var(--danger);
-            color: white;
-            border: none;
-            padding: 6px 18px;
-            border-radius: 30px;
-            cursor: pointer;
-            margin-top: 10px;
-            font-size: 13px;
-            font-weight: 600;
-            transition: 0.3s;
-        }
-
-        .remove-image:hover {
-            background: #c53030;
-            transform: translateY(-2px);
-        }
-
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(145deg, #3498db, #2c81ba);
-            border: none;
-            padding: 16px;
-            border-radius: 40px;
-            font-weight: 800;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-            box-shadow: 0 4px 16px rgba(52,152,219,0.30);
-            margin-top: 5px;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-submit:hover {
-            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(26,74,110,0.35);
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        .message {
-            margin-top: 20px;
-            padding: 14px 20px;
-            border-radius: 30px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .message.success {
-            background: #c6f6d5;
-            color: #22543d;
-            border-right: 4px solid #22543d;
-        }
-
-        .message.error {
-            background: #fed7d7;
-            color: #742a2a;
-            border-right: 4px solid #742a2a;
-        }
-
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .loading.show {
-            display: block;
-        }
-
-        .loading .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--gray);
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading p {
-            color: var(--gray-dark);
-            font-weight: 600;
-        }
-
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-align: center;
-            margin-top: 25px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            transition: 0.3s;
-            padding: 10px 20px;
-            background: var(--white);
-            border-radius: 40px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(52,152,219,0.06);
-        }
-
-        .back-link:hover {
-            color: #3498db;
-            transform: translateX(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--gray-dark);
-            font-size: 0.8rem;
-        }
-
-        @media (max-width: 768px) {
-            .form-container { padding: 20px; border-radius: var(--radius-md); }
-            .navbar { flex-direction: column; gap: 12px; padding: 14px 20px; border-radius: 40px; }
-            .nav-links { justify-content: center; }
-            .nav-links a { padding: 6px 14px; font-size: 12px; }
-            .form-header h1 { font-size: 1.4rem; }
-            .logo-content { font-size: 17px; }
-            .logo-img { width: 35px; height: 35px; }
-            .form-group { margin-bottom: 18px; }
-        }
-
-        @media (max-width: 480px) {
-            .form-container { padding: 16px; }
-            .form-header h1 { font-size: 1.2rem; }
-            .form-header p { font-size: 0.85rem; }
-            input, select, textarea { padding: 12px 14px; font-size: 0.95rem; }
-            .btn-submit { padding: 14px; font-size: 1rem; }
-            .image-upload { padding: 20px; }
-            .image-upload i { font-size: 36px; }
-        }
-    </style>
+/* RESPONSIVE */
+@media (max-width:860px){
+.menu-toggle{display:inline-flex}
+.nav-links{position:fixed;top:var(--header-h);left:0;right:0;background:rgba(10,37,64,0.98);backdrop-filter:blur(20px);flex-direction:column;padding:16px;gap:4px;border-bottom:1px solid rgba(255,255,255,0.1);transform:translateY(-120%);transition:transform var(--t-base);max-height:calc(100vh - var(--header-h));overflow-y:auto;z-index:99}
+.nav-links.open{transform:translateY(0)}
+.nav-links a,.dropdown-btn{width:100%;justify-content:flex-start;padding:12px 16px}
+.dropdown{width:100%}
+.dropdown-content{position:static;transform:none;box-shadow:none;background:rgba(255,255,255,0.05);border:none;max-height:0;overflow:hidden;transition:max-height var(--t-base);opacity:1;visibility:visible}
+.dropdown-content.show{max-height:400px}
+.dropdown-content a{color:rgba(255,255,255,0.85);border-bottom-color:rgba(255,255,255,0.05)}
+.form-container{padding:20px}
+.form-section{padding:18px}
+}
+@media (max-width:640px){
+.main-container{padding:16px 12px 40px}
+.page-header{padding:28px 16px}
+.form-grid{grid-template-columns:1fr}
+.form-actions{flex-direction:column-reverse}
+.form-actions .btn{width:100%}
+.section-title h3{font-size:0.95rem}
+.section-title .section-num{width:30px;height:30px;font-size:0.85rem}
+.images-grid{grid-template-columns:repeat(auto-fill,minmax(90px,1fr))}
+}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
+</style>
 </head>
 <body>
 
-<div class="navbar">
-    <div class="logo">
-        <a href="index.html" style="text-decoration:none;">
-            <div class="logo-content">
-                <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
-                     class="logo-img" alt="كيماتو">
-                <div class="logo-text">
-                    <span>كيماتو</span>
-                    <span> | إضافة منتج</span>
-                </div>
-            </div>
-        </a>
-    </div>
-    <div class="nav-links">
-        <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
-        <a href="all-products.html"><i class="fas fa-flask"></i> جميع المنتجات</a>
-        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> لوحة المورد</a>
-    </div>
+<!-- NAVBAR -->
+<header class="navbar" role="banner">
+<div class="navbar-inner">
+<div class="logo">
+<a href="index.html" aria-label="كيماتو">
+<img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager" onerror="this.style.display='none'" />
+<span class="logo-text">
+<span class="blue">كيماتو</span>
+<span class="gray">| إضافة منتج</span>
+</span>
+</a>
 </div>
 
+<nav class="nav-links" id="navLinks" role="navigation" aria-label="التنقل">
+<a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+<a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
+<a href="supplier-dashboard.html" class="active"><i class="fas fa-warehouse"></i> لوحة المورد</a>
+
+<div class="dropdown">
+<button class="dropdown-btn" id="dropdownToggle" aria-expanded="false">
+<i class="fas fa-user-circle"></i> القائمة
+<i class="fas fa-chevron-down" style="font-size:0.7em;"></i>
+</button>
+<div class="dropdown-content" id="dropdownContent" role="menu"></div>
+</div>
+
+<button class="icon-btn rotate" id="themeToggle" aria-label="تبديل الوضع الليلي">
+<i class="fas fa-moon" id="themeIcon"></i>
+</button>
+</nav>
+
+<button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة">
+<i class="fas fa-bars"></i>
+</button>
+</div>
+</header>
+
+<!-- MAIN -->
+<main class="main-container">
+
+<!-- PAGE HEADER -->
+<section class="page-header animate-in">
+<div class="page-header-content">
+<h1><i class="fas fa-plus-circle"></i> إضافة منتج جديد</h1>
+<p>أضف منتجك الكيماوي ليصل إلى آلاف المشترين في مصر والشرق الأوسط</p>
+<div class="page-header-badges">
+<span class="header-badge"><i class="fas fa-check-circle"></i> بيانات كيميائية كاملة</span>
+<span class="header-badge"><i class="fas fa-check-circle"></i> MSDS/SDS مدمج</span>
+<span class="header-badge"><i class="fas fa-check-circle"></i> صور متعددة</span>
+</div>
+</div>
+</section>
+
+<!-- FORM LAYOUT -->
+<div class="form-layout animate-in" style="animation-delay:0.1s;">
+
+<!-- MAIN FORM -->
 <div class="form-container">
-    <div class="form-header">
-        <h1><i class="fas fa-plus-circle"></i> إضافة منتج جديد</h1>
-        <p>أضف منتجك الكيماوي ليصل إلى آلاف العملاء</p>
-    </div>
+<form id="productForm" novalidate>
 
-    <form id="productForm">
-        <div class="form-group">
-            <label class="required">اسم المنتج</label>
-            <input type="text" id="name" required placeholder="مثال: كاوية صودا 99%">
-        </div>
-
-        <div class="form-group">
-            <label class="required">القسم</label>
-            <select id="categoryId" required>
-                <option value="">اختر القسم</option>
-            </select>
-        </div>
-
-        <div class="form-group">
-            <label>وصف المنتج</label>
-            <textarea id="description" rows="3" placeholder="المواصفات، التركيز، درجة النقاء..."></textarea>
-        </div>
-
-        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 20px;">
-            <div class="form-group">
-                <label>السعر (جنيه)</label>
-                <input type="number" id="price" placeholder="مثال: 12500" step="0.01">
-            </div>
-            <div class="form-group">
-                <label>الوحدة</label>
-                <select id="unit">
-                    <option value="كجم">كيلو جرام (كجم)</option>
-                    <option value="طن">طن</option>
-                    <option value="لتر">لتر</option>
-                    <option value="برميل">برميل</option>
-                    <option value="عبوة">عبوة</option>
-                </select>
-            </div>
-        </div>
-
-        <div class="form-group">
-            <label>صورة المنتج</label>
-            <div class="image-upload" id="imageUpload">
-                <i class="fas fa-cloud-upload-alt"></i>
-                <p>اضغط لرفع صورة المنتج</p>
-                <p class="hint">jpg, png, gif (حد أقصى 5 ميجابايت)</p>
-                <input type="file" id="productImage" accept="image/*" style="display: none;">
-            </div>
-            <div class="image-preview" id="imagePreview">
-                <img id="previewImg" src="">
-                <br>
-                <button type="button" class="remove-image" id="removeImageBtn">🗑️ إزالة الصورة</button>
-            </div>
-        </div>
-
-        <button type="submit" class="btn-submit" id="submitBtn">
-            <i class="fas fa-rocket"></i> رفع المنتج للسوق
-        </button>
-    </form>
-
-    <div id="messageDiv"></div>
-    <div id="loading" class="loading">
-        <div class="spinner"></div>
-        <p>⏳ جاري رفع المنتج...</p>
-    </div>
-
-    <div class="text-center">
-        <a href="supplier-dashboard.html" class="back-link">
-            <i class="fas fa-arrow-right"></i> العودة للوحة التحكم
-        </a>
-    </div>
+<!-- SECTION 1: BASIC INFO -->
+<div class="form-section">
+<div class="section-title">
+<span class="section-num">1</span>
+<h3><i class="fas fa-info-circle"></i> المعلومات الأساسية</h3>
+<span class="section-hint">مطلوب</span>
 </div>
 
-<div class="footer">
-    © جميع الحقوق محفوظة Hazem Mohamady 2026 | كيماتو - سوق المواد الكيماوية في مصر
+<div class="form-grid">
+<div class="form-group full">
+<label for="name"><i class="fas fa-flask"></i> اسم المنتج <span class="req">*</span></label>
+<input type="text" id="name" class="form-input" required placeholder="مثال: صودا كاوية 99% (Sodium Hydroxide)" maxlength="200" />
+<div class="input-hint"><i class="fas fa-info-circle"></i> اكتب الاسم بالعربية والإنجليزية إن أمكن</div>
 </div>
+
+<div class="form-group">
+<label for="categoryId"><i class="fas fa-tags"></i> الفئة <span class="req">*</span></label>
+<select id="categoryId" class="form-select" required>
+<option value="">— اختر الفئة —</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="subcategoryId"><i class="fas fa-sitemap"></i> الفئة الفرعية <span class="hint">(اختياري)</span></label>
+<select id="subcategoryId" class="form-select">
+<option value="">— اختر الفئة الفرعية —</option>
+</select>
+</div>
+
+<div class="form-group full">
+<label for="description"><i class="fas fa-align-right"></i> وصف المنتج <span class="req">*</span></label>
+<textarea id="description" class="form-textarea" rows="4" required placeholder="اكتب وصفاً تفصيلياً للمنتج: الاستخدامات، المواصفات، المميزات..." maxlength="2000"></textarea>
+<div class="input-hint"><i class="fas fa-info-circle"></i> وصف جيد يزيد فرص البيع بنسبة 60%</div>
+</div>
+</div>
+</div>
+
+<!-- SECTION 2: CHEMICAL PROPERTIES -->
+<div class="form-section">
+<div class="section-title">
+<span class="section-num">2</span>
+<h3><i class="fas fa-atom"></i> الخصائص الكيميائية</h3>
+<span class="section-hint">يزيد المصداقية</span>
+</div>
+
+<div class="form-grid">
+<div class="form-group">
+<label for="casNumber"><i class="fas fa-hashtag"></i> رقم CAS</label>
+<input type="text" id="casNumber" class="form-input" placeholder="1310-73-2" dir="ltr" pattern="\d{2,7}-\d{2}-\d" />
+<div class="input-hint"><i class="fas fa-info-circle"></i> الرقم الدولي للمادة الكيميائية</div>
+</div>
+
+<div class="form-group">
+<label for="formula"><i class="fas fa-flask"></i> الصيغة الكيميائية</label>
+<input type="text" id="formula" class="form-input" placeholder="NaOH" dir="ltr" />
+</div>
+
+<div class="form-group">
+<label for="molecularWeight"><i class="fas fa-weight-hanging"></i> الوزن الجزيئي (g/mol)</label>
+<input type="number" id="molecularWeight" class="form-input" placeholder="40.00" step="0.01" min="0" />
+</div>
+
+<div class="form-group">
+<label for="purity"><i class="fas fa-percentage"></i> النقاء</label>
+<input type="text" id="purity" class="form-input" placeholder="99% / تقني" />
+</div>
+
+<div class="form-group">
+<label for="grade"><i class="fas fa-layer-group"></i> الدرجة</label>
+<select id="grade" class="form-select">
+<option value="">— اختر الدرجة —</option>
+<option value="technical">تقني (Technical)</option>
+<option value="analytical">تحليلي (Analytical)</option>
+<option value="acs">ACS</option>
+<option value="pharma">صيدلاني (Pharma)</option>
+<option value="food">غذائي (Food Grade)</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="appearance"><i class="fas fa-eye"></i> المظهر</label>
+<input type="text" id="appearance" class="form-input" placeholder="مسحوق أبيض / سائل شفاف" />
+</div>
+
+<div class="form-group">
+<label for="density"><i class="fas fa-tint"></i> الكثافة</label>
+<input type="text" id="density" class="form-input" placeholder="2.13 g/cm³" dir="ltr" />
+</div>
+
+<div class="form-group">
+<label for="meltingPoint"><i class="fas fa-temperature-low"></i> نقطة الانصهار</label>
+<input type="text" id="meltingPoint" class="form-input" placeholder="318°C" dir="ltr" />
+</div>
+
+<div class="form-group">
+<label for="boilingPoint"><i class="fas fa-temperature-high"></i> نقطة الغليان</label>
+<input type="text" id="boilingPoint" class="form-input" placeholder="1388°C" dir="ltr" />
+</div>
+
+<div class="form-group">
+<label for="solubility"><i class="fas fa-water"></i> الذوبان</label>
+<input type="text" id="solubility" class="form-input" placeholder="قابل للذوبان في الماء" />
+</div>
+
+<div class="form-group">
+<label for="hazardClass"><i class="fas fa-exclamation-triangle"></i> فئة الخطورة</label>
+<input type="text" id="hazardClass" class="form-input" placeholder="Corrosive / Toxic" />
+</div>
+
+<div class="form-group full">
+<label for="storageConditions"><i class="fas fa-warehouse"></i> ظروف التخزين</label>
+<textarea id="storageConditions" class="form-textarea" rows="2" placeholder="يحفظ في مكان جاف وبارد بعيداً عن الرطوبة..."></textarea>
+</div>
+</div>
+</div>
+
+<!-- SECTION 3: PRICING & COMMERCIAL -->
+<div class="form-section">
+<div class="section-title">
+<span class="section-num">3</span>
+<h3><i class="fas fa-tag"></i> السعر والتجارة</h3>
+<span class="section-hint">مطلوب</span>
+</div>
+
+<div class="form-grid">
+<div class="form-group">
+<label for="price"><i class="fas fa-money-bill-wave"></i> السعر (ج.م) <span class="req">*</span></label>
+<input type="number" id="price" class="form-input" placeholder="12500" step="0.01" min="0" required />
+</div>
+
+<div class="form-group">
+<label for="unit"><i class="fas fa-balance-scale"></i> الوحدة</label>
+<select id="unit" class="form-select">
+<option value="كجم">كجم</option>
+<option value="طن">طن</option>
+<option value="لتر">لتر</option>
+<option value="برميل">برميل</option>
+<option value="عبوة">عبوة</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="minOrderQuantity"><i class="fas fa-shopping-basket"></i> الحد الأدنى للطلب (MOQ)</label>
+<input type="text" id="minOrderQuantity" class="form-input" placeholder="100 كجم" />
+</div>
+
+<div class="form-group">
+<label for="quantityAvailable"><i class="fas fa-cubes"></i> الكمية المتاحة</label>
+<input type="text" id="quantityAvailable" class="form-input" placeholder="5 طن" />
+</div>
+
+<div class="form-group">
+<label for="stockStatus"><i class="fas fa-boxes"></i> حالة المخزون</label>
+<select id="stockStatus" class="form-select">
+<option value="available">✅ متوفر</option>
+<option value="low">⚠️ كمية محدودة</option>
+<option value="out">❌ غير متوفر</option>
+</select>
+</div>
+
+<div class="form-group">
+<label for="packaging"><i class="fas fa-box-open"></i> التعبئة</label>
+<input type="text" id="packaging" class="form-input" placeholder="شكائر 25 كجم / براميل 200 لتر" />
+</div>
+
+<div class="form-group">
+<label for="originCountry"><i class="fas fa-globe"></i> بلد المنشأ</label>
+<input type="text" id="originCountry" class="form-input" placeholder="مصر / الصين / ألمانيا" />
+</div>
+
+<div class="form-group">
+<label for="isFeatured"><i class="fas fa-star"></i> ترقية كمنتج مميز</label>
+<select id="isFeatured" class="form-select">
+<option value="false">عادي</option>
+<option value="true">⭐ مميز (يظهر في الأعلى)</option>
+</select>
+<div class="input-hint"><i class="fas fa-info-circle"></i> المنتجات المميزة تحصل على 5x مشاهدات</div>
+</div>
+</div>
+</div>
+
+<!-- SECTION 4: IMAGES -->
+<div class="form-section">
+<div class="section-title">
+<span class="section-num">4</span>
+<h3><i class="fas fa-images"></i> صور المنتج</h3>
+<span class="section-hint">حتى 5 صور</span>
+</div>
+
+<div class="image-upload-zone" id="imageUploadZone">
+<i class="fas fa-cloud-upload-alt"></i>
+<p>اسحب الصور هنا أو اضغط للاختيار</p>
+<p class="hint">PNG، JPG، WEBP — الحد الأقصى 5 ميجابايت لكل صورة</p>
+<input type="file" id="productImages" accept="image/png,image/jpeg,image/jpg,image/webp" multiple />
+</div>
+
+<div class="images-grid" id="imagesGrid"></div>
+<p class="helper-text" style="margin-top:12px;">
+<i class="fas fa-info-circle"></i>
+الصورة الأولى ستكون الصورة الرئيسية للمنتج
+</p>
+</div>
+
+<!-- SECTION 5: DOCUMENTS -->
+<div class="form-section">
+<div class="section-title">
+<span class="section-num">5</span>
+<h3><i class="fas fa-file-shield"></i> وثائق السلامة (اختياري)</h3>
+<span class="section-hint">يزيد الثقة</span>
+</div>
+
+<div class="form-grid">
+<div class="form-group full">
+<label for="msdsFile"><i class="fas fa-file-pdf"></i> ملف MSDS (صحيفة بيانات السلامة)</label>
+<div class="file-upload" id="msdsUpload" onclick="document.getElementById('msdsFile').click()">
+<i class="fas fa-file-upload"></i>
+<div class="file-info">
+<span class="file-name" id="msdsFileName">ارفع ملف MSDS</span>
+<span class="file-hint">PDF — الحد الأقصى 10 ميجابايت</span>
+</div>
+</div>
+<input type="file" id="msdsFile" accept="application/pdf" style="display:none;" />
+</div>
+
+<div class="form-group full">
+<label for="sdsFile"><i class="fas fa-file-alt"></i> ملف SDS (صحيفة البيانات الكيميائية)</label>
+<div class="file-upload" id="sdsUpload" onclick="document.getElementById('sdsFile').click()">
+<i class="fas fa-file-upload"></i>
+<div class="file-info">
+<span class="file-name" id="sdsFileName">ارفع ملف SDS</span>
+<span class="file-hint">PDF — الحد الأقصى 10 ميجابايت</span>
+</div>
+</div>
+<input type="file" id="sdsFile" accept="application/pdf" style="display:none;" />
+</div>
+</div>
+</div>
+
+<!-- ACTIONS -->
+<div class="form-actions">
+<button type="button" class="btn btn-outline" onclick="window.location.href='supplier-dashboard.html'">
+<i class="fas fa-times"></i> إلغاء
+</button>
+<button type="button" class="btn btn-outline" id="saveDraftBtn">
+<i class="fas fa-save"></i> حفظ كمسودة
+</button>
+<button type="submit" class="btn btn-primary btn-lg" id="submitBtn">
+<i class="fas fa-rocket"></i> نشر المنتج
+</button>
+</div>
+
+</form>
+</div>
+
+<!-- SIDEBAR -->
+<aside class="sidebar">
+
+<!-- LIVE PREVIEW -->
+<div class="sidebar-card">
+<h4><i class="fas fa-eye"></i> معاينة مباشرة</h4>
+<div class="preview-card">
+<div class="preview-card-media" id="previewMedia">
+<span>🧪</span>
+</div>
+<div class="preview-card-body">
+<span class="preview-card-category" id="previewCategory">الفئة</span>
+<h4 class="preview-card-title" id="previewTitle">اسم المنتج</h4>
+<div class="preview-card-specs" id="previewSpecs"></div>
+<div class="preview-card-price">
+<span id="previewPrice">السعر</span>
+<span class="currency" id="previewUnit">/ كجم</span>
+</div>
+</div>
+</div>
+</div>
+
+<!-- CHECKLIST -->
+<div class="sidebar-card">
+<h4><i class="fas fa-tasks"></i> قائمة الإكمال</h4>
+<ul class="checklist" id="checklist">
+<li data-check="name"><span class="check-icon"><i class="fas fa-check"></i></span> اسم المنتج</li>
+<li data-check="categoryId"><span class="check-icon"><i class="fas fa-check"></i></span> الفئة</li>
+<li data-check="description"><span class="check-icon"><i class="fas fa-check"></i></span> الوصف</li>
+<li data-check="price"><span class="check-icon"><i class="fas fa-check"></i></span> السعر</li>
+<li data-check="casNumber"><span class="check-icon"><i class="fas fa-check"></i></span> رقم CAS</li>
+<li data-check="purity"><span class="check-icon"><i class="fas fa-check"></i></span> النقاء</li>
+<li data-check="image"><span class="check-icon"><i class="fas fa-check"></i></span> صورة واحدة على الأقل</li>
+</ul>
+</div>
+
+<!-- TIPS -->
+<div class="sidebar-card">
+<h4><i class="fas fa-lightbulb"></i> نصائح للنجاح</h4>
+<div class="tip-box">
+<i class="fas fa-star"></i>
+<strong>اكتب وصفاً تفصيلياً</strong> — المنتجات التي تحتوي على وصف كامل تحصل على 3x تواصل أكثر.
+</div>
+<div class="tip-box" style="margin-top:10px;">
+<i class="fas fa-image"></i>
+<strong>أضف 3 صور على الأقل</strong> — الصور الواضحة تزيد فرص البيع بنسبة 70%.
+</div>
+<div class="tip-box" style="margin-top:10px;">
+<i class="fas fa-file-shield"></i>
+<strong>ارفع MSDS</strong> — وجود وثائق السلامة يبني الثقة مع المشترين المحترفين.
+</div>
+</div>
+
+</aside>
+
+</div>
+
+</main>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<!-- FOOTER -->
+<footer class="footer" role="contentinfo">
+<div class="footer-inner">
+<div class="footer-links">
+<a href="index.html">الرئيسية</a>
+<a href="all-products.html">المنتجات</a>
+<a href="all-requests.html">الطلبات</a>
+<a href="chemato-suppliers.html">الموردين</a>
+<a href="supplier-dashboard.html">لوحة المورد</a>
+</div>
+<div class="footer-copy">© 2026 كيماتو — منصة الكيماويات B2B في مصر</div>
+</div>
+</footer>
 
 <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+let supabase;
+try {
+    supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' }
+    });
+} catch(e) { console.error('Supabase init failed:', e); }
 
-    let selectedImageFile = null
-    let currentUser = null
+// ============================================================
+// STATE
+// ============================================================
+const state = {
+    user: null,
+    profile: null,
+    categories: [],
+    subcategories: [],
+    images: [], // { file, url (preview), path (after upload) }
+    msdsFile: null,
+    sdsFile: null,
+    uploading: false,
+};
 
-    const form = document.getElementById('productForm')
-    const messageDiv = document.getElementById('messageDiv')
-    const loadingDiv = document.getElementById('loading')
-    const submitBtn = document.getElementById('submitBtn')
+const THEME_KEY = 'chemato-theme';
+const DRAFT_KEY = 'chemato-product-draft';
 
-    // ========== معاينة الصورة ==========
-    const imageUpload = document.getElementById('imageUpload')
-    const imageInput = document.getElementById('productImage')
-    const imagePreview = document.getElementById('imagePreview')
-    const previewImg = document.getElementById('previewImg')
-    const removeImageBtn = document.getElementById('removeImageBtn')
+// ============================================================
+// UTILS
+// ============================================================
+const escapeHtml = (s) => {
+    if (s === null || s === undefined) return '';
+    return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
+};
 
-    imageUpload.addEventListener('click', () => {
-        imageInput.click()
-    })
+const formatNumber = (n) => n ? Number(n).toLocaleString('ar-EG') : '';
 
-    imageInput.addEventListener('change', (e) => {
-        if (e.target.files && e.target.files[0]) {
-            if (e.target.files[0].size > 5 * 1024 * 1024) {
-                alert('⚠️ حجم الصورة يتجاوز 5 ميجابايت')
-                imageInput.value = ''
-                return
-            }
-            selectedImageFile = e.target.files[0]
-            const reader = new FileReader()
-            reader.onload = (event) => {
-                previewImg.src = event.target.result
-                imagePreview.style.display = 'block'
-                imageUpload.style.display = 'none'
-            }
-            reader.readAsDataURL(selectedImageFile)
+// ============================================================
+// THEME
+// ============================================================
+const initTheme = () => {
+    const saved = localStorage.getItem(THEME_KEY);
+    const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+    const theme = saved || (prefersDark ? 'dark' : 'light');
+    document.documentElement.setAttribute('data-theme', theme);
+    const icon = document.getElementById('themeIcon');
+    if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+
+    document.getElementById('themeToggle')?.addEventListener('click', () => {
+        const current = document.documentElement.getAttribute('data-theme');
+        const next = current === 'dark' ? 'light' : 'dark';
+        document.documentElement.setAttribute('data-theme', next);
+        localStorage.setItem(THEME_KEY, next);
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    });
+};
+
+// ============================================================
+// TOAST
+// ============================================================
+const removeToast = (toast) => {
+    if (!toast || !toast.parentNode) return;
+    toast.classList.add('removing');
+    setTimeout(() => toast.remove(), 300);
+};
+
+const showToast = (icon, title, desc, type = '') => {
+    const container = document.getElementById('toastContainer');
+    if (!container) return;
+    const toast = document.createElement('div');
+    toast.className = `toast ${type}`;
+    toast.innerHTML = `
+        <div class="toast-icon">${icon}</div>
+        <div class="toast-content">
+            <div class="toast-title">${escapeHtml(title)}</div>
+            <div class="toast-desc">${escapeHtml(desc)}</div>
+        </div>
+        <button class="toast-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+    `;
+    toast.querySelector('.toast-close').onclick = () => removeToast(toast);
+    container.appendChild(toast);
+    setTimeout(() => removeToast(toast), 5000);
+};
+
+// ============================================================
+// NAVBAR
+// ============================================================
+const initNavbar = () => {
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle?.addEventListener('click', () => {
+        const isOpen = navLinks.classList.toggle('open');
+        menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
+    });
+
+    const dropdownToggle = document.getElementById('dropdownToggle');
+    const dropdownContent = document.getElementById('dropdownContent');
+
+    dropdownToggle?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        dropdownContent.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+        dropdownContent?.classList.remove('show');
+    });
+
+    // Update dropdown based on auth
+    const updateDropdown = () => {
+        if (state.user) {
+            dropdownContent.innerHTML = `
+                <a href="supplier-dashboard.html"><i class="fas fa-tachometer-alt"></i> لوحة المورد</a>
+                <a href="add-product.html"><i class="fas fa-plus-circle"></i> إضافة منتج</a>
+                <a href="messages.html"><i class="fas fa-envelope"></i> الرسائل</a>
+                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                <a href="#" class="logout" id="logoutLink"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+            `;
+            document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                e.preventDefault();
+                await supabase.auth.signOut();
+                window.location.href = 'index.html';
+            });
+        } else {
+            dropdownContent.innerHTML = `
+                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+                <a href="auth.html?type=supplier"><i class="fas fa-warehouse"></i> حساب مورد</a>
+            `;
         }
-    })
+    };
+    updateDropdown();
+};
 
-    removeImageBtn.addEventListener('click', () => {
-        selectedImageFile = null
-        imageInput.value = ''
-        imagePreview.style.display = 'none'
-        imageUpload.style.display = 'block'
-        previewImg.src = ''
-    })
+// ============================================================
+// AUTH CHECK
+// ============================================================
+const checkAuth = async () => {
+    if (!supabase) return false;
 
-    // ========== تحميل الأقسام ==========
-    async function loadCategories() {
-        const { data: categories } = await supabase
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            showToast('🔒', 'تسجيل دخول مطلوب', 'جاري تحويلك لصفحة الدخول...', 'warning');
+            setTimeout(() => window.location.href = 'auth.html?redirect=add-product', 1500);
+            return false;
+        }
+        state.user = user;
+
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('id, full_name, company_name, user_type, is_verified')
+            .eq('id', user.id)
+            .single();
+
+        state.profile = profile;
+
+        // Check if supplier
+        if (profile?.user_type !== 'supplier') {
+            showToast('⚠️', 'غير مصرح', 'هذه الصفحة للموردين فقط', 'warning');
+            setTimeout(() => window.location.href = 'index.html', 2000);
+            return false;
+        }
+
+        return true;
+    } catch (e) {
+        console.error('Auth error:', e);
+        return false;
+    }
+};
+
+// ============================================================
+// LOAD CATEGORIES
+// ============================================================
+const loadCategories = async () => {
+    try {
+        const { data, error } = await supabase
             .from('categories')
-            .select('*')
-            .eq('is_active', true)
-            .order('display_order', { ascending: true })
+            .select('id, name, icon, display_order')
+            .order('display_order', { ascending: true });
 
-        const select = document.getElementById('categoryId')
-        if (categories && categories.length > 0) {
-            categories.forEach(cat => {
-                select.innerHTML += `<option value="${cat.id}">${cat.icon || '📁'} ${cat.name}</option>`
-            })
+        if (error) throw error;
+        state.categories = data || [];
+
+        const select = document.getElementById('categoryId');
+        select.innerHTML = '<option value="">— اختر الفئة —</option>';
+        state.categories.forEach(cat => {
+            select.innerHTML += `<option value="${cat.id}">${cat.icon || '📁'} ${escapeHtml(cat.name)}</option>`;
+        });
+    } catch (e) {
+        console.warn('Categories error:', e.message);
+    }
+};
+
+// ============================================================
+// LOAD SUBCATEGORIES
+// ============================================================
+const loadSubcategories = async (categoryId) => {
+    const select = document.getElementById('subcategoryId');
+    select.innerHTML = '<option value="">— اختر الفئة الفرعية —</option>';
+    state.subcategories = [];
+
+    if (!categoryId) return;
+
+    try {
+        const { data, error } = await supabase
+            .from('subcategories')
+            .select('id, name, icon')
+            .eq('category_id', categoryId)
+            .order('display_order', { ascending: true });
+
+        if (error) throw error;
+        state.subcategories = data || [];
+
+        state.subcategories.forEach(sub => {
+            select.innerHTML += `<option value="${sub.id}">${sub.icon || '📂'} ${escapeHtml(sub.name)}</option>`;
+        });
+    } catch (e) {
+        // Subcategories table may not exist yet, silent
+    }
+};
+
+// ============================================================
+// IMAGES HANDLING
+// ============================================================
+const initImagesUpload = () => {
+    const zone = document.getElementById('imageUploadZone');
+    const input = document.getElementById('productImages');
+    const grid = document.getElementById('imagesGrid');
+
+    zone?.addEventListener('click', () => input?.click());
+
+    // Drag & drop
+    zone?.addEventListener('dragover', (e) => {
+        e.preventDefault();
+        zone.classList.add('dragover');
+    });
+    zone?.addEventListener('dragleave', () => zone.classList.remove('dragover'));
+    zone?.addEventListener('drop', (e) => {
+        e.preventDefault();
+        zone.classList.remove('dragover');
+        handleImageFiles(e.dataTransfer.files);
+    });
+
+    input?.addEventListener('change', (e) => handleImageFiles(e.target.files));
+
+    function handleImageFiles(files) {
+        const fileArray = Array.from(files);
+        const maxImages = 5;
+        const remaining = maxImages - state.images.length;
+
+        if (remaining <= 0) {
+            showToast('⚠️', 'حد أقصى', `يمكنك رفع ${maxImages} صور فقط`, 'warning');
+            return;
         }
+
+        fileArray.slice(0, remaining).forEach(file => {
+            if (!file.type.startsWith('image/')) {
+                showToast('⚠️', 'ملف غير صالح', `${file.name} ليس صورة`, 'warning');
+                return;
+            }
+            if (file.size > 5 * 1024 * 1024) {
+                showToast('⚠️', 'حجم كبير', `${file.name} يتجاوز 5 ميجابايت`, 'warning');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                state.images.push({
+                    file: file,
+                    url: e.target.result,
+                    path: null,
+                });
+                renderImagesGrid();
+                updatePreview();
+                updateChecklist();
+            };
+            reader.readAsDataURL(file);
+        });
+
+        input.value = '';
     }
 
-    // ========== رفع المنتج ==========
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        messageDiv.innerHTML = ''
-        loadingDiv.classList.add('show')
-        submitBtn.disabled = true
+    function renderImagesGrid() {
+        grid.innerHTML = state.images.map((img, i) => `
+            <div class="image-preview-item ${i === 0 ? 'primary' : ''}" data-index="${i}">
+                <img src="${img.url}" alt="صورة ${i + 1}" />
+                <button class="image-remove-btn" data-remove="${i}" aria-label="حذف">
+                    <i class="fas fa-times"></i>
+                </button>
+            </div>
+        `).join('');
 
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user) {
-            messageDiv.innerHTML = '<div class="message error">❌ يجب تسجيل الدخول أولاً</div>'
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
-            setTimeout(() => window.location.href = 'auth.html', 1500)
-            return
+        // Remove buttons
+        grid.querySelectorAll('[data-remove]').forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const idx = parseInt(btn.dataset.remove);
+                state.images.splice(idx, 1);
+                renderImagesGrid();
+                updatePreview();
+                updateChecklist();
+            });
+        });
+
+        // Click to set as primary
+        grid.querySelectorAll('.image-preview-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const idx = parseInt(item.dataset.index);
+                if (idx === 0) return;
+                const [img] = state.images.splice(idx, 1);
+                state.images.unshift(img);
+                renderImagesGrid();
+                updatePreview();
+            });
+        });
+    }
+
+    window.renderImagesGrid = renderImagesGrid;
+};
+
+// ============================================================
+// DOCUMENTS HANDLING
+// ============================================================
+const initDocsUpload = () => {
+    document.getElementById('msdsFile')?.addEventListener('change', (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (file.size > 10 * 1024 * 1024) {
+            showToast('⚠️', 'حجم كبير', 'الحد الأقصى 10 ميجابايت', 'warning');
+            return;
         }
-        currentUser = user
+        state.msdsFile = file;
+        document.getElementById('msdsFileName').textContent = file.name;
+        document.getElementById('msdsUpload').classList.add('has-file');
+    });
 
-        const name = document.getElementById('name').value.trim()
-        const categoryId = document.getElementById('categoryId').value
-        const description = document.getElementById('description').value
-        const price = parseFloat(document.getElementById('price').value) || null
-        const unit = document.getElementById('unit').value
-
-        if (!name) {
-            messageDiv.innerHTML = '<div class="message error">❌ الرجاء إدخال اسم المنتج</div>'
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
-            return
+    document.getElementById('sdsFile')?.addEventListener('change', (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+        if (file.size > 10 * 1024 * 1024) {
+            showToast('⚠️', 'حجم كبير', 'الحد الأقصى 10 ميجابايت', 'warning');
+            return;
         }
+        state.sdsFile = file;
+        document.getElementById('sdsFileName').textContent = file.name;
+        document.getElementById('sdsUpload').classList.add('has-file');
+    });
+};
 
+// ============================================================
+// LIVE PREVIEW
+// ============================================================
+const updatePreview = () => {
+    const name = document.getElementById('name')?.value || 'اسم المنتج';
+    const categoryId = document.getElementById('categoryId')?.value;
+    const price = document.getElementById('price')?.value;
+    const unit = document.getElementById('unit')?.value || 'كجم';
+    const casNumber = document.getElementById('casNumber')?.value;
+    const purity = document.getElementById('purity')?.value;
+    const grade = document.getElementById('grade')?.value;
+
+    // Title
+    document.getElementById('previewTitle').textContent = name;
+
+    // Category
+    const cat = state.categories.find(c => c.id === categoryId);
+    document.getElementById('previewCategory').textContent = cat ? `${cat.icon || '📁'} ${cat.name}` : 'الفئة';
+
+    // Price
+    document.getElementById('previewPrice').textContent = price ? `${formatNumber(price)} ج.م` : 'السعر';
+    document.getElementById('previewUnit').textContent = `/ ${unit}`;
+
+    // Specs
+    const specs = [];
+    if (casNumber) specs.push(`<span class="preview-spec cas">${escapeHtml(casNumber)}</span>`);
+    if (purity) specs.push(`<span class="preview-spec purity">${escapeHtml(purity)}</span>`);
+    if (grade) {
+        const gradeMap = { 'technical': 'تقني', 'analytical': 'تحليلي', 'acs': 'ACS', 'pharma': 'صيدلاني', 'food': 'غذائي' };
+        specs.push(`<span class="preview-spec">${gradeMap[grade] || grade}</span>`);
+    }
+    document.getElementById('previewSpecs').innerHTML = specs.join('');
+
+    // Media
+    const media = document.getElementById('previewMedia');
+    if (state.images[0]) {
+        media.innerHTML = `<img src="${state.images[0].url}" alt="preview" />`;
+    } else {
+        media.innerHTML = `<span>🧪</span>`;
+    }
+};
+
+// ============================================================
+// CHECKLIST
+// ============================================================
+const updateChecklist = () => {
+    const checks = {
+        name: !!document.getElementById('name')?.value.trim(),
+        categoryId: !!document.getElementById('categoryId')?.value,
+        description: !!document.getElementById('description')?.value.trim(),
+        price: !!document.getElementById('price')?.value,
+        casNumber: !!document.getElementById('casNumber')?.value.trim(),
+        purity: !!document.getElementById('purity')?.value.trim(),
+        image: state.images.length > 0,
+    };
+
+    document.querySelectorAll('#checklist li').forEach(li => {
+        const key = li.dataset.check;
+        li.classList.toggle('done', checks[key]);
+    });
+};
+
+// ============================================================
+// FORM LISTENERS
+// ============================================================
+const initFormListeners = () => {
+    // Category change → load subcategories
+    document.getElementById('categoryId')?.addEventListener('change', (e) => {
+        loadSubcategories(e.target.value);
+        updatePreview();
+        updateChecklist();
+    });
+
+    // Update preview on any change
+    ['name', 'price', 'unit', 'casNumber', 'purity', 'grade'].forEach(id => {
+        document.getElementById(id)?.addEventListener('input', () => {
+            updatePreview();
+            updateChecklist();
+        });
+        document.getElementById(id)?.addEventListener('change', () => {
+            updatePreview();
+            updateChecklist();
+        });
+    });
+
+    ['description', 'minOrderQuantity'].forEach(id => {
+        document.getElementById(id)?.addEventListener('input', updateChecklist);
+    });
+};
+
+// ============================================================
+// UPLOAD FUNCTIONS
+// ============================================================
+const uploadImage = async (file, userId) => {
+    const fileExt = file.name.split('.').pop().toLowerCase();
+    const fileName = `${userId}/${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`;
+
+    const { error } = await supabase.storage
+        .from('product-images')
+        .upload(fileName, file, { cacheControl: '3600', upsert: false });
+
+    if (error) throw error;
+
+    const { data } = supabase.storage.from('product-images').getPublicUrl(fileName);
+    return data.publicUrl;
+};
+
+const uploadDocument = async (file, userId, type) => {
+    const fileExt = file.name.split('.').pop().toLowerCase();
+    const fileName = `${userId}/${type}_${Date.now()}.${fileExt}`;
+
+    const { error } = await supabase.storage
+        .from('product-images') // or 'documents' if you have one
+        .upload(fileName, file, { cacheControl: '3600', upsert: false });
+
+    if (error) throw error;
+
+    const { data } = supabase.storage.from('product-images').getPublicUrl(fileName);
+    return data.publicUrl;
+};
+
+// ============================================================
+// SUBMIT FORM
+// ============================================================
+const initFormSubmit = () => {
+    const form = document.getElementById('productForm');
+    const submitBtn = document.getElementById('submitBtn');
+
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+
+        // Validation
+        const name = document.getElementById('name').value.trim();
+        const categoryId = document.getElementById('categoryId').value;
+        const description = document.getElementById('description').value.trim();
+        const price = parseFloat(document.getElementById('price').value);
+
+        if (!name || name.length < 3) {
+            showToast('⚠️', 'اسم غير صالح', 'اكتب اسم منتج صحيح', 'warning');
+            return;
+        }
         if (!categoryId) {
-            messageDiv.innerHTML = '<div class="message error">❌ الرجاء اختيار القسم</div>'
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
-            return
+            showToast('⚠️', 'اختر الفئة', 'يجب اختيار فئة للمنتج', 'warning');
+            return;
+        }
+        if (!description || description.length < 20) {
+            showToast('⚠️', 'وصف قصير', 'اكتب وصفاً لا يقل عن 20 حرفاً', 'warning');
+            return;
+        }
+        if (!price || price <= 0) {
+            showToast('⚠️', 'سعر غير صالح', 'أدخل سعراً صحيحاً', 'warning');
+            return;
         }
 
-        let imageUrl = null
-        if (selectedImageFile) {
-            const fileExt = selectedImageFile.name.split('.').pop()
-            const fileName = `product_${Date.now()}_${Math.random().toString(36).substring(7)}.${fileExt}`
-            
-            const { error: uploadError } = await supabase.storage
-                .from('product-images')
-                .upload(fileName, selectedImageFile)
+        // Disable UI
+        submitBtn.disabled = true;
+        const originalText = submitBtn.innerHTML;
+        submitBtn.innerHTML = '<i class="fas fa-spinner fa-spin"></i> جاري النشر...';
 
-            if (uploadError) {
-                messageDiv.innerHTML = `<div class="message error">❌ ${uploadError.message}</div>`
-                loadingDiv.classList.remove('show')
-                submitBtn.disabled = false
-                return
+        try {
+            // 1. Upload images
+            const imageUrls = [];
+            for (const img of state.images) {
+                try {
+                    const url = await uploadImage(img.file, state.user.id);
+                    imageUrls.push(url);
+                } catch (err) {
+                    console.warn('Image upload failed:', err);
+                }
             }
 
-            const { data: urlData } = supabase.storage
-                .from('product-images')
-                .getPublicUrl(fileName)
+            // 2. Upload documents
+            let msdsUrl = null, sdsUrl = null;
+            if (state.msdsFile) {
+                try { msdsUrl = await uploadDocument(state.msdsFile, state.user.id, 'msds'); } catch (e) {}
+            }
+            if (state.sdsFile) {
+                try { sdsUrl = await uploadDocument(state.sdsFile, state.user.id, 'sds'); } catch (e) {}
+            }
 
-            imageUrl = urlData.publicUrl
-        }
+            // 3. Get category name
+            const selectedCat = state.categories.find(c => c.id === categoryId);
 
-        const { data: categoryData } = await supabase
-            .from('categories')
-            .select('name')
-            .eq('id', categoryId)
-            .single()
+            // 4. Prepare data (all columns in products table)
+            const subcategoryId = document.getElementById('subcategoryId')?.value || null;
+            const selectedSub = state.subcategories.find(s => s.id === subcategoryId);
 
-        const { error } = await supabase.from('products').insert({
-            supplier_id: user.id,
-            name: name,
-            category: categoryData?.name || 'أخرى',
-            category_id: categoryId,
-            description: description,
-            price: price,
-            unit: unit,
-            image_url: imageUrl,
-            status: 'active',
-            views_count: 0
-        })
+            const productData = {
+                supplier_id: state.user.id,
+                name: name,
+                category: selectedCat?.name || 'أخرى',
+                category_id: categoryId,
+                sub_category: selectedSub?.name || null,
+                subcategory_id: subcategoryId,
+                description: description,
+                price: price,
+                unit: document.getElementById('unit').value || 'كجم',
+                min_order_quantity: document.getElementById('minOrderQuantity').value.trim() || null,
+                quantity_available: document.getElementById('quantityAvailable').value.trim() || null,
+                purity: document.getElementById('purity').value.trim() || null,
+                grade: document.getElementById('grade').value || null,
+                cas_number: document.getElementById('casNumber').value.trim() || null,
+                formula: document.getElementById('formula').value.trim() || null,
+                molecular_weight: parseFloat(document.getElementById('molecularWeight').value) || null,
+                density: document.getElementById('density').value.trim() || null,
+                melting_point: document.getElementById('meltingPoint').value.trim() || null,
+                boiling_point: document.getElementById('boilingPoint').value.trim() || null,
+                solubility: document.getElementById('solubility').value.trim() || null,
+                appearance: document.getElementById('appearance').value.trim() || null,
+                storage_conditions: document.getElementById('storageConditions').value.trim() || null,
+                hazard_class: document.getElementById('hazardClass').value.trim() || null,
+                packaging: document.getElementById('packaging').value.trim() || null,
+                origin_country: document.getElementById('originCountry').value.trim() || null,
+                stock_status: document.getElementById('stockStatus').value || 'available',
+                is_featured: document.getElementById('isFeatured').value === 'true',
+                image_url: imageUrls[0] || null,
+                images: imageUrls.length > 0 ? imageUrls : null,
+                msds_url: msdsUrl,
+                sds_url: sdsUrl,
+                status: 'active',
+                views: 0,
+                views_count: 0,
+                avg_rating: 0,
+            };
 
-        if (error) {
-            messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
-        } else {
-            messageDiv.innerHTML = '<div class="message success">✅ تم إضافة المنتج بنجاح!</div>'
+            // 5. Insert
+            const { data: newProduct, error } = await supabase
+                .from('products')
+                .insert(productData)
+                .select()
+                .single();
+
+            if (error) throw error;
+
+            // Clear draft
+            localStorage.removeItem(DRAFT_KEY);
+
+            showToast('🎉', 'تم النشر!', 'منتجك الآن مرئي لآلاف المشترين', 'success');
+
             setTimeout(() => {
-                window.location.href = 'supplier-dashboard.html'
-            }, 2000)
-        }
-    })
+                window.location.href = 'supplier-dashboard.html';
+            }, 1500);
 
-    loadCategories()
+        } catch (error) {
+            console.error('Publish error:', error);
+            showToast('❌', 'خطأ', error.message || 'تعذر نشر المنتج', 'error');
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
+
+    // Save draft
+    document.getElementById('saveDraftBtn')?.addEventListener('click', () => {
+        try {
+            const draft = {
+                name: document.getElementById('name').value,
+                categoryId: document.getElementById('categoryId').value,
+                subcategoryId: document.getElementById('subcategoryId').value,
+                description: document.getElementById('description').value,
+                price: document.getElementById('price').value,
+                unit: document.getElementById('unit').value,
+                minOrderQuantity: document.getElementById('minOrderQuantity').value,
+                quantityAvailable: document.getElementById('quantityAvailable').value,
+                purity: document.getElementById('purity').value,
+                grade: document.getElementById('grade').value,
+                casNumber: document.getElementById('casNumber').value,
+                formula: document.getElementById('formula').value,
+                molecularWeight: document.getElementById('molecularWeight').value,
+                density: document.getElementById('density').value,
+                meltingPoint: document.getElementById('meltingPoint').value,
+                boilingPoint: document.getElementById('boilingPoint').value,
+                solubility: document.getElementById('solubility').value,
+                appearance: document.getElementById('appearance').value,
+                storageConditions: document.getElementById('storageConditions').value,
+                hazardClass: document.getElementById('hazardClass').value,
+                packaging: document.getElementById('packaging').value,
+                originCountry: document.getElementById('originCountry').value,
+                stockStatus: document.getElementById('stockStatus').value,
+                savedAt: new Date().toISOString(),
+            };
+            localStorage.setItem(DRAFT_KEY, JSON.stringify(draft));
+            showToast('💾', 'تم الحفظ', 'يمكنك العودة للمسودة في أي وقت', 'success');
+        } catch (e) {
+            showToast('❌', 'خطأ', 'تعذر حفظ المسودة', 'error');
+        }
+    });
+
+    // Load draft on start
+    try {
+        const saved = localStorage.getItem(DRAFT_KEY);
+        if (saved) {
+            const draft = JSON.parse(saved);
+            setTimeout(() => {
+                const confirmLoad = confirm('🔔 لديك مسودة محفوظة. هل تريد استرجاعها؟');
+                if (confirmLoad) {
+                    Object.entries(draft).forEach(([k, v]) => {
+                        const el = document.getElementById(k);
+                        if (el && k !== 'savedAt') el.value = v || '';
+                    });
+                    if (draft.categoryId) loadSubcategories(draft.categoryId);
+                    updatePreview();
+                    updateChecklist();
+                    showToast('✅', 'تم الاسترجاع', 'تم استرجاع المسودة المحفوظة', 'success');
+                } else {
+                    localStorage.removeItem(DRAFT_KEY);
+                }
+            }, 500);
+        }
+    } catch (e) {}
+};
+
+// ============================================================
+// INIT
+// ============================================================
+const init = async () => {
+    console.info('🚀 كيماتو Add Product جاري التحميل...');
+
+    if (!supabase) {
+        showToast('❌', 'خطأ', 'تعذر الاتصال بالخادم', 'error');
+        return;
+    }
+
+    initTheme();
+    initNavbar();
+
+    const isAuthorized = await checkAuth();
+    if (!isAuthorized) return;
+
+    await loadCategories();
+    initImagesUpload();
+    initDocsUpload();
+    initFormListeners();
+    initFormSubmit();
+
+    updatePreview();
+    updateChecklist();
+
+    console.info('✅ كيماتو Add Product جاهز');
+};
+
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+} else {
+    init();
+}
 </script>
 </body>
 </html>
