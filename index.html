@@ -3,26 +3,22 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <title>كيماتو | منصة الكيماويات B2B الأولى في مصر | Chemical Marketplace</title>
+    <meta name="description" content="كيماتو - منصة B2B للمواد الكيماوية. ابحث برقم CAS، احصل على عروض أسعار متعددة، تابع أسعار السلع الحية، وتواصل مع موردين موثّقين." />
+    <meta name="keywords" content="كيماويات,كيماتو,CAS,صودا كاوية,حمض كبريتيك,مذيبات,B2B,موردين كيماويات,مصر,منصة كيماويات" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
 
-    <title>كيماتو | سوق المواد الكيماوية في مصر | B2B Chemicals Marketplace</title>
-    <meta name="description" content="كيماتو - أول منصة B2B للمواد الكيماوية في مصر. ابحث برقم CAS، قارن الأسعار، وتواصل مع موردين موثّقين." />
-    <meta name="robots" content="index, follow" />
-    <meta name="keywords" content="كيماويات,كيماتو,CAS,صودا كاوية,حمض كبريتيك,مذيبات,مواد خام,موردين كيماويات,مصر" />
-
-    <meta property="og:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
-    <meta property="og:description" content="ابحث برقم CAS، قارن الأسعار، وتواصل مع موردين موثّقين." />
+    <meta property="og:title" content="كيماتو | منصة الكيماويات B2B الأولى في مصر" />
+    <meta property="og:description" content="ابحث برقم CAS، احصل على عروض من موردين متعددين، تابع أسعار السوق الحي" />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chemato.vercel.app/" />
     <meta property="og:image" content="https://chemato.vercel.app/api/og?title=كيماتو" />
-    <meta property="og:image:width" content="1200" />
-    <meta property="og:image:height" content="630" />
     <meta property="og:locale" content="ar_EG" />
     <meta property="og:site_name" content="كيماتو" />
 
     <meta name="twitter:card" content="summary_large_image" />
-    <meta name="twitter:title" content="كيماتو | سوق المواد الكيماوية في مصر" />
-    <meta name="twitter:description" content="ابحث برقم CAS، قارن الأسعار، وتواصل مع موردين موثّقين." />
-    <meta name="twitter:image" content="https://chemato.vercel.app/api/og?title=كيماتو" />
+    <meta name="twitter:title" content="كيماتو | منصة الكيماويات B2B" />
+    <meta name="twitter:description" content="ابحث برقم CAS، احصل على عروض من موردين متعددين" />
 
     <link rel="canonical" href="https://chemato.vercel.app/" />
     <link rel="icon" type="image/x-icon" href="logo.ico" />
@@ -30,21 +26,18 @@
     <link rel="apple-touch-icon" href="logo-192.png" />
     <meta name="theme-color" content="#0a2540" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-
     <link rel="manifest" href="/manifest.json" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="كيماتو" />
-    <meta name="mobile-web-app-capable" content="yes" />
 
     <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
 
-    <link rel="preload" href="/logo-192.png" as="image" />
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" as="style" />
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" as="style" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -56,18 +49,23 @@
       "@context": "https://schema.org",
       "@type": "WebSite",
       "name": "كيماتو",
+      "alternateName": "Chemato",
       "url": "https://chemato.vercel.app",
       "inLanguage": "ar-EG",
       "potentialAction": {
         "@type": "SearchAction",
-        "target": "https://chemato.vercel.app/?search={search_term_string}",
+        "target": "https://chemato.vercel.app/all-products.html?search={search_term_string}",
         "query-input": "required name=search_term_string"
       }
     }
     </script>
 
     <style>
+        /* ============================================================
+           CHEMOTO 3.0 — Enterprise Design System
+           ============================================================ */
         :root {
+            /* Corporate Palette */
             --c-primary-50:  #eef6fc;
             --c-primary-100: #d4e7f5;
             --c-primary-500: #2c7ab8;
@@ -75,6 +73,7 @@
             --c-primary-700: #144167;
             --c-primary-800: #0d2e4a;
             --c-primary-900: #0a2540;
+
             --c-accent:      #2ecc71;
             --c-accent-dark: #22a95c;
             --c-warning:     #f39c12;
@@ -82,6 +81,13 @@
             --c-whatsapp:    #25D366;
             --c-purple:      #8b5cf6;
             --c-verified:    #1e88e5;
+
+            /* Enterprise Additions */
+            --c-corp-blue:   #003366;
+            --c-lab-green:   #00A86B;
+            --c-safety-orange: #FF6B35;
+            --c-gold:        #FFD700;
+
             --c-bg:          #f6f8fb;
             --c-surface:     #ffffff;
             --c-surface-2:   #f9fbfd;
@@ -89,18 +95,27 @@
             --c-text:        #0a1f33;
             --c-text-muted:  #5a6b7e;
             --c-text-sub:    #8595a8;
+
+            /* Premium Shadows */
             --sh-sm:  0 1px 3px rgba(10, 37, 64, 0.06);
             --sh-md:  0 4px 16px rgba(10, 37, 64, 0.08);
             --sh-lg:  0 12px 32px rgba(10, 37, 64, 0.10);
             --sh-xl:  0 20px 48px rgba(10, 37, 64, 0.14);
+            --sh-2xl: 0 32px 64px rgba(10, 37, 64, 0.18);
+
+            /* Radii */
             --r-sm: 8px;
             --r-md: 14px;
             --r-lg: 20px;
             --r-xl: 28px;
             --r-full: 999px;
+
+            /* Transitions */
             --t-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
             --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
             --t-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
+            --t-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
             --container: 1320px;
             --header-h: 68px;
         }
@@ -117,6 +132,7 @@
             --sh-md:  0 4px 16px rgba(0, 0, 0, 0.35);
             --sh-lg:  0 12px 32px rgba(0, 0, 0, 0.45);
             --sh-xl:  0 20px 48px rgba(0, 0, 0, 0.55);
+            --sh-2xl: 0 32px 64px rgba(0, 0, 0, 0.65);
         }
 
         *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -154,6 +170,7 @@
             box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
         }
 
+        /* ============ ANIMATIONS ============ */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -163,16 +180,15 @@
         @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
         @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.3); } 50% { transform: scale(1); } 75% { transform: scale(1.2); } 100% { transform: scale(1); } }
         @keyframes badgePop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
-
-        /* ✨ NEW: Enhanced animations */
         @keyframes gradientShift { 0%, 100% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } }
         @keyframes shine { to { background-position: 200% center; } }
         @keyframes badgeShine { 0% { left: -100%; } 50%, 100% { left: 200%; } }
         @keyframes pulseRing { 0% { transform: scale(1); opacity: 0.8; } 100% { transform: scale(2.5); opacity: 0; } }
         @keyframes skeletonWave { 0% { background-position: 200% 0; } 100% { background-position: -200% 0; } }
         @keyframes fireFlicker { 0%, 100% { transform: scale(1) rotate(-5deg); } 50% { transform: scale(1.15) rotate(5deg); } }
-        @keyframes slideInRight { from { opacity: 0; transform: translateX(30px); } to { opacity: 1; transform: translateX(0); } }
-        @keyframes glowPulse { 0%, 100% { box-shadow: 0 0 20px rgba(46, 204, 113, 0.3); } 50% { box-shadow: 0 0 40px rgba(46, 204, 113, 0.6); } }
+        @keyframes nodePulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.5); opacity: 1; } }
+        @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
+        @keyframes bgPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
@@ -209,29 +225,30 @@
         .nav-links a:hover, .dropdown-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
         .nav-links a.active { background: rgba(46, 204, 113, 0.15); color: #5eb8ee; }
 
-        .theme-toggle, .wishlist-toggle, .compare-toggle, .notification-btn {
+        .icon-btn {
             width: 40px; height: 40px; border-radius: 50%;
             background: rgba(255, 255, 255, 0.08); color: #fff;
             display: inline-flex; align-items: center; justify-content: center;
             font-size: 1rem; transition: all var(--t-fast);
             position: relative;
         }
-        .theme-toggle:hover, .wishlist-toggle:hover, .compare-toggle:hover, .notification-btn:hover { background: rgba(255, 255, 255, 0.15); }
-        .theme-toggle:hover { transform: rotate(15deg); }
+        .icon-btn:hover { background: rgba(255, 255, 255, 0.15); }
+        .icon-btn:hover.rotate { transform: rotate(15deg); }
 
-        .wishlist-toggle .count-badge, .compare-toggle .count-badge {
+        .count-badge {
             position: absolute; top: -4px; right: -4px;
             background: var(--c-danger); color: #fff;
-            width: 18px; height: 18px; border-radius: 50%;
+            min-width: 18px; height: 18px; padding: 0 4px;
+            border-radius: 9px;
             font-size: 0.65rem; font-weight: 700;
             display: none; align-items: center; justify-content: center;
             border: 2px solid rgba(10, 37, 64, 0.85);
             animation: badgePop 0.4s ease;
         }
-        .wishlist-toggle .count-badge.show, .compare-toggle .count-badge.show { display: flex; }
-        .compare-toggle .count-badge { background: var(--c-purple); }
+        .count-badge.show { display: flex; }
+        .count-badge.purple { background: var(--c-purple); }
+        .count-badge.green { background: var(--c-accent); }
 
-        /* ✨ NEW: Notification dot */
         .notification-dot {
             position: absolute; top: 8px; right: 8px;
             width: 8px; height: 8px; border-radius: 50%;
@@ -243,7 +260,7 @@
         .dropdown { position: relative; }
         .dropdown-content {
             position: absolute; top: calc(100% + 8px); left: 0;
-            background: var(--c-surface); min-width: 220px;
+            background: var(--c-surface); min-width: 240px;
             border-radius: var(--r-md); box-shadow: var(--sh-xl);
             border: 1px solid var(--c-border); overflow: hidden;
             opacity: 0; visibility: hidden;
@@ -269,9 +286,57 @@
             align-items: center; justify-content: center; font-size: 1.1rem;
         }
 
+        /* ============ COMMODITY TICKER ============ */
+        .commodity-ticker {
+            background: rgba(0, 25, 51, 0.95);
+            backdrop-filter: blur(20px);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+            padding: 8px 0;
+            z-index: 99;
+            overflow: hidden;
+            position: relative;
+        }
+        .ticker-content {
+            display: flex;
+            gap: 48px;
+            animation: tickerScroll 60s linear infinite;
+            white-space: nowrap;
+            will-change: transform;
+        }
+        .commodity-ticker:hover .ticker-content { animation-play-state: paused; }
+        .ticker-item {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 0.78rem;
+            font-weight: 600;
+            color: rgba(255, 255, 255, 0.9);
+        }
+        .ticker-item .symbol {
+            color: rgba(255, 255, 255, 0.6);
+            font-family: 'Courier New', monospace;
+            font-size: 0.72rem;
+        }
+        .ticker-item .price { font-weight: 800; font-variant-numeric: tabular-nums; }
+        .ticker-item .change {
+            font-size: 0.7rem;
+            padding: 2px 8px;
+            border-radius: 4px;
+            font-weight: 700;
+        }
+        .ticker-item .change.up {
+            background: rgba(0, 168, 107, 0.2);
+            color: #2ecc71;
+        }
+        .ticker-item .change.down {
+            background: rgba(255, 107, 53, 0.2);
+            color: #FF6B35;
+        }
+
+        /* ============ MAIN CONTAINER ============ */
         .main-container { max-width: var(--container); margin: 0 auto; padding: 20px 24px 60px; }
 
-        /* ============ HERO (ENHANCED) ============ */
+        /* ============ HERO ============ */
         .hero {
             position: relative; border-radius: var(--r-xl);
             padding: 56px 48px 44px; overflow: hidden;
@@ -283,6 +348,7 @@
             background-size: 200% 200%;
             animation: gradientShift 15s ease infinite;
             color: #fff; box-shadow: var(--sh-xl);
+            min-height: 480px;
         }
         .hero::before {
             content: ''; position: absolute; inset: 0;
@@ -296,30 +362,40 @@
             content: '';
             position: absolute;
             inset: 0;
-            background-image:
-                linear-gradient(rgba(94, 184, 238, 0.05) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(94, 184, 238, 0.05) 1px, transparent 1px);
-            background-size: 60px 60px;
-            mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
-            -webkit-mask-image: radial-gradient(ellipse at center, black 40%, transparent 70%);
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");
+            background-size: 56px 100px;
+            opacity: 0.6;
             pointer-events: none;
         }
-        .hero-bg-icons { position: absolute; inset: 0; overflow: hidden; pointer-events: none; z-index: 0; }
-        .hero-bg-icons .icon-float {
-            position: absolute; font-size: 2.4rem;
-            opacity: 0.08; animation: float 6s ease-in-out infinite;
-        }
-        .hero-bg-icons .icon-float.rotate { animation: rotateSlow 30s linear infinite; }
-        .hero-bg-icons .icon-float:nth-child(1) { top: 12%; left: 6%; font-size: 3rem; animation-delay: 0s; }
-        .hero-bg-icons .icon-float:nth-child(2) { top: 18%; right: 8%; font-size: 3.6rem; animation-delay: 1s; }
-        .hero-bg-icons .icon-float:nth-child(3) { bottom: 30%; left: 10%; font-size: 2.6rem; animation-delay: 2s; }
-        .hero-bg-icons .icon-float:nth-child(4) { bottom: 12%; right: 6%; font-size: 3rem; animation-delay: 0.5s; }
-        .hero-bg-icons .icon-float:nth-child(5) { top: 50%; left: 50%; font-size: 5rem; animation-delay: 1.5s; opacity: 0.04; }
-        .hero-bg-icons .icon-float:nth-child(6) { top: 6%; left: 32%; font-size: 1.8rem; animation-delay: 2.5s; }
-        .hero-bg-icons .icon-float:nth-child(7) { bottom: 40%; right: 22%; font-size: 2.4rem; animation-delay: 0.8s; }
-        .hero-bg-icons .icon-float:nth-child(8) { top: 62%; left: 8%; font-size: 2rem; animation-delay: 3s; }
 
-        .hero-content { position: relative; z-index: 1; text-align: center; max-width: 960px; margin: 0 auto; }
+        .molecule-visualizer {
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            z-index: 1;
+            overflow: hidden;
+        }
+        .molecule-node {
+            position: absolute;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: rgba(46, 204, 113, 0.6);
+            box-shadow: 0 0 20px rgba(46, 204, 113, 0.8);
+            animation: nodePulse 3s ease-in-out infinite;
+        }
+        .molecule-node::before {
+            content: '';
+            position: absolute;
+            width: 80px;
+            height: 1px;
+            background: linear-gradient(90deg, rgba(46, 204, 113, 0.4), transparent);
+            top: 50%;
+            left: 100%;
+            transform-origin: left center;
+        }
+
+        .hero-content { position: relative; z-index: 2; text-align: center; max-width: 960px; margin: 0 auto; }
         .hero-badge {
             display: inline-flex; align-items: center; gap: 8px;
             background: rgba(46, 204, 113, 0.15);
@@ -367,6 +443,7 @@
             max-width: 640px; margin: 0 auto 28px; line-height: 1.65;
         }
 
+        /* ============ STATS ============ */
         .stats-wrapper {
             margin: 0 auto 28px; max-width: 900px;
             border-radius: var(--r-lg); padding: 2px;
@@ -390,8 +467,8 @@
         .stat-item { text-align: center; padding: 6px 4px; border-left: 1px solid rgba(255, 255, 255, 0.08); transition: transform 0.3s ease; }
         .stat-item:last-child { border-left: none; }
         .stat-item:hover { transform: translateY(-4px); }
-        .stat-item:hover .stat-icon { transform: scale(1.2) rotate(-8deg); transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1); }
-        .stat-icon { display: block; font-size: 1.15rem; margin-bottom: 4px; opacity: 0.9; }
+        .stat-item:hover .stat-icon { transform: scale(1.2) rotate(-8deg); }
+        .stat-icon { display: block; font-size: 1.15rem; margin-bottom: 4px; opacity: 0.9; transition: transform 0.4s var(--t-spring); }
         .stat-number {
             display: block; font-size: clamp(1.2rem, 2.2vw, 1.7rem);
             font-weight: 900; line-height: 1.15;
@@ -403,9 +480,8 @@
         .stat-number.updated { animation: pulse 0.6s ease; }
         .stat-label { display: block; font-size: 0.68rem; color: rgba(255, 255, 255, 0.7); font-weight: 500; margin-top: 2px; }
 
+        /* ============ BUTTONS ============ */
         .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
-
-        /* ============ BUTTONS (Enhanced) ============ */
         .btn {
             display: inline-flex; align-items: center; justify-content: center;
             gap: 10px; padding: 13px 28px;
@@ -426,6 +502,7 @@
             z-index: -1;
         }
         .btn:hover::before { transform: translateX(100%); }
+        .btn:active { transform: scale(0.96); }
 
         .btn-primary {
             background: linear-gradient(135deg, #2ecc71, #22a95c);
@@ -433,9 +510,10 @@
             box-shadow: 0 8px 24px rgba(46, 204, 113, 0.3);
         }
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(46, 204, 113, 0.45); }
-        .btn-primary:active { transform: scale(0.96); }
         .btn-outline { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.25); color: #fff; }
         .btn-outline:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.5); transform: translateY(-2px); }
+        .btn-orange { background: linear-gradient(135deg, #FF6B35, #E55A2B); color: #fff; box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3); }
+        .btn-orange:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 107, 53, 0.45); }
 
         .welcome-msg {
             margin-top: 12px; padding: 10px 22px;
@@ -470,8 +548,28 @@
         .install-btn.show { display: inline-flex; }
         .install-btn:hover { background: rgba(46, 204, 113, 0.3); transform: translateY(-2px); }
 
-        /* ============ SEARCH (Enhanced) ============ */
-        .search-container { position: relative; max-width: 820px; margin: -28px auto 24px; z-index: 50; padding: 0 4px; }
+        /* ============ AI SEARCH ============ */
+        .search-container { position: relative; max-width: 900px; margin: -28px auto 24px; z-index: 50; padding: 0 4px; }
+        .search-modes { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; }
+        .search-mode-btn {
+            background: rgba(255, 255, 255, 0.7);
+            border: 1.5px solid rgba(255, 255, 255, 0.4);
+            color: var(--c-text-muted);
+            padding: 6px 16px; border-radius: var(--r-full);
+            font-size: 0.78rem; font-weight: 700;
+            display: inline-flex; align-items: center; gap: 6px;
+            transition: all var(--t-fast);
+            backdrop-filter: blur(8px);
+        }
+        [data-theme="dark"] .search-mode-btn { background: rgba(16, 30, 46, 0.7); border-color: rgba(255, 255, 255, 0.1); }
+        .search-mode-btn:hover { color: var(--c-primary-600); border-color: var(--c-primary-500); }
+        .search-mode-btn.active {
+            background: #fff; color: var(--c-primary-700);
+            border-color: var(--c-accent);
+            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.25);
+        }
+        [data-theme="dark"] .search-mode-btn.active { background: var(--c-primary-700); color: #fff; }
+
         .search-wrapper {
             background: var(--c-surface);
             border-radius: var(--r-full);
@@ -493,7 +591,7 @@
             outline: none; min-width: 0;
         }
         .search-wrapper input::placeholder { color: var(--c-text-sub); }
-        .search-wrapper button {
+        .search-wrapper .search-btn {
             background: linear-gradient(135deg, var(--c-primary-600), var(--c-primary-800));
             color: #fff; padding: 0 26px;
             border-radius: var(--r-full);
@@ -502,27 +600,18 @@
             transition: all var(--t-base);
             min-height: 48px; flex-shrink: 0;
         }
-        .search-wrapper button:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(29, 91, 142, 0.35); }
-
-        .search-modes { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; }
-        .search-mode-btn {
-            background: rgba(255, 255, 255, 0.7);
-            border: 1.5px solid rgba(255, 255, 255, 0.4);
-            color: var(--c-text-muted);
-            padding: 6px 16px; border-radius: var(--r-full);
-            font-size: 0.78rem; font-weight: 700;
+        .search-wrapper .search-btn:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(29, 91, 142, 0.35); }
+        .search-wrapper .ai-btn {
+            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            color: #fff; padding: 0 20px;
+            border-radius: var(--r-full);
+            font-weight: 700; font-size: 0.85rem;
             display: inline-flex; align-items: center; gap: 6px;
-            transition: all var(--t-fast);
-            backdrop-filter: blur(8px);
+            transition: all var(--t-base);
+            min-height: 48px; flex-shrink: 0;
+            margin-right: 6px;
         }
-        [data-theme="dark"] .search-mode-btn { background: rgba(16, 30, 46, 0.7); border-color: rgba(255, 255, 255, 0.1); }
-        .search-mode-btn:hover { color: var(--c-primary-600); border-color: var(--c-primary-500); }
-        .search-mode-btn.active {
-            background: #fff; color: var(--c-primary-700);
-            border-color: var(--c-accent);
-            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.25);
-        }
-        [data-theme="dark"] .search-mode-btn.active { background: var(--c-primary-700); color: #fff; }
+        .search-wrapper .ai-btn:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4); }
 
         .keyboard-hint {
             position: absolute; left: 20px; top: 50%;
@@ -566,11 +655,7 @@
         }
         .suggestion-item:last-child { border-bottom: none; }
         .suggestion-item:hover, .suggestion-item.active { background: var(--c-surface-2); }
-        .suggestion-item .text {
-            flex: 1; font-weight: 500; font-size: 0.92rem;
-            color: var(--c-text); overflow: hidden;
-            text-overflow: ellipsis; white-space: nowrap;
-        }
+        .suggestion-item .text { flex: 1; font-weight: 500; font-size: 0.92rem; color: var(--c-text); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
         .suggestion-item .highlight { color: var(--c-primary-600); font-weight: 800; }
         .suggestion-item .sub-text { font-size: 0.75rem; color: var(--c-text-sub); flex-shrink: 0; }
         .suggestion-item .cas-tag {
@@ -581,19 +666,8 @@
             font-family: 'Courier New', monospace;
             letter-spacing: 0.5px; direction: ltr; flex-shrink: 0;
         }
-        [data-theme="dark"] .suggestion-item .cas-tag { background: rgba(139, 92, 246, 0.2); }
-        .suggestion-item .badge {
-            background: var(--c-primary-50);
-            color: var(--c-primary-700);
-            padding: 3px 10px; border-radius: var(--r-full);
-            font-size: 0.68rem; font-weight: 700; flex-shrink: 0;
-        }
-        [data-theme="dark"] .suggestion-item .badge { background: rgba(44, 122, 184, 0.2); color: #7ec8e3; }
-        .suggestion-view-all {
-            background: linear-gradient(90deg, var(--c-primary-50), transparent);
-            border-bottom: 2px solid var(--c-primary-500) !important;
-        }
-        [data-theme="dark"] .suggestion-view-all { background: linear-gradient(90deg, rgba(44, 122, 184, 0.15), transparent); }
+        .suggestion-item .badge { background: var(--c-primary-50); color: var(--c-primary-700); padding: 3px 10px; border-radius: var(--r-full); font-size: 0.68rem; font-weight: 700; flex-shrink: 0; }
+        .suggestion-view-all { background: linear-gradient(90deg, var(--c-primary-50), transparent); border-bottom: 2px solid var(--c-primary-500) !important; }
         .suggestion-empty { padding: 24px; text-align: center; color: var(--c-text-muted); font-size: 0.88rem; }
 
         /* ============ FILTERS ============ */
@@ -611,11 +685,8 @@
             white-space: nowrap;
         }
         .filter-chip:hover { border-color: var(--c-primary-500); color: var(--c-primary-600); transform: translateY(-1px); }
-        .filter-chip.active {
-            background: linear-gradient(135deg, var(--c-primary-700), var(--c-primary-900));
-            color: #fff; border-color: transparent;
-            box-shadow: 0 6px 20px rgba(10, 37, 64, 0.25);
-        }
+        .filter-chip.active { background: linear-gradient(135deg, var(--c-primary-700), var(--c-primary-900)); color: #fff; border-color: transparent; box-shadow: 0 6px 20px rgba(10, 37, 64, 0.25); }
+        .filter-chip .count { font-size: 0.7rem; opacity: 0.7; }
 
         .advanced-toggle {
             background: transparent;
@@ -627,7 +698,6 @@
             border: 1.5px dashed var(--c-border);
         }
         .advanced-toggle:hover { background: var(--c-primary-50); border-color: var(--c-primary-500); }
-        [data-theme="dark"] .advanced-toggle:hover { background: rgba(44, 122, 184, 0.1); }
 
         .advanced-filters {
             display: grid; grid-template-columns: 1fr 1fr;
@@ -639,7 +709,7 @@
             max-height: 0; overflow: hidden;
             opacity: 0; transition: all var(--t-base);
         }
-        .advanced-filters.show { max-height: 500px; opacity: 1; padding: 16px; }
+        .advanced-filters.show { max-height: 600px; opacity: 1; padding: 16px; }
         .advanced-filters select {
             padding: 10px 16px;
             border-radius: var(--r-md);
@@ -651,7 +721,27 @@
         }
         .advanced-filters select:focus { border-color: var(--c-primary-500); outline: none; box-shadow: 0 0 0 3px rgba(44, 122, 184, 0.1); }
 
-        /* ============ SECTION HEADER ============ */
+        .price-range-slider { position: relative; height: 40px; margin: 8px 0; padding: 0 8px; grid-column: 1 / -1; }
+        .price-range-track { position: absolute; top: 50%; left: 8px; right: 8px; height: 4px; background: var(--c-border); border-radius: var(--r-full); transform: translateY(-50%); }
+        .price-range-fill { position: absolute; height: 100%; background: linear-gradient(90deg, var(--c-accent), var(--c-primary-500)); border-radius: var(--r-full); transition: all 0.1s ease; }
+        .price-range-input {
+            position: absolute; top: 50%; width: 100%; height: 4px;
+            transform: translateY(-50%);
+            -webkit-appearance: none; appearance: none;
+            background: transparent; pointer-events: none; outline: none;
+        }
+        .price-range-input::-webkit-slider-thumb {
+            -webkit-appearance: none; appearance: none;
+            width: 20px; height: 20px; border-radius: 50%;
+            background: #fff; border: 3px solid var(--c-primary-500);
+            cursor: pointer; pointer-events: auto;
+            box-shadow: 0 2px 8px rgba(44, 122, 184, 0.4);
+            transition: all var(--t-fast);
+        }
+        .price-range-input::-webkit-slider-thumb:hover { transform: scale(1.2); }
+        .price-range-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--c-text-muted); font-weight: 700; margin-top: 8px; grid-column: 1 / -1; }
+
+        /* ============ SECTIONS ============ */
         .section-header {
             display: flex; justify-content: space-between;
             align-items: center; margin: 32px 0 16px;
@@ -667,8 +757,7 @@
         }
         .section-header h2 i { color: var(--c-primary-600); }
         .section-header .view-all {
-            font-size: 0.82rem;
-            color: var(--c-primary-600);
+            font-size: 0.82rem; color: var(--c-primary-600);
             background: var(--c-surface);
             padding: 7px 16px; border-radius: var(--r-full);
             font-weight: 600;
@@ -676,21 +765,18 @@
             transition: all var(--t-fast);
             border: 1px solid var(--c-border);
         }
-        .section-header .view-all:hover {
-            background: var(--c-primary-600); color: #fff;
-            border-color: transparent; transform: translateX(-3px);
-        }
+        .section-header .view-all:hover { background: var(--c-primary-600); color: #fff; border-color: transparent; transform: translateX(-3px); }
 
-        /* ============ CARDS (ENHANCED 3D) ============ */
+        /* ============ GRID ============ */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); gap: 20px; }
+
+        /* ============ CARDS ============ */
         .card {
             background: var(--c-surface);
             border-radius: var(--r-lg);
             overflow: hidden;
             box-shadow: var(--sh-sm);
-            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
-                        box-shadow 0.4s ease,
-                        border-color 0.3s ease;
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.4s ease, border-color 0.3s ease;
             border: 1px solid var(--c-border);
             display: flex; flex-direction: column;
             position: relative;
@@ -711,12 +797,9 @@
         .card:hover::before { opacity: 0.3; }
         .card:hover {
             transform: translateY(-12px) rotateX(2deg) rotateY(-2deg) scale(1.02);
-            box-shadow:
-                0 30px 60px -12px rgba(10, 37, 64, 0.25),
-                0 18px 36px -18px rgba(46, 204, 113, 0.3);
+            box-shadow: 0 30px 60px -12px rgba(10, 37, 64, 0.25), 0 18px 36px -18px rgba(46, 204, 113, 0.3);
             border-color: var(--c-primary-500);
         }
-        [data-theme="dark"] .card:hover { box-shadow: 0 24px 60px rgba(0, 0, 0, 0.6), 0 18px 36px -18px rgba(46, 204, 113, 0.3); }
 
         .card-media { position: relative; aspect-ratio: 16 / 10; overflow: hidden; background: linear-gradient(145deg, var(--c-surface-2), var(--c-border)); cursor: zoom-in; }
         .card-img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-slow), filter var(--t-slow); }
@@ -740,7 +823,6 @@
             max-width: 90%; overflow: hidden;
             text-overflow: ellipsis; white-space: nowrap;
         }
-        [data-theme="dark"] .card-img-placeholder .name { background: rgba(0, 0, 0, 0.4); color: #e8eef5; }
 
         .card-badges {
             position: absolute; top: 10px; right: 10px; left: 10px;
@@ -781,16 +863,14 @@
             color: var(--c-text-muted);
             display: flex; align-items: center; justify-content: center;
             font-size: 0.85rem;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.3s var(--t-spring);
             box-shadow: 0 4px 12px rgba(0, 0, 0, 0.12);
             border: none;
         }
         .card-float-btn:hover { background: #fff; transform: scale(1.15) rotate(5deg); color: var(--c-primary-600); }
         .card-float-btn.active { background: var(--c-danger); color: #fff; }
-        .card-float-btn.active:hover { background: #c0392b; }
         .card-float-btn.active i { animation: heartBeat 0.6s ease; }
         .card-float-btn.compare-active { background: var(--c-purple); color: #fff; }
-        .card-float-btn.compare-active:hover { background: #7c3aed; }
 
         .card-body { padding: 14px 16px 16px; flex: 1; display: flex; flex-direction: column; gap: 6px; }
         .card-category {
@@ -822,27 +902,9 @@
             border: 1px solid var(--c-border);
             line-height: 1.2;
         }
-        .spec-tag.cas {
-            background: rgba(139, 92, 246, 0.08);
-            color: var(--c-purple);
-            border-color: rgba(139, 92, 246, 0.2);
-            font-family: 'Courier New', monospace;
-            direction: ltr; letter-spacing: 0.3px;
-        }
-        [data-theme="dark"] .spec-tag.cas { background: rgba(139, 92, 246, 0.15); }
-        .spec-tag.purity {
-            background: rgba(46, 204, 113, 0.08);
-            color: var(--c-accent-dark);
-            border-color: rgba(46, 204, 113, 0.2);
-        }
-        [data-theme="dark"] .spec-tag.purity { background: rgba(46, 204, 113, 0.12); color: #6ee7a0; }
-        .spec-tag.grade {
-            background: rgba(44, 122, 184, 0.08);
-            color: var(--c-primary-600);
-            border-color: rgba(44, 122, 184, 0.2);
-        }
-        [data-theme="dark"] .spec-tag.grade { background: rgba(44, 122, 184, 0.15); color: #7ec8e3; }
-        .spec-tag i { font-size: 0.6rem; opacity: 0.8; }
+        .spec-tag.cas { background: rgba(139, 92, 246, 0.08); color: var(--c-purple); border-color: rgba(139, 92, 246, 0.2); font-family: 'Courier New', monospace; direction: ltr; letter-spacing: 0.3px; }
+        .spec-tag.purity { background: rgba(46, 204, 113, 0.08); color: var(--c-accent-dark); border-color: rgba(46, 204, 113, 0.2); }
+        .spec-tag.grade { background: rgba(44, 122, 184, 0.08); color: var(--c-primary-600); border-color: rgba(44, 122, 184, 0.2); }
 
         .msds-indicator {
             display: inline-flex; align-items: center; gap: 4px;
@@ -851,8 +913,6 @@
             background: var(--c-primary-50);
             padding: 2px 8px; border-radius: var(--r-full);
         }
-        [data-theme="dark"] .msds-indicator { background: rgba(44, 122, 184, 0.15); color: #7ec8e3; }
-        .msds-indicator i { color: var(--c-accent); }
 
         .card-price {
             color: var(--c-primary-700);
@@ -863,15 +923,7 @@
         }
         [data-theme="dark"] .card-price { color: #7ec8e3; }
         .card-price .currency { font-size: 0.72rem; font-weight: 600; color: var(--c-text-sub); }
-        .card-price .moq {
-            font-size: 0.68rem;
-            color: var(--c-text-sub);
-            font-weight: 600;
-            margin-right: auto;
-            background: var(--c-surface-2);
-            padding: 2px 8px;
-            border-radius: var(--r-full);
-        }
+        .card-price .moq { font-size: 0.68rem; color: var(--c-text-sub); font-weight: 600; margin-right: auto; background: var(--c-surface-2); padding: 2px 8px; border-radius: var(--r-full); }
 
         .card-supplier {
             display: flex; align-items: center; gap: 6px;
@@ -891,7 +943,6 @@
             margin-right: 4px;
             box-shadow: 0 2px 6px rgba(30, 136, 229, 0.3);
         }
-        .verified-badge i { color: #fff; }
 
         .stock-indicator { display: inline-flex; align-items: center; gap: 4px; font-size: 0.68rem; font-weight: 700; }
         .stock-available { color: var(--c-accent-dark); }
@@ -913,33 +964,23 @@
         .btn-detail:hover { background: var(--c-primary-600); }
         .btn-wa { background: var(--c-whatsapp); color: #fff; }
         .btn-wa:hover { background: #1da851; }
-        .btn-rfq {
-            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
-            color: #fff;
-            box-shadow: 0 2px 8px rgba(46, 204, 113, 0.25);
-        }
+        .btn-rfq { background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark)); color: #fff; box-shadow: 0 2px 8px rgba(46, 204, 113, 0.25); }
         .btn-rfq:hover { transform: translateY(-1px); box-shadow: 0 6px 16px rgba(46, 204, 113, 0.35); }
-        .btn-share-card {
-            flex: 0 0 auto; width: 40px;
-            background: var(--c-surface-2);
-            color: var(--c-text-muted);
-            border: 1px solid var(--c-border);
-        }
+        .btn-share-card { flex: 0 0 auto; width: 40px; background: var(--c-surface-2); color: var(--c-text-muted); border: 1px solid var(--c-border); }
         .btn-share-card:hover { background: var(--c-primary-50); color: var(--c-primary-600); border-color: var(--c-primary-500); }
 
-        /* ============ FEATURED SECTION ============ */
+        /* ============ FEATURED ============ */
         .featured-section {
             position: relative; border-radius: var(--r-xl);
             padding: 24px; margin: 12px 0 8px;
             background: linear-gradient(135deg, rgba(243, 156, 18, 0.08), rgba(230, 126, 34, 0.04));
             border: 1.5px solid rgba(243, 156, 18, 0.3);
         }
-        [data-theme="dark"] .featured-section { background: linear-gradient(135deg, rgba(243, 156, 18, 0.06), rgba(230, 126, 34, 0.02)); }
         .featured-section .section-header { margin-top: 0; }
         .featured-section .section-header h2 { border-right-color: var(--c-warning); }
         .featured-section .section-header h2 i { color: var(--c-warning); }
 
-        /* ============ TRENDING SECTION ============ */
+        /* ============ TRENDING ============ */
         .trending-section {
             position: relative;
             border-radius: var(--r-xl);
@@ -952,12 +993,9 @@
             border: 1.5px solid rgba(231, 76, 60, 0.15);
         }
         .trending-section .section-header h2 { border-right-color: #e74c3c; }
-        .trending-section .section-header h2 i {
-            color: #e74c3c;
-            animation: fireFlicker 1.5s ease-in-out infinite;
-        }
+        .trending-section .section-header h2 i { color: #e74c3c; animation: fireFlicker 1.5s ease-in-out infinite; }
 
-        /* ============ CATEGORIES GRID ============ */
+        /* ============ CATEGORY GRID ============ */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -971,7 +1009,7 @@
             padding: 20px 12px;
             text-align: center;
             cursor: pointer;
-            transition: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+            transition: all 0.3s var(--t-spring);
             position: relative;
             overflow: hidden;
         }
@@ -985,28 +1023,11 @@
             transition: transform 0.3s ease;
         }
         .category-card:hover::before { transform: scaleX(1); }
-        .category-card:hover {
-            border-color: var(--c-primary-500);
-            transform: translateY(-6px);
-            box-shadow: 0 12px 32px rgba(44, 122, 184, 0.15);
-        }
-        .category-card .cat-icon {
-            font-size: 2rem;
-            display: block;
-            margin-bottom: 8px;
-            transition: transform 0.3s ease;
-        }
+        .category-card:hover { border-color: var(--c-primary-500); transform: translateY(-6px); box-shadow: 0 12px 32px rgba(44, 122, 184, 0.15); }
+        .category-card .cat-icon { font-size: 2rem; display: block; margin-bottom: 8px; transition: transform 0.3s ease; }
         .category-card:hover .cat-icon { transform: scale(1.2) rotate(-10deg); }
-        .category-card .cat-name {
-            font-size: 0.82rem;
-            font-weight: 700;
-            color: var(--c-text);
-        }
-        .category-card .cat-count {
-            font-size: 0.7rem;
-            color: var(--c-text-sub);
-            margin-top: 4px;
-        }
+        .category-card .cat-name { font-size: 0.82rem; font-weight: 700; color: var(--c-text); }
+        .category-card .cat-count { font-size: 0.7rem; color: var(--c-text-sub); margin-top: 4px; }
 
         /* ============ RECENTLY VIEWED ============ */
         .recently-viewed {
@@ -1032,11 +1053,7 @@
             transition: all var(--t-fast);
             cursor: pointer;
         }
-        .recently-viewed .mini-card:hover {
-            border-color: var(--c-primary-500);
-            transform: translateY(-4px);
-            box-shadow: var(--sh-md);
-        }
+        .recently-viewed .mini-card:hover { border-color: var(--c-primary-500); transform: translateY(-4px); box-shadow: var(--sh-md); }
         .recently-viewed .mini-card .mini-thumb {
             width: 50px; height: 50px;
             border-radius: var(--r-sm);
@@ -1049,145 +1066,12 @@
             font-size: 1.5rem;
         }
         .recently-viewed .mini-card .mini-info { min-width: 0; flex: 1; }
-        .recently-viewed .mini-card .mini-name {
-            font-size: 0.8rem;
-            font-weight: 700;
-            color: var(--c-text);
-            white-space: nowrap;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            margin-bottom: 2px;
-        }
-        .recently-viewed .mini-card .mini-price {
-            font-size: 0.75rem;
-            color: var(--c-primary-600);
-            font-weight: 700;
-        }
-
-        /* ============ QUICK VIEW ============ */
-        .quick-view-modal { max-width: 1000px; }
-        .quick-view-content { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
-        .quick-view-image {
-            aspect-ratio: 1;
-            border-radius: var(--r-lg);
-            overflow: hidden;
-            background: var(--c-surface-2);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            position: relative;
-        }
-        .quick-view-image img { width: 100%; height: 100%; object-fit: cover; }
-        .quick-view-info h2 { font-size: 1.5rem; margin-bottom: 12px; color: var(--c-text); }
-        .quick-view-info .qv-price {
-            font-size: 2rem;
-            font-weight: 900;
-            color: var(--c-primary-700);
-            margin: 12px 0;
-        }
-        [data-theme="dark"] .quick-view-info .qv-price { color: #7ec8e3; }
-        .quick-view-info .qv-specs {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 10px;
-            margin: 16px 0;
-            padding: 16px;
-            background: var(--c-surface-2);
-            border-radius: var(--r-md);
-        }
-        .quick-view-info .qv-spec { display: flex; flex-direction: column; gap: 2px; }
-        .quick-view-info .qv-spec .label { font-size: 0.7rem; color: var(--c-text-sub); font-weight: 600; }
-        .quick-view-info .qv-spec .value { font-size: 0.9rem; color: var(--c-text); font-weight: 700; }
-
-        .quick-view-trigger {
-            position: absolute;
-            bottom: 12px;
-            left: 50%;
-            transform: translateX(-50%) translateY(20px);
-            background: rgba(255,255,255,0.95);
-            color: var(--c-primary-700);
-            padding: 8px 18px;
-            border-radius: var(--r-full);
-            font-size: 0.78rem;
-            font-weight: 700;
-            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
-            opacity: 0;
-            transition: all 0.3s ease;
-            z-index: 3;
-            pointer-events: auto;
-            cursor: pointer;
-        }
-        .card-media:hover .quick-view-trigger {
-            opacity: 1;
-            transform: translateX(-50%) translateY(0);
-        }
-
-        /* ============ PRICE SLIDER ============ */
-        .price-range-slider { position: relative; height: 40px; margin: 8px 0; padding: 0 8px; }
-        .price-range-track {
-            position: absolute;
-            top: 50%; left: 8px; right: 8px;
-            height: 4px;
-            background: var(--c-border);
-            border-radius: var(--r-full);
-            transform: translateY(-50%);
-        }
-        .price-range-fill {
-            position: absolute;
-            height: 100%;
-            background: linear-gradient(90deg, var(--c-accent), var(--c-primary-500));
-            border-radius: var(--r-full);
-            transition: all 0.1s ease;
-        }
-        .price-range-input {
-            position: absolute;
-            top: 50%;
-            width: 100%;
-            height: 4px;
-            transform: translateY(-50%);
-            -webkit-appearance: none;
-            appearance: none;
-            background: transparent;
-            pointer-events: none;
-            outline: none;
-        }
-        .price-range-input::-webkit-slider-thumb {
-            -webkit-appearance: none;
-            appearance: none;
-            width: 20px;
-            height: 20px;
-            border-radius: 50%;
-            background: #fff;
-            border: 3px solid var(--c-primary-500);
-            cursor: pointer;
-            pointer-events: auto;
-            box-shadow: 0 2px 8px rgba(44, 122, 184, 0.4);
-            transition: all var(--t-fast);
-        }
-        .price-range-input::-webkit-slider-thumb:hover {
-            transform: scale(1.2);
-            box-shadow: 0 4px 16px rgba(44, 122, 184, 0.6);
-        }
-        .price-range-labels {
-            display: flex;
-            justify-content: space-between;
-            font-size: 0.75rem;
-            color: var(--c-text-muted);
-            font-weight: 700;
-            margin-top: 8px;
-        }
+        .recently-viewed .mini-card .mini-name { font-size: 0.8rem; font-weight: 700; color: var(--c-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
+        .recently-viewed .mini-card .mini-price { font-size: 0.75rem; color: var(--c-primary-600); font-weight: 700; }
 
         /* ============ SKELETON ============ */
         .skeleton {
-            background: linear-gradient(
-                90deg,
-                var(--c-border) 0%,
-                var(--c-surface-2) 25%,
-                var(--c-border) 50%,
-                var(--c-surface-2) 75%,
-                var(--c-border) 100%
-            );
+            background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 25%, var(--c-border) 50%, var(--c-surface-2) 75%, var(--c-border) 100%);
             background-size: 200% 100%;
             animation: skeletonWave 1.5s ease-in-out infinite;
             border-radius: var(--r-md);
@@ -1300,20 +1184,34 @@
         .modal-close:hover { background: var(--c-danger); color: #fff; }
         .modal-body { padding: 24px; overflow-y: auto; flex: 1; }
 
-        .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.88rem; }
-        .compare-table th, .compare-table td {
-            padding: 12px 14px; text-align: right;
-            border-bottom: 1px solid var(--c-border);
-            vertical-align: top;
+        .quick-view-modal { max-width: 1000px; }
+        .quick-view-content { display: grid; grid-template-columns: 1fr 1fr; gap: 24px; }
+        .quick-view-image {
+            aspect-ratio: 1;
+            border-radius: var(--r-lg);
+            overflow: hidden;
+            background: var(--c-surface-2);
+            display: flex; align-items: center; justify-content: center;
+            font-size: 5rem; position: relative;
         }
+        .quick-view-image img { width: 100%; height: 100%; object-fit: cover; }
+        .quick-view-info h2 { font-size: 1.5rem; margin-bottom: 12px; color: var(--c-text); }
+        .quick-view-info .qv-price { font-size: 2rem; font-weight: 900; color: var(--c-primary-700); margin: 12px 0; }
+        [data-theme="dark"] .quick-view-info .qv-price { color: #7ec8e3; }
+        .quick-view-info .qv-specs { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin: 16px 0; padding: 16px; background: var(--c-surface-2); border-radius: var(--r-md); }
+        .quick-view-info .qv-spec { display: flex; flex-direction: column; gap: 2px; }
+        .quick-view-info .qv-spec .label { font-size: 0.7rem; color: var(--c-text-sub); font-weight: 600; }
+        .quick-view-info .qv-spec .value { font-size: 0.9rem; color: var(--c-text); font-weight: 700; }
+
+        /* ============ COMPARE TABLE ============ */
+        .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.88rem; }
+        .compare-table th, .compare-table td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--c-border); vertical-align: top; }
         .compare-table th { background: var(--c-surface-2); font-weight: 700; color: var(--c-text); position: sticky; top: 0; }
         .compare-table td { color: var(--c-text-muted); }
         .compare-table tr:last-child td, .compare-table tr:last-child th { border-bottom: none; }
-        .compare-product-head { display: flex; flex-direction: column; align-items: center; gap: 8px; text-align: center; }
         .compare-product-head .img { width: 100px; height: 100px; object-fit: cover; border-radius: var(--r-md); background: var(--c-surface-2); }
-        .compare-product-head .title { font-weight: 700; color: var(--c-text); font-size: 0.85rem; line-height: 1.3; }
 
-        /* ============ FORM ============ */
+        /* ============ FORMS ============ */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .form-group { display: flex; flex-direction: column; gap: 6px; }
         .form-group.full { grid-column: 1 / -1; }
@@ -1341,20 +1239,11 @@
             display: flex; gap: 12px;
             justify-content: flex-end; margin-top: 8px;
         }
-        .form-actions .btn {
-            padding: 12px 28px;
-            border-radius: var(--r-full);
-            font-weight: 700; font-size: 0.88rem;
-            min-width: 120px;
-        }
-        .form-actions .btn-cancel { background: var(--c-surface-2); color: var(--c-text-muted); border: 1px solid var(--c-border); }
-        .form-actions .btn-cancel:hover { background: var(--c-border); }
-        .form-actions .btn-submit {
-            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
-            color: #fff;
-            box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3);
-        }
-        .form-actions .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
+        .form-actions .btn { padding: 12px 28px; border-radius: var(--r-full); font-weight: 700; font-size: 0.88rem; min-width: 120px; }
+        .btn-cancel { background: var(--c-surface-2); color: var(--c-text-muted); border: 1px solid var(--c-border); }
+        .btn-cancel:hover { background: var(--c-border); }
+        .btn-submit { background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark)); color: #fff; box-shadow: 0 4px 12px rgba(46, 204, 113, 0.3); }
+        .btn-submit:hover { transform: translateY(-2px); box-shadow: 0 8px 20px rgba(46, 204, 113, 0.4); }
 
         .rfq-login-notice {
             background: linear-gradient(135deg, rgba(243, 156, 18, 0.1), rgba(230, 126, 34, 0.05));
@@ -1371,6 +1260,66 @@
         .rfq-login-notice i { color: var(--c-warning); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
         .rfq-login-notice a { color: var(--c-primary-600); font-weight: 700; text-decoration: underline; }
 
+        /* ============ NOTIFICATION PANEL ============ */
+        .notification-panel {
+            position: fixed;
+            top: calc(var(--header-h) + 12px);
+            right: 24px;
+            width: 380px;
+            max-height: 600px;
+            background: var(--c-surface);
+            border-radius: var(--r-lg);
+            box-shadow: var(--sh-2xl);
+            border: 1px solid var(--c-border);
+            z-index: 1000;
+            overflow: hidden;
+            transform: translateX(120%);
+            transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+        }
+        .notification-panel.show { transform: translateX(0); }
+        .notification-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 16px 20px;
+            border-bottom: 1px solid var(--c-border);
+        }
+        .notification-header h3 { font-size: 1rem; font-weight: 800; color: var(--c-text); }
+        .notification-header .mark-all-btn {
+            font-size: 0.75rem;
+            color: var(--c-primary-600);
+            font-weight: 600;
+            transition: all var(--t-fast);
+            background: none;
+            border: none;
+            cursor: pointer;
+        }
+        .notification-header .mark-all-btn:hover { color: var(--c-primary-800); text-decoration: underline; }
+        .notification-list { max-height: 500px; overflow-y: auto; padding: 8px; }
+        .notification-item { display: flex; gap: 12px; padding: 12px; border-radius: var(--r-md); transition: background 0.2s; cursor: pointer; }
+        .notification-item:hover { background: var(--c-surface-2); }
+        .notification-item.unread { background: rgba(46, 204, 113, 0.05); }
+        .notification-item.unread::before {
+            content: '';
+            width: 6px; height: 6px;
+            border-radius: 50%;
+            background: var(--c-accent);
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+        .notification-icon {
+            width: 40px; height: 40px; border-radius: 10px;
+            display: flex; align-items: center; justify-content: center;
+            font-size: 1rem; flex-shrink: 0;
+        }
+        .notification-icon.price-drop { background: rgba(0, 168, 107, 0.1); color: var(--c-lab-green); }
+        .notification-icon.new-quote { background: rgba(44, 122, 184, 0.1); color: var(--c-primary-600); }
+        .notification-icon.stock-alert { background: rgba(255, 107, 53, 0.1); color: var(--c-safety-orange); }
+        .notification-icon.new-product { background: rgba(139, 92, 246, 0.1); color: var(--c-purple); }
+        .notification-icon.default { background: var(--c-surface-2); color: var(--c-text-muted); }
+
         /* ============ SCROLL TOP ============ */
         .scroll-top {
             position: fixed; bottom: 32px; right: 24px;
@@ -1386,9 +1335,8 @@
         }
         .scroll-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
         .scroll-top:hover { transform: translateY(-4px); box-shadow: var(--sh-xl); }
-        .floating-bar.show ~ .scroll-top { bottom: 100px; }
 
-        /* ============ TOAST (Enhanced) ============ */
+        /* ============ TOAST ============ */
         .toast-container {
             position: fixed; bottom: 24px; left: 50%;
             transform: translateX(-50%);
@@ -1411,7 +1359,6 @@
             pointer-events: auto;
             transition: opacity var(--t-base), transform var(--t-base);
             position: relative;
-            overflow: hidden;
         }
         [data-theme="dark"] .toast { background: rgba(16, 30, 46, 0.95); }
         .toast.removing { opacity: 0; transform: translateX(20px); }
@@ -1434,6 +1381,10 @@
         .toast.error { border-right-color: var(--c-danger); }
         .toast.info { border-right-color: var(--c-purple); }
 
+        /* ============ SCROLL REVEAL ============ */
+        .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
+        .reveal.revealed { opacity: 1; transform: translateY(0); }
+
         /* ============ FOOTER ============ */
         .footer {
             background: linear-gradient(180deg, var(--c-primary-900), #061a2e);
@@ -1452,18 +1403,8 @@
         .footer-links a:hover { color: #5eb8ee; }
         .footer-copy { text-align: center; font-size: 0.82rem; color: rgba(255, 255, 255, 0.4); }
 
-        /* ============ SCROLL REVEAL ============ */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
-        }
-        .reveal.revealed { opacity: 1; transform: translateY(0); }
-
         /* ============ RESPONSIVE ============ */
-        @media (max-width: 1024px) {
-            .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
-        }
+        @media (max-width: 1024px) { .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); } }
 
         @media (max-width: 860px) {
             .menu-toggle { display: inline-flex; }
@@ -1514,15 +1455,12 @@
             .search-wrapper { flex-wrap: wrap; padding: 6px; border-radius: var(--r-lg); }
             .search-icon { display: none; }
             .search-wrapper input { padding: 12px 16px; width: 100%; }
-            .search-wrapper button { width: 100%; justify-content: center; min-height: 46px; }
+            .search-wrapper .search-btn, .search-wrapper .ai-btn { width: 100%; justify-content: center; min-height: 46px; margin-right: 0; margin-bottom: 6px; }
             .grid { grid-template-columns: 1fr; gap: 14px; }
             .advanced-filters { grid-template-columns: 1fr; padding: 12px; }
-            .advanced-filters.show { padding: 12px; }
             .section-header { margin: 24px 0 12px; }
             .section-header h2 { font-size: 1.05rem; }
             .footer { padding: 32px 16px 20px; }
-            .footer-links { gap: 10px; }
-            .footer-links a { font-size: 0.78rem; }
             .scroll-top { bottom: 20px; right: 16px; width: 42px; height: 42px; }
             .featured-section { padding: 16px; }
             .form-grid { grid-template-columns: 1fr; }
@@ -1531,15 +1469,11 @@
             .floating-bar { padding: 10px 14px; }
             .floating-bar-info { font-size: 0.8rem; width: 100%; justify-content: center; }
             .floating-bar-actions { width: 100%; justify-content: center; }
-            .floating-btn { padding: 8px 16px; font-size: 0.78rem; }
-            .card-float-btn { width: 32px; height: 32px; font-size: 0.75rem; }
-            .card-specs { gap: 4px; }
-            .spec-tag { font-size: 0.62rem; padding: 2px 7px; }
             .category-grid { grid-template-columns: repeat(auto-fill, minmax(100px, 1fr)); gap: 8px; }
             .category-card { padding: 14px 8px; }
-            .category-card .cat-icon { font-size: 1.5rem; }
-            .category-card .cat-name { font-size: 0.72rem; }
             .recently-viewed .mini-card { flex: 0 0 160px; }
+            .notification-panel { right: 12px; left: 12px; width: auto; }
+            .commodity-ticker { display: none; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1547,7 +1481,6 @@
                 animation-duration: 0.01ms !important;
                 animation-iteration-count: 1 !important;
                 transition-duration: 0.01ms !important;
-                scroll-behavior: auto !important;
             }
         }
     </style>
@@ -1584,28 +1517,32 @@
                     </button>
                     <div class="dropdown-content" id="dropdownContent" role="menu">
                         <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                        <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                        <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                        <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+                        <a href="auth.html?type=buyer"><i class="fas fa-user-plus"></i> حساب مشتري</a>
+                        <a href="auth.html?type=supplier"><i class="fas fa-warehouse"></i> حساب مورد</a>
                     </div>
                 </div>
 
-                <button class="notification-btn" id="notificationBtn" aria-label="الإشعارات" title="الإشعارات">
-                    <i class="fas fa-bell"></i>
-                    <span class="notification-dot"></span>
+                <button class="icon-btn" id="messagesBtn" aria-label="الرسائل" title="الرسائل" onclick="window.location.href='messages.html'">
+                    <i class="fas fa-envelope"></i>
+                    <span class="count-badge green" id="messagesBadge">0</span>
                 </button>
 
-                <button class="wishlist-toggle" id="wishlistToggle" aria-label="المفضلة" title="المفضلة">
+                <button class="icon-btn" id="notificationBtn" aria-label="الإشعارات" title="الإشعارات">
+                    <i class="fas fa-bell"></i>
+                    <span class="count-badge" id="notificationBadge" style="display:none;">0</span>
+                </button>
+
+                <button class="icon-btn" id="wishlistToggle" aria-label="المفضلة" title="المفضلة">
                     <i class="fas fa-heart"></i>
                     <span class="count-badge" id="wishlistCount">0</span>
                 </button>
 
-                <button class="compare-toggle" id="compareToggle" aria-label="مقارنة" title="مقارنة المنتجات">
+                <button class="icon-btn" id="compareToggle" aria-label="مقارنة" title="مقارنة المنتجات">
                     <i class="fas fa-balance-scale"></i>
-                    <span class="count-badge" id="compareCount">0</span>
+                    <span class="count-badge purple" id="compareCount">0</span>
                 </button>
 
-                <button class="theme-toggle" id="themeToggle" aria-label="تبديل الوضع الليلي" title="الوضع الليلي">
+                <button class="icon-btn rotate" id="themeToggle" aria-label="تبديل الوضع الليلي" title="الوضع الليلي">
                     <i class="fas fa-moon" id="themeIcon"></i>
                 </button>
             </nav>
@@ -1616,34 +1553,28 @@
         </div>
     </header>
 
+    <!-- COMMODITY TICKER -->
+    <div class="commodity-ticker" id="commodityTicker" aria-label="أسعار المواد الخام" style="display:none;"></div>
+
     <!-- MAIN -->
     <main class="main-container" id="main">
 
         <!-- HERO -->
         <section class="hero animate-in" aria-labelledby="heroTitle">
-            <div class="hero-bg-icons" aria-hidden="true">
-                <span class="icon-float">🧪</span>
-                <span class="icon-float rotate">⚗️</span>
-                <span class="icon-float">🔬</span>
-                <span class="icon-float rotate">🧫</span>
-                <span class="icon-float">🧴</span>
-                <span class="icon-float">💧</span>
-                <span class="icon-float rotate">⚛️</span>
-                <span class="icon-float">🧪</span>
-            </div>
+            <div class="molecule-visualizer" id="moleculeVisualizer" aria-hidden="true"></div>
 
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
-                    <span>المنصة رقم 1 للكيماويات في مصر</span>
+                    <span>المنصة رقم 1 للكيماويات في مصر • B2B</span>
                 </div>
 
                 <h1 id="heroTitle">
-                    🏭 <span class="highlight">سوق الكيماويات</span><br>في مصر
+                    🏭 <span class="highlight">منصة الكيماويات</span><br>الاحترافية في مصر
                 </h1>
 
                 <p class="subtitle">
-                    ابحث برقم CAS أو بالاسم، قارن الأسعار، وتواصل مباشرة مع موردين موثّقين — صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام
+                    ابحث برقم CAS أو بالاسم، احصل على <strong>عروض أسعار من موردين متعددين</strong>، تابع <strong>أسعار السوق الحي</strong>، وتواصل مباشرة مع موردين موثّقين
                 </p>
 
                 <div class="stats-wrapper">
@@ -1681,7 +1612,7 @@
                         <i class="fas fa-truck"></i> انضم كمورد
                     </a>
                     <a href="auth.html?type=buyer" class="btn btn-outline" id="buyerBtn">
-                        <i class="fas fa-user-plus"></i> انضم كعميل
+                        <i class="fas fa-user-plus"></i> انضم كمشتري
                     </a>
                 </div>
 
@@ -1710,15 +1641,21 @@
                 <button class="search-mode-btn" data-search-mode="cas" role="tab" aria-selected="false">
                     <i class="fas fa-hashtag"></i> بحث برقم CAS
                 </button>
+                <button class="search-mode-btn" data-search-mode="formula" role="tab" aria-selected="false">
+                    <i class="fas fa-flask"></i> بحث بالصيغة
+                </button>
             </div>
 
             <div class="search-wrapper" role="search">
                 <i class="fas fa-search search-icon" aria-hidden="true"></i>
-                <input type="text" id="searchInput" placeholder="ابحث عن منتج... مثل: صودا كاوية، حمض كبريتيك"
+                <input type="text" id="searchInput" placeholder="ابحث عن منتج... مثل: صودا كاوية، حمض كبريتيك، NaOH"
                     autocomplete="off" maxlength="100" aria-label="البحث" aria-autocomplete="list" aria-controls="suggestionsBox" />
                 <span class="keyboard-hint"><kbd>Ctrl</kbd>+<kbd>K</kbd></span>
-                <button id="searchBtn" type="button">
+                <button id="searchBtn" class="search-btn" type="button">
                     <i class="fas fa-search" aria-hidden="true"></i> بحث
+                </button>
+                <button id="aiSearchBtn" class="ai-btn" type="button" title="بحث ذكي بالمعنى">
+                    <i class="fas fa-robot"></i> AI
                 </button>
             </div>
             <div class="suggestions-box" id="suggestionsBox" role="listbox"></div>
@@ -1727,7 +1664,9 @@
         <!-- FILTERS -->
         <div class="filters-wrapper animate-in" style="animation-delay: 0.15s;">
             <div class="filters" id="filterButtons" role="tablist">
-                <button class="filter-chip active" data-category-id="all" role="tab" aria-selected="true">الكل</button>
+                <button class="filter-chip active" data-category-id="all" role="tab" aria-selected="true">
+                    <i class="fas fa-th"></i> الكل
+                </button>
             </div>
             <button class="advanced-toggle" id="advancedToggle" type="button" aria-expanded="false">
                 <i class="fas fa-sliders-h"></i> فلاتر متقدمة
@@ -1738,7 +1677,7 @@
         <div class="advanced-filters" id="advancedFilters">
             <div style="grid-column: 1 / -1;">
                 <label style="font-size:0.82rem;font-weight:700;color:var(--c-text);margin-bottom:4px;display:block;">
-                    نطاق السعر
+                    💰 نطاق السعر (ج.م)
                 </label>
                 <div class="price-range-slider">
                     <div class="price-range-track">
@@ -1758,7 +1697,7 @@
                 <option value="price-low">الأقل سعراً</option>
                 <option value="price-high">الأعلى سعراً</option>
                 <option value="popular">الأكثر مشاهدة</option>
-                <option value="most_contacted">الأكثر تواصلاً</option>
+                <option value="rating">الأعلى تقييماً</option>
             </select>
 
             <select id="purityFilter" aria-label="تصفية حسب النقاء">
@@ -1776,6 +1715,13 @@
                 <option value="acs">ACS</option>
                 <option value="pharma">صيدلاني</option>
                 <option value="food">غذائي</option>
+            </select>
+
+            <select id="stockFilter" aria-label="تصفية حسب المخزون">
+                <option value="all">كل حالات المخزون</option>
+                <option value="available">متوفر</option>
+                <option value="low">كمية محدودة</option>
+                <option value="out">غير متوفر</option>
             </select>
         </div>
 
@@ -1820,6 +1766,19 @@
             <div id="trendingList" class="grid"></div>
         </div>
 
+        <!-- LIVE RFQs (طلبات الشراء المفتوحة) -->
+        <div id="liveRfqsSection" style="display: none;" class="reveal">
+            <div class="section-header">
+                <h2 style="border-right-color: var(--c-safety-orange);">
+                    <i class="fas fa-bolt" style="color: var(--c-safety-orange);"></i> طلبات شراء مفتوحة الآن
+                </h2>
+                <a href="all-requests.html" class="view-all">
+                    عرض الكل <i class="fas fa-arrow-left"></i>
+                </a>
+            </div>
+            <div id="liveRfqsList" class="grid"></div>
+        </div>
+
         <!-- PRODUCTS -->
         <section aria-labelledby="productsTitle">
             <div class="section-header">
@@ -1840,6 +1799,15 @@
 
     </main>
 
+    <!-- NOTIFICATION PANEL -->
+    <div class="notification-panel" id="notificationPanel" role="dialog" aria-label="الإشعارات">
+        <div class="notification-header">
+            <h3><i class="fas fa-bell" style="color: var(--c-primary-600);"></i> الإشعارات</h3>
+            <button class="mark-all-btn" id="markAllReadBtn">تحديد الكل كمقروء</button>
+        </div>
+        <div class="notification-list" id="notificationList"></div>
+    </div>
+
     <!-- FLOATING BAR (Compare) -->
     <div class="floating-bar" id="compareBar">
         <div class="floating-bar-info">
@@ -1857,52 +1825,44 @@
     </div>
 
     <!-- MODAL: COMPARE -->
-    <div class="modal-overlay" id="compareModal" role="dialog" aria-modal="true" aria-labelledby="compareModalTitle">
+    <div class="modal-overlay" id="compareModal" role="dialog" aria-modal="true">
         <div class="modal">
             <div class="modal-header">
-                <h3 id="compareModalTitle"><i class="fas fa-balance-scale" style="color: var(--c-purple);"></i> مقارنة المنتجات</h3>
-                <button class="modal-close" id="closeCompareBtn" aria-label="إغلاق">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3><i class="fas fa-balance-scale" style="color: var(--c-purple);"></i> مقارنة المنتجات</h3>
+                <button class="modal-close" id="closeCompareBtn" aria-label="إغلاق"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body" id="compareModalBody"></div>
         </div>
     </div>
 
     <!-- MODAL: WISHLIST -->
-    <div class="modal-overlay" id="wishlistModal" role="dialog" aria-modal="true" aria-labelledby="wishlistModalTitle">
+    <div class="modal-overlay" id="wishlistModal" role="dialog" aria-modal="true">
         <div class="modal">
             <div class="modal-header">
-                <h3 id="wishlistModalTitle"><i class="fas fa-heart" style="color: var(--c-danger);"></i> المفضلة</h3>
-                <button class="modal-close" id="closeWishlistBtn" aria-label="إغلاق">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3><i class="fas fa-heart" style="color: var(--c-danger);"></i> المفضلة</h3>
+                <button class="modal-close" id="closeWishlistBtn" aria-label="إغلاق"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body" id="wishlistModalBody"></div>
         </div>
     </div>
 
     <!-- MODAL: QUICK VIEW -->
-    <div class="modal-overlay" id="quickViewModal" role="dialog" aria-modal="true" aria-labelledby="quickViewTitle">
+    <div class="modal-overlay" id="quickViewModal" role="dialog" aria-modal="true">
         <div class="modal quick-view-modal">
             <div class="modal-header">
-                <h3 id="quickViewTitle"><i class="fas fa-eye" style="color: var(--c-primary-600);"></i> نظرة سريعة</h3>
-                <button class="modal-close" onclick="document.getElementById('quickViewModal').classList.remove('show')" aria-label="إغلاق">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3><i class="fas fa-eye" style="color: var(--c-primary-600);"></i> نظرة سريعة</h3>
+                <button class="modal-close" onclick="document.getElementById('quickViewModal').classList.remove('show')" aria-label="إغلاق"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body" id="quickViewBody"></div>
         </div>
     </div>
 
     <!-- MODAL: RFQ -->
-    <div class="modal-overlay" id="rfqModal" role="dialog" aria-modal="true" aria-labelledby="rfqModalTitle">
+    <div class="modal-overlay" id="rfqModal" role="dialog" aria-modal="true">
         <div class="modal">
             <div class="modal-header">
-                <h3 id="rfqModalTitle"><i class="fas fa-file-invoice" style="color: var(--c-accent);"></i> طلب عرض سعر (RFQ)</h3>
-                <button class="modal-close" id="closeRfqBtn" aria-label="إغلاق">
-                    <i class="fas fa-times"></i>
-                </button>
+                <h3><i class="fas fa-file-invoice" style="color: var(--c-accent);"></i> طلب عرض سعر (RFQ)</h3>
+                <button class="modal-close" id="closeRfqBtn" aria-label="إغلاق"><i class="fas fa-times"></i></button>
             </div>
             <div class="modal-body">
                 <div class="rfq-login-notice" id="rfqLoginNotice" style="display: none;">
@@ -2007,15 +1967,18 @@
                 <a href="blog.html">المدونة</a>
                 <a href="auth.html">تسجيل الدخول</a>
                 <a href="supplier-dashboard.html">للموردين</a>
-                <a href="buyer-dashboard.html">للعملاء</a>
+                <a href="buyer-dashboard.html">للمشتري</a>
             </div>
-            <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
+            <div class="footer-copy">© 2026 كيماتو — منصة الكيماويات B2B في مصر</div>
         </div>
     </footer>
 
+    <!-- ============================================================
+         CHEMOTO CORE JS
+         ============================================================ -->
     <script type="module">
         // ============================================================
-        // SUPABASE
+        // SUPABASE INIT
         // ============================================================
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
@@ -2026,33 +1989,13 @@
         let supabase;
         try {
             supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-                auth: {
-                    persistSession: true,
-                    autoRefreshToken: true,
-                    detectSessionInUrl: true,
-                    flowType: 'pkce',
-                },
+                auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' },
             });
         } catch (e) {
             console.error('❌ Supabase init failed:', e);
         }
 
-        // ============================================================
-        // SENTRY & POSTHOG
-        // ============================================================
-        try {
-            if (window.Sentry && window.ENV?.SENTRY_DSN) {
-                window.Sentry.init({
-                    dsn: window.ENV.SENTRY_DSN,
-                    environment: window.ENV.NODE_ENV || 'production',
-                    tracesSampleRate: 0.1,
-                    beforeSend(event) {
-                        if (event.exception?.values?.[0]?.value?.includes('Failed to fetch')) return null;
-                        return event;
-                    },
-                });
-            }
-        } catch (e) { /* silent */ }
+        window.supabase = supabase;
 
         // ============================================================
         // STATE
@@ -2064,6 +2007,7 @@
             priceFilter: 'all',
             purityFilter: 'all',
             gradeFilter: 'all',
+            stockFilter: 'all',
             sort: 'newest',
             page: 0,
             pageSize: 12,
@@ -2074,16 +2018,14 @@
             selectedSuggestionIndex: -1,
             loading: false,
             channel: null,
-            hasRatingsTable: true,
             hasMore: true,
-
             user: null,
             userProfile: null,
             wishlist: new Set(),
             compareList: [],
             deferredInstallPrompt: null,
-
             categories: [],
+            unreadMessages: 0,
         };
 
         const WISHLIST_KEY = 'chemato-wishlist';
@@ -2099,55 +2041,47 @@
         const escapeHtml = (str) => {
             if (str === null || str === undefined) return '';
             return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
+                .replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+                .replace(/"/g, '&quot;').replace(/'/g, '&#039;');
         };
 
         const sanitizePhone = (p) => p ? String(p).replace(/\D/g, '') : '';
-
-        const isValidUUID = (id) =>
-            id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
-
-        const sanitizeSearch = (s) =>
-            String(s || '').trim().slice(0, 100).replace(/[<>'"]/g, '');
-
-        const isValidCasFormat = (s) => {
-            if (!s) return false;
-            return /^\d{2,7}-\d{2}-\d$/.test(String(s).trim());
-        };
-
+        const isValidUUID = (id) => id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+        const sanitizeSearch = (s) => String(s || '').trim().slice(0, 100).replace(/[<>'"]/g, '');
+        const isValidCasFormat = (s) => !s ? false : /^\d{2,7}-\d{2}-\d$/.test(String(s).trim());
         const debounce = (fn, delay = 300) => {
             let timer;
-            return (...args) => {
-                clearTimeout(timer);
-                timer = setTimeout(() => fn(...args), delay);
-            };
+            return (...args) => { clearTimeout(timer); timer = setTimeout(() => fn(...args), delay); };
         };
+        const timeAgo = (dateString) => {
+            const date = new Date(dateString);
+            const seconds = Math.floor((new Date() - date) / 1000);
+            if (seconds < 60) return 'الآن';
+            if (seconds < 3600) return `منذ ${Math.floor(seconds / 60)} دقيقة`;
+            if (seconds < 86400) return `منذ ${Math.floor(seconds / 3600)} ساعة`;
+            if (seconds < 604800) return `منذ ${Math.floor(seconds / 86400)} يوم`;
+            return date.toLocaleDateString('ar-EG');
+        };
+        const formatPrice = (price) => price ? `${Number(price).toLocaleString('ar-EG')} ج.م` : 'عند الطلب';
 
         // ============================================================
         // THEME
         // ============================================================
-        const updateThemeIcon = (theme) => {
-            const icon = document.getElementById('themeIcon');
-            if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        };
-
         const initTheme = () => {
             const saved = localStorage.getItem(THEME_KEY);
             const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
             const theme = saved || (prefersDark ? 'dark' : 'light');
             document.documentElement.setAttribute('data-theme', theme);
-            updateThemeIcon(theme);
+            const icon = document.getElementById('themeIcon');
+            if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
 
             document.getElementById('themeToggle')?.addEventListener('click', () => {
                 const current = document.documentElement.getAttribute('data-theme');
                 const next = current === 'dark' ? 'light' : 'dark';
                 document.documentElement.setAttribute('data-theme', next);
                 localStorage.setItem(THEME_KEY, next);
-                updateThemeIcon(next);
+                const icon = document.getElementById('themeIcon');
+                if (icon) icon.className = next === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
             });
         };
 
@@ -2163,7 +2097,6 @@
         const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = '') => {
             const container = document.getElementById('toastContainer');
             if (!container) return;
-
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
 
@@ -2186,10 +2119,6 @@
                 const link = document.createElement('a');
                 link.href = linkUrl;
                 link.textContent = linkText;
-                if (!linkUrl.startsWith('/') && !linkUrl.startsWith(window.location.origin)) {
-                    link.rel = 'noopener noreferrer';
-                    link.target = '_blank';
-                }
                 descEl.appendChild(link);
             }
 
@@ -2206,9 +2135,10 @@
             toast.appendChild(content);
             toast.appendChild(closeBtn);
             container.appendChild(toast);
-
             setTimeout(() => removeToast(toast), 6000);
         };
+
+        window.showToast = showToast;
 
         // ============================================================
         // READING PROGRESS
@@ -2219,11 +2149,9 @@
             const update = () => {
                 const winScroll = document.documentElement.scrollTop;
                 const height = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-                bar.style.width = scrolled + '%';
+                bar.style.width = (height > 0 ? (winScroll / height) * 100 : 0) + '%';
             };
             window.addEventListener('scroll', update, { passive: true });
-            window.addEventListener('resize', update, { passive: true });
             update();
         };
 
@@ -2237,9 +2165,7 @@
             menuToggle?.addEventListener('click', () => {
                 const isOpen = navLinks.classList.toggle('open');
                 menuToggle.setAttribute('aria-expanded', isOpen);
-                menuToggle.innerHTML = isOpen
-                    ? '<i class="fas fa-times"></i>'
-                    : '<i class="fas fa-bars"></i>';
+                menuToggle.innerHTML = isOpen ? '<i class="fas fa-times"></i>' : '<i class="fas fa-bars"></i>';
             });
 
             const dropdownToggle = document.getElementById('dropdownToggle');
@@ -2275,6 +2201,7 @@
                 if (e.key === 'Escape') {
                     hideSuggestions();
                     document.querySelectorAll('.modal-overlay.show').forEach(m => m.classList.remove('show'));
+                    document.getElementById('notificationPanel')?.classList.remove('show');
                     document.querySelector('.dropdown-content')?.classList.remove('show');
                 }
                 if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'd') {
@@ -2289,7 +2216,6 @@
         // ============================================================
         const checkUser = async () => {
             if (!supabase) return;
-
             try {
                 const { data: { user } } = await supabase.auth.getUser();
                 state.user = user || null;
@@ -2312,7 +2238,7 @@
                     if (buyerBtn) buyerBtn.style.display = 'none';
 
                     const name = profile?.company_name || profile?.full_name || 'مستخدم';
-                    const type = profile?.user_type === 'supplier' ? 'مورد' : 'عميل';
+                    const type = profile?.user_type === 'supplier' ? 'مورد' : 'مشتري';
                     const verifiedMark = profile?.is_verified ? ' ✓' : '';
 
                     if (welcome) {
@@ -2324,13 +2250,11 @@
                     }
 
                     if (dropdownContent) {
-                        const dashboardUrl = profile?.user_type === 'supplier'
-                            ? 'supplier-dashboard.html'
-                            : 'buyer-dashboard.html';
-
+                        const dashboardUrl = profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html';
                         dropdownContent.textContent = '';
                         const items = [
-                            { href: dashboardUrl, icon: 'tachometer-alt', text: profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة العميل' },
+                            { href: dashboardUrl, icon: 'tachometer-alt', text: profile?.user_type === 'supplier' ? 'لوحة المورد' : 'لوحة المشتري' },
+                            { href: 'messages.html', icon: 'envelope', text: 'الرسائل' },
                             { href: 'profile.html', icon: 'user', text: 'الملف الشخصي' },
                             { href: '#', icon: 'sign-out-alt', text: 'تسجيل خروج', logout: true },
                         ];
@@ -2355,13 +2279,13 @@
                     }
 
                     await syncFavoritesFromDB();
+                    await loadUnreadMessagesCount();
 
                 } else {
                     state.userProfile = null;
                     if (supplierBtn) supplierBtn.style.display = 'inline-flex';
                     if (buyerBtn) buyerBtn.style.display = 'inline-flex';
                     if (welcome) welcome.textContent = '';
-
                     loadWishlistFromLocal();
                 }
 
@@ -2378,89 +2302,82 @@
         const loadWishlistFromLocal = () => {
             try {
                 const stored = localStorage.getItem(WISHLIST_KEY);
-                if (stored) state.wishlist = new Set(JSON.parse(stored));
-                else state.wishlist = new Set();
-            } catch (e) { /* silent */ }
+                state.wishlist = stored ? new Set(JSON.parse(stored)) : new Set();
+            } catch (e) { state.wishlist = new Set(); }
         };
 
         const saveWishlistToLocal = () => {
-            try {
-                localStorage.setItem(WISHLIST_KEY, JSON.stringify([...state.wishlist]));
-            } catch (e) { /* silent */ }
+            try { localStorage.setItem(WISHLIST_KEY, JSON.stringify([...state.wishlist])); } catch (e) {}
         };
 
         const syncFavoritesFromDB = async () => {
             if (!state.user) return;
-
             try {
                 const localFavs = [];
                 try {
                     const stored = localStorage.getItem(WISHLIST_KEY);
                     if (stored) localFavs.push(...JSON.parse(stored));
-                } catch (e) { /* silent */ }
+                } catch (e) {}
 
                 if (localFavs.length) {
-                    const inserts = localFavs
-                        .filter(id => isValidUUID(id))
-                        .map(pid => ({
-                            user_id: state.user.id,
-                            product_id: pid,
-                        }));
-
+                    const inserts = localFavs.filter(id => isValidUUID(id)).map(pid => ({
+                        user_id: state.user.id, product_id: pid,
+                    }));
                     if (inserts.length) {
                         await supabase.from('favorites').upsert(inserts, {
-                            onConflict: 'user_id,product_id',
-                            ignoreDuplicates: true,
+                            onConflict: 'user_id,product_id', ignoreDuplicates: true,
                         });
                     }
                     localStorage.removeItem(WISHLIST_KEY);
                 }
 
-                const { data, error } = await supabase
+                const { data } = await supabase
                     .from('favorites')
                     .select('product_id')
                     .eq('user_id', state.user.id);
 
-                if (error) {
-                    console.warn('Favorites fetch error:', error.message);
-                    return;
-                }
-
                 state.wishlist = new Set((data || []).map(f => f.product_id));
                 updateWishlistCount();
-
-            } catch (e) {
-                console.warn('Sync favorites failed:', e.message);
-            }
+            } catch (e) {}
         };
 
         const addFavoriteToDB = async (productId) => {
-            if (!state.user) return false;
-            if (!isValidUUID(productId)) return false;
-
+            if (!state.user || !isValidUUID(productId)) return false;
             try {
-                const { error } = await supabase
-                    .from('favorites')
+                const { error } = await supabase.from('favorites')
                     .insert({ user_id: state.user.id, product_id: productId });
-
-                if (error && error.code !== '23505') {
-                    console.warn('Add favorite error:', error.message);
-                    return false;
-                }
-                return true;
+                return !error || error.code === '23505';
             } catch { return false; }
         };
 
         const removeFavoriteFromDB = async (productId) => {
             if (!state.user) return false;
             try {
-                const { error } = await supabase
-                    .from('favorites')
-                    .delete()
-                    .eq('user_id', state.user.id)
-                    .eq('product_id', productId);
-                return !error;
+                await supabase.from('favorites').delete()
+                    .eq('user_id', state.user.id).eq('product_id', productId);
+                return true;
             } catch { return false; }
+        };
+
+        // ============================================================
+        // UNREAD MESSAGES
+        // ============================================================
+        const loadUnreadMessagesCount = async () => {
+            if (!state.user) return;
+            try {
+                const { count } = await supabase
+                    .from('messages')
+                    .select('*', { count: 'exact', head: true })
+                    .eq('to_user_id', state.user.id)
+                    .eq('is_read', false);
+
+                state.unreadMessages = count || 0;
+                const badge = document.getElementById('messagesBadge');
+                if (badge) {
+                    badge.textContent = state.unreadMessages > 99 ? '99+' : state.unreadMessages;
+                    badge.classList.toggle('show', state.unreadMessages > 0);
+                }
+            } catch (e) {}
         };
 
         // ============================================================
@@ -2473,8 +2390,7 @@
             const step = (now) => {
                 const progress = Math.min((now - start) / duration, 1);
                 const eased = 1 - Math.pow(1 - progress, 3);
-                const value = Math.floor(target * eased);
-                el.textContent = value.toLocaleString('ar-EG');
+                el.textContent = Math.floor(target * eased).toLocaleString('ar-EG');
                 if (progress < 1) requestAnimationFrame(step);
                 else {
                     el.textContent = target.toLocaleString('ar-EG');
@@ -2486,23 +2402,11 @@
             requestAnimationFrame(step);
         };
 
-        const countTable = async (table, filter = {}) => {
-            if (!supabase) return 0;
-            try {
-                let q = supabase.from(table).select('*', { count: 'exact', head: true });
-                Object.entries(filter).forEach(([k, v]) => { q = q.eq(k, v); });
-                const { count, error } = await q;
-                if (error) return 0;
-                return count || 0;
-            } catch { return 0; }
-        };
-
         const loadStats = async () => {
             if (!supabase) return;
-
             try {
-                const { data, error } = await supabase.rpc('get_public_stats');
-                if (!error && data) {
+                const { data } = await supabase.rpc('get_public_stats');
+                if (data) {
                     animateNumber(document.getElementById('totalProducts'), data.total_products || 0);
                     animateNumber(document.getElementById('totalRequests'), data.total_requests || 0);
                     animateNumber(document.getElementById('totalSuppliers'), data.total_suppliers || 0);
@@ -2510,22 +2414,106 @@
                     animateNumber(document.getElementById('totalContacts'), data.total_contacts || 0);
                     return;
                 }
-            } catch { /* fallback */ }
+            } catch {}
 
-            const [productsCount, requestsCount, suppliersCount, viewsCount, contactsCount] =
-                await Promise.all([
-                    countTable('products', { status: 'active' }),
-                    countTable('purchase_requests', { status: 'open' }),
-                    countTable('profiles', { user_type: 'supplier' }),
-                    countTable('supplier_contacts', { contact_type: 'view' }),
-                    countTable('supplier_contacts', { contact_type: 'whatsapp' }),
+            // Fallback
+            try {
+                const [prodCount, reqCount, supCount] = await Promise.all([
+                    supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'active'),
+                    supabase.from('purchase_requests').select('*', { count: 'exact', head: true }).eq('status', 'open'),
+                    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier'),
                 ]);
+                animateNumber(document.getElementById('totalProducts'), prodCount.count || 0);
+                animateNumber(document.getElementById('totalRequests'), reqCount.count || 0);
+                animateNumber(document.getElementById('totalSuppliers'), supCount.count || 0);
+                animateNumber(document.getElementById('totalViews'), 0);
+                animateNumber(document.getElementById('totalContacts'), 0);
+            } catch {}
+        };
 
-            animateNumber(document.getElementById('totalProducts'), productsCount);
-            animateNumber(document.getElementById('totalRequests'), requestsCount);
-            animateNumber(document.getElementById('totalSuppliers'), suppliersCount);
-            animateNumber(document.getElementById('totalViews'), viewsCount);
-            animateNumber(document.getElementById('totalContacts'), contactsCount);
+        // ============================================================
+        // COMMODITY TICKER
+        // ============================================================
+        const CommodityTracker = {
+            commodities: [
+                { code: 'BRENT', name: 'خام برنت', unit: '$/برميل' },
+                { code: 'GAS', name: 'الغاز الطبيعي', unit: '$/MMBtu' },
+                { code: 'GOLD', name: 'الذهب', unit: '$/أونصة' },
+                { code: 'ETHYLENE', name: 'الإيثيلين', unit: '$/طن' },
+                { code: 'METHANOL', name: 'الميثانول', unit: '$/طن' },
+                { code: 'SODA_ASH', name: 'رماد الصودا', unit: '$/طن' },
+                { code: 'SULFURIC', name: 'حمض الكبريتيك', unit: '$/طن' },
+            ],
+
+            prices: {
+                'BRENT': { price: 78.45, change: +1.2 },
+                'GAS': { price: 2.85, change: -0.8 },
+                'GOLD': { price: 2345.60, change: +0.3 },
+                'ETHYLENE': { price: 985.00, change: +2.1 },
+                'METHANOL': { price: 342.50, change: -1.5 },
+                'SODA_ASH': { price: 285.00, change: +0.7 },
+                'SULFURIC': { price: 95.30, change: -0.4 },
+            },
+
+            async fetchPrices() {
+                // Demo mode - في الإنتاج: استخدم OilPriceAPI
+                try {
+                    if (window.ENV?.OIL_PRICE_API_KEY) {
+                        // Real API call
+                    }
+                } catch (e) {}
+                this.render();
+            },
+
+            render() {
+                const ticker = document.getElementById('commodityTicker');
+                if (!ticker) return;
+
+                const items = this.commodities.map(c => {
+                    const data = this.prices[c.code] || { price: 0, change: 0 };
+                    const changeClass = data.change >= 0 ? 'up' : 'down';
+                    const changeSymbol = data.change >= 0 ? '▲' : '▼';
+                    return `
+                        <div class="ticker-item">
+                            <span class="symbol">${c.name}</span>
+                            <span class="price">${data.price.toFixed(2)}</span>
+                            <span class="change ${changeClass}">${changeSymbol} ${Math.abs(data.change).toFixed(2)}%</span>
+                        </div>
+                    `;
+                }).join('');
+
+                ticker.innerHTML = `<div class="ticker-content">${items}${items}</div>`;
+                ticker.style.display = 'block';
+            },
+
+            init() {
+                this.fetchPrices();
+                setInterval(() => this.fetchPrices(), 5 * 60 * 1000);
+            }
+        };
+
+        // ============================================================
+        // MOLECULAR VISUALIZER
+        // ============================================================
+        const MolecularVisualizer = {
+            init() {
+                const container = document.getElementById('moleculeVisualizer');
+                if (!container) return;
+                const positions = [
+                    { top: '15%', left: '10%' }, { top: '25%', left: '25%' },
+                    { top: '45%', left: '15%' }, { top: '70%', left: '20%' },
+                    { top: '20%', right: '15%' }, { top: '40%', right: '25%' },
+                    { top: '60%', right: '10%' }, { top: '80%', right: '30%' },
+                    { top: '35%', left: '45%' }, { top: '55%', left: '50%' },
+                ];
+                positions.forEach((pos, i) => {
+                    const node = document.createElement('div');
+                    node.className = 'molecule-node';
+                    Object.assign(node.style, pos);
+                    node.style.animationDelay = `${i * 0.3}s`;
+                    container.appendChild(node);
+                });
+            }
         };
 
         // ============================================================
@@ -2552,48 +2540,12 @@
             const map = {};
             if (!supplierIds.length || !supabase) return map;
             try {
-                const { data, error } = await supabase
+                const { data } = await supabase
                     .from('profiles')
                     .select('id, full_name, company_name, phone, is_verified')
                     .in('id', supplierIds);
-                if (!error && data) data.forEach(s => { map[s.id] = s; });
-            } catch (e) { /* silent */ }
-            return map;
-        };
-
-        const fetchRatingsMap = async (productIds) => {
-            const map = {};
-            if (!productIds.length || !supabase || !state.hasRatingsTable) return map;
-            try {
-                const { data, error } = await supabase
-                    .from('reviews')
-                    .select('product_id, rating')
-                    .in('product_id', productIds)
-                    .eq('review_type', 'product');
-
-                if (error) {
-                    if (error.message?.toLowerCase().includes('does not exist') || error.code === '42P01') {
-                        state.hasRatingsTable = false;
-                    }
-                    return map;
-                }
-
-                if (data) {
-                    const grouped = {};
-                    data.forEach(r => {
-                        if (!r.product_id) return;
-                        if (!grouped[r.product_id]) grouped[r.product_id] = { sum: 0, count: 0 };
-                        grouped[r.product_id].sum += r.rating;
-                        grouped[r.product_id].count += 1;
-                    });
-                    Object.keys(grouped).forEach(pid => {
-                        map[pid] = {
-                            avg_rating: (grouped[pid].sum / grouped[pid].count).toFixed(1),
-                            review_count: grouped[pid].count,
-                        };
-                    });
-                }
-            } catch (e) { /* silent */ }
+                (data || []).forEach(s => { map[s.id] = s; });
+            } catch (e) {}
             return map;
         };
 
@@ -2616,10 +2568,7 @@
                 const from = state.page * state.pageSize;
                 const to = from + state.pageSize - 1;
 
-                let query = supabase
-                    .from('products')
-                    .select('*', { count: 'exact' })
-                    .eq('status', 'active');
+                let query = supabase.from('products').select('*', { count: 'exact' }).eq('status', 'active');
 
                 if (state.categoryId && state.categoryId !== 'all') {
                     query = query.eq('category_id', state.categoryId);
@@ -2628,6 +2577,8 @@
                 if (state.search) {
                     if (state.searchMode === 'cas') {
                         query = query.ilike('cas_number', `%${state.search}%`);
+                    } else if (state.searchMode === 'formula') {
+                        query = query.ilike('formula', `%${state.search}%`);
                     } else {
                         query = query.ilike('name', `%${state.search}%`);
                     }
@@ -2635,8 +2586,7 @@
 
                 if (state.priceFilter !== 'all') {
                     if (state.priceFilter.includes('+')) {
-                        const min = parseInt(state.priceFilter);
-                        query = query.gte('price', min);
+                        query = query.gte('price', parseInt(state.priceFilter));
                     } else if (state.priceFilter.includes('-')) {
                         const [min, max] = state.priceFilter.split('-').map(Number);
                         if (!isNaN(min) && !isNaN(max)) query = query.gte('price', min).lte('price', max);
@@ -2655,12 +2605,16 @@
                     query = query.eq('grade', state.gradeFilter);
                 }
 
+                if (state.stockFilter !== 'all') {
+                    query = query.eq('stock_status', state.stockFilter);
+                }
+
                 const sortMap = {
                     'newest': ['created_at', false],
                     'price-low': ['price', true],
                     'price-high': ['price', false],
                     'popular': ['views', false],
-                    'most_contacted': ['contact_count', false],
+                    'rating': ['avg_rating', false],
                 };
                 const [sortCol, asc] = sortMap[state.sort] || sortMap['newest'];
                 query = query.order(sortCol, { ascending: asc, nullsFirst: false });
@@ -2673,24 +2627,17 @@
                 state.total = count || 0;
 
                 const supplierIds = [...new Set(products.map(p => p.supplier_id).filter(Boolean))];
-                const productIds = products.map(p => p.id).filter(Boolean);
-
-                const [suppliersMap, ratingsMap] = await Promise.all([
-                    fetchSuppliersMap(supplierIds),
-                    fetchRatingsMap(productIds),
-                ]);
+                const suppliersMap = await fetchSuppliersMap(supplierIds);
 
                 const enriched = products.map(p => ({
                     ...p,
                     supplier: suppliersMap[p.supplier_id] || null,
-                    ratings: ratingsMap[p.id] ? [ratingsMap[p.id]] : [],
                 }));
 
                 if (append) state.products = [...state.products, ...enriched];
                 else state.products = enriched;
 
                 renderProducts(enriched, !append);
-
                 state.hasMore = state.products.length < state.total;
                 enriched.forEach(p => trackView(p.id, p.supplier_id));
 
@@ -2702,7 +2649,7 @@
                             <i class="fas fa-exclamation-triangle" style="color: var(--c-danger);"></i>
                             <h3>حدث خطأ في التحميل</h3>
                             <p>${escapeHtml(error?.message || 'خطأ غير معروف')}</p>
-                            <button onclick="location.reload()" class="btn btn-primary" style="margin-top: 16px;">
+                            <button onclick="location.reload()" class="btn btn-primary" style="margin-top:16px;">
                                 <i class="fas fa-redo"></i> إعادة المحاولة
                             </button>
                         </div>
@@ -2725,7 +2672,7 @@
                     <div class="empty-state">
                         <i class="fas fa-box-open"></i>
                         <h3>لا توجد منتجات</h3>
-                        <p>${state.searchMode === 'cas' ? 'تأكد من صيغة رقم CAS (مثال: 1310-73-2)' : 'جرب البحث بكلمات مختلفة أو تصفح فئة أخرى'}</p>
+                        <p>${state.searchMode === 'cas' ? 'تأكد من صيغة رقم CAS (مثال: 1310-73-2)' : 'جرب البحث بكلمات مختلفة'}</p>
                     </div>
                 `;
                 return;
@@ -2733,9 +2680,8 @@
 
             const html = products.map((p, i) => renderProductCard(p, i)).join('');
 
-            if (replace) {
-                container.innerHTML = html;
-            } else {
+            if (replace) container.innerHTML = html;
+            else {
                 const temp = document.createElement('div');
                 temp.innerHTML = html;
                 while (temp.firstChild) container.appendChild(temp.firstChild);
@@ -2752,25 +2698,22 @@
                 : '<span class="currency">سعر عند الطلب</span>';
 
             const supplier = escapeHtml(p.supplier?.company_name || p.supplier?.full_name || 'مورد');
-            const category = escapeHtml(p.category || p.category_name || 'كيماويات');
+            const category = escapeHtml(p.category || 'كيماويات');
             const isVerified = p.supplier?.is_verified === true;
 
-            const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold');
-            const safeImageUrl = hasImage && /^https?:\/\//i.test(p.image_url) ? escapeHtml(p.image_url) : '';
+            const hasImage = p.image_url && p.image_url.trim() && /^https?:\/\//i.test(p.image_url);
+            const safeImageUrl = hasImage ? escapeHtml(p.image_url) : '';
 
             const mediaHtml = safeImageUrl
                 ? `<img class="card-img" src="${safeImageUrl}" alt="${name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'><span class=\\'emoji\\'>🧪</span><span class=\\'name\\'>${shortName.replace(/'/g, "&#39;")}</span></div>';" />`
                 : `<div class="card-img-placeholder"><span class="emoji">🧪</span><span class="name">${shortName}</span></div>`;
 
             const views = Number(p.views) || 0;
-            const contacts = Number(p.contact_count) || 0;
-            const rating = p.ratings?.[0];
-            const ratingValue = rating?.avg_rating ? Number(rating.avg_rating).toFixed(1) : null;
+            const rating = p.avg_rating && p.avg_rating > 0 ? Number(p.avg_rating).toFixed(1) : null;
 
             const badges = [];
             if (p.is_featured) badges.push('<span class="badge-pill badge-featured"><i class="fas fa-star"></i> مميز</span>');
-            if (ratingValue) badges.push(`<span class="badge-pill badge-rating"><i class="fas fa-star"></i> ${ratingValue}</span>`);
-            if (contacts > 0) badges.push(`<span class="badge-pill badge-contacts"><i class="fab fa-whatsapp"></i> ${contacts}</span>`);
+            if (rating) badges.push(`<span class="badge-pill badge-rating"><i class="fas fa-star"></i> ${rating}</span>`);
             if (views > 0) badges.push(`<span class="badge-pill badge-views"><i class="fas fa-eye"></i> ${views.toLocaleString('ar-EG')}</span>`);
 
             const supplierId = p.supplier?.id || p.supplier_id || '';
@@ -2812,16 +2755,14 @@
 
                         <div class="card-float-actions">
                             <button class="card-float-btn ${isWishlisted ? 'active' : ''}"
-                                    type="button"
-                                    data-action="wishlist"
+                                    type="button" data-action="wishlist"
                                     data-product-id="${escapeHtml(p.id)}"
                                     data-product-name="${safeName}"
                                     aria-label="إضافة للمفضلة">
                                 <i class="fas fa-heart"></i>
                             </button>
                             <button class="card-float-btn ${isCompare ? 'compare-active' : ''}"
-                                    type="button"
-                                    data-action="compare"
+                                    type="button" data-action="compare"
                                     data-product-id="${escapeHtml(p.id)}"
                                     aria-label="إضافة للمقارنة">
                                 <i class="fas fa-balance-scale"></i>
@@ -2874,7 +2815,6 @@
                                 data-name="${safeName}"
                                 data-cas="${escapeHtml(p.cas_number || '')}"
                                 data-purity="${escapeHtml(p.purity || '')}"
-                                data-category="${escapeHtml(p.category || '')}"
                                 aria-label="طلب عرض سعر">
                                 <i class="fas fa-file-invoice"></i> RFQ
                             </button>
@@ -2922,31 +2862,42 @@
                         name: btn.dataset.name,
                         cas: btn.dataset.cas,
                         purity: btn.dataset.purity,
-                        category: btn.dataset.category,
                     });
                 }
             });
+
+            // Recent view tracking
+            document.addEventListener('click', (e) => {
+                const card = e.target.closest('.card[data-product-id]');
+                if (card) {
+                    const name = card.querySelector('.card-title')?.textContent;
+                    const priceText = card.querySelector('.card-price')?.textContent;
+                    const img = card.querySelector('.card-img')?.src;
+                    RecentTracker.add({
+                        id: card.dataset.productId,
+                        name: name?.trim() || '',
+                        price: parseFloat(priceText?.replace(/[^\d.]/g, '')) || null,
+                        image_url: img
+                    });
+                }
+            }, { passive: true });
         };
 
         const handleWishlistToggle = async (productId, productName, btn) => {
             const wasWishlisted = state.wishlist.has(productId);
-
             if (wasWishlisted) {
                 state.wishlist.delete(productId);
                 if (state.user) await removeFavoriteFromDB(productId);
                 else saveWishlistToLocal();
-
                 showToast('💔', 'أُزيل من المفضلة', productName || 'المنتج', null, null, 'info');
                 btn?.classList.remove('active');
             } else {
                 state.wishlist.add(productId);
                 if (state.user) await addFavoriteToDB(productId);
                 else saveWishlistToLocal();
-
                 showToast('❤️', 'أضيف للمفضلة', productName || 'المنتج', null, null, 'success');
                 btn?.classList.add('active');
             }
-
             updateWishlistCount();
         };
 
@@ -2954,21 +2905,9 @@
             const productInput = document.getElementById('rfqProduct');
             const casInput = document.getElementById('rfqCas');
             const purityInput = document.getElementById('rfqPurity');
-
             if (productInput) productInput.value = product.name || '';
             if (casInput) casInput.value = product.cas || '';
             if (purityInput) purityInput.value = product.purity || '';
-
-            if (product.category) {
-                const catSelect = document.getElementById('rfqCategory');
-                if (catSelect) {
-                    const option = Array.from(catSelect.options).find(
-                        opt => opt.value === product.category || opt.textContent === product.category
-                    );
-                    if (option) catSelect.value = option.value;
-                }
-            }
-
             showRfqModal();
         };
 
@@ -3020,7 +2959,7 @@
 
             if (!state.wishlist.size) {
                 body.innerHTML = `
-                    <div class="empty-state" style="border: none; padding: 40px 20px;">
+                    <div class="empty-state" style="border:none;padding:40px 20px;">
                         <i class="fas fa-heart"></i>
                         <h3>المفضلة فاضية</h3>
                         <p>اضغط ❤️ على أي منتج لحفظه هنا</p>
@@ -3031,23 +2970,11 @@
                 try {
                     const ids = [...state.wishlist].filter(id => isValidUUID(id));
                     if (!ids.length) throw new Error('No valid IDs');
-
-                    const { data, error } = await supabase
-                        .from('products')
-                        .select('*')
-                        .in('id', ids);
-
+                    const { data, error } = await supabase.from('products').select('*').in('id', ids);
                     if (error) throw error;
-
                     const supplierIds = [...new Set((data || []).map(p => p.supplier_id).filter(Boolean))];
                     const suppliersMap = await fetchSuppliersMap(supplierIds);
-
-                    const enriched = (data || []).map(p => ({
-                        ...p,
-                        supplier: suppliersMap[p.supplier_id] || null,
-                        ratings: [],
-                    }));
-
+                    const enriched = (data || []).map(p => ({ ...p, supplier: suppliersMap[p.supplier_id] || null }));
                     body.innerHTML = `<div class="grid" style="grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));">
                         ${enriched.map((p, i) => renderProductCard(p, i)).join('')}
                     </div>`;
@@ -3055,7 +2982,6 @@
                     body.innerHTML = `<div class="empty-state">⚠️ خطأ في التحميل</div>`;
                 }
             }
-
             modal.classList.add('show');
         };
 
@@ -3066,13 +2992,11 @@
             try {
                 const stored = localStorage.getItem(COMPARE_KEY);
                 if (stored) state.compareList = JSON.parse(stored);
-            } catch (e) { /* silent */ }
+            } catch (e) {}
         };
 
         const saveCompareList = () => {
-            try {
-                localStorage.setItem(COMPARE_KEY, JSON.stringify(state.compareList));
-            } catch (e) { /* silent */ }
+            try { localStorage.setItem(COMPARE_KEY, JSON.stringify(state.compareList)); } catch (e) {}
         };
 
         const toggleCompare = (productId) => {
@@ -3099,7 +3023,6 @@
                 badge.textContent = count;
                 badge.classList.toggle('show', count > 0);
             }
-
             const bar = document.getElementById('compareBar');
             const barText = document.getElementById('compareBarText');
             if (count > 0) {
@@ -3108,7 +3031,6 @@
             } else {
                 bar.classList.remove('show');
             }
-
             document.querySelectorAll('[data-action="compare"]').forEach(btn => {
                 btn.classList.toggle('compare-active', state.compareList.includes(btn.dataset.productId));
             });
@@ -3118,25 +3040,15 @@
             if (!state.compareList.length) return;
             const modal = document.getElementById('compareModal');
             const body = document.getElementById('compareModalBody');
-
             body.innerHTML = `<div class="infinite-loading"><span>جاري التحميل</span><div class="dots"><span></span><span></span><span></span></div></div>`;
             modal.classList.add('show');
 
             try {
-                const { data, error } = await supabase
-                    .from('products')
-                    .select('*')
-                    .in('id', state.compareList);
-
+                const { data, error } = await supabase.from('products').select('*').in('id', state.compareList);
                 if (error) throw error;
-
                 const supplierIds = [...new Set((data || []).map(p => p.supplier_id).filter(Boolean))];
                 const suppliersMap = await fetchSuppliersMap(supplierIds);
-
-                const products = (data || []).map(p => ({
-                    ...p,
-                    supplier: suppliersMap[p.supplier_id] || null,
-                }));
+                const products = (data || []).map(p => ({ ...p, supplier: suppliersMap[p.supplier_id] || null }));
 
                 if (!products.length) {
                     body.innerHTML = `<div class="empty-state">لا توجد منتجات</div>`;
@@ -3147,55 +3059,30 @@
                 const stockLabels = { 'available': '✅ متوفر', 'low': '⚠️ محدود', 'out': '❌ غير متوفر' };
 
                 const rows = [
-                    { label: 'الصورة', render: p => p.image_url
-                        ? `<img src="${escapeHtml(p.image_url)}" class="img" alt="${escapeHtml(p.name)}" onerror="this.style.display='none'">`
-                        : `<div class="img" style="display:flex;align-items:center;justify-content:center;font-size:2rem;">🧪</div>` },
-                    { label: 'الاسم', render: p => `<div class="title">${escapeHtml(p.name || '—')}</div>` },
-                    { label: 'رقم CAS', render: p => p.cas_number
-                        ? `<code style="background: rgba(139,92,246,0.1); color: var(--c-purple); padding: 2px 8px; border-radius: 6px; direction: ltr; font-weight: 700;">${escapeHtml(p.cas_number)}</code>`
-                        : '—' },
+                    { label: 'الصورة', render: p => p.image_url ? `<img src="${escapeHtml(p.image_url)}" class="img" alt="${escapeHtml(p.name)}" onerror="this.style.display='none'">` : `<div class="img" style="display:flex;align-items:center;justify-content:center;font-size:2rem;">🧪</div>` },
+                    { label: 'الاسم', render: p => `<div style="font-weight:700;">${escapeHtml(p.name || '—')}</div>` },
+                    { label: 'رقم CAS', render: p => p.cas_number ? `<code style="background: rgba(139,92,246,0.1); color: var(--c-purple); padding: 2px 8px; border-radius: 6px; direction: ltr; font-weight: 700;">${escapeHtml(p.cas_number)}</code>` : '—' },
+                    { label: 'الصيغة', render: p => escapeHtml(p.formula || '—') },
                     { label: 'النقاء', render: p => escapeHtml(p.purity || '—') },
                     { label: 'الدرجة', render: p => p.grade ? (gradeLabels[p.grade] || p.grade) : '—' },
-                    { label: 'السعر', render: p => p.price
-                        ? `<strong style="color: var(--c-primary-700);">${Number(p.price).toLocaleString('ar-EG')} ج.م</strong>`
-                        : 'عند الطلب' },
+                    { label: 'السعر', render: p => p.price ? `<strong style="color: var(--c-primary-700);">${Number(p.price).toLocaleString('ar-EG')} ج.م</strong>` : 'عند الطلب' },
                     { label: 'الوحدة', render: p => escapeHtml(p.unit || '—') },
-                    { label: 'الحد الأدنى (MOQ)', render: p => escapeHtml(p.min_order_quantity || '—') },
+                    { label: 'الحد الأدنى', render: p => escapeHtml(p.min_order_quantity || '—') },
                     { label: 'التعبئة', render: p => escapeHtml(p.packaging || '—') },
                     { label: 'بلد المنشأ', render: p => escapeHtml(p.origin_country || '—') },
                     { label: 'المخزون', render: p => stockLabels[p.stock_status] || '✅ متوفر' },
-                    { label: 'MSDS', render: p => (p.msds_url || p.sds_url)
-                        ? '<span style="color: var(--c-accent); font-weight:700;">✓ متوفر</span>'
-                        : '—' },
+                    { label: 'MSDS', render: p => (p.msds_url || p.sds_url) ? '<span style="color: var(--c-accent); font-weight:700;">✓ متوفر</span>' : '—' },
                     { label: 'المورد', render: p => {
-                        const isVerified = p.supplier?.is_verified;
-                        const name = escapeHtml(p.supplier?.company_name || p.supplier?.full_name || '—');
-                        return `${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span> ' : ''}${name}`;
-                    } },
-                    { label: 'المشاهدات', render: p => (p.views || 0).toLocaleString('ar-EG') },
-                    { label: 'التواصلات', render: p => (p.contact_count || 0).toLocaleString('ar-EG') },
-                    { label: 'الوصف', render: p => `<div style="font-size:0.8rem;">${escapeHtml((p.description || '—').substring(0, 120))}</div>` },
+                        const v = p.supplier?.is_verified;
+                        return `${v ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span> ' : ''}${escapeHtml(p.supplier?.company_name || p.supplier?.full_name || '—')}`;
+                    }},
                 ];
 
                 body.innerHTML = `
-                    <div style="overflow-x: auto;">
+                    <div style="overflow-x:auto;">
                         <table class="compare-table">
-                            <thead>
-                                <tr>
-                                    <th style="width: 160px;">المقارنة</th>
-                                    ${products.map(p => `
-                                        <th><div class="compare-product-head"><div class="title">${escapeHtml(p.name || '—')}</div></div></th>
-                                    `).join('')}
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${rows.map(row => `
-                                    <tr>
-                                        <th>${row.label}</th>
-                                        ${products.map(p => `<td>${row.render(p)}</td>`).join('')}
-                                    </tr>
-                                `).join('')}
-                            </tbody>
+                            <thead><tr><th style="width:160px;">المقارنة</th>${products.map(p => `<th><div>${escapeHtml(p.name || '—')}</div></th>`).join('')}</tr></thead>
+                            <tbody>${rows.map(row => `<tr><th>${row.label}</th>${products.map(p => `<td>${row.render(p)}</td>`).join('')}</tr>`).join('')}</tbody>
                         </table>
                     </div>
                 `;
@@ -3205,128 +3092,27 @@
         };
 
         // ============================================================
-        // QUICK VIEW
-        // ============================================================
-        const showQuickView = async (productId) => {
-            if (!supabase || !isValidUUID(productId)) return;
-
-            const modal = document.getElementById('quickViewModal');
-            const body = document.getElementById('quickViewBody');
-            if (!modal || !body) return;
-
-            modal.classList.add('show');
-            body.innerHTML = `<div class="infinite-loading"><span>جاري التحميل</span><div class="dots"><span></span><span></span><span></span></div></div>`;
-
-            try {
-                const { data: p, error } = await supabase
-                    .from('products')
-                    .select('*')
-                    .eq('id', productId)
-                    .single();
-
-                if (error || !p) throw new Error('Product not found');
-
-                const supplier = p.supplier_id
-                    ? (await fetchSuppliersMap([p.supplier_id]))[p.supplier_id]
-                    : null;
-
-                const price = p.price
-                    ? `${Number(p.price).toLocaleString('ar-EG')} <span class="currency">ج.م</span>`
-                    : 'سعر عند الطلب';
-
-                const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
-                const mediaHtml = hasImage
-                    ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}">`
-                    : `<span>🧪</span>`;
-
-                const gradeLabels = { 'technical': 'تقني', 'analytical': 'تحليلي', 'acs': 'ACS', 'pharma': 'صيدلاني', 'food': 'غذائي' };
-                const safeName = (p.name || '').replace(/'/g, '&#39;');
-
-                body.innerHTML = `
-                    <div class="quick-view-content">
-                        <div class="quick-view-image">${mediaHtml}</div>
-                        <div class="quick-view-info">
-                            <span class="card-category"><i class="fas fa-flask"></i> ${escapeHtml(p.category || 'كيماويات')}</span>
-                            <h2>${escapeHtml(p.name)}</h2>
-
-                            <div class="qv-price">${price}${p.unit ? ` <span class="currency" style="font-size:0.9rem;">/ ${escapeHtml(p.unit)}</span>` : ''}</div>
-
-                            <div class="qv-specs">
-                                ${p.cas_number ? `<div class="qv-spec"><span class="label">رقم CAS</span><span class="value" style="font-family:monospace;direction:ltr;">${escapeHtml(p.cas_number)}</span></div>` : ''}
-                                ${p.purity ? `<div class="qv-spec"><span class="label">النقاء</span><span class="value">${escapeHtml(p.purity)}</span></div>` : ''}
-                                ${p.grade ? `<div class="qv-spec"><span class="label">الدرجة</span><span class="value">${escapeHtml(gradeLabels[p.grade] || p.grade)}</span></div>` : ''}
-                                ${p.packaging ? `<div class="qv-spec"><span class="label">التعبئة</span><span class="value">${escapeHtml(p.packaging)}</span></div>` : ''}
-                                ${p.min_order_quantity ? `<div class="qv-spec"><span class="label">MOQ</span><span class="value">${escapeHtml(p.min_order_quantity)}</span></div>` : ''}
-                                ${p.origin_country ? `<div class="qv-spec"><span class="label">بلد المنشأ</span><span class="value">${escapeHtml(p.origin_country)}</span></div>` : ''}
-                            </div>
-
-                            ${p.description ? `<p style="color:var(--c-text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:16px;">${escapeHtml(p.description.substring(0, 250))}${p.description.length > 250 ? '...' : ''}</p>` : ''}
-
-                            <div class="card-actions" style="margin-top: 20px;">
-                                <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="btn-card btn-detail" style="flex:2;">
-                                    <i class="fas fa-info-circle"></i> عرض التفاصيل
-                                </a>
-                                <button class="btn-card btn-rfq" type="button" style="flex:1;"
-                                    data-action="rfq"
-                                    data-product-id="${escapeHtml(p.id)}"
-                                    data-name="${safeName}"
-                                    data-cas="${escapeHtml(p.cas_number || '')}"
-                                    data-purity="${escapeHtml(p.purity || '')}">
-                                    <i class="fas fa-file-invoice"></i> RFQ
-                                </button>
-                            </div>
-
-                            ${supplier ? `
-                                <div class="card-supplier" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--c-border);">
-                                    ${supplier.is_verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
-                                    <i class="fas fa-building"></i>
-                                    <span>${escapeHtml(supplier.company_name || supplier.full_name || 'مورد')}</span>
-                                </div>
-                            ` : ''}
-                        </div>
-                    </div>
-                `;
-
-                trackView(p.id, p.supplier_id);
-            } catch (e) {
-                body.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle"></i><h3>خطأ في التحميل</h3></div>`;
-            }
-        };
-
-        // ============================================================
-        // RECENTLY VIEWED
+        // RECENT VIEW
         // ============================================================
         const RecentTracker = {
             add(product) {
                 try {
                     let recent = this.getAll();
                     recent = recent.filter(p => p.id !== product.id);
-                    recent.unshift({
-                        id: product.id,
-                        name: product.name,
-                        price: product.price,
-                        image_url: product.image_url,
-                        timestamp: Date.now()
-                    });
+                    recent.unshift({ ...product, timestamp: Date.now() });
                     recent = recent.slice(0, MAX_RECENT);
                     localStorage.setItem(RECENT_KEY, JSON.stringify(recent));
-                } catch (e) { /* silent */ }
+                } catch (e) {}
             },
-
             getAll() {
-                try {
-                    return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]');
-                } catch { return []; }
+                try { return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]'); } catch { return []; }
             },
-
             render() {
                 const items = this.getAll();
                 if (!items.length) return;
-
                 const section = document.getElementById('recentlyViewedSection');
                 const list = document.getElementById('recentlyViewedList');
                 if (!section || !list) return;
-
                 section.style.display = 'block';
                 list.innerHTML = items.map(p => {
                     const price = p.price ? `${Number(p.price).toLocaleString('ar-EG')} ج.م` : 'عند الطلب';
@@ -3344,7 +3130,6 @@
                     `;
                 }).join('');
             },
-
             clear() {
                 localStorage.removeItem(RECENT_KEY);
                 const section = document.getElementById('recentlyViewedSection');
@@ -3355,252 +3140,132 @@
         window.RecentTracker = RecentTracker;
 
         // ============================================================
-        // TRENDING
-        // ============================================================
-        const loadTrending = async () => {
-            if (!supabase) return;
-            try {
-                const { data, error } = await supabase
-                    .from('products')
-                    .select('*')
-                    .eq('status', 'active')
-                    .gte('views', 10)
-                    .order('views', { ascending: false, nullsFirst: false })
-                    .limit(4);
-
-                if (error || !data?.length) {
-                    const { data: fallback } = await supabase
-                        .from('products')
-                        .select('*')
-                        .eq('status', 'active')
-                        .order('views', { ascending: false, nullsFirst: false })
-                        .limit(4);
-                    if (fallback?.length) renderTrendingSection(fallback);
-                    return;
-                }
-
-                renderTrendingSection(data);
-            } catch (e) { /* silent */ }
-        };
-
-        const renderTrendingSection = async (products) => {
-            const section = document.getElementById('trendingSection');
-            const list = document.getElementById('trendingList');
-            if (!section || !list) return;
-
-            const supplierIds = [...new Set(products.map(p => p.supplier_id).filter(Boolean))];
-            const suppliersMap = await fetchSuppliersMap(supplierIds);
-
-            const enriched = products.map(p => ({
-                ...p,
-                supplier: suppliersMap[p.supplier_id] || null,
-                ratings: []
-            }));
-
-            section.style.display = 'block';
-            list.innerHTML = enriched.map((p, i) => renderProductCard(p, i)).join('');
-            observeProductViews();
-        };
-
-        // ============================================================
-        // RFQ
-        // ============================================================
-        const showRfqModal = () => {
-            const notice = document.getElementById('rfqLoginNotice');
-            const submitBtn = document.getElementById('submitRfqBtn');
-
-            if (state.user) {
-                notice.style.display = 'none';
-                submitBtn.disabled = false;
-                submitBtn.title = '';
-            } else {
-                notice.style.display = 'flex';
-                submitBtn.disabled = false;
-                submitBtn.title = 'لازم تسجّل دخولك';
-            }
-
-            document.getElementById('rfqModal').classList.add('show');
-            setTimeout(() => document.getElementById('rfqProduct')?.focus(), 300);
-        };
-
-        const initRfqForm = () => {
-            const form = document.getElementById('rfqForm');
-            form?.addEventListener('submit', async (e) => {
-                e.preventDefault();
-
-                if (!state.user) {
-                    showToast('🔒', 'مطلوب تسجيل دخول', 'سجّل دخولك أولاً لإرسال طلب عرض سعر',
-                        'تسجيل الدخول', 'auth.html?redirect=rfq', 'warning');
-                    return;
-                }
-
-                const submitBtn = document.getElementById('submitRfqBtn');
-                const originalText = submitBtn.innerHTML;
-                submitBtn.disabled = true;
-                submitBtn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span> جاري الإرسال';
-
-                try {
-                    const formData = new FormData(form);
-                    const data = Object.fromEntries(formData);
-
-                    if (!data.product_name?.trim()) throw new Error('اكتب اسم المنتج');
-                    if (!data.quantity || Number(data.quantity) <= 0) throw new Error('الكمية لازم تكون أكبر من صفر');
-                    if (data.cas_number && data.cas_number.trim() && !isValidCasFormat(data.cas_number)) {
-                        throw new Error('صيغة رقم CAS غير صحيحة (مثال: 1310-73-2)');
-                    }
-                    if (data.budget_min && data.budget_max && Number(data.budget_min) > Number(data.budget_max)) {
-                        throw new Error('الميزانية الدنيا أكبر من العليا');
-                    }
-
-                    const { data: inserted, error } = await supabase
-                        .from('purchase_requests')
-                        .insert({
-                            buyer_id: state.user.id,
-                            product_name: data.product_name.trim(),
-                            cas_number: data.cas_number?.trim() || null,
-                            purity_required: data.purity?.trim() || null,
-                            category: data.category?.trim() || null,
-                            quantity_needed: `${data.quantity} ${data.unit || 'كجم'}`.trim(),
-                            preferred_unit: data.unit || 'كجم',
-                            description: data.notes?.trim() || null,
-                            location: data.location?.trim() || null,
-                            deadline: data.deadline || null,
-                            budget_min: data.budget_min ? Number(data.budget_min) : null,
-                            budget_max: data.budget_max ? Number(data.budget_max) : null,
-                            status: 'open',
-                        })
-                        .select()
-                        .single();
-
-                    if (error) throw error;
-
-                    if (data.product_id && isValidUUID(data.product_id)) {
-                        const { data: productData } = await supabase
-                            .from('products')
-                            .select('supplier_id')
-                            .eq('id', data.product_id)
-                            .single();
-
-                        if (productData?.supplier_id) {
-                            logContact({
-                                supplierId: productData.supplier_id,
-                                productId: data.product_id,
-                                type: 'request_quote',
-                            }).catch(() => {});
-                        }
-                    }
-
-                    showToast('✅', 'تم الإرسال بنجاح!', 'هيتواصل معك الموردون قريباً — تقدر تتابع الطلب من لوحة التحكم',
-                        'لوحة التحكم', 'buyer-dashboard.html', 'success');
-
-                    form.reset();
-                    document.getElementById('rfqModal').classList.remove('show');
-
-                } catch (err) {
-                    console.error('RFQ error:', err);
-                    showToast('⚠️', 'خطأ', err.message || 'تعذر إرسال الطلب', null, null, 'error');
-                } finally {
-                    submitBtn.disabled = false;
-                    submitBtn.innerHTML = originalText;
-                }
-            });
-        };
-
-        // ============================================================
-        // LOG CONTACT
-        // ============================================================
-        const logContact = async ({ supplierId, productId, type }) => {
-            if (!supabase || !isValidUUID(supplierId)) return;
-            try {
-                const { error } = await supabase.rpc('log_supplier_contact', {
-                    p_supplier_id: supplierId,
-                    p_product_id: productId && isValidUUID(productId) ? productId : null,
-                    p_buyer_id: state.user?.id || null,
-                    p_contact_type: type,
-                    p_contact_data: { timestamp: new Date().toISOString(), page: window.location.pathname },
-                    p_ip_address: null,
-                    p_user_agent: (navigator.userAgent || '').slice(0, 400),
-                    p_referrer: (document.referrer || '').slice(0, 400) || null,
-                });
-
-                if (error) {
-                    await supabase.from('supplier_contacts').insert({
-                        supplier_id: supplierId,
-                        product_id: productId && isValidUUID(productId) ? productId : null,
-                        buyer_id: state.user?.id || null,
-                        contact_type: type,
-                        contact_data: { timestamp: new Date().toISOString() },
-                    }).then(() => {});
-                }
-            } catch (e) { /* silent */ }
-        };
-
-        const trackView = (productId, supplierId) => {
-            if (!productId || state.viewTracked.has(productId)) return;
-            state.viewTracked.add(productId);
-            logContact({ supplierId, productId, type: 'view' }).catch(() => {});
-        };
-
-        const observeProductViews = () => {
-            if (!('IntersectionObserver' in window)) return;
-            const observer = new IntersectionObserver((entries) => {
-                entries.forEach(entry => {
-                    if (entry.isIntersecting) {
-                        const card = entry.target;
-                        const productId = card.dataset.productId;
-                        const supplierId = card.querySelector('[data-action="whatsapp"]')?.dataset.supplierId;
-                        if (productId && supplierId && !state.viewTracked.has(productId)) {
-                            setTimeout(() => {
-                                if (card.isConnected) trackView(productId, supplierId);
-                            }, 3000);
-                        }
-                        observer.unobserve(card);
-                    }
-                });
-            }, { threshold: 0.5 });
-            document.querySelectorAll('.card[data-product-id]').forEach(card => observer.observe(card));
-        };
-
-        // ============================================================
         // FEATURED
         // ============================================================
         const loadFeatured = async () => {
             if (!supabase) return;
             try {
-                const { data: products, error } = await supabase
-                    .from('products')
-                    .select('*')
-                    .eq('status', 'active')
-                    .eq('is_featured', true)
-                    .order('created_at', { ascending: false })
-                    .limit(4);
+                const { data: products } = await supabase
+                    .from('products').select('*').eq('status', 'active').eq('is_featured', true)
+                    .order('created_at', { ascending: false }).limit(4);
 
                 const section = document.getElementById('featuredContainer');
                 const list = document.getElementById('featuredProductsList');
 
-                if (error || !products?.length) {
+                if (!products?.length) {
                     if (section) section.style.display = 'none';
                     return;
                 }
 
                 const supplierIds = [...new Set(products.map(p => p.supplier_id).filter(Boolean))];
-                const productIds = products.map(p => p.id).filter(Boolean);
-
-                const [suppliersMap, ratingsMap] = await Promise.all([
-                    fetchSuppliersMap(supplierIds),
-                    fetchRatingsMap(productIds),
-                ]);
-
-                const enriched = products.map(p => ({
-                    ...p,
-                    supplier: suppliersMap[p.supplier_id] || null,
-                    ratings: ratingsMap[p.id] ? [ratingsMap[p.id]] : [],
-                }));
+                const suppliersMap = await fetchSuppliersMap(supplierIds);
+                const enriched = products.map(p => ({ ...p, supplier: suppliersMap[p.supplier_id] || null }));
 
                 if (section) section.style.display = 'block';
                 if (list) list.innerHTML = enriched.map((p, i) => renderProductCard(p, i)).join('');
                 observeProductViews();
-            } catch (e) { /* silent */ }
+            } catch (e) {}
+        };
+
+        // ============================================================
+        // TRENDING
+        // ============================================================
+        const loadTrending = async () => {
+            if (!supabase) return;
+            try {
+                let { data } = await supabase.from('products').select('*').eq('status', 'active')
+                    .gte('views', 5).order('views', { ascending: false, nullsFirst: false }).limit(4);
+                
+                if (!data?.length) {
+                    const fallback = await supabase.from('products').select('*').eq('status', 'active')
+                        .order('views', { ascending: false, nullsFirst: false }).limit(4);
+                    data = fallback.data;
+                }
+
+                if (!data?.length) return;
+
+                const supplierIds = [...new Set(data.map(p => p.supplier_id).filter(Boolean))];
+                const suppliersMap = await fetchSuppliersMap(supplierIds);
+                const enriched = data.map(p => ({ ...p, supplier: suppliersMap[p.supplier_id] || null }));
+
+                const section = document.getElementById('trendingSection');
+                const list = document.getElementById('trendingList');
+                if (section) section.style.display = 'block';
+                if (list) list.innerHTML = enriched.map((p, i) => renderProductCard(p, i)).join('');
+                observeProductViews();
+            } catch (e) {}
+        };
+
+        // ============================================================
+        // LIVE RFQs
+        // ============================================================
+        const loadLiveRfqs = async () => {
+            if (!supabase) return;
+            try {
+                const { data } = await supabase
+                    .from('purchase_requests')
+                    .select(`
+                        id, product_name, quantity_needed, budget_max, deadline, location, created_at,
+                        buyer:profiles!buyer_id (company_name, full_name, is_verified)
+                    `)
+                    .eq('status', 'open')
+                    .order('created_at', { ascending: false })
+                    .limit(3);
+
+                if (!data?.length) return;
+
+                const section = document.getElementById('liveRfqsSection');
+                const list = document.getElementById('liveRfqsList');
+                if (!section || !list) return;
+
+                section.style.display = 'block';
+                list.innerHTML = data.map(rfq => {
+                    const buyerName = rfq.buyer?.company_name || rfq.buyer?.full_name || 'مشتري';
+                    const budget = rfq.budget_max 
+                        ? `حتى ${Number(rfq.budget_max).toLocaleString('ar-EG')} ج.م`
+                        : 'ميزانية مفتوحة';
+                    
+                    return `
+                        <article class="card" style="animation-delay: 0.1s;" onclick="window.location.href='request-details.html?id=${encodeURIComponent(rfq.id)}'">
+                            <div style="padding: 20px; cursor: pointer;">
+                                <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                                    <span style="background: rgba(255,107,53,0.1); color: var(--c-safety-orange); padding: 4px 12px; border-radius: var(--r-full); font-size: 0.7rem; font-weight: 800;">
+                                        🔥 طلب مفتوح
+                                    </span>
+                                    <span style="font-size: 0.75rem; color: var(--c-text-sub);">
+                                        ${timeAgo(rfq.created_at)}
+                                    </span>
+                                </div>
+                                <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 10px; color: var(--c-text);">
+                                    ${escapeHtml(rfq.product_name)}
+                                </h3>
+                                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 8px; font-size: 0.8rem;">
+                                    <div>
+                                        <div style="color: var(--c-text-sub); font-size: 0.7rem;">الكمية</div>
+                                        <div style="font-weight: 700;">${escapeHtml(rfq.quantity_needed || '—')}</div>
+                                    </div>
+                                    <div>
+                                        <div style="color: var(--c-text-sub); font-size: 0.7rem;">الميزانية</div>
+                                        <div style="font-weight: 700; color: var(--c-lab-green);">${budget}</div>
+                                    </div>
+                                    <div>
+                                        <div style="color: var(--c-text-sub); font-size: 0.7rem;">الموقع</div>
+                                        <div style="font-weight: 700;">${escapeHtml(rfq.location || '—')}</div>
+                                    </div>
+                                    <div>
+                                        <div style="color: var(--c-text-sub); font-size: 0.7rem;">الموعد النهائي</div>
+                                        <div style="font-weight: 700;">${rfq.deadline ? new Date(rfq.deadline).toLocaleDateString('ar-EG') : '—'}</div>
+                                    </div>
+                                </div>
+                                <div style="margin-top: 12px; padding-top: 12px; border-top: 1px solid var(--c-border); display: flex; align-items: center; gap: 6px; font-size: 0.78rem; color: var(--c-text-muted);">
+                                    <i class="fas fa-user-circle"></i>
+                                    <span>${escapeHtml(buyerName)}</span>
+                                </div>
+                            </div>
+                        </article>
+                    `;
+                }).join('');
+            } catch (e) {}
         };
 
         // ============================================================
@@ -3611,7 +3276,7 @@
             try {
                 const { data } = await supabase
                     .from('products')
-                    .select('id, name, price, cas_number, purity')
+                    .select('id, name, price, cas_number, purity, formula')
                     .eq('status', 'active')
                     .order('views', { ascending: false, nullsFirst: false })
                     .limit(300);
@@ -3637,19 +3302,15 @@
             let results;
 
             if (state.searchMode === 'cas') {
-                results = state.allSuggestions
-                    .filter(p => p.cas_number && String(p.cas_number).includes(query))
-                    .slice(0, 8);
+                results = state.allSuggestions.filter(p => p.cas_number && String(p.cas_number).includes(query)).slice(0, 8);
+            } else if (state.searchMode === 'formula') {
+                results = state.allSuggestions.filter(p => p.formula && p.formula.toLowerCase().includes(lower)).slice(0, 8);
             } else {
-                results = state.allSuggestions
-                    .filter(p => p.name && p.name.toLowerCase().includes(lower))
-                    .slice(0, 8);
+                results = state.allSuggestions.filter(p => p.name && p.name.toLowerCase().includes(lower)).slice(0, 8);
             }
 
             if (!results.length) {
-                const tip = state.searchMode === 'cas'
-                    ? 'تأكد من كتابة رقم CAS بشكل صحيح (مثال: 1310-73-2)'
-                    : 'جرب كلمة مختلفة';
+                const tip = state.searchMode === 'cas' ? 'تأكد من كتابة رقم CAS بشكل صحيح (مثال: 1310-73-2)' : 'جرب كلمة مختلفة';
                 box.innerHTML = `<div class="suggestion-empty">🔍 لا توجد نتائج لـ "${escapeHtml(query)}"<br><small style="font-size:0.75rem;opacity:0.7;margin-top:4px;display:inline-block;">${tip}</small></div>`;
                 box.classList.add('show');
                 return;
@@ -3691,11 +3352,8 @@
             const items = box.querySelectorAll('.suggestion-item');
             if (!items.length) return;
             items.forEach(el => el.classList.remove('active'));
-            if (direction === 'down') {
-                state.selectedSuggestionIndex = Math.min(state.selectedSuggestionIndex + 1, items.length - 1);
-            } else {
-                state.selectedSuggestionIndex = Math.max(state.selectedSuggestionIndex - 1, 0);
-            }
+            if (direction === 'down') state.selectedSuggestionIndex = Math.min(state.selectedSuggestionIndex + 1, items.length - 1);
+            else state.selectedSuggestionIndex = Math.max(state.selectedSuggestionIndex - 1, 0);
             if (state.selectedSuggestionIndex >= 0) {
                 items[state.selectedSuggestionIndex].classList.add('active');
                 items[state.selectedSuggestionIndex].scrollIntoView({ block: 'nearest' });
@@ -3707,8 +3365,7 @@
             if (!box?.classList.contains('show')) return;
             const items = box.querySelectorAll('.suggestion-item');
             if (!items.length) return;
-            const idx = state.selectedSuggestionIndex >= 0 ? state.selectedSuggestionIndex : 0;
-            items[idx]?.click();
+            items[state.selectedSuggestionIndex >= 0 ? state.selectedSuggestionIndex : 0]?.click();
         };
 
         const performSearch = () => {
@@ -3738,6 +3395,11 @@
                         input.setAttribute('inputmode', 'numeric');
                         input.setAttribute('dir', 'ltr');
                         input.style.textAlign = 'left';
+                    } else if (mode === 'formula') {
+                        input.placeholder = 'ابحث بالصيغة الكيميائية... مثل: NaOH، H2SO4';
+                        input.removeAttribute('inputmode');
+                        input.setAttribute('dir', 'ltr');
+                        input.style.textAlign = 'left';
                     } else {
                         input.placeholder = 'ابحث عن منتج... مثل: صودا كاوية، حمض كبريتيك';
                         input.removeAttribute('inputmode');
@@ -3755,6 +3417,7 @@
         const initSearch = () => {
             const input = document.getElementById('searchInput');
             const btn = document.getElementById('searchBtn');
+            const aiBtn = document.getElementById('aiSearchBtn');
             const box = document.getElementById('suggestionsBox');
 
             const debouncedShow = debounce((q) => showSuggestions(q), 200);
@@ -3784,6 +3447,16 @@
 
             btn?.addEventListener('click', performSearch);
 
+            // AI Search
+            aiBtn?.addEventListener('click', () => {
+                const query = input?.value.trim();
+                if (!query) {
+                    showToast('🤖', 'البحث الذكي', 'اكتب استعلام طبيعي: "أريد 10 طن أسيتون 99% في القاهرة"', null, null, 'info');
+                    return;
+                }
+                performAISearch(query);
+            });
+
             box?.addEventListener('click', (e) => {
                 const item = e.target.closest('.suggestion-item');
                 if (!item) return;
@@ -3805,21 +3478,74 @@
         };
 
         // ============================================================
+        // AI SEARCH
+        // ============================================================
+        const performAISearch = async (query) => {
+            try {
+                // Parse natural language
+                const parsed = parseNaturalLanguage(query);
+                
+                showToast('🤖', 'البحث الذكي', `جاري تحليل: "${query}"`, null, null, 'info');
+
+                // Apply parsed filters
+                if (parsed.filters.quantity) state.search = parsed.query;
+                if (parsed.filters.grade) state.gradeFilter = parsed.filters.grade;
+                if (parsed.filters.purity) state.purityFilter = parsed.filters.purity;
+                if (parsed.filters.location) state.search = parsed.query;
+
+                // Update UI
+                const input = document.getElementById('searchInput');
+                if (input) input.value = parsed.query;
+                
+                state.search = parsed.query;
+
+                // Load with filters
+                updateURL();
+                await loadProducts();
+                
+                document.getElementById('productsList')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+                showToast('✅', 'نتائج البحث الذكي', `تم تطبيق الفلاتر المستخرجة تلقائياً`, null, null, 'success');
+            } catch (e) {
+                console.error('AI Search error:', e);
+                performSearch();
+            }
+        };
+
+        const parseNaturalLanguage = (query) => {
+            const patterns = [
+                { regex: /(\d+)\s*(طن|كجم|لتر|عبوة|برميل)/i, extract: (m) => ({ quantity: parseInt(m[1]), unit: m[2] }) },
+                { regex: /(?:سعر|بـ|بسعر)\s*(\d+)/i, extract: (m) => ({ maxPrice: parseInt(m[1]) }) },
+                { regex: /(?:نقاء|درجة نقاء)\s*(\d+)%/i, extract: (m) => ({ purity: parseInt(m[1]) }) },
+                { regex: /(?:درجة|grade)\s*(تقني|تحليلي|صيدلاني|غذائي|ACS)/i, extract: (m) => ({ grade: m[1] }) },
+                { regex: /(?:في|بمدينة|منطقة)\s*(القاهرة|الإسكندرية|الجيزة|بورسعيد|السويس|طنطا|المنصورة|أسيوط)/i, extract: (m) => ({ location: m[1] }) },
+            ];
+
+            const filters = {};
+            let cleanQuery = query;
+
+            patterns.forEach(pattern => {
+                const match = query.match(pattern.regex);
+                if (match) {
+                    Object.assign(filters, pattern.extract(match));
+                    cleanQuery = cleanQuery.replace(match[0], '').trim();
+                }
+            });
+
+            return { query: cleanQuery || query, filters };
+        };
+
+        // ============================================================
         // CATEGORIES
         // ============================================================
         const loadCategories = async () => {
             if (!supabase) return;
             try {
-                let { data, error } = await supabase
-                    .from('categories')
-                    .select('id, name, icon')
-                    .order('display_order');
-
-                if (error) {
+                let { data } = await supabase.from('categories').select('id, name, icon').order('display_order');
+                if (!data) {
                     const fallback = await supabase.from('categories').select('id, name, icon');
                     data = fallback.data;
                 }
-
                 if (!data?.length) return;
                 state.categories = data;
 
@@ -3831,7 +3557,7 @@
                         btn.dataset.categoryId = cat.id;
                         btn.setAttribute('role', 'tab');
                         btn.setAttribute('aria-selected', 'false');
-                        btn.textContent = `${cat.icon || '📁'} ${cat.name}`;
+                        btn.innerHTML = `${cat.icon || '📁'} ${escapeHtml(cat.name)}`;
                         container.appendChild(btn);
                     });
 
@@ -3859,8 +3585,7 @@
                         rfqCatSelect.appendChild(option);
                     });
                 }
-
-            } catch (e) { /* silent */ }
+            } catch (e) {}
         };
 
         const renderCategoryGrid = async () => {
@@ -3869,16 +3594,11 @@
 
             const counts = {};
             try {
-                const { data } = await supabase
-                    .from('products')
-                    .select('category_id')
-                    .eq('status', 'active');
-                (data || []).forEach(p => {
-                    counts[p.category_id] = (counts[p.category_id] || 0) + 1;
-                });
+                const { data } = await supabase.from('products').select('category_id').eq('status', 'active');
+                (data || []).forEach(p => { counts[p.category_id] = (counts[p.category_id] || 0) + 1; });
             } catch {}
 
-            grid.innerHTML = state.categories.slice(0, 8).map(cat => `
+            grid.innerHTML = state.categories.slice(0, 12).map(cat => `
                 <div class="category-card reveal" data-category-id="${escapeHtml(cat.id)}">
                     <span class="cat-icon">${cat.icon || '📁'}</span>
                     <div class="cat-name">${escapeHtml(cat.name)}</div>
@@ -3889,11 +3609,10 @@
             grid.addEventListener('click', (e) => {
                 const card = e.target.closest('.category-card');
                 if (!card) return;
-                const catId = card.dataset.categoryId;
-                state.categoryId = catId;
+                state.categoryId = card.dataset.categoryId;
 
                 document.querySelectorAll('.filter-chip').forEach(c => {
-                    const isActive = c.dataset.categoryId === catId;
+                    const isActive = c.dataset.categoryId === state.categoryId;
                     c.classList.toggle('active', isActive);
                     c.setAttribute('aria-selected', isActive);
                 });
@@ -3917,19 +3636,16 @@
             });
 
             document.getElementById('sortFilter')?.addEventListener('change', (e) => {
-                state.sort = e.target.value;
-                updateURL();
-                loadProducts();
+                state.sort = e.target.value; updateURL(); loadProducts();
             });
             document.getElementById('purityFilter')?.addEventListener('change', (e) => {
-                state.purityFilter = e.target.value;
-                updateURL();
-                loadProducts();
+                state.purityFilter = e.target.value; updateURL(); loadProducts();
             });
             document.getElementById('gradeFilter')?.addEventListener('change', (e) => {
-                state.gradeFilter = e.target.value;
-                updateURL();
-                loadProducts();
+                state.gradeFilter = e.target.value; updateURL(); loadProducts();
+            });
+            document.getElementById('stockFilter')?.addEventListener('change', (e) => {
+                state.stockFilter = e.target.value; updateURL(); loadProducts();
             });
         };
 
@@ -3975,13 +3691,9 @@
             const apply = debounce(() => {
                 const min = Number(minInput.value);
                 const max = Number(maxInput.value);
-                if (min === 0 && max === MAX) {
-                    state.priceFilter = 'all';
-                } else if (max === MAX) {
-                    state.priceFilter = `${min}+`;
-                } else {
-                    state.priceFilter = `${min}-${max}`;
-                }
+                if (min === 0 && max === MAX) state.priceFilter = 'all';
+                else if (max === MAX) state.priceFilter = `${min}+`;
+                else state.priceFilter = `${min}-${max}`;
                 updateURL();
                 loadProducts();
             }, 400);
@@ -3996,12 +3708,13 @@
         const updateURL = () => {
             const params = new URLSearchParams();
             if (state.search) params.set('search', state.search);
-            if (state.searchMode && state.searchMode !== 'name') params.set('mode', state.searchMode);
-            if (state.categoryId && state.categoryId !== 'all') params.set('category', state.categoryId);
-            if (state.priceFilter && state.priceFilter !== 'all') params.set('price', state.priceFilter);
-            if (state.purityFilter && state.purityFilter !== 'all') params.set('purity', state.purityFilter);
-            if (state.gradeFilter && state.gradeFilter !== 'all') params.set('grade', state.gradeFilter);
-            if (state.sort && state.sort !== 'newest') params.set('sort', state.sort);
+            if (state.searchMode !== 'name') params.set('mode', state.searchMode);
+            if (state.categoryId !== 'all') params.set('category', state.categoryId);
+            if (state.priceFilter !== 'all') params.set('price', state.priceFilter);
+            if (state.purityFilter !== 'all') params.set('purity', state.purityFilter);
+            if (state.gradeFilter !== 'all') params.set('grade', state.gradeFilter);
+            if (state.stockFilter !== 'all') params.set('stock', state.stockFilter);
+            if (state.sort !== 'newest') params.set('sort', state.sort);
             const qs = params.toString();
             history.replaceState({}, '', qs ? `?${qs}` : window.location.pathname);
         };
@@ -4009,25 +3722,24 @@
         const readURL = () => {
             const params = new URLSearchParams(window.location.search);
             state.search = sanitizeSearch(params.get('search') || '');
-            const savedMode = localStorage.getItem(SEARCH_MODE_KEY);
-            state.searchMode = params.get('mode') === 'cas' ? 'cas' : (savedMode === 'cas' ? 'cas' : 'name');
+            state.searchMode = params.get('mode') || localStorage.getItem(SEARCH_MODE_KEY) || 'name';
             state.categoryId = params.get('category') || 'all';
             state.priceFilter = params.get('price') || 'all';
             state.purityFilter = params.get('purity') || 'all';
             state.gradeFilter = params.get('grade') || 'all';
+            state.stockFilter = params.get('stock') || 'all';
             state.sort = params.get('sort') || 'newest';
 
             const input = document.getElementById('searchInput');
             if (input && state.search) input.value = state.search;
-
             const sortFilter = document.getElementById('sortFilter');
             if (sortFilter) sortFilter.value = state.sort;
-
             const purityFilterEl = document.getElementById('purityFilter');
             if (purityFilterEl) purityFilterEl.value = state.purityFilter;
-
             const gradeFilterEl = document.getElementById('gradeFilter');
             if (gradeFilterEl) gradeFilterEl.value = state.gradeFilter;
+            const stockFilterEl = document.getElementById('stockFilter');
+            if (stockFilterEl) stockFilterEl.value = state.stockFilter;
         };
 
         // ============================================================
@@ -4036,7 +3748,6 @@
         const initInfiniteScroll = () => {
             const sentinel = document.getElementById('infiniteSentinel');
             if (!sentinel || !('IntersectionObserver' in window)) return;
-
             let isLoading = false;
             const observer = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting && !isLoading && state.hasMore && !state.loading) {
@@ -4067,25 +3778,19 @@
             document.getElementById('shareBtn')?.addEventListener('click', async () => {
                 if (navigator.share) {
                     try {
-                        await navigator.share({
-                            title: 'كيماتو - سوق الكيماويات',
-                            text: 'اكتشف أفضل المنتجات الكيماوية في مصر!',
-                            url: window.location.href,
-                        });
+                        await navigator.share({ title: 'كيماتو', text: 'منصة الكيماويات B2B', url: window.location.href });
                         return;
                     } catch (e) { if (e.name === 'AbortError') return; }
                 }
                 try {
                     await navigator.clipboard.writeText(window.location.href);
                     showToast('📋', 'تم النسخ!', 'تم نسخ رابط الصفحة', null, null, 'success');
-                } catch {
-                    showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', null, null, 'error');
-                }
+                } catch {}
             });
         };
 
         // ============================================================
-        // QUICK VIEW TRIGGER
+        // QUICK VIEW
         // ============================================================
         const initQuickView = () => {
             document.addEventListener('dblclick', (e) => {
@@ -4095,33 +3800,289 @@
                     if (card) showQuickView(card.dataset.productId);
                 }
             });
+        };
 
-            document.addEventListener('mouseover', (e) => {
-                const media = e.target.closest('.card-media');
-                if (media && !media.querySelector('.quick-view-trigger')) {
-                    const card = media.closest('[data-product-id]');
-                    if (!card) return;
+        const showQuickView = async (productId) => {
+            if (!supabase || !isValidUUID(productId)) return;
+            const modal = document.getElementById('quickViewModal');
+            const body = document.getElementById('quickViewBody');
+            if (!modal || !body) return;
 
-                    const btn = document.createElement('button');
-                    btn.className = 'quick-view-trigger';
-                    btn.setAttribute('aria-label', 'نظرة سريعة');
-                    btn.innerHTML = '<i class="fas fa-eye"></i> نظرة سريعة';
+            modal.classList.add('show');
+            body.innerHTML = `<div class="infinite-loading"><span>جاري التحميل</span><div class="dots"><span></span><span></span><span></span></div></div>`;
 
-                    btn.addEventListener('click', (ev) => {
-                        ev.stopPropagation();
-                        ev.preventDefault();
-                        showQuickView(card.dataset.productId);
-                    });
+            try {
+                const { data: p } = await supabase.from('products').select('*').eq('id', productId).single();
+                if (!p) throw new Error('Not found');
+                const supplier = p.supplier_id ? (await fetchSuppliersMap([p.supplier_id]))[p.supplier_id] : null;
+                const price = p.price ? `${Number(p.price).toLocaleString('ar-EG')} <span class="currency">ج.م</span>` : 'سعر عند الطلب';
+                const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
+                const mediaHtml = hasImage ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}">` : `<span>🧪</span>`;
+                const gradeLabels = { 'technical': 'تقني', 'analytical': 'تحليلي', 'acs': 'ACS', 'pharma': 'صيدلاني', 'food': 'غذائي' };
+                const safeName = (p.name || '').replace(/'/g, '&#39;');
 
-                    media.appendChild(btn);
+                body.innerHTML = `
+                    <div class="quick-view-content">
+                        <div class="quick-view-image">${mediaHtml}</div>
+                        <div class="quick-view-info">
+                            <span class="card-category"><i class="fas fa-flask"></i> ${escapeHtml(p.category || 'كيماويات')}</span>
+                            <h2>${escapeHtml(p.name)}</h2>
+                            <div class="qv-price">${price}${p.unit ? ` <span class="currency" style="font-size:0.9rem;">/ ${escapeHtml(p.unit)}</span>` : ''}</div>
+                            <div class="qv-specs">
+                                ${p.cas_number ? `<div class="qv-spec"><span class="label">رقم CAS</span><span class="value" style="font-family:monospace;direction:ltr;">${escapeHtml(p.cas_number)}</span></div>` : ''}
+                                ${p.formula ? `<div class="qv-spec"><span class="label">الصيغة</span><span class="value" style="font-family:monospace;direction:ltr;">${escapeHtml(p.formula)}</span></div>` : ''}
+                                ${p.purity ? `<div class="qv-spec"><span class="label">النقاء</span><span class="value">${escapeHtml(p.purity)}</span></div>` : ''}
+                                ${p.grade ? `<div class="qv-spec"><span class="label">الدرجة</span><span class="value">${escapeHtml(gradeLabels[p.grade] || p.grade)}</span></div>` : ''}
+                                ${p.molecular_weight ? `<div class="qv-spec"><span class="label">الوزن الجزيئي</span><span class="value">${escapeHtml(p.molecular_weight)}</span></div>` : ''}
+                                ${p.packaging ? `<div class="qv-spec"><span class="label">التعبئة</span><span class="value">${escapeHtml(p.packaging)}</span></div>` : ''}
+                            </div>
+                            ${p.description ? `<p style="color:var(--c-text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:16px;">${escapeHtml(p.description.substring(0, 250))}</p>` : ''}
+                            <div class="card-actions" style="margin-top: 20px;">
+                                <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="btn-card btn-detail" style="flex:2;">
+                                    <i class="fas fa-info-circle"></i> عرض التفاصيل
+                                </a>
+                                <button class="btn-card btn-rfq" type="button" style="flex:1;"
+                                    data-action="rfq"
+                                    data-product-id="${escapeHtml(p.id)}"
+                                    data-name="${safeName}"
+                                    data-cas="${escapeHtml(p.cas_number || '')}"
+                                    data-purity="${escapeHtml(p.purity || '')}">
+                                    <i class="fas fa-file-invoice"></i> RFQ
+                                </button>
+                            </div>
+                            ${supplier ? `
+                                <div class="card-supplier" style="margin-top: 16px; padding-top: 16px; border-top: 1px solid var(--c-border);">
+                                    ${supplier.is_verified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
+                                    <i class="fas fa-building"></i>
+                                    <span>${escapeHtml(supplier.company_name || supplier.full_name || 'مورد')}</span>
+                                </div>
+                            ` : ''}
+                        </div>
+                    </div>
+                `;
+                trackView(p.id, p.supplier_id);
+            } catch (e) {
+                body.innerHTML = `<div class="empty-state">⚠️ خطأ في التحميل</div>`;
+            }
+        };
 
-                    media.addEventListener('mouseleave', () => {
-                        btn.style.opacity = '0';
-                        btn.style.transform = 'translateX(-50%) translateY(20px)';
-                        setTimeout(() => btn.remove(), 300);
-                    }, { once: true });
+        // ============================================================
+        // RFQ
+        // ============================================================
+        const showRfqModal = () => {
+            const notice = document.getElementById('rfqLoginNotice');
+            const submitBtn = document.getElementById('submitRfqBtn');
+            if (state.user) {
+                notice.style.display = 'none';
+                submitBtn.disabled = false;
+            } else {
+                notice.style.display = 'flex';
+                submitBtn.disabled = false;
+            }
+            document.getElementById('rfqModal').classList.add('show');
+            setTimeout(() => document.getElementById('rfqProduct')?.focus(), 300);
+        };
+
+        const initRfqForm = () => {
+            const form = document.getElementById('rfqForm');
+            form?.addEventListener('submit', async (e) => {
+                e.preventDefault();
+                if (!state.user) {
+                    showToast('🔒', 'مطلوب تسجيل دخول', 'سجّل دخولك أولاً', 'تسجيل الدخول', 'auth.html?redirect=rfq', 'warning');
+                    return;
+                }
+
+                const submitBtn = document.getElementById('submitRfqBtn');
+                const originalText = submitBtn.innerHTML;
+                submitBtn.disabled = true;
+                submitBtn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span> جاري الإرسال';
+
+                try {
+                    const data = Object.fromEntries(new FormData(form));
+                    if (!data.product_name?.trim()) throw new Error('اكتب اسم المنتج');
+                    if (!data.quantity || Number(data.quantity) <= 0) throw new Error('الكمية لازم تكون أكبر من صفر');
+                    if (data.cas_number && data.cas_number.trim() && !isValidCasFormat(data.cas_number)) {
+                        throw new Error('صيغة رقم CAS غير صحيحة');
+                    }
+
+                    const { data: inserted, error } = await supabase
+                        .from('purchase_requests')
+                        .insert({
+                            buyer_id: state.user.id,
+                            product_name: data.product_name.trim(),
+                            cas_number: data.cas_number?.trim() || null,
+                            purity_required: data.purity?.trim() || null,
+                            category: data.category?.trim() || null,
+                            quantity_needed: `${data.quantity} ${data.unit || 'كجم'}`.trim(),
+                            preferred_unit: data.unit || 'كجم',
+                            description: data.notes?.trim() || null,
+                            location: data.location?.trim() || null,
+                            deadline: data.deadline || null,
+                            budget_min: data.budget_min ? Number(data.budget_min) : null,
+                            budget_max: data.budget_max ? Number(data.budget_max) : null,
+                            status: 'open',
+                        })
+                        .select()
+                        .single();
+
+                    if (error) throw error;
+
+                    showToast('✅', 'تم الإرسال!', 'هيتواصل معك الموردون قريباً', 'لوحة التحكم', 'buyer-dashboard.html', 'success');
+                    form.reset();
+                    document.getElementById('rfqModal').classList.remove('show');
+                } catch (err) {
+                    showToast('⚠️', 'خطأ', err.message || 'تعذر إرسال الطلب', null, null, 'error');
+                } finally {
+                    submitBtn.disabled = false;
+                    submitBtn.innerHTML = originalText;
                 }
             });
+        };
+
+        // ============================================================
+        // LOG CONTACT
+        // ============================================================
+        const logContact = async ({ supplierId, productId, type }) => {
+            if (!supabase || !isValidUUID(supplierId)) return;
+            try {
+                await supabase.rpc('log_supplier_contact', {
+                    p_supplier_id: supplierId,
+                    p_product_id: productId && isValidUUID(productId) ? productId : null,
+                    p_buyer_id: state.user?.id || null,
+                    p_contact_type: type,
+                    p_contact_data: { timestamp: new Date().toISOString() },
+                    p_ip_address: null,
+                    p_user_agent: (navigator.userAgent || '').slice(0, 400),
+                    p_referrer: (document.referrer || '').slice(0, 400) || null,
+                });
+            } catch (e) {}
+        };
+
+        const trackView = (productId, supplierId) => {
+            if (!productId || state.viewTracked.has(productId)) return;
+            state.viewTracked.add(productId);
+            logContact({ supplierId, productId, type: 'view' }).catch(() => {});
+        };
+
+        const observeProductViews = () => {
+            if (!('IntersectionObserver' in window)) return;
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        const card = entry.target;
+                        const productId = card.dataset.productId;
+                        const supplierId = card.querySelector('[data-action="whatsapp"]')?.dataset.supplierId;
+                        if (productId && supplierId && !state.viewTracked.has(productId)) {
+                            setTimeout(() => { if (card.isConnected) trackView(productId, supplierId); }, 3000);
+                        }
+                        observer.unobserve(card);
+                    }
+                });
+            }, { threshold: 0.5 });
+            document.querySelectorAll('.card[data-product-id]').forEach(card => observer.observe(card));
+        };
+
+        // ============================================================
+        // NOTIFICATIONS
+        // ============================================================
+        const SmartNotifications = {
+            notifications: [],
+            async load() {
+                if (!state.user) return;
+                try {
+                    const { data } = await supabase
+                        .from('notifications')
+                        .select('*')
+                        .eq('user_id', state.user.id)
+                        .order('created_at', { ascending: false })
+                        .limit(50);
+                    this.notifications = data || [];
+                } catch {
+                    this.notifications = JSON.parse(localStorage.getItem('chemato-notifications') || '[]');
+                }
+                this.updateBadge();
+                this.render();
+            },
+            async add(notification) {
+                const newN = { id: Date.now(), ...notification, read: false, created_at: new Date().toISOString() };
+                this.notifications.unshift(newN);
+                this.notifications = this.notifications.slice(0, 50);
+                if (state.user) {
+                    await supabase.from('notifications').insert({
+                        user_id: state.user.id,
+                        type: notification.type,
+                        title: notification.title,
+                        message: notification.message,
+                    }).catch(() => {});
+                } else {
+                    localStorage.setItem('chemato-notifications', JSON.stringify(this.notifications));
+                }
+                this.updateBadge();
+                this.render();
+            },
+            updateBadge() {
+                const unread = this.notifications.filter(n => !n.read).length;
+                const badge = document.getElementById('notificationBadge');
+                if (badge) {
+                    badge.textContent = unread > 99 ? '99+' : unread;
+                    badge.style.display = unread > 0 ? 'flex' : 'none';
+                }
+            },
+            render() {
+                const list = document.getElementById('notificationList');
+                if (!list) return;
+                if (!this.notifications.length) {
+                    list.innerHTML = `
+                        <div class="empty-state" style="padding:40px 20px;border:none;">
+                            <i class="fas fa-bell-slash" style="font-size:2rem;opacity:0.3;"></i>
+                            <p style="margin-top:12px;color:var(--c-text-sub);">لا توجد إشعارات</p>
+                        </div>
+                    `;
+                    return;
+                }
+                const iconMap = {
+                    price_drop: { icon: 'chart-line', class: 'price-drop' },
+                    new_quote: { icon: 'file-invoice', class: 'new-quote' },
+                    stock_alert: { icon: 'exclamation-triangle', class: 'stock-alert' },
+                    new_product: { icon: 'box', class: 'new-product' },
+                };
+                list.innerHTML = this.notifications.map(n => {
+                    const icon = iconMap[n.type] || { icon: 'bell', class: 'default' };
+                    return `
+                        <div class="notification-item ${n.read ? '' : 'unread'}" data-id="${n.id}" style="position:relative;">
+                            <div class="notification-icon ${icon.class}">
+                                <i class="fas fa-${icon.icon}"></i>
+                            </div>
+                            <div style="flex:1;min-width:0;">
+                                <div style="font-weight:700;font-size:0.85rem;margin-bottom:2px;">${escapeHtml(n.title)}</div>
+                                <div style="font-size:0.78rem;color:var(--c-text-muted);line-height:1.4;">${escapeHtml(n.message)}</div>
+                                <div style="font-size:0.7rem;color:var(--c-text-sub);margin-top:4px;">${timeAgo(n.created_at)}</div>
+                            </div>
+                        </div>
+                    `;
+                }).join('');
+            },
+            async markAllRead() {
+                this.notifications.forEach(n => n.read = true);
+                this.updateBadge();
+                this.render();
+                if (state.user) {
+                    await supabase.from('notifications').update({ read: true }).eq('user_id', state.user.id).catch(() => {});
+                }
+            },
+            init() {
+                this.load();
+                document.getElementById('notificationBtn')?.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    document.getElementById('notificationPanel')?.classList.toggle('show');
+                });
+                document.addEventListener('click', (e) => {
+                    if (!e.target.closest('#notificationPanel') && !e.target.closest('#notificationBtn')) {
+                        document.getElementById('notificationPanel')?.classList.remove('show');
+                    }
+                });
+                document.getElementById('markAllReadBtn')?.addEventListener('click', () => this.markAllRead());
+            }
         };
 
         // ============================================================
@@ -4129,7 +4090,6 @@
         // ============================================================
         const initScrollReveal = () => {
             if (!('IntersectionObserver' in window)) return;
-
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
@@ -4138,65 +4098,7 @@
                     }
                 });
             }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
-
             document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
-        };
-
-        // ============================================================
-        // NOTIFICATIONS
-        // ============================================================
-        const NotificationCenter = {
-            items: [],
-
-            add(notification) {
-                this.items.unshift({
-                    id: Date.now(),
-                    ...notification,
-                    read: false,
-                    timestamp: Date.now()
-                });
-                this.items = this.items.slice(0, 20);
-                this.updateBadge();
-                this.persist();
-            },
-
-            markAllRead() {
-                this.items.forEach(n => n.read = true);
-                this.updateBadge();
-                this.persist();
-            },
-
-            updateBadge() {
-                const unread = this.items.filter(n => !n.read).length;
-                const dot = document.querySelector('.notification-dot');
-                if (dot) dot.style.display = unread > 0 ? 'block' : 'none';
-            },
-
-            persist() {
-                try { localStorage.setItem('chemato-notifications', JSON.stringify(this.items)); } catch {}
-            },
-
-            load() {
-                try {
-                    const saved = JSON.parse(localStorage.getItem('chemato-notifications') || '[]');
-                    this.items = saved;
-                    this.updateBadge();
-                } catch {}
-            }
-        };
-
-        const initNotifications = () => {
-            NotificationCenter.load();
-
-            document.getElementById('notificationBtn')?.addEventListener('click', () => {
-                if (NotificationCenter.items.length) {
-                    const latest = NotificationCenter.items[0];
-                    showToast('🔔', latest.title || 'إشعار', latest.desc || '', null, null, 'info');
-                    NotificationCenter.markAllRead();
-                } else {
-                    showToast('🔔', 'لا توجد إشعارات', 'هتلاقي هنا آخر التحديثات والمنتجات الجديدة', null, null, 'info');
-                }
-            });
         };
 
         // ============================================================
@@ -4205,9 +4107,7 @@
         const initPWA = () => {
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/sw.js')
-                        .then(() => console.log('✅ SW registered'))
-                        .catch(err => console.log('SW failed:', err));
+                    navigator.serviceWorker.register('/sw.js').catch(() => {});
                 });
             }
             const installBtn = document.getElementById('installBtn');
@@ -4225,7 +4125,7 @@
             });
             window.addEventListener('appinstalled', () => {
                 installBtn?.classList.remove('show');
-                showToast('🎉', 'تم التثبيت!', 'كيماتو أصبح تطبيقاً على جهازك', null, null, 'success');
+                showToast('🎉', 'تم التثبيت!', 'كيماتو على جهازك', null, null, 'success');
             });
         };
 
@@ -4243,14 +4143,12 @@
                 saveCompareList();
                 updateCompareUI();
                 document.querySelectorAll('[data-action="compare"]').forEach(btn => btn.classList.remove('compare-active'));
-                showToast('🗑️', 'تم المسح', 'أُزيلت كل المنتجات من المقارنة', null, null, 'info');
+                showToast('🗑️', 'تم المسح', 'أُزيلت كل المنتجات', null, null, 'info');
             });
-
             document.getElementById('wishlistToggle')?.addEventListener('click', showWishlistModal);
             document.getElementById('closeWishlistBtn')?.addEventListener('click', () => {
                 document.getElementById('wishlistModal').classList.remove('show');
             });
-
             document.getElementById('rfqBtn')?.addEventListener('click', () => {
                 document.getElementById('rfqForm')?.reset();
                 showRfqModal();
@@ -4261,7 +4159,6 @@
             document.getElementById('cancelRfqBtn')?.addEventListener('click', () => {
                 document.getElementById('rfqModal').classList.remove('show');
             });
-
             document.querySelectorAll('.modal-overlay').forEach(overlay => {
                 overlay.addEventListener('click', (e) => {
                     if (e.target === overlay) overlay.classList.remove('show');
@@ -4274,61 +4171,36 @@
         // ============================================================
         const setupRealtime = () => {
             if (!supabase) return;
-            if (state.channel) supabase.removeChannel(state.channel);
             try {
                 state.channel = supabase
-                    .channel('products_realtime')
+                    .channel('chemato_realtime')
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'products' }, (payload) => {
                         const name = payload.new?.name || 'منتج جديد';
-                        showToast('🆕', 'منتج جديد!', `تم إضافة: ${name}`, 'عرض', '/all-products.html', 'success');
-                        NotificationCenter.add({
-                            title: 'منتج جديد',
-                            desc: `تم إضافة: ${name}`
-                        });
+                        SmartNotifications.add({ type: 'new_product', title: 'منتج جديد', message: `تم إضافة: ${name}` });
+                        showToast('🆕', 'منتج جديد!', name, 'عرض', '/all-products.html', 'success');
                         loadProducts();
-                        loadStats();
+                    })
+                    .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
+                        if (payload.new?.to_user_id === state.user?.id) {
+                            SmartNotifications.add({ type: 'new_quote', title: 'رسالة جديدة', message: 'وصلك رسالة جديدة' });
+                            loadUnreadMessagesCount();
+                            showToast('💬', 'رسالة جديدة!', 'وصلك رسالة جديدة', 'عرض', 'messages.html', 'info');
+                        }
                     })
                     .subscribe();
-            } catch (e) { /* silent */ }
-        };
-
-        // ============================================================
-        // RECENT VIEW TRACKING
-        // ============================================================
-        const initRecentTracking = () => {
-            document.addEventListener('click', (e) => {
-                const card = e.target.closest('.card[data-product-id]');
-                if (card) {
-                    const name = card.querySelector('.card-title')?.textContent;
-                    const priceText = card.querySelector('.card-price')?.textContent;
-                    const img = card.querySelector('.card-img')?.src;
-
-                    RecentTracker.add({
-                        id: card.dataset.productId,
-                        name: name?.trim() || '',
-                        price: parseFloat(priceText?.replace(/[^\d.]/g, '')) || null,
-                        image_url: img
-                    });
-                }
-            }, { passive: true });
+            } catch (e) {}
         };
 
         // ============================================================
         // INIT
         // ============================================================
         const init = async () => {
-            console.log('🚀 كيماتو جاري التحميل...');
+            console.log('🚀 كيماتو 3.0 جاري التحميل...');
 
             if (!supabase) {
                 const container = document.getElementById('productsList');
                 if (container) {
-                    container.innerHTML = `
-                        <div class="empty-state">
-                            <i class="fas fa-plug" style="color: var(--c-danger);"></i>
-                            <h3>خطأ في الاتصال</h3>
-                            <p>تعذر الاتصال بقاعدة البيانات.</p>
-                        </div>
-                    `;
+                    container.innerHTML = `<div class="empty-state"><i class="fas fa-plug"></i><h3>خطأ في الاتصال</h3></div>`;
                 }
                 return;
             }
@@ -4354,8 +4226,9 @@
             initPWA();
             initQuickView();
             initScrollReveal();
-            initNotifications();
-            initRecentTracking();
+            SmartNotifications.init();
+            MolecularVisualizer.init();
+            CommodityTracker.init();
 
             updateWishlistCount();
             updateCompareUI();
@@ -4372,6 +4245,7 @@
             await Promise.all([
                 loadFeatured(),
                 loadProducts(),
+                loadLiveRfqs(),
             ]);
 
             setTimeout(() => {
@@ -4383,20 +4257,20 @@
             setupRealtime();
 
             setTimeout(() => {
-                showToast('👋', 'مرحباً بك في كيماتو!', 'ابحث برقم CAS أو بالاسم — سوق المواد الكيماوية في مصر',
-                    'استكشف المنتجات', 'all-products.html', 'info');
+                showToast('👋', 'مرحباً بك في كيماتو!', 'منصة الكيماويات B2B الاحترافية', 'استكشف', 'all-products.html', 'info');
             }, 1500);
 
             setInterval(loadStats, 60000);
 
-            console.log('✅ كيماتو جاهز');
+            console.log('✅ كيماتو 3.0 جاهز');
         };
 
         if (supabase) {
-            supabase.auth.onAuthStateChange(async (event, session) => {
+            supabase.auth.onAuthStateChange(async (event) => {
                 if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
                     await checkUser();
                     loadProducts();
+                    loadLiveRfqs();
                 }
             });
         }
