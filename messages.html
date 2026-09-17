@@ -57,7 +57,6 @@ input,select,textarea{font-family:inherit}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes badgePop{0%{transform:scale(0.5);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
@@ -611,7 +610,7 @@ input,select,textarea{font-family:inherit}
     border: 1px solid var(--c-border);
 }
 
-/* ============ MESSAGE ATTACHMENTS ============ */
+/* MESSAGE ATTACHMENTS */
 .msg-bubble .msg-image {
     display: block;
     max-width: 260px;
@@ -669,17 +668,12 @@ input,select,textarea{font-family:inherit}
     background: rgba(255, 255, 255, 0.2);
     border-color: rgba(255, 255, 255, 0.15);
 }
-.msg-wrapper.sent .msg-bubble .msg-file:hover {
-    background: rgba(255, 255, 255, 0.3);
-}
+.msg-wrapper.sent .msg-bubble .msg-file:hover { background: rgba(255, 255, 255, 0.3); }
 .msg-wrapper.sent .msg-bubble .msg-file i:first-child { color: #fff; }
 
 [data-theme="dark"] .msg-wrapper.received .msg-bubble .msg-file {
     background: rgba(255, 255, 255, 0.08);
     border-color: rgba(255, 255, 255, 0.1);
-}
-[data-theme="dark"] .msg-wrapper.received .msg-bubble .msg-file:hover {
-    background: rgba(255, 255, 255, 0.14);
 }
 
 /* Offer Bubble */
@@ -806,11 +800,7 @@ input,select,textarea{font-family:inherit}
     transition: all var(--t-base);
     z-index: 50;
 }
-.attach-dropdown.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
+.attach-dropdown.show { opacity: 1; visibility: visible; transform: translateY(0); }
 .attach-dropdown button {
     display: flex;
     align-items: center;
@@ -898,7 +888,6 @@ input,select,textarea{font-family:inherit}
 }
 .chat-send-btn:disabled { opacity: 0.5; cursor: not-allowed; transform: none; }
 
-/* Quick replies popover */
 .quick-replies-popover {
     position: absolute;
     bottom: calc(100% + 10px);
@@ -918,11 +907,7 @@ input,select,textarea{font-family:inherit}
     max-height: 320px;
     overflow-y: auto;
 }
-.quick-replies-popover.show {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
-}
+.quick-replies-popover.show { opacity: 1; visibility: visible; transform: translateY(0); }
 .quick-replies-popover .qr-header {
     padding: 10px 14px;
     background: var(--c-surface-2);
@@ -1201,7 +1186,7 @@ input,select,textarea{font-family:inherit}
 .user-badge.type-supplier { background: rgba(255,107,53,0.15); color: var(--c-safety-orange); }
 .user-badge.type-buyer { background: rgba(44,122,184,0.15); color: var(--c-primary-600); }
 
-/* Offer Form inside chat */
+/* Offer Form */
 .offer-form-box {
     background: linear-gradient(135deg, rgba(46,204,113,0.06), rgba(94,184,238,0.04));
     border: 2px solid rgba(46,204,113,0.2);
@@ -1660,12 +1645,10 @@ const state = {
     hasMoreMessages: false,
     pageSize: 50,
 
-    // New chat
     userSearchResults: [],
     userSearchType: 'all',
     userSearchQuery: '',
 
-    // Offer modal
     offerTargetUserId: null,
 };
 
@@ -2026,11 +2009,8 @@ const openConversation = async (otherUserId, contextOverride = null) => {
 
     const conv = state.conversations.find(c => c.otherUserId === otherUserId);
     state.activeOtherUser = conv?.otherUser || { id: otherUserId, full_name: 'مستخدم' };
-
-    // Priority: override > conversation context
     state.activeContext = contextOverride || conv?.product || conv?.request || null;
 
-    // If not in conversations, fetch user info
     if (!conv) {
         try {
             const { data: profile } = await supabase
@@ -2058,7 +2038,6 @@ const renderChatView = () => {
     const name = otherUser?.company_name || otherUser?.full_name || 'مستخدم';
     const initial = getInitials(name);
 
-    // Build context bar (enhanced with thumb + price)
     let contextHtml = '';
     if (state.activeContext) {
         const ctx = state.activeContext;
@@ -2188,13 +2167,11 @@ const renderChatView = () => {
         </div>
     `;
 
-    // Bind clear context
     window._clearContext = () => {
         state.activeContext = null;
         renderChatView();
     };
 
-    // Bind events
     document.getElementById('backBtn')?.addEventListener('click', () => {
         document.getElementById('chatLayout')?.classList.remove('chat-open');
         state.activeConversationId = null;
@@ -2311,7 +2288,21 @@ const loadMessages = async (otherUserId, reset = false) => {
 };
 
 // ============================================================
-// RENDER MESSAGES (with smart attachment handling)
+// SCROLL TO BOTTOM
+// ============================================================
+const scrollToBottom = (smooth = true) => {
+    const container = document.getElementById('chatMessages');
+    if (!container) return;
+    setTimeout(() => {
+        container.scrollTo({
+            top: container.scrollHeight,
+            behavior: smooth ? 'smooth' : 'auto',
+        });
+    }, 50);
+};
+
+// ============================================================
+// RENDER MESSAGES
 // ============================================================
 const renderMessages = () => {
     const container = document.getElementById('chatMessages');
@@ -2387,19 +2378,17 @@ const renderMessages = () => {
         loadMessages(state.activeConversationId, false);
     });
 
-    // Bind media events
     bindMessageMediaEvents();
-
     scrollToBottom(false);
 };
 
 // ============================================================
-// RENDER MESSAGE CONTENT (Smart detection)
+// RENDER MESSAGE CONTENT
 // ============================================================
 const renderMessageContent = (msg) => {
     const text = msg.message || '';
 
-    // ===== 1. OFFER MESSAGE =====
+    // 1. OFFER
     if (text.startsWith('[OFFER]')) {
         try {
             const data = JSON.parse(text.substring(7));
@@ -2422,7 +2411,7 @@ const renderMessageContent = (msg) => {
         }
     }
 
-    // ===== 2. IMAGE MESSAGE =====
+    // 2. IMAGE
     const imgPattern = /(?:📷\s*صورة:\s*)?(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|bmp|svg))(?:\?\S*)?/i;
     const imgMatch = text.match(imgPattern);
 
@@ -2444,7 +2433,7 @@ const renderMessageContent = (msg) => {
         };
     }
 
-    // ===== 3. FILE MESSAGE =====
+    // 3. FILE
     const filePattern = /(?:📄\s*ملف:\s*)?(https?:\/\/[^\s]+\.(?:pdf|doc|docx|xls|xlsx|csv|txt|zip|rar))(?!\S)/i;
     const fileMatch = text.match(filePattern);
 
@@ -2453,15 +2442,9 @@ const renderMessageContent = (msg) => {
         const filename = decodeURIComponent(url.split('/').pop().split('?')[0]);
         const ext = filename.split('.').pop().toLowerCase();
         const iconMap = {
-            'pdf': 'fa-file-pdf',
-            'doc': 'fa-file-word',
-            'docx': 'fa-file-word',
-            'xls': 'fa-file-excel',
-            'xlsx': 'fa-file-excel',
-            'csv': 'fa-file-csv',
-            'txt': 'fa-file-alt',
-            'zip': 'fa-file-archive',
-            'rar': 'fa-file-archive',
+            'pdf': 'fa-file-pdf', 'doc': 'fa-file-word', 'docx': 'fa-file-word',
+            'xls': 'fa-file-excel', 'xlsx': 'fa-file-excel', 'csv': 'fa-file-csv',
+            'txt': 'fa-file-alt', 'zip': 'fa-file-archive', 'rar': 'fa-file-archive',
         };
         const icon = iconMap[ext] || 'fa-file';
 
@@ -2485,7 +2468,7 @@ const renderMessageContent = (msg) => {
         };
     }
 
-    // ===== 4. GENERIC URL =====
+    // 4. GENERIC URL
     const urlPattern = /(https?:\/\/[^\s]+)/i;
     const urlMatch = text.match(urlPattern);
 
@@ -2509,7 +2492,7 @@ const renderMessageContent = (msg) => {
         };
     }
 
-    // ===== 5. PLAIN TEXT =====
+    // 5. PLAIN TEXT
     return {
         bubbleClass: '',
         html: escapeHtml(text).replace(/\n/g, '<br>'),
@@ -2517,7 +2500,7 @@ const renderMessageContent = (msg) => {
 };
 
 // ============================================================
-// BIND MESSAGE MEDIA EVENTS
+// BIND MEDIA EVENTS
 // ============================================================
 const bindMessageMediaEvents = () => {
     document.querySelectorAll('.msg-image').forEach(img => {
@@ -2538,32 +2521,27 @@ const openImagePreview = (url) => {
     const lightbox = document.createElement('div');
     lightbox.id = 'imageLightbox';
     lightbox.style.cssText = `
-        position: fixed;
-        inset: 0;
+        position: fixed; inset: 0;
         background: rgba(0, 0, 0, 0.92);
         z-index: 9999;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-        cursor: zoom-out;
+        display: flex; align-items: center; justify-content: center;
+        padding: 20px; cursor: zoom-out;
         animation: fadeIn 0.2s ease;
     `;
 
     lightbox.innerHTML = `
-        <button style="position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.15);color:#fff;border:none;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(231,76,60,0.9)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'" onclick="document.getElementById('imageLightbox').remove();event.stopPropagation();">
+        <button style="position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.15);color:#fff;border:none;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;" 
+                onclick="document.getElementById('imageLightbox').remove();event.stopPropagation();">
             <i class="fas fa-times"></i>
         </button>
-        <a href="${escapeHtml(url)}" 
-           download
+        <a href="${escapeHtml(url)}" download
            style="position:absolute;top:20px;left:20px;height:44px;padding:0 18px;border-radius:22px;background:rgba(46,204,113,0.9);color:#fff;text-decoration:none;font-size:0.85rem;font-weight:700;display:flex;align-items:center;gap:8px;font-family:'Cairo',sans-serif;" 
            onclick="event.stopPropagation();">
             <i class="fas fa-download"></i> تحميل
         </a>
         <img src="${escapeHtml(url)}" 
              style="max-width:95%;max-height:95%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);" 
-             onclick="event.stopPropagation();" 
-        />
+             onclick="event.stopPropagation();" />
     `;
 
     lightbox.addEventListener('click', () => lightbox.remove());
@@ -2615,19 +2593,15 @@ const sendMessage = async () => {
 
     sendBtn.disabled = true;
     const originalHtml = sendBtn.innerHTML;
-    sendBtn.innerHTML = '<span class="spinner" style="width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;"></span>';
+    sendBtn.innerHTML = '<span style="width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;"></span>';
 
     try {
-        // Determine context - product or request
         let product_id = null;
         let request_id = null;
         const ctx = state.activeContext;
         if (ctx) {
-            if (ctx.name && ctx.price !== undefined) {
-                product_id = ctx.id; // It's a product
-            } else if (ctx.product_name) {
-                request_id = ctx.id; // It's a request
-            }
+            if (ctx.name && ctx.price !== undefined) product_id = ctx.id;
+            else if (ctx.product_name) request_id = ctx.id;
         }
 
         const messageData = {
@@ -2675,11 +2649,7 @@ const broadcastTyping = () => {
         state.channel.send({
             type: 'broadcast',
             event: 'typing',
-            payload: {
-                from: state.user.id,
-                to: state.activeConversationId,
-                at: Date.now(),
-            }
+            payload: { from: state.user.id, to: state.activeConversationId, at: Date.now() }
         });
     } catch (e) {}
 };
@@ -2785,11 +2755,8 @@ const initNewChatModal = () => {
             tab.classList.add('active');
             state.userSearchType = tab.dataset.type;
             
-            if (state.userSearchQuery) {
-                searchUsers(state.userSearchQuery);
-            } else {
-                loadDefaultUsers();
-            }
+            if (state.userSearchQuery) searchUsers(state.userSearchQuery);
+            else loadDefaultUsers();
         });
     });
 
@@ -2798,9 +2765,8 @@ const initNewChatModal = () => {
 
     searchInput?.addEventListener('input', (e) => {
         state.userSearchQuery = e.target.value.trim();
-        if (state.userSearchQuery.length >= 2) {
-            debouncedSearch(state.userSearchQuery);
-        } else {
+        if (state.userSearchQuery.length >= 2) debouncedSearch(state.userSearchQuery);
+        else {
             state.userSearchResults = [];
             loadDefaultUsers();
         }
@@ -2840,13 +2806,11 @@ const loadDefaultUsers = async () => {
         
         if (error) {
             console.warn('Load default users failed:', error);
-            
             const { data: fallbackData } = await supabase
                 .from('profiles')
                 .select('id, full_name, company_name, avatar_url, user_type, is_verified')
                 .neq('id', state.user.id)
                 .limit(30);
-            
             state.userSearchResults = (fallbackData || []).filter(u => u.user_type);
         } else {
             state.userSearchResults = data || [];
@@ -2927,8 +2891,6 @@ const searchUsers = async (query) => {
         const { data, error } = await queryBuilder;
         
         if (error) {
-            console.warn('Search with filters failed, trying fallback...', error);
-            
             let fallbackQuery = supabase
                 .from('profiles')
                 .select('id, full_name, company_name, avatar_url, user_type, is_verified')
@@ -2941,7 +2903,6 @@ const searchUsers = async (query) => {
             }
 
             const { data: fallbackData, error: fallbackError } = await fallbackQuery;
-            
             if (fallbackError) throw fallbackError;
             
             state.userSearchResults = fallbackData || [];
@@ -3055,7 +3016,7 @@ const confirmSendOffer = async () => {
     const btn = document.getElementById('confirmSendOfferBtn');
     btn.disabled = true;
     const originalText = btn.innerHTML;
-    btn.innerHTML = '<span class="spinner" style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span> جاري الإرسال...';
+    btn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span> جاري الإرسال...';
 
     try {
         const offerData = {
@@ -3175,7 +3136,7 @@ const initFilters = () => {
 };
 
 // ============================================================
-// HANDLE URL PARAMS (?to=xxx&product=yyy / ?to=xxx&request=yyy)
+// HANDLE URL PARAMS
 // ============================================================
 const handleUrlParams = async () => {
     const params = new URLSearchParams(window.location.search);
@@ -3185,10 +3146,8 @@ const handleUrlParams = async () => {
 
     if (!to || !isValidUUID(to)) return;
 
-    // Wait a moment for state to be ready
     await new Promise(resolve => setTimeout(resolve, 300));
 
-    // Build context
     let context = null;
 
     if (productId && isValidUUID(productId)) {
@@ -3211,10 +3170,8 @@ const handleUrlParams = async () => {
         } catch (e) {}
     }
 
-    // Open conversation with context
     await openConversation(to, context);
 
-    // Clean URL
     window.history.replaceState({}, '', window.location.pathname);
 };
 
@@ -3235,8 +3192,6 @@ const init = async () => {
 
     await fetchConversations();
     setupRealtime();
-
-    // ✅ Handle URL params (from product/request pages)
     await handleUrlParams();
 
     console.info('✅ جاهز');
