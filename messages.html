@@ -1130,8 +1130,20 @@ input,select,textarea{font-family:inherit}
     font-size: 0.95rem;
     flex-shrink: 0;
     overflow: hidden;
+    position: relative;
 }
 .user-result-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.user-result-avatar.online::after {
+    content: '';
+    position: absolute;
+    bottom: 1px;
+    left: 1px;
+    width: 11px;
+    height: 11px;
+    background: var(--c-accent);
+    border-radius: 50%;
+    border: 2px solid var(--c-surface);
+}
 
 .user-result-info { flex: 1; min-width: 0; }
 .user-result-name {
@@ -1647,7 +1659,6 @@ const state = {
 };
 
 const THEME_KEY = 'chemato-theme';
-const RECENT_CHATS_KEY = 'chemato-recent-chats';
 
 // ============================================================
 // UTILS
@@ -1871,7 +1882,7 @@ const fetchConversations = async () => {
         if (otherUserIds.length) {
             const { data: profiles } = await supabase
                 .from('profiles')
-                .select('id, full_name, company_name, avatar_url, user_type, is_verified, city, last_seen')
+                .select('id, full_name, company_name, avatar_url, user_type, is_verified, city')
                 .in('id', otherUserIds);
             (profiles || []).forEach(p => { profilesMap[p.id] = p; });
         }
@@ -1915,12 +1926,6 @@ const fetchConversations = async () => {
 // ============================================================
 // RENDER CHAT LIST
 // ============================================================
-const isUserOnline = (lastSeen) => {
-    if (!lastSeen) return false;
-    const diff = Date.now() - new Date(lastSeen).getTime();
-    return diff < 5 * 60 * 1000; // online if seen in last 5 minutes
-};
-
 const renderChatList = () => {
     const list = document.getElementById('chatList');
     if (!list) return;
@@ -1961,9 +1966,9 @@ const renderChatList = () => {
         const lastMsg = conv.lastMessage;
         const isActive = state.activeConversationId === conv.otherUserId;
         const isUnread = conv.unreadCount > 0;
-        const online = isUserOnline(otherUser?.last_seen);
 
         let preview = lastMsg?.message || '📎 مرفق';
+        if (preview.startsWith('[OFFER]')) preview = '💰 عرض سعر جديد';
         if (preview.length > 60) preview = preview.substring(0, 60) + '...';
         const isFromMe = lastMsg?.from_user_id === state.user.id;
 
@@ -1971,7 +1976,7 @@ const renderChatList = () => {
             <div class="chat-item ${isActive ? 'active' : ''} ${isUnread ? 'unread' : ''}"
                  data-other-user-id="${escapeHtml(conv.otherUserId)}"
                  role="button" tabindex="0">
-                <div class="chat-item-avatar ${online ? 'online' : ''}">
+                <div class="chat-item-avatar">
                     ${otherUser?.avatar_url
                         ? `<img src="${escapeHtml(otherUser.avatar_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(getInitials(name))}';" />`
                         : escapeHtml(getInitials(name))}
@@ -2012,6 +2017,18 @@ const openConversation = async (otherUserId) => {
     state.activeOtherUser = conv?.otherUser || { id: otherUserId, full_name: 'مستخدم' };
     state.activeContext = conv?.product || conv?.request || null;
 
+    // If not in conversations, fetch user info
+    if (!conv) {
+        try {
+            const { data: profile } = await supabase
+                .from('profiles')
+                .select('id, full_name, company_name, avatar_url, user_type, is_verified, city')
+                .eq('id', otherUserId)
+                .single();
+            if (profile) state.activeOtherUser = profile;
+        } catch (e) {}
+    }
+
     document.getElementById('chatLayout')?.classList.add('chat-open');
     renderChatView();
     renderChatList();
@@ -2027,7 +2044,6 @@ const renderChatView = () => {
     const otherUser = state.activeOtherUser;
     const name = otherUser?.company_name || otherUser?.full_name || 'مستخدم';
     const initial = getInitials(name);
-    const online = isUserOnline(otherUser?.last_seen);
 
     let contextHtml = '';
     if (state.activeContext) {
@@ -2054,7 +2070,7 @@ const renderChatView = () => {
             <button class="chat-back-btn" id="backBtn" type="button" aria-label="رجوع">
                 <i class="fas fa-arrow-right"></i>
             </button>
-            <div class="chat-header-avatar ${online ? 'online' : ''}">
+            <div class="chat-header-avatar">
                 ${otherUser?.avatar_url
                     ? `<img src="${escapeHtml(otherUser.avatar_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(initial)}';" />`
                     : escapeHtml(initial)}
@@ -2065,7 +2081,7 @@ const renderChatView = () => {
                     ${otherUser?.is_verified ? '<i class="fas fa-check-circle verified-dot"></i>' : ''}
                 </div>
                 <div class="chat-header-status">
-                    ${online ? '<span class="online-dot"></span><span>متصل الآن</span>' : '<span>غير متصل</span>'}
+                    ${otherUser?.user_type === 'supplier' ? '<i class="fas fa-warehouse"></i> مورد' : '<i class="fas fa-shopping-cart"></i> مشتري'}
                 </div>
             </div>
             <div class="chat-header-actions">
@@ -2287,7 +2303,6 @@ const renderMessages = () => {
         const otherInitial = getInitials(state.activeOtherUser?.company_name || state.activeOtherUser?.full_name);
         const myInitial = getInitials(state.userProfile?.company_name || state.userProfile?.full_name);
 
-        // Check if this is an offer message
         const isOffer = msg.message && msg.message.startsWith('[OFFER]');
         let messageContent = '';
 
@@ -2397,7 +2412,7 @@ const sendMessage = async () => {
 
     sendBtn.disabled = true;
     const originalHtml = sendBtn.innerHTML;
-    sendBtn.innerHTML = '<span class="spinner" style="width:16px;height:16px;"></span>';
+    sendBtn.innerHTML = '<span class="spinner" style="width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;"></span>';
 
     try {
         const messageData = {
@@ -2554,7 +2569,13 @@ const initNewChatModal = () => {
             document.querySelectorAll('.user-type-tab').forEach(t => t.classList.remove('active'));
             tab.classList.add('active');
             state.userSearchType = tab.dataset.type;
-            if (state.userSearchQuery) searchUsers(state.userSearchQuery);
+            
+            // إذا في بحث، ابحث. لو لأ، اعرض الافتراضيين
+            if (state.userSearchQuery) {
+                searchUsers(state.userSearchQuery);
+            } else {
+                loadDefaultUsers();
+            }
         });
     });
 
@@ -2567,40 +2588,128 @@ const initNewChatModal = () => {
             debouncedSearch(state.userSearchQuery);
         } else {
             state.userSearchResults = [];
-            renderUserSearchResults();
+            // ✅ إذا مسح البحث، اعرض الافتراضيين
+            loadDefaultUsers();
         }
     });
 };
 
-const openNewChatModal = () => {
+// ============================================================
+// OPEN NEW CHAT MODAL (Enhanced - Shows users by default)
+// ============================================================
+const openNewChatModal = async () => {
     const modal = document.getElementById('newChatModal');
     modal?.classList.add('show');
+    
+    // ✅ اعرض المستخدمين افتراضياً (بدون ما يكتب المستخدم)
+    await loadDefaultUsers();
+    
     setTimeout(() => document.getElementById('userSearchInput')?.focus(), 300);
 };
 
+// ============================================================
+// LOAD DEFAULT USERS (Show suppliers/buyers by default)
+// ============================================================
+const loadDefaultUsers = async () => {
+    const list = document.getElementById('usersList');
+    if (!list) return;
+
+    list.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--c-text-muted);">
+        <i class="fas fa-spinner fa-spin" style="font-size:1.5rem;opacity:0.5;"></i>
+        <p style="margin-top:8px;font-size:0.85rem;">جاري تحميل المستخدمين...</p>
+    </div>`;
+
+    try {
+        let queryBuilder = supabase
+            .from('profiles')
+            .select('id, full_name, company_name, avatar_url, user_type, is_verified, city')
+            .neq('id', state.user.id)
+            .not('user_type', 'is', null)
+            .order('is_verified', { ascending: false })
+            .limit(30);
+
+        if (state.userSearchType !== 'all') {
+            queryBuilder = queryBuilder.eq('user_type', state.userSearchType);
+        }
+
+        const { data, error } = await queryBuilder;
+        
+        if (error) {
+            console.warn('Load default users failed:', error);
+            
+            // Fallback - no order
+            const { data: fallbackData } = await supabase
+                .from('profiles')
+                .select('id, full_name, company_name, avatar_url, user_type, is_verified')
+                .neq('id', state.user.id)
+                .limit(30);
+            
+            state.userSearchResults = (fallbackData || []).filter(u => u.user_type);
+        } else {
+            state.userSearchResults = data || [];
+        }
+
+        // ✅ اذا مفيش يوزرز
+        if (!state.userSearchResults.length) {
+            list.innerHTML = `
+                <div class="chat-empty-sidebar" style="padding:40px 20px;">
+                    <i class="fas fa-users" style="opacity:0.4;"></i>
+                    <p style="font-weight:700;color:var(--c-text);margin-bottom:6px;">لا يوجد مستخدمون بعد</p>
+                    <p style="font-size:0.8rem;">جرب البحث باسم محدد</p>
+                </div>
+            `;
+            return;
+        }
+
+        renderUserSearchResults();
+
+    } catch (e) {
+        console.error('Load default users error:', e);
+        list.innerHTML = `
+            <div class="chat-empty-sidebar" style="padding:40px 20px;">
+                <i class="fas fa-exclamation-triangle" style="color:var(--c-danger);"></i>
+                <p>تعذر تحميل المستخدمين</p>
+            </div>
+        `;
+    }
+};
+
+// ============================================================
+// CLOSE NEW CHAT MODAL (Reset state)
+// ============================================================
 const closeNewChatModal = () => {
     document.getElementById('newChatModal')?.classList.remove('show');
     document.getElementById('userSearchInput').value = '';
     state.userSearchResults = [];
     state.userSearchQuery = '';
+    state.userSearchType = 'all';
+    
+    // Reset tabs
     document.querySelectorAll('.user-type-tab').forEach((t, i) => {
         t.classList.toggle('active', i === 0);
     });
-    state.userSearchType = 'all';
-    renderUserSearchResults();
-};
-
-const searchUsers = async (query) => {
+    
+    // Reset list
     const list = document.getElementById('usersList');
-    if (!list) return;
-
-    if (!query || query.length < 2) {
+    if (list) {
         list.innerHTML = `
             <div class="chat-empty-sidebar" style="padding:40px 20px;">
                 <i class="fas fa-user-friends"></i>
                 <p>اكتب اسم للبحث عن موردين ومشترين</p>
             </div>
         `;
+    }
+};
+
+// ============================================================
+// SEARCH USERS (FIXED - Without last_seen)
+// ============================================================
+const searchUsers = async (query) => {
+    const list = document.getElementById('usersList');
+    if (!list) return;
+
+    if (!query || query.length < 2) {
+        loadDefaultUsers();
         return;
     }
 
@@ -2610,33 +2719,62 @@ const searchUsers = async (query) => {
     </div>`;
 
     try {
+        // ✅ Build query base - فقط الأعمدة الموجودة
         let queryBuilder = supabase
             .from('profiles')
-            .select('id, full_name, company_name, avatar_url, user_type, is_verified, city, last_seen')
+            .select('id, full_name, company_name, avatar_url, user_type, is_verified, city')
             .neq('id', state.user.id)
-            .not('user_type', 'is', null)
             .or(`full_name.ilike.%${query}%,company_name.ilike.%${query}%,city.ilike.%${query}%`)
-            .limit(20);
+            .limit(30);
 
+        // Filter by type if not "all"
         if (state.userSearchType !== 'all') {
             queryBuilder = queryBuilder.eq('user_type', state.userSearchType);
         }
 
         const { data, error } = await queryBuilder;
-        if (error) throw error;
+        
+        if (error) {
+            console.warn('Search with filters failed, trying fallback...', error);
+            
+            // ✅ Fallback: search without type filter and without city
+            let fallbackQuery = supabase
+                .from('profiles')
+                .select('id, full_name, company_name, avatar_url, user_type, is_verified')
+                .neq('id', state.user.id)
+                .or(`full_name.ilike.%${query}%,company_name.ilike.%${query}%`)
+                .limit(30);
 
-        state.userSearchResults = data || [];
+            if (state.userSearchType !== 'all') {
+                fallbackQuery = fallbackQuery.eq('user_type', state.userSearchType);
+            }
+
+            const { data: fallbackData, error: fallbackError } = await fallbackQuery;
+            
+            if (fallbackError) throw fallbackError;
+            
+            state.userSearchResults = fallbackData || [];
+        } else {
+            state.userSearchResults = data || [];
+        }
+
         renderUserSearchResults();
 
     } catch (e) {
         console.error('Search users error:', e);
-        list.innerHTML = `<div style="text-align:center;padding:40px 20px;color:var(--c-text-muted);">
-            <i class="fas fa-exclamation-triangle" style="font-size:1.5rem;color:var(--c-danger);opacity:0.5;"></i>
-            <p style="margin-top:8px;font-size:0.85rem;">تعذر البحث</p>
-        </div>`;
+        list.innerHTML = `
+            <div class="chat-empty-sidebar" style="padding:40px 20px;">
+                <i class="fas fa-exclamation-triangle" style="color:var(--c-danger);"></i>
+                <p style="font-weight:700;color:var(--c-text);margin-bottom:4px;">تعذر البحث</p>
+                <p style="font-size:0.78rem;">${escapeHtml(e.message || 'حدث خطأ')}</p>
+            </div>
+        `;
     }
 };
 
+// ============================================================
+// RENDER USER SEARCH RESULTS
+// ============================================================
 const renderUserSearchResults = () => {
     const list = document.getElementById('usersList');
     if (!list) return;
@@ -2654,14 +2792,13 @@ const renderUserSearchResults = () => {
     list.innerHTML = state.userSearchResults.map(user => {
         const name = user.company_name || user.full_name || 'مستخدم';
         const initial = getInitials(name);
-        const online = isUserOnline(user.last_seen);
         const typeLabel = user.user_type === 'supplier' ? 'مورد' : 'مشتري';
         const typeBadgeClass = user.user_type === 'supplier' ? 'type-supplier' : 'type-buyer';
         const typeIcon = user.user_type === 'supplier' ? 'warehouse' : 'shopping-cart';
 
         return `
             <div class="user-result-item" data-user-id="${escapeHtml(user.id)}">
-                <div class="user-result-avatar ${online ? 'online' : ''}">
+                <div class="user-result-avatar">
                     ${user.avatar_url
                         ? `<img src="${escapeHtml(user.avatar_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(initial)}';" />`
                         : escapeHtml(initial)}
@@ -2730,7 +2867,7 @@ const confirmSendOffer = async () => {
     const btn = document.getElementById('confirmSendOfferBtn');
     btn.disabled = true;
     const originalText = btn.innerHTML;
-    btn.innerHTML = '<span class="spinner"></span> جاري الإرسال...';
+    btn.innerHTML = '<span class="spinner" style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span> جاري الإرسال...';
 
     try {
         const offerData = {
