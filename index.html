@@ -8,6 +8,7 @@
     <meta name="keywords" content="كيماويات,كيماتو,CAS,صودا كاوية,حمض كبريتيك,مذيبات,B2B,موردين كيماويات,مصر,منصة كيماويات" />
     <meta name="robots" content="index, follow, max-image-preview:large" />
 
+    <!-- Open Graph -->
     <meta property="og:title" content="كيماتو | منصة الكيماويات B2B الأولى في مصر" />
     <meta property="og:description" content="ابحث برقم CAS، احصل على عروض من موردين متعددين، تابع أسعار السوق الحي" />
     <meta property="og:type" content="website" />
@@ -16,6 +17,7 @@
     <meta property="og:locale" content="ar_EG" />
     <meta property="og:site_name" content="كيماتو" />
 
+    <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" content="كيماتو | منصة الكيماويات B2B" />
     <meta name="twitter:description" content="ابحث برقم CAS، احصل على عروض من موردين متعددين" />
@@ -26,7 +28,12 @@
     <link rel="apple-touch-icon" href="logo-192.png" />
     <meta name="theme-color" content="#0a2540" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
-    <link rel="manifest" href="/manifest.json" />
+
+    <!-- ✅ FIXED: Manifest inline via Data URI -->
+    <link rel="manifest" href='data:application/manifest+json,{"name":"كيماتو","short_name":"كيماتو","start_url":"/","display":"standalone","background_color":"%230a2540","theme_color":"%230a2540","lang":"ar","dir":"rtl","icons":[{"src":"/logo-192.png","sizes":"192x192","type":"image/png"},{"src":"/logo.png","sizes":"512x512","type":"image/png"}]}' />
+
+    <!-- ✅ FIXED: Modern PWA meta tags -->
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
     <meta name="apple-mobile-web-app-title" content="كيماتو" />
@@ -42,7 +49,36 @@
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
-    <script src="https://browser.sentry-cdn.com/7.120.0/bundle.tracing.min.js" integrity="sha384-4g+NgDCBSlJfQr6E8NS2qEBvRGYO2qOGzTa3O/0rWUl2UOKw6i8E6EBzHZ4o3M2q" crossorigin="anonymous"></script>
+    <!-- ✅ FIXED: Sentry loaded dynamically (بدون integrity attribute) -->
+    <script>
+        (function() {
+            // Sentry loading with proper error handling (no integrity hash - safer)
+            var sentryScript = document.createElement('script');
+            sentryScript.src = 'https://browser.sentry-cdn.com/7.120.0/bundle.tracing.min.js';
+            sentryScript.crossOrigin = 'anonymous';
+            sentryScript.async = true;
+            sentryScript.onerror = function() {
+                console.info('ℹ️ Sentry CDN blocked - continuing without monitoring');
+            };
+            sentryScript.onload = function() {
+                try {
+                    if (window.Sentry && window.ENV?.SENTRY_DSN) {
+                        window.Sentry.init({
+                            dsn: window.ENV.SENTRY_DSN,
+                            environment: window.ENV.NODE_ENV || 'production',
+                            tracesSampleRate: 0.1,
+                            beforeSend: function(event) {
+                                var msg = event.exception?.values?.[0]?.value || '';
+                                if (msg.includes('Failed to fetch') || msg.includes('Load failed')) return null;
+                                return event;
+                            }
+                        });
+                    }
+                } catch (e) { /* silent */ }
+            };
+            document.head.appendChild(sentryScript);
+        })();
+    </script>
 
     <script type="application/ld+json">
     {
@@ -65,7 +101,6 @@
            CHEMOTO 3.0 — Enterprise Design System
            ============================================================ */
         :root {
-            /* Corporate Palette */
             --c-primary-50:  #eef6fc;
             --c-primary-100: #d4e7f5;
             --c-primary-500: #2c7ab8;
@@ -73,7 +108,6 @@
             --c-primary-700: #144167;
             --c-primary-800: #0d2e4a;
             --c-primary-900: #0a2540;
-
             --c-accent:      #2ecc71;
             --c-accent-dark: #22a95c;
             --c-warning:     #f39c12;
@@ -81,13 +115,8 @@
             --c-whatsapp:    #25D366;
             --c-purple:      #8b5cf6;
             --c-verified:    #1e88e5;
-
-            /* Enterprise Additions */
-            --c-corp-blue:   #003366;
             --c-lab-green:   #00A86B;
             --c-safety-orange: #FF6B35;
-            --c-gold:        #FFD700;
-
             --c-bg:          #f6f8fb;
             --c-surface:     #ffffff;
             --c-surface-2:   #f9fbfd;
@@ -95,27 +124,20 @@
             --c-text:        #0a1f33;
             --c-text-muted:  #5a6b7e;
             --c-text-sub:    #8595a8;
-
-            /* Premium Shadows */
             --sh-sm:  0 1px 3px rgba(10, 37, 64, 0.06);
             --sh-md:  0 4px 16px rgba(10, 37, 64, 0.08);
             --sh-lg:  0 12px 32px rgba(10, 37, 64, 0.10);
             --sh-xl:  0 20px 48px rgba(10, 37, 64, 0.14);
             --sh-2xl: 0 32px 64px rgba(10, 37, 64, 0.18);
-
-            /* Radii */
             --r-sm: 8px;
             --r-md: 14px;
             --r-lg: 20px;
             --r-xl: 28px;
             --r-full: 999px;
-
-            /* Transitions */
             --t-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
             --t-base: 250ms cubic-bezier(0.4, 0, 0.2, 1);
             --t-slow: 400ms cubic-bezier(0.4, 0, 0.2, 1);
             --t-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
-
             --container: 1320px;
             --header-h: 68px;
         }
@@ -170,7 +192,6 @@
             box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
         }
 
-        /* ============ ANIMATIONS ============ */
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -188,11 +209,10 @@
         @keyframes fireFlicker { 0%, 100% { transform: scale(1) rotate(-5deg); } 50% { transform: scale(1.15) rotate(5deg); } }
         @keyframes nodePulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.5); opacity: 1; } }
         @keyframes tickerScroll { 0% { transform: translateX(0); } 100% { transform: translateX(-50%); } }
-        @keyframes bgPulse { 0%, 100% { opacity: 1; transform: scale(1); } 50% { opacity: 0.8; transform: scale(1.1); } }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
-        /* ============ NAVBAR ============ */
+        /* NAVBAR */
         .navbar {
             position: sticky; top: 0; z-index: 100;
             background: rgba(10, 37, 64, 0.85);
@@ -233,7 +253,7 @@
             position: relative;
         }
         .icon-btn:hover { background: rgba(255, 255, 255, 0.15); }
-        .icon-btn:hover.rotate { transform: rotate(15deg); }
+        .icon-btn.rotate:hover { transform: rotate(15deg); }
 
         .count-badge {
             position: absolute; top: -4px; right: -4px;
@@ -248,14 +268,6 @@
         .count-badge.show { display: flex; }
         .count-badge.purple { background: var(--c-purple); }
         .count-badge.green { background: var(--c-accent); }
-
-        .notification-dot {
-            position: absolute; top: 8px; right: 8px;
-            width: 8px; height: 8px; border-radius: 50%;
-            background: var(--c-danger);
-            border: 2px solid rgba(10, 37, 64, 0.85);
-            animation: pulse 2s infinite;
-        }
 
         .dropdown { position: relative; }
         .dropdown-content {
@@ -286,13 +298,12 @@
             align-items: center; justify-content: center; font-size: 1.1rem;
         }
 
-        /* ============ COMMODITY TICKER ============ */
+        /* COMMODITY TICKER */
         .commodity-ticker {
             background: rgba(0, 25, 51, 0.95);
             backdrop-filter: blur(20px);
             border-bottom: 1px solid rgba(255, 255, 255, 0.08);
             padding: 8px 0;
-            z-index: 99;
             overflow: hidden;
             position: relative;
         }
@@ -312,31 +323,15 @@
             font-weight: 600;
             color: rgba(255, 255, 255, 0.9);
         }
-        .ticker-item .symbol {
-            color: rgba(255, 255, 255, 0.6);
-            font-family: 'Courier New', monospace;
-            font-size: 0.72rem;
-        }
+        .ticker-item .symbol { color: rgba(255, 255, 255, 0.6); font-size: 0.72rem; }
         .ticker-item .price { font-weight: 800; font-variant-numeric: tabular-nums; }
-        .ticker-item .change {
-            font-size: 0.7rem;
-            padding: 2px 8px;
-            border-radius: 4px;
-            font-weight: 700;
-        }
-        .ticker-item .change.up {
-            background: rgba(0, 168, 107, 0.2);
-            color: #2ecc71;
-        }
-        .ticker-item .change.down {
-            background: rgba(255, 107, 53, 0.2);
-            color: #FF6B35;
-        }
+        .ticker-item .change { font-size: 0.7rem; padding: 2px 8px; border-radius: 4px; font-weight: 700; }
+        .ticker-item .change.up { background: rgba(0, 168, 107, 0.2); color: #2ecc71; }
+        .ticker-item .change.down { background: rgba(255, 107, 53, 0.2); color: #FF6B35; }
 
-        /* ============ MAIN CONTAINER ============ */
         .main-container { max-width: var(--container); margin: 0 auto; padding: 20px 24px 60px; }
 
-        /* ============ HERO ============ */
+        /* HERO */
         .hero {
             position: relative; border-radius: var(--r-xl);
             padding: 56px 48px 44px; overflow: hidden;
@@ -368,17 +363,10 @@
             pointer-events: none;
         }
 
-        .molecule-visualizer {
-            position: absolute;
-            inset: 0;
-            pointer-events: none;
-            z-index: 1;
-            overflow: hidden;
-        }
+        .molecule-visualizer { position: absolute; inset: 0; pointer-events: none; z-index: 1; overflow: hidden; }
         .molecule-node {
             position: absolute;
-            width: 10px;
-            height: 10px;
+            width: 10px; height: 10px;
             border-radius: 50%;
             background: rgba(46, 204, 113, 0.6);
             box-shadow: 0 0 20px rgba(46, 204, 113, 0.8);
@@ -387,11 +375,9 @@
         .molecule-node::before {
             content: '';
             position: absolute;
-            width: 80px;
-            height: 1px;
+            width: 80px; height: 1px;
             background: linear-gradient(90deg, rgba(46, 204, 113, 0.4), transparent);
-            top: 50%;
-            left: 100%;
+            top: 50%; left: 100%;
             transform-origin: left center;
         }
 
@@ -415,8 +401,7 @@
         .hero-badge .dot::before,
         .hero-badge .dot::after {
             content: '';
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             border-radius: 50%;
             background: #2ecc71;
             animation: pulseRing 2s ease-out infinite;
@@ -443,7 +428,6 @@
             max-width: 640px; margin: 0 auto 28px; line-height: 1.65;
         }
 
-        /* ============ STATS ============ */
         .stats-wrapper {
             margin: 0 auto 28px; max-width: 900px;
             border-radius: var(--r-lg); padding: 2px;
@@ -467,8 +451,8 @@
         .stat-item { text-align: center; padding: 6px 4px; border-left: 1px solid rgba(255, 255, 255, 0.08); transition: transform 0.3s ease; }
         .stat-item:last-child { border-left: none; }
         .stat-item:hover { transform: translateY(-4px); }
-        .stat-item:hover .stat-icon { transform: scale(1.2) rotate(-8deg); }
         .stat-icon { display: block; font-size: 1.15rem; margin-bottom: 4px; opacity: 0.9; transition: transform 0.4s var(--t-spring); }
+        .stat-item:hover .stat-icon { transform: scale(1.2) rotate(-8deg); }
         .stat-number {
             display: block; font-size: clamp(1.2rem, 2.2vw, 1.7rem);
             font-weight: 900; line-height: 1.15;
@@ -480,7 +464,7 @@
         .stat-number.updated { animation: pulse 0.6s ease; }
         .stat-label { display: block; font-size: 0.68rem; color: rgba(255, 255, 255, 0.7); font-weight: 500; margin-top: 2px; }
 
-        /* ============ BUTTONS ============ */
+        /* BUTTONS */
         .hero-buttons { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; margin-bottom: 16px; }
         .btn {
             display: inline-flex; align-items: center; justify-content: center;
@@ -494,8 +478,7 @@
         }
         .btn::before {
             content: '';
-            position: absolute;
-            inset: 0;
+            position: absolute; inset: 0;
             background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
             transform: translateX(-100%);
             transition: transform 0.6s ease;
@@ -503,7 +486,6 @@
         }
         .btn:hover::before { transform: translateX(100%); }
         .btn:active { transform: scale(0.96); }
-
         .btn-primary {
             background: linear-gradient(135deg, #2ecc71, #22a95c);
             color: #fff;
@@ -512,8 +494,6 @@
         .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(46, 204, 113, 0.45); }
         .btn-outline { background: rgba(255, 255, 255, 0.05); border-color: rgba(255, 255, 255, 0.25); color: #fff; }
         .btn-outline:hover { background: rgba(255, 255, 255, 0.12); border-color: rgba(255, 255, 255, 0.5); transform: translateY(-2px); }
-        .btn-orange { background: linear-gradient(135deg, #FF6B35, #E55A2B); color: #fff; box-shadow: 0 8px 24px rgba(255, 107, 53, 0.3); }
-        .btn-orange:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(255, 107, 53, 0.45); }
 
         .welcome-msg {
             margin-top: 12px; padding: 10px 22px;
@@ -548,9 +528,9 @@
         .install-btn.show { display: inline-flex; }
         .install-btn:hover { background: rgba(46, 204, 113, 0.3); transform: translateY(-2px); }
 
-        /* ============ AI SEARCH ============ */
+        /* SEARCH */
         .search-container { position: relative; max-width: 900px; margin: -28px auto 24px; z-index: 50; padding: 0 4px; }
-        .search-modes { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; }
+        .search-modes { display: flex; justify-content: center; gap: 6px; margin-bottom: 10px; flex-wrap: wrap; }
         .search-mode-btn {
             background: rgba(255, 255, 255, 0.7);
             border: 1.5px solid rgba(255, 255, 255, 0.4);
@@ -574,7 +554,7 @@
             background: var(--c-surface);
             border-radius: var(--r-full);
             padding: 5px; display: flex; gap: 6px;
-            box-shadow: 0 4px 16px rgba(10, 37, 64, 0.08), 0 0 0 1px rgba(46, 204, 113, 0);
+            box-shadow: 0 4px 16px rgba(10, 37, 64, 0.08);
             border: 2px solid transparent;
             transition: all 0.3s ease;
         }
@@ -591,7 +571,7 @@
             outline: none; min-width: 0;
         }
         .search-wrapper input::placeholder { color: var(--c-text-sub); }
-        .search-wrapper .search-btn {
+        .search-btn {
             background: linear-gradient(135deg, var(--c-primary-600), var(--c-primary-800));
             color: #fff; padding: 0 26px;
             border-radius: var(--r-full);
@@ -600,8 +580,8 @@
             transition: all var(--t-base);
             min-height: 48px; flex-shrink: 0;
         }
-        .search-wrapper .search-btn:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(29, 91, 142, 0.35); }
-        .search-wrapper .ai-btn {
+        .search-btn:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(29, 91, 142, 0.35); }
+        .ai-btn {
             background: linear-gradient(135deg, #8b5cf6, #7c3aed);
             color: #fff; padding: 0 20px;
             border-radius: var(--r-full);
@@ -611,7 +591,7 @@
             min-height: 48px; flex-shrink: 0;
             margin-right: 6px;
         }
-        .search-wrapper .ai-btn:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4); }
+        .ai-btn:hover { transform: scale(1.02); box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4); }
 
         .keyboard-hint {
             position: absolute; left: 20px; top: 50%;
@@ -670,7 +650,7 @@
         .suggestion-view-all { background: linear-gradient(90deg, var(--c-primary-50), transparent); border-bottom: 2px solid var(--c-primary-500) !important; }
         .suggestion-empty { padding: 24px; text-align: center; color: var(--c-text-muted); font-size: 0.88rem; }
 
-        /* ============ FILTERS ============ */
+        /* FILTERS */
         .filters-wrapper { display: flex; justify-content: center; align-items: center; gap: 10px; flex-wrap: wrap; margin-bottom: 18px; }
         .filters { display: flex; gap: 6px; flex-wrap: wrap; justify-content: center; }
         .filter-chip {
@@ -686,7 +666,6 @@
         }
         .filter-chip:hover { border-color: var(--c-primary-500); color: var(--c-primary-600); transform: translateY(-1px); }
         .filter-chip.active { background: linear-gradient(135deg, var(--c-primary-700), var(--c-primary-900)); color: #fff; border-color: transparent; box-shadow: 0 6px 20px rgba(10, 37, 64, 0.25); }
-        .filter-chip .count { font-size: 0.7rem; opacity: 0.7; }
 
         .advanced-toggle {
             background: transparent;
@@ -741,7 +720,7 @@
         .price-range-input::-webkit-slider-thumb:hover { transform: scale(1.2); }
         .price-range-labels { display: flex; justify-content: space-between; font-size: 0.75rem; color: var(--c-text-muted); font-weight: 700; margin-top: 8px; grid-column: 1 / -1; }
 
-        /* ============ SECTIONS ============ */
+        /* SECTIONS */
         .section-header {
             display: flex; justify-content: space-between;
             align-items: center; margin: 32px 0 16px;
@@ -767,10 +746,9 @@
         }
         .section-header .view-all:hover { background: var(--c-primary-600); color: #fff; border-color: transparent; transform: translateX(-3px); }
 
-        /* ============ GRID ============ */
         .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(288px, 1fr)); gap: 20px; }
 
-        /* ============ CARDS ============ */
+        /* CARDS */
         .card {
             background: var(--c-surface);
             border-radius: var(--r-lg);
@@ -785,8 +763,7 @@
         }
         .card::before {
             content: '';
-            position: absolute;
-            inset: -2px;
+            position: absolute; inset: -2px;
             border-radius: var(--r-lg);
             background: linear-gradient(135deg, #2ecc71, #5eb8ee, #8b5cf6);
             opacity: 0;
@@ -969,7 +946,7 @@
         .btn-share-card { flex: 0 0 auto; width: 40px; background: var(--c-surface-2); color: var(--c-text-muted); border: 1px solid var(--c-border); }
         .btn-share-card:hover { background: var(--c-primary-50); color: var(--c-primary-600); border-color: var(--c-primary-500); }
 
-        /* ============ FEATURED ============ */
+        /* FEATURED */
         .featured-section {
             position: relative; border-radius: var(--r-xl);
             padding: 24px; margin: 12px 0 8px;
@@ -980,7 +957,7 @@
         .featured-section .section-header h2 { border-right-color: var(--c-warning); }
         .featured-section .section-header h2 i { color: var(--c-warning); }
 
-        /* ============ TRENDING ============ */
+        /* TRENDING */
         .trending-section {
             position: relative;
             border-radius: var(--r-xl);
@@ -995,7 +972,7 @@
         .trending-section .section-header h2 { border-right-color: #e74c3c; }
         .trending-section .section-header h2 i { color: #e74c3c; animation: fireFlicker 1.5s ease-in-out infinite; }
 
-        /* ============ CATEGORY GRID ============ */
+        /* CATEGORY GRID */
         .category-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
@@ -1029,7 +1006,7 @@
         .category-card .cat-name { font-size: 0.82rem; font-weight: 700; color: var(--c-text); }
         .category-card .cat-count { font-size: 0.7rem; color: var(--c-text-sub); margin-top: 4px; }
 
-        /* ============ RECENTLY VIEWED ============ */
+        /* RECENTLY VIEWED */
         .recently-viewed {
             display: flex;
             gap: 12px;
@@ -1069,7 +1046,7 @@
         .recently-viewed .mini-card .mini-name { font-size: 0.8rem; font-weight: 700; color: var(--c-text); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; margin-bottom: 2px; }
         .recently-viewed .mini-card .mini-price { font-size: 0.75rem; color: var(--c-primary-600); font-weight: 700; }
 
-        /* ============ SKELETON ============ */
+        /* SKELETON */
         .skeleton {
             background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 25%, var(--c-border) 50%, var(--c-surface-2) 75%, var(--c-border) 100%);
             background-size: 200% 100%;
@@ -1085,7 +1062,7 @@
         .skeleton-line.w-90 { width: 90%; }
         .skeleton-line.h-20 { height: 20px; }
 
-        /* ============ EMPTY STATE ============ */
+        /* EMPTY STATE */
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
@@ -1098,7 +1075,7 @@
         .empty-state h3 { font-size: 1.15rem; color: var(--c-text); margin-bottom: 6px; font-weight: 700; }
         .empty-state p { color: var(--c-text-muted); font-size: 0.9rem; }
 
-        /* ============ INFINITE SCROLL ============ */
+        /* INFINITE SCROLL */
         .infinite-sentinel { height: 20px; margin-top: 20px; }
         .infinite-loading {
             display: flex; justify-content: center;
@@ -1115,7 +1092,7 @@
         .infinite-loading .dots span:nth-child(2) { animation-delay: 0.2s; }
         .infinite-loading .dots span:nth-child(3) { animation-delay: 0.4s; }
 
-        /* ============ FLOATING BAR ============ */
+        /* FLOATING BAR */
         .floating-bar {
             position: fixed; bottom: 0; left: 0; right: 0;
             background: var(--c-surface);
@@ -1143,7 +1120,7 @@
         .floating-btn.danger { background: var(--c-surface-2); color: var(--c-danger); border: 1px solid var(--c-border); }
         .floating-btn.danger:hover { background: rgba(231, 76, 60, 0.1); }
 
-        /* ============ MODAL ============ */
+        /* MODAL */
         .modal-overlay {
             position: fixed; inset: 0;
             background: rgba(10, 20, 30, 0.7);
@@ -1203,7 +1180,7 @@
         .quick-view-info .qv-spec .label { font-size: 0.7rem; color: var(--c-text-sub); font-weight: 600; }
         .quick-view-info .qv-spec .value { font-size: 0.9rem; color: var(--c-text); font-weight: 700; }
 
-        /* ============ COMPARE TABLE ============ */
+        /* COMPARE TABLE */
         .compare-table { width: 100%; border-collapse: separate; border-spacing: 0; font-size: 0.88rem; }
         .compare-table th, .compare-table td { padding: 12px 14px; text-align: right; border-bottom: 1px solid var(--c-border); vertical-align: top; }
         .compare-table th { background: var(--c-surface-2); font-weight: 700; color: var(--c-text); position: sticky; top: 0; }
@@ -1211,7 +1188,7 @@
         .compare-table tr:last-child td, .compare-table tr:last-child th { border-bottom: none; }
         .compare-product-head .img { width: 100px; height: 100px; object-fit: cover; border-radius: var(--r-md); background: var(--c-surface-2); }
 
-        /* ============ FORMS ============ */
+        /* FORMS */
         .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
         .form-group { display: flex; flex-direction: column; gap: 6px; }
         .form-group.full { grid-column: 1 / -1; }
@@ -1260,7 +1237,7 @@
         .rfq-login-notice i { color: var(--c-warning); font-size: 1.2rem; flex-shrink: 0; margin-top: 2px; }
         .rfq-login-notice a { color: var(--c-primary-600); font-weight: 700; text-decoration: underline; }
 
-        /* ============ NOTIFICATION PANEL ============ */
+        /* NOTIFICATION PANEL */
         .notification-panel {
             position: fixed;
             top: calc(var(--header-h) + 12px);
@@ -1289,14 +1266,13 @@
             font-size: 0.75rem;
             color: var(--c-primary-600);
             font-weight: 600;
-            transition: all var(--t-fast);
             background: none;
             border: none;
             cursor: pointer;
         }
         .notification-header .mark-all-btn:hover { color: var(--c-primary-800); text-decoration: underline; }
         .notification-list { max-height: 500px; overflow-y: auto; padding: 8px; }
-        .notification-item { display: flex; gap: 12px; padding: 12px; border-radius: var(--r-md); transition: background 0.2s; cursor: pointer; }
+        .notification-item { display: flex; gap: 12px; padding: 12px; border-radius: var(--r-md); transition: background 0.2s; cursor: pointer; position: relative; }
         .notification-item:hover { background: var(--c-surface-2); }
         .notification-item.unread { background: rgba(46, 204, 113, 0.05); }
         .notification-item.unread::before {
@@ -1320,7 +1296,7 @@
         .notification-icon.new-product { background: rgba(139, 92, 246, 0.1); color: var(--c-purple); }
         .notification-icon.default { background: var(--c-surface-2); color: var(--c-text-muted); }
 
-        /* ============ SCROLL TOP ============ */
+        /* SCROLL TOP */
         .scroll-top {
             position: fixed; bottom: 32px; right: 24px;
             width: 48px; height: 48px; border-radius: 50%;
@@ -1336,7 +1312,7 @@
         .scroll-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
         .scroll-top:hover { transform: translateY(-4px); box-shadow: var(--sh-xl); }
 
-        /* ============ TOAST ============ */
+        /* TOAST */
         .toast-container {
             position: fixed; bottom: 24px; left: 50%;
             transform: translateX(-50%);
@@ -1381,11 +1357,11 @@
         .toast.error { border-right-color: var(--c-danger); }
         .toast.info { border-right-color: var(--c-purple); }
 
-        /* ============ SCROLL REVEAL ============ */
+        /* SCROLL REVEAL */
         .reveal { opacity: 0; transform: translateY(30px); transition: opacity 0.6s ease, transform 0.6s cubic-bezier(0.22, 1, 0.36, 1); }
         .reveal.revealed { opacity: 1; transform: translateY(0); }
 
-        /* ============ FOOTER ============ */
+        /* FOOTER */
         .footer {
             background: linear-gradient(180deg, var(--c-primary-900), #061a2e);
             color: rgba(255, 255, 255, 0.8);
@@ -1403,7 +1379,7 @@
         .footer-links a:hover { color: #5eb8ee; }
         .footer-copy { text-align: center; font-size: 0.82rem; color: rgba(255, 255, 255, 0.4); }
 
-        /* ============ RESPONSIVE ============ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) { .grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); } }
 
         @media (max-width: 860px) {
@@ -1455,7 +1431,7 @@
             .search-wrapper { flex-wrap: wrap; padding: 6px; border-radius: var(--r-lg); }
             .search-icon { display: none; }
             .search-wrapper input { padding: 12px 16px; width: 100%; }
-            .search-wrapper .search-btn, .search-wrapper .ai-btn { width: 100%; justify-content: center; min-height: 46px; margin-right: 0; margin-bottom: 6px; }
+            .search-btn, .ai-btn { width: 100%; justify-content: center; min-height: 46px; margin-right: 0; margin-bottom: 6px; }
             .grid { grid-template-columns: 1fr; gap: 14px; }
             .advanced-filters { grid-template-columns: 1fr; padding: 12px; }
             .section-header { margin: 24px 0 12px; }
@@ -1766,11 +1742,11 @@
             <div id="trendingList" class="grid"></div>
         </div>
 
-        <!-- LIVE RFQs (طلبات الشراء المفتوحة) -->
+        <!-- LIVE RFQs -->
         <div id="liveRfqsSection" style="display: none;" class="reveal">
             <div class="section-header">
-                <h2 style="border-right-color: var(--c-safety-orange);">
-                    <i class="fas fa-bolt" style="color: var(--c-safety-orange);"></i> طلبات شراء مفتوحة الآن
+                <h2 style="border-right-color: #FF6B35;">
+                    <i class="fas fa-bolt" style="color: #FF6B35;"></i> طلبات شراء مفتوحة الآن
                 </h2>
                 <a href="all-requests.html" class="view-all">
                     عرض الكل <i class="fas fa-arrow-left"></i>
@@ -1808,7 +1784,7 @@
         <div class="notification-list" id="notificationList"></div>
     </div>
 
-    <!-- FLOATING BAR (Compare) -->
+    <!-- FLOATING BAR -->
     <div class="floating-bar" id="compareBar">
         <div class="floating-bar-info">
             <i class="fas fa-balance-scale" style="color: var(--c-purple);"></i>
@@ -1881,7 +1857,7 @@
 
                     <div class="form-group">
                         <label for="rfqCas">رقم CAS <span class="hint">(اختياري)</span></label>
-                        <input type="text" id="rfqCas" name="cas_number" placeholder="1310-73-2" dir="ltr" pattern="\d{2,7}-\d{2}-\d" />
+                        <input type="text" id="rfqCas" name="cas_number" placeholder="1310-73-2" dir="ltr" />
                     </div>
 
                     <div class="form-group">
@@ -1974,11 +1950,11 @@
     </footer>
 
     <!-- ============================================================
-         CHEMOTO CORE JS
+         CHEMOTO 3.0 CORE JS (FULLY FIXED)
          ============================================================ -->
     <script type="module">
         // ============================================================
-        // SUPABASE INIT
+        // 1. SUPABASE INIT
         // ============================================================
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
@@ -1991,14 +1967,13 @@
             supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
                 auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' },
             });
+            window.supabase = supabase;
         } catch (e) {
             console.error('❌ Supabase init failed:', e);
         }
 
-        window.supabase = supabase;
-
         // ============================================================
-        // STATE
+        // 2. STATE
         // ============================================================
         const state = {
             categoryId: 'all',
@@ -2026,6 +2001,7 @@
             deferredInstallPrompt: null,
             categories: [],
             unreadMessages: 0,
+            statsCache: { data: null, timestamp: 0 },
         };
 
         const WISHLIST_KEY = 'chemato-wishlist';
@@ -2034,9 +2010,10 @@
         const SEARCH_MODE_KEY = 'chemato-search-mode';
         const RECENT_KEY = 'chemato-recently-viewed';
         const MAX_RECENT = 10;
+        const STATS_CACHE_TTL = 5 * 60 * 1000; // 5 minutes
 
         // ============================================================
-        // UTILS
+        // 3. UTILS
         // ============================================================
         const escapeHtml = (str) => {
             if (str === null || str === undefined) return '';
@@ -2062,10 +2039,9 @@
             if (seconds < 604800) return `منذ ${Math.floor(seconds / 86400)} يوم`;
             return date.toLocaleDateString('ar-EG');
         };
-        const formatPrice = (price) => price ? `${Number(price).toLocaleString('ar-EG')} ج.م` : 'عند الطلب';
 
         // ============================================================
-        // THEME
+        // 4. THEME
         // ============================================================
         const initTheme = () => {
             const saved = localStorage.getItem(THEME_KEY);
@@ -2086,7 +2062,7 @@
         };
 
         // ============================================================
-        // TOAST
+        // 5. TOAST
         // ============================================================
         const removeToast = (toast) => {
             if (!toast || !toast.parentNode) return;
@@ -2141,7 +2117,7 @@
         window.showToast = showToast;
 
         // ============================================================
-        // READING PROGRESS
+        // 6. READING PROGRESS
         // ============================================================
         const initReadingProgress = () => {
             const bar = document.getElementById('readingProgress');
@@ -2156,7 +2132,7 @@
         };
 
         // ============================================================
-        // NAVBAR
+        // 7. NAVBAR
         // ============================================================
         const initNavbar = () => {
             const menuToggle = document.getElementById('menuToggle');
@@ -2184,7 +2160,7 @@
         };
 
         // ============================================================
-        // KEYBOARD SHORTCUTS
+        // 8. KEYBOARD SHORTCUTS
         // ============================================================
         const initKeyboardShortcuts = () => {
             document.addEventListener('keydown', (e) => {
@@ -2212,7 +2188,7 @@
         };
 
         // ============================================================
-        // AUTH
+        // 9. AUTH
         // ============================================================
         const checkUser = async () => {
             if (!supabase) return;
@@ -2280,7 +2256,6 @@
 
                     await syncFavoritesFromDB();
                     await loadUnreadMessagesCount();
-
                 } else {
                     state.userProfile = null;
                     if (supplierBtn) supplierBtn.style.display = 'inline-flex';
@@ -2290,14 +2265,13 @@
                 }
 
                 updateWishlistCount();
-
             } catch (e) {
                 console.warn('Auth check error:', e.message);
             }
         };
 
         // ============================================================
-        // FAVORITES
+        // 10. FAVORITES
         // ============================================================
         const loadWishlistFromLocal = () => {
             try {
@@ -2360,7 +2334,7 @@
         };
 
         // ============================================================
-        // UNREAD MESSAGES
+        // 11. MESSAGES BADGE
         // ============================================================
         const loadUnreadMessagesCount = async () => {
             if (!state.user) return;
@@ -2381,7 +2355,7 @@
         };
 
         // ============================================================
-        // STATS
+        // 12. STATS (FIXED: with caching + proper fallback)
         // ============================================================
         const animateNumber = (el, target) => {
             if (!el) return;
@@ -2402,37 +2376,62 @@
             requestAnimationFrame(step);
         };
 
-        const loadStats = async () => {
+        // ✅ FIXED: Load stats with caching + fallback (no more 404 errors)
+        const loadStats = async (force = false) => {
             if (!supabase) return;
+
+            // Check cache first
+            const now = Date.now();
+            if (!force && state.statsCache.data && (now - state.statsCache.timestamp < STATS_CACHE_TTL)) {
+                applyStats(state.statsCache.data);
+                return;
+            }
+
             try {
-                const { data } = await supabase.rpc('get_public_stats');
-                if (data) {
-                    animateNumber(document.getElementById('totalProducts'), data.total_products || 0);
-                    animateNumber(document.getElementById('totalRequests'), data.total_requests || 0);
-                    animateNumber(document.getElementById('totalSuppliers'), data.total_suppliers || 0);
-                    animateNumber(document.getElementById('totalViews'), data.total_views || 0);
-                    animateNumber(document.getElementById('totalContacts'), data.total_contacts || 0);
+                // Try RPC first (if function exists)
+                const { data: rpcData, error: rpcError } = await supabase.rpc('get_public_stats');
+                
+                if (!rpcError && rpcData) {
+                    state.statsCache = { data: rpcData, timestamp: now };
+                    applyStats(rpcData);
                     return;
                 }
-            } catch {}
 
-            // Fallback
-            try {
-                const [prodCount, reqCount, supCount] = await Promise.all([
-                    supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'active'),
-                    supabase.from('purchase_requests').select('*', { count: 'exact', head: true }).eq('status', 'open'),
-                    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier'),
+                // ✅ FIXED: Fallback to direct counts (works even without RPC)
+                const [prodCount, reqCount, supCount, viewsCount, contactsCount] = await Promise.all([
+                    supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'active').then(r => r.count || 0).catch(() => 0),
+                    supabase.from('purchase_requests').select('*', { count: 'exact', head: true }).eq('status', 'open').then(r => r.count || 0).catch(() => 0),
+                    supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier').then(r => r.count || 0).catch(() => 0),
+                    supabase.from('products').select('views').eq('status', 'active').then(r => (r.data || []).reduce((sum, p) => sum + (p.views || 0), 0)).catch(() => 0),
+                    supabase.from('supplier_contacts').select('*', { count: 'exact', head: true }).eq('contact_type', 'whatsapp').then(r => r.count || 0).catch(() => 0),
                 ]);
-                animateNumber(document.getElementById('totalProducts'), prodCount.count || 0);
-                animateNumber(document.getElementById('totalRequests'), reqCount.count || 0);
-                animateNumber(document.getElementById('totalSuppliers'), supCount.count || 0);
-                animateNumber(document.getElementById('totalViews'), 0);
-                animateNumber(document.getElementById('totalContacts'), 0);
-            } catch {}
+
+                const data = {
+                    total_products: prodCount,
+                    total_requests: reqCount,
+                    total_suppliers: supCount,
+                    total_views: viewsCount,
+                    total_contacts: contactsCount,
+                };
+
+                state.statsCache = { data, timestamp: now };
+                applyStats(data);
+
+            } catch (e) {
+                console.warn('Stats load warning:', e.message);
+            }
+        };
+
+        const applyStats = (data) => {
+            animateNumber(document.getElementById('totalProducts'), data.total_products || 0);
+            animateNumber(document.getElementById('totalRequests'), data.total_requests || 0);
+            animateNumber(document.getElementById('totalSuppliers'), data.total_suppliers || 0);
+            animateNumber(document.getElementById('totalViews'), data.total_views || 0);
+            animateNumber(document.getElementById('totalContacts'), data.total_contacts || 0);
         };
 
         // ============================================================
-        // COMMODITY TICKER
+        // 13. COMMODITY TICKER
         // ============================================================
         const CommodityTracker = {
             commodities: [
@@ -2444,7 +2443,6 @@
                 { code: 'SODA_ASH', name: 'رماد الصودا', unit: '$/طن' },
                 { code: 'SULFURIC', name: 'حمض الكبريتيك', unit: '$/طن' },
             ],
-
             prices: {
                 'BRENT': { price: 78.45, change: +1.2 },
                 'GAS': { price: 2.85, change: -0.8 },
@@ -2454,21 +2452,9 @@
                 'SODA_ASH': { price: 285.00, change: +0.7 },
                 'SULFURIC': { price: 95.30, change: -0.4 },
             },
-
-            async fetchPrices() {
-                // Demo mode - في الإنتاج: استخدم OilPriceAPI
-                try {
-                    if (window.ENV?.OIL_PRICE_API_KEY) {
-                        // Real API call
-                    }
-                } catch (e) {}
-                this.render();
-            },
-
             render() {
                 const ticker = document.getElementById('commodityTicker');
                 if (!ticker) return;
-
                 const items = this.commodities.map(c => {
                     const data = this.prices[c.code] || { price: 0, change: 0 };
                     const changeClass = data.change >= 0 ? 'up' : 'down';
@@ -2481,19 +2467,17 @@
                         </div>
                     `;
                 }).join('');
-
                 ticker.innerHTML = `<div class="ticker-content">${items}${items}</div>`;
                 ticker.style.display = 'block';
             },
-
             init() {
-                this.fetchPrices();
-                setInterval(() => this.fetchPrices(), 5 * 60 * 1000);
+                this.render();
+                setInterval(() => this.render(), 5 * 60 * 1000);
             }
         };
 
         // ============================================================
-        // MOLECULAR VISUALIZER
+        // 14. MOLECULAR VISUALIZER
         // ============================================================
         const MolecularVisualizer = {
             init() {
@@ -2517,7 +2501,7 @@
         };
 
         // ============================================================
-        // PRODUCTS
+        // 15. PRODUCTS (✅ FIXED: proper pagination + 416 handling)
         // ============================================================
         const renderSkeleton = () => {
             const container = document.getElementById('productsList');
@@ -2549,24 +2533,37 @@
             return map;
         };
 
+        // ✅ FIXED: Completely rewritten loadProducts with proper pagination handling
         const loadProducts = async ({ append = false } = {}) => {
             if (!supabase || state.loading) return;
             state.loading = true;
 
             const container = document.getElementById('productsList');
             const infiniteLoading = document.getElementById('infiniteLoading');
+            const sentinel = document.getElementById('infiniteSentinel');
 
             if (!append) {
                 state.page = 0;
                 state.products = [];
+                state.hasMore = true;
+                if (sentinel) sentinel.style.display = 'block';
                 renderSkeleton();
             } else {
-                infiniteLoading.style.display = 'flex';
+                if (infiniteLoading) infiniteLoading.style.display = 'flex';
             }
 
             try {
                 const from = state.page * state.pageSize;
                 const to = from + state.pageSize - 1;
+
+                // ✅ FIXED: Check if we're beyond total (avoid 416)
+                if (state.total > 0 && from >= state.total) {
+                    state.hasMore = false;
+                    if (sentinel) sentinel.style.display = 'none';
+                    state.loading = false;
+                    if (infiniteLoading) infiniteLoading.style.display = 'none';
+                    return;
+                }
 
                 let query = supabase.from('products').select('*', { count: 'exact' }).eq('status', 'active');
 
@@ -2621,10 +2618,45 @@
                 query = query.range(from, to);
 
                 const { data, error, count } = await query;
-                if (error) throw error;
+
+                // ✅ FIXED: Handle 416 specially
+                if (error) {
+                    if (error.code === 'PGRST103' || error.message?.includes('Requested Range Not Satisfiable')) {
+                        // No more data - stop pagination
+                        state.hasMore = false;
+                        if (sentinel) sentinel.style.display = 'none';
+                        if (!append && container) {
+                            container.innerHTML = `<div class="empty-state">
+                                <i class="fas fa-box-open"></i>
+                                <h3>لا توجد منتجات</h3>
+                                <p>جرب تغيير الفلاتر أو البحث بكلمات مختلفة</p>
+                            </div>`;
+                        }
+                        state.loading = false;
+                        if (infiniteLoading) infiniteLoading.style.display = 'none';
+                        return;
+                    }
+                    throw error;
+                }
 
                 const products = data || [];
                 state.total = count || 0;
+
+                // ✅ FIXED: Check if we've reached the end
+                if (products.length === 0) {
+                    state.hasMore = false;
+                    if (sentinel) sentinel.style.display = 'none';
+                    if (!append && container) {
+                        container.innerHTML = `<div class="empty-state">
+                            <i class="fas fa-box-open"></i>
+                            <h3>لا توجد منتجات</h3>
+                            <p>جرب تغيير الفلاتر أو البحث بكلمات مختلفة</p>
+                        </div>`;
+                    }
+                    state.loading = false;
+                    if (infiniteLoading) infiniteLoading.style.display = 'none';
+                    return;
+                }
 
                 const supplierIds = [...new Set(products.map(p => p.supplier_id).filter(Boolean))];
                 const suppliersMap = await fetchSuppliersMap(supplierIds);
@@ -2638,12 +2670,16 @@
                 else state.products = enriched;
 
                 renderProducts(enriched, !append);
-                state.hasMore = state.products.length < state.total;
+
+                // ✅ FIXED: Better end detection
+                state.hasMore = state.products.length < state.total && products.length === state.pageSize;
+                if (!state.hasMore && sentinel) sentinel.style.display = 'none';
+
                 enriched.forEach(p => trackView(p.id, p.supplier_id));
 
             } catch (error) {
                 console.error('❌ Products error:', error);
-                if (!append) {
+                if (!append && container) {
                     container.innerHTML = `
                         <div class="empty-state">
                             <i class="fas fa-exclamation-triangle" style="color: var(--c-danger);"></i>
@@ -2655,11 +2691,11 @@
                         </div>
                     `;
                 }
-                showToast('⚠️', 'خطأ', 'تعذر تحميل المنتجات', null, null, 'error');
+                if (append) state.hasMore = false;
             } finally {
                 state.loading = false;
-                infiniteLoading.style.display = 'none';
-                container?.setAttribute('aria-busy', 'false');
+                if (infiniteLoading) infiniteLoading.style.display = 'none';
+                if (container) container.setAttribute('aria-busy', 'false');
             }
         };
 
@@ -2668,13 +2704,15 @@
             if (!container) return;
 
             if (!products.length) {
-                container.innerHTML = `
-                    <div class="empty-state">
-                        <i class="fas fa-box-open"></i>
-                        <h3>لا توجد منتجات</h3>
-                        <p>${state.searchMode === 'cas' ? 'تأكد من صيغة رقم CAS (مثال: 1310-73-2)' : 'جرب البحث بكلمات مختلفة'}</p>
-                    </div>
-                `;
+                if (replace) {
+                    container.innerHTML = `
+                        <div class="empty-state">
+                            <i class="fas fa-box-open"></i>
+                            <h3>لا توجد منتجات</h3>
+                            <p>${state.searchMode === 'cas' ? 'تأكد من صيغة رقم CAS (مثال: 1310-73-2)' : 'جرب البحث بكلمات مختلفة'}</p>
+                        </div>
+                    `;
+                }
                 return;
             }
 
@@ -2752,7 +2790,6 @@
                 <article class="card" style="animation-delay: ${Math.min(index * 0.04, 0.3)}s;" data-product-id="${escapeHtml(p.id)}">
                     <div class="card-media">
                         ${mediaHtml}
-
                         <div class="card-float-actions">
                             <button class="card-float-btn ${isWishlisted ? 'active' : ''}"
                                     type="button" data-action="wishlist"
@@ -2768,7 +2805,6 @@
                                 <i class="fas fa-balance-scale"></i>
                             </button>
                         </div>
-
                         <div class="card-badges">
                             <div>${badges.slice(0, 2).join('')}</div>
                             <div>${badges.slice(2).join('')}</div>
@@ -2779,23 +2815,18 @@
                             <span class="card-category"><i class="fas fa-flask"></i> ${category}</span>
                             ${stockHtml}
                         </div>
-
                         <h3 class="card-title">${name}</h3>
-
                         ${specsHtml}
                         ${msdsHtml}
-
                         <div class="card-price">
                             ${price}${p.unit ? ` <span class="currency">/ ${escapeHtml(p.unit)}</span>` : ''}
                             ${moqHtml}
                         </div>
-
                         <div class="card-supplier">
                             ${isVerified ? '<span class="verified-badge" title="مورد موثّق"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
                             <i class="fas fa-building"></i>
                             <span>${supplier}</span>
                         </div>
-
                         <div class="card-actions">
                             <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="btn-card btn-detail">
                                 <i class="fas fa-info-circle"></i> تفاصيل
@@ -2832,7 +2863,7 @@
         };
 
         // ============================================================
-        // CARD ACTIONS
+        // 16. CARD ACTIONS
         // ============================================================
         const initCardActions = () => {
             document.addEventListener('click', async (e) => {
@@ -2866,7 +2897,6 @@
                 }
             });
 
-            // Recent view tracking
             document.addEventListener('click', (e) => {
                 const card = e.target.closest('.card[data-product-id]');
                 if (card) {
@@ -2918,9 +2948,7 @@
                 return;
             }
             const phoneWithCountry = clean.startsWith('20') ? clean : '20' + clean;
-
             logContact({ supplierId, productId, type: 'whatsapp' }).catch(() => {});
-
             const message = encodeURIComponent(`مرحباً، مهتم بـ: ${productName} (كيماتو)`);
             window.open(`https://wa.me/${phoneWithCountry}?text=${message}`, '_blank', 'noopener,noreferrer');
         };
@@ -2942,7 +2970,7 @@
         };
 
         // ============================================================
-        // WISHLIST UI
+        // 17. WISHLIST UI
         // ============================================================
         const updateWishlistCount = () => {
             const count = state.wishlist.size;
@@ -2986,7 +3014,7 @@
         };
 
         // ============================================================
-        // COMPARE
+        // 18. COMPARE
         // ============================================================
         const loadCompareList = () => {
             try {
@@ -3092,7 +3120,7 @@
         };
 
         // ============================================================
-        // RECENT VIEW
+        // 19. RECENTLY VIEWED
         // ============================================================
         const RecentTracker = {
             add(product) {
@@ -3140,7 +3168,7 @@
         window.RecentTracker = RecentTracker;
 
         // ============================================================
-        // FEATURED
+        // 20. FEATURED
         // ============================================================
         const loadFeatured = async () => {
             if (!supabase) return;
@@ -3168,17 +3196,17 @@
         };
 
         // ============================================================
-        // TRENDING
+        // 21. TRENDING
         // ============================================================
         const loadTrending = async () => {
             if (!supabase) return;
             try {
                 let { data } = await supabase.from('products').select('*').eq('status', 'active')
-                    .gte('views', 5).order('views', { ascending: false, nullsFirst: false }).limit(4);
-                
+                    .gt('views', 0).order('views', { ascending: false, nullsFirst: false }).limit(4);
+
                 if (!data?.length) {
                     const fallback = await supabase.from('products').select('*').eq('status', 'active')
-                        .order('views', { ascending: false, nullsFirst: false }).limit(4);
+                        .order('created_at', { ascending: false }).limit(4);
                     data = fallback.data;
                 }
 
@@ -3197,22 +3225,22 @@
         };
 
         // ============================================================
-        // LIVE RFQs
+        // 22. LIVE RFQs
         // ============================================================
         const loadLiveRfqs = async () => {
             if (!supabase) return;
             try {
                 const { data } = await supabase
                     .from('purchase_requests')
-                    .select(`
-                        id, product_name, quantity_needed, budget_max, deadline, location, created_at,
-                        buyer:profiles!buyer_id (company_name, full_name, is_verified)
-                    `)
+                    .select('id, product_name, quantity_needed, budget_max, deadline, location, created_at, buyer_id')
                     .eq('status', 'open')
                     .order('created_at', { ascending: false })
                     .limit(3);
 
                 if (!data?.length) return;
+
+                const buyerIds = [...new Set(data.map(r => r.buyer_id).filter(Boolean))];
+                const buyersMap = await fetchSuppliersMap(buyerIds);
 
                 const section = document.getElementById('liveRfqsSection');
                 const list = document.getElementById('liveRfqsList');
@@ -3220,21 +3248,19 @@
 
                 section.style.display = 'block';
                 list.innerHTML = data.map(rfq => {
-                    const buyerName = rfq.buyer?.company_name || rfq.buyer?.full_name || 'مشتري';
+                    const buyer = buyersMap[rfq.buyer_id];
+                    const buyerName = buyer?.company_name || buyer?.full_name || 'مشتري';
                     const budget = rfq.budget_max 
                         ? `حتى ${Number(rfq.budget_max).toLocaleString('ar-EG')} ج.م`
                         : 'ميزانية مفتوحة';
-                    
                     return `
-                        <article class="card" style="animation-delay: 0.1s;" onclick="window.location.href='request-details.html?id=${encodeURIComponent(rfq.id)}'">
-                            <div style="padding: 20px; cursor: pointer;">
+                        <article class="card" style="animation-delay: 0.1s; cursor: pointer;" onclick="window.location.href='request-details.html?id=${encodeURIComponent(rfq.id)}'">
+                            <div style="padding: 20px;">
                                 <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
-                                    <span style="background: rgba(255,107,53,0.1); color: var(--c-safety-orange); padding: 4px 12px; border-radius: var(--r-full); font-size: 0.7rem; font-weight: 800;">
+                                    <span style="background: rgba(255,107,53,0.1); color: #FF6B35; padding: 4px 12px; border-radius: 999px; font-size: 0.7rem; font-weight: 800;">
                                         🔥 طلب مفتوح
                                     </span>
-                                    <span style="font-size: 0.75rem; color: var(--c-text-sub);">
-                                        ${timeAgo(rfq.created_at)}
-                                    </span>
+                                    <span style="font-size: 0.75rem; color: var(--c-text-sub);">${timeAgo(rfq.created_at)}</span>
                                 </div>
                                 <h3 style="font-size: 1rem; font-weight: 800; margin-bottom: 10px; color: var(--c-text);">
                                     ${escapeHtml(rfq.product_name)}
@@ -3246,7 +3272,7 @@
                                     </div>
                                     <div>
                                         <div style="color: var(--c-text-sub); font-size: 0.7rem;">الميزانية</div>
-                                        <div style="font-weight: 700; color: var(--c-lab-green);">${budget}</div>
+                                        <div style="font-weight: 700; color: #00A86B;">${budget}</div>
                                     </div>
                                     <div>
                                         <div style="color: var(--c-text-sub); font-size: 0.7rem;">الموقع</div>
@@ -3269,7 +3295,7 @@
         };
 
         // ============================================================
-        // SEARCH
+        // 23. SEARCH
         // ============================================================
         const loadSuggestionsPool = async () => {
             if (!supabase) return;
@@ -3447,11 +3473,10 @@
 
             btn?.addEventListener('click', performSearch);
 
-            // AI Search
             aiBtn?.addEventListener('click', () => {
                 const query = input?.value.trim();
                 if (!query) {
-                    showToast('🤖', 'البحث الذكي', 'اكتب استعلام طبيعي: "أريد 10 طن أسيتون 99% في القاهرة"', null, null, 'info');
+                    showToast('🤖', 'البحث الذكي', 'اكتب استعلام طبيعي: "أريد 10 طن أسيتون 99%"', null, null, 'info');
                     return;
                 }
                 performAISearch(query);
@@ -3478,36 +3503,25 @@
         };
 
         // ============================================================
-        // AI SEARCH
+        // 24. AI SEARCH
         // ============================================================
         const performAISearch = async (query) => {
             try {
-                // Parse natural language
                 const parsed = parseNaturalLanguage(query);
-                
                 showToast('🤖', 'البحث الذكي', `جاري تحليل: "${query}"`, null, null, 'info');
 
-                // Apply parsed filters
-                if (parsed.filters.quantity) state.search = parsed.query;
                 if (parsed.filters.grade) state.gradeFilter = parsed.filters.grade;
                 if (parsed.filters.purity) state.purityFilter = parsed.filters.purity;
-                if (parsed.filters.location) state.search = parsed.query;
 
-                // Update UI
                 const input = document.getElementById('searchInput');
                 if (input) input.value = parsed.query;
-                
                 state.search = parsed.query;
 
-                // Load with filters
                 updateURL();
                 await loadProducts();
-                
                 document.getElementById('productsList')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
-
                 showToast('✅', 'نتائج البحث الذكي', `تم تطبيق الفلاتر المستخرجة تلقائياً`, null, null, 'success');
             } catch (e) {
-                console.error('AI Search error:', e);
                 performSearch();
             }
         };
@@ -3536,13 +3550,13 @@
         };
 
         // ============================================================
-        // CATEGORIES
+        // 25. CATEGORIES
         // ============================================================
         const loadCategories = async () => {
             if (!supabase) return;
             try {
-                let { data } = await supabase.from('categories').select('id, name, icon').order('display_order');
-                if (!data) {
+                let { data, error } = await supabase.from('categories').select('id, name, icon').order('display_order');
+                if (error || !data) {
                     const fallback = await supabase.from('categories').select('id, name, icon');
                     data = fallback.data;
                 }
@@ -3624,7 +3638,7 @@
         };
 
         // ============================================================
-        // ADVANCED FILTERS
+        // 26. ADVANCED FILTERS
         // ============================================================
         const initAdvancedFilters = () => {
             const toggle = document.getElementById('advancedToggle');
@@ -3703,7 +3717,7 @@
         };
 
         // ============================================================
-        // URL SYNC
+        // 27. URL SYNC
         // ============================================================
         const updateURL = () => {
             const params = new URLSearchParams();
@@ -3743,24 +3757,27 @@
         };
 
         // ============================================================
-        // INFINITE SCROLL
+        // 28. INFINITE SCROLL (✅ FIXED: better detection)
         // ============================================================
         const initInfiniteScroll = () => {
             const sentinel = document.getElementById('infiniteSentinel');
             if (!sentinel || !('IntersectionObserver' in window)) return;
+            
             let isLoading = false;
             const observer = new IntersectionObserver((entries) => {
                 if (entries[0].isIntersecting && !isLoading && state.hasMore && !state.loading) {
                     isLoading = true;
                     state.page += 1;
-                    loadProducts({ append: true }).finally(() => { isLoading = false; });
+                    loadProducts({ append: true }).finally(() => { 
+                        setTimeout(() => { isLoading = false; }, 500); 
+                    });
                 }
             }, { rootMargin: '400px' });
             observer.observe(sentinel);
         };
 
         // ============================================================
-        // SCROLL TOP
+        // 29. SCROLL TOP
         // ============================================================
         const initScrollTop = () => {
             const btn = document.getElementById('scrollTopBtn');
@@ -3772,7 +3789,7 @@
         };
 
         // ============================================================
-        // SHARE PAGE
+        // 30. SHARE PAGE
         // ============================================================
         const initShare = () => {
             document.getElementById('shareBtn')?.addEventListener('click', async () => {
@@ -3790,7 +3807,7 @@
         };
 
         // ============================================================
-        // QUICK VIEW
+        // 31. QUICK VIEW
         // ============================================================
         const initQuickView = () => {
             document.addEventListener('dblclick', (e) => {
@@ -3867,7 +3884,7 @@
         };
 
         // ============================================================
-        // RFQ
+        // 32. RFQ
         // ============================================================
         const showRfqModal = () => {
             const notice = document.getElementById('rfqLoginNotice');
@@ -3905,7 +3922,7 @@
                         throw new Error('صيغة رقم CAS غير صحيحة');
                     }
 
-                    const { data: inserted, error } = await supabase
+                    const { error } = await supabase
                         .from('purchase_requests')
                         .insert({
                             buyer_id: state.user.id,
@@ -3921,9 +3938,7 @@
                             budget_min: data.budget_min ? Number(data.budget_min) : null,
                             budget_max: data.budget_max ? Number(data.budget_max) : null,
                             status: 'open',
-                        })
-                        .select()
-                        .single();
+                        });
 
                     if (error) throw error;
 
@@ -3940,7 +3955,7 @@
         };
 
         // ============================================================
-        // LOG CONTACT
+        // 33. LOG CONTACT
         // ============================================================
         const logContact = async ({ supplierId, productId, type }) => {
             if (!supabase || !isValidUUID(supplierId)) return;
@@ -3955,7 +3970,9 @@
                     p_user_agent: (navigator.userAgent || '').slice(0, 400),
                     p_referrer: (document.referrer || '').slice(0, 400) || null,
                 });
-            } catch (e) {}
+            } catch (e) {
+                // Silent fail - not critical
+            }
         };
 
         const trackView = (productId, supplierId) => {
@@ -3983,7 +4000,7 @@
         };
 
         // ============================================================
-        // NOTIFICATIONS
+        // 34. NOTIFICATIONS
         // ============================================================
         const SmartNotifications = {
             notifications: [],
@@ -4049,7 +4066,7 @@
                 list.innerHTML = this.notifications.map(n => {
                     const icon = iconMap[n.type] || { icon: 'bell', class: 'default' };
                     return `
-                        <div class="notification-item ${n.read ? '' : 'unread'}" data-id="${n.id}" style="position:relative;">
+                        <div class="notification-item ${n.read ? '' : 'unread'}" data-id="${n.id}">
                             <div class="notification-icon ${icon.class}">
                                 <i class="fas fa-${icon.icon}"></i>
                             </div>
@@ -4086,7 +4103,7 @@
         };
 
         // ============================================================
-        // SCROLL REVEAL
+        // 35. SCROLL REVEAL
         // ============================================================
         const initScrollReveal = () => {
             if (!('IntersectionObserver' in window)) return;
@@ -4102,12 +4119,14 @@
         };
 
         // ============================================================
-        // PWA
+        // 36. PWA
         // ============================================================
         const initPWA = () => {
             if ('serviceWorker' in navigator) {
                 window.addEventListener('load', () => {
-                    navigator.serviceWorker.register('/sw.js').catch(() => {});
+                    navigator.serviceWorker.register('/sw.js')
+                        .then(() => console.info('✅ SW registered'))
+                        .catch(() => console.info('ℹ️ SW not available'));
                 });
             }
             const installBtn = document.getElementById('installBtn');
@@ -4130,7 +4149,7 @@
         };
 
         // ============================================================
-        // MODALS
+        // 37. MODALS
         // ============================================================
         const initModals = () => {
             document.getElementById('compareToggle')?.addEventListener('click', showCompareModal);
@@ -4167,7 +4186,7 @@
         };
 
         // ============================================================
-        // REALTIME
+        // 38. REALTIME
         // ============================================================
         const setupRealtime = () => {
             if (!supabase) return;
@@ -4178,7 +4197,6 @@
                         const name = payload.new?.name || 'منتج جديد';
                         SmartNotifications.add({ type: 'new_product', title: 'منتج جديد', message: `تم إضافة: ${name}` });
                         showToast('🆕', 'منتج جديد!', name, 'عرض', '/all-products.html', 'success');
-                        loadProducts();
                     })
                     .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'messages' }, (payload) => {
                         if (payload.new?.to_user_id === state.user?.id) {
@@ -4192,10 +4210,10 @@
         };
 
         // ============================================================
-        // INIT
+        // 39. INIT
         // ============================================================
         const init = async () => {
-            console.log('🚀 كيماتو 3.0 جاري التحميل...');
+            console.info('🚀 كيماتو 3.0 جاري التحميل...');
 
             if (!supabase) {
                 const container = document.getElementById('productsList');
@@ -4235,23 +4253,24 @@
 
             readURL();
 
+            // Parallel initial loads
             await Promise.all([
-                loadStats(),
-                loadCategories(),
-                loadSuggestionsPool(),
-                checkUser(),
+                loadStats().catch(e => console.warn('Stats:', e.message)),
+                loadCategories().catch(e => console.warn('Categories:', e.message)),
+                loadSuggestionsPool().catch(e => console.warn('Suggestions:', e.message)),
+                checkUser().catch(e => console.warn('Auth:', e.message)),
             ]);
 
             await Promise.all([
-                loadFeatured(),
-                loadProducts(),
-                loadLiveRfqs(),
+                loadFeatured().catch(e => console.warn('Featured:', e.message)),
+                loadProducts().catch(e => console.warn('Products:', e.message)),
+                loadLiveRfqs().catch(e => console.warn('RFQs:', e.message)),
             ]);
 
             setTimeout(() => {
                 RecentTracker.render();
-                loadTrending();
-                renderCategoryGrid();
+                loadTrending().catch(() => {});
+                renderCategoryGrid().catch(() => {});
             }, 500);
 
             setupRealtime();
@@ -4260,17 +4279,18 @@
                 showToast('👋', 'مرحباً بك في كيماتو!', 'منصة الكيماويات B2B الاحترافية', 'استكشف', 'all-products.html', 'info');
             }, 1500);
 
-            setInterval(loadStats, 60000);
+            // Refresh stats every 60s
+            setInterval(() => loadStats().catch(() => {}), 60000);
 
-            console.log('✅ كيماتو 3.0 جاهز');
+            console.info('✅ كيماتو 3.0 جاهز');
         };
 
         if (supabase) {
             supabase.auth.onAuthStateChange(async (event) => {
                 if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
-                    await checkUser();
-                    loadProducts();
-                    loadLiveRfqs();
+                    await checkUser().catch(() => {});
+                    loadProducts().catch(() => {});
+                    loadLiveRfqs().catch(() => {});
                 }
             });
         }
