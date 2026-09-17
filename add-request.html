@@ -879,7 +879,7 @@ function updatePreview() {
         // مفيش سعر → السعر عند الطلب
         priceWrap.innerHTML = `<div class="price poa">💬 السعر عند الطلب</div>`
     } else if (hidePrice) {
-        // فيه سعر + مخفي → يظهر "السعر متاح للمشترين"
+        // فيه سعر + مخفي
         priceWrap.innerHTML = `<div class="price hidden-price">🔒 السعر متاح للمشترين المسجلين</div>`
     } else {
         // فيه سعر + ظاهر
@@ -922,7 +922,7 @@ form.addEventListener('submit', async e => {
     submitBtn.disabled = true
 
     try {
-        // ===== 1. Validate =====
+        // ===== 1. Validate (بس اتنين!) =====
         const name = document.getElementById('name').value.trim()
         const categoryId = document.getElementById('category_id').value
         if (!name) throw new Error('اسم المنتج مطلوب')
@@ -956,18 +956,13 @@ form.addEventListener('submit', async e => {
             subcategory_id: document.getElementById('subcategory_id').value || null,
             description: document.getElementById('description').value.trim() || null,
 
-            // السعر: null لو فاضي، وإلا القيمة
+            // السعر: null لو فاضي
             price: priceVal ? parseFloat(priceVal) : null,
             unit: document.getElementById('unit').value || 'كجم',
             min_order_quantity: document.getElementById('min_order_quantity').value.trim() || null,
             quantity_available: document.getElementById('quantity_available').value.trim() || null,
             stock_status: document.getElementById('stock_status').value || 'available',
             is_featured: document.getElementById('is_featured').value === 'true',
-
-            // السعر المخفي: نخزنه في الـ description كـ flag أو نضيف عمود جديد
-            // الحل الأنظف: نضيفه في description prefix أو metadata
-            // لكن الأفضل نضيف عمود اسمه hide_price في DB (اختياري)
-            // حاليًا نضيفه في وصف كـ hidden marker؟ الأفضل نضيف عمود
 
             purity: document.getElementById('purity').value.trim() || null,
             cas_number: document.getElementById('cas_number').value.trim() || null,
@@ -991,7 +986,7 @@ form.addEventListener('submit', async e => {
             status: 'active'
         }
 
-        // نحاول نضيف hide_price لو العمود موجود، لو مش موجود نتجاهله
+        // hide_price (لو العمود موجود)
         payload.hide_price = hidePrice
 
         // ===== 5. Insert =====
@@ -1001,7 +996,7 @@ form.addEventListener('submit', async e => {
             .select('id')
             .single()
 
-        // لو خطأ بسبب hide_price مش موجود في DB → نعيد المحاولة بدونه
+        // لو hide_price مش موجود في DB → نعيد بدونها
         if (error && error.message?.toLowerCase().includes('hide_price')) {
             delete payload.hide_price
             const retry = await supabase.from('products').insert(payload).select('id').single()
