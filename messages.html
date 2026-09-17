@@ -20,7 +20,7 @@
 
 <style>
 /* ============================================================
-   CHEMOTO 3.2 — Design System
+   CHEMOTO 3.3 — Design System
    ============================================================ */
 :root {
     --c-primary-50:#eef6fc; --c-primary-100:#d4e7f5; --c-primary-500:#2c7ab8;
@@ -65,8 +65,6 @@ input,select,textarea{font-family:inherit}
 @keyframes messageIn{from{opacity:0;transform:translateY(10px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
 @keyframes typingDots{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-6px);opacity:1}}
 @keyframes slideInSidebar{from{transform:translateX(100%)}to{transform:translateX(0)}}
-@keyframes glowPulse{0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,0.4)}50%{box-shadow:0 0 0 8px rgba(46,204,113,0)}}
-@keyframes shine{0%{background-position:-200% 0}100%{background-position:200% 0}}
 
 .animate-in{animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) backwards}
 
@@ -137,15 +135,8 @@ input,select,textarea{font-family:inherit}
     color: var(--c-text);
     font-weight: 700;
 }
-.benefits-banner .benefit-item i {
-    color: var(--c-accent);
-    font-size: 0.9rem;
-}
-.benefits-banner .divider {
-    width: 1px;
-    height: 16px;
-    background: var(--c-border);
-}
+.benefits-banner .benefit-item i { color: var(--c-accent); font-size: 0.9rem; }
+.benefits-banner .divider { width: 1px; height: 16px; background: var(--c-border); }
 .benefits-banner .highlight {
     background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
     color: #fff;
@@ -207,10 +198,7 @@ input,select,textarea{font-family:inherit}
 }
 .new-chat-btn i { font-size: 0.85rem; }
 
-.chat-search {
-    position: relative;
-    margin-bottom: 10px;
-}
+.chat-search { position: relative; margin-bottom: 10px; }
 .chat-search i {
     position: absolute;
     right: 14px;
@@ -237,11 +225,7 @@ input,select,textarea{font-family:inherit}
     box-shadow: 0 0 0 3px rgba(46,204,113,0.1);
 }
 
-.chat-filters {
-    display: flex;
-    gap: 6px;
-    flex-wrap: wrap;
-}
+.chat-filters { display: flex; gap: 6px; flex-wrap: wrap; }
 .chat-filter-btn {
     padding: 5px 12px;
     border-radius: var(--r-full);
@@ -253,10 +237,7 @@ input,select,textarea{font-family:inherit}
     transition: all var(--t-fast);
     white-space: nowrap;
 }
-.chat-filter-btn:hover {
-    border-color: var(--c-accent);
-    color: var(--c-accent-dark);
-}
+.chat-filter-btn:hover { border-color: var(--c-accent); color: var(--c-accent-dark); }
 .chat-filter-btn.active {
     background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
     color: #fff;
@@ -264,11 +245,7 @@ input,select,textarea{font-family:inherit}
     box-shadow: 0 4px 12px rgba(46,204,113,0.3);
 }
 
-.chat-list {
-    flex: 1;
-    overflow-y: auto;
-    overflow-x: hidden;
-}
+.chat-list { flex: 1; overflow-y: auto; overflow-x: hidden; }
 .chat-list::-webkit-scrollbar { width: 6px; }
 .chat-list::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 3px; }
 .chat-list::-webkit-scrollbar-thumb:hover { background: var(--c-text-sub); }
@@ -288,9 +265,7 @@ input,select,textarea{font-family:inherit}
     background: linear-gradient(90deg, rgba(46,204,113,0.08), transparent);
     border-right: 3px solid var(--c-accent);
 }
-.chat-item.unread {
-    background: linear-gradient(90deg, rgba(46,204,113,0.04), transparent);
-}
+.chat-item.unread { background: linear-gradient(90deg, rgba(46,204,113,0.04), transparent); }
 .chat-item.unread .chat-item-name { font-weight: 900; color: var(--c-text); }
 .chat-item.unread .chat-item-preview { color: var(--c-text); font-weight: 700; }
 
@@ -312,17 +287,6 @@ input,select,textarea{font-family:inherit}
     box-shadow: 0 2px 8px rgba(10,37,64,0.1);
 }
 .chat-item-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.chat-item-avatar.online::after {
-    content: '';
-    position: absolute;
-    bottom: 2px;
-    left: 2px;
-    width: 11px;
-    height: 11px;
-    background: var(--c-accent);
-    border-radius: 50%;
-    border: 2px solid var(--c-surface);
-}
 
 .chat-item-body { flex: 1; min-width: 0; display: flex; flex-direction: column; gap: 2px; }
 .chat-item-top { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
@@ -338,18 +302,6 @@ input,select,textarea{font-family:inherit}
     gap: 4px;
 }
 .chat-item-name .verified-dot { color: var(--c-verified); font-size: 0.72rem; flex-shrink: 0; }
-.chat-item-name .fast-responder-badge {
-    display: inline-flex;
-    align-items: center;
-    gap: 2px;
-    background: linear-gradient(135deg, var(--c-gold), #F4B400);
-    color: #664d00;
-    font-size: 0.55rem;
-    font-weight: 900;
-    padding: 1px 5px;
-    border-radius: var(--r-full);
-    flex-shrink: 0;
-}
 .chat-item-time { font-size: 0.68rem; color: var(--c-text-sub); font-weight: 700; flex-shrink: 0; }
 .chat-item-preview {
     font-size: 0.78rem;
@@ -377,11 +329,7 @@ input,select,textarea{font-family:inherit}
     align-self: flex-start;
 }
 
-.chat-empty-sidebar {
-    padding: 60px 24px;
-    text-align: center;
-    color: var(--c-text-muted);
-}
+.chat-empty-sidebar { padding: 60px 24px; text-align: center; color: var(--c-text-muted); }
 .chat-empty-sidebar i {
     font-size: 3rem;
     opacity: 0.3;
@@ -435,20 +383,8 @@ input,select,textarea{font-family:inherit}
     font-size: 1rem;
     flex-shrink: 0;
     overflow: hidden;
-    position: relative;
 }
 .chat-header-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.chat-header-avatar.online::after {
-    content: '';
-    position: absolute;
-    bottom: 1px;
-    left: 1px;
-    width: 12px;
-    height: 12px;
-    background: var(--c-accent);
-    border-radius: 50%;
-    border: 2px solid var(--c-surface);
-}
 
 .chat-header-info { flex: 1; min-width: 0; }
 .chat-header-name {
@@ -471,13 +407,6 @@ input,select,textarea{font-family:inherit}
     align-items: center;
     gap: 4px;
 }
-.chat-header-status .online-dot {
-    width: 7px;
-    height: 7px;
-    border-radius: 50%;
-    background: var(--c-accent);
-    box-shadow: 0 0 0 3px rgba(46,204,113,0.2);
-}
 
 .chat-header-actions { display: flex; gap: 5px; }
 .chat-header-btn {
@@ -497,26 +426,92 @@ input,select,textarea{font-family:inherit}
     color: #fff;
     transform: scale(1.08);
 }
-.chat-header-btn.danger:hover {
-    background: var(--c-danger);
-}
 
 /* Context Bar */
 .chat-context-bar {
-    padding: 10px 18px;
-    background: linear-gradient(135deg, rgba(46,204,113,0.06), rgba(94,184,238,0.04));
+    padding: 12px 18px;
+    background: linear-gradient(135deg, rgba(46,204,113,0.08), rgba(94,184,238,0.06));
     border-bottom: 1px solid var(--c-border);
     display: flex;
     align-items: center;
-    gap: 10px;
-    font-size: 0.8rem;
+    gap: 12px;
     cursor: pointer;
     transition: all var(--t-fast);
+    position: relative;
 }
-.chat-context-bar:hover { background: linear-gradient(135deg, rgba(46,204,113,0.12), rgba(94,184,238,0.08)); }
-.chat-context-bar i.context-icon { color: var(--c-accent); font-size: 0.95rem; }
-.chat-context-bar .context-text { flex: 1; min-width: 0; color: var(--c-text); font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.chat-context-bar .context-action { color: var(--c-accent-dark); font-weight: 800; font-size: 0.75rem; }
+.chat-context-bar:hover { background: linear-gradient(135deg, rgba(46,204,113,0.14), rgba(94,184,238,0.1)); }
+
+.chat-context-thumb {
+    width: 46px;
+    height: 46px;
+    border-radius: var(--r-md);
+    background: linear-gradient(145deg, var(--c-primary-50), var(--c-primary-100));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    overflow: hidden;
+    flex-shrink: 0;
+    border: 1px solid var(--c-border);
+}
+.chat-context-thumb img { width: 100%; height: 100%; object-fit: cover; }
+
+.chat-context-info { flex: 1; min-width: 0; }
+.chat-context-label {
+    font-size: 0.68rem;
+    font-weight: 800;
+    color: var(--c-accent-dark);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+    margin-bottom: 2px;
+}
+.chat-context-title {
+    font-size: 0.88rem;
+    font-weight: 800;
+    color: var(--c-text);
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}
+.chat-context-price {
+    font-size: 0.8rem;
+    font-weight: 800;
+    color: var(--c-accent-dark);
+    margin-top: 2px;
+}
+.chat-context-action {
+    color: var(--c-accent-dark);
+    font-weight: 800;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.chat-context-close {
+    position: absolute;
+    top: 6px;
+    left: 6px;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(0,0,0,0.1);
+    color: var(--c-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.65rem;
+    cursor: pointer;
+    transition: all var(--t-fast);
+    opacity: 0;
+    border: none;
+}
+.chat-context-bar:hover .chat-context-close { opacity: 1; }
+.chat-context-close:hover { background: var(--c-danger); color: #fff; }
 
 /* Messages Area */
 .chat-messages {
@@ -602,6 +597,7 @@ input,select,textarea{font-family:inherit}
     overflow-wrap: break-word;
     position: relative;
     box-shadow: 0 1px 2px rgba(10,37,64,0.04);
+    max-width: 100%;
 }
 .msg-wrapper.sent .msg-bubble {
     background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
@@ -615,7 +611,78 @@ input,select,textarea{font-family:inherit}
     border: 1px solid var(--c-border);
 }
 
-/* Message types */
+/* ============ MESSAGE ATTACHMENTS ============ */
+.msg-bubble .msg-image {
+    display: block;
+    max-width: 260px;
+    max-height: 300px;
+    width: auto;
+    height: auto;
+    border-radius: 12px;
+    margin-bottom: 4px;
+    cursor: zoom-in;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    object-fit: cover;
+    background: var(--c-surface-2);
+    min-height: 60px;
+    min-width: 60px;
+}
+.msg-bubble .msg-image:hover {
+    transform: scale(1.02);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+}
+
+.msg-bubble .msg-file {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px 12px;
+    background: rgba(0, 0, 0, 0.06);
+    border-radius: 10px;
+    margin-bottom: 6px;
+    font-size: 0.82rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    color: inherit;
+    text-decoration: none;
+    max-width: 260px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+}
+.msg-bubble .msg-file:hover {
+    background: rgba(0, 0, 0, 0.1);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+.msg-bubble .msg-file i:first-child {
+    font-size: 1.2rem;
+    flex-shrink: 0;
+    color: var(--c-danger);
+}
+.msg-bubble .msg-file i:last-child {
+    flex-shrink: 0;
+    opacity: 0.6;
+    font-size: 0.85rem;
+}
+
+.msg-wrapper.sent .msg-bubble .msg-file {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.15);
+}
+.msg-wrapper.sent .msg-bubble .msg-file:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+.msg-wrapper.sent .msg-bubble .msg-file i:first-child { color: #fff; }
+
+[data-theme="dark"] .msg-wrapper.received .msg-bubble .msg-file {
+    background: rgba(255, 255, 255, 0.08);
+    border-color: rgba(255, 255, 255, 0.1);
+}
+[data-theme="dark"] .msg-wrapper.received .msg-bubble .msg-file:hover {
+    background: rgba(255, 255, 255, 0.14);
+}
+
+/* Offer Bubble */
 .msg-bubble.offer-bubble {
     background: linear-gradient(135deg, rgba(46,204,113,0.12), rgba(46,204,113,0.06)) !important;
     border: 2px solid var(--c-accent) !important;
@@ -648,31 +715,6 @@ input,select,textarea{font-family:inherit}
     gap: 12px;
     flex-wrap: wrap;
 }
-
-.msg-bubble .msg-image {
-    max-width: 240px;
-    border-radius: 12px;
-    margin-bottom: 6px;
-    cursor: pointer;
-    transition: transform var(--t-fast);
-}
-.msg-bubble .msg-image:hover { transform: scale(1.02); }
-
-.msg-bubble .msg-file {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    padding: 8px 10px;
-    background: rgba(0,0,0,0.06);
-    border-radius: 10px;
-    margin-bottom: 6px;
-    font-size: 0.78rem;
-    font-weight: 700;
-    cursor: pointer;
-    transition: background var(--t-fast);
-}
-.msg-bubble .msg-file:hover { background: rgba(0,0,0,0.1); }
-[data-theme="dark"] .msg-bubble.sent .msg-file { background: rgba(255,255,255,0.12); }
 
 .msg-meta {
     display: flex;
@@ -1018,11 +1060,7 @@ input,select,textarea{font-family:inherit}
 }
 .modal-close:hover { background: var(--c-danger); color: #fff; }
 
-.modal-body {
-    padding: 20px 22px;
-    overflow-y: auto;
-    flex: 1;
-}
+.modal-body { padding: 20px 22px; overflow-y: auto; flex: 1; }
 .modal-footer {
     padding: 14px 22px;
     border-top: 1px solid var(--c-border);
@@ -1033,10 +1071,7 @@ input,select,textarea{font-family:inherit}
 }
 
 /* New Chat Modal */
-.search-users-input {
-    position: relative;
-    margin-bottom: 14px;
-}
+.search-users-input { position: relative; margin-bottom: 14px; }
 .search-users-input i {
     position: absolute;
     right: 14px;
@@ -1130,20 +1165,8 @@ input,select,textarea{font-family:inherit}
     font-size: 0.95rem;
     flex-shrink: 0;
     overflow: hidden;
-    position: relative;
 }
 .user-result-avatar img { width: 100%; height: 100%; object-fit: cover; }
-.user-result-avatar.online::after {
-    content: '';
-    position: absolute;
-    bottom: 1px;
-    left: 1px;
-    width: 11px;
-    height: 11px;
-    background: var(--c-accent);
-    border-radius: 50%;
-    border: 2px solid var(--c-surface);
-}
 
 .user-result-info { flex: 1; min-width: 0; }
 .user-result-name {
@@ -1177,7 +1200,6 @@ input,select,textarea{font-family:inherit}
 }
 .user-badge.type-supplier { background: rgba(255,107,53,0.15); color: var(--c-safety-orange); }
 .user-badge.type-buyer { background: rgba(44,122,184,0.15); color: var(--c-primary-600); }
-.user-badge.fast { background: linear-gradient(135deg, var(--c-gold), #F4B400); color: #664d00; }
 
 /* Offer Form inside chat */
 .offer-form-box {
@@ -1250,7 +1272,6 @@ input,select,textarea{font-family:inherit}
 .btn-primary:hover:not(:disabled) { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(46,204,113,0.45); }
 .btn-outline { background: transparent; border-color: var(--c-border); color: var(--c-text); }
 .btn-outline:hover:not(:disabled) { background: var(--c-surface-2); border-color: var(--c-primary-500); color: var(--c-primary-600); }
-.btn-sm { padding: 8px 14px; font-size: 0.78rem; }
 
 /* SKELETON */
 .skeleton {
@@ -1345,24 +1366,9 @@ input,select,textarea{font-family:inherit}
     font-size: 2.5rem;
     margin-bottom: 24px;
 }
-.login-required-state h2 {
-    font-size: 1.5rem;
-    font-weight: 900;
-    color: var(--c-text);
-    margin-bottom: 10px;
-}
-.login-required-state p {
-    font-size: 0.95rem;
-    color: var(--c-text-muted);
-    max-width: 460px;
-    margin-bottom: 28px;
-}
-.login-required-actions {
-    display: flex;
-    gap: 12px;
-    flex-wrap: wrap;
-    justify-content: center;
-}
+.login-required-state h2 { font-size: 1.5rem; font-weight: 900; color: var(--c-text); margin-bottom: 10px; }
+.login-required-state p { font-size: 0.95rem; color: var(--c-text-muted); max-width: 460px; margin-bottom: 28px; }
+.login-required-actions { display: flex; gap: 12px; flex-wrap: wrap; justify-content: center; }
 
 /* RESPONSIVE */
 @media (max-width: 1024px) {
@@ -1403,6 +1409,8 @@ input,select,textarea{font-family:inherit}
     .chat-composer { padding: 10px 12px; gap: 6px; }
     .msg-wrapper { max-width: 88%; }
     .msg-bubble { font-size: 0.83rem; padding: 9px 12px; }
+    .msg-bubble .msg-image { max-width: 200px; max-height: 220px; }
+    .msg-bubble .msg-file { max-width: 200px; font-size: 0.78rem; }
     .attach-menu-btn, .chat-send-btn { width: 40px; height: 40px; font-size: 0.9rem; }
     .chat-input { font-size: 0.86rem; padding: 10px 40px 10px 14px; }
     .benefits-banner { padding: 10px 14px; font-size: 0.75rem; }
@@ -1410,6 +1418,9 @@ input,select,textarea{font-family:inherit}
     .offer-form-grid { grid-template-columns: 1fr; }
     .modal-body { padding: 16px; }
     .modal-header { padding: 14px 18px; }
+    .chat-context-bar { padding: 10px 14px; }
+    .chat-context-thumb { width: 40px; height: 40px; font-size: 1.3rem; }
+    .chat-context-title { font-size: 0.82rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -2007,7 +2018,7 @@ const renderChatList = () => {
 // ============================================================
 // OPEN CONVERSATION
 // ============================================================
-const openConversation = async (otherUserId) => {
+const openConversation = async (otherUserId, contextOverride = null) => {
     if (!isValidUUID(otherUserId)) return;
 
     state.activeConversationId = otherUserId;
@@ -2015,7 +2026,9 @@ const openConversation = async (otherUserId) => {
 
     const conv = state.conversations.find(c => c.otherUserId === otherUserId);
     state.activeOtherUser = conv?.otherUser || { id: otherUserId, full_name: 'مستخدم' };
-    state.activeContext = conv?.product || conv?.request || null;
+
+    // Priority: override > conversation context
+    state.activeContext = contextOverride || conv?.product || conv?.request || null;
 
     // If not in conversations, fetch user info
     if (!conv) {
@@ -2045,24 +2058,49 @@ const renderChatView = () => {
     const name = otherUser?.company_name || otherUser?.full_name || 'مستخدم';
     const initial = getInitials(name);
 
+    // Build context bar (enhanced with thumb + price)
     let contextHtml = '';
     if (state.activeContext) {
         const ctx = state.activeContext;
-        const isProduct = !!ctx.name && !!ctx.price;
-        const title = isProduct ? ctx.name : (ctx.product_name || 'طلب');
-        const link = isProduct
-            ? `product-details.html?id=${encodeURIComponent(ctx.id)}`
-            : `request-details.html?id=${encodeURIComponent(ctx.id)}`;
-        const icon = isProduct ? 'flask' : 'clipboard-list';
-        const label = isProduct ? 'منتج' : 'طلب';
+        const isProduct = !!ctx.name && ctx.price !== undefined;
+        const isRequest = !isProduct && !!ctx.product_name;
 
-        contextHtml = `
-            <div class="chat-context-bar" onclick="window.open('${link}', '_blank')">
-                <i class="fas fa-${icon} context-icon"></i>
-                <span class="context-text"><strong>${label}:</strong> ${escapeHtml(title)}</span>
-                <span class="context-action">عرض <i class="fas fa-external-link-alt"></i></span>
-            </div>
-        `;
+        if (isProduct) {
+            const hasImage = ctx.image_url && /^https?:\/\//i.test(ctx.image_url);
+            contextHtml = `
+                <div class="chat-context-bar" onclick="window.open('product-details.html?id=${encodeURIComponent(ctx.id)}', '_blank')">
+                    <div class="chat-context-thumb">
+                        ${hasImage
+                            ? `<img src="${escapeHtml(ctx.image_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='🧪';" />`
+                            : '🧪'}
+                    </div>
+                    <div class="chat-context-info">
+                        <div class="chat-context-label"><i class="fas fa-flask"></i> منتج</div>
+                        <div class="chat-context-title">${escapeHtml(ctx.name)}</div>
+                        ${ctx.price ? `<div class="chat-context-price">${formatPrice(ctx.price)} ج.م / ${escapeHtml(ctx.unit || 'كجم')}</div>` : ''}
+                    </div>
+                    <span class="chat-context-action">عرض <i class="fas fa-external-link-alt"></i></span>
+                    <button class="chat-context-close" type="button" onclick="event.stopPropagation(); window._clearContext && window._clearContext();" title="إزالة الربط">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+        } else if (isRequest) {
+            contextHtml = `
+                <div class="chat-context-bar" onclick="window.open('request-details.html?id=${encodeURIComponent(ctx.id)}', '_blank')">
+                    <div class="chat-context-thumb"><i class="fas fa-clipboard-list" style="color:var(--c-accent);font-size:1.5rem;"></i></div>
+                    <div class="chat-context-info">
+                        <div class="chat-context-label"><i class="fas fa-clipboard-list"></i> طلب شراء</div>
+                        <div class="chat-context-title">${escapeHtml(ctx.product_name || 'طلب')}</div>
+                        ${ctx.quantity_needed ? `<div class="chat-context-price">الكمية: ${escapeHtml(ctx.quantity_needed)}</div>` : ''}
+                    </div>
+                    <span class="chat-context-action">عرض <i class="fas fa-external-link-alt"></i></span>
+                    <button class="chat-context-close" type="button" onclick="event.stopPropagation(); window._clearContext && window._clearContext();" title="إزالة الربط">
+                        <i class="fas fa-times"></i>
+                    </button>
+                </div>
+            `;
+        }
     }
 
     view.innerHTML = `
@@ -2149,6 +2187,12 @@ const renderChatView = () => {
             </button>
         </div>
     `;
+
+    // Bind clear context
+    window._clearContext = () => {
+        state.activeContext = null;
+        renderChatView();
+    };
 
     // Bind events
     document.getElementById('backBtn')?.addEventListener('click', () => {
@@ -2266,6 +2310,9 @@ const loadMessages = async (otherUserId, reset = false) => {
     }
 };
 
+// ============================================================
+// RENDER MESSAGES (with smart attachment handling)
+// ============================================================
 const renderMessages = () => {
     const container = document.getElementById('chatMessages');
     if (!container) return;
@@ -2303,29 +2350,8 @@ const renderMessages = () => {
         const otherInitial = getInitials(state.activeOtherUser?.company_name || state.activeOtherUser?.full_name);
         const myInitial = getInitials(state.userProfile?.company_name || state.userProfile?.full_name);
 
-        const isOffer = msg.message && msg.message.startsWith('[OFFER]');
-        let messageContent = '';
-
-        if (isOffer) {
-            try {
-                const offerData = JSON.parse(msg.message.substring(7));
-                messageContent = `
-                    <div class="offer-label"><i class="fas fa-hand-holding-usd"></i> عرض سعر</div>
-                    <div class="offer-price-value">${formatPrice(offerData.price)} ج.م</div>
-                    ${offerData.quantity || offerData.delivery ? `
-                        <div class="offer-details">
-                            ${offerData.quantity ? `<span><i class="fas fa-cubes"></i> ${escapeHtml(offerData.quantity)}</span>` : ''}
-                            ${offerData.delivery ? `<span><i class="fas fa-truck"></i> ${escapeHtml(offerData.delivery)}</span>` : ''}
-                        </div>
-                    ` : ''}
-                    ${offerData.message ? `<div style="margin-top:8px;font-size:0.82rem;color:var(--c-text-muted);">${escapeHtml(offerData.message)}</div>` : ''}
-                `;
-            } catch (e) {
-                messageContent = escapeHtml(msg.message);
-            }
-        } else {
-            messageContent = escapeHtml(msg.message || '');
-        }
+        const messageContent = renderMessageContent(msg);
+        const bubbleClass = messageContent.bubbleClass || '';
 
         html += `
             <div class="msg-wrapper ${isSent ? 'sent' : 'received'}" data-message-id="${escapeHtml(msg.id)}">
@@ -2338,8 +2364,8 @@ const renderMessages = () => {
                             ? `<img src="${escapeHtml(state.activeOtherUser.avatar_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(otherInitial)}';" />`
                             : escapeHtml(otherInitial))}
                 </div>
-                <div class="msg-bubble ${isOffer ? 'offer-bubble' : ''}">
-                    ${messageContent}
+                <div class="msg-bubble ${bubbleClass}">
+                    ${messageContent.html}
                     <div class="msg-meta">
                         <span>${formatTime(msg.created_at)}</span>
                         ${isSent ? `<i class="fas fa-${msg.is_read ? 'check-double' : 'check'} status-icon ${msg.is_read ? 'read' : ''}"></i>` : ''}
@@ -2361,18 +2387,195 @@ const renderMessages = () => {
         loadMessages(state.activeConversationId, false);
     });
 
+    // Bind media events
+    bindMessageMediaEvents();
+
     scrollToBottom(false);
 };
 
-const scrollToBottom = (smooth = true) => {
-    const container = document.getElementById('chatMessages');
-    if (!container) return;
-    setTimeout(() => {
-        container.scrollTo({
-            top: container.scrollHeight,
-            behavior: smooth ? 'smooth' : 'auto',
+// ============================================================
+// RENDER MESSAGE CONTENT (Smart detection)
+// ============================================================
+const renderMessageContent = (msg) => {
+    const text = msg.message || '';
+
+    // ===== 1. OFFER MESSAGE =====
+    if (text.startsWith('[OFFER]')) {
+        try {
+            const data = JSON.parse(text.substring(7));
+            return {
+                bubbleClass: 'offer-bubble',
+                html: `
+                    <div class="offer-label"><i class="fas fa-hand-holding-usd"></i> عرض سعر</div>
+                    <div class="offer-price-value">${formatPrice(data.price)} ج.م</div>
+                    ${data.quantity || data.delivery ? `
+                        <div class="offer-details">
+                            ${data.quantity ? `<span><i class="fas fa-cubes"></i> ${escapeHtml(data.quantity)}</span>` : ''}
+                            ${data.delivery ? `<span><i class="fas fa-truck"></i> ${escapeHtml(data.delivery)}</span>` : ''}
+                        </div>
+                    ` : ''}
+                    ${data.message ? `<div style="margin-top:8px;font-size:0.82rem;color:var(--c-text-muted);">${escapeHtml(data.message)}</div>` : ''}
+                `,
+            };
+        } catch (e) {
+            return { bubbleClass: '', html: escapeHtml(text) };
+        }
+    }
+
+    // ===== 2. IMAGE MESSAGE =====
+    const imgPattern = /(?:📷\s*صورة:\s*)?(https?:\/\/[^\s]+\.(?:jpg|jpeg|png|gif|webp|bmp|svg))(?:\?\S*)?/i;
+    const imgMatch = text.match(imgPattern);
+
+    if (imgMatch) {
+        const url = imgMatch[1];
+        const textBefore = text.substring(0, text.indexOf(imgMatch[0])).trim();
+        return {
+            bubbleClass: '',
+            html: `
+                ${textBefore ? `<div style="margin-bottom:6px;">${escapeHtml(textBefore)}</div>` : ''}
+                <img src="${escapeHtml(url)}" 
+                     class="msg-image" 
+                     alt="صورة" 
+                     loading="lazy"
+                     data-image-url="${escapeHtml(url)}"
+                     onerror="this.onerror=null;this.outerHTML='<div class=\\'msg-file\\'><i class=\\'fas fa-image\\'></i><span>تعذر تحميل الصورة</span></div>';" 
+                />
+            `,
+        };
+    }
+
+    // ===== 3. FILE MESSAGE =====
+    const filePattern = /(?:📄\s*ملف:\s*)?(https?:\/\/[^\s]+\.(?:pdf|doc|docx|xls|xlsx|csv|txt|zip|rar))(?!\S)/i;
+    const fileMatch = text.match(filePattern);
+
+    if (fileMatch) {
+        const url = fileMatch[1];
+        const filename = decodeURIComponent(url.split('/').pop().split('?')[0]);
+        const ext = filename.split('.').pop().toLowerCase();
+        const iconMap = {
+            'pdf': 'fa-file-pdf',
+            'doc': 'fa-file-word',
+            'docx': 'fa-file-word',
+            'xls': 'fa-file-excel',
+            'xlsx': 'fa-file-excel',
+            'csv': 'fa-file-csv',
+            'txt': 'fa-file-alt',
+            'zip': 'fa-file-archive',
+            'rar': 'fa-file-archive',
+        };
+        const icon = iconMap[ext] || 'fa-file';
+
+        const textBefore = text.substring(0, text.indexOf(fileMatch[0])).trim();
+        return {
+            bubbleClass: '',
+            html: `
+                ${textBefore ? `<div style="margin-bottom:6px;">${escapeHtml(textBefore)}</div>` : ''}
+                <a href="${escapeHtml(url)}" 
+                   class="msg-file"
+                   download
+                   target="_blank"
+                   rel="noopener noreferrer"
+                   onclick="event.stopPropagation();"
+                >
+                    <i class="fas ${icon}"></i>
+                    <span style="flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;">${escapeHtml(filename)}</span>
+                    <i class="fas fa-download"></i>
+                </a>
+            `,
+        };
+    }
+
+    // ===== 4. GENERIC URL =====
+    const urlPattern = /(https?:\/\/[^\s]+)/i;
+    const urlMatch = text.match(urlPattern);
+
+    if (urlMatch) {
+        const url = urlMatch[1];
+        const displayUrl = url.length > 50 ? url.substring(0, 50) + '...' : url;
+        const textBefore = text.substring(0, text.indexOf(urlMatch[0])).trim();
+        const textAfter = text.substring(text.indexOf(urlMatch[0]) + urlMatch[0].length).trim();
+
+        return {
+            bubbleClass: '',
+            html: `
+                ${textBefore ? `<div style="margin-bottom:6px;">${escapeHtml(textBefore)}</div>` : ''}
+                <a href="${escapeHtml(url)}" target="_blank" rel="noopener noreferrer" 
+                   style="color:inherit;text-decoration:underline;word-break:break-all;"
+                   onclick="event.stopPropagation();">
+                    ${escapeHtml(displayUrl)}
+                </a>
+                ${textAfter ? `<div style="margin-top:6px;">${escapeHtml(textAfter)}</div>` : ''}
+            `,
+        };
+    }
+
+    // ===== 5. PLAIN TEXT =====
+    return {
+        bubbleClass: '',
+        html: escapeHtml(text).replace(/\n/g, '<br>'),
+    };
+};
+
+// ============================================================
+// BIND MESSAGE MEDIA EVENTS
+// ============================================================
+const bindMessageMediaEvents = () => {
+    document.querySelectorAll('.msg-image').forEach(img => {
+        img.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const url = img.dataset.imageUrl || img.src;
+            if (url) openImagePreview(url);
         });
-    }, 50);
+    });
+};
+
+// ============================================================
+// IMAGE PREVIEW LIGHTBOX
+// ============================================================
+const openImagePreview = (url) => {
+    document.getElementById('imageLightbox')?.remove();
+
+    const lightbox = document.createElement('div');
+    lightbox.id = 'imageLightbox';
+    lightbox.style.cssText = `
+        position: fixed;
+        inset: 0;
+        background: rgba(0, 0, 0, 0.92);
+        z-index: 9999;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+        cursor: zoom-out;
+        animation: fadeIn 0.2s ease;
+    `;
+
+    lightbox.innerHTML = `
+        <button style="position:absolute;top:20px;right:20px;width:44px;height:44px;border-radius:50%;background:rgba(255,255,255,0.15);color:#fff;border:none;font-size:1.2rem;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background 0.2s;" onmouseover="this.style.background='rgba(231,76,60,0.9)'" onmouseout="this.style.background='rgba(255,255,255,0.15)'" onclick="document.getElementById('imageLightbox').remove();event.stopPropagation();">
+            <i class="fas fa-times"></i>
+        </button>
+        <a href="${escapeHtml(url)}" 
+           download
+           style="position:absolute;top:20px;left:20px;height:44px;padding:0 18px;border-radius:22px;background:rgba(46,204,113,0.9);color:#fff;text-decoration:none;font-size:0.85rem;font-weight:700;display:flex;align-items:center;gap:8px;font-family:'Cairo',sans-serif;" 
+           onclick="event.stopPropagation();">
+            <i class="fas fa-download"></i> تحميل
+        </a>
+        <img src="${escapeHtml(url)}" 
+             style="max-width:95%;max-height:95%;border-radius:12px;box-shadow:0 20px 60px rgba(0,0,0,0.5);" 
+             onclick="event.stopPropagation();" 
+        />
+    `;
+
+    lightbox.addEventListener('click', () => lightbox.remove());
+
+    document.addEventListener('keydown', function escHandler(e) {
+        if (e.key === 'Escape') {
+            document.getElementById('imageLightbox')?.remove();
+            document.removeEventListener('keydown', escHandler);
+        }
+    });
+
+    document.body.appendChild(lightbox);
 };
 
 // ============================================================
@@ -2415,13 +2618,25 @@ const sendMessage = async () => {
     sendBtn.innerHTML = '<span class="spinner" style="width:16px;height:16px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;"></span>';
 
     try {
+        // Determine context - product or request
+        let product_id = null;
+        let request_id = null;
+        const ctx = state.activeContext;
+        if (ctx) {
+            if (ctx.name && ctx.price !== undefined) {
+                product_id = ctx.id; // It's a product
+            } else if (ctx.product_name) {
+                request_id = ctx.id; // It's a request
+            }
+        }
+
         const messageData = {
             from_user_id: state.user.id,
             to_user_id: state.activeConversationId,
             message: text,
             is_read: false,
-            product_id: state.activeContext?.name ? state.activeContext.id : null,
-            request_id: !state.activeContext?.name && state.activeContext?.product_name ? state.activeContext.id : null,
+            product_id,
+            request_id,
         };
 
         const { data, error } = await supabase
@@ -2570,7 +2785,6 @@ const initNewChatModal = () => {
             tab.classList.add('active');
             state.userSearchType = tab.dataset.type;
             
-            // إذا في بحث، ابحث. لو لأ، اعرض الافتراضيين
             if (state.userSearchQuery) {
                 searchUsers(state.userSearchQuery);
             } else {
@@ -2588,28 +2802,18 @@ const initNewChatModal = () => {
             debouncedSearch(state.userSearchQuery);
         } else {
             state.userSearchResults = [];
-            // ✅ إذا مسح البحث، اعرض الافتراضيين
             loadDefaultUsers();
         }
     });
 };
 
-// ============================================================
-// OPEN NEW CHAT MODAL (Enhanced - Shows users by default)
-// ============================================================
 const openNewChatModal = async () => {
     const modal = document.getElementById('newChatModal');
     modal?.classList.add('show');
-    
-    // ✅ اعرض المستخدمين افتراضياً (بدون ما يكتب المستخدم)
     await loadDefaultUsers();
-    
     setTimeout(() => document.getElementById('userSearchInput')?.focus(), 300);
 };
 
-// ============================================================
-// LOAD DEFAULT USERS (Show suppliers/buyers by default)
-// ============================================================
 const loadDefaultUsers = async () => {
     const list = document.getElementById('usersList');
     if (!list) return;
@@ -2637,7 +2841,6 @@ const loadDefaultUsers = async () => {
         if (error) {
             console.warn('Load default users failed:', error);
             
-            // Fallback - no order
             const { data: fallbackData } = await supabase
                 .from('profiles')
                 .select('id, full_name, company_name, avatar_url, user_type, is_verified')
@@ -2649,7 +2852,6 @@ const loadDefaultUsers = async () => {
             state.userSearchResults = data || [];
         }
 
-        // ✅ اذا مفيش يوزرز
         if (!state.userSearchResults.length) {
             list.innerHTML = `
                 <div class="chat-empty-sidebar" style="padding:40px 20px;">
@@ -2674,9 +2876,6 @@ const loadDefaultUsers = async () => {
     }
 };
 
-// ============================================================
-// CLOSE NEW CHAT MODAL (Reset state)
-// ============================================================
 const closeNewChatModal = () => {
     document.getElementById('newChatModal')?.classList.remove('show');
     document.getElementById('userSearchInput').value = '';
@@ -2684,12 +2883,10 @@ const closeNewChatModal = () => {
     state.userSearchQuery = '';
     state.userSearchType = 'all';
     
-    // Reset tabs
     document.querySelectorAll('.user-type-tab').forEach((t, i) => {
         t.classList.toggle('active', i === 0);
     });
     
-    // Reset list
     const list = document.getElementById('usersList');
     if (list) {
         list.innerHTML = `
@@ -2701,9 +2898,6 @@ const closeNewChatModal = () => {
     }
 };
 
-// ============================================================
-// SEARCH USERS (FIXED - Without last_seen)
-// ============================================================
 const searchUsers = async (query) => {
     const list = document.getElementById('usersList');
     if (!list) return;
@@ -2719,7 +2913,6 @@ const searchUsers = async (query) => {
     </div>`;
 
     try {
-        // ✅ Build query base - فقط الأعمدة الموجودة
         let queryBuilder = supabase
             .from('profiles')
             .select('id, full_name, company_name, avatar_url, user_type, is_verified, city')
@@ -2727,7 +2920,6 @@ const searchUsers = async (query) => {
             .or(`full_name.ilike.%${query}%,company_name.ilike.%${query}%,city.ilike.%${query}%`)
             .limit(30);
 
-        // Filter by type if not "all"
         if (state.userSearchType !== 'all') {
             queryBuilder = queryBuilder.eq('user_type', state.userSearchType);
         }
@@ -2737,7 +2929,6 @@ const searchUsers = async (query) => {
         if (error) {
             console.warn('Search with filters failed, trying fallback...', error);
             
-            // ✅ Fallback: search without type filter and without city
             let fallbackQuery = supabase
                 .from('profiles')
                 .select('id, full_name, company_name, avatar_url, user_type, is_verified')
@@ -2772,9 +2963,6 @@ const searchUsers = async (query) => {
     }
 };
 
-// ============================================================
-// RENDER USER SEARCH RESULTS
-// ============================================================
 const renderUserSearchResults = () => {
     const list = document.getElementById('usersList');
     if (!list) return;
@@ -2987,6 +3175,50 @@ const initFilters = () => {
 };
 
 // ============================================================
+// HANDLE URL PARAMS (?to=xxx&product=yyy / ?to=xxx&request=yyy)
+// ============================================================
+const handleUrlParams = async () => {
+    const params = new URLSearchParams(window.location.search);
+    const to = params.get('to');
+    const productId = params.get('product');
+    const requestId = params.get('request');
+
+    if (!to || !isValidUUID(to)) return;
+
+    // Wait a moment for state to be ready
+    await new Promise(resolve => setTimeout(resolve, 300));
+
+    // Build context
+    let context = null;
+
+    if (productId && isValidUUID(productId)) {
+        try {
+            const { data: product } = await supabase
+                .from('products')
+                .select('id, name, image_url, price, unit')
+                .eq('id', productId)
+                .single();
+            if (product) context = product;
+        } catch (e) {}
+    } else if (requestId && isValidUUID(requestId)) {
+        try {
+            const { data: request } = await supabase
+                .from('purchase_requests')
+                .select('id, product_name, quantity_needed')
+                .eq('id', requestId)
+                .single();
+            if (request) context = request;
+        } catch (e) {}
+    }
+
+    // Open conversation with context
+    await openConversation(to, context);
+
+    // Clean URL
+    window.history.replaceState({}, '', window.location.pathname);
+};
+
+// ============================================================
 // INIT
 // ============================================================
 const init = async () => {
@@ -3004,6 +3236,9 @@ const init = async () => {
     await fetchConversations();
     setupRealtime();
 
+    // ✅ Handle URL params (from product/request pages)
+    await handleUrlParams();
+
     console.info('✅ جاهز');
 };
 
@@ -3014,6 +3249,7 @@ supabase.auth.onAuthStateChange(async (event) => {
         if (ok) {
             await fetchConversations();
             setupRealtime();
+            await handleUrlParams();
         }
     }
 });
