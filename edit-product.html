@@ -119,6 +119,8 @@ input,select,textarea{font-family:inherit}
 .section-title h3{font-size:1rem;font-weight:800;color:var(--c-text);display:flex;align-items:center;gap:8px;flex:1}
 .section-title h3 i{color:var(--c-primary-600);font-size:1.05rem}
 .section-title .section-hint{font-size:0.72rem;font-weight:600;color:var(--c-text-sub);background:var(--c-surface);padding:4px 10px;border-radius:var(--r-full);border:1px solid var(--c-border)}
+.section-title .section-hint.required{color:#b91c1c;background:#fee2e2;border-color:#fecaca}
+.section-title .section-hint.optional{color:#64748b;background:#f1f5f9;border-color:#e2e8f0}
 
 /* FORM FIELDS */
 .form-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
@@ -208,6 +210,8 @@ input,select,textarea{font-family:inherit}
 .preview-spec.cas{background:rgba(139,92,246,0.08);color:var(--c-purple);font-family:monospace;direction:ltr}
 .preview-spec.purity{background:rgba(46,204,113,0.08);color:var(--c-accent-dark)}
 .preview-card-price{font-size:1.05rem;font-weight:800;color:var(--c-primary-700);display:flex;align-items:baseline;gap:4px;margin-top:4px}
+.preview-card-price.poa{font-size:0.85rem;color:var(--c-warning);background:rgba(243,156,18,0.08);padding:4px 10px;border-radius:var(--r-sm);border:1px dashed var(--c-warning);display:inline-block}
+.preview-card-price.hidden-price{font-size:0.8rem;color:var(--c-text-muted);background:var(--c-surface-2);padding:4px 10px;border-radius:var(--r-sm);border:1px dashed var(--c-text-sub);display:inline-block}
 .preview-card-price .currency{font-size:0.68rem;font-weight:600;color:var(--c-text-sub)}
 
 /* STATS MINI */
@@ -366,18 +370,18 @@ input,select,textarea{font-family:inherit}
 <div class="section-title">
 <span class="section-num">1</span>
 <h3><i class="fas fa-info-circle"></i> المعلومات الأساسية</h3>
-<span class="section-hint">مطلوب</span>
+<span class="section-hint required">مطلوب: الاسم + الفئة</span>
 </div>
 
 <div class="form-grid">
 <div class="form-group full">
 <label for="name"><i class="fas fa-flask"></i> اسم المنتج <span class="req">*</span></label>
-<input type="text" id="name" class="form-input" required placeholder="مثال: صودا كاوية 99%" maxlength="200" />
+<input type="text" id="name" class="form-input" placeholder="مثال: صودا كاوية 99%" maxlength="200" />
 </div>
 
 <div class="form-group">
 <label for="categoryId"><i class="fas fa-tags"></i> الفئة <span class="req">*</span></label>
-<select id="categoryId" class="form-select" required>
+<select id="categoryId" class="form-select">
 <option value="">— اختر الفئة —</option>
 </select>
 </div>
@@ -390,8 +394,8 @@ input,select,textarea{font-family:inherit}
 </div>
 
 <div class="form-group full">
-<label for="description"><i class="fas fa-align-right"></i> وصف المنتج <span class="req">*</span></label>
-<textarea id="description" class="form-textarea" rows="4" required placeholder="اكتب وصفاً تفصيلياً للمنتج..." maxlength="2000"></textarea>
+<label for="description"><i class="fas fa-align-right"></i> وصف المنتج <span class="hint">(اختياري)</span></label>
+<textarea id="description" class="form-textarea" rows="4" placeholder="اكتب وصفاً تفصيلياً للمنتج..." maxlength="2000"></textarea>
 <div class="input-hint"><i class="fas fa-info-circle"></i> وصف جيد يزيد فرص البيع بنسبة 60%</div>
 </div>
 </div>
@@ -402,32 +406,32 @@ input,select,textarea{font-family:inherit}
 <div class="section-title">
 <span class="section-num">2</span>
 <h3><i class="fas fa-atom"></i> الخصائص الكيميائية</h3>
-<span class="section-hint">يزيد المصداقية</span>
+<span class="section-hint optional">كلها اختيارية</span>
 </div>
 
 <div class="form-grid">
 <div class="form-group">
-<label for="casNumber"><i class="fas fa-hashtag"></i> رقم CAS</label>
+<label for="casNumber"><i class="fas fa-hashtag"></i> رقم CAS <span class="hint">(اختياري)</span></label>
 <input type="text" id="casNumber" class="form-input" placeholder="1310-73-2" dir="ltr" />
 </div>
 
 <div class="form-group">
-<label for="formula"><i class="fas fa-flask"></i> الصيغة الكيميائية</label>
+<label for="formula"><i class="fas fa-flask"></i> الصيغة الكيميائية <span class="hint">(اختياري)</span></label>
 <input type="text" id="formula" class="form-input" placeholder="NaOH" dir="ltr" />
 </div>
 
 <div class="form-group">
-<label for="molecularWeight"><i class="fas fa-weight-hanging"></i> الوزن الجزيئي (g/mol)</label>
+<label for="molecularWeight"><i class="fas fa-weight-hanging"></i> الوزن الجزيئي (g/mol) <span class="hint">(اختياري)</span></label>
 <input type="number" id="molecularWeight" class="form-input" placeholder="40.00" step="0.01" min="0" />
 </div>
 
 <div class="form-group">
-<label for="purity"><i class="fas fa-percentage"></i> النقاء</label>
+<label for="purity"><i class="fas fa-percentage"></i> النقاء <span class="hint">(اختياري)</span></label>
 <input type="text" id="purity" class="form-input" placeholder="99% / تقني" />
 </div>
 
 <div class="form-group">
-<label for="grade"><i class="fas fa-layer-group"></i> الدرجة</label>
+<label for="grade"><i class="fas fa-layer-group"></i> الدرجة <span class="hint">(اختياري)</span></label>
 <select id="grade" class="form-select">
 <option value="">— اختر الدرجة —</option>
 <option value="technical">تقني (Technical)</option>
@@ -439,37 +443,37 @@ input,select,textarea{font-family:inherit}
 </div>
 
 <div class="form-group">
-<label for="appearance"><i class="fas fa-eye"></i> المظهر</label>
+<label for="appearance"><i class="fas fa-eye"></i> المظهر <span class="hint">(اختياري)</span></label>
 <input type="text" id="appearance" class="form-input" placeholder="مسحوق أبيض / سائل شفاف" />
 </div>
 
 <div class="form-group">
-<label for="density"><i class="fas fa-tint"></i> الكثافة</label>
+<label for="density"><i class="fas fa-tint"></i> الكثافة <span class="hint">(اختياري)</span></label>
 <input type="text" id="density" class="form-input" placeholder="2.13 g/cm³" dir="ltr" />
 </div>
 
 <div class="form-group">
-<label for="meltingPoint"><i class="fas fa-temperature-low"></i> نقطة الانصهار</label>
+<label for="meltingPoint"><i class="fas fa-temperature-low"></i> نقطة الانصهار <span class="hint">(اختياري)</span></label>
 <input type="text" id="meltingPoint" class="form-input" placeholder="318°C" dir="ltr" />
 </div>
 
 <div class="form-group">
-<label for="boilingPoint"><i class="fas fa-temperature-high"></i> نقطة الغليان</label>
+<label for="boilingPoint"><i class="fas fa-temperature-high"></i> نقطة الغليان <span class="hint">(اختياري)</span></label>
 <input type="text" id="boilingPoint" class="form-input" placeholder="1388°C" dir="ltr" />
 </div>
 
 <div class="form-group">
-<label for="solubility"><i class="fas fa-water"></i> الذوبان</label>
+<label for="solubility"><i class="fas fa-water"></i> الذوبان <span class="hint">(اختياري)</span></label>
 <input type="text" id="solubility" class="form-input" placeholder="قابل للذوبان في الماء" />
 </div>
 
 <div class="form-group">
-<label for="hazardClass"><i class="fas fa-exclamation-triangle"></i> فئة الخطورة</label>
+<label for="hazardClass"><i class="fas fa-exclamation-triangle"></i> فئة الخطورة <span class="hint">(اختياري)</span></label>
 <input type="text" id="hazardClass" class="form-input" placeholder="Corrosive / Toxic" />
 </div>
 
 <div class="form-group full">
-<label for="storageConditions"><i class="fas fa-warehouse"></i> ظروف التخزين</label>
+<label for="storageConditions"><i class="fas fa-warehouse"></i> ظروف التخزين <span class="hint">(اختياري)</span></label>
 <textarea id="storageConditions" class="form-textarea" rows="2" placeholder="يحفظ في مكان جاف وبارد..."></textarea>
 </div>
 </div>
@@ -480,17 +484,17 @@ input,select,textarea{font-family:inherit}
 <div class="section-title">
 <span class="section-num">3</span>
 <h3><i class="fas fa-tag"></i> السعر والتجارة</h3>
-<span class="section-hint">مطلوب</span>
+<span class="section-hint optional">كلها اختيارية</span>
 </div>
 
 <div class="form-grid">
 <div class="form-group">
-<label for="price"><i class="fas fa-money-bill-wave"></i> السعر (ج.م) <span class="req">*</span></label>
-<input type="number" id="price" class="form-input" placeholder="12500" step="0.01" min="0" required />
+<label for="price"><i class="fas fa-money-bill-wave"></i> السعر (ج.م) <span class="hint">(اختياري — اتركه فاضي لو السعر عند الطلب)</span></label>
+<input type="number" id="price" class="form-input" placeholder="اتركه فارغًا لو السعر عند الطلب" step="0.01" min="0" />
 </div>
 
 <div class="form-group">
-<label for="unit"><i class="fas fa-balance-scale"></i> الوحدة</label>
+<label for="unit"><i class="fas fa-balance-scale"></i> الوحدة <span class="hint">(اختياري)</span></label>
 <select id="unit" class="form-select">
 <option value="كجم">كجم</option>
 <option value="طن">طن</option>
@@ -500,28 +504,39 @@ input,select,textarea{font-family:inherit}
 </select>
 </div>
 
+<div class="form-group full">
+<label style="cursor:pointer; display:flex; align-items:center; gap:8px; padding:10px 14px; border:1.5px solid var(--c-border); border-radius:var(--r-md); background:var(--c-surface);">
+<input type="checkbox" id="hidePrice" style="width:18px; height:18px; accent-color:var(--c-primary-500); margin:0; cursor:pointer;" />
+<span style="display:flex; align-items:center; gap:6px; font-weight:700; font-size:0.85rem;">
+<i class="fas fa-eye-slash" style="color:var(--c-text-muted);"></i>
+إخفاء السعر عن العامة
+</span>
+<span style="margin-right:auto; font-size:0.72rem; color:var(--c-text-sub); font-weight:600;">يظهر للمشترين المسجلين فقط</span>
+</label>
+</div>
+
 <div class="form-group">
-<label for="minOrderQuantity"><i class="fas fa-shopping-basket"></i> الحد الأدنى للطلب (MOQ)</label>
+<label for="minOrderQuantity"><i class="fas fa-shopping-basket"></i> الحد الأدنى للطلب (MOQ) <span class="hint">(اختياري)</span></label>
 <input type="text" id="minOrderQuantity" class="form-input" placeholder="100 كجم" />
 </div>
 
 <div class="form-group">
-<label for="quantityAvailable"><i class="fas fa-cubes"></i> الكمية المتاحة</label>
+<label for="quantityAvailable"><i class="fas fa-cubes"></i> الكمية المتاحة <span class="hint">(اختياري)</span></label>
 <input type="text" id="quantityAvailable" class="form-input" placeholder="5 طن" />
 </div>
 
 <div class="form-group">
-<label for="packaging"><i class="fas fa-box-open"></i> التعبئة</label>
+<label for="packaging"><i class="fas fa-box-open"></i> التعبئة <span class="hint">(اختياري)</span></label>
 <input type="text" id="packaging" class="form-input" placeholder="شكائر 25 كجم" />
 </div>
 
 <div class="form-group">
-<label for="originCountry"><i class="fas fa-globe"></i> بلد المنشأ</label>
+<label for="originCountry"><i class="fas fa-globe"></i> بلد المنشأ <span class="hint">(اختياري)</span></label>
 <input type="text" id="originCountry" class="form-input" placeholder="مصر / الصين" />
 </div>
 
 <div class="form-group">
-<label for="isFeatured"><i class="fas fa-star"></i> منتج مميز</label>
+<label for="isFeatured"><i class="fas fa-star"></i> منتج مميز <span class="hint">(اختياري)</span></label>
 <select id="isFeatured" class="form-select">
 <option value="false">عادي</option>
 <option value="true">⭐ مميز</option>
@@ -552,8 +567,8 @@ input,select,textarea{font-family:inherit}
 <label><i class="fas fa-boxes"></i> حالة المخزون</label>
 <div class="status-buttons" id="stockButtons">
 <button type="button" class="status-btn" data-stock="available">✅ متوفر</button>
-<button type="button" class="status-btn" data-stock="low">⚠️ كمية محدودة</button>
-<button type="button" class="status-btn" data-stock="out">❌ غير متوفر</button>
+<button type="button" class="status-btn" data-stock="limited">⚠️ كمية محدودة</button>
+<button type="button" class="status-btn" data-stock="out_of_stock">❌ غير متوفر</button>
 </div>
 <input type="hidden" id="stockStatus" value="available" />
 </div>
@@ -565,7 +580,7 @@ input,select,textarea{font-family:inherit}
 <div class="section-title">
 <span class="section-num">5</span>
 <h3><i class="fas fa-images"></i> صور المنتج</h3>
-<span class="section-hint">حتى 5 صور</span>
+<span class="section-hint optional">اختياري — حتى 5 صور</span>
 </div>
 
 <div class="image-upload-zone" id="imageUploadZone">
@@ -587,12 +602,12 @@ input,select,textarea{font-family:inherit}
 <div class="section-title">
 <span class="section-num">6</span>
 <h3><i class="fas fa-file-shield"></i> وثائق السلامة</h3>
-<span class="section-hint">اختياري</span>
+<span class="section-hint optional">اختياري</span>
 </div>
 
 <div class="form-grid">
 <div class="form-group full">
-<label for="msdsFile"><i class="fas fa-file-pdf"></i> ملف MSDS</label>
+<label for="msdsFile"><i class="fas fa-file-pdf"></i> ملف MSDS <span class="hint">(اختياري)</span></label>
 <div class="file-upload" id="msdsUpload" onclick="document.getElementById('msdsFile').click()">
 <i class="fas fa-file-upload"></i>
 <div class="file-info">
@@ -604,7 +619,7 @@ input,select,textarea{font-family:inherit}
 </div>
 
 <div class="form-group full">
-<label for="sdsFile"><i class="fas fa-file-alt"></i> ملف SDS</label>
+<label for="sdsFile"><i class="fas fa-file-alt"></i> ملف SDS <span class="hint">(اختياري)</span></label>
 <div class="file-upload" id="sdsUpload" onclick="document.getElementById('sdsFile').click()">
 <i class="fas fa-file-upload"></i>
 <div class="file-info">
@@ -647,9 +662,8 @@ input,select,textarea{font-family:inherit}
 <span class="preview-card-category" id="previewCategory">الفئة</span>
 <h4 class="preview-card-title" id="previewTitle">اسم المنتج</h4>
 <div class="preview-card-specs" id="previewSpecs"></div>
-<div class="preview-card-price">
-<span id="previewPrice">السعر</span>
-<span class="currency" id="previewUnit">/ كجم</span>
+<div id="previewPriceWrap">
+<div class="preview-card-price poa">💬 السعر عند الطلب</div>
 </div>
 </div>
 </div>
@@ -869,7 +883,7 @@ const updateUserUI = () => {
 };
 
 // ============================================================
-// AUTH & LOAD PRODUCT
+// AUTH
 // ============================================================
 const checkAuth = async () => {
     try {
@@ -967,11 +981,8 @@ const loadProduct = async (productId) => {
         if (!data) throw new Error('المنتج غير موجود أو غير مصرح لك بتعديله');
 
         state.product = data;
-
-        // Store original data for change detection
         state.originalData = { ...data };
 
-        // Fill form
         fillForm(data);
 
         // Load images
@@ -985,12 +996,10 @@ const loadProduct = async (productId) => {
         }
         renderImagesGrid();
 
-        // Update preview
         updatePreview();
         updateStats();
         updateMeta();
 
-        // Show form
         document.getElementById('loadingSkeleton').style.display = 'none';
         document.getElementById('formLayout').style.display = 'grid';
 
@@ -1041,10 +1050,12 @@ const fillForm = (data) => {
     setValue('status', data.status || 'active');
     setValue('stockStatus', data.stock_status || 'available');
 
-    // Load subcategories
+    // hide_price checkbox
+    const hidePriceEl = document.getElementById('hidePrice');
+    if (hidePriceEl) hidePriceEl.checked = data.hide_price === true;
+
     if (data.category_id) loadSubcategories(data.category_id);
 
-    // Activate status buttons
     document.querySelectorAll('#statusButtons .status-btn').forEach(btn => {
         btn.classList.toggle('active', btn.dataset.status === (data.status || 'active'));
     });
@@ -1123,7 +1134,6 @@ const renderImagesGrid = () => {
         </div>
     `).join('');
 
-    // Bind remove
     grid.querySelectorAll('[data-remove]').forEach(btn => {
         btn.addEventListener('click', (e) => {
             e.stopPropagation();
@@ -1139,7 +1149,6 @@ const renderImagesGrid = () => {
         });
     });
 
-    // Bind set primary
     grid.querySelectorAll('.image-preview-item').forEach(item => {
         item.addEventListener('click', () => {
             const idx = parseInt(item.dataset.index);
@@ -1222,7 +1231,7 @@ window.addEventListener('beforeunload', (e) => {
 // PREVIEW
 // ============================================================
 const initPreviewListeners = () => {
-    const ids = ['name', 'price', 'unit', 'casNumber', 'purity', 'grade', 'categoryId'];
+    const ids = ['name', 'price', 'unit', 'casNumber', 'purity', 'grade', 'categoryId', 'hidePrice'];
     ids.forEach(id => {
         const el = document.getElementById(id);
         el?.addEventListener('input', () => { updatePreview(); markChanged(); });
@@ -1233,7 +1242,6 @@ const initPreviewListeners = () => {
         loadSubcategories(e.target.value);
     });
 
-    // Mark changed on any other input
     document.querySelectorAll('input, select, textarea').forEach(el => {
         if (ids.includes(el.id)) return;
         el.addEventListener('change', markChanged);
@@ -1249,14 +1257,22 @@ const updatePreview = () => {
     const casNumber = document.getElementById('casNumber')?.value;
     const purity = document.getElementById('purity')?.value;
     const grade = document.getElementById('grade')?.value;
+    const hidePrice = document.getElementById('hidePrice')?.checked;
 
     document.getElementById('previewTitle').textContent = name;
 
     const cat = state.categories.find(c => c.id === categoryId);
     document.getElementById('previewCategory').textContent = cat ? `${cat.icon || '📁'} ${cat.name}` : 'الفئة';
 
-    document.getElementById('previewPrice').textContent = price ? `${formatPrice(price)} ج.م` : 'السعر';
-    document.getElementById('previewUnit').textContent = `/ ${unit}`;
+    // منطق السعر
+    const priceWrap = document.getElementById('previewPriceWrap');
+    if (!price) {
+        priceWrap.innerHTML = `<div class="preview-card-price poa">💬 السعر عند الطلب</div>`;
+    } else if (hidePrice) {
+        priceWrap.innerHTML = `<div class="preview-card-price hidden-price">🔒 السعر متاح للمشترين المسجلين</div>`;
+    } else {
+        priceWrap.innerHTML = `<div class="preview-card-price">${formatPrice(price)} ج.م <span class="currency">/ ${escapeHtml(unit)}</span></div>`;
+    }
 
     const specs = [];
     if (casNumber) specs.push(`<span class="preview-spec cas">${escapeHtml(casNumber)}</span>`);
@@ -1330,7 +1346,7 @@ const uploadDocument = async (file, userId, type) => {
 };
 
 // ============================================================
-// SUBMIT
+// SUBMIT — إجباري: الاسم + الفئة بس
 // ============================================================
 const initFormSubmit = () => {
     const form = document.getElementById('productForm');
@@ -1340,26 +1356,18 @@ const initFormSubmit = () => {
         e.preventDefault();
         if (state.saving) return;
 
-        // Validation
+        // Validation — اتنين بس!
         const name = document.getElementById('name').value.trim();
         const categoryId = document.getElementById('categoryId').value;
-        const description = document.getElementById('description').value.trim();
-        const price = parseFloat(document.getElementById('price').value);
 
-        if (!name || name.length < 3) {
-            showToast('⚠️', 'اسم غير صالح', 'اكتب اسم منتج صحيح (3 أحرف على الأقل)', 'warning');
+        if (!name) {
+            showToast('⚠️', 'اسم المنتج مطلوب', 'اكتب اسم المنتج', 'warning');
+            document.getElementById('name').focus();
             return;
         }
         if (!categoryId) {
-            showToast('⚠️', 'اختر الفئة', 'يجب اختيار فئة', 'warning');
-            return;
-        }
-        if (!description || description.length < 20) {
-            showToast('⚠️', 'وصف قصير', 'اكتب 20 حرفاً على الأقل', 'warning');
-            return;
-        }
-        if (!price || price <= 0) {
-            showToast('⚠️', 'سعر غير صالح', 'أدخل سعراً صحيحاً', 'warning');
+            showToast('⚠️', 'الفئة مطلوبة', 'اختر الفئة الرئيسية', 'warning');
+            document.getElementById('categoryId').focus();
             return;
         }
 
@@ -1394,20 +1402,27 @@ const initFormSubmit = () => {
                 try { sdsUrl = await uploadDocument(state.newSdsFile, state.user.id, 'sds'); } catch (e) {}
             }
 
-            // 3. Get category name
+            // 3. Category info
             const selectedCat = state.categories.find(c => c.id === categoryId);
             const subcategoryId = document.getElementById('subcategoryId')?.value || null;
             const selectedSub = state.subcategories.find(s => s.id === subcategoryId);
 
-            // 4. Build update object
+            // 4. Price (اختياري)
+            const priceVal = document.getElementById('price').value;
+            const mwVal = document.getElementById('molecularWeight').value;
+            const hidePrice = document.getElementById('hidePrice').checked;
+
+            // 5. Build updates
             const updates = {
                 name,
                 category: selectedCat?.name || 'أخرى',
                 category_id: categoryId,
                 sub_category: selectedSub?.name || null,
                 subcategory_id: subcategoryId,
-                description,
-                price,
+                description: document.getElementById('description').value.trim() || null,
+
+                // السعر: null لو فاضي
+                price: priceVal ? parseFloat(priceVal) : null,
                 unit: document.getElementById('unit').value || 'كجم',
                 min_order_quantity: document.getElementById('minOrderQuantity').value.trim() || null,
                 quantity_available: document.getElementById('quantityAvailable').value.trim() || null,
@@ -1415,7 +1430,7 @@ const initFormSubmit = () => {
                 grade: document.getElementById('grade').value || null,
                 cas_number: document.getElementById('casNumber').value.trim() || null,
                 formula: document.getElementById('formula').value.trim() || null,
-                molecular_weight: parseFloat(document.getElementById('molecularWeight').value) || null,
+                molecular_weight: mwVal ? parseFloat(mwVal) : null,
                 density: document.getElementById('density').value.trim() || null,
                 melting_point: document.getElementById('meltingPoint').value.trim() || null,
                 boiling_point: document.getElementById('boilingPoint').value.trim() || null,
@@ -1432,14 +1447,27 @@ const initFormSubmit = () => {
                 images: finalImages.length ? finalImages : null,
                 msds_url: msdsUrl,
                 sds_url: sdsUrl,
+                hide_price: hidePrice,
                 updated_at: new Date().toISOString(),
             };
 
-            const { error } = await supabase
+            // 6. Update
+            let { error } = await supabase
                 .from('products')
                 .update(updates)
                 .eq('id', state.productId)
                 .eq('supplier_id', state.user.id);
+
+            // لو hide_price مش موجود → إعادة بدونها
+            if (error && error.message?.toLowerCase().includes('hide_price')) {
+                delete updates.hide_price;
+                const retry = await supabase
+                    .from('products')
+                    .update(updates)
+                    .eq('id', state.productId)
+                    .eq('supplier_id', state.user.id);
+                error = retry.error;
+            }
 
             if (error) throw error;
 
@@ -1507,7 +1535,6 @@ const init = async () => {
     initTheme();
     initNavbar();
 
-    // Get product ID from URL
     const params = new URLSearchParams(window.location.search);
     const productId = params.get('id');
 
@@ -1519,14 +1546,12 @@ const init = async () => {
 
     state.productId = productId;
 
-    // Auth check
     const authed = await checkAuth();
     if (!authed) {
         renderLoginRequired();
         return;
     }
 
-    // Load data
     await loadCategories();
     initImagesUpload();
     initDocsUpload();
