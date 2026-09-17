@@ -3,12 +3,12 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>كيماتو | لوحة المورد</title>
-<meta name="description" content="لوحة تحكم المورد على كيماتو — إدارة منتجاتك، عروضك، والعملاء المحتملين." />
+<title>كيماتو | الرسائل</title>
+<meta name="description" content="محادثاتك على كيماتو — تواصل مباشر مع الموردين والمشترين" />
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" type="image/png" href="logo.png" />
 <meta name="theme-color" content="#0a2540" />
-<link rel="manifest" href='data:application/manifest+json,{"name":"كيماتو مورد","short_name":"كيماتو","start_url":"/supplier-dashboard.html","display":"standalone","background_color":"%230a2540","theme_color":"%230a2540","lang":"ar","dir":"rtl"}' />
+<link rel="manifest" href='data:application/manifest+json,{"name":"كيماتو الرسائل","short_name":"كيماتو","start_url":"/messages.html","display":"standalone","background_color":"%230a2540","theme_color":"%230a2540","lang":"ar","dir":"rtl"}' />
 
 <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
@@ -28,7 +28,6 @@
     --c-accent:#2ecc71; --c-accent-dark:#22a95c; --c-warning:#f39c12; --c-danger:#e74c3c;
     --c-whatsapp:#25D366; --c-purple:#8b5cf6; --c-verified:#1e88e5;
     --c-lab-green:#00A86B; --c-safety-orange:#FF6B35;
-    --c-request:#FF6B35; --c-request-dark:#E55A2B;
     --c-bg:#f6f8fb; --c-surface:#ffffff; --c-surface-2:#f9fbfd; --c-border:#e3eaf2;
     --c-text:#0a1f33; --c-text-muted:#5a6b7e; --c-text-sub:#8595a8;
     --sh-sm:0 1px 3px rgba(10,37,64,0.06); --sh-md:0 4px 16px rgba(10,37,64,0.08);
@@ -37,7 +36,8 @@
     --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-full:999px;
     --t-fast:150ms cubic-bezier(0.4,0,0.2,1); --t-base:250ms cubic-bezier(0.4,0,0.2,1);
     --t-slow:400ms cubic-bezier(0.4,0,0.2,1); --t-spring:400ms cubic-bezier(0.34,1.56,0.64,1);
-    --container:1320px; --header-h:68px; --sidebar-w:270px;
+    --container:1320px; --header-h:68px;
+    --chat-sidebar-w: 360px;
 }
 [data-theme="dark"] {
     --c-bg:#0a1520; --c-surface:#101e2e; --c-surface-2:#16273a; --c-border:#1f3349;
@@ -56,11 +56,17 @@ input,select,textarea{font-family:inherit}
 :focus-visible{outline:3px solid var(--c-primary-500);outline-offset:2px;border-radius:var(--r-sm)}
 
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+@keyframes slideIn{from{opacity:0;transform:translateX(20px)}to{opacity:1;transform:translateX(0)}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
 @keyframes spin{to{transform:rotate(360deg)}}
 @keyframes badgePop{0%{transform:scale(0.5);opacity:0}60%{transform:scale(1.15)}100%{transform:scale(1);opacity:1}}
 @keyframes skeletonWave{0%{background-position:200% 0}100%{background-position:-200% 0}}
-@keyframes slideInRight{from{opacity:0;transform:translateX(-20px)}to{opacity:1;transform:translateX(0)}}
+@keyframes messageIn{from{opacity:0;transform:translateY(10px) scale(0.98)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes typingDots{0%,60%,100%{transform:translateY(0);opacity:0.4}30%{transform:translateY(-6px);opacity:1}}
+@keyframes slideInSidebar{from{transform:translateX(100%)}to{transform:translateX(0)}}
+@keyframes fadeInOverlay{from{opacity:0}to{opacity:1}}
+
 .animate-in{animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) backwards}
 
 /* NAVBAR */
@@ -72,7 +78,7 @@ input,select,textarea{font-family:inherit}
 .logo-text .blue{color:#5eb8ee}
 .logo-text .gray{color:rgba(255,255,255,0.6);font-weight:400;font-size:0.9em}
 .nav-right{display:flex;align-items:center;gap:10px}
-.nav-action-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--t-fast);position:relative}
+.nav-action-btn{width:40px;height:40px;border-radius:50%;background:rgba(255,255,255,0.08);color:#fff;display:inline-flex;align-items:center;justify-content:center;font-size:1rem;transition:all var(--t-fast);position:relative;border:none;cursor:pointer}
 .nav-action-btn:hover{background:rgba(255,255,255,0.18);transform:translateY(-2px)}
 .nav-action-btn.rotate:hover{transform:rotate(15deg)}
 .count-badge{position:absolute;top:-4px;right:-4px;background:var(--c-danger);color:#fff;min-width:18px;height:18px;padding:0 5px;border-radius:9px;font-size:0.65rem;font-weight:800;display:none;align-items:center;justify-content:center;border:2px solid rgba(10,37,64,0.9);animation:badgePop 0.4s ease}
@@ -89,231 +95,806 @@ input,select,textarea{font-family:inherit}
 .nav-dropdown a:last-child{border-bottom:none}
 .nav-dropdown a:hover{background:var(--c-surface-2);color:var(--c-primary-600);padding-right:24px}
 .nav-dropdown a.logout{color:var(--c-danger)}
-.menu-toggle{display:none;width:42px;height:42px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:#fff;align-items:center;justify-content:center;font-size:1.1rem;border:none;cursor:pointer}
 
-/* LAYOUT */
-.dashboard-layout{max-width:var(--container);margin:0 auto;padding:24px;display:grid;grid-template-columns:1fr var(--sidebar-w);gap:24px;align-items:start}
+/* MAIN LAYOUT - CHAT */
+.chat-layout {
+    max-width: var(--container);
+    margin: 0 auto;
+    height: calc(100vh - var(--header-h));
+    display: grid;
+    grid-template-columns: var(--chat-sidebar-w) 1fr;
+    gap: 0;
+    background: var(--c-surface);
+    border-radius: 0;
+    overflow: hidden;
+    position: relative;
+}
+@media (min-width: 1025px) {
+    .chat-layout {
+        height: calc(100vh - var(--header-h) - 32px);
+        margin: 16px auto;
+        border-radius: var(--r-xl);
+        box-shadow: var(--sh-lg);
+        border: 1px solid var(--c-border);
+    }
+}
 
 /* SIDEBAR */
-.sidebar{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-lg);padding:16px;position:sticky;top:calc(var(--header-h) + 24px);box-shadow:var(--sh-sm);display:flex;flex-direction:column;gap:16px}
-.sidebar-section-title{font-size:0.7rem;font-weight:800;color:var(--c-text-sub);text-transform:uppercase;letter-spacing:1px;padding:0 12px}
-.sidebar-nav{display:flex;flex-direction:column;gap:4px}
-.sidebar-link{display:flex;align-items:center;gap:12px;padding:12px 14px;border-radius:var(--r-md);color:var(--c-text-muted);font-weight:700;font-size:0.88rem;transition:all var(--t-fast);text-align:right;width:100%;position:relative;background:transparent;border:none;cursor:pointer}
-.sidebar-link:hover{background:var(--c-surface-2);color:var(--c-text)}
-.sidebar-link.active{background:linear-gradient(135deg,var(--c-request),var(--c-request-dark));color:#fff;box-shadow:0 6px 20px rgba(255,107,53,0.3)}
-.sidebar-link i{width:20px;text-align:center;font-size:1rem}
-.sidebar-link .count-pill{margin-right:auto;background:var(--c-danger);color:#fff;padding:1px 8px;border-radius:var(--r-full);font-size:0.68rem;font-weight:800;min-width:22px;text-align:center}
-.sidebar-link.active .count-pill{background:rgba(255,255,255,0.25)}
-.sidebar-link:not(.active) .count-pill{background:var(--c-surface-2);color:var(--c-text-muted)}
-.sidebar-link:not(.active) .count-pill:empty,
-.sidebar-link:not(.active) .count-pill[data-zero="true"]{display:none}
+.chat-sidebar {
+    background: var(--c-surface);
+    border-left: 1px solid var(--c-border);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+.chat-sidebar-header {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--c-border);
+    background: var(--c-surface);
+}
+.chat-sidebar-title {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 12px;
+}
+.chat-sidebar-title h2 {
+    font-size: 1.15rem;
+    font-weight: 900;
+    color: var(--c-text);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+.chat-sidebar-title h2 i { color: var(--c-accent); }
+.chat-sidebar-title .total-unread {
+    background: var(--c-danger);
+    color: #fff;
+    font-size: 0.72rem;
+    font-weight: 800;
+    padding: 3px 10px;
+    border-radius: var(--r-full);
+}
 
-/* Verification Banner */
-.verif-banner{background:linear-gradient(135deg,rgba(30,136,229,0.08),rgba(30,136,229,0.02));border:1.5px solid rgba(30,136,229,0.25);border-radius:var(--r-md);padding:12px 14px;font-size:0.78rem;color:var(--c-text);line-height:1.5;display:flex;flex-direction:column;gap:8px}
-.verif-banner .icon-row{display:flex;align-items:center;gap:8px;font-weight:800;color:var(--c-verified)}
-.verif-banner .icon-row i{font-size:1rem}
-.verif-banner a{color:var(--c-verified);font-weight:800;text-decoration:underline;font-size:0.78rem}
-.verif-banner.verif-done{background:linear-gradient(135deg,rgba(46,204,113,0.08),rgba(46,204,113,0.02));border-color:rgba(46,204,113,0.25)}
-.verif-banner.verif-done .icon-row{color:var(--c-accent-dark)}
-.verif-progress{height:6px;background:var(--c-border);border-radius:3px;overflow:hidden;margin-top:4px}
-.verif-progress-bar{height:100%;background:linear-gradient(90deg,var(--c-accent),var(--c-verified));border-radius:3px;transition:width var(--t-slow)}
+.chat-search {
+    position: relative;
+    margin-bottom: 12px;
+}
+.chat-search i {
+    position: absolute;
+    right: 14px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--c-text-sub);
+    font-size: 0.9rem;
+    pointer-events: none;
+}
+.chat-search input {
+    width: 100%;
+    padding: 11px 40px 11px 14px;
+    border-radius: var(--r-full);
+    border: 1.5px solid var(--c-border);
+    background: var(--c-surface-2);
+    color: var(--c-text);
+    font-size: 0.88rem;
+    transition: all var(--t-fast);
+}
+.chat-search input:focus {
+    outline: none;
+    border-color: var(--c-accent);
+    background: var(--c-surface);
+    box-shadow: 0 0 0 3px rgba(46,204,113,0.1);
+}
 
-/* MAIN CONTENT */
-.dashboard-main{display:flex;flex-direction:column;gap:20px;min-width:0}
+.chat-filters {
+    display: flex;
+    gap: 6px;
+    flex-wrap: wrap;
+}
+.chat-filter-btn {
+    padding: 6px 14px;
+    border-radius: var(--r-full);
+    background: var(--c-surface-2);
+    color: var(--c-text-muted);
+    font-size: 0.75rem;
+    font-weight: 700;
+    border: 1px solid var(--c-border);
+    transition: all var(--t-fast);
+    white-space: nowrap;
+}
+.chat-filter-btn:hover {
+    border-color: var(--c-accent);
+    color: var(--c-accent-dark);
+}
+.chat-filter-btn.active {
+    background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+    color: #fff;
+    border-color: transparent;
+    box-shadow: 0 4px 12px rgba(46,204,113,0.3);
+}
 
-/* PAGE HEADER */
-.page-header-bar{display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.page-title{font-size:clamp(1.3rem,2.5vw,1.8rem);font-weight:900;color:var(--c-text);display:flex;align-items:center;gap:12px}
-.page-title i{color:var(--c-request)}
-.page-subtitle{font-size:0.88rem;color:var(--c-text-muted);margin-top:4px}
+.chat-list {
+    flex: 1;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+.chat-list::-webkit-scrollbar { width: 6px; }
+.chat-list::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 3px; }
+.chat-list::-webkit-scrollbar-thumb:hover { background: var(--c-text-sub); }
 
-/* BUTTONS */
-.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:11px 24px;border-radius:var(--r-full);font-weight:700;font-size:0.88rem;transition:all var(--t-base);border:2px solid transparent;font-family:inherit;cursor:pointer;white-space:nowrap}
-.btn:active{transform:scale(0.97)}
-.btn:disabled{opacity:0.6;cursor:not-allowed;transform:none !important}
-.btn-primary{background:linear-gradient(135deg,var(--c-request),var(--c-request-dark));color:#fff;box-shadow:0 6px 20px rgba(255,107,53,0.3)}
-.btn-primary:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 32px rgba(255,107,53,0.45)}
-.btn-secondary{background:var(--c-surface-2);color:var(--c-text-muted);border:1px solid var(--c-border)}
-.btn-secondary:hover:not(:disabled){background:var(--c-border);color:var(--c-text)}
-.btn-accent{background:linear-gradient(135deg,var(--c-accent),var(--c-accent-dark));color:#fff;box-shadow:0 6px 20px rgba(46,204,113,0.3)}
-.btn-accent:hover:not(:disabled){transform:translateY(-2px);box-shadow:0 12px 32px rgba(46,204,113,0.45)}
-.btn-sm{padding:8px 16px;font-size:0.78rem}
+.chat-item {
+    padding: 14px 18px;
+    display: flex;
+    gap: 12px;
+    align-items: flex-start;
+    cursor: pointer;
+    border-bottom: 1px solid var(--c-border);
+    transition: all var(--t-fast);
+    position: relative;
+}
+.chat-item:hover {
+    background: var(--c-surface-2);
+}
+.chat-item.active {
+    background: linear-gradient(90deg, rgba(46,204,113,0.08), transparent);
+    border-right: 3px solid var(--c-accent);
+}
+.chat-item.unread {
+    background: linear-gradient(90deg, rgba(46,204,113,0.04), transparent);
+}
+.chat-item.unread .chat-item-name {
+    font-weight: 900;
+    color: var(--c-text);
+}
+.chat-item.unread .chat-item-preview {
+    color: var(--c-text);
+    font-weight: 700;
+}
 
-/* STATS GRID */
-.stats-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
-.stat-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-lg);padding:20px;display:flex;align-items:flex-start;gap:14px;transition:all var(--t-base);position:relative;overflow:hidden}
-.stat-card:hover{transform:translateY(-4px);box-shadow:var(--sh-md);border-color:var(--stat-color,var(--c-request))}
-.stat-card::before{content:'';position:absolute;top:0;right:0;width:4px;height:100%;background:var(--stat-color,var(--c-request))}
-.stat-icon{width:48px;height:48px;border-radius:var(--r-md);background:var(--stat-bg,rgba(255,107,53,0.12));color:var(--stat-color,var(--c-request));display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.stat-content{flex:1;min-width:0}
-.stat-label{font-size:0.78rem;color:var(--c-text-muted);font-weight:700;margin-bottom:4px}
-.stat-value{font-size:1.7rem;font-weight:900;color:var(--c-text);line-height:1;font-variant-numeric:tabular-nums}
-.stat-value.updated{animation:pulse 0.6s ease}
-.stat-trend{font-size:0.72rem;color:var(--c-text-sub);margin-top:6px;display:flex;align-items:center;gap:4px}
+.chat-item-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-primary-500), var(--c-primary-700));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1.1rem;
+    flex-shrink: 0;
+    overflow: hidden;
+    position: relative;
+    border: 2px solid var(--c-surface);
+    box-shadow: 0 2px 8px rgba(10,37,64,0.1);
+}
+.chat-item-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.chat-item-avatar.online::after {
+    content: '';
+    position: absolute;
+    bottom: 2px;
+    left: 2px;
+    width: 12px;
+    height: 12px;
+    background: var(--c-accent);
+    border-radius: 50%;
+    border: 2px solid var(--c-surface);
+    animation: pulse 2s ease-in-out infinite;
+}
 
-/* SECTION CARD */
-.section-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-lg);overflow:hidden;box-shadow:var(--sh-sm)}
-.section-card-header{padding:18px 22px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;gap:12px;flex-wrap:wrap}
-.section-card-title{font-size:1.05rem;font-weight:800;color:var(--c-text);display:flex;align-items:center;gap:10px}
-.section-card-title i{color:var(--c-request)}
-.section-card-title .count-badge-static{background:var(--c-surface-2);color:var(--c-text-muted);padding:2px 10px;border-radius:var(--r-full);font-size:0.72rem;font-weight:800}
-.section-card-title .count-badge-static.accent{background:linear-gradient(135deg,var(--c-request),var(--c-request-dark));color:#fff}
-.section-card-body{padding:20px 22px}
-.view-all-link{font-size:0.82rem;color:var(--c-primary-600);background:var(--c-surface-2);padding:7px 16px;border-radius:var(--r-full);font-weight:700;display:inline-flex;align-items:center;gap:6px;transition:all var(--t-fast);border:1px solid var(--c-border);cursor:pointer}
-.view-all-link:hover{background:var(--c-primary-600);color:#fff;border-color:transparent;transform:translateX(-3px)}
+.chat-item-body {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+}
+.chat-item-top {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    gap: 8px;
+}
+.chat-item-name {
+    font-size: 0.92rem;
+    font-weight: 700;
+    color: var(--c-text);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+.chat-item-name .verified-dot {
+    color: var(--c-verified);
+    font-size: 0.75rem;
+    flex-shrink: 0;
+}
+.chat-item-time {
+    font-size: 0.7rem;
+    color: var(--c-text-sub);
+    font-weight: 700;
+    flex-shrink: 0;
+}
+.chat-item-preview {
+    font-size: 0.82rem;
+    color: var(--c-text-muted);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    line-height: 1.4;
+}
+.chat-item-preview .attachment-icon {
+    color: var(--c-accent);
+    margin-left: 4px;
+}
 
-/* ITEM ROW */
-.item-list{display:flex;flex-direction:column;gap:12px}
-.item-row{background:var(--c-surface-2);border:1.5px solid var(--c-border);border-radius:var(--r-md);padding:14px 16px;display:flex;align-items:center;gap:14px;transition:all var(--t-base);flex-wrap:wrap;position:relative}
-.item-row:hover{border-color:var(--c-request);background:var(--c-surface);box-shadow:var(--sh-sm)}
-.item-row.is-new{border-color:var(--c-request);background:linear-gradient(135deg,rgba(255,107,53,0.04),var(--c-surface-2))}
-.item-row.is-new::before{content:'جديد';position:absolute;top:-8px;right:16px;background:linear-gradient(135deg,var(--c-request),var(--c-request-dark));color:#fff;padding:2px 10px;border-radius:var(--r-full);font-size:0.62rem;font-weight:800;box-shadow:0 2px 8px rgba(255,107,53,0.35)}
-.item-icon-wrapper{width:44px;height:44px;border-radius:var(--r-md);background:linear-gradient(135deg,rgba(255,107,53,0.15),rgba(255,107,53,0.05));color:var(--c-request-dark);display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0;overflow:hidden}
-.item-icon-wrapper img{width:100%;height:100%;object-fit:cover}
-.item-icon-wrapper.accent{background:linear-gradient(135deg,rgba(46,204,113,0.15),rgba(46,204,113,0.05));color:var(--c-accent-dark)}
-.item-info{flex:1;min-width:200px}
-.item-title{font-size:0.92rem;font-weight:800;color:var(--c-text);margin-bottom:4px;line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
-.item-meta{display:flex;gap:12px;font-size:0.75rem;color:var(--c-text-sub);flex-wrap:wrap;align-items:center}
-.item-meta span{display:inline-flex;align-items:center;gap:4px}
-.item-meta i{font-size:0.7rem}
-.item-price-block{text-align:left;flex-shrink:0}
-.item-price{font-size:1.15rem;font-weight:900;color:var(--c-accent-dark);font-variant-numeric:tabular-nums;line-height:1}
-[data-theme="dark"] .item-price{color:#6ee7a0}
-.item-price .currency{font-size:0.7rem;font-weight:700;color:var(--c-text-sub)}
-.item-price-label{font-size:0.68rem;color:var(--c-text-sub);margin-top:4px;font-weight:700}
-.item-actions{display:flex;gap:6px;flex-wrap:wrap;align-items:center}
-.item-action-btn{padding:8px 14px;border-radius:var(--r-md);font-weight:700;font-size:0.78rem;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all var(--t-fast);border:none;white-space:nowrap;cursor:pointer;text-decoration:none}
-.item-action-btn.primary{background:linear-gradient(135deg,var(--c-request),var(--c-request-dark));color:#fff;box-shadow:0 2px 8px rgba(255,107,53,0.25)}
-.item-action-btn.primary:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(255,107,53,0.4)}
-.item-action-btn.secondary{background:var(--c-surface);color:var(--c-text-muted);border:1px solid var(--c-border)}
-.item-action-btn.secondary:hover{background:var(--c-primary-50);color:var(--c-primary-600);border-color:var(--c-primary-500)}
-[data-theme="dark"] .item-action-btn.secondary:hover{background:rgba(44,122,184,0.15);color:#7ec8e3}
-.item-action-btn.danger{background:var(--c-surface);color:var(--c-danger);border:1px solid rgba(231,76,60,0.25)}
-.item-action-btn.danger:hover{background:var(--c-danger);color:#fff;border-color:var(--c-danger)}
-.item-action-btn.icon-only{width:36px;height:36px;padding:0}
+.chat-item-badge {
+    background: var(--c-accent);
+    color: #fff;
+    font-size: 0.7rem;
+    font-weight: 800;
+    min-width: 22px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 11px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    margin-top: 4px;
+    align-self: flex-start;
+}
 
-/* Status badges */
-.status-badge{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:var(--r-full);font-size:0.68rem;font-weight:800}
-.status-open{background:rgba(46,204,113,0.12);color:var(--c-accent-dark)}
-.status-matched{background:rgba(44,122,184,0.12);color:var(--c-primary-600)}
-.status-closed{background:rgba(0,0,0,0.06);color:var(--c-text-muted)}
-.status-expired{background:rgba(231,76,60,0.12);color:var(--c-danger)}
-.status-pending{background:rgba(243,156,18,0.12);color:var(--c-warning)}
-.status-accepted{background:rgba(46,204,113,0.15);color:var(--c-accent-dark)}
-.status-rejected{background:rgba(0,0,0,0.06);color:var(--c-text-sub)}
-[data-theme="dark"] .status-open{background:rgba(46,204,113,0.18);color:#6ee7a0}
-[data-theme="dark"] .status-matched{background:rgba(44,122,184,0.2);color:#7ec8e3}
-[data-theme="dark"] .status-closed{background:rgba(255,255,255,0.06)}
-[data-theme="dark"] .status-expired{background:rgba(231,76,60,0.2);color:#ff9588}
-[data-theme="dark"] .status-pending{background:rgba(243,156,18,0.2);color:#f4b860}
-[data-theme="dark"] .status-accepted{background:rgba(46,204,113,0.2);color:#6ee7a0}
+.chat-empty-sidebar {
+    padding: 60px 24px;
+    text-align: center;
+    color: var(--c-text-muted);
+}
+.chat-empty-sidebar i {
+    font-size: 3rem;
+    opacity: 0.3;
+    color: var(--c-accent);
+    margin-bottom: 14px;
+    display: block;
+}
 
-/* EMPTY STATE */
-.empty-state{text-align:center;padding:48px 24px;color:var(--c-text-muted)}
-.empty-state i.empty-icon{font-size:3rem;color:var(--c-request);opacity:0.35;margin-bottom:14px;display:block}
-.empty-state h4{font-size:1rem;font-weight:800;color:var(--c-text);margin-bottom:6px}
-.empty-state p{font-size:0.85rem;margin-bottom:18px}
+/* CHAT VIEW */
+.chat-view {
+    background: var(--c-bg);
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
 
-/* PRODUCT MINI GRID */
-.products-grid-mini{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:16px}
-.mini-product{background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-lg);overflow:hidden;display:flex;flex-direction:column;transition:all var(--t-base);position:relative}
-.mini-product:hover{transform:translateY(-4px);box-shadow:var(--sh-md);border-color:var(--c-request)}
-.mini-product-media{aspect-ratio:16/10;background:linear-gradient(145deg,var(--c-surface-2),var(--c-border));overflow:hidden;position:relative}
-.mini-product-media img{width:100%;height:100%;object-fit:cover}
-.mini-product-placeholder{width:100%;height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;background:linear-gradient(145deg,var(--c-primary-50),var(--c-primary-100));color:var(--c-primary-700)}
-[data-theme="dark"] .mini-product-placeholder{background:linear-gradient(145deg,var(--c-surface-2),var(--c-primary-900));color:#7ec8e3}
-.mini-product-placeholder .emoji{font-size:2.5rem}
-.mini-product-status-badge{position:absolute;top:8px;right:8px;padding:3px 10px;border-radius:var(--r-full);font-size:0.65rem;font-weight:800;backdrop-filter:blur(6px);z-index:2}
-.mini-product-status-badge.active{background:rgba(46,204,113,0.95);color:#fff}
-.mini-product-status-badge.inactive{background:rgba(0,0,0,0.7);color:#fff}
-.mini-product-status-badge.featured{background:linear-gradient(135deg,#f39c12,#e67e22);color:#fff;top:auto;bottom:8px}
-.mini-product-body{padding:12px 14px 14px;flex:1;display:flex;flex-direction:column;gap:6px}
-.mini-product-title{font-size:0.88rem;font-weight:800;color:var(--c-text);line-height:1.4;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden;min-height:2.5em}
-.mini-product-specs{display:flex;gap:6px;flex-wrap:wrap;font-size:0.68rem}
-.mini-product-specs span{background:var(--c-surface-2);padding:2px 8px;border-radius:var(--r-sm);font-weight:700;color:var(--c-text-muted);border:1px solid var(--c-border)}
-.mini-product-price{font-size:1.05rem;font-weight:900;color:var(--c-accent-dark);font-variant-numeric:tabular-nums;margin-top:auto}
-[data-theme="dark"] .mini-product-price{color:#6ee7a0}
-.mini-product-price .currency{font-size:0.7rem;color:var(--c-text-sub)}
-.mini-product-price.no-price{font-size:0.8rem;color:var(--c-text-sub)}
-.mini-product-actions{display:flex;gap:4px;padding:0 14px 14px}
+/* Chat Header */
+.chat-view-header {
+    padding: 14px 20px;
+    background: var(--c-surface);
+    border-bottom: 1px solid var(--c-border);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 5;
+}
+.chat-back-btn {
+    display: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--c-surface-2);
+    color: var(--c-text);
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all var(--t-fast);
+}
+.chat-back-btn:hover { background: var(--c-border); }
 
-/* CONTACTS TABLE */
-.contacts-table-wrapper{overflow-x:auto;margin:0 -22px -20px}
-.contacts-table{width:100%;border-collapse:separate;border-spacing:0;font-size:0.85rem;min-width:700px}
-.contacts-table th{background:var(--c-surface-2);padding:12px 16px;text-align:right;font-weight:800;color:var(--c-text);font-size:0.78rem;border-bottom:1px solid var(--c-border);white-space:nowrap}
-.contacts-table td{padding:12px 16px;border-bottom:1px solid var(--c-border);color:var(--c-text-muted);vertical-align:middle}
-.contacts-table tr:hover td{background:var(--c-surface-2)}
-.contacts-table tr:last-child td{border-bottom:none}
-.contact-type-pill{display:inline-flex;align-items:center;gap:4px;padding:3px 10px;border-radius:var(--r-full);font-size:0.68rem;font-weight:800}
-.contact-type-whatsapp{background:rgba(37,211,102,0.12);color:var(--c-whatsapp)}
-.contact-type-view{background:rgba(44,122,184,0.12);color:var(--c-primary-600)}
-.contact-type-phone{background:rgba(243,156,18,0.12);color:var(--c-warning)}
-.contact-type-inquiry{background:rgba(139,92,246,0.12);color:var(--c-purple)}
-.contact-type-request_quote{background:rgba(255,107,53,0.12);color:var(--c-request-dark)}
+.chat-header-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-primary-500), var(--c-primary-700));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 1rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.chat-header-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-/* PROFILE FORM */
-.profile-form{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;max-width:720px}
-.form-group{display:flex;flex-direction:column;gap:6px}
-.form-group.full{grid-column:1/-1}
-.form-group label{font-size:0.82rem;font-weight:700;color:var(--c-text)}
-.form-group label .req{color:var(--c-danger)}
-.form-group label .hint{font-size:0.72rem;color:var(--c-text-sub);font-weight:500;margin-right:4px}
-.form-group input,.form-group textarea,.form-group select{padding:11px 14px;border-radius:var(--r-md);border:1.5px solid var(--c-border);background:var(--c-surface-2);color:var(--c-text);font-size:0.9rem;transition:all var(--t-fast)}
-.form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--c-request);outline:none;background:var(--c-surface);box-shadow:0 0 0 3px rgba(255,107,53,0.12)}
-.form-group input:disabled{opacity:0.6;cursor:not-allowed}
-.form-group textarea{min-height:90px;resize:vertical}
-.form-actions{grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:8px}
+.chat-header-info {
+    flex: 1;
+    min-width: 0;
+}
+.chat-header-name {
+    font-size: 0.95rem;
+    font-weight: 800;
+    color: var(--c-text);
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+.chat-header-name .verified-dot { color: var(--c-verified); font-size: 0.8rem; }
+.chat-header-status {
+    font-size: 0.75rem;
+    color: var(--c-text-muted);
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+.chat-header-status .online-dot {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--c-accent);
+    box-shadow: 0 0 0 3px rgba(46,204,113,0.2);
+}
 
-/* NOTIFICATIONS PANEL */
-.notif-panel{position:fixed;top:calc(var(--header-h) + 12px);left:24px;width:min(380px,calc(100vw - 32px));background:var(--c-surface);border-radius:var(--r-lg);box-shadow:var(--sh-xl);border:1px solid var(--c-border);overflow:hidden;z-index:200;opacity:0;visibility:hidden;transform:translateY(-10px);transition:all var(--t-base);max-height:500px;display:flex;flex-direction:column}
-.notif-panel.show{opacity:1;visibility:visible;transform:translateY(0)}
-.notif-header{padding:14px 18px;border-bottom:1px solid var(--c-border);display:flex;justify-content:space-between;align-items:center;background:var(--c-surface-2)}
-.notif-header h4{font-size:0.95rem;font-weight:800;color:var(--c-text);display:flex;align-items:center;gap:8px}
-.notif-header h4 i{color:var(--c-request)}
-.notif-mark-read{background:none;color:var(--c-primary-600);font-size:0.75rem;font-weight:700;cursor:pointer;padding:4px 10px;border-radius:var(--r-sm);transition:all var(--t-fast);border:none}
-.notif-mark-read:hover{background:var(--c-primary-50)}
-.notif-list{overflow-y:auto;flex:1}
-.notif-item{display:flex;gap:12px;padding:14px 18px;border-bottom:1px solid var(--c-border);transition:background var(--t-fast);cursor:pointer}
-.notif-item:last-child{border-bottom:none}
-.notif-item:hover{background:var(--c-surface-2)}
-.notif-item.unread{background:linear-gradient(90deg,rgba(255,107,53,0.04),transparent)}
-.notif-item.unread::before{content:'';width:8px;height:8px;border-radius:50%;background:var(--c-request);flex-shrink:0;margin-top:8px}
-.notif-item:not(.unread)::before{content:'';width:8px;height:8px;border-radius:50%;background:transparent;flex-shrink:0}
-.notif-content{flex:1;min-width:0}
-.notif-title{font-size:0.85rem;font-weight:800;color:var(--c-text);margin-bottom:3px}
-.notif-desc{font-size:0.78rem;color:var(--c-text-muted);line-height:1.4}
-.notif-time{font-size:0.7rem;color:var(--c-text-sub);margin-top:4px}
+.chat-header-actions {
+    display: flex;
+    gap: 6px;
+}
+.chat-header-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    background: var(--c-surface-2);
+    color: var(--c-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.95rem;
+    transition: all var(--t-fast);
+}
+.chat-header-btn:hover {
+    background: var(--c-accent);
+    color: #fff;
+    transform: scale(1.08);
+}
+.chat-header-btn.whatsapp:hover {
+    background: var(--c-whatsapp);
+}
 
-/* MODAL */
-.modal-overlay{position:fixed;inset:0;background:rgba(10,20,30,0.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:all var(--t-base)}
-.modal-overlay.show{opacity:1;visibility:visible}
-.modal{background:var(--c-surface);border-radius:var(--r-xl);box-shadow:var(--sh-xl);max-width:700px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;transform:scale(0.95) translateY(20px);transition:transform var(--t-base)}
-.modal-overlay.show .modal{transform:scale(1) translateY(0)}
-.modal-header{padding:20px 24px;border-bottom:1px solid var(--c-border);display:flex;align-items:center;justify-content:space-between;gap:12px}
-.modal-header h3{font-size:1.1rem;font-weight:800;color:var(--c-text);display:flex;align-items:center;gap:10px}
-.modal-header h3 i{color:var(--c-request)}
-.modal-close{width:36px;height:36px;border-radius:50%;background:var(--c-surface-2);color:var(--c-text-muted);display:flex;align-items:center;justify-content:center;transition:all var(--t-fast);font-size:0.9rem;border:none;cursor:pointer}
-.modal-close:hover{background:var(--c-danger);color:#fff}
-.modal-body{padding:24px;overflow-y:auto;flex:1}
-.modal-footer{padding:16px 24px;border-top:1px solid var(--c-border);display:flex;gap:10px;justify-content:flex-end;background:var(--c-surface-2)}
+/* Context Bar (product/request link) */
+.chat-context-bar {
+    padding: 10px 20px;
+    background: linear-gradient(135deg, rgba(46,204,113,0.06), rgba(94,184,238,0.04));
+    border-bottom: 1px solid var(--c-border);
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    cursor: pointer;
+    transition: all var(--t-fast);
+}
+.chat-context-bar:hover { background: linear-gradient(135deg, rgba(46,204,113,0.12), rgba(94,184,238,0.08)); }
+.chat-context-bar i.context-icon { color: var(--c-accent); font-size: 1rem; }
+.chat-context-bar .context-text { flex: 1; min-width: 0; color: var(--c-text); font-weight: 700; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.chat-context-bar .context-action { color: var(--c-accent-dark); font-weight: 800; font-size: 0.78rem; }
 
-/* OFFER FORM */
-.offer-details-box{background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);padding:14px;margin-bottom:16px;font-size:0.85rem}
-.offer-details-box strong{color:var(--c-text);font-weight:800}
+/* Messages Area */
+.chat-messages {
+    flex: 1;
+    overflow-y: auto;
+    padding: 20px 20px 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    scroll-behavior: smooth;
+    background-image:
+        radial-gradient(circle at 20% 20%, rgba(46,204,113,0.02) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(44,122,184,0.02) 0%, transparent 50%);
+}
+.chat-messages::-webkit-scrollbar { width: 8px; }
+.chat-messages::-webkit-scrollbar-thumb { background: var(--c-border); border-radius: 4px; }
+.chat-messages::-webkit-scrollbar-thumb:hover { background: var(--c-text-sub); }
+
+.load-more-btn {
+    align-self: center;
+    padding: 8px 20px;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-full);
+    font-size: 0.78rem;
+    font-weight: 700;
+    color: var(--c-text-muted);
+    margin-bottom: 16px;
+    transition: all var(--t-fast);
+    box-shadow: var(--sh-sm);
+}
+.load-more-btn:hover {
+    background: var(--c-accent);
+    color: #fff;
+    border-color: transparent;
+}
+
+.date-separator {
+    align-self: center;
+    padding: 4px 14px;
+    background: rgba(10,37,64,0.08);
+    color: var(--c-text-muted);
+    border-radius: var(--r-full);
+    font-size: 0.7rem;
+    font-weight: 700;
+    margin: 12px 0;
+}
+[data-theme="dark"] .date-separator {
+    background: rgba(255,255,255,0.08);
+}
+
+.msg-wrapper {
+    display: flex;
+    gap: 8px;
+    align-items: flex-end;
+    margin-bottom: 4px;
+    animation: messageIn 0.3s cubic-bezier(0.22,1,0.36,1);
+    max-width: 75%;
+}
+.msg-wrapper.sent {
+    align-self: flex-start;
+    flex-direction: row;
+}
+.msg-wrapper.received {
+    align-self: flex-end;
+    flex-direction: row-reverse;
+}
+
+.msg-avatar {
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-primary-500), var(--c-primary-700));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 800;
+    font-size: 0.75rem;
+    flex-shrink: 0;
+    overflow: hidden;
+}
+.msg-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+.msg-bubble {
+    padding: 10px 14px;
+    border-radius: 18px;
+    font-size: 0.88rem;
+    line-height: 1.5;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    position: relative;
+    box-shadow: 0 1px 2px rgba(10,37,64,0.04);
+}
+.msg-wrapper.sent .msg-bubble {
+    background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+    color: #fff;
+    border-bottom-right-radius: 4px;
+}
+.msg-wrapper.received .msg-bubble {
+    background: var(--c-surface);
+    color: var(--c-text);
+    border-bottom-left-radius: 4px;
+    border: 1px solid var(--c-border);
+}
+
+.msg-bubble .msg-image {
+    max-width: 240px;
+    border-radius: 12px;
+    margin-bottom: 6px;
+    cursor: pointer;
+    transition: transform var(--t-fast);
+}
+.msg-bubble .msg-image:hover { transform: scale(1.02); }
+
+.msg-bubble .msg-file {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 10px;
+    background: rgba(0,0,0,0.06);
+    border-radius: 10px;
+    margin-bottom: 6px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+[data-theme="dark"] .msg-bubble.sent .msg-file { background: rgba(255,255,255,0.12); }
+
+.msg-meta {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 4px;
+    margin-top: 4px;
+    font-size: 0.68rem;
+    opacity: 0.8;
+}
+.msg-wrapper.sent .msg-meta { color: rgba(255,255,255,0.9); }
+.msg-wrapper.received .msg-meta { color: var(--c-text-sub); }
+.msg-meta .status-icon { font-size: 0.72rem; }
+.msg-meta .status-icon.read { color: #fff; }
+.msg-wrapper.received .msg-meta .status-icon.read { color: var(--c-accent); }
+
+.msg-actions {
+    display: flex;
+    gap: 4px;
+    opacity: 0;
+    transition: opacity var(--t-fast);
+    align-self: center;
+    flex-shrink: 0;
+}
+.msg-wrapper:hover .msg-actions { opacity: 1; }
+.msg-action-btn {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    color: var(--c-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    transition: all var(--t-fast);
+}
+.msg-action-btn:hover {
+    background: var(--c-accent);
+    color: #fff;
+    border-color: transparent;
+}
+
+/* Typing Indicator */
+.typing-indicator {
+    display: none;
+    align-self: flex-end;
+    flex-direction: row-reverse;
+    gap: 8px;
+    align-items: flex-end;
+    max-width: 75%;
+    margin-bottom: 8px;
+}
+.typing-indicator.show { display: flex; }
+.typing-indicator .msg-bubble {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    display: flex;
+    gap: 4px;
+    padding: 12px 16px;
+}
+.typing-indicator .dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--c-accent);
+    animation: typingDots 1.4s infinite;
+}
+.typing-indicator .dot:nth-child(2) { animation-delay: 0.2s; }
+.typing-indicator .dot:nth-child(3) { animation-delay: 0.4s; }
+
+/* Composer */
+.chat-composer {
+    padding: 14px 20px;
+    background: var(--c-surface);
+    border-top: 1px solid var(--c-border);
+    display: flex;
+    gap: 10px;
+    align-items: flex-end;
+}
+
+.attach-menu {
+    position: relative;
+}
+.attach-menu-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: var(--c-surface-2);
+    color: var(--c-text-muted);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.05rem;
+    transition: all var(--t-fast);
+    border: 1px solid var(--c-border);
+}
+.attach-menu-btn:hover {
+    background: var(--c-accent);
+    color: #fff;
+    border-color: transparent;
+    transform: scale(1.05);
+}
+
+.attach-dropdown {
+    position: absolute;
+    bottom: calc(100% + 10px);
+    right: 0;
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: var(--r-md);
+    box-shadow: var(--sh-xl);
+    min-width: 180px;
+    overflow: hidden;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(8px);
+    transition: all var(--t-base);
+    z-index: 50;
+}
+.attach-dropdown.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+.attach-dropdown button {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 100%;
+    padding: 12px 16px;
+    color: var(--c-text);
+    font-size: 0.88rem;
+    font-weight: 600;
+    transition: background var(--t-fast);
+    text-align: right;
+}
+.attach-dropdown button:hover {
+    background: var(--c-surface-2);
+    color: var(--c-accent-dark);
+}
+.attach-dropdown button i {
+    color: var(--c-accent);
+    width: 20px;
+    text-align: center;
+}
+
+.chat-input-wrapper {
+    flex: 1;
+    position: relative;
+}
+.chat-input {
+    width: 100%;
+    padding: 12px 46px 12px 16px;
+    border-radius: 22px;
+    border: 1.5px solid var(--c-border);
+    background: var(--c-surface-2);
+    color: var(--c-text);
+    font-size: 0.92rem;
+    font-family: inherit;
+    resize: none;
+    max-height: 140px;
+    min-height: 44px;
+    line-height: 1.5;
+    transition: all var(--t-fast);
+}
+.chat-input:focus {
+    outline: none;
+    border-color: var(--c-accent);
+    background: var(--c-surface);
+    box-shadow: 0 0 0 3px rgba(46,204,113,0.1);
+}
+.chat-emoji-btn {
+    position: absolute;
+    left: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--c-text-sub);
+    font-size: 1.15rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--t-fast);
+}
+.chat-emoji-btn:hover {
+    color: var(--c-accent);
+    background: rgba(46,204,113,0.08);
+}
+
+.chat-send-btn {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1rem;
+    transition: all var(--t-base);
+    box-shadow: 0 4px 14px rgba(46,204,113,0.35);
+    flex-shrink: 0;
+}
+.chat-send-btn:hover:not(:disabled) {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 8px 20px rgba(46,204,113,0.5);
+}
+.chat-send-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+/* Empty Chat State */
+.chat-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+    color: var(--c-text-muted);
+}
+.chat-empty-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(46,204,113,0.1), rgba(46,204,113,0.03));
+    color: var(--c-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+.chat-empty h3 {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--c-text);
+    margin-bottom: 8px;
+}
+.chat-empty p {
+    font-size: 0.88rem;
+    max-width: 400px;
+    line-height: 1.6;
+}
 
 /* SKELETON */
-.skeleton{background:linear-gradient(90deg,var(--c-border) 0%,var(--c-surface-2) 50%,var(--c-border) 100%);background-size:200% 100%;animation:skeletonWave 1.5s infinite;border-radius:var(--r-md)}
-.skeleton-row{height:76px;border-radius:var(--r-md);margin-bottom:12px}
-.skeleton-stat{height:110px;border-radius:var(--r-lg)}
-
-/* SPINNER */
-.spinner{width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;display:inline-block;vertical-align:middle}
+.skeleton {
+    background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
+    background-size: 200% 100%;
+    animation: skeletonWave 1.5s infinite;
+    border-radius: var(--r-md);
+}
+.chat-skeleton-item {
+    padding: 14px 18px;
+    display: flex;
+    gap: 12px;
+    border-bottom: 1px solid var(--c-border);
+}
+.chat-skeleton-avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 50%;
+    flex-shrink: 0;
+}
+.chat-skeleton-body {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+.chat-skeleton-line {
+    height: 12px;
+    border-radius: 6px;
+}
 
 /* TOAST */
 .toast-container{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;width:min(420px,calc(100% - 32px));display:flex;flex-direction:column;gap:10px;pointer-events:none}
-.toast{background:var(--c-surface);border:1px solid var(--c-border);color:var(--c-text);padding:14px 18px;border-radius:var(--r-md);box-shadow:var(--sh-xl);display:flex;align-items:center;gap:12px;animation:fadeUp 0.4s cubic-bezier(0.22,1,0.36,1);border-right:4px solid var(--c-request);pointer-events:auto;transition:opacity var(--t-base),transform var(--t-base)}
+.toast{background:var(--c-surface);border:1px solid var(--c-border);color:var(--c-text);padding:14px 18px;border-radius:var(--r-md);box-shadow:var(--sh-xl);display:flex;align-items:center;gap:12px;animation:fadeUp 0.4s cubic-bezier(0.22,1,0.36,1);border-right:4px solid var(--c-accent);pointer-events:auto;transition:opacity var(--t-base),transform var(--t-base)}
 .toast.removing{opacity:0;transform:translateX(20px)}
-.toast .toast-icon{font-size:1.5rem;flex-shrink:0;line-height:1}
+.toast .toast-icon{font-size:1.5rem;flex-shrink:0}
 .toast .toast-content{flex:1;min-width:0}
 .toast .toast-title{font-weight:700;font-size:0.9rem;margin-bottom:2px}
 .toast .toast-desc{font-size:0.8rem;color:var(--c-text-muted);line-height:1.4}
@@ -324,80 +905,137 @@ input,select,textarea{font-family:inherit}
 .toast.error{border-right-color:var(--c-danger)}
 .toast.info{border-right-color:var(--c-purple)}
 
-/* MOBILE NAV */
-.mobile-nav{display:none;position:fixed;bottom:0;left:0;right:0;background:var(--c-surface);border-top:1px solid var(--c-border);box-shadow:0 -6px 20px rgba(10,37,64,0.08);z-index:90;padding:6px;grid-template-columns:repeat(5,1fr);gap:2px}
-.mobile-nav-item{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:3px;padding:8px 4px;border-radius:var(--r-md);color:var(--c-text-sub);font-size:0.65rem;font-weight:700;transition:all var(--t-fast);position:relative;background:transparent;border:none;cursor:pointer}
-.mobile-nav-item i{font-size:1.15rem}
-.mobile-nav-item.active{color:var(--c-request-dark);background:rgba(255,107,53,0.08)}
-[data-theme="dark"] .mobile-nav-item.active{color:#ffb877;background:rgba(255,107,53,0.15)}
-.mobile-nav-item .count-pill{position:absolute;top:4px;right:12px;background:var(--c-danger);color:#fff;padding:0 5px;border-radius:var(--r-full);font-size:0.6rem;font-weight:800;min-width:16px;height:16px;display:none;align-items:center;justify-content:center}
-.mobile-nav-item .count-pill.show{display:flex}
-
 /* LOGIN REQUIRED */
-.login-required-state{min-height:70vh;display:flex;flex-direction:column;align-items:center;justify-content:center;text-align:center;padding:40px 24px}
-.login-required-state .big-icon{width:100px;height:100px;border-radius:50%;background:linear-gradient(135deg,rgba(255,107,53,0.12),rgba(255,107,53,0.04));color:var(--c-request-dark);display:flex;align-items:center;justify-content:center;font-size:2.5rem;margin-bottom:24px}
-.login-required-state h2{font-size:1.5rem;font-weight:900;color:var(--c-text);margin-bottom:10px}
-.login-required-state p{font-size:0.95rem;color:var(--c-text-muted);max-width:460px;margin-bottom:28px}
-.login-required-actions{display:flex;gap:12px;flex-wrap:wrap;justify-content:center}
-
-/* CHART CONTAINER */
-.chart-container{background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-md);padding:20px;height:260px;display:flex;flex-direction:column}
-.chart-bars{flex:1;display:flex;align-items:flex-end;gap:8px;padding-top:20px}
-.chart-bar{flex:1;background:linear-gradient(180deg,var(--c-request),var(--c-request-dark));border-radius:6px 6px 0 0;min-height:4px;position:relative;transition:all var(--t-slow);cursor:pointer}
-.chart-bar:hover{opacity:0.8;transform:translateY(-4px)}
-.chart-bar-label{position:absolute;bottom:-24px;left:50%;transform:translateX(-50%);font-size:0.7rem;color:var(--c-text-sub);font-weight:700;white-space:nowrap}
-.chart-bar-value{position:absolute;top:-22px;left:50%;transform:translateX(-50%);font-size:0.72rem;color:var(--c-text);font-weight:800;white-space:nowrap}
+.login-required-state {
+    min-height: calc(100vh - var(--header-h));
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 40px 24px;
+}
+.login-required-state .big-icon {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, rgba(46,204,113,0.12), rgba(46,204,113,0.04));
+    color: var(--c-accent);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 2.5rem;
+    margin-bottom: 24px;
+}
+.login-required-state h2 {
+    font-size: 1.5rem;
+    font-weight: 900;
+    color: var(--c-text);
+    margin-bottom: 10px;
+}
+.login-required-state p {
+    font-size: 0.95rem;
+    color: var(--c-text-muted);
+    max-width: 460px;
+    margin-bottom: 28px;
+}
+.login-required-actions {
+    display: flex;
+    gap: 12px;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+.btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 12px 24px;
+    border-radius: var(--r-full);
+    font-weight: 700;
+    font-size: 0.9rem;
+    transition: all var(--t-base);
+    border: 2px solid transparent;
+    cursor: pointer;
+    text-decoration: none;
+}
+.btn-primary {
+    background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+    color: #fff;
+    box-shadow: 0 6px 20px rgba(46,204,113,0.3);
+}
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 32px rgba(46,204,113,0.45);
+}
+.btn-secondary {
+    background: var(--c-surface-2);
+    color: var(--c-text-muted);
+    border: 1px solid var(--c-border);
+}
+.btn-secondary:hover {
+    background: var(--c-border);
+    color: var(--c-text);
+}
 
 /* RESPONSIVE */
-@media (max-width:1024px){
-    :root{--sidebar-w:100%}
-    .dashboard-layout{grid-template-columns:1fr;padding:16px}
-    .sidebar{position:static;display:none}
-    .sidebar.mobile-open{display:flex;margin-bottom:16px}
-    .profile-form{grid-template-columns:1fr}
+@media (max-width: 1024px) {
+    .chat-layout {
+        grid-template-columns: 1fr;
+        height: calc(100vh - var(--header-h));
+        margin: 0;
+        border-radius: 0;
+    }
+    .chat-sidebar {
+        border-left: none;
+        border-bottom: none;
+    }
+    .chat-view {
+        display: none;
+        position: absolute;
+        inset: 0;
+        z-index: 10;
+        animation: slideInSidebar 0.3s ease;
+    }
+    .chat-layout.chat-open .chat-sidebar {
+        display: none;
+    }
+    .chat-layout.chat-open .chat-view {
+        display: flex;
+    }
+    .chat-back-btn { display: flex !important; }
 }
-@media (max-width:860px){
-    .menu-toggle{display:inline-flex}
-    .nav-user-name{display:none}
-    .nav-user-btn{padding:4px}
-    .mobile-nav{display:grid}
-    body{padding-bottom:72px}
+
+@media (max-width: 640px) {
+    .navbar { padding: 0 12px; }
+    .logo-text { font-size: 16px; }
+    .logo-text .gray { display: none; }
+    .nav-user-name { display: none; }
+    .nav-user-btn { padding: 4px; }
+    .chat-sidebar-header { padding: 14px 14px; }
+    .chat-sidebar-title h2 { font-size: 1rem; }
+    .chat-item { padding: 12px 14px; }
+    .chat-item-avatar { width: 44px; height: 44px; font-size: 1rem; }
+    .chat-item-name { font-size: 0.88rem; }
+    .chat-item-preview { font-size: 0.78rem; }
+    .chat-messages { padding: 16px 12px 8px; }
+    .chat-composer { padding: 10px 12px; gap: 8px; }
+    .msg-wrapper { max-width: 88%; }
+    .msg-bubble { font-size: 0.85rem; padding: 9px 12px; }
+    .attach-menu-btn, .chat-send-btn { width: 40px; height: 40px; font-size: 0.95rem; }
+    .chat-input { font-size: 0.88rem; padding: 10px 40px 10px 14px; }
 }
-@media (max-width:640px){
-    .navbar{padding:0 12px}
-    .dashboard-layout{padding:12px;gap:16px}
-    .stats-grid{grid-template-columns:repeat(2,1fr);gap:10px}
-    .stat-card{padding:14px;gap:10px}
-    .stat-icon{width:40px;height:40px;font-size:1.1rem}
-    .stat-value{font-size:1.3rem}
-    .stat-label{font-size:0.7rem}
-    .section-card-header{padding:14px 16px}
-    .section-card-body{padding:16px}
-    .section-card-title{font-size:0.95rem}
-    .item-row{padding:12px;gap:10px}
-    .item-icon-wrapper{width:38px;height:38px;font-size:1rem}
-    .item-title{font-size:0.85rem}
-    .item-meta{font-size:0.7rem;gap:8px}
-    .item-price{font-size:1rem}
-    .item-actions{width:100%;justify-content:flex-end;margin-top:6px;padding-top:10px;border-top:1px dashed var(--c-border)}
-    .item-action-btn{padding:7px 12px;font-size:0.72rem}
-    .page-title{font-size:1.15rem}
-    .page-title i{font-size:1rem}
-    .btn{padding:9px 18px;font-size:0.82rem}
-    .notif-panel{left:12px;right:12px;width:auto;top:calc(var(--header-h) + 8px)}
-    .modal-body{padding:16px}
-    .modal-header{padding:14px 16px}
-    .modal-header h3{font-size:0.95rem}
-    .modal-footer{padding:12px 16px}
-    .products-grid-mini{grid-template-columns:1fr;gap:12px}
+
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
 }
-@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
-.hidden{display:none !important}
 </style>
 </head>
 <body>
-
-<a href="#main" class="skip-link" style="position:absolute;top:-100px;right:16px;background:var(--c-primary-900);color:#fff;padding:12px 20px;border-radius:var(--r-md);z-index:9999;transition:top var(--t-fast)" onfocus="this.style.top='16px'" onblur="this.style.top='-100px'">تخطي إلى المحتوى</a>
 
 <!-- NAVBAR -->
 <header class="navbar" role="banner">
@@ -407,7 +1045,7 @@ input,select,textarea{font-family:inherit}
 <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager" onerror="this.style.display='none'" />
 <span class="logo-text">
 <span class="blue">كيماتو</span>
-<span class="gray">| لوحة المورد</span>
+<span class="gray">| الرسائل</span>
 </span>
 </a>
 </div>
@@ -417,11 +1055,6 @@ input,select,textarea{font-family:inherit}
 <i class="fas fa-moon" id="themeIcon"></i>
 </button>
 
-<button class="nav-action-btn" id="notifBtn" type="button" aria-label="الإشعارات">
-<i class="fas fa-bell"></i>
-<span class="count-badge" id="notifCount">0</span>
-</button>
-
 <div class="nav-user-menu">
 <button class="nav-user-btn" id="userMenuBtn" type="button" aria-haspopup="true" aria-expanded="false">
 <span class="nav-user-avatar" id="userAvatar">؟</span>
@@ -429,154 +1062,81 @@ input,select,textarea{font-family:inherit}
 <i class="fas fa-chevron-down" style="font-size:0.7rem; opacity:0.7;"></i>
 </button>
 <div class="nav-dropdown" id="userDropdown" role="menu">
+<a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
+<a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
 <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
-<a href="add-product.html"><i class="fas fa-plus-circle"></i> إضافة منتج</a>
-<a href="index.html"><i class="fas fa-home"></i> الصفحة الرئيسية</a>
-<a href="all-products.html"><i class="fas fa-flask"></i> تصفح المنتجات</a>
 <a href="#" id="dropdownLogout" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
 </div>
 </div>
-
-<button class="menu-toggle" id="menuToggle" type="button" aria-label="فتح القائمة الجانبية">
-<i class="fas fa-bars"></i>
-</button>
 </div>
 </div>
 </header>
 
-<!-- NOTIFICATIONS PANEL -->
-<div class="notif-panel" id="notifPanel" role="region" aria-label="الإشعارات">
-<div class="notif-header">
-<h4><i class="fas fa-bell"></i> الإشعارات</h4>
-<button class="notif-mark-read" id="notifMarkRead" type="button">تعليم الكل كمقروء</button>
-</div>
-<div class="notif-list" id="notifList"></div>
-</div>
-
 <!-- MAIN -->
-<main class="dashboard-layout" id="main">
+<main id="main">
 
-<!-- SIDEBAR -->
-<aside class="sidebar" id="sidebar">
-<div>
-<div class="sidebar-section-title">القائمة الرئيسية</div>
-<nav class="sidebar-nav" role="tablist">
-<button class="sidebar-link active" data-section="overview" role="tab" aria-selected="true">
-<i class="fas fa-th-large"></i>
-نظرة عامة
-</button>
-<button class="sidebar-link" data-section="products" role="tab" aria-selected="false">
-<i class="fas fa-flask"></i>
-منتجاتي
-<span class="count-pill" id="sidebarProductsCount">0</span>
-</button>
-<button class="sidebar-link" data-section="my-offers" role="tab" aria-selected="false">
-<i class="fas fa-hand-holding-usd"></i>
-عروضي
-<span class="count-pill" id="sidebarOffersCount">0</span>
-</button>
-<button class="sidebar-link" data-section="available-requests" role="tab" aria-selected="false">
-<i class="fas fa-bullhorn"></i>
-الطلبات المتاحة
-<span class="count-pill" id="sidebarAvailableCount">0</span>
-</button>
-<button class="sidebar-link" data-section="contacts" role="tab" aria-selected="false">
-<i class="fas fa-users"></i>
-العملاء المحتملون
-</button>
-<button class="sidebar-link" data-section="analytics" role="tab" aria-selected="false">
-<i class="fas fa-chart-line"></i>
-التحليلات
-</button>
-<button class="sidebar-link" data-section="profile" role="tab" aria-selected="false">
-<i class="fas fa-user-circle"></i>
-الملف الشخصي
-</button>
-</nav>
+<div class="chat-layout" id="chatLayout">
+<!-- SIDEBAR: CONVERSATIONS LIST -->
+<aside class="chat-sidebar">
+<div class="chat-sidebar-header">
+<div class="chat-sidebar-title">
+<h2><i class="fas fa-comments"></i> المحادثات</h2>
+<span class="total-unread" id="totalUnread" style="display:none;">0</span>
 </div>
 
-<!-- Verification banner -->
-<div id="verifBannerSlot"></div>
+<div class="chat-search">
+<i class="fas fa-search"></i>
+<input type="text" id="chatSearch" placeholder="ابحث في المحادثات..." autocomplete="off" />
+</div>
 
-<!-- Quick Action -->
-<button class="btn btn-primary" onclick="window.location.href='add-product.html'" style="width:100%">
-<i class="fas fa-plus-circle"></i> إضافة منتج جديد
-</button>
+<div class="chat-filters" role="tablist">
+<button class="chat-filter-btn active" data-filter="all" role="tab" aria-selected="true">الكل</button>
+<button class="chat-filter-btn" data-filter="unread" role="tab" aria-selected="false">غير مقروء</button>
+<button class="chat-filter-btn" data-filter="products" role="tab" aria-selected="false">منتجات</button>
+<button class="chat-filter-btn" data-filter="requests" role="tab" aria-selected="false">طلبات</button>
+</div>
+</div>
+
+<div class="chat-list" id="chatList">
+<!-- Skeleton loader -->
+<div class="chat-skeleton-item">
+<div class="skeleton chat-skeleton-avatar"></div>
+<div class="chat-skeleton-body">
+<div class="skeleton chat-skeleton-line" style="width:60%;"></div>
+<div class="skeleton chat-skeleton-line" style="width:90%;"></div>
+</div>
+</div>
+<div class="chat-skeleton-item">
+<div class="skeleton chat-skeleton-avatar"></div>
+<div class="chat-skeleton-body">
+<div class="skeleton chat-skeleton-line" style="width:50%;"></div>
+<div class="skeleton chat-skeleton-line" style="width:80%;"></div>
+</div>
+</div>
+<div class="chat-skeleton-item">
+<div class="skeleton chat-skeleton-avatar"></div>
+<div class="chat-skeleton-body">
+<div class="skeleton chat-skeleton-line" style="width:70%;"></div>
+<div class="skeleton chat-skeleton-line" style="width:85%;"></div>
+</div>
+</div>
+</div>
 </aside>
 
-<!-- MAIN CONTENT -->
-<div class="dashboard-main" id="dashboardMain">
-<div class="skeleton skeleton-stat"></div>
-<div class="skeleton skeleton-stat"></div>
-<div class="skeleton skeleton-stat"></div>
-<div class="skeleton skeleton-stat"></div>
+<!-- CHAT VIEW -->
+<section class="chat-view" id="chatView">
+<div class="chat-empty" id="chatEmptyState">
+<div class="chat-empty-icon">
+<i class="fas fa-comments"></i>
+</div>
+<h3>اختر محادثة</h3>
+<p>ابدأ باختيار محادثة من القائمة الجانبية لعرض الرسائل والرد عليها</p>
+</div>
+</section>
+
 </div>
 
 </main>
-
-<!-- MOBILE NAV -->
-<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="التنقل السريع">
-<button class="mobile-nav-item active" data-section="overview" type="button">
-<i class="fas fa-th-large"></i>
-<span>نظرة عامة</span>
-</button>
-<button class="mobile-nav-item" data-section="products" type="button">
-<i class="fas fa-flask"></i>
-<span>منتجاتي</span>
-<span class="count-pill" id="mobileProductsCount">0</span>
-</button>
-<button class="mobile-nav-item" data-section="my-offers" type="button">
-<i class="fas fa-hand-holding-usd"></i>
-<span>عروضي</span>
-<span class="count-pill" id="mobileOffersCount">0</span>
-</button>
-<button class="mobile-nav-item" data-section="available-requests" type="button">
-<i class="fas fa-bullhorn"></i>
-<span>الطلبات</span>
-<span class="count-pill" id="mobileAvailableCount">0</span>
-</button>
-<button class="mobile-nav-item" data-section="contacts" type="button">
-<i class="fas fa-users"></i>
-<span>العملاء</span>
-</button>
-</nav>
-
-<!-- MODAL: Submit Offer -->
-<div class="modal-overlay" id="offerModal" role="dialog" aria-modal="true">
-<div class="modal">
-<div class="modal-header">
-<h3><i class="fas fa-paper-plane"></i> تقديم عرض سعر</h3>
-<button class="modal-close" id="closeOfferModal" type="button"><i class="fas fa-times"></i></button>
-</div>
-<div class="modal-body">
-<div class="offer-details-box" id="offerRequestDetails"></div>
-<form id="offerForm" class="profile-form" novalidate>
-<div class="form-group">
-<label for="offerPrice">السعر المقترح (ج.م) <span class="req">*</span></label>
-<input type="number" id="offerPrice" required min="0" step="0.01" placeholder="مثال: 500" />
-</div>
-<div class="form-group">
-<label for="offerQuantity">الكمية المعروضة</label>
-<input type="text" id="offerQuantity" placeholder="مثال: 1000 كجم" />
-</div>
-<div class="form-group">
-<label for="offerDelivery">مدة التسليم</label>
-<input type="text" id="offerDelivery" placeholder="مثال: 5 أيام عمل" />
-</div>
-<div class="form-group full">
-<label for="offerMessage">رسالة للعميل</label>
-<textarea id="offerMessage" placeholder="اكتب تفاصيل إضافية عن عرضك: شروط، ضمانات، إلخ..."></textarea>
-</div>
-</form>
-</div>
-<div class="modal-footer">
-<button class="btn-secondary" id="cancelOfferModal" type="button">إلغاء</button>
-<button class="btn-primary" id="submitOfferBtn" type="button">
-<i class="fas fa-paper-plane"></i> إرسال العرض
-</button>
-</div>
-</div>
-</div>
 
 <!-- TOAST -->
 <div class="toast-container" id="toastContainer" aria-live="polite"></div>
@@ -585,7 +1145,7 @@ input,select,textarea{font-family:inherit}
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
 const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NlY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'.replace('MjA5NlY3', 'MjA5NTY3');
 
 const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
     auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
@@ -597,26 +1157,19 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
 const state = {
     user: null,
     userProfile: null,
-    activeSection: 'overview',
-    products: [],
-    myOffers: [],
-    availableRequests: [],
-    contacts: [],
-    categories: [],
-    notifications: [],
-    stats: {
-        totalProducts: 0,
-        activeProducts: 0,
-        totalOffers: 0,
-        acceptedOffers: 0,
-        totalViews: 0,
-        totalContacts: 0,
-        totalWhatsapp: 0,
-        weeklyViews: [0, 0, 0, 0, 0, 0, 0],
-    },
-    currentOfferRequestId: null,
+    conversations: [],
+    activeConversationId: null,
+    activeMessages: [],
+    activeOtherUser: null,
+    activeContext: null,
+    filter: 'all',
+    search: '',
     channel: null,
-    loadedSections: {},
+    typingTimeout: null,
+    isLoadingMessages: false,
+    hasMoreMessages: false,
+    offset: 0,
+    pageSize: 50,
 };
 
 const THEME_KEY = 'chemato-theme';
@@ -630,21 +1183,41 @@ const escapeHtml = (str) => {
 };
 const sanitizePhone = (p) => p ? String(p).replace(/\D/g, '') : '';
 const isValidUUID = (id) => id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
-const formatNumber = (n) => Number(n || 0).toLocaleString('ar-EG');
-const formatPrice = (p) => Number(p || 0).toLocaleString('ar-EG');
-const formatDate = (dateStr) => !dateStr ? '—' : new Date(dateStr).toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
-const formatDateTime = (dateStr) => {
+
+const formatTime = (dateStr) => {
     if (!dateStr) return '';
-    const diffMin = Math.floor((Date.now() - new Date(dateStr)) / 60000);
-    if (diffMin < 1) return 'الآن';
-    if (diffMin < 60) return `منذ ${diffMin} د`;
-    if (diffMin < 1440) return `منذ ${Math.floor(diffMin/60)} س`;
-    if (diffMin < 10080) return `منذ ${Math.floor(diffMin/1440)} يوم`;
-    return formatDate(dateStr);
+    return new Date(dateStr).toLocaleTimeString('ar-EG', { hour: '2-digit', minute: '2-digit' });
 };
-const getRequestStatusInfo = (status) => ({ 'open':{text:'مفتوح',cls:'status-open',icon:'circle'}, 'matched':{text:'تمت المطابقة',cls:'status-matched',icon:'check-circle'}, 'closed':{text:'مغلق',cls:'status-closed',icon:'lock'}, 'expired':{text:'منتهي',cls:'status-expired',icon:'clock'} }[status] || {text:'مفتوح',cls:'status-open',icon:'circle'});
-const getOfferStatusInfo = (status) => ({ 'pending':{text:'قيد المراجعة',cls:'status-pending',icon:'clock'}, 'accepted':{text:'مقبول',cls:'status-accepted',icon:'check-circle'}, 'rejected':{text:'مرفوض',cls:'status-rejected',icon:'times-circle'} }[status] || {text:'قيد المراجعة',cls:'status-pending',icon:'clock'});
-const getContactTypeInfo = (type) => ({ 'whatsapp':{text:'واتساب',cls:'contact-type-whatsapp',icon:'fab fa-whatsapp'}, 'phone':{text:'اتصال',cls:'contact-type-phone',icon:'fas fa-phone'}, 'view':{text:'مشاهدة',cls:'contact-type-view',icon:'fas fa-eye'}, 'inquiry':{text:'استفسار',cls:'contact-type-inquiry',icon:'fas fa-comment'}, 'request_quote':{text:'طلب عرض',cls:'contact-type-request_quote',icon:'fas fa-file-invoice'}, 'email':{text:'إيميل',cls:'contact-type-view',icon:'fas fa-envelope'} }[type] || {text:'مشاهدة',cls:'contact-type-view',icon:'fas fa-eye'});
+
+const formatDateSeparator = (dateStr) => {
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffDays = Math.floor((now - date) / 86400000);
+    if (diffDays === 0) return 'اليوم';
+    if (diffDays === 1) return 'أمس';
+    if (diffDays < 7) return date.toLocaleDateString('ar-EG', { weekday: 'long' });
+    return date.toLocaleDateString('ar-EG', { year: 'numeric', month: 'short', day: 'numeric' });
+};
+
+const formatListTime = (dateStr) => {
+    if (!dateStr) return '';
+    const date = new Date(dateStr);
+    const now = new Date();
+    const diffMs = now - date;
+    const diffMin = Math.floor(diffMs / 60000);
+    const diffHrs = Math.floor(diffMs / 3600000);
+    const diffDays = Math.floor(diffMs / 86400000);
+    if (diffMin < 1) return 'الآن';
+    if (diffMin < 60) return `${diffMin} د`;
+    if (diffHrs < 24) return `${diffHrs} س`;
+    if (diffDays < 7) return `${diffDays} يوم`;
+    return date.toLocaleDateString('ar-EG', { month: 'short', day: 'numeric' });
+};
+
+const getInitials = (name) => {
+    if (!name) return '؟';
+    return String(name).trim().charAt(0).toUpperCase();
+};
 
 // ============================================================
 // THEME
@@ -675,100 +1248,81 @@ const removeToast = (toast) => {
     toast.classList.add('removing');
     setTimeout(() => toast.remove(), 300);
 };
-const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = '') => {
+const showToast = (icon, title, desc, type = '') => {
     const container = document.getElementById('toastContainer');
     if (!container) return;
     const toast = document.createElement('div');
     toast.className = `toast ${type}`;
-    const iconEl = document.createElement('div');
-    iconEl.className = 'toast-icon';
-    iconEl.textContent = icon;
-    const content = document.createElement('div');
-    content.className = 'toast-content';
-    const titleEl = document.createElement('div');
-    titleEl.className = 'toast-title';
-    titleEl.textContent = title;
-    const descEl = document.createElement('div');
-    descEl.className = 'toast-desc';
-    descEl.textContent = desc + (linkText ? ' ' : '');
-    if (linkText && linkUrl) {
-        const link = document.createElement('a');
-        link.href = linkUrl;
-        link.textContent = linkText;
-        descEl.appendChild(link);
-    }
-    content.appendChild(titleEl);
-    content.appendChild(descEl);
-    const closeBtn = document.createElement('button');
-    closeBtn.className = 'toast-close';
-    closeBtn.setAttribute('aria-label', 'إغلاق');
-    closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-    closeBtn.onclick = () => removeToast(toast);
-    toast.appendChild(iconEl);
-    toast.appendChild(content);
-    toast.appendChild(closeBtn);
+    toast.innerHTML = `
+        <div class="toast-icon">${icon}</div>
+        <div class="toast-content">
+            <div class="toast-title">${escapeHtml(title)}</div>
+            <div class="toast-desc">${escapeHtml(desc)}</div>
+        </div>
+        <button class="toast-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+    `;
+    toast.querySelector('.toast-close').onclick = () => removeToast(toast);
     container.appendChild(toast);
-    setTimeout(() => removeToast(toast), 6000);
+    setTimeout(() => removeToast(toast), 5000);
 };
 
 // ============================================================
 // AUTH
 // ============================================================
-const checkAuthAndLoad = async () => {
-    const { data: { user } } = await supabase.auth.getUser();
-    if (!user) {
-        renderLoginRequired();
+const checkAuth = async () => {
+    try {
+        const { data: { user } } = await supabase.auth.getUser();
+        if (!user) {
+            renderLoginRequired();
+            return false;
+        }
+        state.user = user;
+
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('id, full_name, company_name, avatar_url, user_type, is_verified, phone, whatsapp')
+            .eq('id', user.id)
+            .single();
+
+        state.userProfile = profile;
+        updateUserUI();
+        return true;
+    } catch (e) {
+        console.error('Auth error:', e);
         return false;
     }
-    state.user = user;
-
-    const { data: profile } = await supabase
-        .from('profiles')
-        .select('id, full_name, company_name, phone, whatsapp, city, address, user_type, is_verified, avatar_url, created_at')
-        .eq('id', user.id)
-        .single();
-
-    state.userProfile = profile;
-
-    if (profile?.user_type !== 'supplier') {
-        showToast('⚠️', 'تنبيه', 'هذه اللوحة للموردين. جاري تحويلك...', null, null, 'warning');
-        setTimeout(() => window.location.href = 'buyer-dashboard.html', 1500);
-        return false;
-    }
-
-    updateUserUI();
-    renderVerifBanner();
-    return true;
 };
 
 const renderLoginRequired = () => {
-    const main = document.getElementById('dashboardMain');
+    const layout = document.getElementById('chatLayout');
+    if (layout) {
+        layout.style.display = 'none';
+    }
+    const main = document.getElementById('main');
     if (main) {
         main.innerHTML = `
             <div class="login-required-state">
-                <div class="big-icon"><i class="fas fa-warehouse"></i></div>
-                <h2>سجّل دخولك كمورد</h2>
-                <p>عشان تدير منتجاتك، عروضك، والعملاء المحتملين، لازم تسجّل دخولك كمورد.</p>
+                <div class="big-icon"><i class="fas fa-comments"></i></div>
+                <h2>سجّل دخولك للرسائل</h2>
+                <p>عشان تشوف محادثاتك وترد على العملاء، لازم تسجّل دخولك أولاً.</p>
                 <div class="login-required-actions">
-                    <a href="auth.html?redirect=supplier-dashboard" class="btn btn-primary">
+                    <a href="auth.html?redirect=messages" class="btn btn-primary">
                         <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
                     </a>
-                    <a href="auth.html?type=supplier" class="btn btn-secondary">
-                        <i class="fas fa-user-plus"></i> حساب مورد جديد
+                    <a href="index.html" class="btn btn-secondary">
+                        <i class="fas fa-home"></i> العودة للرئيسية
                     </a>
                 </div>
             </div>
         `;
     }
-    document.getElementById('sidebar')?.style.setProperty('display', 'none');
-    document.getElementById('mobileNav')?.style.setProperty('display', 'none');
 };
 
 const updateUserUI = () => {
     const p = state.userProfile;
     if (!p) return;
-    const name = p.company_name || p.full_name || 'مورد';
-    const initial = name.charAt(0).toUpperCase();
+    const name = p.company_name || p.full_name || 'مستخدم';
+    const initial = getInitials(name);
     const avatarEl = document.getElementById('userAvatar');
     const nameEl = document.getElementById('userName');
     if (avatarEl) {
@@ -781,1363 +1335,894 @@ const updateUserUI = () => {
     if (nameEl) nameEl.textContent = name;
 };
 
-const renderVerifBanner = () => {
-    const slot = document.getElementById('verifBannerSlot');
-    if (!slot) return;
-    const p = state.userProfile;
-
-    // Calculate verification score
-    const checks = [
-        !!p?.company_name,
-        p?.is_verified === true,
-        !!p?.phone,
-        !!p?.whatsapp,
-        !!p?.city,
-        !!p?.address,
-    ];
-    const score = Math.round((checks.filter(Boolean).length / checks.length) * 100);
-
-    if (p?.is_verified) {
-        slot.innerHTML = `
-            <div class="verif-banner verif-done">
-                <div class="icon-row"><i class="fas fa-check-circle"></i> حساب موثّق</div>
-                <div>حسابك موثّق، عملاؤك يثقون بك أكثر.</div>
-            </div>
-        `;
-    } else {
-        slot.innerHTML = `
-            <div class="verif-banner">
-                <div class="icon-row"><i class="fas fa-shield-alt"></i> اكتمال الملف (${score}%)</div>
-                <div class="verif-progress"><div class="verif-progress-bar" style="width:${score}%"></div></div>
-                <div>أكمل بياناتك لزيادة الثقة والمشاهدات.</div>
-                <a href="#" id="completeProfileBtn">أكمل بياناتك ←</a>
-            </div>
-        `;
-        document.getElementById('completeProfileBtn')?.addEventListener('click', (e) => {
-            e.preventDefault();
-            switchSection('profile');
-        });
-    }
-};
-
 // ============================================================
 // NAVBAR
 // ============================================================
 const initNavbar = () => {
-    const menuToggle = document.getElementById('menuToggle');
-    const sidebar = document.getElementById('sidebar');
-    menuToggle?.addEventListener('click', () => sidebar?.classList.toggle('mobile-open'));
-
     const userBtn = document.getElementById('userMenuBtn');
     const userDropdown = document.getElementById('userDropdown');
     userBtn?.addEventListener('click', (e) => {
         e.stopPropagation();
         userDropdown?.classList.toggle('show');
-        userBtn.setAttribute('aria-expanded', userDropdown?.classList.contains('show'));
     });
-
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.nav-user-menu')) {
             userDropdown?.classList.remove('show');
         }
-        if (!e.target.closest('#notifPanel') && !e.target.closest('#notifBtn')) {
-            document.getElementById('notifPanel')?.classList.remove('show');
-        }
     });
-
     document.getElementById('dropdownLogout')?.addEventListener('click', async (e) => {
         e.preventDefault();
         await supabase.auth.signOut();
         window.location.href = 'index.html';
     });
-
-    document.getElementById('notifBtn')?.addEventListener('click', (e) => {
-        e.stopPropagation();
-        document.getElementById('notifPanel')?.classList.toggle('show');
-    });
-    document.getElementById('notifMarkRead')?.addEventListener('click', markAllNotificationsRead);
 };
 
 // ============================================================
-// SECTION NAVIGATION
+// FETCH CONVERSATIONS
 // ============================================================
-const switchSection = (section) => {
-    state.activeSection = section;
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        const isActive = link.dataset.section === section;
-        link.classList.toggle('active', isActive);
-        link.setAttribute('aria-selected', isActive);
-    });
-    document.querySelectorAll('.mobile-nav-item').forEach(item => {
-        item.classList.toggle('active', item.dataset.section === section);
-    });
-    document.getElementById('sidebar')?.classList.remove('mobile-open');
-    loadSection(section);
-};
+const fetchConversations = async () => {
+    if (!state.user) return;
 
-const initSidebar = () => {
-    document.querySelectorAll('.sidebar-link').forEach(link => {
-        link.addEventListener('click', () => switchSection(link.dataset.section));
-    });
-    document.querySelectorAll('.mobile-nav-item').forEach(item => {
-        item.addEventListener('click', () => switchSection(item.dataset.section));
-    });
-};
-
-const loadSection = async (section) => {
-    const main = document.getElementById('dashboardMain');
-    if (!main) return;
-
-    if (!state.loadedSections[section]) {
-        main.innerHTML = `
-            <div class="skeleton skeleton-row" style="height:60px;"></div>
-            <div class="stats-grid">
-                <div class="skeleton skeleton-stat"></div>
-                <div class="skeleton skeleton-stat"></div>
-                <div class="skeleton skeleton-stat"></div>
-                <div class="skeleton skeleton-stat"></div>
-            </div>
-            <div class="skeleton skeleton-row"></div>
-            <div class="skeleton skeleton-row"></div>
-        `;
-    }
-
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-
-    switch (section) {
-        case 'overview': await renderOverview(); break;
-        case 'products': await renderProducts(); break;
-        case 'my-offers': await renderMyOffers(); break;
-        case 'available-requests': await renderAvailableRequests(); break;
-        case 'contacts': await renderContacts(); break;
-        case 'analytics': renderAnalytics(); break;
-        case 'profile': renderProfile(); break;
-        default: renderOverview();
-    }
-    state.loadedSections[section] = true;
-};
-
-// ============================================================
-// FETCHERS
-// ============================================================
-const fetchMyProducts = async () => {
-    if (!state.user) return [];
     try {
-        const { data, error } = await supabase
-            .from('products').select('*')
-            .eq('supplier_id', state.user.id)
-            .order('created_at', { ascending: false });
-        if (error) throw error;
-        return data || [];
-    } catch (e) { console.error('Fetch products:', e); return []; }
-};
-
-const fetchMyOffers = async () => {
-    if (!state.user) return [];
-    try {
-        const { data, error } = await supabase
-            .from('offers').select('*')
-            .eq('supplier_id', state.user.id)
-            .order('created_at', { ascending: false });
-        if (error) throw error;
-        const offers = data || [];
-
-        const requestIds = [...new Set(offers.map(o => o.request_id).filter(Boolean))];
-        if (!requestIds.length) return offers;
-
-        const { data: requests } = await supabase
-            .from('purchase_requests')
-            .select('id, product_name, quantity_needed, buyer_id, status, location, budget_min, budget_max, created_at')
-            .in('id', requestIds);
-        const requestsMap = {};
-        (requests || []).forEach(r => { requestsMap[r.id] = r; });
-
-        const buyerIds = [...new Set((requests || []).map(r => r.buyer_id).filter(Boolean))];
-        const buyersMap = {};
-        if (buyerIds.length) {
-            const { data: buyers } = await supabase
-                .from('profiles')
-                .select('id, full_name, company_name, city, is_verified, phone, whatsapp')
-                .in('id', buyerIds);
-            (buyers || []).forEach(b => { buyersMap[b.id] = b; });
-        }
-
-        return offers.map(o => ({
-            ...o,
-            request: requestsMap[o.request_id] || null,
-            buyer: requestsMap[o.request_id] ? (buyersMap[requestsMap[o.request_id].buyer_id] || null) : null,
-        }));
-    } catch (e) { console.error('Fetch offers:', e); return []; }
-};
-
-const fetchAvailableRequests = async () => {
-    if (!state.user) return [];
-    try {
-        const { data: requests, error } = await supabase
-            .from('purchase_requests')
-            .select('id, product_name, quantity_needed, category, location, budget_min, budget_max, deadline, description, buyer_id, status, views_count, created_at')
-            .eq('status', 'open')
+        // Fetch all messages involving the user
+        const { data: messages, error } = await supabase
+            .from('messages')
+            .select('*')
+            .or(`from_user_id.eq.${state.user.id},to_user_id.eq.${state.user.id}`)
             .order('created_at', { ascending: false })
-            .limit(50);
-        if (error) throw error;
-        if (!requests?.length) return [];
+            .limit(500);
 
-        const buyerIds = [...new Set(requests.map(r => r.buyer_id).filter(Boolean))];
-        const buyersMap = {};
-        if (buyerIds.length) {
-            const { data: buyers } = await supabase
-                .from('profiles')
-                .select('id, full_name, company_name, city, is_verified')
-                .in('id', buyerIds);
-            (buyers || []).forEach(b => { buyersMap[b.id] = b; });
+        if (error) throw error;
+        if (!messages?.length) {
+            state.conversations = [];
+            renderChatList();
+            return;
         }
 
-        const myOffers = await fetchMyOffers();
-        const myOffersByRequest = {};
-        myOffers.forEach(o => { myOffersByRequest[o.request_id] = o; });
+        // Group by conversation partner
+        const conversationsMap = new Map();
 
-        return requests.map(r => ({
-            ...r,
-            buyer: buyersMap[r.buyer_id] || null,
-            myOffer: myOffersByRequest[r.id] || null,
-        }));
-    } catch (e) { console.error('Fetch requests:', e); return []; }
-};
+        messages.forEach(msg => {
+            const otherId = msg.from_user_id === state.user.id ? msg.to_user_id : msg.from_user_id;
+            if (!otherId) return;
 
-const fetchContacts = async () => {
-    if (!state.user) return [];
-    try {
-        const { data: contacts, error } = await supabase
-            .from('supplier_contacts').select('*')
-            .eq('supplier_id', state.user.id)
-            .order('contact_date', { ascending: false })
-            .limit(100);
-        if (error) throw error;
-        if (!contacts?.length) return [];
+            if (!conversationsMap.has(otherId)) {
+                conversationsMap.set(otherId, {
+                    otherUserId: otherId,
+                    lastMessage: msg,
+                    messages: [msg],
+                    unreadCount: 0,
+                    hasProduct: !!msg.product_id,
+                    hasRequest: !!msg.request_id,
+                });
+            } else {
+                const conv = conversationsMap.get(otherId);
+                conv.messages.push(msg);
+                // Since sorted by created_at desc, first message is the latest
+            }
 
-        const productIds = [...new Set(contacts.map(c => c.product_id).filter(Boolean))];
+            // Count unread (messages to me that are not read)
+            if (msg.to_user_id === state.user.id && !msg.is_read) {
+                conversationsMap.get(otherId).unreadCount++;
+            }
+        });
+
+        // Fetch profiles of all conversation partners
+        const otherUserIds = Array.from(conversationsMap.keys()).filter(isValidUUID);
+        const profilesMap = {};
+        if (otherUserIds.length) {
+            const { data: profiles } = await supabase
+                .from('profiles')
+                .select('id, full_name, company_name, avatar_url, user_type, is_verified, city')
+                .in('id', otherUserIds);
+            (profiles || []).forEach(p => { profilesMap[p.id] = p; });
+        }
+
+        // Fetch products referenced in messages
+        const productIds = [...new Set(
+            messages.map(m => m.product_id).filter(id => id && isValidUUID(id))
+        )];
         const productsMap = {};
         if (productIds.length) {
             const { data: products } = await supabase
-                .from('products').select('id, name').in('id', productIds);
+                .from('products')
+                .select('id, name, image_url, price, unit')
+                .in('id', productIds);
             (products || []).forEach(p => { productsMap[p.id] = p; });
         }
 
-        const buyerIds = [...new Set(contacts.map(c => c.buyer_id).filter(Boolean))];
-        const buyersMap = {};
-        if (buyerIds.length) {
-            const { data: buyers } = await supabase
-                .from('profiles')
-                .select('id, full_name, company_name, phone, whatsapp, city, is_verified')
-                .in('id', buyerIds);
-            (buyers || []).forEach(b => { buyersMap[b.id] = b; });
+        // Fetch requests referenced in messages
+        const requestIds = [...new Set(
+            messages.map(m => m.request_id).filter(id => id && isValidUUID(id))
+        )];
+        const requestsMap = {};
+        if (requestIds.length) {
+            const { data: requests } = await supabase
+                .from('purchase_requests')
+                .select('id, product_name, quantity_needed')
+                .in('id', requestIds);
+            (requests || []).forEach(r => { requestsMap[r.id] = r; });
         }
 
-        return contacts.map(c => ({
-            ...c,
-            product: productsMap[c.product_id] || null,
-            buyer: buyersMap[c.buyer_id] || null,
-        }));
-    } catch (e) { console.error('Fetch contacts:', e); return []; }
-};
+        // Build final conversations array
+        state.conversations = Array.from(conversationsMap.values())
+            .map(conv => ({
+                ...conv,
+                otherUser: profilesMap[conv.otherUserId] || { id: conv.otherUserId, full_name: 'مستخدم' },
+                product: conv.lastMessage.product_id ? (productsMap[conv.lastMessage.product_id] || null) : null,
+                request: conv.lastMessage.request_id ? (requestsMap[conv.lastMessage.request_id] || null) : null,
+            }))
+            .sort((a, b) => new Date(b.lastMessage.created_at) - new Date(a.lastMessage.created_at));
 
-const fetchCategories = async () => {
-    try {
-        const { data } = await supabase
-            .from('categories')
-            .select('id, name, icon')
-            .order('display_order');
-        state.categories = data || [];
-    } catch (e) { state.categories = []; }
-};
+        renderChatList();
+        updateTotalUnread();
 
-const fetchAllData = async () => {
-    if (!state.user) return;
-    const [products, myOffers, availableRequests, contacts] = await Promise.all([
-        fetchMyProducts(),
-        fetchMyOffers(),
-        fetchAvailableRequests(),
-        fetchContacts(),
-    ]);
-    state.products = products;
-    state.myOffers = myOffers;
-    state.availableRequests = availableRequests;
-    state.contacts = contacts;
-
-    const totalViews = products.reduce((sum, p) => sum + (p.views || 0), 0);
-    const totalContacts = contacts.length;
-    const totalWhatsapp = contacts.filter(c => c.contact_type === 'whatsapp').length;
-    const acceptedOffers = myOffers.filter(o => o.status === 'accepted').length;
-
-    // Weekly views (approximate from recent products)
-    const weeklyViews = [0, 0, 0, 0, 0, 0, 0];
-    products.forEach(p => {
-        const dayIndex = new Date(p.created_at).getDay();
-        weeklyViews[dayIndex] += (p.views || 0);
-    });
-
-    state.stats = {
-        totalProducts: products.length,
-        activeProducts: products.filter(p => p.status === 'active').length,
-        totalOffers: myOffers.length,
-        acceptedOffers,
-        totalViews,
-        totalContacts,
-        totalWhatsapp,
-        weeklyViews,
-    };
-
-    updateSidebarCounts();
-    buildNotifications();
-};
-
-const updateSidebarCounts = () => {
-    const els = {
-        sidebarProductsCount: state.stats.totalProducts,
-        sidebarOffersCount: state.stats.totalOffers,
-        sidebarAvailableCount: state.availableRequests.filter(r => !r.myOffer).length,
-        mobileProductsCount: state.stats.totalProducts,
-        mobileOffersCount: state.stats.totalOffers,
-        mobileAvailableCount: state.availableRequests.filter(r => !r.myOffer).length,
-    };
-    Object.entries(els).forEach(([id, val]) => {
-        const el = document.getElementById(id);
-        if (el) {
-            el.textContent = val > 99 ? '99+' : val;
-            el.classList.toggle('show', val > 0);
-            el.dataset.zero = val === 0 ? 'true' : 'false';
-        }
-    });
-};
-
-// ============================================================
-// NOTIFICATIONS
-// ============================================================
-const buildNotifications = () => {
-    const notifs = [];
-
-    state.availableRequests.filter(r => !r.myOffer).slice(0, 5).forEach(r => {
-        notifs.push({
-            id: `req-${r.id}`, type: 'request',
-            title: '📢 طلب شراء جديد',
-            desc: `مطلوب: ${r.product_name} — ${r.quantity_needed || 'كمية غير محددة'}`,
-            time: r.created_at, unread: true,
-            link: `request-details.html?id=${r.id}`,
-        });
-    });
-
-    state.contacts.filter(c => c.contact_type === 'whatsapp' || c.contact_type === 'phone').slice(0, 3).forEach(c => {
-        const typeInfo = getContactTypeInfo(c.contact_type);
-        const buyerName = c.buyer?.company_name || c.buyer?.full_name || 'عميل';
-        notifs.push({
-            id: `contact-${c.id}`, type: 'contact',
-            title: `${typeInfo.icon.includes('whatsapp') ? '💬' : '📞'} ${typeInfo.text}`,
-            desc: `${buyerName} — ${c.product?.name || 'منتج'}`,
-            time: c.contact_date, unread: false,
-            link: `product-details.html?id=${c.product_id}`,
-        });
-    });
-
-    state.myOffers.filter(o => o.status === 'accepted').slice(0, 3).forEach(o => {
-        notifs.push({
-            id: `offer-${o.id}`, type: 'offer',
-            title: '✅ عرضك مقبول!',
-            desc: `تم قبول عرضك على "${o.request?.product_name || 'طلب'}"`,
-            time: o.created_at, unread: false,
-            link: `request-details.html?id=${o.request_id}`,
-        });
-    });
-
-    notifs.sort((a, b) => new Date(b.time) - new Date(a.time));
-    state.notifications = notifs;
-    renderNotifications();
-    updateNotifBadge();
-};
-
-const updateNotifBadge = () => {
-    const badge = document.getElementById('notifCount');
-    const unread = state.notifications.filter(n => n.unread).length;
-    if (badge) {
-        badge.textContent = unread > 99 ? '99+' : unread;
-        badge.classList.toggle('show', unread > 0);
+    } catch (e) {
+        console.error('Fetch conversations error:', e);
+        showToast('⚠️', 'خطأ', 'تعذر تحميل المحادثات', 'error');
     }
 };
 
-const renderNotifications = () => {
-    const list = document.getElementById('notifList');
+// ============================================================
+// RENDER CHAT LIST
+// ============================================================
+const renderChatList = () => {
+    const list = document.getElementById('chatList');
     if (!list) return;
-    if (!state.notifications.length) {
-        list.innerHTML = `<div class="empty-state" style="padding:40px 20px;"><i class="fas fa-bell-slash empty-icon" style="font-size:2rem;"></i><p>لا توجد إشعارات جديدة</p></div>`;
+
+    let conversations = [...state.conversations];
+
+    // Apply filter
+    if (state.filter === 'unread') {
+        conversations = conversations.filter(c => c.unreadCount > 0);
+    } else if (state.filter === 'products') {
+        conversations = conversations.filter(c => c.hasProduct);
+    } else if (state.filter === 'requests') {
+        conversations = conversations.filter(c => c.hasRequest);
+    }
+
+    // Apply search
+    if (state.search) {
+        const q = state.search.toLowerCase();
+        conversations = conversations.filter(c => {
+            const name = (c.otherUser?.company_name || c.otherUser?.full_name || '').toLowerCase();
+            const lastMsg = (c.lastMessage?.message || '').toLowerCase();
+            return name.includes(q) || lastMsg.includes(q);
+        });
+    }
+
+    if (!conversations.length) {
+        list.innerHTML = `
+            <div class="chat-empty-sidebar">
+                <i class="fas fa-inbox"></i>
+                <p style="font-weight:700;color:var(--c-text);margin-bottom:6px;">لا توجد محادثات</p>
+                <p style="font-size:0.82rem;">${state.search ? 'جرب البحث بكلمة مختلفة' : 'ابدأ بمراسلة مورد أو مشتري'}</p>
+            </div>
+        `;
         return;
     }
-    list.innerHTML = state.notifications.map(n => `
-        <div class="notif-item ${n.unread ? 'unread' : ''}" data-notif-id="${escapeHtml(n.id)}" data-link="${escapeHtml(n.link || '')}">
-            <div class="notif-content">
-                <div class="notif-title">${escapeHtml(n.title)}</div>
-                <div class="notif-desc">${escapeHtml(n.desc)}</div>
-                <div class="notif-time">${formatDateTime(n.time)}</div>
+
+    list.innerHTML = conversations.map(conv => {
+        const otherUser = conv.otherUser;
+        const name = otherUser?.company_name || otherUser?.full_name || 'مستخدم';
+        const lastMsg = conv.lastMessage;
+        const isActive = state.activeConversationId === conv.otherUserId;
+        const isUnread = conv.unreadCount > 0;
+
+        // Message preview
+        let preview = lastMsg?.message || '📎 مرفق';
+        if (preview.length > 60) preview = preview.substring(0, 60) + '...';
+        const isFromMe = lastMsg?.from_user_id === state.user.id;
+
+        return `
+            <div class="chat-item ${isActive ? 'active' : ''} ${isUnread ? 'unread' : ''}"
+                 data-other-user-id="${escapeHtml(conv.otherUserId)}"
+                 role="button" tabindex="0">
+                <div class="chat-item-avatar">
+                    ${otherUser?.avatar_url
+                        ? `<img src="${escapeHtml(otherUser.avatar_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(getInitials(name))}';" />`
+                        : escapeHtml(getInitials(name))}
+                </div>
+                <div class="chat-item-body">
+                    <div class="chat-item-top">
+                        <div class="chat-item-name">
+                            <span>${escapeHtml(name)}</span>
+                            ${otherUser?.is_verified ? '<i class="fas fa-check-circle verified-dot"></i>' : ''}
+                        </div>
+                        <div class="chat-item-time">${formatListTime(lastMsg?.created_at)}</div>
+                    </div>
+                    <div class="chat-item-preview">
+                        ${isFromMe ? '<i class="fas fa-reply attachment-icon"></i>' : ''}
+                        ${escapeHtml(preview)}
+                    </div>
+                    ${isUnread ? `<span class="chat-item-badge">${conv.unreadCount}</span>` : ''}
+                </div>
             </div>
-        </div>
-    `).join('');
-    list.querySelectorAll('.notif-item').forEach(item => {
+        `;
+    }).join('');
+
+    // Bind click events
+    list.querySelectorAll('.chat-item').forEach(item => {
         item.addEventListener('click', () => {
-            const link = item.dataset.link;
-            if (link) window.location.href = link;
+            openConversation(item.dataset.otherUserId);
         });
     });
 };
 
-const markAllNotificationsRead = () => {
-    state.notifications = state.notifications.map(n => ({ ...n, unread: false }));
-    renderNotifications();
-    updateNotifBadge();
-    showToast('✅', 'تم التعليم', 'كل الإشعارات اتعلّمت كمقروءة', null, null, 'success');
-};
-
-// ============================================================
-// RENDER: OVERVIEW
-// ============================================================
-const renderOverview = async () => {
-    const main = document.getElementById('dashboardMain');
-    if (!main) return;
-    await fetchAllData();
-
-    const recentOffers = state.myOffers.slice(0, 4);
-    const recentRequests = state.availableRequests.filter(r => !r.myOffer).slice(0, 4);
-
-    main.innerHTML = `
-        <div class="page-header-bar animate-in">
-            <div>
-                <h1 class="page-title"><i class="fas fa-th-large"></i> نظرة عامة</h1>
-                <p class="page-subtitle">مرحباً ${escapeHtml(state.userProfile?.company_name || state.userProfile?.full_name || 'بك')} — دي ملخص نشاطك على كيماتو</p>
-            </div>
-            <a href="add-product.html" class="btn btn-primary">
-                <i class="fas fa-plus-circle"></i> أضف منتج جديد
-            </a>
-        </div>
-
-        <!-- STATS (8 cards) -->
-        <div class="stats-grid animate-in" style="animation-delay:0.05s;">
-            <div class="stat-card" style="--stat-color:var(--c-request);--stat-bg:rgba(255,107,53,0.12);">
-                <div class="stat-icon"><i class="fas fa-flask"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">إجمالي منتجاتي</div>
-                    <div class="stat-value">${formatNumber(state.stats.totalProducts)}</div>
-                    <div class="stat-trend"><i class="fas fa-circle" style="color:var(--c-accent);font-size:0.5rem;"></i> ${formatNumber(state.stats.activeProducts)} نشط</div>
-                </div>
-            </div>
-            <div class="stat-card" style="--stat-color:var(--c-accent);--stat-bg:rgba(46,204,113,0.12);">
-                <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">عروضي</div>
-                    <div class="stat-value">${formatNumber(state.stats.totalOffers)}</div>
-                    <div class="stat-trend"><i class="fas fa-check-circle" style="color:var(--c-accent);font-size:0.6rem;"></i> ${formatNumber(state.stats.acceptedOffers)} مقبول</div>
-                </div>
-            </div>
-            <div class="stat-card" style="--stat-color:var(--c-primary-600);--stat-bg:rgba(44,122,184,0.12);">
-                <div class="stat-icon"><i class="fas fa-eye"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">مشاهدات المنتجات</div>
-                    <div class="stat-value">${formatNumber(state.stats.totalViews)}</div>
-                    <div class="stat-trend">إجمالي الزيارات</div>
-                </div>
-            </div>
-            <div class="stat-card" style="--stat-color:var(--c-whatsapp);--stat-bg:rgba(37,211,102,0.12);">
-                <div class="stat-icon"><i class="fab fa-whatsapp"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">تواصلات العملاء</div>
-                    <div class="stat-value">${formatNumber(state.stats.totalContacts)}</div>
-                    <div class="stat-trend"><i class="fab fa-whatsapp" style="font-size:0.6rem;"></i> ${formatNumber(state.stats.totalWhatsapp)} واتساب</div>
-                </div>
-            </div>
-        </div>
-
-        <!-- CHART -->
-        <div class="section-card animate-in" style="animation-delay:0.08s;">
-            <div class="section-card-header">
-                <h2 class="section-card-title"><i class="fas fa-chart-line"></i> نشاط المشاهدات</h2>
-            </div>
-            <div class="section-card-body">
-                <div class="chart-container">
-                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:10px;">
-                        <div style="font-size:0.82rem;color:var(--c-text-muted);font-weight:700;">مشاهدات هذا الأسبوع</div>
-                        <div style="font-size:0.82rem;color:var(--c-text);font-weight:800;">${formatNumber(state.stats.weeklyViews.reduce((a,b)=>a+b,0))}</div>
-                    </div>
-                    <div class="chart-bars">
-                        ${['الأحد','الاثنين','الثلاثاء','الأربعاء','الخميس','الجمعة','السبت'].map((day, i) => {
-                            const maxVal = Math.max(...state.stats.weeklyViews, 1);
-                            const height = (state.stats.weeklyViews[i] / maxVal) * 100;
-                            return `
-                                <div class="chart-bar" style="height:${Math.max(height, 5)}%;" title="${day}: ${state.stats.weeklyViews[i]} مشاهدة">
-                                    <span class="chart-bar-value">${state.stats.weeklyViews[i]}</span>
-                                    <span class="chart-bar-label">${day.substring(0, 3)}</span>
-                                </div>
-                            `;
-                        }).join('')}
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <!-- LATEST OFFERS -->
-        <div class="section-card animate-in" style="animation-delay:0.1s;">
-            <div class="section-card-header">
-                <h2 class="section-card-title"><i class="fas fa-hand-holding-usd"></i> آخر عروضي <span class="count-badge-static">${state.myOffers.length}</span></h2>
-                <button class="view-all-link" onclick="window.switchSection('my-offers')">عرض الكل <i class="fas fa-arrow-left"></i></button>
-            </div>
-            <div class="section-card-body">
-                ${recentOffers.length ? `<div class="item-list">${recentOffers.map(o => renderMyOfferRow(o)).join('')}</div>` : `
-                    <div class="empty-state">
-                        <i class="fas fa-hand-holding-usd empty-icon"></i>
-                        <h4>لسه مفيش عروض</h4>
-                        <p>قدّم عرضك الأول على طلب شراء متاح</p>
-                        <button class="btn btn-primary" onclick="window.switchSection('available-requests')"><i class="fas fa-bullhorn"></i> شوف الطلبات المتاحة</button>
-                    </div>
-                `}
-            </div>
-        </div>
-
-        <!-- AVAILABLE REQUESTS -->
-        <div class="section-card animate-in" style="animation-delay:0.15s;">
-            <div class="section-card-header">
-                <h2 class="section-card-title"><i class="fas fa-bullhorn"></i> طلبات جديدة متاحة <span class="count-badge-static accent">${state.availableRequests.filter(r => !r.myOffer).length}</span></h2>
-                <button class="view-all-link" onclick="window.switchSection('available-requests')">عرض الكل <i class="fas fa-arrow-left"></i></button>
-            </div>
-            <div class="section-card-body">
-                ${recentRequests.length ? `<div class="item-list">${recentRequests.map(r => renderAvailableRequestRow(r)).join('')}</div>` : `
-                    <div class="empty-state">
-                        <i class="fas fa-bullhorn empty-icon"></i>
-                        <h4>مفيش طلبات جديدة</h4>
-                        <p>هتلاقي هنا طلبات الشراء اللي المشترين بيعملوها</p>
-                    </div>
-                `}
-            </div>
-        </div>
-    `;
-    bindCommonEvents();
-};
-
-const bindCommonEvents = () => {
-    document.querySelectorAll('.offer-request-btn').forEach(btn => {
-        btn.addEventListener('click', () => {
-            const rid = btn.dataset.requestId;
-            openOfferModal(rid);
-        });
-    });
-};
-
-// ============================================================
-// RENDER: PRODUCTS
-// ============================================================
-const renderProducts = async () => {
-    const main = document.getElementById('dashboardMain');
-    if (!main) return;
-    await fetchAllData();
-    await fetchCategories();
-
-    main.innerHTML = `
-        <div class="page-header-bar animate-in">
-            <div>
-                <h1 class="page-title"><i class="fas fa-flask"></i> منتجاتي</h1>
-                <p class="page-subtitle">إدارة كل المنتجات اللي بتقدمها</p>
-            </div>
-            <a href="add-product.html" class="btn btn-primary"><i class="fas fa-plus-circle"></i> أضف منتج جديد</a>
-        </div>
-
-        ${state.products.length ? `
-            <div class="section-card animate-in" style="animation-delay:0.05s;">
-                <div class="section-card-header">
-                    <h2 class="section-card-title"><i class="fas fa-list"></i> القائمة الكاملة <span class="count-badge-static">${state.products.length}</span></h2>
-                </div>
-                <div class="section-card-body">
-                    <div class="products-grid-mini">${state.products.map(p => renderProductMini(p)).join('')}</div>
-                </div>
-            </div>
-
-            <div class="section-card animate-in" style="animation-delay:0.1s;">
-                <div class="section-card-header">
-                    <h2 class="section-card-title"><i class="fas fa-table"></i> جدول تفصيلي</h2>
-                </div>
-                <div class="section-card-body" style="padding:0;">
-                    <div class="contacts-table-wrapper" style="margin:0;">
-                        <table class="contacts-table">
-                            <thead>
-                                <tr>
-                                    <th>المنتج</th><th>السعر</th><th>المخزون</th><th>المشاهدات</th><th>التواصلات</th><th>الحالة</th><th></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                ${state.products.map(p => `
-                                    <tr>
-                                        <td>
-                                            <div style="display:flex;align-items:center;gap:10px;">
-                                                <div style="width:40px;height:40px;border-radius:var(--r-md);overflow:hidden;background:var(--c-surface-2);flex-shrink:0;">
-                                                    ${p.image_url ? `<img src="${escapeHtml(p.image_url)}" alt="" style="width:100%;height:100%;object-fit:cover;" onerror="this.style.display='none';this.parentElement.innerHTML='🧪';" />` : `<div style="width:100%;height:100%;display:flex;align-items:center;justify-content:center;font-size:1.2rem;">🧪</div>`}
-                                                </div>
-                                                <div>
-                                                    <div style="font-weight:800;color:var(--c-text);font-size:0.85rem;">${escapeHtml(p.name)}</div>
-                                                    ${p.cas_number ? `<div style="font-size:0.7rem;color:var(--c-purple);direction:ltr;font-family:monospace;">${escapeHtml(p.cas_number)}</div>` : ''}
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td>${p.price ? `<strong style="color:var(--c-accent-dark);">${formatPrice(p.price)} ج.م</strong>` : '—'}</td>
-                                        <td>${p.stock_status === 'available' ? '<span class="status-badge status-open">متوفر</span>' : p.stock_status === 'low' ? '<span class="status-badge status-pending">محدود</span>' : '<span class="status-badge status-expired">غير متوفر</span>'}</td>
-                                        <td>${formatNumber(p.views || 0)}</td>
-                                        <td>${formatNumber(p.contact_count || 0)}</td>
-                                        <td>${p.status === 'active' ? '<span class="status-badge status-open">نشط</span>' : '<span class="status-badge status-closed">غير نشط</span>'}</td>
-                                        <td>
-                                            <div style="display:flex;gap:4px;justify-content:flex-end;">
-                                                <a href="add-product.html?id=${encodeURIComponent(p.id)}" class="item-action-btn secondary icon-only" title="تعديل"><i class="fas fa-edit"></i></a>
-                                                <button class="item-action-btn danger icon-only delete-product-btn" type="button" data-product-id="${escapeHtml(p.id)}" data-product-name="${escapeHtml(p.name)}" title="حذف"><i class="fas fa-trash"></i></button>
-                                            </div>
-                                        </td>
-                                    </tr>
-                                `).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-            </div>
-        ` : `
-            <div class="section-card animate-in">
-                <div class="section-card-body">
-                    <div class="empty-state">
-                        <i class="fas fa-flask empty-icon"></i>
-                        <h4>لسه مفيش منتجات</h4>
-                        <p>ابدأ بإضافة أول منتج عشان العملاء يلاقوك</p>
-                        <a href="add-product.html" class="btn btn-primary"><i class="fas fa-plus-circle"></i> أضف أول منتج</a>
-                    </div>
-                </div>
-            </div>
-        `}
-    `;
-    bindProductEvents();
-};
-
-const renderProductMini = (p) => {
-    const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
-    const stockLabels = { 'available': { text: 'متوفر', cls: 'active' }, 'low': { text: 'محدود', cls: 'inactive' }, 'out': { text: 'غير متوفر', cls: 'inactive' } };
-    const stock = stockLabels[p.stock_status] || stockLabels['available'];
-    return `
-        <div class="mini-product" data-product-id="${escapeHtml(p.id)}">
-            <div class="mini-product-media">
-                ${hasImage ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}" loading="lazy" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'mini-product-placeholder\\'><span class=\\'emoji\\'>🧪</span></div>';" />` : `<div class="mini-product-placeholder"><span class="emoji">🧪</span></div>`}
-                <span class="mini-product-status-badge ${stock.cls}">${stock.text}</span>
-                ${p.is_featured ? `<span class="mini-product-status-badge featured">⭐ مميز</span>` : ''}
-            </div>
-            <div class="mini-product-body">
-                <h3 class="mini-product-title">${escapeHtml(p.name)}</h3>
-                <div class="mini-product-specs">
-                    ${p.cas_number ? `<span style="color:var(--c-purple);">CAS ${escapeHtml(p.cas_number)}</span>` : ''}
-                    ${p.purity ? `<span>${escapeHtml(p.purity)}</span>` : ''}
-                    ${p.packaging ? `<span>${escapeHtml(p.packaging)}</span>` : ''}
-                </div>
-                <div class="mini-product-price ${p.price ? '' : 'no-price'}">
-                    ${p.price ? `${formatPrice(p.price)} <span class="currency">ج.م</span>` : 'السعر عند الطلب'}
-                </div>
-            </div>
-            <div class="mini-product-actions">
-                <a href="add-product.html?id=${encodeURIComponent(p.id)}" class="item-action-btn secondary" style="flex:1;">
-                    <i class="fas fa-edit"></i> تعديل
-                </a>
-                <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="item-action-btn secondary icon-only" target="_blank" title="عرض"><i class="fas fa-external-link-alt"></i></a>
-                <button class="item-action-btn danger icon-only delete-product-btn" type="button" data-product-id="${escapeHtml(p.id)}" data-product-name="${escapeHtml(p.name)}" title="حذف"><i class="fas fa-trash"></i></button>
-            </div>
-        </div>
-    `;
-};
-
-const bindProductEvents = () => {
-    document.querySelectorAll('.delete-product-btn').forEach(btn => {
-        btn.addEventListener('click', () => deleteProduct(btn.dataset.productId, btn.dataset.productName));
-    });
-};
-
-const deleteProduct = async (productId, productName) => {
-    if (!confirm(`هل أنت متأكد من حذف "${productName}"؟`)) return;
-    try {
-        const { error } = await supabase.from('products').delete().eq('id', productId).eq('supplier_id', state.user.id);
-        if (error) throw error;
-        showToast('🗑️', 'تم الحذف', `حُذف "${productName}"`, null, null, 'success');
-        await fetchAllData();
-        loadSection('products');
-    } catch (err) {
-        showToast('⚠️', 'خطأ', err.message || 'تعذر الحذف', null, null, 'error');
+const updateTotalUnread = () => {
+    const totalUnread = state.conversations.reduce((sum, c) => sum + c.unreadCount, 0);
+    const badge = document.getElementById('totalUnread');
+    if (badge) {
+        badge.textContent = totalUnread > 99 ? '99+' : totalUnread;
+        badge.style.display = totalUnread > 0 ? 'inline-flex' : 'none';
     }
 };
 
 // ============================================================
-// RENDER: MY OFFERS
+// OPEN CONVERSATION
 // ============================================================
-const renderMyOffers = async () => {
-    const main = document.getElementById('dashboardMain');
-    if (!main) return;
-    await fetchAllData();
+const openConversation = async (otherUserId) => {
+    if (!isValidUUID(otherUserId)) return;
 
-    const pending = state.myOffers.filter(o => o.status === 'pending' || !o.status);
-    const accepted = state.myOffers.filter(o => o.status === 'accepted');
-    const rejected = state.myOffers.filter(o => o.status === 'rejected');
+    state.activeConversationId = otherUserId;
+    state.offset = 0;
+    state.activeMessages = [];
 
-    main.innerHTML = `
-        <div class="page-header-bar animate-in">
-            <div>
-                <h1 class="page-title"><i class="fas fa-hand-holding-usd"></i> عروضي</h1>
-                <p class="page-subtitle">كل العروض اللي قدّمتها على طلبات الشراء</p>
-            </div>
-        </div>
+    // Find conversation to get other user details
+    const conv = state.conversations.find(c => c.otherUserId === otherUserId);
+    state.activeOtherUser = conv?.otherUser || { id: otherUserId, full_name: 'مستخدم' };
+    state.activeContext = conv?.product || conv?.request || null;
 
-        ${state.myOffers.length ? `
-            ${pending.length ? `
-                <div class="section-card animate-in" style="animation-delay:0.05s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title"><i class="fas fa-clock"></i> قيد المراجعة <span class="count-badge-static">${pending.length}</span></h2>
-                    </div>
-                    <div class="section-card-body"><div class="item-list">${pending.map(o => renderMyOfferRow(o)).join('')}</div></div>
-                </div>
-            ` : ''}
-            ${accepted.length ? `
-                <div class="section-card animate-in" style="animation-delay:0.1s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title"><i class="fas fa-check-circle" style="color:var(--c-accent);"></i> مقبولة <span class="count-badge-static accent">${accepted.length}</span></h2>
-                    </div>
-                    <div class="section-card-body"><div class="item-list">${accepted.map(o => renderMyOfferRow(o)).join('')}</div></div>
-                </div>
-            ` : ''}
-            ${rejected.length ? `
-                <div class="section-card animate-in" style="animation-delay:0.15s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title"><i class="fas fa-times-circle" style="color:var(--c-text-sub);"></i> مرفوضة <span class="count-badge-static">${rejected.length}</span></h2>
-                    </div>
-                    <div class="section-card-body"><div class="item-list">${rejected.map(o => renderMyOfferRow(o)).join('')}</div></div>
-                </div>
-            ` : ''}
-        ` : `
-            <div class="section-card animate-in">
-                <div class="section-card-body">
-                    <div class="empty-state">
-                        <i class="fas fa-hand-holding-usd empty-icon"></i>
-                        <h4>لسه مفيش عروض</h4>
-                        <p>قدّم عرضك الأول على طلب شراء متاح</p>
-                        <button class="btn btn-primary" onclick="window.switchSection('available-requests')"><i class="fas fa-bullhorn"></i> شوف الطلبات المتاحة</button>
-                    </div>
-                </div>
-            </div>
-        `}
-    `;
+    // Update UI
+    document.getElementById('chatLayout')?.classList.add('chat-open');
+
+    // Render chat view with skeleton
+    renderChatView();
+    renderChatList(); // to update active state
+
+    // Mark messages as read
+    await markConversationRead(otherUserId);
+
+    // Fetch messages
+    await loadMessages(otherUserId, true);
+
+    // Setup realtime for this conversation
+    setupConversationRealtime(otherUserId);
 };
 
-const renderMyOfferRow = (offer) => {
-    const statusInfo = getOfferStatusInfo(offer.status);
-    const req = offer.request;
-    const buyer = offer.buyer;
-    const buyerName = buyer?.company_name || buyer?.full_name || 'عميل';
-    return `
-        <div class="item-row">
-            <div class="item-icon-wrapper accent"><i class="fas fa-hand-holding-usd"></i></div>
-            <div class="item-info">
-                <div class="item-title">${escapeHtml(req?.product_name || 'طلب شراء')}</div>
-                <div class="item-meta">
-                    <span class="status-badge ${statusInfo.cls}"><i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}</span>
-                    ${req?.quantity_needed ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(req.quantity_needed)}</span>` : ''}
-                    <span><i class="fas fa-user"></i> ${escapeHtml(buyerName)}</span>
-                    ${buyer?.city ? `<span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(buyer.city)}</span>` : ''}
-                    <span><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>
-                </div>
-                ${offer.message ? `<div style="font-size:0.78rem;color:var(--c-text-muted);margin-top:6px;padding:8px 10px;background:var(--c-surface);border-radius:var(--r-sm);border-right:3px solid var(--c-accent);"><i class="fas fa-comment-dots"></i> ${escapeHtml(offer.message).substring(0, 120)}${offer.message.length > 120 ? '...' : ''}</div>` : ''}
-            </div>
-            <div class="item-price-block">
-                <div class="item-price">${formatPrice(offer.price)} <span class="currency">ج.م</span></div>
-                <div class="item-price-label">عرضك</div>
-            </div>
-            <div class="item-actions">
-                <a href="request-details.html?id=${encodeURIComponent(offer.request_id)}" class="item-action-btn secondary">
-                    <i class="fas fa-info-circle"></i> التفاصيل
-                </a>
-                ${offer.status === 'accepted' && (buyer?.phone || buyer?.whatsapp) ? `
-                    <a href="https://wa.me/${sanitizePhone(buyer.whatsapp || buyer.phone).replace(/^(?!20)/, '20')}" target="_blank" rel="noopener noreferrer" class="item-action-btn primary">
-                        <i class="fab fa-whatsapp"></i> تواصل
-                    </a>
-                ` : ''}
-            </div>
-        </div>
-    `;
-};
+const renderChatView = () => {
+    const view = document.getElementById('chatView');
+    if (!view) return;
 
-// ============================================================
-// RENDER: AVAILABLE REQUESTS
-// ============================================================
-const renderAvailableRequests = async () => {
-    const main = document.getElementById('dashboardMain');
-    if (!main) return;
-    await fetchAllData();
+    const otherUser = state.activeOtherUser;
+    const name = otherUser?.company_name || otherUser?.full_name || 'مستخدم';
+    const initial = getInitials(name);
 
-    const notOffered = state.availableRequests.filter(r => !r.myOffer);
-    const offered = state.availableRequests.filter(r => r.myOffer);
+    let contextHtml = '';
+    if (state.activeContext) {
+        const ctx = state.activeContext;
+        const isProduct = !!ctx.name && !!ctx.price;
+        const title = isProduct ? ctx.name : (ctx.product_name || 'طلب');
+        const link = isProduct
+            ? `product-details.html?id=${encodeURIComponent(ctx.id)}`
+            : `request-details.html?id=${encodeURIComponent(ctx.id)}`;
+        const icon = isProduct ? 'flask' : 'clipboard-list';
+        const label = isProduct ? 'منتج' : 'طلب';
 
-    main.innerHTML = `
-        <div class="page-header-bar animate-in">
-            <div>
-                <h1 class="page-title"><i class="fas fa-bullhorn"></i> الطلبات المتاحة</h1>
-                <p class="page-subtitle">طلبات شراء من عملاء — قدّم عرضك الآن</p>
-            </div>
-        </div>
-
-        ${state.availableRequests.length ? `
-            ${notOffered.length ? `
-                <div class="section-card animate-in" style="animation-delay:0.05s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title"><i class="fas fa-fire"></i> جديدة لم تقدّم عليها <span class="count-badge-static accent">${notOffered.length}</span></h2>
-                    </div>
-                    <div class="section-card-body"><div class="item-list">${notOffered.map(r => renderAvailableRequestRow(r)).join('')}</div></div>
-                </div>
-            ` : ''}
-            ${offered.length ? `
-                <div class="section-card animate-in" style="animation-delay:0.1s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title"><i class="fas fa-check-circle"></i> قدّمت عليها عروض <span class="count-badge-static">${offered.length}</span></h2>
-                    </div>
-                    <div class="section-card-body"><div class="item-list">${offered.map(r => renderAvailableRequestRow(r)).join('')}</div></div>
-                </div>
-            ` : ''}
-        ` : `
-            <div class="section-card animate-in">
-                <div class="section-card-body">
-                    <div class="empty-state">
-                        <i class="fas fa-bullhorn empty-icon"></i>
-                        <h4>مفيش طلبات متاحة حالياً</h4>
-                        <p>هتلاقي هنا طلبات الشراء اللي المشترين بيعملوها</p>
-                        <a href="all-requests.html" class="btn btn-primary"><i class="fas fa-clipboard-list"></i> تصفح كل الطلبات</a>
-                    </div>
-                </div>
-            </div>
-        `}
-    `;
-    bindCommonEvents();
-};
-
-const renderAvailableRequestRow = (r) => {
-    const statusInfo = getRequestStatusInfo(r.status);
-    const buyer = r.buyer;
-    const buyerName = buyer?.company_name || buyer?.full_name || 'عميل';
-    const hasOffered = !!r.myOffer;
-
-    let budgetText = '';
-    if (r.budget_min || r.budget_max) {
-        const min = r.budget_min ? formatPrice(r.budget_min) : '';
-        const max = r.budget_max ? formatPrice(r.budget_max) : '';
-        if (min && max) budgetText = `${min} - ${max} ج.م`;
-        else if (min) budgetText = `من ${min} ج.م`;
-        else budgetText = `حتى ${max} ج.م`;
-    }
-
-    return `
-        <div class="item-row">
-            <div class="item-icon-wrapper"><i class="fas fa-clipboard-list"></i></div>
-            <div class="item-info">
-                <div class="item-title">📦 ${escapeHtml(r.product_name)}</div>
-                <div class="item-meta">
-                    <span class="status-badge ${statusInfo.cls}"><i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}</span>
-                    ${r.quantity_needed ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(r.quantity_needed)}</span>` : ''}
-                    ${budgetText ? `<span><i class="fas fa-money-bill-wave"></i> ${budgetText}</span>` : ''}
-                    ${r.location ? `<span><i class="fas fa-map-marker-alt"></i> ${escapeHtml(r.location)}</span>` : ''}
-                    <span><i class="fas fa-user"></i> ${escapeHtml(buyerName)}</span>
-                    <span><i class="fas fa-clock"></i> ${formatDateTime(r.created_at)}</span>
-                </div>
-            </div>
-            <div class="item-actions">
-                ${hasOffered ? `
-                    <span class="status-badge ${getOfferStatusInfo(r.myOffer.status).cls}">
-                        <i class="fas fa-${getOfferStatusInfo(r.myOffer.status).icon}"></i>
-                        عرضك: ${formatPrice(r.myOffer.price)} ج.م
-                    </span>
-                    <a href="request-details.html?id=${encodeURIComponent(r.id)}" class="item-action-btn secondary"><i class="fas fa-info-circle"></i> التفاصيل</a>
-                ` : `
-                    <button class="item-action-btn primary offer-request-btn" type="button" data-request-id="${escapeHtml(r.id)}"><i class="fas fa-paper-plane"></i> قدّم عرض</button>
-                    <a href="request-details.html?id=${encodeURIComponent(r.id)}" class="item-action-btn secondary"><i class="fas fa-info-circle"></i> التفاصيل</a>
-                `}
-            </div>
-        </div>
-    `;
-};
-
-// ============================================================
-// OFFER MODAL
-// ============================================================
-const openOfferModal = (requestId) => {
-    const request = state.availableRequests.find(r => r.id === requestId);
-    if (!request) return;
-    state.currentOfferRequestId = requestId;
-
-    const detailsBox = document.getElementById('offerRequestDetails');
-    if (detailsBox) {
-        let budgetText = '';
-        if (request.budget_min || request.budget_max) {
-            const min = request.budget_min ? formatPrice(request.budget_min) : '';
-            const max = request.budget_max ? formatPrice(request.budget_max) : '';
-            if (min && max) budgetText = `${min} - ${max} ج.م`;
-            else if (min) budgetText = `من ${min} ج.م`;
-            else budgetText = `حتى ${max} ج.م`;
-        }
-        detailsBox.innerHTML = `
-            <div style="display:grid;gap:6px;">
-                <div><strong>المنتج:</strong> ${escapeHtml(request.product_name)}</div>
-                ${request.quantity_needed ? `<div><strong>الكمية:</strong> ${escapeHtml(request.quantity_needed)}</div>` : ''}
-                ${budgetText ? `<div><strong>الميزانية:</strong> ${budgetText}</div>` : ''}
-                ${request.location ? `<div><strong>الموقع:</strong> ${escapeHtml(request.location)}</div>` : ''}
-                ${request.deadline ? `<div><strong>الموعد النهائي:</strong> ${formatDate(request.deadline)}</div>` : ''}
+        contextHtml = `
+            <div class="chat-context-bar" onclick="window.open('${link}', '_blank')">
+                <i class="fas fa-${icon} context-icon"></i>
+                <span class="context-text"><strong>${label}:</strong> ${escapeHtml(title)}</span>
+                <span class="context-action">عرض <i class="fas fa-external-link-alt"></i></span>
             </div>
         `;
     }
 
-    document.getElementById('offerForm')?.reset();
-    document.getElementById('offerModal')?.classList.add('show');
-    setTimeout(() => document.getElementById('offerPrice')?.focus(), 300);
-};
-
-const closeOfferModal = () => {
-    document.getElementById('offerModal')?.classList.remove('show');
-    state.currentOfferRequestId = null;
-    document.getElementById('offerForm')?.reset();
-};
-
-const submitOffer = async () => {
-    if (!state.user || !state.currentOfferRequestId) return;
-    const btn = document.getElementById('submitOfferBtn');
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> جاري الإرسال...';
-
-    try {
-        const price = parseFloat(document.getElementById('offerPrice').value);
-        if (!price || price <= 0) throw new Error('السعر مطلوب وأكبر من صفر');
-
-        const offerData = {
-            request_id: state.currentOfferRequestId,
-            supplier_id: state.user.id,
-            price: price,
-            quantity_offered: document.getElementById('offerQuantity').value.trim() || null,
-            delivery_time: document.getElementById('offerDelivery').value.trim() || null,
-            message: document.getElementById('offerMessage').value.trim() || null,
-            status: 'pending',
-        };
-
-        const { error } = await supabase.from('offers').insert(offerData);
-        if (error) throw error;
-
-        showToast('✅', 'تم الإرسال!', 'عرضك وصل للعميل — انتظر الرد', null, null, 'success');
-        closeOfferModal();
-        await fetchAllData();
-        loadSection(state.activeSection);
-
-    } catch (err) {
-        console.error('Submit offer error:', err);
-        showToast('⚠️', 'خطأ', err.message || 'تعذر إرسال العرض', null, null, 'error');
-    } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
-    }
-};
-
-// ============================================================
-// RENDER: CONTACTS
-// ============================================================
-const renderContacts = async () => {
-    const main = document.getElementById('dashboardMain');
-    if (!main) return;
-    await fetchAllData();
-
-    const whatsappCount = state.contacts.filter(c => c.contact_type === 'whatsapp').length;
-    const phoneCount = state.contacts.filter(c => c.contact_type === 'phone').length;
-    const viewCount = state.contacts.filter(c => c.contact_type === 'view').length;
-    const inquiryCount = state.contacts.filter(c => c.contact_type === 'inquiry' || c.contact_type === 'request_quote').length;
-
-    main.innerHTML = `
-        <div class="page-header-bar animate-in">
-            <div>
-                <h1 class="page-title"><i class="fas fa-users"></i> العملاء المحتملون</h1>
-                <p class="page-subtitle">كل اللي تواصلوا أو شافوا منتجاتك</p>
+    view.innerHTML = `
+        <div class="chat-view-header">
+            <button class="chat-back-btn" id="backBtn" type="button" aria-label="رجوع">
+                <i class="fas fa-arrow-right"></i>
+            </button>
+            <div class="chat-header-avatar">
+                ${otherUser?.avatar_url
+                    ? `<img src="${escapeHtml(otherUser.avatar_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(initial)}';" />`
+                    : escapeHtml(initial)}
             </div>
-            <button class="btn btn-secondary" id="exportCsvBtn"><i class="fas fa-download"></i> تصدير CSV</button>
-        </div>
-
-        <div class="stats-grid animate-in" style="animation-delay:0.05s;">
-            <div class="stat-card" style="--stat-color:var(--c-whatsapp);--stat-bg:rgba(37,211,102,0.12);">
-                <div class="stat-icon"><i class="fab fa-whatsapp"></i></div>
-                <div class="stat-content"><div class="stat-label">واتساب</div><div class="stat-value">${formatNumber(whatsappCount)}</div></div>
+            <div class="chat-header-info">
+                <div class="chat-header-name">
+                    <span>${escapeHtml(name)}</span>
+                    ${otherUser?.is_verified ? '<i class="fas fa-check-circle verified-dot"></i>' : ''}
+                </div>
+                <div class="chat-header-status">
+                    <span class="online-dot"></span>
+                    <span>متصل الآن</span>
+                </div>
             </div>
-            <div class="stat-card" style="--stat-color:var(--c-warning);--stat-bg:rgba(243,156,18,0.12);">
-                <div class="stat-icon"><i class="fas fa-phone"></i></div>
-                <div class="stat-content"><div class="stat-label">اتصالات</div><div class="stat-value">${formatNumber(phoneCount)}</div></div>
-            </div>
-            <div class="stat-card" style="--stat-color:var(--c-primary-600);--stat-bg:rgba(44,122,184,0.12);">
-                <div class="stat-icon"><i class="fas fa-eye"></i></div>
-                <div class="stat-content"><div class="stat-label">مشاهدات</div><div class="stat-value">${formatNumber(viewCount)}</div></div>
-            </div>
-            <div class="stat-card" style="--stat-color:var(--c-purple);--stat-bg:rgba(139,92,246,0.12);">
-                <div class="stat-icon"><i class="fas fa-comment-dots"></i></div>
-                <div class="stat-content"><div class="stat-label">استفسارات</div><div class="stat-value">${formatNumber(inquiryCount)}</div></div>
+            <div class="chat-header-actions">
+                ${otherUser?.whatsapp || otherUser?.phone ? `
+                    <a href="https://wa.me/${sanitizePhone(otherUser.whatsapp || otherUser.phone).replace(/^(?!20)/, '20')}"
+                       target="_blank" rel="noopener noreferrer"
+                       class="chat-header-btn whatsapp" title="واتساب">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                ` : ''}
+                <button class="chat-header-btn" id="refreshBtn" type="button" title="تحديث">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
             </div>
         </div>
-
-        <div class="section-card animate-in" style="animation-delay:0.1s;">
-            <div class="section-card-header">
-                <h2 class="section-card-title"><i class="fas fa-list"></i> آخر 100 تواصل <span class="count-badge-static">${state.contacts.length}</span></h2>
+        ${contextHtml}
+        <div class="chat-messages" id="chatMessages">
+            <div class="chat-skeleton-item">
+                <div class="skeleton" style="width:44px;height:44px;border-radius:50%;"></div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:8px;">
+                    <div class="skeleton" style="width:60%;height:60px;border-radius:18px;"></div>
+                </div>
             </div>
-            <div class="section-card-body" style="padding:0;">
-                ${state.contacts.length ? `
-                    <div class="contacts-table-wrapper" style="margin:0;">
-                        <table class="contacts-table">
-                            <thead><tr><th>العميل</th><th>المنتج</th><th>نوع التواصل</th><th>المدينة</th><th>التاريخ</th><th></th></tr></thead>
-                            <tbody>
-                                ${state.contacts.map(c => {
-                                    const typeInfo = getContactTypeInfo(c.contact_type);
-                                    const buyerName = c.buyer?.company_name || c.buyer?.full_name || 'زائر';
-                                    const cleanPhone = sanitizePhone(c.buyer?.phone || c.buyer?.whatsapp);
-                                    const phoneWithCountry = cleanPhone ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone) : '';
-                                    return `
-                                        <tr>
-                                            <td>
-                                                <div style="font-weight:800;color:var(--c-text);">${escapeHtml(buyerName)}</div>
-                                                ${c.buyer?.is_verified ? '<span class="status-badge status-accepted" style="font-size:0.6rem;padding:1px 6px;">موثّق</span>' : ''}
-                                            </td>
-                                            <td>${c.product ? `<a href="product-details.html?id=${encodeURIComponent(c.product_id)}" style="color:var(--c-primary-600);font-weight:700;">${escapeHtml(c.product.name)}</a>` : '—'}</td>
-                                            <td><span class="contact-type-pill ${typeInfo.cls}"><i class="${typeInfo.icon}"></i> ${typeInfo.text}</span></td>
-                                            <td>${escapeHtml(c.buyer?.city || '—')}</td>
-                                            <td>${formatDateTime(c.contact_date)}</td>
-                                            <td>
-                                                ${phoneWithCountry && c.contact_type !== 'view' ? `
-                                                    <a href="https://wa.me/${phoneWithCountry}" target="_blank" rel="noopener noreferrer" class="item-action-btn primary" style="padding:6px 10px;font-size:0.72rem;">
-                                                        <i class="fab fa-whatsapp"></i> تواصل
-                                                    </a>
-                                                ` : ''}
-                                            </td>
-                                        </tr>
-                                    `;
-                                }).join('')}
-                            </tbody>
-                        </table>
-                    </div>
-                ` : `
-                    <div class="empty-state">
-                        <i class="fas fa-users empty-icon"></i>
-                        <h4>لسه مفيش تواصلات</h4>
-                        <p>لما العملاء يتواصلوا معاك، هتلاقيهم هنا</p>
-                    </div>
-                `}
+            <div class="chat-skeleton-item" style="flex-direction:row-reverse;">
+                <div class="skeleton" style="width:44px;height:44px;border-radius:50%;"></div>
+                <div style="flex:1;display:flex;flex-direction:column;gap:8px;align-items:flex-start;">
+                    <div class="skeleton" style="width:50%;height:50px;border-radius:18px;"></div>
+                </div>
             </div>
+        </div>
+        <div class="typing-indicator" id="typingIndicator">
+            <div class="msg-bubble">
+                <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+            </div>
+        </div>
+        <div class="chat-composer">
+            <div class="attach-menu">
+                <button class="attach-menu-btn" id="attachBtn" type="button" aria-label="إرفاق">
+                    <i class="fas fa-paperclip"></i>
+                </button>
+                <div class="attach-dropdown" id="attachDropdown">
+                    <button type="button" data-attach="image">
+                        <i class="fas fa-image"></i> صورة
+                    </button>
+                    <button type="button" data-attach="file">
+                        <i class="fas fa-file-pdf"></i> مستند PDF
+                    </button>
+                    <button type="button" data-attach="product">
+                        <i class="fas fa-flask"></i> رابط منتج
+                    </button>
+                </div>
+            </div>
+            <div class="chat-input-wrapper">
+                <textarea class="chat-input" id="chatInput" placeholder="اكتب رسالتك..." rows="1" maxlength="2000"></textarea>
+                <button class="chat-emoji-btn" id="emojiBtn" type="button" aria-label="إيموجي">
+                    <i class="far fa-smile"></i>
+                </button>
+            </div>
+            <button class="chat-send-btn" id="sendBtn" type="button" disabled aria-label="إرسال">
+                <i class="fas fa-paper-plane"></i>
+            </button>
         </div>
     `;
 
-    document.getElementById('exportCsvBtn')?.addEventListener('click', exportContactsCsv);
-};
-
-const exportContactsCsv = () => {
-    if (!state.contacts.length) {
-        showToast('⚠️', 'مفيش بيانات', 'لا توجد تواصلات للتصدير', null, null, 'warning');
-        return;
-    }
-    const rows = [['العميل','الشركة','المنتج','نوع التواصل','المدينة','الهاتف','التاريخ']];
-    state.contacts.forEach(c => {
-        rows.push([
-            c.buyer?.full_name || '',
-            c.buyer?.company_name || '',
-            c.product?.name || '',
-            getContactTypeInfo(c.contact_type).text,
-            c.buyer?.city || '',
-            c.buyer?.phone || c.buyer?.whatsapp || '',
-            formatDate(c.contact_date),
-        ]);
+    // Bind events
+    document.getElementById('backBtn')?.addEventListener('click', () => {
+        document.getElementById('chatLayout')?.classList.remove('chat-open');
+        state.activeConversationId = null;
+        renderChatList();
     });
-    const csv = '\uFEFF' + rows.map(r => r.map(f => `"${String(f).replace(/"/g, '""')}"`).join(',')).join('\n');
-    const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
-    const url = URL.createObjectURL(blob);
-    const a = document.createElement('a');
-    a.href = url;
-    a.download = `contacts-${new Date().toISOString().slice(0, 10)}.csv`;
-    a.click();
-    URL.revokeObjectURL(url);
-    showToast('✅', 'تم التصدير', 'تم تحميل ملف CSV', null, null, 'success');
-};
 
-// ============================================================
-// RENDER: ANALYTICS
-// ============================================================
-const renderAnalytics = () => {
-    const main = document.getElementById('dashboardMain');
-    if (!main) return;
-
-    main.innerHTML = `
-        <div class="page-header-bar animate-in">
-            <div>
-                <h1 class="page-title"><i class="fas fa-chart-line"></i> التحليلات</h1>
-                <p class="page-subtitle">رؤى تفصيلية عن أداء منتجاتك</p>
-            </div>
-        </div>
-
-        <div class="stats-grid animate-in" style="animation-delay:0.05s;">
-            <div class="stat-card" style="--stat-color:var(--c-accent);--stat-bg:rgba(46,204,113,0.12);">
-                <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">معدل التحويل</div>
-                    <div class="stat-value">${state.stats.totalViews ? Math.round((state.stats.totalContacts / state.stats.totalViews) * 100) : 0}%</div>
-                    <div class="stat-trend">مشاهدات → تواصلات</div>
-                </div>
-            </div>
-            <div class="stat-card" style="--stat-color:var(--c-purple);--stat-bg:rgba(139,92,246,0.12);">
-                <div class="stat-icon"><i class="fas fa-percentage"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">معدل قبول العروض</div>
-                    <div class="stat-value">${state.stats.totalOffers ? Math.round((state.stats.acceptedOffers / state.stats.totalOffers) * 100) : 0}%</div>
-                    <div class="stat-trend">${state.stats.acceptedOffers} من ${state.stats.totalOffers}</div>
-                </div>
-            </div>
-            <div class="stat-card" style="--stat-color:var(--c-whatsapp);--stat-bg:rgba(37,211,102,0.12);">
-                <div class="stat-icon"><i class="fas fa-eye"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">مشاهدة/منتج</div>
-                    <div class="stat-value">${state.stats.totalProducts ? Math.round(state.stats.totalViews / state.stats.totalProducts) : 0}</div>
-                    <div class="stat-trend">متوسط</div>
-                </div>
-            </div>
-            <div class="stat-card" style="--stat-color:var(--c-request);--stat-bg:rgba(255,107,53,0.12);">
-                <div class="stat-icon"><i class="fas fa-star"></i></div>
-                <div class="stat-content">
-                    <div class="stat-label">أفضل منتج</div>
-                    <div class="stat-value" style="font-size:1rem;">${escapeHtml(state.products.sort((a,b) => (b.views||0) - (a.views||0))[0]?.name?.substring(0, 20) || '—')}</div>
-                    <div class="stat-trend">${state.products[0]?.views || 0} مشاهدة</div>
-                </div>
-            </div>
-        </div>
-
-        <div class="section-card animate-in" style="animation-delay:0.1s;">
-            <div class="section-card-header">
-                <h2 class="section-card-title"><i class="fas fa-trophy"></i> أفضل منتجاتك أداءً</h2>
-            </div>
-            <div class="section-card-body">
-                ${state.products.length ? `
-                    <div class="item-list">
-                        ${state.products.slice(0, 10).sort((a,b) => (b.views||0) - (a.views||0)).map((p, i) => `
-                            <div class="item-row">
-                                <div class="item-icon-wrapper" style="background:linear-gradient(135deg,${i < 3 ? 'rgba(243,156,18,0.15),rgba(243,156,18,0.05)' : 'var(--c-surface-2),var(--c-surface-2)'});color:${i < 3 ? 'var(--c-warning)' : 'var(--c-text-muted)'};">
-                                    ${i < 3 ? `<i class="fas fa-trophy"></i>` : `<span style="font-weight:900;">${i + 1}</span>`}
-                                </div>
-                                <div class="item-info">
-                                    <div class="item-title">${escapeHtml(p.name)}</div>
-                                    <div class="item-meta">
-                                        <span><i class="fas fa-eye"></i> ${formatNumber(p.views || 0)} مشاهدة</span>
-                                        <span><i class="fas fa-comments"></i> ${formatNumber(p.contact_count || 0)} تواصل</span>
-                                        <span><i class="fas fa-star"></i> ${p.avg_rating ? Number(p.avg_rating).toFixed(1) : '—'}</span>
-                                    </div>
-                                </div>
-                                <div class="item-price-block">
-                                    <div class="item-price">${p.price ? formatPrice(p.price) : '—'} <span class="currency">ج.م</span></div>
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                ` : `
-                    <div class="empty-state">
-                        <i class="fas fa-chart-line empty-icon"></i>
-                        <h4>لا توجد بيانات بعد</h4>
-                        <p>ابدأ بإضافة منتجات وشوف أدائها هنا</p>
-                    </div>
-                `}
-            </div>
-        </div>
-    `;
-};
-
-// ============================================================
-// RENDER: PROFILE
-// ============================================================
-const renderProfile = () => {
-    const main = document.getElementById('dashboardMain');
-    if (!main) return;
-    const p = state.userProfile || {};
-
-    main.innerHTML = `
-        <div class="page-header-bar animate-in">
-            <div>
-                <h1 class="page-title"><i class="fas fa-user-circle"></i> الملف الشخصي</h1>
-                <p class="page-subtitle">بياناتك كمورد على كيماتو</p>
-            </div>
-            <a href="profile.html" class="btn btn-secondary"><i class="fas fa-external-link-alt"></i> صفحة الملف الكاملة</a>
-        </div>
-
-        <div class="section-card animate-in" style="animation-delay:0.05s;">
-            <div class="section-card-header">
-                <h2 class="section-card-title"><i class="fas fa-user-edit"></i> البيانات الأساسية</h2>
-            </div>
-            <div class="section-card-body">
-                <form id="profileForm" class="profile-form" novalidate>
-                    <div class="form-group full">
-                        <label for="profFullName">الاسم الكامل</label>
-                        <input type="text" id="profFullName" value="${escapeHtml(p.full_name || '')}" disabled />
-                    </div>
-                    <div class="form-group full">
-                        <label for="profCompany">اسم الشركة <span class="req">*</span></label>
-                        <input type="text" id="profCompany" value="${escapeHtml(p.company_name || '')}" placeholder="اسم شركتك" />
-                    </div>
-                    <div class="form-group">
-                        <label for="profPhone">رقم الهاتف</label>
-                        <input type="tel" id="profPhone" dir="ltr" value="${escapeHtml(p.phone || '')}" placeholder="+20 1XX XXX XXXX" />
-                    </div>
-                    <div class="form-group">
-                        <label for="profWhatsapp">واتساب</label>
-                        <input type="tel" id="profWhatsapp" dir="ltr" value="${escapeHtml(p.whatsapp || '')}" placeholder="+20 1XX XXX XXXX" />
-                    </div>
-                    <div class="form-group">
-                        <label for="profCity">المدينة</label>
-                        <input type="text" id="profCity" value="${escapeHtml(p.city || '')}" placeholder="مثل: القاهرة" />
-                    </div>
-                    <div class="form-group">
-                        <label for="profAddress">العنوان</label>
-                        <input type="text" id="profAddress" value="${escapeHtml(p.address || '')}" />
-                    </div>
-                    <div class="form-actions">
-                        <button type="submit" class="btn btn-primary" id="saveProfileBtn">
-                            <i class="fas fa-save"></i> حفظ التعديلات
-                        </button>
-                    </div>
-                </form>
-            </div>
-        </div>
-
-        <div class="section-card animate-in" style="animation-delay:0.1s;">
-            <div class="section-card-header">
-                <h2 class="section-card-title"><i class="fas fa-info-circle"></i> معلومات الحساب</h2>
-            </div>
-            <div class="section-card-body">
-                <div style="display:grid;gap:12px;font-size:0.88rem;">
-                    <div style="display:flex;justify-content:space-between;padding:10px;background:var(--c-surface-2);border-radius:var(--r-md);">
-                        <span style="color:var(--c-text-muted);font-weight:700;">نوع الحساب</span>
-                        <span style="font-weight:800;">🏭 مورد</span>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;padding:10px;background:var(--c-surface-2);border-radius:var(--r-md);">
-                        <span style="color:var(--c-text-muted);font-weight:700;">حالة التحقق</span>
-                        <span style="font-weight:800;">${p.is_verified ? '✅ موثّق' : '⏳ قيد التحقق'}</span>
-                    </div>
-                    <div style="display:flex;justify-content:space-between;padding:10px;background:var(--c-surface-2);border-radius:var(--r-md);">
-                        <span style="color:var(--c-text-muted);font-weight:700;">تاريخ التسجيل</span>
-                        <span style="font-weight:800;">${formatDate(p.created_at)}</span>
-                    </div>
-                </div>
-            </div>
-        </div>
-    `;
-    document.getElementById('profileForm')?.addEventListener('submit', saveProfile);
-};
-
-const saveProfile = async (e) => {
-    e.preventDefault();
-    const btn = document.getElementById('saveProfileBtn');
-    const originalText = btn.innerHTML;
-    btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> جاري الحفظ...';
-    try {
-        const updates = {
-            company_name: document.getElementById('profCompany').value.trim() || null,
-            phone: document.getElementById('profPhone').value.trim() || null,
-            whatsapp: document.getElementById('profWhatsapp').value.trim() || null,
-            city: document.getElementById('profCity').value.trim() || null,
-            address: document.getElementById('profAddress').value.trim() || null,
-        };
-        const { error } = await supabase.from('profiles').update(updates).eq('id', state.user.id);
-        if (error) throw error;
-        state.userProfile = { ...state.userProfile, ...updates };
-        updateUserUI();
-        renderVerifBanner();
-        showToast('✅', 'تم الحفظ', 'تم تحديث بياناتك بنجاح', null, null, 'success');
-    } catch (err) {
-        showToast('⚠️', 'خطأ', err.message || 'تعذر حفظ التعديلات', null, null, 'error');
-    } finally {
-        btn.disabled = false;
-        btn.innerHTML = originalText;
-    }
-};
-
-// ============================================================
-// MODALS
-// ============================================================
-const initModals = () => {
-    document.getElementById('closeOfferModal')?.addEventListener('click', closeOfferModal);
-    document.getElementById('cancelOfferModal')?.addEventListener('click', closeOfferModal);
-    document.getElementById('submitOfferBtn')?.addEventListener('click', submitOffer);
-    document.getElementById('offerModal')?.addEventListener('click', (e) => {
-        if (e.target.id === 'offerModal') closeOfferModal();
-    });
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape') {
-            closeOfferModal();
-            document.getElementById('notifPanel')?.classList.remove('show');
-            document.getElementById('userDropdown')?.classList.remove('show');
+    document.getElementById('refreshBtn')?.addEventListener('click', async () => {
+        if (state.activeConversationId) {
+            await loadMessages(state.activeConversationId, true);
+            showToast('✅', 'تم التحديث', '', 'success');
         }
     });
+
+    document.getElementById('attachBtn')?.addEventListener('click', (e) => {
+        e.stopPropagation();
+        document.getElementById('attachDropdown')?.classList.toggle('show');
+    });
+
+    document.addEventListener('click', () => {
+        document.getElementById('attachDropdown')?.classList.remove('show');
+    });
+
+    document.getElementById('attachDropdown')?.querySelectorAll('[data-attach]').forEach(btn => {
+        btn.addEventListener('click', () => handleAttach(btn.dataset.attach));
+    });
+
+    const input = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+
+    input?.addEventListener('input', () => {
+        // Auto-resize
+        input.style.height = 'auto';
+        input.style.height = Math.min(input.scrollHeight, 140) + 'px';
+        // Toggle send button
+        sendBtn.disabled = !input.value.trim();
+        // Typing indicator (broadcast)
+        broadcastTyping();
+    });
+
+    input?.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' && !e.shiftKey) {
+            e.preventDefault();
+            sendMessage();
+        }
+    });
+
+    sendBtn?.addEventListener('click', sendMessage);
+};
+
+// ============================================================
+// LOAD MESSAGES
+// ============================================================
+const loadMessages = async (otherUserId, reset = false) => {
+    if (!state.user) return;
+    if (state.isLoadingMessages) return;
+    state.isLoadingMessages = true;
+
+    try {
+        const from = reset ? 0 : state.activeMessages.length;
+        const to = from + state.pageSize - 1;
+
+        const { data: messages, error } = await supabase
+            .from('messages')
+            .select('*')
+            .or(`and(from_user_id.eq.${state.user.id},to_user_id.eq.${otherUserId}),and(from_user_id.eq.${otherUserId},to_user_id.eq.${state.user.id})`)
+            .order('created_at', { ascending: false })
+            .range(from, to);
+
+        if (error) throw error;
+
+        const fetchedMessages = (messages || []).reverse(); // oldest first
+
+        if (reset) {
+            state.activeMessages = fetchedMessages;
+        } else {
+            state.activeMessages = [...fetchedMessages, ...state.activeMessages];
+        }
+
+        state.hasMoreMessages = (messages || []).length === state.pageSize;
+
+        renderMessages();
+    } catch (e) {
+        console.error('Load messages error:', e);
+        const container = document.getElementById('chatMessages');
+        if (container) {
+            container.innerHTML = `<div class="empty-state" style="padding:40px 20px;">
+                <i class="fas fa-exclamation-triangle" style="font-size:2rem;color:var(--c-danger);opacity:0.5;display:block;margin-bottom:12px;"></i>
+                <p>تعذر تحميل الرسائل</p>
+            </div>`;
+        }
+    } finally {
+        state.isLoadingMessages = false;
+    }
+};
+
+const renderMessages = () => {
+    const container = document.getElementById('chatMessages');
+    if (!container) return;
+
+    if (!state.activeMessages.length) {
+        container.innerHTML = `
+            <div class="chat-empty" style="padding:40px 20px;">
+                <div class="chat-empty-icon" style="width:70px;height:70px;font-size:1.8rem;">
+                    <i class="fas fa-comment-dots"></i>
+                </div>
+                <h3>ابدأ المحادثة</h3>
+                <p>اكتب أول رسالة لبدء التواصل</p>
+            </div>
+        `;
+        return;
+    }
+
+    let html = '';
+    let lastDate = '';
+
+    // Load more button
+    if (state.hasMoreMessages) {
+        html += `<button class="load-more-btn" id="loadMoreBtn" type="button">
+            <i class="fas fa-arrow-up"></i> تحميل رسائل أقدم
+        </button>`;
+    }
+
+    state.activeMessages.forEach(msg => {
+        // Date separator
+        const msgDate = new Date(msg.created_at).toDateString();
+        if (msgDate !== lastDate) {
+            html += `<div class="date-separator">${formatDateSeparator(msg.created_at)}</div>`;
+            lastDate = msgDate;
+        }
+
+        const isSent = msg.from_user_id === state.user.id;
+        const otherInitial = getInitials(state.activeOtherUser?.company_name || state.activeOtherUser?.full_name);
+        const myInitial = getInitials(state.userProfile?.company_name || state.userProfile?.full_name);
+
+        html += `
+            <div class="msg-wrapper ${isSent ? 'sent' : 'received'}" data-message-id="${escapeHtml(msg.id)}">
+                <div class="msg-avatar">
+                    ${isSent
+                        ? (state.userProfile?.avatar_url
+                            ? `<img src="${escapeHtml(state.userProfile.avatar_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(myInitial)}';" />`
+                            : escapeHtml(myInitial))
+                        : (state.activeOtherUser?.avatar_url
+                            ? `<img src="${escapeHtml(state.activeOtherUser.avatar_url)}" alt="" onerror="this.style.display='none';this.parentElement.textContent='${escapeHtml(otherInitial)}';" />`
+                            : escapeHtml(otherInitial))}
+                </div>
+                <div class="msg-bubble">
+                    ${msg.message ? escapeHtml(msg.message) : ''}
+                    <div class="msg-meta">
+                        <span>${formatTime(msg.created_at)}</span>
+                        ${isSent ? `<i class="fas fa-${msg.is_read ? 'check-double' : 'check'} status-icon ${msg.is_read ? 'read' : ''}"></i>` : ''}
+                    </div>
+                </div>
+                <div class="msg-actions">
+                    <button class="msg-action-btn" data-action="copy" data-message="${escapeHtml(msg.message || '')}" title="نسخ">
+                        <i class="fas fa-copy"></i>
+                    </button>
+                </div>
+            </div>
+        `;
+    });
+
+    // Typing indicator at bottom
+    html += `<div class="typing-indicator" id="typingIndicator">
+        <div class="msg-bubble">
+            <span class="dot"></span><span class="dot"></span><span class="dot"></span>
+        </div>
+    </div>`;
+
+    container.innerHTML = html;
+
+    // Bind events
+    document.getElementById('loadMoreBtn')?.addEventListener('click', () => {
+        loadMessages(state.activeConversationId, false);
+    });
+
+    container.querySelectorAll('[data-action="copy"]').forEach(btn => {
+        btn.addEventListener('click', async (e) => {
+            e.stopPropagation();
+            const text = btn.dataset.message;
+            if (!text) return;
+            try {
+                await navigator.clipboard.writeText(text);
+                showToast('📋', 'تم النسخ', '', 'success');
+            } catch (err) {
+                showToast('⚠️', 'خطأ', 'تعذر النسخ', 'error');
+            }
+        });
+    });
+
+    // Scroll to bottom
+    scrollToBottom(false);
+};
+
+const scrollToBottom = (smooth = true) => {
+    const container = document.getElementById('chatMessages');
+    if (!container) return;
+    setTimeout(() => {
+        container.scrollTo({
+            top: container.scrollHeight,
+            behavior: smooth ? 'smooth' : 'auto',
+        });
+    }, 50);
+};
+
+// ============================================================
+// MARK AS READ
+// ============================================================
+const markConversationRead = async (otherUserId) => {
+    if (!state.user) return;
+    try {
+        await supabase
+            .from('messages')
+            .update({ is_read: true })
+            .eq('to_user_id', state.user.id)
+            .eq('from_user_id', otherUserId)
+            .eq('is_read', false);
+
+        // Update local state
+        const conv = state.conversations.find(c => c.otherUserId === otherUserId);
+        if (conv) {
+            conv.unreadCount = 0;
+            conv.messages.forEach(m => {
+                if (m.to_user_id === state.user.id) m.is_read = true;
+            });
+        }
+        updateTotalUnread();
+        renderChatList();
+    } catch (e) {
+        console.error('Mark read error:', e);
+    }
+};
+
+// ============================================================
+// SEND MESSAGE
+// ============================================================
+const sendMessage = async () => {
+    const input = document.getElementById('chatInput');
+    const sendBtn = document.getElementById('sendBtn');
+    if (!input || !state.activeConversationId || !state.user) return;
+
+    const text = input.value.trim();
+    if (!text) return;
+
+    sendBtn.disabled = true;
+    const originalHtml = sendBtn.innerHTML;
+    sendBtn.innerHTML = '<span class="spinner" style="width:16px;height:16px;"></span>';
+
+    try {
+        const messageData = {
+            from_user_id: state.user.id,
+            to_user_id: state.activeConversationId,
+            message: text,
+            is_read: false,
+            product_id: state.activeContext?.name ? state.activeContext.id : (state.activeContext?.product_name ? null : null),
+            request_id: !state.activeContext?.name && state.activeContext?.product_name ? state.activeContext.id : null,
+        };
+
+        const { data, error } = await supabase
+            .from('messages')
+            .insert(messageData)
+            .select()
+            .single();
+
+        if (error) throw error;
+
+        // Clear input
+        input.value = '';
+        input.style.height = 'auto';
+
+        // Add to local state
+        state.activeMessages.push(data);
+        renderMessages();
+
+        // Update conversation list
+        const conv = state.conversations.find(c => c.otherUserId === state.activeConversationId);
+        if (conv) {
+            conv.lastMessage = data;
+        } else {
+            // Refresh conversations
+            await fetchConversations();
+        }
+
+        showToast('✅', 'تم الإرسال', '', 'success');
+
+    } catch (e) {
+        console.error('Send message error:', e);
+        showToast('⚠️', 'خطأ', 'تعذر إرسال الرسالة', 'error');
+    } finally {
+        sendBtn.disabled = false;
+        sendBtn.innerHTML = originalHtml;
+    }
+};
+
+// ============================================================
+// TYPING INDICATOR (Broadcast)
+// ============================================================
+const broadcastTyping = () => {
+    if (!state.channel || !state.activeConversationId) return;
+    try {
+        state.channel.send({
+            type: 'broadcast',
+            event: 'typing',
+            payload: {
+                from: state.user.id,
+                to: state.activeConversationId,
+                at: Date.now(),
+            }
+        });
+    } catch (e) {}
+};
+
+// ============================================================
+// ATTACHMENTS
+// ============================================================
+const handleAttach = async (type) => {
+    document.getElementById('attachDropdown')?.classList.remove('show');
+
+    if (type === 'product') {
+        // Insert product link
+        const url = prompt('الصق رابط المنتج من كيماتو:');
+        if (url) {
+            const input = document.getElementById('chatInput');
+            if (input) {
+                input.value += (input.value ? ' ' : '') + url;
+                input.focus();
+                document.getElementById('sendBtn').disabled = false;
+            }
+        }
+        return;
+    }
+
+    // File/Image upload
+    const input = document.createElement('input');
+    input.type = 'file';
+    input.accept = type === 'image' ? 'image/*' : 'application/pdf';
+
+    input.onchange = async (e) => {
+        const file = e.target.files?.[0];
+        if (!file) return;
+
+        if (file.size > 10 * 1024 * 1024) {
+            showToast('⚠️', 'حجم كبير', 'الحد الأقصى 10 ميجابايت', 'warning');
+            return;
+        }
+
+        showToast('📎', 'جاري الرفع', 'يتم رفع الملف...', 'info');
+
+        try {
+            const ext = file.name.split('.').pop().toLowerCase();
+            const fileName = `messages/${state.user.id}/${Date.now()}.${ext}`;
+
+            const { error: uploadError } = await supabase.storage
+                .from('product-images')
+                .upload(fileName, file, { cacheControl: '3600', upsert: false });
+
+            if (uploadError) throw uploadError;
+
+            const { data: urlData } = supabase.storage
+                .from('product-images')
+                .getPublicUrl(fileName);
+
+            const fileUrl = urlData.publicUrl;
+
+            const messageData = {
+                from_user_id: state.user.id,
+                to_user_id: state.activeConversationId,
+                message: type === 'image'
+                    ? `📷 صورة: ${fileUrl}`
+                    : `📄 ملف: ${fileUrl}`,
+                is_read: false,
+            };
+
+            const { data, error } = await supabase
+                .from('messages')
+                .insert(messageData)
+                .select()
+                .single();
+
+            if (error) throw error;
+
+            state.activeMessages.push(data);
+            renderMessages();
+            showToast('✅', 'تم الرفع', 'تم إرسال الملف', 'success');
+
+        } catch (e) {
+            console.error('Upload error:', e);
+            showToast('⚠️', 'خطأ', 'تعذر رفع الملف', 'error');
+        }
+    };
+
+    input.click();
 };
 
 // ============================================================
 // REALTIME
 // ============================================================
-const setupRealtime = () => {
+const setupGlobalRealtime = () => {
+    if (!state.user) return;
+
     if (state.channel) supabase.removeChannel(state.channel);
+
     try {
         state.channel = supabase
-            .channel('supplier_dashboard_realtime')
-            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'purchase_requests' }, (payload) => {
-                const req = payload.new;
-                if (req.status === 'open') {
-                    showToast('📢', 'طلب شراء جديد!', `مطلوب: ${req.product_name}`, 'قدّم عرض', 'all-requests.html', 'success');
-                    loadSection(state.activeSection);
+            .channel('messages_realtime')
+            .on('postgres_changes', {
+                event: 'INSERT',
+                schema: 'public',
+                table: 'messages',
+                filter: `to_user_id=eq.${state.user.id}`,
+            }, (payload) => {
+                const newMsg = payload.new;
+                const isActive = state.activeConversationId === newMsg.from_user_id;
+
+                if (isActive) {
+                    // Add to active messages
+                    state.activeMessages.push(newMsg);
+                    renderMessages();
+                    // Mark as read
+                    markConversationRead(newMsg.from_user_id);
+                } else {
+                    // Show notification
+                    showToast('💬', 'رسالة جديدة!', newMsg.message?.substring(0, 60) || 'وصلك رسالة', 'info');
                 }
+
+                // Update conversation list
+                const conv = state.conversations.find(c => c.otherUserId === newMsg.from_user_id);
+                if (conv) {
+                    conv.lastMessage = newMsg;
+                    if (!isActive) conv.unreadCount++;
+                } else {
+                    fetchConversations();
+                }
+
+                renderChatList();
+                updateTotalUnread();
             })
-            .on('postgres_changes', { event: 'UPDATE', schema: 'public', table: 'offers', filter: `supplier_id=eq.${state.user?.id}` }, (payload) => {
-                const oldStatus = payload.old?.status;
-                const newStatus = payload.new?.status;
-                if (oldStatus !== newStatus && newStatus === 'accepted') {
-                    showToast('🎉', 'مبروك!', 'تم قبول عرضك', null, null, 'success');
+            .on('broadcast', { event: 'typing' }, (payload) => {
+                const typing = payload.payload;
+                if (typing.to === state.user.id && typing.from === state.activeConversationId) {
+                    showTypingIndicator();
                 }
-                loadSection(state.activeSection);
-            })
-            .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'supplier_contacts', filter: `supplier_id=eq.${state.user?.id}` }, (payload) => {
-                const contact = payload.new;
-                if (contact.contact_type === 'whatsapp' || contact.contact_type === 'phone') {
-                    showToast('💬', 'تواصل جديد!', 'عميل جديد تواصل معك', null, null, 'success');
-                }
-                loadSection(state.activeSection);
             })
             .subscribe();
-    } catch (e) { /* silent */ }
+    } catch (e) {
+        console.error('Realtime setup error:', e);
+    }
+};
+
+const setupConversationRealtime = (otherUserId) => {
+    // Just ensure we're subscribed
+    if (!state.channel) setupGlobalRealtime();
+};
+
+const showTypingIndicator = () => {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) {
+        indicator.classList.add('show');
+        scrollToBottom();
+    }
+    clearTimeout(state.typingTimeout);
+    state.typingTimeout = setTimeout(() => {
+        indicator?.classList.remove('show');
+    }, 3000);
+};
+
+// ============================================================
+// FILTERS & SEARCH
+// ============================================================
+const initFilters = () => {
+    document.querySelectorAll('.chat-filter-btn').forEach(btn => {
+        btn.addEventListener('click', () => {
+            document.querySelectorAll('.chat-filter-btn').forEach(b => {
+                b.classList.remove('active');
+                b.setAttribute('aria-selected', 'false');
+            });
+            btn.classList.add('active');
+            btn.setAttribute('aria-selected', 'true');
+            state.filter = btn.dataset.filter;
+            renderChatList();
+        });
+    });
+
+    const searchInput = document.getElementById('chatSearch');
+    let searchTimer;
+    searchInput?.addEventListener('input', (e) => {
+        clearTimeout(searchTimer);
+        searchTimer = setTimeout(() => {
+            state.search = e.target.value.trim();
+            renderChatList();
+        }, 250);
+    });
 };
 
 // ============================================================
 // INIT
 // ============================================================
 const init = async () => {
-    console.log('🚀 كيماتو | لوحة المورد 3.1');
+    console.info('🚀 كيماتو | الرسائل');
+
     initTheme();
     initNavbar();
-    initSidebar();
-    initModals();
+    initFilters();
 
-    const isAuthed = await checkAuthAndLoad();
-    if (!isAuthed) return;
+    const authed = await checkAuth();
+    if (!authed) return;
 
-    await fetchCategories();
-    await loadSection('overview');
-    setupRealtime();
+    await fetchConversations();
+    setupGlobalRealtime();
 
-    console.log('✅ جاهز');
+    console.info('✅ جاهز');
 };
 
 supabase.auth.onAuthStateChange(async (event) => {
     if (event === 'SIGNED_OUT') window.location.href = 'index.html';
     else if (event === 'SIGNED_IN') {
-        const ok = await checkAuthAndLoad();
-        if (ok) await loadSection('overview');
+        const ok = await checkAuth();
+        if (ok) {
+            await fetchConversations();
+            setupGlobalRealtime();
+        }
     }
 });
-
-window.switchSection = switchSection;
 
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
