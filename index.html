@@ -68,7 +68,7 @@ input,select,textarea{font-family:inherit}
 @keyframes skeletonWave{0%{background-position:200% 0}100%{background-position:-200% 0}}
 @keyframes fireFlicker{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.15) rotate(5deg)}}
 @keyframes nodePulse{0%,100%{transform:scale(1);opacity:0.6}50%{transform:scale(1.5);opacity:1}}
-@keyframes tickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes newsTickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 .animate-in{animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) backwards}
 
 /* NAVBAR */
@@ -99,16 +99,125 @@ input,select,textarea{font-family:inherit}
 .dropdown-content a.logout{color:var(--c-danger)}
 .menu-toggle{display:none;width:42px;height:42px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:#fff;align-items:center;justify-content:center;font-size:1.1rem}
 
-/* COMMODITY TICKER */
-.commodity-ticker{background:rgba(0,25,51,0.95);backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);padding:8px 0;overflow:hidden;position:relative;display:none}
-.ticker-content{display:flex;gap:48px;animation:tickerScroll 60s linear infinite;white-space:nowrap;will-change:transform}
-.commodity-ticker:hover .ticker-content{animation-play-state:paused}
-.ticker-item{display:inline-flex;align-items:center;gap:8px;font-size:0.78rem;font-weight:600;color:rgba(255,255,255,0.9)}
-.ticker-item .symbol{color:rgba(255,255,255,0.6);font-size:0.72rem}
-.ticker-item .price{font-weight:800;font-variant-numeric:tabular-nums}
-.ticker-item .change{font-size:0.7rem;padding:2px 8px;border-radius:4px;font-weight:700}
-.ticker-item .change.up{background:rgba(0,168,107,0.2);color:#2ecc71}
-.ticker-item .change.down{background:rgba(255,107,53,0.2);color:#FF6B35}
+/* ============ NEWS TICKER (REAL DB) ============ */
+.news-ticker {
+    background: rgba(0, 25, 51, 0.95);
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    padding: 0;
+    overflow: hidden;
+    position: relative;
+    display: none;
+    height: 40px;
+    line-height: 40px;
+    z-index: 98;
+}
+.news-ticker.show { display: block; }
+
+.news-ticker-content {
+    display: flex;
+    align-items: center;
+    gap: 48px;
+    animation: newsTickerScroll 60s linear infinite;
+    white-space: nowrap;
+    will-change: transform;
+    padding: 0 20px;
+}
+.news-ticker:hover .news-ticker-content { animation-play-state: paused; }
+.news-ticker-content.paused { animation-play-state: paused; }
+
+.news-item {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.82rem;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.92);
+    flex-shrink: 0;
+    cursor: pointer;
+    padding: 0 4px;
+    transition: opacity 0.2s ease;
+    text-decoration: none;
+}
+.news-item:hover { opacity: 0.8; }
+
+.news-item .news-icon {
+    font-size: 1rem;
+    filter: drop-shadow(0 0 6px currentColor);
+    flex-shrink: 0;
+}
+
+.news-item .news-badge {
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: 0.66rem;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    flex-shrink: 0;
+}
+
+.news-item.info .news-badge { background: rgba(94, 184, 238, 0.2); color: #5eb8ee; }
+.news-item.success .news-badge { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
+.news-item.warning .news-badge { background: rgba(243, 156, 18, 0.2); color: #f39c12; }
+.news-item.danger .news-badge { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
+.news-item.primary .news-badge { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
+
+.news-item .news-title {
+    color: rgba(255, 255, 255, 0.95);
+    font-weight: 700;
+}
+
+.news-item .news-desc {
+    color: rgba(255, 255, 255, 0.6);
+    font-weight: 500;
+}
+
+.news-item .news-link {
+    color: #5eb8ee;
+    font-weight: 700;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    padding: 2px 6px;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+    font-size: 0.78rem;
+}
+.news-item .news-link:hover {
+    background: rgba(94, 184, 238, 0.15);
+    color: #8ecfff;
+}
+
+.news-item .news-sep {
+    color: rgba(255, 255, 255, 0.15);
+    font-weight: 300;
+    margin: 0 4px;
+}
+
+.news-ticker-close {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.08);
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+    cursor: pointer;
+    border: none;
+    z-index: 2;
+    transition: all 0.2s ease;
+}
+.news-ticker-close:hover {
+    background: rgba(231, 76, 60, 0.4);
+    color: #fff;
+}
 
 .main-container{max-width:var(--container);margin:0 auto;padding:20px 24px 60px}
 
@@ -327,7 +436,6 @@ input,select,textarea{font-family:inherit}
 .empty-state h3{font-size:1.15rem;color:var(--c-text);margin-bottom:6px;font-weight:700}
 .empty-state p{color:var(--c-text-muted);font-size:0.9rem}
 
-/* INFINITE SCROLL */
 .infinite-sentinel{height:20px;margin-top:20px}
 .infinite-loading{display:flex;justify-content:center;padding:24px;color:var(--c-text-muted);font-weight:600;font-size:0.88rem;align-items:center;gap:12px}
 .infinite-loading .dots{display:inline-flex;gap:4px}
@@ -335,7 +443,6 @@ input,select,textarea{font-family:inherit}
 .infinite-loading .dots span:nth-child(2){animation-delay:0.2s}
 .infinite-loading .dots span:nth-child(3){animation-delay:0.4s}
 
-/* FLOATING BAR */
 .floating-bar{position:fixed;bottom:0;left:0;right:0;background:var(--c-surface);border-top:1px solid var(--c-border);box-shadow:0 -8px 32px rgba(10,37,64,0.12);padding:12px 20px;z-index:95;transform:translateY(100%);transition:transform var(--t-base);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
 .floating-bar.show{transform:translateY(0)}
 .floating-bar-info{display:flex;align-items:center;gap:10px;font-weight:700;font-size:0.9rem;color:var(--c-text)}
@@ -346,7 +453,6 @@ input,select,textarea{font-family:inherit}
 .floating-btn.danger{background:var(--c-surface-2);color:var(--c-danger);border:1px solid var(--c-border)}
 .floating-btn.danger:hover{background:rgba(231,76,60,0.1)}
 
-/* MODAL */
 .modal-overlay{position:fixed;inset:0;background:rgba(10,20,30,0.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;visibility:hidden;transition:all var(--t-base)}
 .modal-overlay.show{opacity:1;visibility:visible}
 .modal{background:var(--c-surface);border-radius:var(--r-xl);box-shadow:var(--sh-xl);max-width:900px;width:100%;max-height:90vh;overflow:hidden;display:flex;flex-direction:column;transform:scale(0.95) translateY(20px);transition:transform var(--t-base)}
@@ -374,7 +480,6 @@ input,select,textarea{font-family:inherit}
 .compare-table td{color:var(--c-text-muted)}
 .compare-table tr:last-child td,.compare-table tr:last-child th{border-bottom:none}
 
-/* FORMS */
 .form-grid{display:grid;grid-template-columns:1fr 1fr;gap:16px}
 .form-group{display:flex;flex-direction:column;gap:6px}
 .form-group.full{grid-column:1 / -1}
@@ -394,7 +499,6 @@ input,select,textarea{font-family:inherit}
 .rfq-login-notice i{color:var(--c-warning);font-size:1.2rem;flex-shrink:0;margin-top:2px}
 .rfq-login-notice a{color:var(--c-primary-600);font-weight:700;text-decoration:underline}
 
-/* NOTIFICATIONS */
 .notification-panel{position:fixed;top:calc(var(--header-h) + 12px);right:24px;width:380px;max-height:600px;background:var(--c-surface);border-radius:var(--r-lg);box-shadow:var(--sh-2xl);border:1px solid var(--c-border);z-index:1000;overflow:hidden;transform:translateX(120%);transition:transform 0.4s cubic-bezier(0.22,1,0.36,1)}
 .notification-panel.show{transform:translateX(0)}
 .notification-header{display:flex;justify-content:space-between;align-items:center;padding:16px 20px;border-bottom:1px solid var(--c-border)}
@@ -410,12 +514,10 @@ input,select,textarea{font-family:inherit}
 .notification-icon.stock-alert{background:rgba(255,107,53,0.1);color:var(--c-safety-orange)}
 .notification-icon.default{background:var(--c-surface-2);color:var(--c-text-muted)}
 
-/* SCROLL TOP */
 .scroll-top{position:fixed;bottom:32px;right:24px;width:48px;height:48px;border-radius:50%;background:linear-gradient(135deg,var(--c-primary-700),var(--c-primary-900));color:#fff;font-size:1rem;box-shadow:var(--sh-lg);display:flex;align-items:center;justify-content:center;transition:all var(--t-base);opacity:0;visibility:hidden;transform:translateY(16px);z-index:90}
 .scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
 .scroll-top:hover{transform:translateY(-4px);box-shadow:var(--sh-xl)}
 
-/* TOAST */
 .toast-container{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);z-index:9999;width:min(420px,calc(100% - 32px));display:flex;flex-direction:column;gap:10px;pointer-events:none}
 .toast{background:rgba(255,255,255,0.95);backdrop-filter:blur(20px);border:1px solid var(--c-border);color:var(--c-text);padding:14px 18px;border-radius:var(--r-lg);box-shadow:var(--sh-xl);display:flex;align-items:center;gap:12px;animation:fadeUp 0.4s cubic-bezier(0.22,1,0.36,1);border-right:4px solid var(--c-primary-500);pointer-events:auto;transition:opacity var(--t-base),transform var(--t-base);position:relative}
 [data-theme="dark"] .toast{background:rgba(16,30,46,0.95)}
@@ -491,7 +593,11 @@ input,select,textarea{font-family:inherit}
 .category-card{padding:14px 8px}
 .recently-viewed .mini-card{flex:0 0 160px}
 .notification-panel{right:12px;left:12px;width:auto}
-.commodity-ticker{display:none !important}
+.news-ticker{height:36px;line-height:36px}
+.news-item{font-size:0.75rem;gap:6px}
+.news-item .news-icon{font-size:0.9rem}
+.news-item .news-desc{display:none}
+.news-ticker-close{right:8px;width:20px;height:20px;font-size:0.65rem}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
 </style>
@@ -564,8 +670,13 @@ input,select,textarea{font-family:inherit}
 </div>
 </header>
 
-<!-- COMMODITY TICKER -->
-<div class="commodity-ticker" id="commodityTicker" aria-label="أسعار المواد الخام"></div>
+<!-- NEWS TICKER (REAL DB DATA) -->
+<div class="news-ticker" id="newsTicker" aria-label="آخر الأخبار والإعلانات">
+<div class="news-ticker-content" id="newsTickerContent"></div>
+<button class="news-ticker-close" id="newsTickerClose" aria-label="إغلاق الشريط" title="إغلاق لمدة 24 ساعة">
+<i class="fas fa-times"></i>
+</button>
+</div>
 
 <!-- MAIN -->
 <main class="main-container" id="main">
@@ -983,9 +1094,6 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-// ============================================================
-// 1. SUPABASE
-// ============================================================
 const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
 
@@ -997,9 +1105,6 @@ try {
     window.supabase = supabase;
 } catch(e) { console.error('Supabase init failed:', e); }
 
-// ============================================================
-// 2. STATE
-// ============================================================
 const state = {
     categoryId: 'all',
     search: '',
@@ -1034,12 +1139,10 @@ const COMPARE_KEY = 'chemato-compare';
 const THEME_KEY = 'chemato-theme';
 const SEARCH_MODE_KEY = 'chemato-search-mode';
 const RECENT_KEY = 'chemato-recently-viewed';
+const NEWS_HIDDEN_KEY = 'chemato-news-ticker-hidden-until';
 const MAX_RECENT = 10;
-const STATS_CACHE_TTL = 30000; // 30 ثانية
+const STATS_CACHE_TTL = 30000;
 
-// ============================================================
-// 3. UTILS
-// ============================================================
 const escapeHtml = (str) => {
     if (str === null || str === undefined) return '';
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
@@ -1065,9 +1168,6 @@ const timeAgo = (dateString) => {
     return date.toLocaleDateString('ar-EG');
 };
 
-// ============================================================
-// 4. THEME
-// ============================================================
 const initTheme = () => {
     const saved = localStorage.getItem(THEME_KEY);
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1086,9 +1186,6 @@ const initTheme = () => {
     });
 };
 
-// ============================================================
-// 5. TOAST
-// ============================================================
 const removeToast = (toast) => {
     if (!toast || !toast.parentNode) return;
     toast.classList.add('removing');
@@ -1141,9 +1238,6 @@ const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = ''
 
 window.showToast = showToast;
 
-// ============================================================
-// 6. READING PROGRESS
-// ============================================================
 const initReadingProgress = () => {
     const bar = document.getElementById('readingProgress');
     if (!bar) return;
@@ -1156,9 +1250,6 @@ const initReadingProgress = () => {
     update();
 };
 
-// ============================================================
-// 7. NAVBAR
-// ============================================================
 const initNavbar = () => {
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -1184,9 +1275,6 @@ const initNavbar = () => {
     });
 };
 
-// ============================================================
-// 8. KEYBOARD
-// ============================================================
 const initKeyboardShortcuts = () => {
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
@@ -1208,8 +1296,142 @@ const initKeyboardShortcuts = () => {
 };
 
 // ============================================================
-// 9. AUTH
+// NEWS TICKER - Real Data from ticker_news table
 // ============================================================
+const NewsTicker = {
+    items: [],
+    ticker: null,
+    content: null,
+
+    async load() {
+        this.ticker = document.getElementById('newsTicker');
+        this.content = document.getElementById('newsTickerContent');
+        if (!this.ticker || !this.content) return;
+
+        const hiddenUntil = localStorage.getItem(NEWS_HIDDEN_KEY);
+        if (hiddenUntil && Date.now() < Number(hiddenUntil)) {
+            this.ticker.classList.remove('show');
+            return;
+        }
+
+        if (!supabase) return;
+
+        try {
+            const now = new Date().toISOString();
+            const { data, error } = await supabase
+                .from('ticker_news')
+                .select('id, title, description, link_url, link_text, icon, color, priority')
+                .eq('is_active', true)
+                .or(`starts_at.is.null,starts_at.lte.${now}`)
+                .or(`ends_at.is.null,ends_at.gte.${now}`)
+                .order('priority', { ascending: false })
+                .order('display_order', { ascending: true })
+                .limit(20);
+
+            if (error) throw error;
+
+            this.items = data || [];
+
+            if (!this.items.length) {
+                this.ticker.classList.remove('show');
+                return;
+            }
+
+            this.render();
+            this.ticker.classList.add('show');
+
+            this.items.forEach(item => this.trackView(item.id));
+
+            setTimeout(() => this.load(), 60000);
+
+        } catch (e) {
+            console.warn('News ticker load:', e.message);
+            this.ticker.classList.remove('show');
+        }
+    },
+
+    render() {
+        if (!this.content || !this.items.length) return;
+
+        const itemsHtml = this.items.map(item => {
+            const icon = item.icon || '📢';
+            const color = item.color || 'info';
+            const safeTitle = escapeHtml(item.title || '');
+            const safeDesc = item.description ? escapeHtml(item.description) : '';
+            const linkUrl = item.link_url ? escapeHtml(item.link_url) : '';
+            const linkText = item.link_text ? escapeHtml(item.link_text) : 'اعرف المزيد';
+
+            const badgeLabels = { info: 'جديد', success: 'مهم', warning: 'تنبيه', danger: 'عاجل', primary: 'مميز' };
+
+            const innerContent = `
+                <span class="news-icon">${icon}</span>
+                <span class="news-badge">${badgeLabels[color] || 'جديد'}</span>
+                <span class="news-title">${safeTitle}</span>
+                ${safeDesc ? `<span class="news-desc">— ${safeDesc}</span>` : ''}
+                ${linkUrl ? `<span class="news-link">${linkText} →</span>` : ''}
+                <span class="news-sep">✦</span>
+            `;
+
+            if (linkUrl) {
+                const isExternal = /^https?:\/\//i.test(linkUrl);
+                return `
+                    <a class="news-item ${color}" href="${linkUrl}"
+                       ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}
+                       data-news-id="${escapeHtml(item.id)}"
+                       onclick="NewsTicker.trackClick('${escapeHtml(item.id)}')">
+                        ${innerContent}
+                    </a>
+                `;
+            }
+
+            return `
+                <div class="news-item ${color}" data-news-id="${escapeHtml(item.id)}">
+                    ${innerContent}
+                </div>
+            `;
+        }).join('');
+
+        this.content.innerHTML = itemsHtml + itemsHtml;
+
+        const speed = Math.max(30, this.items.length * 12);
+        this.content.style.animationDuration = `${speed}s`;
+    },
+
+    async trackView(newsId) {
+        if (!supabase || !isValidUUID(newsId)) return;
+        try {
+            await supabase.rpc('increment_ticker_news_view', { p_news_id: newsId });
+        } catch (e) {}
+    },
+
+    async trackClick(newsId) {
+        if (!supabase || !isValidUUID(newsId)) return;
+        try {
+            await supabase.rpc('increment_ticker_news_click', { p_news_id: newsId });
+        } catch (e) {}
+    },
+
+    hideTemporarily() {
+        const until = Date.now() + (24 * 60 * 60 * 1000);
+        localStorage.setItem(NEWS_HIDDEN_KEY, String(until));
+        this.ticker?.classList.remove('show');
+    },
+
+    init() {
+        this.load();
+        document.getElementById('newsTickerClose')?.addEventListener('click', () => {
+            this.hideTemporarily();
+            showToast('👋', 'تم إخفاء الشريط', 'هيظهر تاني بعد 24 ساعة', null, null, 'info');
+        });
+    }
+};
+
+window.NewsTicker = NewsTicker;
+
+// ============================================================
+// REST OF THE CODE (same as before)
+// ============================================================
+
 const checkUser = async () => {
     if (!supabase) return;
     try {
@@ -1288,9 +1510,6 @@ const checkUser = async () => {
     } catch (e) { console.warn('Auth check:', e.message); }
 };
 
-// ============================================================
-// 10. FAVORITES
-// ============================================================
 const loadWishlistFromLocal = () => {
     try {
         const stored = localStorage.getItem(WISHLIST_KEY);
@@ -1345,9 +1564,6 @@ const removeFavoriteFromDB = async (productId) => {
     } catch { return false; }
 };
 
-// ============================================================
-// 11. UNREAD MESSAGES
-// ============================================================
 const loadUnreadMessagesCount = async () => {
     if (!state.user) return;
     try {
@@ -1366,9 +1582,6 @@ const loadUnreadMessagesCount = async () => {
     } catch (e) {}
 };
 
-// ============================================================
-// 12. STATS (✅ REAL DATA from actual tables)
-// ============================================================
 const animateNumber = (el, target) => {
     if (!el) return;
     const duration = 900;
@@ -1388,7 +1601,6 @@ const animateNumber = (el, target) => {
     requestAnimationFrame(step);
 };
 
-// ✅ REAL STATS - كل البيانات من الجداول الحقيقية
 const loadStats = async (force = false) => {
     if (!supabase) return;
 
@@ -1399,28 +1611,12 @@ const loadStats = async (force = false) => {
     }
 
     try {
-        // ✅ استعلامات حقيقية متوازية من الجداول
         const [prodResult, reqResult, supResult] = await Promise.all([
-            // عدد المنتجات النشطة
-            supabase
-                .from('products')
-                .select('*', { count: 'exact', head: true })
-                .eq('status', 'active'),
-            
-            // عدد الطلبات المفتوحة
-            supabase
-                .from('purchase_requests')
-                .select('*', { count: 'exact', head: true })
-                .eq('status', 'open'),
-            
-            // عدد الموردين
-            supabase
-                .from('profiles')
-                .select('*', { count: 'exact', head: true })
-                .eq('user_type', 'supplier'),
+            supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'active'),
+            supabase.from('purchase_requests').select('*', { count: 'exact', head: true }).eq('status', 'open'),
+            supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier'),
         ]);
 
-        // ✅ حساب مجموع المشاهدات من جدول products
         const { data: viewsData } = await supabase
             .from('products')
             .select('views, views_count')
@@ -1430,7 +1626,6 @@ const loadStats = async (force = false) => {
             return sum + (Number(p.views) || 0) + (Number(p.views_count) || 0);
         }, 0);
 
-        // ✅ عدد التواصلات من جدول supplier_contacts
         const { count: contactsCount } = await supabase
             .from('supplier_contacts')
             .select('*', { count: 'exact', head: true });
@@ -1445,7 +1640,6 @@ const loadStats = async (force = false) => {
 
         state.statsCache = { data, timestamp: now };
         applyStats(data);
-        
     } catch (e) {
         console.warn('Stats load error:', e.message);
     }
@@ -1459,55 +1653,6 @@ const applyStats = (data) => {
     animateNumber(document.getElementById('totalContacts'), data.total_contacts || 0);
 };
 
-// ============================================================
-// 13. COMMODITY TICKER
-// ============================================================
-const CommodityTracker = {
-    commodities: [
-        { code: 'BRENT', name: 'خام برنت' },
-        { code: 'GAS', name: 'الغاز الطبيعي' },
-        { code: 'GOLD', name: 'الذهب' },
-        { code: 'ETHYLENE', name: 'الإيثيلين' },
-        { code: 'METHANOL', name: 'الميثانول' },
-        { code: 'SODA_ASH', name: 'رماد الصودا' },
-        { code: 'SULFURIC', name: 'حمض الكبريتيك' },
-    ],
-    prices: {
-        'BRENT': { price: 78.45, change: +1.2 },
-        'GAS': { price: 2.85, change: -0.8 },
-        'GOLD': { price: 2345.60, change: +0.3 },
-        'ETHYLENE': { price: 985.00, change: +2.1 },
-        'METHANOL': { price: 342.50, change: -1.5 },
-        'SODA_ASH': { price: 285.00, change: +0.7 },
-        'SULFURIC': { price: 95.30, change: -0.4 },
-    },
-    render() {
-        const ticker = document.getElementById('commodityTicker');
-        if (!ticker) return;
-        const items = this.commodities.map(c => {
-            const data = this.prices[c.code] || { price: 0, change: 0 };
-            const changeClass = data.change >= 0 ? 'up' : 'down';
-            const changeSymbol = data.change >= 0 ? '▲' : '▼';
-            return `
-                <div class="ticker-item">
-                    <span class="symbol">${c.name}</span>
-                    <span class="price">${data.price.toFixed(2)}</span>
-                    <span class="change ${changeClass}">${changeSymbol} ${Math.abs(data.change).toFixed(2)}%</span>
-                </div>
-            `;
-        }).join('');
-        ticker.innerHTML = `<div class="ticker-content">${items}${items}</div>`;
-        ticker.style.display = 'block';
-    },
-    init() {
-        this.render();
-        setInterval(() => this.render(), 5 * 60 * 1000);
-    }
-};
-
-// ============================================================
-// 14. MOLECULAR VISUALIZER
-// ============================================================
 const MolecularVisualizer = {
     init() {
         const container = document.getElementById('moleculeVisualizer');
@@ -1529,9 +1674,6 @@ const MolecularVisualizer = {
     }
 };
 
-// ============================================================
-// 15. PRODUCTS
-// ============================================================
 const renderSkeleton = () => {
     const container = document.getElementById('productsList');
     if (!container) return;
@@ -1831,9 +1973,6 @@ const renderProductCard = (p, index = 0) => {
     `;
 };
 
-// ============================================================
-// 16. CARD ACTIONS
-// ============================================================
 const initCardActions = () => {
     document.addEventListener('click', async (e) => {
         const btn = e.target.closest('[data-action]');
@@ -1938,9 +2077,6 @@ const handleShareProduct = async (productId, name) => {
     }
 };
 
-// ============================================================
-// 17. WISHLIST UI
-// ============================================================
 const updateWishlistCount = () => {
     const count = state.wishlist.size;
     const badge = document.getElementById('wishlistCount');
@@ -1974,9 +2110,6 @@ const showWishlistModal = async () => {
     modal.classList.add('show');
 };
 
-// ============================================================
-// 18. COMPARE
-// ============================================================
 const loadCompareList = () => {
     try {
         const stored = localStorage.getItem(COMPARE_KEY);
@@ -2080,9 +2213,6 @@ const showCompareModal = async () => {
     }
 };
 
-// ============================================================
-// 19. RECENT VIEW
-// ============================================================
 const RecentTracker = {
     add(product) {
         try {
@@ -2128,9 +2258,6 @@ const RecentTracker = {
 
 window.RecentTracker = RecentTracker;
 
-// ============================================================
-// 20. FEATURED
-// ============================================================
 const loadFeatured = async () => {
     if (!supabase) return;
     try {
@@ -2156,9 +2283,6 @@ const loadFeatured = async () => {
     } catch (e) {}
 };
 
-// ============================================================
-// 21. TRENDING
-// ============================================================
 const loadTrending = async () => {
     if (!supabase) return;
     try {
@@ -2185,9 +2309,6 @@ const loadTrending = async () => {
     } catch (e) {}
 };
 
-// ============================================================
-// 22. LIVE RFQs (REAL from DB)
-// ============================================================
 const loadLiveRfqs = async () => {
     if (!supabase) return;
     try {
@@ -2236,9 +2357,6 @@ const loadLiveRfqs = async () => {
     } catch (e) {}
 };
 
-// ============================================================
-// 23. SEARCH
-// ============================================================
 const loadSuggestionsPool = async () => {
     if (!supabase) return;
     try {
@@ -2430,9 +2548,6 @@ const initSearch = () => {
     });
 };
 
-// ============================================================
-// 24. CATEGORIES (✅ REAL from DB with fallback)
-// ============================================================
 const loadCategories = async () => {
     if (!supabase) return;
     try {
@@ -2446,7 +2561,6 @@ const loadCategories = async () => {
             data = fallback.data;
         }
 
-        // ✅ إذا الجدول فارغ، نستخدم الفئات الأساسية
         if (!data?.length) {
             console.info('Categories table empty, using defaults');
             return;
@@ -2456,7 +2570,6 @@ const loadCategories = async () => {
 
         const container = document.getElementById('filterButtons');
         if (container) {
-            // مسح القديم (بعد "الكل")
             container.innerHTML = `
                 <button class="filter-chip active" data-category-id="all" role="tab" aria-selected="true">
                     <i class="fas fa-th"></i> الكل
@@ -2502,15 +2615,12 @@ const loadCategories = async () => {
     }
 };
 
-// ✅ الفئات الرئيسية - تجيب من الـ DB الحقيقي
 const renderCategoryGrid = async () => {
     const grid = document.getElementById('categoryGrid');
     if (!grid) return;
 
-    // ✅ جيب الفئات من الـ DB
     let categories = state.categories || [];
 
-    // لو مفيش فئات، جيب من جدول categories مباشرة
     if (!categories.length && supabase) {
         try {
             const { data } = await supabase.from('categories').select('id, name, icon').limit(12);
@@ -2519,7 +2629,6 @@ const renderCategoryGrid = async () => {
         } catch (e) {}
     }
 
-    // لو لسه مفيش، استخدم الفئات الأساسية
     if (!categories.length) {
         categories = [
             { id: 'fallback-acids', name: 'أحماض', icon: '🧪' },
@@ -2533,12 +2642,11 @@ const renderCategoryGrid = async () => {
         ];
     }
 
-    // ✅ جيب عدد المنتجات لكل فئة من الـ DB
     const counts = {};
     try {
         const { data: productsData } = await supabase
             .from('products')
-            .select('category_id, category')
+            .select('category_id')
             .eq('status', 'active');
 
         (productsData || []).forEach(p => {
@@ -2571,17 +2679,11 @@ const renderCategoryGrid = async () => {
         document.getElementById('productsList')?.scrollIntoView({ behavior: 'smooth' });
     });
 
-    // ✅ تشغيل الـ reveal بعد الإضافة
     document.querySelectorAll('.reveal').forEach(el => {
-        if (!el.classList.contains('revealed')) {
-            el.classList.add('revealed');
-        }
+        if (!el.classList.contains('revealed')) el.classList.add('revealed');
     });
 };
 
-// ============================================================
-// 25. ADVANCED FILTERS
-// ============================================================
 const initAdvancedFilters = () => {
     const toggle = document.getElementById('advancedToggle');
     const panel = document.getElementById('advancedFilters');
@@ -2658,9 +2760,6 @@ const initPriceSlider = () => {
     maxInput.addEventListener('change', apply);
 };
 
-// ============================================================
-// 26. URL SYNC
-// ============================================================
 const updateURL = () => {
     const params = new URLSearchParams();
     if (state.search) params.set('search', state.search);
@@ -2698,9 +2797,6 @@ const readURL = () => {
     if (stockFilterEl) stockFilterEl.value = state.stockFilter;
 };
 
-// ============================================================
-// 27. INFINITE SCROLL
-// ============================================================
 const initInfiniteScroll = () => {
     const sentinel = document.getElementById('infiniteSentinel');
     if (!sentinel || !('IntersectionObserver' in window)) return;
@@ -2718,9 +2814,6 @@ const initInfiniteScroll = () => {
     observer.observe(sentinel);
 };
 
-// ============================================================
-// 28. SCROLL TOP
-// ============================================================
 const initScrollTop = () => {
     const btn = document.getElementById('scrollTopBtn');
     if (!btn) return;
@@ -2730,9 +2823,6 @@ const initScrollTop = () => {
     btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 };
 
-// ============================================================
-// 29. SHARE
-// ============================================================
 const initShare = () => {
     document.getElementById('shareBtn')?.addEventListener('click', async () => {
         if (navigator.share) {
@@ -2748,9 +2838,6 @@ const initShare = () => {
     });
 };
 
-// ============================================================
-// 30. QUICK VIEW
-// ============================================================
 const initQuickView = () => {
     document.addEventListener('dblclick', (e) => {
         const media = e.target.closest('.card-media');
@@ -2819,9 +2906,6 @@ const showQuickView = async (productId) => {
     }
 };
 
-// ============================================================
-// 31. RFQ
-// ============================================================
 const showRfqModal = () => {
     const notice = document.getElementById('rfqLoginNotice');
     const submitBtn = document.getElementById('submitRfqBtn');
@@ -2890,9 +2974,6 @@ const initRfqForm = () => {
     });
 };
 
-// ============================================================
-// 32. LOG CONTACT
-// ============================================================
 const logContact = async ({ supplierId, productId, type }) => {
     if (!supabase || !isValidUUID(supplierId)) return;
     try {
@@ -2930,9 +3011,6 @@ const observeProductViews = () => {
     document.querySelectorAll('.card[data-product-id]').forEach(card => observer.observe(card));
 };
 
-// ============================================================
-// 33. NOTIFICATIONS
-// ============================================================
 const SmartNotifications = {
     notifications: [],
     async load() {
@@ -2997,9 +3075,6 @@ const SmartNotifications = {
     }
 };
 
-// ============================================================
-// 34. SCROLL REVEAL
-// ============================================================
 const initScrollReveal = () => {
     if (!('IntersectionObserver' in window)) return;
     const observer = new IntersectionObserver((entries) => {
@@ -3013,9 +3088,6 @@ const initScrollReveal = () => {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 };
 
-// ============================================================
-// 35. PWA
-// ============================================================
 const initPWA = () => {
     const installBtn = document.getElementById('installBtn');
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -3036,9 +3108,6 @@ const initPWA = () => {
     });
 };
 
-// ============================================================
-// 36. MODALS
-// ============================================================
 const initModals = () => {
     document.getElementById('compareToggle')?.addEventListener('click', showCompareModal);
     document.getElementById('openCompareBtn')?.addEventListener('click', showCompareModal);
@@ -3073,14 +3142,14 @@ const initModals = () => {
     });
 };
 
-// ============================================================
-// 37. REALTIME
-// ============================================================
 const setupRealtime = () => {
     if (!supabase) return;
     try {
         state.channel = supabase
             .channel('chemato_realtime')
+            .on('postgres_changes', { event: '*', schema: 'public', table: 'ticker_news' }, () => {
+                NewsTicker.load();
+            })
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'products' }, () => {
                 loadStats(true);
             })
@@ -3088,11 +3157,8 @@ const setupRealtime = () => {
     } catch (e) {}
 };
 
-// ============================================================
-// 38. INIT
-// ============================================================
 const init = async () => {
-    console.info('🚀 كيماتو 3.0 جاري التحميل...');
+    console.info('🚀 كيماتو 3.1 جاري التحميل...');
 
     if (!supabase) {
         const container = document.getElementById('productsList');
@@ -3122,22 +3188,20 @@ const init = async () => {
     initQuickView();
     initScrollReveal();
     SmartNotifications.init();
+    NewsTicker.init();
     MolecularVisualizer.init();
-    CommodityTracker.init();
 
     updateWishlistCount();
     updateCompareUI();
 
     readURL();
 
-    // ✅ المرحلة 1: البيانات الأساسية (فئات + إحصائيات + مستخدم)
     await Promise.all([
         loadStats(true).catch(e => console.warn('Stats:', e.message)),
         loadCategories().catch(e => console.warn('Categories:', e.message)),
         checkUser().catch(e => console.warn('Auth:', e.message)),
     ]);
 
-    // ✅ المرحلة 2: عرض الفئات والمنتجات
     await Promise.all([
         renderCategoryGrid().catch(e => console.warn('CategoryGrid:', e.message)),
         loadSuggestionsPool().catch(e => console.warn('Suggestions:', e.message)),
@@ -3159,7 +3223,7 @@ const init = async () => {
 
     setInterval(() => loadStats(true).catch(() => {}), 60000);
 
-    console.info('✅ كيماتو 3.0 جاهز');
+    console.info('✅ كيماتو 3.1 جاهز');
 };
 
 if (supabase) {
