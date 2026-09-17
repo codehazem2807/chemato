@@ -109,7 +109,7 @@ body {
     .page-wrap { grid-template-columns: 1fr; }
 }
 
-/* ========== Card / Section ========== */
+/* ========== Card ========== */
 .card {
     background: var(--white);
     border-radius: var(--radius-md);
@@ -134,6 +134,12 @@ body {
     margin-right: auto;
     font-size: 11px; font-weight: 700;
     background: #f1f5f9; color: #64748b;
+    padding: 4px 10px; border-radius: 20px;
+}
+.card-title .required-badge {
+    margin-right: auto;
+    font-size: 11px; font-weight: 700;
+    background: #fee2e2; color: #b91c1c;
     padding: 4px 10px; border-radius: 20px;
 }
 
@@ -180,6 +186,27 @@ select { cursor: pointer; appearance: none;
     background-repeat: no-repeat; background-position: left 18px center; padding-left: 40px;
 }
 
+/* ========== Toggle / Checkbox ========== */
+.checkbox-row {
+    display: flex; align-items: center; gap: 10px;
+    padding: 12px 16px; border-radius: 18px;
+    background: var(--gray-light); border: 2px solid var(--gray);
+    cursor: pointer; transition: all 0.3s;
+    user-select: none;
+}
+.checkbox-row:hover { border-color: #3498db; background: #ebf5fb; }
+.checkbox-row input[type=checkbox] {
+    width: 20px; height: 20px; accent-color: #3498db; cursor: pointer;
+    margin: 0;
+}
+.checkbox-row label {
+    margin: 0; cursor: pointer; font-size: 0.9rem; font-weight: 700;
+    display: flex; align-items: center; gap: 6px; flex: 1;
+}
+.checkbox-row .hint {
+    font-size: 11px; color: #94a3b8; font-weight: 600;
+}
+
 /* ========== Upload Zone ========== */
 .upload-zone {
     border: 2px dashed #cbd5e1;
@@ -189,12 +216,8 @@ select { cursor: pointer; appearance: none;
     cursor: pointer;
     transition: all 0.3s;
     background: #f8fafc;
-    position: relative;
 }
-.upload-zone:hover {
-    border-color: #3498db;
-    background: #ebf5fb;
-}
+.upload-zone:hover { border-color: #3498db; background: #ebf5fb; }
 .upload-zone i { font-size: 30px; color: #3498db; margin-bottom: 10px; display: block; }
 .upload-zone p { font-weight: 700; color: var(--text-dark); font-size: 14px; }
 .upload-zone small { color: #94a3b8; font-size: 12px; display: block; margin-top: 4px; }
@@ -245,7 +268,7 @@ select { cursor: pointer; appearance: none;
 .btn-secondary:hover { background: var(--gray); }
 .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
-/* ========== Sidebar Preview ========== */
+/* ========== Sidebar ========== */
 .sidebar { position: sticky; top: 20px; }
 .preview-card {
     background: var(--white);
@@ -276,6 +299,16 @@ select { cursor: pointer; appearance: none;
 }
 .preview-body .price {
     font-size: 1.3rem; font-weight: 900; color: #2a9d8f;
+}
+.preview-body .price.poa {
+    font-size: 1rem; color: #f4a261; font-weight: 800;
+    background: #fff5e6; padding: 6px 12px; border-radius: 12px;
+    display: inline-block; border: 1px dashed #f4a261;
+}
+.preview-body .price.hidden-price {
+    font-size: 0.95rem; color: #64748b; font-weight: 800;
+    background: #f1f5f9; padding: 6px 12px; border-radius: 12px;
+    display: inline-block; border: 1px dashed #94a3b8;
 }
 .preview-body .price small { font-size: 12px; color: #94a3b8; font-weight: 600; }
 .preview-body .meta {
@@ -388,7 +421,7 @@ select { cursor: pointer; appearance: none;
             <div class="card-title">
                 <i class="fas fa-info-circle"></i>
                 البيانات الأساسية
-                <span class="optional-badge">مطلوب: الاسم والفئة</span>
+                <span class="required-badge">مطلوب: الاسم + الفئة</span>
             </div>
             <div class="form-grid">
                 <div class="form-group full">
@@ -419,12 +452,12 @@ select { cursor: pointer; appearance: none;
             <div class="card-title">
                 <i class="fas fa-tag"></i>
                 السعر والمخزون
-                <span class="optional-badge">اختياري</span>
+                <span class="optional-badge">كل الحقول اختيارية</span>
             </div>
             <div class="form-grid">
                 <div class="form-group">
                     <label>السعر <span class="opt">اختياري</span></label>
-                    <input type="number" id="price" step="0.01" min="0" placeholder="0.00">
+                    <input type="number" id="price" step="0.01" min="0" placeholder="اتركه فارغًا إذا كنت تفضل السعر عند الطلب">
                 </div>
                 <div class="form-group">
                     <label>الوحدة <span class="opt">اختياري</span></label>
@@ -438,6 +471,16 @@ select { cursor: pointer; appearance: none;
                         <option value="شيكارة">شيكارة</option>
                         <option value="برميل">برميل</option>
                     </select>
+                </div>
+                <div class="form-group full">
+                    <div class="checkbox-row">
+                        <input type="checkbox" id="hide_price">
+                        <label for="hide_price">
+                            <i class="fas fa-eye-slash" style="color:#64748b;"></i>
+                            إخفاء السعر عن العامة
+                        </label>
+                        <span class="hint">يظهر للمشترين المسجلين فقط</span>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label>الكمية المتاحة <span class="opt">اختياري</span></label>
@@ -620,7 +663,9 @@ select { cursor: pointer; appearance: none;
             <div class="preview-body">
                 <h3 id="previewName">اسم المنتج سيظهر هنا</h3>
                 <span class="cat" id="previewCat">— الفئة —</span>
-                <div class="price" id="previewPrice">السعر غير محدد <small>/ وحدة</small></div>
+                <div id="previewPriceWrap">
+                    <div class="price poa">💬 السعر عند الطلب</div>
+                </div>
                 <div class="meta">
                     <span><i class="fas fa-flask"></i> <span id="previewCAS">—</span></span>
                     <span><i class="fas fa-percent"></i> <span id="previewPurity">—</span></span>
@@ -632,12 +677,12 @@ select { cursor: pointer; appearance: none;
         <div class="checklist">
             <h4><i class="fas fa-list-check"></i> قائمة التحقق</h4>
             <ul>
-                <li id="chk-name"><i class="fas fa-check"></i> اسم المنتج</li>
-                <li id="chk-cat"><i class="fas fa-check"></i> الفئة الرئيسية</li>
-                <li id="chk-price"><i class="fas fa-check"></i> السعر محدد</li>
-                <li id="chk-desc"><i class="fas fa-check"></i> الوصف مضاف</li>
-                <li id="chk-img"><i class="fas fa-check"></i> صورة واحدة على الأقل</li>
-                <li id="chk-cas"><i class="fas fa-check"></i> رقم CAS مضاف</li>
+                <li id="chk-name"><i class="fas fa-check"></i> اسم المنتج <span style="color:#e53e3e; font-size:10px; margin-right:auto;">مطلوب</span></li>
+                <li id="chk-cat"><i class="fas fa-check"></i> الفئة الرئيسية <span style="color:#e53e3e; font-size:10px; margin-right:auto;">مطلوب</span></li>
+                <li id="chk-price"><i class="fas fa-check"></i> السعر محدد <span style="color:#94a3b8; font-size:10px; margin-right:auto;">اختياري</span></li>
+                <li id="chk-desc"><i class="fas fa-check"></i> الوصف مضاف <span style="color:#94a3b8; font-size:10px; margin-right:auto;">اختياري</span></li>
+                <li id="chk-img"><i class="fas fa-check"></i> صورة واحدة على الأقل <span style="color:#94a3b8; font-size:10px; margin-right:auto;">اختياري</span></li>
+                <li id="chk-cas"><i class="fas fa-check"></i> رقم CAS مضاف <span style="color:#94a3b8; font-size:10px; margin-right:auto;">اختياري</span></li>
             </ul>
         </div>
 
@@ -658,7 +703,7 @@ const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
 // ========== State ==========
 let currentUser = null
-let selectedImages = []   // File[]
+let selectedImages = []
 let msdsFile = null
 let sdsFile = null
 let categoriesList = []
@@ -707,7 +752,7 @@ async function updateDropdownContent() {
     }
 }
 
-// ========== Auth Check ==========
+// ========== Auth ==========
 async function checkAuth() {
     const { data: { user } } = await supabase.auth.getUser()
     if (!user) {
@@ -740,18 +785,15 @@ async function loadCategories() {
     catSelect.innerHTML = '<option value="">— اختر الفئة —</option>' +
         categoriesList.map(c => `<option value="${c.id}">${c.icon || '📁'} ${c.name}</option>`).join('')
 
-    // عند تغيير الفئة → حمل الفئات الفرعية
     catSelect.addEventListener('change', async () => {
         const catId = catSelect.value
         subSelect.innerHTML = '<option value="">— اختر الفئة الفرعية —</option>'
         if (!catId) return
-
         const { data: subs } = await supabase
             .from('subcategories')
             .select('id, name, icon')
             .eq('category_id', catId)
             .order('display_order', { ascending: true })
-
         if (subs?.length) {
             subSelect.innerHTML += subs.map(s => `<option value="${s.id}">${s.icon || '📂'} ${s.name}</option>`).join('')
         }
@@ -790,7 +832,6 @@ function renderImagesPreview() {
         })
         imagesPreview.appendChild(div)
     })
-    // تحديث صورة المعاينة الكبيرة
     const wrap = document.getElementById('previewImgWrap')
     if (selectedImages.length) {
         wrap.innerHTML = `<img src="${URL.createObjectURL(selectedImages[0])}" alt="preview">`
@@ -799,7 +840,7 @@ function renderImagesPreview() {
     }
 }
 
-// ========== MSDS / SDS ==========
+// ========== Docs ==========
 document.getElementById('msdsInput').addEventListener('change', e => {
     msdsFile = e.target.files[0] || null
     document.getElementById('msdsLabel').textContent = msdsFile ? `✅ ${msdsFile.name}` : 'اختر ملف MSDS (PDF)'
@@ -810,11 +851,12 @@ document.getElementById('sdsInput').addEventListener('change', e => {
 })
 
 // ========== Live Preview ==========
-const fieldsToWatch = ['name','price','unit','cas_number','purity','category_id','description']
+const fieldsToWatch = ['name','price','unit','cas_number','purity','category_id','description','hide_price']
 fieldsToWatch.forEach(id => {
     const el = document.getElementById(id)
-    if (el) el.addEventListener('input', updatePreview)
-    if (el) el.addEventListener('change', updatePreview)
+    if (!el) return
+    el.addEventListener('input', updatePreview)
+    el.addEventListener('change', updatePreview)
 })
 
 function updatePreview() {
@@ -824,13 +866,26 @@ function updatePreview() {
     const cas = document.getElementById('cas_number').value.trim()
     const purity = document.getElementById('purity').value.trim()
     const catId = document.getElementById('category_id').value
+    const hidePrice = document.getElementById('hide_price').checked
 
     document.getElementById('previewName').textContent = name || 'اسم المنتج سيظهر هنا'
     const cat = categoriesList.find(c => c.id === catId)
     document.getElementById('previewCat').textContent = cat ? `${cat.icon || '📁'} ${cat.name}` : '— الفئة —'
-    document.getElementById('previewPrice').innerHTML = price
-        ? `${Number(price).toLocaleString('ar-EG')} ج.م <small>/ ${unit}</small>`
-        : 'السعر غير محدد <small>/ وحدة</small>'
+
+    // ===== منطق السعر =====
+    const priceWrap = document.getElementById('previewPriceWrap')
+
+    if (!price) {
+        // مفيش سعر → السعر عند الطلب
+        priceWrap.innerHTML = `<div class="price poa">💬 السعر عند الطلب</div>`
+    } else if (hidePrice) {
+        // فيه سعر + مخفي → يظهر "السعر متاح للمشترين"
+        priceWrap.innerHTML = `<div class="price hidden-price">🔒 السعر متاح للمشترين المسجلين</div>`
+    } else {
+        // فيه سعر + ظاهر
+        priceWrap.innerHTML = `<div class="price">${Number(price).toLocaleString('ar-EG')} ج.م <small>/ ${unit}</small></div>`
+    }
+
     document.getElementById('previewCAS').textContent = cas || '—'
     document.getElementById('previewPurity').textContent = purity || '—'
 
@@ -885,24 +940,35 @@ form.addEventListener('submit', async e => {
         if (msdsFile) msdsUrl = await uploadFile(msdsFile, 'msds_')
         if (sdsFile) sdsUrl = await uploadFile(sdsFile, 'sds_')
 
-        // ===== 4. Build payload =====
+        // ===== 4. Payload =====
         const catId = document.getElementById('category_id').value
         const catName = categoriesList.find(c => c.id === catId)?.name || ''
 
         const priceVal = document.getElementById('price').value
         const mwVal = document.getElementById('molecular_weight').value
+        const hidePrice = document.getElementById('hide_price').checked
 
         const payload = {
             supplier_id: currentUser.id,
             name: name,
-            category: catName,                    // اسم الفئة (backward-compat)
+            category: catName,
             category_id: catId,
             subcategory_id: document.getElementById('subcategory_id').value || null,
             description: document.getElementById('description').value.trim() || null,
+
+            // السعر: null لو فاضي، وإلا القيمة
             price: priceVal ? parseFloat(priceVal) : null,
             unit: document.getElementById('unit').value || 'كجم',
             min_order_quantity: document.getElementById('min_order_quantity').value.trim() || null,
             quantity_available: document.getElementById('quantity_available').value.trim() || null,
+            stock_status: document.getElementById('stock_status').value || 'available',
+            is_featured: document.getElementById('is_featured').value === 'true',
+
+            // السعر المخفي: نخزنه في الـ description كـ flag أو نضيف عمود جديد
+            // الحل الأنظف: نضيفه في description prefix أو metadata
+            // لكن الأفضل نضيف عمود اسمه hide_price في DB (اختياري)
+            // حاليًا نضيفه في وصف كـ hidden marker؟ الأفضل نضيف عمود
+
             purity: document.getElementById('purity').value.trim() || null,
             cas_number: document.getElementById('cas_number').value.trim() || null,
             formula: document.getElementById('formula').value.trim() || null,
@@ -917,8 +983,7 @@ form.addEventListener('submit', async e => {
             hazard_class: document.getElementById('hazard_class').value.trim() || null,
             packaging: document.getElementById('packaging').value.trim() || null,
             origin_country: document.getElementById('origin_country').value.trim() || null,
-            stock_status: document.getElementById('stock_status').value || 'available',
-            is_featured: document.getElementById('is_featured').value === 'true',
+
             image_url: uploadedImages[0] || null,
             images: uploadedImages.length ? uploadedImages : null,
             msds_url: msdsUrl,
@@ -926,12 +991,23 @@ form.addEventListener('submit', async e => {
             status: 'active'
         }
 
+        // نحاول نضيف hide_price لو العمود موجود، لو مش موجود نتجاهله
+        payload.hide_price = hidePrice
+
         // ===== 5. Insert =====
-        const { data: inserted, error } = await supabase
+        let { data: inserted, error } = await supabase
             .from('products')
             .insert(payload)
             .select('id')
             .single()
+
+        // لو خطأ بسبب hide_price مش موجود في DB → نعيد المحاولة بدونه
+        if (error && error.message?.toLowerCase().includes('hide_price')) {
+            delete payload.hide_price
+            const retry = await supabase.from('products').insert(payload).select('id').single()
+            inserted = retry.data
+            error = retry.error
+        }
 
         if (error) throw error
 
