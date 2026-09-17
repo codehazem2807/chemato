@@ -30,6 +30,7 @@
 <link rel="apple-touch-icon" href="logo.png">
 
 <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co">
+<link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
@@ -56,6 +57,8 @@
   --rose:        #f43f5e;
   --violet:      #8b5cf6;
   --cyan:        #06b6d4;
+  --chat:        #8b5cf6;
+  --chat-dark:   #7c3aed;
 
   --bg:          #f8fafc;
   --surface:     #ffffff;
@@ -69,7 +72,6 @@
   --shadow-md:   0 4px 16px rgba(15, 23, 42, 0.08);
   --shadow-lg:   0 12px 32px rgba(15, 23, 42, 0.10);
   --shadow-xl:   0 24px 56px rgba(15, 23, 42, 0.14);
-  --shadow-glow: 0 0 40px rgba(59, 130, 246, 0.25);
 
   --r-sm: 10px;
   --r-md: 16px;
@@ -83,6 +85,7 @@
 
   --container: 1320px;
   --header-h: 72px;
+  --font-scale: 1;
 }
 
 [data-theme="dark"] {
@@ -102,19 +105,9 @@
   --shadow-xl:   0 24px 56px rgba(0, 0, 0, 0.7);
 }
 
-/* ============================================================
-   RESET
-   ============================================================ */
-*, *::before, *::after {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
-}
-
-html {
-  scroll-behavior: smooth;
-  -webkit-text-size-adjust: 100%;
-}
+/* RESET */
+*, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+html { scroll-behavior: smooth; -webkit-text-size-adjust: 100%; }
 
 body {
   font-family: 'Cairo', system-ui, -apple-system, sans-serif;
@@ -126,27 +119,13 @@ body {
   transition: background-color var(--t-base), color var(--t-base);
 }
 
-img {
-  max-width: 100%;
-  display: block;
-}
+img { max-width: 100%; display: block; }
+button { font-family: inherit; cursor: pointer; border: none; background: none; color: inherit; }
+a { color: inherit; text-decoration: none; }
 
-button {
-  font-family: inherit;
-  cursor: pointer;
-  border: none;
-  background: none;
-  color: inherit;
-}
+:focus-visible { outline: 3px solid var(--primary-500); outline-offset: 2px; border-radius: var(--r-sm); }
 
-a {
-  color: inherit;
-  text-decoration: none;
-}
-
-/* ============================================================
-   PROGRESS
-   ============================================================ */
+/* READING PROGRESS */
 .reading-progress {
   position: fixed;
   top: 0;
@@ -159,9 +138,7 @@ a {
   box-shadow: 0 0 12px rgba(16, 185, 129, 0.6);
 }
 
-/* ============================================================
-   NAVBAR
-   ============================================================ */
+/* NAVBAR */
 .navbar {
   position: sticky;
   top: 0;
@@ -185,14 +162,7 @@ a {
   gap: 16px;
 }
 
-.logo {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  color: #fff;
-  font-weight: 800;
-  font-size: 20px;
-}
+.logo { display: flex; align-items: center; gap: 12px; color: #fff; font-weight: 800; font-size: 20px; }
 
 .logo-img {
   width: 44px;
@@ -207,12 +177,7 @@ a {
 .logo-text-blue { color: #60a5fa; }
 .logo-text-gray { color: rgba(255, 255, 255, 0.55); font-weight: 400; font-size: 0.9em; }
 
-.nav-links {
-  display: flex;
-  gap: 4px;
-  align-items: center;
-  flex-wrap: wrap;
-}
+.nav-links { display: flex; gap: 4px; align-items: center; flex-wrap: wrap; }
 
 .nav-links a {
   color: rgba(255, 255, 255, 0.75);
@@ -226,12 +191,7 @@ a {
   transition: all var(--t-fast);
 }
 
-.nav-links a:hover {
-  background: rgba(255, 255, 255, 0.1);
-  color: #fff;
-  transform: translateY(-1px);
-}
-
+.nav-links a:hover { background: rgba(255, 255, 255, 0.1); color: #fff; transform: translateY(-1px); }
 .nav-links a.active {
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.25), rgba(16, 185, 129, 0.2));
   color: #60a5fa;
@@ -251,10 +211,7 @@ a {
   transition: all var(--t-fast);
 }
 
-.theme-toggle:hover {
-  background: rgba(255, 255, 255, 0.16);
-  transform: rotate(20deg) scale(1.05);
-}
+.theme-toggle:hover { background: rgba(255, 255, 255, 0.16); transform: rotate(20deg) scale(1.05); }
 
 .menu-toggle {
   display: none;
@@ -268,18 +225,10 @@ a {
   font-size: 1.1rem;
 }
 
-/* ============================================================
-   MAIN CONTAINER
-   ============================================================ */
-.main-container {
-  max-width: var(--container);
-  margin: 0 auto;
-  padding: 24px 24px 80px;
-}
+/* MAIN */
+.main-container { max-width: var(--container); margin: 0 auto; padding: 24px 24px 80px; }
 
-/* ============================================================
-   PAGE LOADER
-   ============================================================ */
+/* LOADER */
 .page-loader {
   text-align: center;
   padding: 100px 20px;
@@ -300,25 +249,12 @@ a {
   margin: 0 auto 20px;
 }
 
-@keyframes spin {
-  to { transform: rotate(360deg); }
-}
+@keyframes spin { to { transform: rotate(360deg); } }
 
-.page-loader h3 {
-  font-size: 1.15rem;
-  font-weight: 700;
-  color: var(--text);
-  margin-bottom: 8px;
-}
+.page-loader h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: 8px; }
+.page-loader p { font-size: 0.9rem; color: var(--text-muted); }
 
-.page-loader p {
-  font-size: 0.9rem;
-  color: var(--text-muted);
-}
-
-/* ============================================================
-   HERO
-   ============================================================ */
+/* POST HERO */
 .post-hero {
   position: relative;
   border-radius: var(--r-xl);
@@ -354,12 +290,7 @@ a {
   -webkit-mask-image: radial-gradient(ellipse at center, black 30%, transparent 75%);
 }
 
-.hero-content {
-  position: relative;
-  z-index: 2;
-  max-width: 900px;
-  margin: 0 auto;
-}
+.hero-content { position: relative; z-index: 2; max-width: 900px; margin: 0 auto; }
 
 .hero-category {
   display: inline-flex;
@@ -374,11 +305,12 @@ a {
   font-weight: 700;
   margin-bottom: 24px;
   backdrop-filter: blur(10px);
+  cursor: pointer;
+  transition: all var(--t-fast);
 }
 
-.hero-category i {
-  color: #60a5fa;
-}
+.hero-category:hover { background: linear-gradient(135deg, rgba(59, 130, 246, 0.4), rgba(16, 185, 129, 0.3)); transform: translateY(-2px); }
+.hero-category i { color: #60a5fa; }
 
 .post-hero h1 {
   font-size: clamp(1.6rem, 4vw, 2.8rem);
@@ -409,19 +341,54 @@ a {
   font-weight: 500;
 }
 
-.hero-meta-item i {
-  color: #60a5fa;
-  font-size: 0.9rem;
+.hero-meta-item i { color: #60a5fa; font-size: 0.9rem; }
+.hero-meta-item strong { color: #fff; font-weight: 800; }
+
+/* CONTROL BAR */
+.post-controls {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  margin-bottom: 24px;
+  padding: 12px 16px;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--r-lg);
+  box-shadow: var(--shadow-sm);
+  align-items: center;
 }
 
-.hero-meta-item strong {
+.control-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 14px;
+  border-radius: var(--r-md);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  background: var(--surface-2);
+  border: 1px solid var(--border);
+  transition: all var(--t-fast);
+  white-space: nowrap;
+}
+
+.control-btn:hover {
+  background: var(--primary-600);
   color: #fff;
-  font-weight: 800;
+  border-color: var(--primary-600);
+  transform: translateY(-1px);
 }
 
-/* ============================================================
-   FEATURED IMAGE
-   ============================================================ */
+.control-btn.active {
+  background: var(--accent);
+  color: #fff;
+  border-color: var(--accent);
+}
+
+.control-spacer { flex: 1; }
+
+/* FEATURED IMAGE */
 .post-featured-image {
   border-radius: var(--r-lg);
   overflow: hidden;
@@ -432,15 +399,9 @@ a {
   position: relative;
 }
 
-.post-featured-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
+.post-featured-image img { width: 100%; height: 100%; object-fit: cover; }
 
-/* ============================================================
-   LAYOUT
-   ============================================================ */
+/* LAYOUT */
 .post-layout {
   display: grid;
   grid-template-columns: 1fr 320px;
@@ -448,9 +409,7 @@ a {
   align-items: start;
 }
 
-.post-main {
-  min-width: 0;
-}
+.post-main { min-width: 0; }
 
 .post-sidebar {
   position: sticky;
@@ -460,9 +419,7 @@ a {
   gap: 18px;
 }
 
-/* ============================================================
-   BACK BUTTON
-   ============================================================ */
+/* BACK BUTTON */
 .back-btn {
   display: inline-flex;
   align-items: center;
@@ -487,16 +444,14 @@ a {
   box-shadow: var(--shadow-md);
 }
 
-/* ============================================================
-   POST CONTENT
-   ============================================================ */
+/* POST CONTENT */
 .post-content {
   background: var(--surface);
   border-radius: var(--r-lg);
   padding: 44px 48px;
   border: 1px solid var(--border);
   box-shadow: var(--shadow-sm);
-  font-size: 1.06rem;
+  font-size: calc(1.06rem * var(--font-scale));
   line-height: 2;
   color: var(--text-muted);
 }
@@ -511,10 +466,7 @@ a {
   scroll-margin-top: calc(var(--header-h) + 20px);
 }
 
-.post-content h1 {
-  font-size: 1.9rem;
-  margin: 36px 0 18px;
-}
+.post-content h1 { font-size: 1.9rem; margin: 36px 0 18px; }
 
 .post-content h2 {
   font-size: 1.5rem;
@@ -530,29 +482,14 @@ a {
   color: var(--primary-600);
 }
 
-[data-theme="dark"] .post-content h3 {
-  color: #60a5fa;
-}
+[data-theme="dark"] .post-content h3 { color: #60a5fa; }
 
-.post-content h4 {
-  font-size: 1.08rem;
-  margin: 24px 0 12px;
-}
+.post-content h4 { font-size: 1.08rem; margin: 24px 0 12px; }
 
-.post-content p {
-  margin-bottom: 18px;
-  color: var(--text-muted);
-}
+.post-content p { margin-bottom: 18px; color: var(--text-muted); }
 
-.post-content strong {
-  color: var(--text);
-  font-weight: 800;
-}
-
-.post-content em {
-  font-style: italic;
-  color: var(--primary-600);
-}
+.post-content strong { color: var(--text); font-weight: 800; }
+.post-content em { font-style: italic; color: var(--primary-600); }
 
 .post-content a {
   color: var(--primary-600);
@@ -563,26 +500,13 @@ a {
   transition: color var(--t-fast);
 }
 
-.post-content a:hover {
-  color: var(--accent-dark);
-}
+.post-content a:hover { color: var(--accent-dark); }
 
 .post-content ul,
-.post-content ol {
-  margin: 16px 0 22px;
-  padding-right: 30px;
-}
+.post-content ol { margin: 16px 0 22px; padding-right: 30px; }
 
-.post-content li {
-  margin-bottom: 12px;
-  line-height: 1.9;
-  color: var(--text-muted);
-}
-
-.post-content li::marker {
-  color: var(--accent);
-  font-weight: 900;
-}
+.post-content li { margin-bottom: 12px; line-height: 1.9; color: var(--text-muted); }
+.post-content li::marker { color: var(--accent); font-weight: 900; }
 
 .post-content img {
   max-width: 100%;
@@ -625,12 +549,7 @@ a {
   box-shadow: var(--shadow-md);
 }
 
-.post-content pre code {
-  background: transparent;
-  color: inherit;
-  padding: 0;
-  border: none;
-}
+.post-content pre code { background: transparent; color: inherit; padding: 0; border: none; }
 
 .post-content table {
   width: 100%;
@@ -648,26 +567,12 @@ a {
   text-align: right;
 }
 
-.post-content table th {
-  background: var(--surface-2);
-  font-weight: 800;
-  color: var(--text);
-}
+.post-content table th { background: var(--surface-2); font-weight: 800; color: var(--text); }
+.post-content table td { color: var(--text-muted); }
 
-.post-content table td {
-  color: var(--text-muted);
-}
+.post-content hr { border: none; height: 1px; background: var(--border); margin: 36px 0; }
 
-.post-content hr {
-  border: none;
-  height: 1px;
-  background: var(--border);
-  margin: 36px 0;
-}
-
-/* ============================================================
-   TAGS
-   ============================================================ */
+/* TAGS */
 .post-tags {
   display: flex;
   gap: 10px;
@@ -688,9 +593,7 @@ a {
   margin-left: 8px;
 }
 
-.tags-label i {
-  color: var(--accent);
-}
+.tags-label i { color: var(--accent); }
 
 .tag {
   background: linear-gradient(135deg, var(--primary-50), var(--primary-100));
@@ -701,6 +604,7 @@ a {
   font-weight: 700;
   transition: all var(--t-fast);
   border: 1px solid transparent;
+  cursor: pointer;
 }
 
 [data-theme="dark"] .tag {
@@ -709,16 +613,9 @@ a {
   border-color: rgba(59, 130, 246, 0.2);
 }
 
-.tag:hover {
-  background: var(--primary-600);
-  color: #fff;
-  transform: translateY(-2px);
-  box-shadow: var(--shadow-md);
-}
+.tag:hover { background: var(--primary-600); color: #fff; transform: translateY(-2px); box-shadow: var(--shadow-md); }
 
-/* ============================================================
-   SHARE
-   ============================================================ */
+/* SHARE */
 .share-section {
   display: flex;
   align-items: center;
@@ -739,9 +636,7 @@ a {
   margin-left: 8px;
 }
 
-.share-label i {
-  color: var(--accent);
-}
+.share-label i { color: var(--accent); }
 
 .share-btn {
   width: 46px;
@@ -769,14 +664,8 @@ a {
   transition: opacity var(--t-fast);
 }
 
-.share-btn:hover {
-  transform: translateY(-4px) scale(1.1);
-  box-shadow: var(--shadow-md);
-}
-
-.share-btn:hover::before {
-  opacity: 1;
-}
+.share-btn:hover { transform: translateY(-4px) scale(1.1); box-shadow: var(--shadow-md); }
+.share-btn:hover::before { opacity: 1; }
 
 .share-btn.facebook { background: linear-gradient(135deg, #1877f2, #0d5dbf); }
 .share-btn.twitter { background: linear-gradient(135deg, #000000, #333333); }
@@ -784,9 +673,7 @@ a {
 .share-btn.linkedin { background: linear-gradient(135deg, #0a66c2, #004182); }
 .share-btn.copy { background: linear-gradient(135deg, #64748b, #475569); }
 
-/* ============================================================
-   AUTHOR CARD
-   ============================================================ */
+/* AUTHOR CARD */
 .author-card {
   background: linear-gradient(135deg, rgba(59, 130, 246, 0.05), rgba(16, 185, 129, 0.03));
   border: 1.5px solid var(--border);
@@ -830,35 +717,44 @@ a {
   text-transform: uppercase;
   box-shadow: 0 8px 20px rgba(37, 99, 235, 0.3);
   border: 3px solid var(--surface);
+  overflow: hidden;
 }
 
-.author-info {
-  flex: 1;
-  min-width: 0;
-}
+.author-avatar img { width: 100%; height: 100%; object-fit: cover; }
 
-.author-name {
-  font-size: 1rem;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 3px;
-}
+.author-info { flex: 1; min-width: 0; }
 
-.author-role {
-  font-size: 0.75rem;
-  color: var(--text-sub);
-  font-weight: 600;
-}
+.author-name { font-size: 1rem; font-weight: 800; color: var(--text); margin-bottom: 3px; }
+.author-role { font-size: 0.75rem; color: var(--text-sub); font-weight: 600; }
+.author-bio { font-size: 0.85rem; color: var(--text-muted); line-height: 1.7; margin-bottom: 14px; }
 
-.author-bio {
+/* 🆕 زر تواصل مع الكاتب */
+.author-contact-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  width: 100%;
+  padding: 11px 18px;
+  background: linear-gradient(135deg, var(--chat), var(--chat-dark));
+  color: #fff;
+  border-radius: var(--r-md);
+  font-weight: 700;
   font-size: 0.85rem;
-  color: var(--text-muted);
-  line-height: 1.7;
+  transition: all var(--t-fast);
+  box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
+  text-decoration: none;
+  border: none;
+  cursor: pointer;
 }
 
-/* ============================================================
-   TOC
-   ============================================================ */
+.author-contact-btn:hover {
+  background: linear-gradient(135deg, var(--chat-dark), #6d28d9);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(139, 92, 246, 0.45);
+}
+
+/* TOC */
 .toc-card {
   background: var(--surface);
   border: 1.5px solid var(--border);
@@ -879,10 +775,7 @@ a {
   border-bottom: 1px solid var(--border);
 }
 
-.toc-title i {
-  color: var(--accent);
-  font-size: 1rem;
-}
+.toc-title i { color: var(--accent); font-size: 1rem; }
 
 .toc-list {
   display: flex;
@@ -891,6 +784,11 @@ a {
   max-height: 400px;
   overflow-y: auto;
 }
+
+.toc-list::-webkit-scrollbar { width: 6px; }
+.toc-list::-webkit-scrollbar-track { background: var(--surface-2); border-radius: 3px; }
+.toc-list::-webkit-scrollbar-thumb { background: var(--border); border-radius: 3px; }
+.toc-list::-webkit-scrollbar-thumb:hover { background: var(--primary-500); }
 
 .toc-link {
   display: flex;
@@ -907,11 +805,7 @@ a {
   border-right: 3px solid transparent;
 }
 
-.toc-link:hover {
-  background: var(--surface-2);
-  color: var(--text);
-  padding-right: 18px;
-}
+.toc-link:hover { background: var(--surface-2); color: var(--text); padding-right: 18px; }
 
 .toc-link.active {
   background: linear-gradient(90deg, rgba(16, 185, 129, 0.12), transparent);
@@ -920,11 +814,7 @@ a {
   border-right-color: var(--accent);
 }
 
-.toc-link.h3 {
-  padding-right: 28px;
-  font-size: 0.78rem;
-  font-weight: 500;
-}
+.toc-link.h3 { padding-right: 28px; font-size: 0.78rem; font-weight: 500; }
 
 .toc-dot {
   width: 5px;
@@ -935,9 +825,7 @@ a {
   flex-shrink: 0;
 }
 
-/* ============================================================
-   SIDEBAR SHARE
-   ============================================================ */
+/* SIDEBAR SHARE */
 .sidebar-share {
   background: var(--surface);
   border: 1.5px solid var(--border);
@@ -956,9 +844,7 @@ a {
   margin-bottom: 16px;
 }
 
-.sidebar-share-title i {
-  color: var(--accent);
-}
+.sidebar-share-title i { color: var(--accent); }
 
 .sidebar-share-buttons {
   display: flex;
@@ -966,12 +852,8 @@ a {
   flex-wrap: wrap;
 }
 
-/* ============================================================
-   RELATED
-   ============================================================ */
-.related-section {
-  margin-top: 56px;
-}
+/* RELATED */
+.related-section { margin-top: 56px; }
 
 .related-header {
   display: flex;
@@ -982,16 +864,9 @@ a {
   border-right: 5px solid var(--accent);
 }
 
-.related-header i {
-  color: var(--accent);
-  font-size: 1.4rem;
-}
+.related-header i { color: var(--accent); font-size: 1.4rem; }
 
-.related-header h2 {
-  font-size: 1.3rem;
-  font-weight: 900;
-  color: var(--text);
-}
+.related-header h2 { font-size: 1.3rem; font-weight: 900; color: var(--text); }
 
 .related-grid {
   display: grid;
@@ -1013,11 +888,7 @@ a {
   box-shadow: var(--shadow-sm);
 }
 
-.related-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-xl);
-  border-color: var(--accent);
-}
+.related-card:hover { transform: translateY(-8px); box-shadow: var(--shadow-xl); border-color: var(--accent); }
 
 .related-card-media {
   aspect-ratio: 16 / 10;
@@ -1025,16 +896,9 @@ a {
   overflow: hidden;
 }
 
-.related-card-media img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  transition: transform var(--t-slow);
-}
+.related-card-media img { width: 100%; height: 100%; object-fit: cover; transition: transform var(--t-slow); }
 
-.related-card:hover .related-card-media img {
-  transform: scale(1.08);
-}
+.related-card:hover .related-card-media img { transform: scale(1.08); }
 
 .related-placeholder {
   width: 100%;
@@ -1089,13 +953,9 @@ a {
   padding-top: 8px;
 }
 
-.related-card-meta i {
-  color: var(--primary-500);
-}
+.related-card-meta i { color: var(--primary-500); }
 
-/* ============================================================
-   ERROR STATE
-   ============================================================ */
+/* ERROR STATE */
 .error-state {
   text-align: center;
   padding: 80px 24px;
@@ -1106,25 +966,9 @@ a {
   margin: 40px auto;
 }
 
-.error-state i {
-  font-size: 4rem;
-  color: var(--rose);
-  opacity: 0.6;
-  margin-bottom: 20px;
-}
-
-.error-state h2 {
-  font-size: 1.4rem;
-  font-weight: 800;
-  color: var(--text);
-  margin-bottom: 10px;
-}
-
-.error-state p {
-  color: var(--text-muted);
-  font-size: 0.95rem;
-  margin-bottom: 24px;
-}
+.error-state i { font-size: 4rem; color: var(--rose); opacity: 0.6; margin-bottom: 20px; }
+.error-state h2 { font-size: 1.4rem; font-weight: 800; color: var(--text); margin-bottom: 10px; }
+.error-state p { color: var(--text-muted); font-size: 0.95rem; margin-bottom: 24px; }
 
 .btn-back-home {
   display: inline-flex;
@@ -1140,14 +984,9 @@ a {
   box-shadow: 0 8px 24px rgba(37, 99, 235, 0.3);
 }
 
-.btn-back-home:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 12px 32px rgba(37, 99, 235, 0.4);
-}
+.btn-back-home:hover { transform: translateY(-3px); box-shadow: 0 12px 32px rgba(37, 99, 235, 0.4); }
 
-/* ============================================================
-   SCROLL TOP
-   ============================================================ */
+/* SCROLL TOP */
 .scroll-top {
   position: fixed;
   bottom: 32px;
@@ -1169,20 +1008,10 @@ a {
   z-index: 90;
 }
 
-.scroll-top.visible {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
+.scroll-top.visible { opacity: 1; visibility: visible; transform: translateY(0); }
+.scroll-top:hover { transform: translateY(-6px); box-shadow: var(--shadow-xl); }
 
-.scroll-top:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-xl);
-}
-
-/* ============================================================
-   TOAST
-   ============================================================ */
+/* TOAST */
 .toast-container {
   position: fixed;
   bottom: 24px;
@@ -1216,34 +1045,12 @@ a {
   to { opacity: 1; transform: translateY(0); }
 }
 
-.toast.removing {
-  opacity: 0;
-  transform: translateX(20px);
-  transition: all 0.3s;
-}
+.toast.removing { opacity: 0; transform: translateX(20px); transition: all 0.3s; }
 
-.toast-icon {
-  font-size: 1.6rem;
-  flex-shrink: 0;
-  line-height: 1;
-}
-
-.toast-content {
-  flex: 1;
-  min-width: 0;
-}
-
-.toast-title {
-  font-weight: 700;
-  font-size: 0.92rem;
-  margin-bottom: 3px;
-}
-
-.toast-desc {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  line-height: 1.5;
-}
+.toast-icon { font-size: 1.6rem; flex-shrink: 0; line-height: 1; }
+.toast-content { flex: 1; min-width: 0; }
+.toast-title { font-weight: 700; font-size: 0.92rem; margin-bottom: 3px; }
+.toast-desc { font-size: 0.82rem; color: var(--text-muted); line-height: 1.5; }
 
 .toast-close {
   width: 28px;
@@ -1259,14 +1066,9 @@ a {
   transition: all var(--t-fast);
 }
 
-.toast-close:hover {
-  background: var(--rose);
-  color: #fff;
-}
+.toast-close:hover { background: var(--rose); color: #fff; }
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
+/* FOOTER */
 .footer {
   background: linear-gradient(180deg, #0f172a, #050a15);
   color: rgba(255, 255, 255, 0.75);
@@ -1274,10 +1076,7 @@ a {
   margin-top: 80px;
 }
 
-.footer-inner {
-  max-width: var(--container);
-  margin: 0 auto;
-}
+.footer-inner { max-width: var(--container); margin: 0 auto; }
 
 .footer-links {
   display: flex;
@@ -1296,37 +1095,28 @@ a {
   transition: color var(--t-fast);
 }
 
-.footer-links a:hover {
-  color: #60a5fa;
+.footer-links a:hover { color: #60a5fa; }
+.footer-copy { text-align: center; font-size: 0.84rem; color: rgba(255, 255, 255, 0.4); }
+
+/* PRINT */
+@media print {
+  .navbar, .footer, .scroll-top, .toast-container, .reading-progress,
+  .post-controls, .post-sidebar, .share-section, .back-btn, .related-section {
+    display: none !important;
+  }
+  .post-content { box-shadow: none; padding: 0; }
+  body { background: #fff; }
 }
 
-.footer-copy {
-  text-align: center;
-  font-size: 0.84rem;
-  color: rgba(255, 255, 255, 0.4);
-}
-
-/* ============================================================
-   RESPONSIVE
-   ============================================================ */
+/* RESPONSIVE */
 @media (max-width: 1024px) {
-  .post-layout {
-    grid-template-columns: 1fr;
-    gap: 28px;
-  }
-  .post-sidebar {
-    position: static;
-    order: -1;
-  }
-  .toc-card {
-    display: none;
-  }
+  .post-layout { grid-template-columns: 1fr; gap: 28px; }
+  .post-sidebar { position: static; order: -1; }
+  .toc-card { display: none; }
 }
 
 @media (max-width: 860px) {
-  .menu-toggle {
-    display: inline-flex;
-  }
+  .menu-toggle { display: inline-flex; }
   .nav-links {
     position: fixed;
     top: var(--header-h);
@@ -1344,86 +1134,32 @@ a {
     overflow-y: auto;
     z-index: 99;
   }
-  .nav-links.open {
-    transform: translateY(0);
-  }
-  .nav-links a {
-    width: 100%;
-    justify-content: flex-start;
-    padding: 14px 18px;
-  }
+  .nav-links.open { transform: translateY(0); }
+  .nav-links a { width: 100%; justify-content: flex-start; padding: 14px 18px; }
 }
 
 @media (max-width: 640px) {
-  .main-container {
-    padding: 16px 14px 60px;
-  }
-  .navbar {
-    padding: 0 14px;
-  }
-  .logo-img {
-    width: 38px;
-    height: 38px;
-  }
-  .logo {
-    font-size: 17px;
-  }
-  .post-hero {
-    padding: 36px 22px 30px;
-    border-radius: var(--r-lg);
-  }
-  .post-hero h1 {
-    font-size: 1.4rem;
-  }
-  .hero-meta {
-    gap: 12px;
-  }
-  .hero-meta-item {
-    font-size: 0.78rem;
-  }
-  .post-content {
-    padding: 26px 20px;
-    font-size: 1rem;
-    line-height: 1.9;
-    border-radius: var(--r-md);
-  }
-  .post-content h2 {
-    font-size: 1.28rem;
-    margin: 30px 0 14px;
-  }
-  .post-content h3 {
-    font-size: 1.08rem;
-  }
-  .post-content blockquote {
-    padding: 16px 18px;
-  }
-  .share-section {
-    gap: 10px;
-  }
-  .share-btn {
-    width: 42px;
-    height: 42px;
-    font-size: 0.95rem;
-  }
-  .footer {
-    padding: 36px 16px 22px;
-  }
-  .footer-links {
-    gap: 12px;
-  }
-  .footer-links a {
-    font-size: 0.8rem;
-  }
-  .scroll-top {
-    bottom: 20px;
-    right: 16px;
-    width: 46px;
-    height: 46px;
-  }
-  .related-grid {
-    grid-template-columns: 1fr;
-    gap: 16px;
-  }
+  .main-container { padding: 16px 14px 60px; }
+  .navbar { padding: 0 14px; }
+  .logo-img { width: 38px; height: 38px; }
+  .logo { font-size: 17px; }
+  .post-hero { padding: 36px 22px 30px; border-radius: var(--r-lg); }
+  .post-hero h1 { font-size: 1.4rem; }
+  .hero-meta { gap: 12px; }
+  .hero-meta-item { font-size: 0.78rem; }
+  .post-content { padding: 26px 20px; font-size: calc(1rem * var(--font-scale)); line-height: 1.9; border-radius: var(--r-md); }
+  .post-content h2 { font-size: 1.28rem; margin: 30px 0 14px; }
+  .post-content h3 { font-size: 1.08rem; }
+  .post-content blockquote { padding: 16px 18px; }
+  .share-section { gap: 10px; }
+  .share-btn { width: 42px; height: 42px; font-size: 0.95rem; }
+  .footer { padding: 36px 16px 22px; }
+  .footer-links { gap: 12px; }
+  .footer-links a { font-size: 0.8rem; }
+  .scroll-top { bottom: 20px; right: 16px; width: 46px; height: 46px; }
+  .related-grid { grid-template-columns: 1fr; gap: 16px; }
+  .post-controls { padding: 8px 10px; }
+  .control-btn { padding: 6px 10px; font-size: 0.75rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
@@ -1503,621 +1239,879 @@ a {
   </div>
 </footer>
 
-<script>
-(function() {
-  'use strict';
+<script type="module">
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
-  // ============================================================
-  // CONFIG
-  // ============================================================
-  const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
-  const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
-  const SITE_URL = 'https://chemato.vercel.app';
+const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
+const SITE_URL = 'https://chemato.vercel.app';
 
-  // ============================================================
-  // UTILS
-  // ============================================================
-  function escapeHtml(str) {
-    if (str === null || str === undefined) return '';
-    return String(str)
-      .replace(/&/g, '&amp;')
-      .replace(/</g, '&lt;')
-      .replace(/>/g, '&gt;')
-      .replace(/"/g, '&quot;')
-      .replace(/'/g, '&#039;');
-  }
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+  auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+});
 
-  function stripHtml(html) {
-    return String(html || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
-  }
+// ============================================================
+// STATE
+// ============================================================
+const state = {
+  post: null,
+  related: [],
+  user: null,
+  fontSize: parseInt(localStorage.getItem('chemato-font-size') || '100', 10),
+  isSpeaking: false,
+  synth: null,
+};
 
-  function formatDate(dateStr) {
-    if (!dateStr) return '';
-    try {
-      return new Date(dateStr).toLocaleDateString('ar-EG', {
-        year: 'numeric', month: 'long', day: 'numeric'
-      });
-    } catch (e) {
-      return '';
+const THEME_KEY = 'chemato-theme';
+const READ_KEY = 'chemato-read-posts';
+
+// ============================================================
+// UTILS
+// ============================================================
+const escapeHtml = (str) => {
+  if (str === null || str === undefined) return '';
+  return String(str)
+    .replace(/&/g, '&amp;')
+    .replace(/</g, '&lt;')
+    .replace(/>/g, '&gt;')
+    .replace(/"/g, '&quot;')
+    .replace(/'/g, '&#039;');
+};
+
+const stripHtml = (html) => {
+  return String(html || '').replace(/<[^>]*>/g, ' ').replace(/\s+/g, ' ').trim();
+};
+
+const formatDate = (dateStr) => {
+  if (!dateStr) return '';
+  try {
+    return new Date(dateStr).toLocaleDateString('ar-EG', {
+      year: 'numeric', month: 'long', day: 'numeric'
+    });
+  } catch { return ''; }
+};
+
+const readingTime = (content) => {
+  if (!content) return '1 دقيقة';
+  const words = String(content).replace(/<[^>]*>/g, '').split(/\s+/).length;
+  const minutes = Math.max(1, Math.ceil(words / 200));
+  return minutes + ' دقيقة';
+};
+
+const isValidUrl = (url) => {
+  if (!url) return false;
+  return /^https?:\/\//i.test(url);
+};
+
+const buildMessageUrl = (userId, { context = null } = {}) => {
+  const params = new URLSearchParams({ to: userId });
+  if (context) params.set('request', context);
+  return `messages.html?${params.toString()}`;
+};
+
+// 🆕 Sanitize HTML — يمنع XSS
+const sanitizeHtml = (html) => {
+  if (!html) return '';
+  // نشيل script, iframe, object, embed, on* events
+  let clean = String(html);
+  
+  // حذف script tags
+  clean = clean.replace(/<script\b[^<]*(?:(?!<\/script>)<[^<]*)*<\/script>/gi, '');
+  
+  // حذف iframe
+  clean = clean.replace(/<iframe\b[^<]*(?:(?!<\/iframe>)<[^<]*)*<\/iframe>/gi, '');
+  
+  // حذف on* attributes
+  clean = clean.replace(/\son\w+\s*=\s*(["'])(.*?)\1/gi, '');
+  clean = clean.replace(/\son\w+\s*=\s*[^\s>]+/gi, '');
+  
+  // حذف javascript: URLs
+  clean = clean.replace(/href\s*=\s*["']javascript:[^"']*["']/gi, 'href="#"');
+  clean = clean.replace(/src\s*=\s*["']javascript:[^"']*["']/gi, '');
+  
+  return clean;
+};
+
+const getSlug = () => {
+  const params = new URLSearchParams(window.location.search);
+  let slug = params.get('slug');
+  if (slug) return slug;
+
+  const match = window.location.pathname.match(/\/blog\/([^\/\?#]+)/);
+  if (match && match[1]) return decodeURIComponent(match[1]);
+
+  return null;
+};
+
+const getReadPosts = () => {
+  try {
+    return JSON.parse(localStorage.getItem(READ_KEY) || '[]');
+  } catch { return []; }
+};
+
+const markAsRead = (postId) => {
+  try {
+    const read = getReadPosts();
+    if (!read.includes(postId)) {
+      read.push(postId);
+      if (read.length > 50) read.shift();
+      localStorage.setItem(READ_KEY, JSON.stringify(read));
     }
+  } catch {}
+};
+
+// ============================================================
+// THEME
+// ============================================================
+const updateThemeIcon = (theme) => {
+  const icon = document.getElementById('themeIcon');
+  if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+};
+
+const initTheme = () => {
+  const saved = localStorage.getItem(THEME_KEY);
+  const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+  const theme = saved || (prefersDark ? 'dark' : 'light');
+  document.documentElement.setAttribute('data-theme', theme);
+  updateThemeIcon(theme);
+
+  document.getElementById('themeToggle')?.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    document.documentElement.setAttribute('data-theme', next);
+    localStorage.setItem(THEME_KEY, next);
+    updateThemeIcon(next);
+  });
+};
+
+// ============================================================
+// FONT SIZE
+// ============================================================
+const initFontSize = () => {
+  document.documentElement.style.setProperty('--font-scale', (state.fontSize / 100).toString());
+};
+
+const increaseFontSize = () => {
+  if (state.fontSize >= 130) return;
+  state.fontSize += 10;
+  localStorage.setItem('chemato-font-size', String(state.fontSize));
+  document.documentElement.style.setProperty('--font-scale', (state.fontSize / 100).toString());
+  showToast('🔤', 'حجم الخط', `تم التكبير إلى ${state.fontSize}%`);
+};
+
+const decreaseFontSize = () => {
+  if (state.fontSize <= 80) return;
+  state.fontSize -= 10;
+  localStorage.setItem('chemato-font-size', String(state.fontSize));
+  document.documentElement.style.setProperty('--font-scale', (state.fontSize / 100).toString());
+  showToast('🔤', 'حجم الخط', `تم التصغير إلى ${state.fontSize}%`);
+};
+
+const resetFontSize = () => {
+  state.fontSize = 100;
+  localStorage.setItem('chemato-font-size', '100');
+  document.documentElement.style.setProperty('--font-scale', '1');
+  showToast('🔤', 'حجم الخط', 'رجع للحجم الافتراضي');
+};
+
+// ============================================================
+// TEXT TO SPEECH
+// ============================================================
+const initTTS = () => {
+  if (!('speechSynthesis' in window)) return;
+  state.synth = window.speechSynthesis;
+};
+
+const toggleSpeech = (btn) => {
+  if (!state.synth) {
+    showToast('⚠️', 'غير مدعوم', 'متصفحك لا يدعم القراءة الصوتية');
+    return;
   }
 
-  function readingTime(content) {
-    if (!content) return '1 دقيقة';
-    const words = String(content).replace(/<[^>]*>/g, '').split(/\s+/).length;
-    const minutes = Math.max(1, Math.ceil(words / 200));
-    return minutes + ' دقيقة';
+  if (state.isSpeaking) {
+    state.synth.cancel();
+    state.isSpeaking = false;
+    if (btn) {
+      btn.classList.remove('active');
+      btn.innerHTML = '<i class="fas fa-volume-up"></i> اقرأ';
+    }
+    return;
   }
 
-  function getSlug() {
-    // من query string
-    const params = new URLSearchParams(window.location.search);
-    let slug = params.get('slug');
-    if (slug) return slug;
+  const contentEl = document.querySelector('.post-content');
+  if (!contentEl) return;
 
-    // من pathname /blog/xxx
-    const match = window.location.pathname.match(/\/blog\/([^\/\?#]+)/);
-    if (match && match[1]) return decodeURIComponent(match[1]);
+  // نأخذ نص المحتوى بدون HTML
+  let text = '';
+  const walker = document.createTreeWalker(contentEl, NodeFilter.SHOW_TEXT);
+  let node;
+  while ((node = walker.nextNode())) {
+    const t = node.textContent.trim();
+    if (t) text += t + ' ';
+  }
 
+  if (!text) {
+    showToast('⚠️', 'لا يوجد محتوى', 'المقال لا يحتوي على نص للقراءة');
+    return;
+  }
+
+  // قطع النص لأجزاء (بحد 200 حرف) — لتفادي مشكلة المتصفحات
+  const chunks = text.match(/[^.!?]+[.!?]*/g) || [text];
+  
+  state.synth.cancel();
+  state.isSpeaking = true;
+  
+  if (btn) {
+    btn.classList.add('active');
+    btn.innerHTML = '<i class="fas fa-stop"></i> إيقاف';
+  }
+
+  chunks.forEach((chunk, i) => {
+    if (!chunk.trim()) return;
+    const utterance = new SpeechSynthesisUtterance(chunk.trim());
+    utterance.lang = 'ar-EG';
+    utterance.rate = 1.0;
+    utterance.pitch = 1.0;
+    
+    if (i === chunks.length - 1) {
+      utterance.onend = () => {
+        state.isSpeaking = false;
+        if (btn) {
+          btn.classList.remove('active');
+          btn.innerHTML = '<i class="fas fa-volume-up"></i> اقرأ';
+        }
+      };
+    }
+    
+    state.synth.speak(utterance);
+  });
+
+  showToast('🎙️', 'جاري القراءة', 'اقرأ المقال بصوت مسموع');
+};
+
+// ============================================================
+// TOAST
+// ============================================================
+const removeToast = (toast) => {
+  if (!toast || !toast.parentNode) return;
+  toast.classList.add('removing');
+  setTimeout(() => toast.remove(), 300);
+};
+
+const showToast = (icon, title, desc) => {
+  const container = document.getElementById('toastContainer');
+  if (!container) return;
+
+  const toast = document.createElement('div');
+  toast.className = 'toast';
+  toast.innerHTML = `
+    <div class="toast-icon">${icon}</div>
+    <div class="toast-content">
+      <div class="toast-title">${escapeHtml(title)}</div>
+      <div class="toast-desc">${escapeHtml(desc)}</div>
+    </div>
+    <button class="toast-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+  `;
+
+  toast.querySelector('.toast-close').onclick = () => removeToast(toast);
+  container.appendChild(toast);
+  setTimeout(() => removeToast(toast), 5000);
+};
+
+// ============================================================
+// NAVBAR
+// ============================================================
+const initNavbar = () => {
+  const menuToggle = document.getElementById('menuToggle');
+  const navLinks = document.getElementById('navLinks');
+
+  menuToggle?.addEventListener('click', () => {
+    const isOpen = navLinks.classList.toggle('open');
+    menuToggle.innerHTML = isOpen
+      ? '<i class="fas fa-times"></i>'
+      : '<i class="fas fa-bars"></i>';
+  });
+};
+
+// ============================================================
+// AUTH
+// ============================================================
+const checkUser = async () => {
+  try {
+    const { data: { user } } = await supabase.auth.getUser();
+    state.user = user || null;
+  } catch (e) {
+    console.warn('Auth check failed:', e.message);
+  }
+};
+
+// ============================================================
+// READING PROGRESS
+// ============================================================
+const initReadingProgress = () => {
+  const bar = document.getElementById('readingProgress');
+  if (!bar) return;
+
+  const update = () => {
+    const ws = document.documentElement.scrollTop;
+    const h = document.documentElement.scrollHeight - window.innerHeight;
+    const progress = h > 0 ? (ws / h) * 100 : 0;
+    bar.style.width = progress + '%';
+  };
+
+  window.addEventListener('scroll', update, { passive: true });
+  window.addEventListener('resize', update, { passive: true });
+  update();
+};
+
+// ============================================================
+// SCROLL TOP
+// ============================================================
+const initScrollTop = () => {
+  const btn = document.getElementById('scrollTopBtn');
+  if (!btn) return;
+
+  window.addEventListener('scroll', () => {
+    btn.classList.toggle('visible', window.scrollY > 400);
+  }, { passive: true });
+
+  btn.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+};
+
+// ============================================================
+// UPDATE META
+// ============================================================
+const updateMetaTags = (post) => {
+  const title = post.title || 'مقال';
+  const description = (post.excerpt || stripHtml(post.content).substring(0, 160) || '').substring(0, 160);
+  const image = isValidUrl(post.image_url) ? post.image_url : SITE_URL + '/og-default.jpg';
+  const canonical = SITE_URL + '/blog-post.html?slug=' + encodeURIComponent(post.slug || post.id);
+
+  document.title = title + ' | كيماتو';
+
+  const setMeta = (id, content) => {
+    const el = document.getElementById(id);
+    if (el) el.setAttribute('content', content);
+  };
+
+  setMeta('pageDescription', description);
+  setMeta('ogTitle', title);
+  setMeta('ogDescription', description);
+  setMeta('ogImage', image);
+  setMeta('ogUrl', canonical);
+  setMeta('twTitle', title);
+  setMeta('twDescription', description);
+  setMeta('twImage', image);
+
+  const canonicalEl = document.getElementById('pageCanonical');
+  if (canonicalEl) canonicalEl.setAttribute('href', canonical);
+
+  try {
+    const oldSchema = document.getElementById('post-schema');
+    if (oldSchema) oldSchema.remove();
+    
+    const schema = document.createElement('script');
+    schema.id = 'post-schema';
+    schema.type = 'application/ld+json';
+    schema.textContent = JSON.stringify({
+      "@context": "https://schema.org",
+      "@type": "Article",
+      "headline": title,
+      "description": description,
+      "image": image,
+      "datePublished": post.published_at || post.created_at,
+      "dateModified": post.updated_at || post.created_at,
+      "author": { "@type": "Person", "name": post.author_name || "كيماتو" },
+      "publisher": {
+        "@type": "Organization",
+        "name": "كيماتو",
+        "logo": { "@type": "ImageObject", "url": SITE_URL + "/logo.png" }
+      },
+      "mainEntityOfPage": { "@type": "WebPage", "@id": canonical }
+    });
+    document.head.appendChild(schema);
+  } catch {}
+};
+
+// ============================================================
+// TOC
+// ============================================================
+const buildTOC = () => {
+  const container = document.getElementById('tocList');
+  const card = document.getElementById('tocCard');
+  if (!container) return;
+
+  const contentEl = document.querySelector('.post-content');
+  if (!contentEl) return;
+
+  const headings = contentEl.querySelectorAll('h2, h3');
+  if (!headings.length) {
+    if (card) card.style.display = 'none';
+    return;
+  }
+
+  let html = '';
+  headings.forEach((h, i) => {
+    const id = 'heading-' + i;
+    h.id = id;
+    const isH3 = h.tagName === 'H3';
+    const text = h.textContent.trim().substring(0, 60);
+    html += `<a href="#${id}" class="toc-link${isH3 ? ' h3' : ''}" data-target="${id}">
+      <span class="toc-dot"></span>
+      ${escapeHtml(text)}
+    </a>`;
+  });
+  container.innerHTML = html;
+
+  const links = container.querySelectorAll('.toc-link');
+  links.forEach(link => {
+    link.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.getElementById(link.dataset.target);
+      if (target) {
+        const top = target.getBoundingClientRect().top + window.scrollY - 90;
+        window.scrollTo({ top, behavior: 'smooth' });
+      }
+    });
+  });
+
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          links.forEach(l => l.classList.toggle('active', l.dataset.target === id));
+        }
+      });
+    }, { rootMargin: '-100px 0px -70% 0px', threshold: 0 });
+
+    headings.forEach(h => observer.observe(h));
+  }
+};
+
+// ============================================================
+// SHARE
+// ============================================================
+const handleShare = (type) => {
+  const url = window.location.href;
+  const title = document.title;
+
+  try {
+    if (type === 'facebook') {
+      window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
+    } else if (type === 'twitter') {
+      window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
+    } else if (type === 'whatsapp') {
+      window.open('https://wa.me/?text=' + encodeURIComponent(title + '\n' + url), '_blank', 'noopener,noreferrer');
+    } else if (type === 'linkedin') {
+      window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
+    } else if (type === 'copy') {
+      if (navigator.clipboard) {
+        navigator.clipboard.writeText(url).then(() => {
+          showToast('📋', 'تم النسخ!', 'تم نسخ رابط المقال');
+        }).catch(() => {
+          showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط');
+        });
+      }
+    }
+  } catch {}
+};
+
+const bindShareButtons = () => {
+  document.querySelectorAll('[data-share]').forEach(btn => {
+    btn.addEventListener('click', () => handleShare(btn.dataset.share));
+  });
+};
+
+// ============================================================
+// RENDER POST
+// ============================================================
+const renderPost = (post) => {
+  const container = document.getElementById('pageContent');
+  if (!container) return;
+
+  const authorName = post.author_name || 'كيماتو';
+  const authorInitial = (authorName || 'ك').charAt(0).toUpperCase();
+  const hasImage = isValidUrl(post.image_url);
+  const tags = Array.isArray(post.tags) ? post.tags : [];
+  const readTime = readingTime(post.content);
+  const isRead = getReadPosts().includes(post.id);
+  const isSelfAuthor = state.user && post.author_id && state.user.id === post.author_id;
+
+  // Tags
+  let tagsHtml = '';
+  if (tags.length > 0) {
+    const tagsInner = tags.map(t => 
+      `<span class="tag" data-tag="${escapeHtml(t)}">#${escapeHtml(t)}</span>`
+    ).join('');
+    tagsHtml = `<div class="post-tags">
+      <span class="tags-label"><i class="fas fa-tags"></i> الوسوم:</span>
+      ${tagsInner}
+    </div>`;
+  }
+
+  // 🆕 Author contact button
+  let authorContactHtml = '';
+  if (post.author_id && !isSelfAuthor) {
+    const chatUrl = buildMessageUrl(post.author_id);
+    authorContactHtml = `
+      <a href="${chatUrl}" class="author-contact-btn" data-action="chat-author" data-author-id="${escapeHtml(post.author_id)}">
+        <i class="fas fa-comments"></i> تواصل عبر الموقع
+      </a>
+    `;
+  } else if (isSelfAuthor) {
+    authorContactHtml = `
+      <button class="author-contact-btn" type="button" disabled style="opacity:0.6;cursor:not-allowed;">
+        <i class="fas fa-user"></i> هذا حسابك
+      </button>
+    `;
+  }
+
+  let html = '';
+
+  // Back button
+  html += `<a href="blog.html" class="back-btn">
+    <i class="fas fa-arrow-right"></i> العودة إلى المدونة
+  </a>`;
+
+  // Hero
+  html += `<section class="post-hero">
+    <div class="hero-content">
+      ${post.category ? `<span class="hero-category" data-tag="${escapeHtml(post.category)}"><i class="fas fa-tag"></i> ${escapeHtml(post.category)}</span>` : ''}
+      <h1>${escapeHtml(post.title)}</h1>
+      <div class="hero-meta">
+        <span class="hero-meta-item">
+          <i class="fas fa-calendar"></i> ${formatDate(post.published_at || post.created_at)}
+        </span>
+        ${authorName ? `<span class="hero-meta-item"><i class="fas fa-user"></i> <strong>${escapeHtml(authorName)}</strong></span>` : ''}
+        <span class="hero-meta-item">
+          <i class="fas fa-clock"></i> ${readTime} قراءة
+        </span>
+        <span class="hero-meta-item">
+          <i class="fas fa-eye"></i> <strong>${Number(post.views || 0).toLocaleString('ar-EG')}</strong> مشاهدة
+        </span>
+        ${isRead ? `<span class="hero-meta-item" style="color:#6ee7b7;"><i class="fas fa-check-circle"></i> مقروء</span>` : ''}
+      </div>
+    </div>
+  </section>`;
+
+  // Control bar
+  html += `<div class="post-controls">
+    <button class="control-btn" id="fontDecBtn" type="button" title="تصغير الخط">
+      <i class="fas fa-font"></i> <small>A-</small>
+    </button>
+    <button class="control-btn" id="fontResetBtn" type="button" title="الحجم الافتراضي">
+      <i class="fas fa-undo"></i>
+    </button>
+    <button class="control-btn" id="fontIncBtn" type="button" title="تكبير الخط">
+      <i class="fas fa-font"></i> <small>A+</small>
+    </button>
+    <button class="control-btn" id="speakBtn" type="button" title="قراءة صوتية">
+      <i class="fas fa-volume-up"></i> اقرأ
+    </button>
+    <button class="control-btn" id="printBtn" type="button" title="طباعة">
+      <i class="fas fa-print"></i>
+    </button>
+    <div class="control-spacer"></div>
+    <button class="control-btn" id="topBtn2" type="button" title="الأعلى">
+      <i class="fas fa-arrow-up"></i>
+    </button>
+  </div>`;
+
+  // Featured image
+  if (hasImage) {
+    html += `<div class="post-featured-image">
+      <img src="${escapeHtml(post.image_url)}" alt="${escapeHtml(post.title)}" loading="eager">
+    </div>`;
+  }
+
+  // Layout
+  html += `<div class="post-layout">`;
+
+  // Main content
+  const sanitizedContent = sanitizeHtml(post.content || post.excerpt || '<p>لا يوجد محتوى متاح.</p>');
+  html += `<div class="post-main">
+    <article class="post-content">
+      ${sanitizedContent}
+      ${tagsHtml}
+      <div class="share-section">
+        <span class="share-label"><i class="fas fa-share-alt"></i> شارك المقال:</span>
+        <button class="share-btn facebook" data-share="facebook" type="button" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></button>
+        <button class="share-btn twitter" data-share="twitter" type="button" aria-label="تويتر"><i class="fab fa-twitter"></i></button>
+        <button class="share-btn whatsapp" data-share="whatsapp" type="button" aria-label="واتساب"><i class="fab fa-whatsapp"></i></button>
+        <button class="share-btn linkedin" data-share="linkedin" type="button" aria-label="لينكد إن"><i class="fab fa-linkedin-in"></i></button>
+        <button class="share-btn copy" data-share="copy" type="button" aria-label="نسخ"><i class="fas fa-link"></i></button>
+      </div>
+    </article>
+  </div>`;
+
+  // Sidebar
+  html += `<aside class="post-sidebar">
+    <div class="author-card">
+      <div class="author-header">
+        <div class="author-avatar">${authorInitial}</div>
+        <div class="author-info">
+          <div class="author-name">${escapeHtml(authorName)}</div>
+          <div class="author-role">محرر في كيماتو</div>
+        </div>
+      </div>
+      <p class="author-bio">ننشر مقالات متخصصة عن سوق المواد الكيميائية في مصر والشرق الأوسط.</p>
+      ${authorContactHtml}
+    </div>
+    <div class="toc-card" id="tocCard">
+      <div class="toc-title"><i class="fas fa-list-ul"></i> محتويات المقال</div>
+      <div class="toc-list" id="tocList"></div>
+    </div>
+    <div class="sidebar-share">
+      <div class="sidebar-share-title"><i class="fas fa-share-alt"></i> شارك المقال</div>
+      <div class="sidebar-share-buttons">
+        <button class="share-btn facebook" data-share="facebook" type="button"><i class="fab fa-facebook-f"></i></button>
+        <button class="share-btn twitter" data-share="twitter" type="button"><i class="fab fa-twitter"></i></button>
+        <button class="share-btn whatsapp" data-share="whatsapp" type="button"><i class="fab fa-whatsapp"></i></button>
+        <button class="share-btn copy" data-share="copy" type="button"><i class="fas fa-link"></i></button>
+      </div>
+    </div>
+  </aside>`;
+
+  html += `</div>`;
+
+  // Related section
+  html += `<section class="related-section" id="relatedSection" style="display:none;">
+    <div class="related-header">
+      <i class="fas fa-newspaper"></i>
+      <h2>مقالات ذات صلة</h2>
+    </div>
+    <div class="related-grid" id="relatedGrid"></div>
+  </section>`;
+
+  container.innerHTML = html;
+
+  // Bind controls
+  document.getElementById('fontDecBtn')?.addEventListener('click', decreaseFontSize);
+  document.getElementById('fontResetBtn')?.addEventListener('click', resetFontSize);
+  document.getElementById('fontIncBtn')?.addEventListener('click', increaseFontSize);
+  document.getElementById('printBtn')?.addEventListener('click', () => window.print());
+  document.getElementById('topBtn2')?.addEventListener('click', () => {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+  
+  const speakBtn = document.getElementById('speakBtn');
+  speakBtn?.addEventListener('click', () => toggleSpeech(speakBtn));
+
+  // Bind tags
+  document.querySelectorAll('[data-tag]').forEach(el => {
+    el.addEventListener('click', () => {
+      const tag = el.dataset.tag;
+      if (tag) {
+        window.location.href = 'blog.html?category=' + encodeURIComponent(tag);
+      }
+    });
+  });
+
+  // Bind author chat button
+  document.querySelector('[data-action="chat-author"]')?.addEventListener('click', (e) => {
+    if (!state.user) {
+      e.preventDefault();
+      showToast('🔐', 'سجّل دخولك', 'لازم تسجل دخول للتواصل مع الكاتب');
+      const chatUrl = e.currentTarget.getAttribute('href');
+      setTimeout(() => {
+        window.location.href = `auth.html?redirect=${encodeURIComponent(chatUrl)}`;
+      }, 1200);
+    }
+  });
+
+  buildTOC();
+  bindShareButtons();
+
+  // Mark as read
+  markAsRead(post.id);
+};
+
+// ============================================================
+// RENDER ERROR
+// ============================================================
+const renderError = (title, desc) => {
+  const container = document.getElementById('pageContent');
+  if (!container) return;
+  container.innerHTML = `<div class="error-state">
+    <i class="fas fa-newspaper"></i>
+    <h2>${escapeHtml(title)}</h2>
+    <p>${escapeHtml(desc)}</p>
+    <a href="blog.html" class="btn-back-home">
+      <i class="fas fa-arrow-right"></i> العودة للمدونة
+    </a>
+  </div>`;
+};
+
+// ============================================================
+// SUPABASE CLIENT QUERIES
+// ============================================================
+const fetchPost = async (slug) => {
+  try {
+    // نجرب بالـ slug
+    let { data, error } = await supabase
+      .from('blog_posts')
+      .select('*')
+      .eq('slug', slug)
+      .eq('status', 'published')
+      .maybeSingle();
+
+    // لو مش لاقي، نجرب بالـ id
+    if (!data) {
+      const { data: byId } = await supabase
+        .from('blog_posts')
+        .select('*')
+        .eq('id', slug)
+        .eq('status', 'published')
+        .maybeSingle();
+      data = byId;
+    }
+
+    return data;
+  } catch (e) {
+    console.error('fetchPost error:', e);
     return null;
   }
+};
 
-  // ============================================================
-  // THEME
-  // ============================================================
-  var THEME_KEY = 'chemato-theme';
-  var themeIcon = document.getElementById('themeIcon');
+const fetchRelatedPosts = async (category, excludeId) => {
+  try {
+    let query = supabase
+      .from('blog_posts')
+      .select('id,title,slug,image_url,category,published_at,created_at')
+      .eq('status', 'published')
+      .neq('id', excludeId)
+      .order('published_at', { ascending: false, nullsFirst: false })
+      .limit(3);
 
-  function setTheme(theme) {
-    document.documentElement.setAttribute('data-theme', theme);
-    if (themeIcon) {
-      themeIcon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    if (category) query = query.eq('category', category);
+
+    const { data } = await query;
+    
+    // لو مفيش في نفس الفئة، نجيب أي مقالات
+    if (!data || data.length === 0) {
+      const { data: fallback } = await supabase
+        .from('blog_posts')
+        .select('id,title,slug,image_url,category,published_at,created_at')
+        .eq('status', 'published')
+        .neq('id', excludeId)
+        .order('published_at', { ascending: false, nullsFirst: false })
+        .limit(3);
+      return fallback || [];
     }
+
+    return data || [];
+  } catch (e) {
+    console.warn('fetchRelatedPosts error:', e);
+    return [];
   }
+};
 
-  function initTheme() {
-    var saved = null;
-    try { saved = localStorage.getItem(THEME_KEY); } catch (e) {}
-    var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-    var theme = saved || (prefersDark ? 'dark' : 'light');
-    setTheme(theme);
-
-    var toggle = document.getElementById('themeToggle');
-    if (toggle) {
-      toggle.addEventListener('click', function() {
-        var current = document.documentElement.getAttribute('data-theme');
-        var next = current === 'dark' ? 'light' : 'dark';
-        setTheme(next);
-        try { localStorage.setItem(THEME_KEY, next); } catch (e) {}
-      });
-    }
-  }
-
-  // ============================================================
-  // TOAST
-  // ============================================================
-  function showToast(icon, title, desc) {
-    var container = document.getElementById('toastContainer');
-    if (!container) return;
-
-    var toast = document.createElement('div');
-    toast.className = 'toast';
-    toast.innerHTML =
-      '<div class="toast-icon">' + icon + '</div>' +
-      '<div class="toast-content">' +
-        '<div class="toast-title">' + title + '</div>' +
-        '<div class="toast-desc">' + desc + '</div>' +
-      '</div>' +
-      '<button class="toast-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>';
-
-    toast.querySelector('.toast-close').addEventListener('click', function() {
-      toast.classList.add('removing');
-      setTimeout(function() { toast.remove(); }, 300);
-    });
-
-    container.appendChild(toast);
-    setTimeout(function() {
-      if (toast.parentNode) {
-        toast.classList.add('removing');
-        setTimeout(function() { toast.remove(); }, 300);
-      }
-    }, 5000);
-  }
-
-  // ============================================================
-  // NAVBAR
-  // ============================================================
-  function initNavbar() {
-    var menuToggle = document.getElementById('menuToggle');
-    var navLinks = document.getElementById('navLinks');
-
-    if (menuToggle && navLinks) {
-      menuToggle.addEventListener('click', function() {
-        var isOpen = navLinks.classList.toggle('open');
-        menuToggle.innerHTML = isOpen
-          ? '<i class="fas fa-times"></i>'
-          : '<i class="fas fa-bars"></i>';
-      });
-    }
-  }
-
-  // ============================================================
-  // READING PROGRESS
-  // ============================================================
-  function initReadingProgress() {
-    var bar = document.getElementById('readingProgress');
-    if (!bar) return;
-
-    function update() {
-      var ws = document.documentElement.scrollTop;
-      var h = document.documentElement.scrollHeight - window.innerHeight;
-      var progress = h > 0 ? (ws / h) * 100 : 0;
-      bar.style.width = progress + '%';
-    }
-
-    window.addEventListener('scroll', update, { passive: true });
-    window.addEventListener('resize', update, { passive: true });
-    update();
-  }
-
-  // ============================================================
-  // SCROLL TOP
-  // ============================================================
-  function initScrollTop() {
-    var btn = document.getElementById('scrollTopBtn');
-    if (!btn) return;
-
-    window.addEventListener('scroll', function() {
-      btn.classList.toggle('visible', window.scrollY > 400);
-    }, { passive: true });
-
-    btn.addEventListener('click', function() {
-      window.scrollTo({ top: 0, behavior: 'smooth' });
-    });
-  }
-
-  // ============================================================
-  // UPDATE META TAGS
-  // ============================================================
-  function updateMetaTags(post) {
-    var title = post.title || 'مقال';
-    var description = (post.excerpt || stripHtml(post.content).substring(0, 160) || '').substring(0, 160);
-    var image = (post.image_url && /^https?:\/\//i.test(post.image_url))
-      ? post.image_url
-      : SITE_URL + '/og-default.jpg';
-    var canonical = SITE_URL + '/blog-post.html?slug=' + encodeURIComponent(post.slug || post.id);
-
-    document.title = title + ' | كيماتو';
-
-    function setMeta(id, content) {
-      var el = document.getElementById(id);
-      if (el) el.setAttribute('content', content);
-    }
-
-    setMeta('pageDescription', description);
-    setMeta('ogTitle', title);
-    setMeta('ogDescription', description);
-    setMeta('ogImage', image);
-    setMeta('ogUrl', canonical);
-    setMeta('twTitle', title);
-    setMeta('twDescription', description);
-    setMeta('twImage', image);
-
-    var canonicalEl = document.getElementById('pageCanonical');
-    if (canonicalEl) canonicalEl.setAttribute('href', canonical);
-
-    // Schema.org
-    try {
-      var schema = document.createElement('script');
-      schema.type = 'application/ld+json';
-      schema.textContent = JSON.stringify({
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": title,
-        "description": description,
-        "image": image,
-        "datePublished": post.published_at || post.created_at,
-        "dateModified": post.updated_at || post.created_at,
-        "author": { "@type": "Person", "name": post.author_name || "كيماتو" },
-        "publisher": {
-          "@type": "Organization",
-          "name": "كيماتو",
-          "logo": { "@type": "ImageObject", "url": SITE_URL + "/logo.png" }
-        },
-        "mainEntityOfPage": { "@type": "WebPage", "@id": canonical }
-      });
-      document.head.appendChild(schema);
-    } catch (e) {}
-  }
-
-  // ============================================================
-  // BUILD TOC
-  // ============================================================
-  function buildTOC() {
-    var container = document.getElementById('tocList');
-    var card = document.getElementById('tocCard');
-    if (!container) return;
-
-    var contentEl = document.querySelector('.post-content');
-    if (!contentEl) return;
-
-    var headings = contentEl.querySelectorAll('h2, h3');
-    if (!headings.length) {
-      if (card) card.style.display = 'none';
-      return;
-    }
-
-    var html = '';
-    for (var i = 0; i < headings.length; i++) {
-      var h = headings[i];
-      var id = 'heading-' + i;
-      h.id = id;
-      var isH3 = h.tagName === 'H3';
-      var text = h.textContent.trim().substring(0, 60);
-      html += '<a href="#' + id + '" class="toc-link' + (isH3 ? ' h3' : '') + '" data-target="' + id + '">' +
-        '<span class="toc-dot"></span>' +
-        escapeHtml(text) +
-      '</a>';
-    }
-    container.innerHTML = html;
-
-    var links = container.querySelectorAll('.toc-link');
-    for (var j = 0; j < links.length; j++) {
-      links[j].addEventListener('click', function(e) {
-        e.preventDefault();
-        var target = document.getElementById(this.dataset.target);
-        if (target) {
-          var top = target.getBoundingClientRect().top + window.scrollY - 90;
-          window.scrollTo({ top: top, behavior: 'smooth' });
-        }
-      });
-    }
-
-    // Active state
-    if ('IntersectionObserver' in window) {
-      var observer = new IntersectionObserver(function(entries) {
-        entries.forEach(function(entry) {
-          if (entry.isIntersecting) {
-            var id = entry.target.id;
-            for (var k = 0; k < links.length; k++) {
-              links[k].classList.toggle('active', links[k].dataset.target === id);
-            }
-          }
-        });
-      }, { rootMargin: '-100px 0px -70% 0px', threshold: 0 });
-
-      for (var l = 0; l < headings.length; l++) {
-        observer.observe(headings[l]);
+// 🆕 زيادة المشاهدات صح
+const incrementViews = async (postId) => {
+  try {
+    // نجرب RPC الأول
+    const { error } = await supabase.rpc('increment_post_views', { post_id: postId });
+    
+    if (error) {
+      // لو RPC مش موجود، نستخدم update يدوي
+      const { data: current } = await supabase
+        .from('blog_posts')
+        .select('views')
+        .eq('id', postId)
+        .single();
+      
+      if (current) {
+        await supabase
+          .from('blog_posts')
+          .update({ views: (current.views || 0) + 1 })
+          .eq('id', postId);
       }
     }
+  } catch (e) {
+    console.warn('incrementViews error:', e.message);
+  }
+};
+
+// ============================================================
+// LOAD RELATED
+// ============================================================
+const loadRelatedPosts = async (post) => {
+  const posts = await fetchRelatedPosts(post.category, post.id);
+  if (!posts || !posts.length) return;
+
+  const section = document.getElementById('relatedSection');
+  const grid = document.getElementById('relatedGrid');
+  if (!section || !grid) return;
+
+  section.style.display = 'block';
+
+  grid.innerHTML = posts.map(p => {
+    const hasImg = isValidUrl(p.image_url);
+    return `<a href="blog-post.html?slug=${encodeURIComponent(p.slug || p.id)}" class="related-card">
+      <div class="related-card-media">
+        ${hasImg
+          ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.title)}" loading="lazy">`
+          : '<div class="related-placeholder">📰</div>'}
+      </div>
+      <div class="related-card-body">
+        ${p.category ? `<span class="related-card-category"><i class="fas fa-tag"></i> ${escapeHtml(p.category)}</span>` : ''}
+        <h3 class="related-card-title">${escapeHtml(p.title)}</h3>
+        <div class="related-card-meta">
+          <span><i class="fas fa-calendar"></i> ${formatDate(p.published_at || p.created_at)}</span>
+        </div>
+      </div>
+    </a>`;
+  }).join('');
+};
+
+// ============================================================
+// INIT
+// ============================================================
+const init = async () => {
+  console.log('🚀 كيماتو | المقال');
+
+  initTheme();
+  initFontSize();
+  initNavbar();
+  initReadingProgress();
+  initScrollTop();
+  initTTS();
+
+  await checkUser();
+
+  const slug = getSlug();
+  console.log('📍 Slug:', slug);
+
+  if (!slug) {
+    renderError('رابط غير صحيح', 'لم يتم تحديد المقال المطلوب.');
+    return;
   }
 
-  // ============================================================
-  // SHARE
-  // ============================================================
-  function bindShareButtons() {
-    var buttons = document.querySelectorAll('[data-share]');
-    for (var i = 0; i < buttons.length; i++) {
-      buttons[i].addEventListener('click', function() {
-        handleShare(this.dataset.share);
-      });
-    }
+  const post = await fetchPost(slug);
+
+  if (!post) {
+    renderError('المقال غير موجود', 'ربما تم حذفه أو لم يتم نشره بعد.');
+    return;
   }
 
-  function handleShare(type) {
-    var url = window.location.href;
-    var title = document.title;
+  console.log('✅ Post loaded:', post.title);
+  state.post = post;
+  updateMetaTags(post);
+  renderPost(post);
+  loadRelatedPosts(post);
+  incrementViews(post.id);
 
-    try {
-      if (type === 'facebook') {
-        window.open('https://www.facebook.com/sharer/sharer.php?u=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
-      } else if (type === 'twitter') {
-        window.open('https://twitter.com/intent/tweet?text=' + encodeURIComponent(title) + '&url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
-      } else if (type === 'whatsapp') {
-        window.open('https://wa.me/?text=' + encodeURIComponent(title + '\n' + url), '_blank', 'noopener,noreferrer');
-      } else if (type === 'linkedin') {
-        window.open('https://www.linkedin.com/sharing/share-offsite/?url=' + encodeURIComponent(url), '_blank', 'noopener,noreferrer');
-      } else if (type === 'copy') {
-        if (navigator.clipboard) {
-          navigator.clipboard.writeText(url).then(function() {
-            showToast('📋', 'تم النسخ!', 'تم نسخ رابط المقال');
-          });
-        }
-      }
-    } catch (e) {}
-  }
+  console.log('✅ جاهز');
+};
 
-  // ============================================================
-  // RENDER POST
-  // ============================================================
-  function renderPost(post) {
-    var container = document.getElementById('pageContent');
-    if (!container) return;
-
-    var authorName = post.author_name || 'كيماتو';
-    var authorInitial = (authorName || 'ك').charAt(0).toUpperCase();
-    var hasImage = post.image_url && /^https?:\/\//i.test(post.image_url);
-    var tags = Array.isArray(post.tags) ? post.tags : [];
-    var readTime = readingTime(post.content);
-
-    var tagsHtml = '';
-    if (tags.length > 0) {
-      var tagsInner = '';
-      for (var i = 0; i < tags.length; i++) {
-        tagsInner += '<span class="tag">#' + escapeHtml(tags[i]) + '</span>';
-      }
-      tagsHtml = '<div class="post-tags">' +
-        '<span class="tags-label"><i class="fas fa-tags"></i> الوسوم:</span>' +
-        tagsInner +
-      '</div>';
-    }
-
-    var html = '';
-
-    // Back button
-    html += '<a href="blog.html" class="back-btn">' +
-      '<i class="fas fa-arrow-right"></i> العودة إلى المدونة' +
-    '</a>';
-
-    // Hero
-    html += '<section class="post-hero">' +
-      '<div class="hero-content">' +
-        (post.category ? '<span class="hero-category"><i class="fas fa-tag"></i> ' + escapeHtml(post.category) + '</span>' : '') +
-        '<h1>' + escapeHtml(post.title) + '</h1>' +
-        '<div class="hero-meta">' +
-          '<span class="hero-meta-item">' +
-            '<i class="fas fa-calendar"></i> ' + formatDate(post.published_at || post.created_at) +
-          '</span>' +
-          (authorName ? '<span class="hero-meta-item"><i class="fas fa-user"></i> <strong>' + escapeHtml(authorName) + '</strong></span>' : '') +
-          '<span class="hero-meta-item">' +
-            '<i class="fas fa-clock"></i> ' + readTime + ' قراءة' +
-          '</span>' +
-          '<span class="hero-meta-item">' +
-            '<i class="fas fa-eye"></i> <strong>' + Number(post.views || 0).toLocaleString('ar-EG') + '</strong> مشاهدة' +
-          '</span>' +
-        '</div>' +
-      '</div>' +
-    '</section>';
-
-    // Featured image
-    if (hasImage) {
-      html += '<div class="post-featured-image">' +
-        '<img src="' + escapeHtml(post.image_url) + '" alt="' + escapeHtml(post.title) + '" loading="eager">' +
-      '</div>';
-    }
-
-    // Layout
-    html += '<div class="post-layout">';
-
-    // Main content
-    html += '<div class="post-main">' +
-      '<article class="post-content">' +
-        (post.content || post.excerpt || '<p>لا يوجد محتوى متاح.</p>') +
-        tagsHtml +
-        '<div class="share-section">' +
-          '<span class="share-label"><i class="fas fa-share-alt"></i> شارك المقال:</span>' +
-          '<button class="share-btn facebook" data-share="facebook" type="button" aria-label="فيسبوك"><i class="fab fa-facebook-f"></i></button>' +
-          '<button class="share-btn twitter" data-share="twitter" type="button" aria-label="تويتر"><i class="fab fa-twitter"></i></button>' +
-          '<button class="share-btn whatsapp" data-share="whatsapp" type="button" aria-label="واتساب"><i class="fab fa-whatsapp"></i></button>' +
-          '<button class="share-btn linkedin" data-share="linkedin" type="button" aria-label="لينكد إن"><i class="fab fa-linkedin-in"></i></button>' +
-          '<button class="share-btn copy" data-share="copy" type="button" aria-label="نسخ"><i class="fas fa-link"></i></button>' +
-        '</div>' +
-      '</article>' +
-    '</div>';
-
-    // Sidebar
-    html += '<aside class="post-sidebar">' +
-      '<div class="author-card">' +
-        '<div class="author-header">' +
-          '<div class="author-avatar">' + authorInitial + '</div>' +
-          '<div class="author-info">' +
-            '<div class="author-name">' + escapeHtml(authorName) + '</div>' +
-            '<div class="author-role">محرر في كيماتو</div>' +
-          '</div>' +
-        '</div>' +
-        '<p class="author-bio">ننشر مقالات متخصصة عن سوق المواد الكيميائية في مصر والشرق الأوسط.</p>' +
-      '</div>' +
-      '<div class="toc-card" id="tocCard">' +
-        '<div class="toc-title"><i class="fas fa-list-ul"></i> محتويات المقال</div>' +
-        '<div class="toc-list" id="tocList"></div>' +
-      '</div>' +
-      '<div class="sidebar-share">' +
-        '<div class="sidebar-share-title"><i class="fas fa-share-alt"></i> شارك المقال</div>' +
-        '<div class="sidebar-share-buttons">' +
-          '<button class="share-btn facebook" data-share="facebook" type="button"><i class="fab fa-facebook-f"></i></button>' +
-          '<button class="share-btn twitter" data-share="twitter" type="button"><i class="fab fa-twitter"></i></button>' +
-          '<button class="share-btn whatsapp" data-share="whatsapp" type="button"><i class="fab fa-whatsapp"></i></button>' +
-          '<button class="share-btn copy" data-share="copy" type="button"><i class="fas fa-link"></i></button>' +
-        '</div>' +
-      '</div>' +
-    '</aside>';
-
-    html += '</div>'; // end layout
-
-    // Related section
-    html += '<section class="related-section" id="relatedSection" style="display:none;">' +
-      '<div class="related-header">' +
-        '<i class="fas fa-newspaper"></i>' +
-        '<h2>مقالات ذات صلة</h2>' +
-      '</div>' +
-      '<div class="related-grid" id="relatedGrid"></div>' +
-    '</section>';
-
-    container.innerHTML = html;
-
-    buildTOC();
-    bindShareButtons();
-  }
-
-  // ============================================================
-  // RENDER ERROR
-  // ============================================================
-  function renderError(title, desc) {
-    var container = document.getElementById('pageContent');
-    if (!container) return;
-    container.innerHTML =
-      '<div class="error-state">' +
-        '<i class="fas fa-newspaper"></i>' +
-        '<h2>' + escapeHtml(title) + '</h2>' +
-        '<p>' + escapeHtml(desc) + '</p>' +
-        '<a href="blog.html" class="btn-back-home">' +
-          '<i class="fas fa-arrow-right"></i> العودة للمدونة' +
-        '</a>' +
-      '</div>';
-  }
-
-  // ============================================================
-  // FETCH FROM SUPABASE (باستخدام REST API مباشرة)
-  // ============================================================
-  function fetchPost(slug) {
-    var url = SUPABASE_URL + '/rest/v1/blog_posts' +
-      '?slug=eq.' + encodeURIComponent(slug) +
-      '&status=eq.published' +
-      '&select=*' +
-      '&limit=1';
-
-    return fetch(url, {
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        'Accept': 'application/json'
-      }
-    }).then(function(response) {
-      if (!response.ok) {
-        throw new Error('HTTP ' + response.status);
-      }
-      return response.json();
-    }).then(function(posts) {
-      if (!posts || !posts[0]) return null;
-      return posts[0];
-    });
-  }
-
-  function fetchRelatedPosts(category, excludeId) {
-    var baseUrl = SUPABASE_URL + '/rest/v1/blog_posts' +
-      '?status=eq.published' +
-      '&id=neq.' + excludeId +
-      '&select=id,title,slug,image_url,category,published_at,created_at' +
-      '&order=published_at.desc.nullslast' +
-      '&limit=3';
-
-    if (category) {
-      baseUrl += '&category=eq.' + encodeURIComponent(category);
-    }
-
-    return fetch(baseUrl, {
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY
-      }
-    }).then(function(r) { return r.json(); }).catch(function() { return []; });
-  }
-
-  function incrementViews(postId) {
-    fetch(SUPABASE_URL + '/rest/v1/blog_posts?id=eq.' + postId, {
-      method: 'PATCH',
-      headers: {
-        'apikey': SUPABASE_ANON_KEY,
-        'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
-        'Content-Type': 'application/json',
-        'Prefer': 'return=minimal'
-      },
-      body: JSON.stringify({ views: 999 })
-    }).catch(function() {});
-  }
-
-  // ============================================================
-  // LOAD RELATED
-  // ============================================================
-  function loadRelatedPosts(post) {
-    fetchRelatedPosts(post.category, post.id).then(function(posts) {
-      if (!posts || !posts.length) {
-        // حاول بكل المقالات
-        return fetchRelatedPosts(null, post.id);
-      }
-      return posts;
-    }).then(function(posts) {
-      if (!posts || !posts.length) return;
-
-      var section = document.getElementById('relatedSection');
-      var grid = document.getElementById('relatedGrid');
-      if (!section || !grid) return;
-
-      section.style.display = 'block';
-
-      var html = '';
-      for (var i = 0; i < posts.length; i++) {
-        var p = posts[i];
-        var hasImg = p.image_url && /^https?:\/\//i.test(p.image_url);
-        html += '<a href="blog-post.html?slug=' + encodeURIComponent(p.slug || p.id) + '" class="related-card">' +
-          '<div class="related-card-media">' +
-            (hasImg
-              ? '<img src="' + escapeHtml(p.image_url) + '" alt="' + escapeHtml(p.title) + '" loading="lazy">'
-              : '<div class="related-placeholder">📰</div>') +
-          '</div>' +
-          '<div class="related-card-body">' +
-            (p.category
-              ? '<span class="related-card-category"><i class="fas fa-tag"></i> ' + escapeHtml(p.category) + '</span>'
-              : '') +
-            '<h3 class="related-card-title">' + escapeHtml(p.title) + '</h3>' +
-            '<div class="related-card-meta">' +
-              '<span><i class="fas fa-calendar"></i> ' + formatDate(p.published_at || p.created_at) + '</span>' +
-            '</div>' +
-          '</div>' +
-        '</a>';
-      }
-      grid.innerHTML = html;
-    }).catch(function() {});
-  }
-
-  // ============================================================
-  // INIT
-  // ============================================================
-  function init() {
-    console.log('🚀 كيماتو | المقال');
-
-    initTheme();
-    initNavbar();
-    initReadingProgress();
-    initScrollTop();
-
-    var slug = getSlug();
-    console.log('📍 Slug:', slug);
-
-    if (!slug) {
-      renderError('رابط غير صحيح', 'لم يتم تحديد المقال المطلوب.');
-      return;
-    }
-
-    console.log('🔄 Fetching post...');
-
-    fetchPost(slug)
-      .then(function(post) {
-        if (!post) {
-          console.log('❌ Post not found');
-          renderError('المقال غير موجود', 'ربما تم حذفه أو لم يتم نشره بعد.');
-          return;
-        }
-
-        console.log('✅ Post loaded:', post.title);
-        updateMetaTags(post);
-        renderPost(post);
-        loadRelatedPosts(post);
-        incrementViews(post.id);
-      })
-      .catch(function(err) {
-        console.error('❌ Error:', err);
-        renderError('حدث خطأ', 'تعذر تحميل المقال: ' + err.message);
-      });
-  }
-
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
-  }
-
-})();
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', init);
+} else {
+  init();
+}
 </script>
 
 </body>
