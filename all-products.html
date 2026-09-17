@@ -29,19 +29,11 @@
     <meta name="theme-color" content="#0a2540" />
     <meta name="referrer" content="strict-origin-when-cross-origin" />
 
-    <link rel="manifest" href="/manifest.json" />
-    <meta name="apple-mobile-web-app-capable" content="yes" />
-    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
-    <meta name="apple-mobile-web-app-title" content="كيماتو" />
-
     <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
     <link rel="preconnect" href="https://cdn.jsdelivr.net" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com" />
-
-    <link rel="preload" href="/logo-192.png" as="image" />
-    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" as="style" />
 
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
@@ -70,8 +62,11 @@
             --c-warning:     #f39c12;
             --c-danger:      #e74c3c;
             --c-whatsapp:    #25D366;
+            --c-chat:        #8b5cf6;
+            --c-chat-dark:   #7c3aed;
             --c-purple:      #8b5cf6;
             --c-verified:    #1e88e5;
+            --c-gold:        #f1c40f;
             --c-bg:          #f6f8fb;
             --c-surface:     #ffffff;
             --c-surface-2:   #f9fbfd;
@@ -134,16 +129,6 @@
         }
         .skip-link:focus { top: 16px; }
 
-        .reading-progress {
-            position: fixed; top: 0; right: 0;
-            height: 3px;
-            background: linear-gradient(90deg, var(--c-accent), #5eb8ee);
-            z-index: 9999; width: 0;
-            transition: width 0.1s linear;
-            pointer-events: none;
-            box-shadow: 0 0 8px rgba(46, 204, 113, 0.5);
-        }
-
         @keyframes fadeUp { from { opacity: 0; transform: translateY(24px); } to { opacity: 1; transform: translateY(0); } }
         @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-12px); } }
         @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
@@ -156,9 +141,7 @@
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
-        /* ============================================================
-           NAVBAR
-           ============================================================ */
+        /* NAVBAR */
         .navbar {
             position: sticky; top: 0; z-index: 100;
             background: rgba(10, 37, 64, 0.85);
@@ -191,7 +174,7 @@
             background: transparent;
         }
         .nav-links a:hover, .dropdown-btn:hover { background: rgba(255, 255, 255, 0.1); color: #fff; }
-        .nav-links a.active { background: rgba(46, 204, 113, 0.15); color: #5eb8ee; }
+        .nav-links a.active { background: rgba(46, 204, 113, 0.15); color: #a8f0c6; }
 
         .theme-toggle, .wishlist-toggle, .compare-toggle {
             width: 40px; height: 40px; border-radius: 50%;
@@ -214,7 +197,7 @@
             animation: badgePop 0.4s ease;
         }
         .wishlist-toggle .count-badge.show, .compare-toggle .count-badge.show { display: flex; }
-        .compare-toggle .count-badge { background: var(--c-purple); }
+        .compare-toggle .count-badge { background: var(--c-chat); }
 
         .dropdown { position: relative; }
         .dropdown-content {
@@ -245,14 +228,10 @@
             align-items: center; justify-content: center; font-size: 1.1rem;
         }
 
-        /* ============================================================
-           MAIN
-           ============================================================ */
+        /* MAIN */
         .main-container { max-width: var(--container); margin: 0 auto; padding: 20px 24px 60px; }
 
-        /* ============================================================
-           PAGE HEADER
-           ============================================================ */
+        /* PAGE HEADER */
         .page-header {
             position: relative;
             border-radius: var(--r-xl);
@@ -328,7 +307,6 @@
             max-width: 640px; margin: 0 auto 24px; line-height: 1.65;
         }
 
-        /* Stats bar */
         .stats-bar {
             display: grid;
             grid-template-columns: repeat(4, 1fr);
@@ -368,9 +346,7 @@
             font-weight: 500; margin-top: 2px;
         }
 
-        /* ============================================================
-           SEARCH SECTION
-           ============================================================ */
+        /* SEARCH */
         .search-section {
             margin-top: -24px;
             position: relative;
@@ -486,7 +462,6 @@
             box-shadow: 0 8px 24px rgba(46, 204, 113, 0.4);
         }
 
-        /* Suggestions */
         .suggestions-box {
             position: absolute;
             top: calc(100% + 10px);
@@ -532,7 +507,7 @@
         .suggestion-item .sub-text { font-size: 0.75rem; color: var(--c-text-sub); flex-shrink: 0; }
         .suggestion-item .cas-tag {
             background: rgba(139, 92, 246, 0.12);
-            color: var(--c-purple);
+            color: var(--c-chat);
             padding: 2px 8px;
             border-radius: var(--r-full);
             font-size: 0.65rem;
@@ -570,9 +545,7 @@
             font-size: 0.88rem;
         }
 
-        /* ============================================================
-           FILTERS
-           ============================================================ */
+        /* FILTERS */
         .filters-row {
             display: flex;
             justify-content: center;
@@ -616,12 +589,8 @@
             background: rgba(46, 204, 113, 0.06);
             border-color: var(--c-accent);
         }
-        .advanced-toggle i {
-            transition: transform var(--t-fast);
-        }
-        .advanced-toggle[aria-expanded="true"] i {
-            transform: rotate(180deg);
-        }
+        .advanced-toggle i { transition: transform var(--t-fast); }
+        .advanced-toggle[aria-expanded="true"] i { transform: rotate(180deg); }
 
         .advanced-panel {
             max-height: 0;
@@ -632,7 +601,7 @@
             margin: 0 auto 20px;
         }
         .advanced-panel.show {
-            max-height: 400px;
+            max-height: 500px;
             opacity: 1;
             padding: 16px;
             background: var(--c-surface);
@@ -686,6 +655,7 @@
             align-items: center;
             justify-content: center;
             gap: 6px;
+            cursor: pointer;
         }
         .btn-reset:hover {
             background: var(--c-danger);
@@ -693,19 +663,67 @@
             border-color: var(--c-danger);
         }
 
-        /* ============================================================
-           FEATURED SECTION
-           ============================================================ */
+        /* ACTIVE FILTERS */
+        .active-filters-bar {
+            display: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+            animation: fadeUp 0.3s ease;
+        }
+        .active-filters-bar.visible { display: flex; }
+        .active-filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            background: var(--c-primary-50);
+            color: var(--c-primary-700);
+            border: 1.5px solid var(--c-primary-100);
+            border-radius: var(--r-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        [data-theme="dark"] .active-filter-chip {
+            background: rgba(46, 204, 113, 0.12);
+            color: #a8f0c6;
+            border-color: rgba(46, 204, 113, 0.25);
+        }
+        .active-filter-chip button {
+            color: inherit;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            transition: opacity var(--t-fast);
+            cursor: pointer;
+        }
+        .active-filter-chip button:hover { opacity: 1; }
+        .clear-all-filters {
+            padding: 5px 14px;
+            background: var(--c-danger);
+            color: #fff;
+            border-radius: var(--r-full);
+            font-size: 0.72rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--t-fast);
+            cursor: pointer;
+        }
+        .clear-all-filters:hover { transform: scale(1.05); }
+
+        /* FEATURED SECTION */
         .featured-section {
             position: relative;
             border-radius: var(--r-xl);
             padding: 24px;
             margin: 12px 0 24px;
-            background: linear-gradient(135deg, rgba(243, 156, 18, 0.08), rgba(230, 126, 34, 0.04));
-            border: 1.5px solid rgba(243, 156, 18, 0.3);
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.08), rgba(243, 156, 18, 0.02));
+            border: 1.5px solid rgba(241, 196, 15, 0.3);
         }
         [data-theme="dark"] .featured-section {
-            background: linear-gradient(135deg, rgba(243, 156, 18, 0.06), rgba(230, 126, 34, 0.02));
+            background: linear-gradient(135deg, rgba(241, 196, 15, 0.06), rgba(243, 156, 18, 0.02));
         }
         .featured-header {
             display: flex;
@@ -723,18 +741,16 @@
             align-items: center;
             gap: 10px;
             padding-right: 14px;
-            border-right: 4px solid var(--c-warning);
+            border-right: 4px solid var(--c-gold);
         }
-        .featured-title i { color: var(--c-warning); }
+        .featured-title i { color: var(--c-gold); animation: pulse 3s ease-in-out infinite; }
         .featured-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
             gap: 20px;
         }
 
-        /* ============================================================
-           RESULTS INFO
-           ============================================================ */
+        /* RESULTS INFO */
         .results-info {
             display: flex;
             justify-content: space-between;
@@ -757,9 +773,7 @@
             font-weight: 800;
         }
 
-        /* ============================================================
-           PRODUCT CARDS
-           ============================================================ */
+        /* PRODUCT CARDS */
         .grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(288px, 1fr));
@@ -842,11 +856,10 @@
         }
         .badge-views { background: rgba(0, 0, 0, 0.55); color: #fff; }
         .badge-contacts { background: rgba(37, 211, 102, 0.9); color: #fff; }
-        .badge-rating { background: rgba(241, 196, 15, 0.95); color: #fff; }
         .badge-featured {
-            background: linear-gradient(135deg, #f39c12, #e67e22);
+            background: linear-gradient(135deg, #f1c40f, #e67e22);
             color: #fff;
-            box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4);
+            box-shadow: 0 4px 12px rgba(241, 196, 15, 0.4);
         }
 
         .card-float-actions {
@@ -886,10 +899,10 @@
         .card-float-btn.active:hover { background: #c0392b; }
         .card-float-btn.active i { animation: heartBeat 0.6s ease; }
         .card-float-btn.compare-active {
-            background: var(--c-purple);
+            background: var(--c-chat);
             color: #fff;
         }
-        .card-float-btn.compare-active:hover { background: #7c3aed; }
+        .card-float-btn.compare-active:hover { background: var(--c-chat-dark); }
 
         .card-body {
             padding: 14px 16px 16px;
@@ -897,6 +910,13 @@
             display: flex;
             flex-direction: column;
             gap: 6px;
+        }
+        .card-category-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            gap: 8px;
+            flex-wrap: wrap;
         }
         .card-category {
             align-self: flex-start;
@@ -947,7 +967,7 @@
         }
         .spec-tag.cas {
             background: rgba(139, 92, 246, 0.08);
-            color: var(--c-purple);
+            color: var(--c-chat);
             border-color: rgba(139, 92, 246, 0.2);
             font-family: 'Courier New', monospace;
             direction: ltr;
@@ -978,6 +998,7 @@
             background: var(--c-primary-50);
             padding: 2px 8px;
             border-radius: var(--r-full);
+            align-self: flex-start;
         }
         [data-theme="dark"] .msds-indicator { background: rgba(44, 122, 184, 0.15); color: #7ec8e3; }
         .msds-indicator i { color: var(--c-accent); }
@@ -1031,7 +1052,6 @@
             padding: 2px 7px;
             border-radius: var(--r-full);
             font-weight: 700;
-            margin-right: 4px;
             box-shadow: 0 2px 6px rgba(30, 136, 229, 0.3);
         }
         .verified-badge i { color: #fff; }
@@ -1061,48 +1081,61 @@
         .btn-card {
             flex: 1;
             min-height: 40px;
-            padding: 8px 10px;
+            padding: 8px 6px;
             border-radius: var(--r-md);
             font-weight: 700;
-            font-size: 0.78rem;
+            font-size: 0.72rem;
             display: inline-flex;
             align-items: center;
             justify-content: center;
-            gap: 6px;
+            gap: 5px;
             transition: all var(--t-fast);
             text-decoration: none;
             border: none;
             white-space: nowrap;
+            cursor: pointer;
+            font-family: inherit;
         }
         .btn-detail { background: var(--c-primary-900); color: #fff; }
-        .btn-detail:hover { background: var(--c-primary-600); }
+        .btn-detail:hover { background: var(--c-primary-600); transform: translateY(-2px); }
+
+        /* 🆕 زر تواصل عبر الموقع */
+        .btn-chat-card {
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
+        }
+        .btn-chat-card:hover {
+            background: linear-gradient(135deg, var(--c-chat-dark), #6d28d9);
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+        }
+
         .btn-wa { background: var(--c-whatsapp); color: #fff; }
-        .btn-wa:hover { background: #1da851; }
+        .btn-wa:hover { background: #1da851; transform: translateY(-2px); }
         .btn-rfq {
             background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
             color: #fff;
             box-shadow: 0 2px 8px rgba(46, 204, 113, 0.25);
         }
         .btn-rfq:hover {
-            transform: translateY(-1px);
+            transform: translateY(-2px);
             box-shadow: 0 6px 16px rgba(46, 204, 113, 0.35);
         }
-        .btn-share-card {
-            flex: 0 0 auto;
-            width: 40px;
+        .btn-copy-card {
+            flex: 0 0 40px;
             background: var(--c-surface-2);
             color: var(--c-text-muted);
             border: 1px solid var(--c-border);
+            padding: 0;
         }
-        .btn-share-card:hover {
+        .btn-copy-card:hover {
             background: var(--c-primary-50);
             color: var(--c-primary-600);
             border-color: var(--c-primary-500);
         }
 
-        /* ============================================================
-           SKELETON
-           ============================================================ */
+        /* SKELETON */
         .skeleton {
             background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
             background-size: 200% 100%;
@@ -1123,9 +1156,7 @@
         .skeleton-line.w-90 { width: 90%; }
         .skeleton-line.h-20 { height: 20px; }
 
-        /* ============================================================
-           EMPTY STATE
-           ============================================================ */
+        /* EMPTY STATE */
         .empty-state {
             grid-column: 1 / -1;
             text-align: center;
@@ -1163,15 +1194,14 @@
             font-size: 0.9rem;
             transition: all var(--t-base);
             box-shadow: 0 6px 20px rgba(46, 204, 113, 0.3);
+            cursor: pointer;
         }
         .empty-state .btn-reset-filters:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 32px rgba(46, 204, 113, 0.45);
         }
 
-        /* ============================================================
-           INFINITE SCROLL
-           ============================================================ */
+        /* INFINITE SCROLL */
         .infinite-sentinel { height: 20px; margin-top: 20px; }
         .infinite-loading {
             display: flex;
@@ -1197,9 +1227,7 @@
         .infinite-loading .dots span:nth-child(2) { animation-delay: 0.2s; }
         .infinite-loading .dots span:nth-child(3) { animation-delay: 0.4s; }
 
-        /* ============================================================
-           FLOATING BAR (Compare)
-           ============================================================ */
+        /* FLOATING BAR */
         .floating-bar {
             position: fixed;
             bottom: 0;
@@ -1245,7 +1273,7 @@
             cursor: pointer;
         }
         .floating-btn.primary {
-            background: linear-gradient(135deg, #8b5cf6, #7c3aed);
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
             color: #fff;
             box-shadow: 0 4px 12px rgba(139, 92, 246, 0.3);
         }
@@ -1262,9 +1290,7 @@
             background: rgba(231, 76, 60, 0.1);
         }
 
-        /* ============================================================
-           MODALS
-           ============================================================ */
+        /* MODALS */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -1379,9 +1405,7 @@
             line-height: 1.3;
         }
 
-        /* ============================================================
-           SCROLL TOP
-           ============================================================ */
+        /* SCROLL TOP */
         .scroll-top {
             position: fixed;
             bottom: 32px;
@@ -1413,9 +1437,7 @@
         }
         .floating-bar.show ~ .scroll-top { bottom: 100px; }
 
-        /* ============================================================
-           TOAST
-           ============================================================ */
+        /* TOAST */
         .toast-container {
             position: fixed;
             bottom: 24px;
@@ -1465,11 +1487,9 @@
         .toast.success { border-right-color: var(--c-accent); }
         .toast.warning { border-right-color: var(--c-warning); }
         .toast.error { border-right-color: var(--c-danger); }
-        .toast.info { border-right-color: var(--c-purple); }
+        .toast.info { border-right-color: var(--c-chat); }
 
-        /* ============================================================
-           FOOTER
-           ============================================================ */
+        /* FOOTER */
         .footer {
             background: linear-gradient(180deg, var(--c-primary-900), #061a2e);
             color: rgba(255, 255, 255, 0.8);
@@ -1499,9 +1519,7 @@
             color: rgba(255, 255, 255, 0.4);
         }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
+        /* RESPONSIVE */
         @media (max-width: 1024px) {
             .grid,
             .featured-grid { grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); }
@@ -1591,6 +1609,9 @@
             .floating-bar-info { font-size: 0.8rem; width: 100%; justify-content: center; }
             .floating-bar-actions { width: 100%; justify-content: center; }
             .floating-btn { padding: 8px 16px; font-size: 0.78rem; }
+
+            .btn-card { font-size: 0.65rem; padding: 8px 4px; gap: 3px; }
+            .btn-copy-card { flex: 0 0 34px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1607,13 +1628,11 @@
 
     <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
 
-    <div class="reading-progress" id="readingProgress" aria-hidden="true"></div>
-
     <!-- NAVBAR -->
     <header class="navbar" role="banner">
         <div class="navbar-inner">
             <div class="logo">
-                <a href="/" aria-label="كيماتو">
+                <a href="index.html" aria-label="كيماتو">
                     <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager"
                          onerror="this.style.display='none'" />
                     <span class="logo-text">
@@ -1719,7 +1738,6 @@
 
         <!-- SEARCH -->
         <div class="search-section animate-in" style="animation-delay: 0.1s;">
-
             <div class="search-modes" role="tablist" aria-label="نوع البحث">
                 <button class="search-mode-btn active" data-search-mode="name" role="tab" aria-selected="true">
                     <i class="fas fa-font"></i> بحث بالاسم
@@ -1773,7 +1791,6 @@
                 <option value="price-low">💵 الأقل سعراً</option>
                 <option value="price-high">💰 الأعلى سعراً</option>
                 <option value="popular">👁️ الأكثر مشاهدة</option>
-                <option value="most_contacted">💬 الأكثر تواصلاً</option>
                 <option value="name-asc">🔤 الاسم (أ - ي)</option>
             </select>
 
@@ -1827,6 +1844,9 @@
             </div>
         </div>
 
+        <!-- ACTIVE FILTERS -->
+        <div class="active-filters-bar" id="activeFiltersBar"></div>
+
         <!-- FEATURED SECTION -->
         <section id="featuredSection" class="featured-section animate-in" style="display: none; animation-delay: 0.18s;">
             <div class="featured-header">
@@ -1834,9 +1854,6 @@
                     <i class="fas fa-star"></i>
                     منتجات مميزة
                 </h2>
-                <a href="all-products.html?featured=true" class="view-all" style="display:none;">
-                    عرض الكل <i class="fas fa-arrow-left"></i>
-                </a>
             </div>
             <div class="featured-grid" id="featuredGrid"></div>
         </section>
@@ -1850,11 +1867,9 @@
         </div>
 
         <!-- PRODUCTS GRID -->
-        <div id="productsList" class="grid" aria-live="polite" aria-busy="true">
-            <!-- Skeleton will be injected here -->
-        </div>
+        <div id="productsList" class="grid" aria-live="polite" aria-busy="true"></div>
 
-        <!-- INFINITE SCROLL SENTINEL -->
+        <!-- INFINITE SCROLL -->
         <div class="infinite-sentinel" id="infiniteSentinel"></div>
 
         <div id="infiniteLoading" class="infinite-loading" style="display: none;">
@@ -1869,7 +1884,7 @@
     <!-- FLOATING BAR (Compare) -->
     <div class="floating-bar" id="compareBar">
         <div class="floating-bar-info">
-            <i class="fas fa-balance-scale" style="color: var(--c-purple);"></i>
+            <i class="fas fa-balance-scale" style="color: var(--c-chat);"></i>
             <span id="compareBarText">0 منتج للمقارنة</span>
         </div>
         <div class="floating-bar-actions">
@@ -1887,7 +1902,7 @@
         <div class="modal">
             <div class="modal-header">
                 <h3 id="compareModalTitle">
-                    <i class="fas fa-balance-scale" style="color: var(--c-purple);"></i>
+                    <i class="fas fa-balance-scale" style="color: var(--c-chat);"></i>
                     مقارنة المنتجات
                 </h3>
                 <button class="modal-close" id="closeCompareBtn" aria-label="إغلاق">
@@ -1938,7 +1953,8 @@
             <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
         </div>
     </footer>
-        <script type="module">
+
+    <script type="module">
         import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
         const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
@@ -1952,7 +1968,6 @@
         // STATE
         // ============================================================
         const state = {
-            // Filters
             search: '',
             searchMode: 'name',
             categoryId: 'all',
@@ -1962,8 +1977,6 @@
             stockFilter: 'all',
             supplierSearch: '',
             sort: 'newest',
-
-            // Data
             page: 0,
             pageSize: 12,
             total: 0,
@@ -1971,19 +1984,15 @@
             suggestions: [],
             allCategories: [],
             featuredProducts: [],
-
-            // User
             user: null,
             userProfile: null,
             wishlist: new Set(),
             compareList: [],
-
-            // UI
             loading: false,
             hasMore: true,
             selectedSuggestionIndex: -1,
             channel: null,
-            isFilterActive: false,
+            viewTracked: new Set(),
         };
 
         const WISHLIST_KEY = 'chemato-wishlist';
@@ -2016,6 +2025,13 @@
                 clearTimeout(timer);
                 timer = setTimeout(() => fn(...args), delay);
             };
+        };
+
+        // 🆕 بناء رابط المحادثة
+        const buildMessageUrl = (userId, { productId = null } = {}) => {
+            const params = new URLSearchParams({ to: userId });
+            if (productId) params.set('product', productId);
+            return `messages.html?${params.toString()}`;
         };
 
         // ============================================================
@@ -2051,71 +2067,24 @@
             setTimeout(() => toast.remove(), 300);
         };
 
-        const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = '') => {
+        const showToast = (icon, title, desc, type = '') => {
             const container = document.getElementById('toastContainer');
             if (!container) return;
 
             const toast = document.createElement('div');
             toast.className = `toast ${type}`;
+            toast.innerHTML = `
+                <div class="toast-icon">${icon}</div>
+                <div class="toast-content">
+                    <div class="toast-title">${escapeHtml(title)}</div>
+                    <div class="toast-desc">${escapeHtml(desc)}</div>
+                </div>
+                <button class="toast-close" aria-label="إغلاق"><i class="fas fa-times"></i></button>
+            `;
 
-            const iconEl = document.createElement('div');
-            iconEl.className = 'toast-icon';
-            iconEl.textContent = icon;
-
-            const content = document.createElement('div');
-            content.className = 'toast-content';
-
-            const titleEl = document.createElement('div');
-            titleEl.className = 'toast-title';
-            titleEl.textContent = title;
-
-            const descEl = document.createElement('div');
-            descEl.className = 'toast-desc';
-            descEl.textContent = desc + (linkText ? ' ' : '');
-
-            if (linkText && linkUrl) {
-                const link = document.createElement('a');
-                link.href = linkUrl;
-                link.textContent = linkText;
-                if (!linkUrl.startsWith('/') && !linkUrl.startsWith(window.location.origin)) {
-                    link.rel = 'noopener noreferrer';
-                    link.target = '_blank';
-                }
-                descEl.appendChild(link);
-            }
-
-            content.appendChild(titleEl);
-            content.appendChild(descEl);
-
-            const closeBtn = document.createElement('button');
-            closeBtn.className = 'toast-close';
-            closeBtn.setAttribute('aria-label', 'إغلاق');
-            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-            closeBtn.onclick = () => removeToast(toast);
-
-            toast.appendChild(iconEl);
-            toast.appendChild(content);
-            toast.appendChild(closeBtn);
+            toast.querySelector('.toast-close').onclick = () => removeToast(toast);
             container.appendChild(toast);
-
-            setTimeout(() => removeToast(toast), 6000);
-        };
-
-        // ============================================================
-        // READING PROGRESS
-        // ============================================================
-        const initReadingProgress = () => {
-            const bar = document.getElementById('readingProgress');
-            if (!bar) return;
-            const update = () => {
-                const winScroll = document.documentElement.scrollTop;
-                const height = document.documentElement.scrollHeight - window.innerHeight;
-                const scrolled = height > 0 ? (winScroll / height) * 100 : 0;
-                bar.style.width = scrolled + '%';
-            };
-            window.addEventListener('scroll', update, { passive: true });
-            window.addEventListener('resize', update, { passive: true });
-            update();
+            setTimeout(() => removeToast(toast), 5000);
         };
 
         // ============================================================
@@ -2174,6 +2143,7 @@
 
                         dropdownContent.innerHTML = `
                             <a href="${dashboardUrl}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                            <a href="messages.html"><i class="fas fa-comments"></i> المحادثات</a>
                             <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
                             <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
                         `;
@@ -2208,13 +2178,22 @@
             try {
                 const stored = localStorage.getItem(WISHLIST_KEY);
                 if (stored) state.wishlist = new Set(JSON.parse(stored));
-            } catch (e) { /* silent */ }
+            } catch { /* silent */ }
         };
 
         const saveWishlistLocal = () => {
             try {
                 localStorage.setItem(WISHLIST_KEY, JSON.stringify([...state.wishlist]));
-            } catch (e) { /* silent */ }
+            } catch { /* silent */ }
+        };
+
+        const updateWishlistCount = () => {
+            const count = state.wishlist.size;
+            const badge = document.getElementById('wishlistCount');
+            if (badge) {
+                badge.textContent = count > 99 ? '99+' : count;
+                badge.classList.toggle('show', count > 0);
+            }
         };
 
         const syncWishlistFromDB = async () => {
@@ -2242,16 +2221,7 @@
 
                 state.wishlist = new Set((data || []).map(f => f.product_id));
                 updateWishlistCount();
-            } catch (e) { /* silent */ }
-        };
-
-        const updateWishlistCount = () => {
-            const count = state.wishlist.size;
-            const badge = document.getElementById('wishlistCount');
-            if (badge) {
-                badge.textContent = count > 99 ? '99+' : count;
-                badge.classList.toggle('show', count > 0);
-            }
+            } catch { /* silent */ }
         };
 
         const toggleWishlist = async (productId, productName, btn) => {
@@ -2265,7 +2235,7 @@
                 } else {
                     saveWishlistLocal();
                 }
-                showToast('💔', 'أُزيل من المفضلة', productName || 'المنتج', null, null, 'info');
+                showToast('💔', 'أُزيل من المفضلة', productName || 'المنتج', 'info');
                 btn?.classList.remove('active');
             } else {
                 state.wishlist.add(productId);
@@ -2277,7 +2247,7 @@
                 } else {
                     saveWishlistLocal();
                 }
-                showToast('❤️', 'أُضيف للمفضلة', productName || 'المنتج', null, null, 'success');
+                showToast('❤️', 'أُضيف للمفضلة', productName || 'المنتج', 'success');
                 btn?.classList.add('active');
             }
 
@@ -2291,13 +2261,13 @@
             try {
                 const stored = localStorage.getItem(COMPARE_KEY);
                 if (stored) state.compareList = JSON.parse(stored);
-            } catch (e) { /* silent */ }
+            } catch { /* silent */ }
         };
 
         const saveCompareList = () => {
             try {
                 localStorage.setItem(COMPARE_KEY, JSON.stringify(state.compareList));
-            } catch (e) { /* silent */ }
+            } catch { /* silent */ }
         };
 
         const updateCompareUI = () => {
@@ -2327,14 +2297,14 @@
             const idx = state.compareList.indexOf(productId);
             if (idx >= 0) {
                 state.compareList.splice(idx, 1);
-                showToast('✖️', 'أُزيل من المقارنة', '', null, null, 'info');
+                showToast('✖️', 'أُزيل من المقارنة', '', 'info');
             } else {
                 if (state.compareList.length >= 4) {
-                    showToast('⚠️', 'الحد الأقصى', 'يمكنك مقارنة 4 منتجات فقط', null, null, 'warning');
+                    showToast('⚠️', 'الحد الأقصى', 'يمكنك مقارنة 4 منتجات فقط', 'warning');
                     return;
                 }
                 state.compareList.push(productId);
-                showToast('✅', 'أضيف للمقارنة', `${state.compareList.length}/4`, null, null, 'success');
+                showToast('✅', 'أضيف للمقارنة', `${state.compareList.length}/4`, 'success');
             }
             saveCompareList();
             updateCompareUI();
@@ -2408,7 +2378,7 @@
                     option.textContent = `${cat.icon || '📁'} ${cat.name}`;
                     select.appendChild(option);
                 });
-            } catch (e) { /* silent */ }
+            } catch { /* silent */ }
         };
 
         // ============================================================
@@ -2424,7 +2394,7 @@
                     .limit(400);
 
                 state.suggestions = data || [];
-            } catch (e) {
+            } catch {
                 state.suggestions = [];
             }
         };
@@ -2519,7 +2489,26 @@
         };
 
         // ============================================================
-        // LOAD FEATURED
+        // FETCH SUPPLIERS MAP
+        // ============================================================
+        const fetchSuppliersMap = async (supplierIds) => {
+            const map = {};
+            if (!supplierIds.length) return map;
+            try {
+                const { data, error } = await supabase
+                    .from('profiles')
+                    .select('id, full_name, company_name, phone, is_verified')
+                    .in('id', supplierIds);
+
+                if (!error && data) {
+                    data.forEach(s => { map[s.id] = s; });
+                }
+            } catch { /* silent */ }
+            return map;
+        };
+
+        // ============================================================
+        // FEATURED
         // ============================================================
         const loadFeatured = async () => {
             try {
@@ -2550,26 +2539,7 @@
                 if (section) section.style.display = 'block';
                 if (grid) grid.innerHTML = enriched.map((p, i) => renderProductCard(p, i)).join('');
                 observeProductViews();
-            } catch (e) { /* silent */ }
-        };
-
-        // ============================================================
-        // FETCH SUPPLIERS MAP
-        // ============================================================
-        const fetchSuppliersMap = async (supplierIds) => {
-            const map = {};
-            if (!supplierIds.length || !supabase) return map;
-            try {
-                const { data, error } = await supabase
-                    .from('profiles')
-                    .select('id, full_name, company_name, phone, is_verified')
-                    .in('id', supplierIds);
-
-                if (!error && data) {
-                    data.forEach(s => { map[s.id] = s; });
-                }
-            } catch (e) { /* silent */ }
-            return map;
+            } catch { /* silent */ }
         };
 
         // ============================================================
@@ -2632,7 +2602,6 @@
                 'price-low': ['price', true],
                 'price-high': ['price', false],
                 'popular': ['views', false],
-                'most_contacted': ['contact_count', false],
                 'name-asc': ['name', true],
             };
             const [sortCol, asc] = sortMap[state.sort] || sortMap['newest'];
@@ -2680,15 +2649,14 @@
                 const from = state.page * state.pageSize;
                 const to = from + state.pageSize - 1;
 
-                let query = buildQuery().range(from, to);
+                const query = buildQuery().range(from, to);
                 const { data, error, count } = await query;
 
                 if (error) throw error;
 
-                const products = data || [];
+                let products = data || [];
                 state.total = count || 0;
 
-                // Fetch suppliers map
                 const supplierIds = [...new Set(products.map(p => p.supplier_id).filter(Boolean))];
                 const suppliersMap = await fetchSuppliersMap(supplierIds);
 
@@ -2716,9 +2684,10 @@
 
                 state.hasMore = state.products.length < state.total;
                 updateResultsCount();
+                updateActiveFiltersUI();
 
-                // Track views
-                enriched.forEach(p => trackView(p.id, p.supplier_id));
+                // Track views (مع throttle)
+                enriched.forEach(p => scheduleViewTrack(p.id, p.supplier_id));
 
             } catch (error) {
                 console.error('❌ Products error:', error);
@@ -2734,7 +2703,7 @@
                         </div>
                     `;
                 }
-                showToast('⚠️', 'خطأ', 'تعذر تحميل المنتجات', null, null, 'error');
+                showToast('⚠️', 'خطأ', 'تعذر تحميل المنتجات', 'error');
             } finally {
                 state.loading = false;
                 infiniteLoading.style.display = 'none';
@@ -2784,11 +2753,11 @@
                 : '<span class="currency">سعر عند الطلب</span>';
 
             const supplier = escapeHtml(p.supplier?.company_name || p.supplier?.full_name || 'مورد');
-            const category = escapeHtml(p.category || p.category_name || 'كيماويات');
+            const category = escapeHtml(p.category || 'كيماويات');
             const isVerified = p.supplier?.is_verified === true;
 
-            const hasImage = p.image_url && p.image_url.trim() && !p.image_url.includes('placehold');
-            const safeImageUrl = hasImage && /^https?:\/\//i.test(p.image_url) ? escapeHtml(p.image_url) : '';
+            const hasImage = p.image_url && p.image_url.trim() && /^https?:\/\//i.test(p.image_url);
+            const safeImageUrl = hasImage ? escapeHtml(p.image_url) : '';
 
             const mediaHtml = safeImageUrl
                 ? `<img class="card-img" src="${safeImageUrl}" alt="${name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'><span class=\\'emoji\\'>🧪</span><span class=\\'name\\'>${shortName.replace(/'/g, "&#39;")}</span></div>';" />`
@@ -2808,6 +2777,9 @@
 
             const isWishlisted = state.wishlist.has(p.id);
             const isCompare = state.compareList.includes(p.id);
+
+            // 🆕 Chat URL
+            const chatUrl = supplierId ? buildMessageUrl(supplierId, { productId: p.id }) : '';
 
             // Specs
             const specs = [];
@@ -2847,14 +2819,16 @@
                                     data-action="wishlist"
                                     data-product-id="${escapeHtml(p.id)}"
                                     data-product-name="${safeName}"
-                                    aria-label="إضافة للمفضلة">
+                                    aria-label="إضافة للمفضلة"
+                                    title="إضافة للمفضلة">
                                 <i class="fas fa-heart"></i>
                             </button>
                             <button class="card-float-btn ${isCompare ? 'compare-active' : ''}"
                                     type="button"
                                     data-action="compare"
                                     data-product-id="${escapeHtml(p.id)}"
-                                    aria-label="إضافة للمقارنة">
+                                    aria-label="إضافة للمقارنة"
+                                    title="إضافة للمقارنة">
                                 <i class="fas fa-balance-scale"></i>
                             </button>
                         </div>
@@ -2865,7 +2839,7 @@
                         </div>
                     </div>
                     <div class="card-body">
-                        <div style="display:flex;justify-content:space-between;align-items:center;gap:8px;flex-wrap:wrap;">
+                        <div class="card-category-row">
                             <span class="card-category"><i class="fas fa-flask"></i> ${category}</span>
                             ${stockHtml}
                         </div>
@@ -2887,33 +2861,35 @@
                         </div>
 
                         <div class="card-actions">
-                            <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="btn-card btn-detail">
+                            <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="btn-card btn-detail" title="عرض التفاصيل">
                                 <i class="fas fa-info-circle"></i> تفاصيل
                             </a>
-                            <button class="btn-card btn-wa" type="button"
-                                data-action="whatsapp"
-                                data-supplier-id="${escapeHtml(supplierId)}"
-                                data-product-id="${escapeHtml(p.id)}"
-                                data-phone="${escapeHtml(supplierPhone)}"
-                                data-name="${safeName}"
-                                aria-label="تواصل عبر واتساب">
-                                <i class="fab fa-whatsapp"></i> واتساب
-                            </button>
-                            <button class="btn-card btn-rfq" type="button"
-                                data-action="rfq"
-                                data-product-id="${escapeHtml(p.id)}"
-                                data-name="${safeName}"
-                                data-cas="${escapeHtml(p.cas_number || '')}"
-                                data-purity="${escapeHtml(p.purity || '')}"
-                                aria-label="طلب عرض سعر">
-                                <i class="fas fa-file-invoice"></i> RFQ
-                            </button>
-                            <button class="btn-card btn-share-card" type="button"
+                            
+                            ${chatUrl ? `
+                                <a href="${chatUrl}" class="btn-card btn-chat-card" data-action="chat" title="تواصل عبر الموقع">
+                                    <i class="fas fa-comments"></i> تواصل
+                                </a>
+                            ` : ''}
+                            
+                            ${supplierPhone ? `
+                                <button class="btn-card btn-wa" type="button"
+                                    data-action="whatsapp"
+                                    data-supplier-id="${escapeHtml(supplierId)}"
+                                    data-product-id="${escapeHtml(p.id)}"
+                                    data-phone="${escapeHtml(supplierPhone)}"
+                                    data-name="${safeName}"
+                                    title="تواصل عبر واتساب">
+                                    <i class="fab fa-whatsapp"></i>
+                                </button>
+                            ` : ''}
+                            
+                            <button class="btn-card btn-copy-card" type="button"
                                 data-action="share"
                                 data-product-id="${escapeHtml(p.id)}"
                                 data-name="${safeName}"
-                                aria-label="مشاركة">
-                                <i class="fas fa-share-alt"></i>
+                                title="نسخ الرابط"
+                                aria-label="نسخ الرابط">
+                                <i class="fas fa-link"></i>
                             </button>
                         </div>
                     </div>
@@ -2929,6 +2905,98 @@
                 return;
             }
             el.innerHTML = `<i class="fas fa-flask"></i> <span>عرض <strong>${state.products.length.toLocaleString('ar-EG')}</strong> من أصل <strong>${state.total.toLocaleString('ar-EG')}</strong> منتج</span>`;
+        };
+
+        // ============================================================
+        // ACTIVE FILTERS UI
+        // ============================================================
+        const updateActiveFiltersUI = () => {
+            const container = document.getElementById('activeFiltersBar');
+            if (!container) return;
+
+            const chips = [];
+
+            if (state.search) {
+                chips.push(`<span class="active-filter-chip">🔍 "${escapeHtml(state.search)}" <button type="button" data-clear="search"><i class="fas fa-times"></i></button></span>`);
+            }
+            if (state.categoryId !== 'all') {
+                const cat = state.allCategories.find(c => c.id === state.categoryId);
+                if (cat) chips.push(`<span class="active-filter-chip">📂 ${escapeHtml(cat.name)} <button type="button" data-clear="category"><i class="fas fa-times"></i></button></span>`);
+            }
+            if (state.priceFilter !== 'all') {
+                chips.push(`<span class="active-filter-chip">💰 ${escapeHtml(state.priceFilter)} ج.م <button type="button" data-clear="price"><i class="fas fa-times"></i></button></span>`);
+            }
+            if (state.purityFilter !== 'all') {
+                chips.push(`<span class="active-filter-chip">💎 نقاء ${escapeHtml(state.purityFilter)} <button type="button" data-clear="purity"><i class="fas fa-times"></i></button></span>`);
+            }
+            if (state.gradeFilter !== 'all') {
+                chips.push(`<span class="active-filter-chip">🏷️ ${escapeHtml(state.gradeFilter)} <button type="button" data-clear="grade"><i class="fas fa-times"></i></button></span>`);
+            }
+            if (state.stockFilter !== 'all') {
+                chips.push(`<span class="active-filter-chip">📦 ${escapeHtml(state.stockFilter)} <button type="button" data-clear="stock"><i class="fas fa-times"></i></button></span>`);
+            }
+            if (state.supplierSearch) {
+                chips.push(`<span class="active-filter-chip">🏢 "${escapeHtml(state.supplierSearch)}" <button type="button" data-clear="supplier"><i class="fas fa-times"></i></button></span>`);
+            }
+
+            if (chips.length > 1) {
+                chips.push(`<button class="clear-all-filters" type="button" data-clear-all><i class="fas fa-trash-alt"></i> مسح الكل</button>`);
+            }
+
+            if (chips.length) {
+                container.innerHTML = chips.join('');
+                container.classList.add('visible');
+            } else {
+                container.classList.remove('visible');
+                container.innerHTML = '';
+            }
+        };
+
+        const initActiveFilters = () => {
+            document.getElementById('activeFiltersBar')?.addEventListener('click', (e) => {
+                const target = e.target.closest('[data-clear], [data-clear-all]');
+                if (!target) return;
+
+                if (target.hasAttribute('data-clear-all')) {
+                    document.getElementById('resetFiltersBtn')?.click();
+                    return;
+                }
+
+                const which = target.dataset.clear;
+                if (which === 'search') {
+                    state.search = '';
+                    const input = document.getElementById('searchInput');
+                    if (input) input.value = '';
+                    document.getElementById('clearSearch')?.classList.remove('visible');
+                } else if (which === 'category') {
+                    state.categoryId = 'all';
+                    const sel = document.getElementById('categoryFilter');
+                    if (sel) sel.value = 'all';
+                } else if (which === 'price') {
+                    state.priceFilter = 'all';
+                    const sel = document.getElementById('priceFilter');
+                    if (sel) sel.value = 'all';
+                } else if (which === 'purity') {
+                    state.purityFilter = 'all';
+                    const sel = document.getElementById('purityFilter');
+                    if (sel) sel.value = 'all';
+                } else if (which === 'grade') {
+                    state.gradeFilter = 'all';
+                    const sel = document.getElementById('gradeFilter');
+                    if (sel) sel.value = 'all';
+                } else if (which === 'stock') {
+                    state.stockFilter = 'all';
+                    const sel = document.getElementById('stockFilter');
+                    if (sel) sel.value = 'all';
+                } else if (which === 'supplier') {
+                    state.supplierSearch = '';
+                    const input = document.getElementById('supplierSearch');
+                    if (input) input.value = '';
+                }
+
+                syncToURL();
+                resetAndLoad();
+            });
         };
 
         // ============================================================
@@ -2954,9 +3022,18 @@
                 } else if (action === 'compare') {
                     e.preventDefault();
                     toggleCompare(productId);
-                } else if (action === 'rfq') {
-                    e.preventDefault();
-                    handleRfqClick(productId, btn.dataset.name, btn.dataset.cas, btn.dataset.purity);
+                } else if (action === 'chat') {
+                    // معالج النقر على زر "تواصل عبر الموقع"
+                    if (!state.user) {
+                        e.preventDefault();
+                        showToast('🔐', 'سجّل دخولك', 'لازم تسجل دخول للتواصل عبر الموقع', 'warning');
+                        const chatUrl = btn.getAttribute('href');
+                        setTimeout(() => {
+                            window.location.href = `auth.html?redirect=${encodeURIComponent(chatUrl)}`;
+                        }, 1200);
+                        return;
+                    }
+                    showToast('💬', 'جاري فتح المحادثة', 'يتم تحويلك لصفحة المحادثات...', 'info');
                 }
             });
         };
@@ -2964,7 +3041,7 @@
         const handleWhatsApp = async (supplierId, productId, phone, productName) => {
             const clean = sanitizePhone(phone);
             if (!clean) {
-                showToast('⚠️', 'غير متاح', 'رقم الهاتف غير متوفر لهذا المورد', null, null, 'warning');
+                showToast('⚠️', 'غير متاح', 'رقم الهاتف غير متوفر لهذا المورد', 'warning');
                 return;
             }
             const phoneWithCountry = clean.startsWith('20') ? clean : '20' + clean;
@@ -2989,29 +3066,17 @@
             }
             try {
                 await navigator.clipboard.writeText(url);
-                showToast('📋', 'تم النسخ!', `تم نسخ رابط ${name || 'المنتج'}`, null, null, 'success');
+                showToast('📋', 'تم النسخ!', `تم نسخ رابط ${name || 'المنتج'}`, 'success');
             } catch {
-                showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', null, null, 'error');
+                showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', 'error');
             }
-        };
-
-        const handleRfqClick = (productId, name, cas, purity) => {
-            // ارجع للصفحة الرئيسية وافتح فورم RFQ مع البيانات
-            const params = new URLSearchParams({
-                action: 'rfq',
-                product_id: productId,
-                product_name: name,
-                cas: cas || '',
-                purity: purity || '',
-            });
-            window.location.href = `index.html?${params.toString()}`;
         };
 
         // ============================================================
         // LOG CONTACT & VIEW TRACKING
         // ============================================================
         const logContact = async ({ supplierId, productId, type }) => {
-            if (!supabase || !isValidUUID(supplierId)) return;
+            if (!isValidUUID(supplierId)) return;
             try {
                 const { error } = await supabase.rpc('log_supplier_contact', {
                     p_supplier_id: supplierId,
@@ -3033,14 +3098,18 @@
                         contact_data: { timestamp: new Date().toISOString() },
                     }).then(() => {});
                 }
-            } catch (e) { /* silent */ }
+            } catch { /* silent */ }
         };
 
-        const state_viewTracked = new Set();
-        const trackView = (productId, supplierId) => {
-            if (!productId || state_viewTracked.has(productId)) return;
-            state_viewTracked.add(productId);
-            logContact({ supplierId, productId, type: 'view' }).catch(() => {});
+        const scheduleViewTrack = (productId, supplierId) => {
+            if (!productId || state.viewTracked.has(productId)) return;
+            state.viewTracked.add(productId);
+            // تأخير 5 ثواني — فقط لو المستخدم لسه على الصفحة
+            setTimeout(() => {
+                if (document.visibilityState === 'visible') {
+                    logContact({ supplierId, productId, type: 'view' }).catch(() => {});
+                }
+            }, 5000);
         };
 
         const observeProductViews = () => {
@@ -3050,11 +3119,10 @@
                     if (entry.isIntersecting) {
                         const card = entry.target;
                         const productId = card.dataset.productId;
-                        const supplierId = card.querySelector('[data-action="whatsapp"]')?.dataset.supplierId;
-                        if (productId && supplierId && !state_viewTracked.has(productId)) {
-                            setTimeout(() => {
-                                if (card.isConnected) trackView(productId, supplierId);
-                            }, 3000);
+                        const supplierId = card.querySelector('[data-action="whatsapp"]')?.dataset.supplierId || 
+                                          card.querySelector('[data-action="chat"]')?.getAttribute('href')?.match(/to=([^&]+)/)?.[1];
+                        if (productId && supplierId && !state.viewTracked.has(productId)) {
+                            scheduleViewTrack(productId, supplierId);
                         }
                         observer.unobserve(card);
                     }
@@ -3070,6 +3138,7 @@
             const input = document.getElementById('searchInput');
             state.search = sanitizeSearch(input?.value || '');
             hideSuggestions();
+            syncToURL();
             resetAndLoad();
             document.getElementById('productsList')?.scrollIntoView({ behavior: 'smooth', block: 'start' });
         };
@@ -3145,6 +3214,7 @@
                 state.search = '';
                 clearBtn.classList.remove('visible');
                 hideSuggestions();
+                syncToURL();
                 resetAndLoad();
                 input?.focus();
             });
@@ -3158,6 +3228,7 @@
                     if (input) input.value = q;
                     state.search = sanitizeSearch(q);
                     hideSuggestions();
+                    syncToURL();
                     resetAndLoad();
                 } else if (item.dataset.productId) {
                     window.location.href = `product-details.html?id=${encodeURIComponent(item.dataset.productId)}`;
@@ -3175,20 +3246,22 @@
         const initFilters = () => {
             document.getElementById('categoryFilter')?.addEventListener('change', (e) => {
                 state.categoryId = e.target.value;
+                syncToURL();
                 resetAndLoad();
             });
 
             document.getElementById('priceFilter')?.addEventListener('change', (e) => {
                 state.priceFilter = e.target.value;
+                syncToURL();
                 resetAndLoad();
             });
 
             document.getElementById('sortFilter')?.addEventListener('change', (e) => {
                 state.sort = e.target.value;
+                syncToURL();
                 resetAndLoad();
             });
 
-            // Advanced toggle
             const advToggle = document.getElementById('advancedToggle');
             const advPanel = document.getElementById('advancedPanel');
             advToggle?.addEventListener('click', () => {
@@ -3198,25 +3271,28 @@
 
             document.getElementById('purityFilter')?.addEventListener('change', (e) => {
                 state.purityFilter = e.target.value;
+                syncToURL();
                 resetAndLoad();
             });
 
             document.getElementById('gradeFilter')?.addEventListener('change', (e) => {
                 state.gradeFilter = e.target.value;
+                syncToURL();
                 resetAndLoad();
             });
 
             document.getElementById('stockFilter')?.addEventListener('change', (e) => {
                 state.stockFilter = e.target.value;
+                syncToURL();
                 resetAndLoad();
             });
 
             document.getElementById('supplierSearch')?.addEventListener('input', debounce((e) => {
                 state.supplierSearch = e.target.value.trim();
+                syncToURL();
                 resetAndLoad();
-            }, 400));
+            }, 500));
 
-            // Reset
             document.getElementById('resetFiltersBtn')?.addEventListener('click', () => {
                 state.categoryId = 'all';
                 state.priceFilter = 'all';
@@ -3237,8 +3313,9 @@
                 document.getElementById('searchInput').value = '';
                 document.getElementById('clearSearch').classList.remove('visible');
 
+                syncToURL();
                 resetAndLoad();
-                showToast('🔄', 'تم إعادة التعيين', 'كل الفلاتر رجعت افتراضي', null, null, 'info');
+                showToast('🔄', 'تم إعادة التعيين', 'كل الفلاتر رجعت افتراضي', 'info');
             });
         };
 
@@ -3280,7 +3357,7 @@
         };
 
         // ============================================================
-        // MODALS: COMPARE & WISHLIST
+        // MODALS
         // ============================================================
         const initModals = () => {
             document.getElementById('compareToggle')?.addEventListener('click', showCompareModal);
@@ -3294,7 +3371,7 @@
                 saveCompareList();
                 updateCompareUI();
                 document.querySelectorAll('[data-action="compare"]').forEach(btn => btn.classList.remove('compare-active'));
-                showToast('🗑️', 'تم المسح', 'أُزيلت كل المنتجات من المقارنة', null, null, 'info');
+                showToast('🗑️', 'تم المسح', 'أُزيلت كل المنتجات من المقارنة', 'info');
             });
 
             document.getElementById('wishlistToggle')?.addEventListener('click', showWishlistModal);
@@ -3347,7 +3424,7 @@
                         : `<div class="img" style="display:flex;align-items:center;justify-content:center;font-size:2rem;">🧪</div>` },
                     { label: 'الاسم', render: p => `<div class="title">${escapeHtml(p.name || '—')}</div>` },
                     { label: 'رقم CAS', render: p => p.cas_number
-                        ? `<code style="background: rgba(139,92,246,0.1); color: var(--c-purple); padding: 2px 8px; border-radius: 6px; direction: ltr; font-weight: 700;">${escapeHtml(p.cas_number)}</code>`
+                        ? `<code style="background: rgba(139,92,246,0.1); color: var(--c-chat); padding: 2px 8px; border-radius: 6px; direction: ltr; font-weight: 700;">${escapeHtml(p.cas_number)}</code>`
                         : '—' },
                     { label: 'النقاء', render: p => escapeHtml(p.purity || '—') },
                     { label: 'الدرجة', render: p => p.grade ? (gradeLabels[p.grade] || p.grade) : '—' },
@@ -3456,12 +3533,11 @@
                         table: 'products',
                     }, (payload) => {
                         const name = payload.new?.name || 'منتج جديد';
-                        showToast('🆕', 'منتج جديد!', `تم إضافة: ${name}`, 'عرض', 'all-products.html', 'success');
+                        showToast('🆕', 'منتج جديد!', `تم إضافة: ${name}`, 'success');
                         loadStats();
-                        if (!state.isFilterActive) resetAndLoad();
                     })
                     .subscribe();
-            } catch (e) { /* silent */ }
+            } catch { /* silent */ }
         };
 
         // ============================================================
@@ -3487,6 +3563,23 @@
         // ============================================================
         // URL SYNC
         // ============================================================
+        const syncToURL = () => {
+            const params = new URLSearchParams();
+            if (state.search) params.set('search', state.search);
+            if (state.searchMode && state.searchMode !== 'name') params.set('mode', state.searchMode);
+            if (state.categoryId && state.categoryId !== 'all') params.set('category', state.categoryId);
+            if (state.priceFilter && state.priceFilter !== 'all') params.set('price', state.priceFilter);
+            if (state.purityFilter && state.purityFilter !== 'all') params.set('purity', state.purityFilter);
+            if (state.gradeFilter && state.gradeFilter !== 'all') params.set('grade', state.gradeFilter);
+            if (state.stockFilter && state.stockFilter !== 'all') params.set('stock', state.stockFilter);
+            if (state.supplierSearch) params.set('supplier', state.supplierSearch);
+            if (state.sort && state.sort !== 'newest') params.set('sort', state.sort);
+
+            const qs = params.toString();
+            const url = qs ? `?${qs}` : window.location.pathname;
+            window.history.replaceState({}, '', url);
+        };
+
         const readURL = () => {
             const params = new URLSearchParams(window.location.search);
             state.search = sanitizeSearch(params.get('search') || '');
@@ -3500,14 +3593,11 @@
             state.stockFilter = params.get('stock') || 'all';
             state.supplierSearch = sanitizeSearch(params.get('supplier') || '');
 
-            // If featured=true, filter to featured only
-            if (params.get('featured') === 'true') {
-                state.sort = 'newest';
-            }
-
-            // Populate UI
             const input = document.getElementById('searchInput');
-            if (input && state.search) input.value = state.search;
+            if (input && state.search) {
+                input.value = state.search;
+                document.getElementById('clearSearch')?.classList.add('visible');
+            }
 
             const catSel = document.getElementById('categoryFilter');
             if (catSel) catSel.value = state.categoryId;
@@ -3525,39 +3615,22 @@
             if (suppInp && state.supplierSearch) suppInp.value = state.supplierSearch;
         };
 
-        const updateURL = () => {
-            const params = new URLSearchParams();
-            if (state.search) params.set('search', state.search);
-            if (state.searchMode && state.searchMode !== 'name') params.set('mode', state.searchMode);
-            if (state.categoryId && state.categoryId !== 'all') params.set('category', state.categoryId);
-            if (state.priceFilter && state.priceFilter !== 'all') params.set('price', state.priceFilter);
-            if (state.purityFilter && state.purityFilter !== 'all') params.set('purity', state.purityFilter);
-            if (state.gradeFilter && state.gradeFilter !== 'all') params.set('grade', state.gradeFilter);
-            if (state.stockFilter && state.stockFilter !== 'all') params.set('stock', state.stockFilter);
-            if (state.supplierSearch) params.set('supplier', state.supplierSearch);
-            if (state.sort && state.sort !== 'newest') params.set('sort', state.sort);
-            const qs = params.toString();
-            history.replaceState({}, '', qs ? `?${qs}` : window.location.pathname);
-        };
-
         // ============================================================
         // INIT
         // ============================================================
         const init = async () => {
             console.log('🚀 كيماتو | جميع المنتجات');
 
-            // Load prefs
             loadWishlistLocal();
             loadCompareList();
             state.searchMode = localStorage.getItem(SEARCH_MODE_KEY) || 'name';
 
-            // UI Setup
             initTheme();
             initNavbar();
-            initReadingProgress();
             initSearchModes();
             initSearch();
             initFilters();
+            initActiveFilters();
             initInfiniteScroll();
             initScrollTop();
             initCardActions();
@@ -3567,10 +3640,8 @@
             updateWishlistCount();
             updateCompareUI();
 
-            // Read URL first
             readURL();
 
-            // Data parallel
             await Promise.all([
                 checkUser(),
                 loadStats(),
@@ -3578,11 +3649,8 @@
                 loadSuggestions(),
             ]);
 
-            if (state.user) {
-                await syncWishlistFromDB();
-            }
+            if (state.user) await syncWishlistFromDB();
 
-            // Load data
             await Promise.all([
                 loadFeatured(),
                 loadProducts(),
@@ -3591,7 +3659,7 @@
             setupRealtime();
 
             setTimeout(() => {
-                showToast('👋', 'أهلاً بك!', 'ابحث برقم CAS أو بالاسم — أكثر من صنف كيميائي', null, null, 'info');
+                showToast('👋', 'أهلاً بك!', 'ابحث برقم CAS أو بالاسم — أكثر من صنف كيميائي', 'info');
             }, 1500);
 
             setInterval(loadStats, 60000);
