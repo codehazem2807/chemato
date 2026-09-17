@@ -1,495 +1,366 @@
 <!DOCTYPE html>
 <html lang="ar" dir="rtl">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <title>كيماتو | طلب شراء مواد كيماوية</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>كيماتو | إضافة منتج جديد</title>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+* { margin: 0; padding: 0; box-sizing: border-box; }
 
-        :root {
-            --primary-dark: #0c2d4a;
-            --primary: #1a4a6e;
-            --primary-light: #2d7a9e;
-            --accent: #3498db;
-            --accent-dark: #2c81ba;
-            --gray-light: #f8fafc;
-            --gray: #e2e8f0;
-            --gray-dark: #64748b;
-            --text-dark: #0c2d4a;
-            --text-light: #475569;
-            --white: #ffffff;
-            --danger: #e53e3e;
-            --success: #2a9d8f;
-            --warning: #f4a261;
-            --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
-            --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
-            --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
-            --radius-sm: 16px;
-            --radius-md: 24px;
-            --radius-lg: 32px;
-        }
+:root {
+    --primary-dark: #0c2d4a;
+    --primary: #1a4a6e;
+    --primary-light: #2d7a9e;
+    --accent: #3498db;
+    --accent-dark: #2c81ba;
+    --gray-light: #f8fafc;
+    --gray: #e2e8f0;
+    --gray-dark: #64748b;
+    --text-dark: #0c2d4a;
+    --text-light: #475569;
+    --white: #ffffff;
+    --danger: #e53e3e;
+    --success: #2a9d8f;
+    --warning: #f4a261;
+    --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
+    --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
+    --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
+    --radius-sm: 16px;
+    --radius-md: 24px;
+    --radius-lg: 32px;
+}
 
-        body {
-            font-family: 'Cairo', 'Tahoma', sans-serif;
-            background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
-            min-height: 100vh;
-            color: var(--text-dark);
-            padding: 20px;
-        }
+body {
+    font-family: 'Cairo', 'Tahoma', sans-serif;
+    background: linear-gradient(145deg, #f0f4f8 0%, #e2eaf2 100%);
+    min-height: 100vh;
+    color: var(--text-dark);
+    padding: 20px;
+}
 
-        @media (min-width: 768px) {
-            body {
-                padding: 40px 20px;
-            }
-        }
+@media (min-width: 768px) { body { padding: 30px 20px; } }
 
-        /* ========== الهيدر ========== */
-        .navbar {
-            background: linear-gradient(145deg, var(--primary-dark), var(--primary));
-            padding: 14px 30px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 15px;
-            color: white;
-            border-radius: 60px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 32px rgba(12,45,74,0.25);
-            border-bottom: 2px solid rgba(52,152,219,0.30);
-        }
+/* ========== Navbar ========== */
+.navbar {
+    background: linear-gradient(145deg, var(--primary-dark), var(--primary));
+    padding: 14px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+    color: white;
+    border-radius: 60px;
+    margin-bottom: 30px;
+    box-shadow: 0 8px 32px rgba(12,45,74,0.25);
+    border-bottom: 2px solid rgba(52,152,219,0.30);
+    max-width: 1400px;
+    margin-left: auto;
+    margin-right: auto;
+}
+.logo a { text-decoration: none; }
+.logo-content { display: flex; align-items: center; gap: 12px; font-weight: 800; font-size: 20px; }
+.logo-img { width: 40px; height: 40px; border-radius: 50%; border: 2px solid #3498db; object-fit: cover; }
+.logo-text span:first-child { color: #3498db; }
+.logo-text span:last-child { color: #b0c9d9; font-size: 14px; }
+.nav-links { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+.nav-links a {
+    color: white; text-decoration: none; padding: 8px 18px; border-radius: 40px;
+    transition: all 0.3s ease; font-weight: 600; background: rgba(255,255,255,0.06);
+    backdrop-filter: blur(4px); border: 1px solid rgba(255,255,255,0.06); font-size: 14px;
+}
+.nav-links a:hover { background: #3498db; transform: translateY(-2px); box-shadow: 0 8px 24px rgba(52,152,219,0.35); }
 
-        .logo a {
-            text-decoration: none;
-        }
+/* Dropdown */
+.dropdown { position: relative; display: inline-block; }
+.dropdown-btn {
+    background: rgba(255,255,255,0.08); color: white; padding: 8px 22px; border-radius: 40px;
+    cursor: pointer; font-weight: 600; transition: all 0.3s; display: flex; align-items: center;
+    gap: 8px; border: 1px solid rgba(255,255,255,0.08); font-size: 14px; font-family: inherit;
+}
+.dropdown-btn:hover { background: #3498db; transform: translateY(-2px); }
+.dropdown-content {
+    display: none; position: absolute; top: 100%; left: 0; right: 0; background: white;
+    min-width: 220px; box-shadow: 0 24px 56px rgba(0,0,0,0.12); border-radius: 20px;
+    z-index: 1000; overflow: hidden; margin-top: 8px; border: 1px solid rgba(52,152,219,0.15);
+}
+.dropdown-content.show { display: block; animation: dropFade 0.25s ease; }
+@keyframes dropFade { 0% { opacity: 0; transform: translateY(-10px); } 100% { opacity: 1; transform: translateY(0); } }
+.dropdown-content a {
+    color: var(--text-dark); padding: 14px 22px; text-decoration: none; display: block;
+    transition: 0.2s; font-size: 14px; font-weight: 500; border-bottom: 1px solid var(--gray);
+}
+.dropdown-content a:hover { background: #ebf5fb; color: var(--primary); }
+.dropdown-content .logout-item { color: var(--danger); border-top: 1px solid var(--gray); }
+.dropdown-content .logout-item:hover { background: #fee2e2; }
 
-        .logo-content {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            font-weight: 800;
-            font-size: 20px;
-        }
+/* ========== Layout ========== */
+.page-wrap {
+    max-width: 1400px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr 340px;
+    gap: 24px;
+    align-items: start;
+}
+@media (max-width: 1024px) {
+    .page-wrap { grid-template-columns: 1fr; }
+}
 
-        .logo-img {
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            border: 2px solid #3498db;
-            object-fit: cover;
-        }
+/* ========== Card / Section ========== */
+.card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 28px;
+    box-shadow: 0 12px 36px rgba(12,45,74,0.06);
+    border: 1px solid rgba(52,152,219,0.06);
+    margin-bottom: 20px;
+}
+.card-title {
+    display: flex; align-items: center; gap: 10px;
+    font-size: 1.15rem; font-weight: 800; color: var(--primary-dark);
+    margin-bottom: 22px; padding-bottom: 14px;
+    border-bottom: 2px dashed rgba(52,152,219,0.18);
+}
+.card-title i {
+    width: 38px; height: 38px; border-radius: 12px;
+    background: linear-gradient(145deg, #e8f4fd, #d4e9f8);
+    color: #2c81ba; display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+}
+.card-title .optional-badge {
+    margin-right: auto;
+    font-size: 11px; font-weight: 700;
+    background: #f1f5f9; color: #64748b;
+    padding: 4px 10px; border-radius: 20px;
+}
 
-        .logo-text span:first-child { color: #3498db; }
-        .logo-text span:last-child { color: #b0c9d9; font-size: 14px; }
+/* ========== Form ========== */
+.form-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 18px;
+}
+.form-grid .full { grid-column: 1 / -1; }
+@media (max-width: 640px) {
+    .form-grid { grid-template-columns: 1fr; }
+    .card { padding: 18px; }
+}
 
-        .nav-links {
-            display: flex;
-            gap: 10px;
-            align-items: center;
-            flex-wrap: wrap;
-        }
+.form-group { margin-bottom: 4px; }
+label {
+    display: block; margin-bottom: 6px; font-weight: 700;
+    color: var(--text-dark); font-size: 0.88rem;
+}
+label .req { color: var(--danger); margin-right: 4px; }
+label .opt {
+    color: #94a3b8; font-size: 11px; font-weight: 600;
+    background: #f1f5f9; padding: 2px 8px; border-radius: 10px; margin-right: 6px;
+}
+input, select, textarea {
+    width: 100%; padding: 13px 18px;
+    border: 2px solid var(--gray);
+    border-radius: 20px; font-size: 0.95rem;
+    transition: all 0.3s ease;
+    background: var(--gray-light);
+    font-family: inherit;
+    color: var(--text-dark);
+}
+input:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: #3498db;
+    background: var(--white);
+    box-shadow: 0 0 0 4px rgba(52,152,219,0.10);
+}
+textarea { border-radius: 18px; resize: vertical; min-height: 90px; }
+select { cursor: pointer; appearance: none;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%2364748b' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+    background-repeat: no-repeat; background-position: left 18px center; padding-left: 40px;
+}
 
-        .nav-links a {
-            color: white;
-            text-decoration: none;
-            padding: 8px 18px;
-            border-radius: 40px;
-            transition: all 0.3s ease;
-            font-weight: 600;
-            background: rgba(255,255,255,0.06);
-            backdrop-filter: blur(4px);
-            border: 1px solid rgba(255,255,255,0.06);
-            font-size: 14px;
-        }
+/* ========== Upload Zone ========== */
+.upload-zone {
+    border: 2px dashed #cbd5e1;
+    border-radius: 20px;
+    padding: 26px;
+    text-align: center;
+    cursor: pointer;
+    transition: all 0.3s;
+    background: #f8fafc;
+    position: relative;
+}
+.upload-zone:hover {
+    border-color: #3498db;
+    background: #ebf5fb;
+}
+.upload-zone i { font-size: 30px; color: #3498db; margin-bottom: 10px; display: block; }
+.upload-zone p { font-weight: 700; color: var(--text-dark); font-size: 14px; }
+.upload-zone small { color: #94a3b8; font-size: 12px; display: block; margin-top: 4px; }
+.upload-zone input[type=file] { display: none; }
 
-        .nav-links a:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
-        }
+.preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+    margin-top: 14px;
+}
+.preview-item {
+    position: relative; aspect-ratio: 1; border-radius: 14px;
+    overflow: hidden; border: 2px solid var(--gray); background: #f1f5f9;
+}
+.preview-item img { width: 100%; height: 100%; object-fit: cover; }
+.preview-item .remove {
+    position: absolute; top: 4px; left: 4px;
+    width: 24px; height: 24px; border-radius: 50%;
+    background: rgba(229,62,62,0.9); color: white;
+    border: none; cursor: pointer; font-size: 12px;
+    display: flex; align-items: center; justify-content: center;
+}
+.preview-item .remove:hover { background: var(--danger); transform: scale(1.1); }
 
-        /* ========== القائمة المنسدلة ========== */
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
+/* ========== Buttons ========== */
+.btn-row { display: flex; gap: 12px; flex-wrap: wrap; }
+.btn {
+    flex: 1; padding: 15px 24px; border-radius: 40px; border: none;
+    font-weight: 800; font-size: 1rem; cursor: pointer;
+    transition: all 0.3s ease; font-family: inherit;
+    display: flex; align-items: center; justify-content: center; gap: 8px;
+    min-width: 160px;
+}
+.btn-primary {
+    background: linear-gradient(145deg, #3498db, #2c81ba);
+    color: white; box-shadow: 0 4px 16px rgba(52,152,219,0.30);
+}
+.btn-primary:hover:not(:disabled) {
+    background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
+    transform: translateY(-3px);
+    box-shadow: 0 8px 28px rgba(26,74,110,0.35);
+}
+.btn-secondary {
+    background: #f1f5f9; color: var(--text-dark);
+    border: 2px solid var(--gray);
+}
+.btn-secondary:hover { background: var(--gray); }
+.btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; }
 
-        .dropdown-btn {
-            background: rgba(255,255,255,0.08);
-            color: white;
-            padding: 8px 22px;
-            border-radius: 40px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            border: 1px solid rgba(255,255,255,0.08);
-            font-size: 14px;
-            font-family: inherit;
-        }
+/* ========== Sidebar Preview ========== */
+.sidebar { position: sticky; top: 20px; }
+.preview-card {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    overflow: hidden;
+    box-shadow: 0 12px 36px rgba(12,45,74,0.08);
+    border: 1px solid rgba(52,152,219,0.06);
+    margin-bottom: 16px;
+}
+.preview-img-wrap {
+    aspect-ratio: 4/3; background: linear-gradient(145deg, #e8f4fd, #d4e9f8);
+    display: flex; align-items: center; justify-content: center; overflow: hidden;
+}
+.preview-img-wrap img { width: 100%; height: 100%; object-fit: cover; }
+.preview-img-wrap .ph { color: #94a3b8; text-align: center; padding: 20px; }
+.preview-img-wrap .ph i { font-size: 40px; display: block; margin-bottom: 8px; color: #cbd5e1; }
+.preview-body { padding: 18px; }
+.preview-body h3 {
+    font-size: 1.05rem; font-weight: 800; color: var(--text-dark);
+    margin-bottom: 6px; line-height: 1.4;
+    overflow: hidden; text-overflow: ellipsis; display: -webkit-box;
+    -webkit-line-clamp: 2; -webkit-box-orient: vertical;
+}
+.preview-body .cat {
+    font-size: 12px; color: #2c81ba; font-weight: 700;
+    background: #e8f4fd; padding: 3px 10px; border-radius: 10px;
+    display: inline-block; margin-bottom: 10px;
+}
+.preview-body .price {
+    font-size: 1.3rem; font-weight: 900; color: #2a9d8f;
+}
+.preview-body .price small { font-size: 12px; color: #94a3b8; font-weight: 600; }
+.preview-body .meta {
+    display: flex; gap: 10px; flex-wrap: wrap; margin-top: 12px;
+    padding-top: 12px; border-top: 1px dashed var(--gray);
+    font-size: 12px; color: var(--gray-dark);
+}
+.preview-body .meta span { display: flex; align-items: center; gap: 4px; }
 
-        .dropdown-btn:hover {
-            background: #3498db;
-            color: white;
-            transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(52,152,219,0.35);
-        }
+.checklist {
+    background: var(--white);
+    border-radius: var(--radius-md);
+    padding: 20px;
+    box-shadow: 0 12px 36px rgba(12,45,74,0.06);
+    border: 1px solid rgba(52,152,219,0.06);
+}
+.checklist h4 {
+    font-size: 14px; font-weight: 800; color: var(--primary-dark);
+    margin-bottom: 14px; display: flex; align-items: center; gap: 8px;
+}
+.checklist ul { list-style: none; }
+.checklist li {
+    display: flex; align-items: center; gap: 10px;
+    padding: 8px 0; font-size: 13px; color: var(--gray-dark);
+    font-weight: 600;
+}
+.checklist li i {
+    width: 18px; height: 18px; border-radius: 50%;
+    border: 2px solid #cbd5e1; display: flex; align-items: center;
+    justify-content: center; font-size: 9px; color: transparent;
+    transition: all 0.3s; flex-shrink: 0;
+}
+.checklist li.done { color: #2a9d8f; }
+.checklist li.done i {
+    background: #2a9d8f; border-color: #2a9d8f; color: white;
+}
 
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            top: 100%;
-            left: 0;
-            right: 0;
-            background: white;
-            min-width: 200px;
-            box-shadow: 0 24px 56px rgba(0,0,0,0.12);
-            border-radius: 20px;
-            z-index: 1000;
-            overflow: hidden;
-            margin-top: 8px;
-            border: 1px solid rgba(52,152,219,0.15);
-        }
+/* ========== Message ========== */
+.message {
+    margin-top: 16px; padding: 14px 20px; border-radius: 20px;
+    font-weight: 700; text-align: center; font-size: 14px;
+}
+.message.success { background: #c6f6d5; color: #22543d; border-right: 4px solid #22543d; }
+.message.error { background: #fed7d7; color: #742a2a; border-right: 4px solid #742a2a; }
+.message.info { background: #dbeafe; color: #1e40af; border-right: 4px solid #1e40af; }
 
-        .dropdown-content.show {
-            display: block;
-            animation: dropFade 0.25s ease;
-        }
+/* ========== Loading ========== */
+.loading { display: none; text-align: center; padding: 20px; }
+.loading.show { display: block; }
+.spinner {
+    width: 46px; height: 46px; border: 4px solid var(--gray);
+    border-top: 4px solid #3498db; border-radius: 50%;
+    animation: spin 1s linear infinite; margin: 0 auto 12px;
+}
+@keyframes spin { 100% { transform: rotate(360deg); } }
+.loading p { color: var(--gray-dark); font-weight: 600; font-size: 14px; }
 
-        @keyframes dropFade {
-            0% { opacity: 0; transform: translateY(-10px); }
-            100% { opacity: 1; transform: translateY(0); }
-        }
+/* ========== Footer ========== */
+.footer {
+    text-align: center; margin-top: 40px;
+    color: var(--gray-dark); font-size: 0.8rem;
+}
 
-        .dropdown-content a {
-            color: var(--text-dark);
-            padding: 14px 22px;
-            text-decoration: none;
-            display: block;
-            transition: 0.2s;
-            font-size: 14px;
-            font-weight: 500;
-            border-bottom: 1px solid var(--gray);
-        }
-
-        .dropdown-content a:hover {
-            background: #ebf5fb;
-            color: var(--primary);
-        }
-
-        .dropdown-content .logout-item {
-            color: var(--danger);
-            border-top: 1px solid var(--gray);
-        }
-
-        .dropdown-content .logout-item:hover {
-            background: #fee2e2;
-        }
-
-        /* ========== الفورم ========== */
-        .form-container {
-            max-width: 700px;
-            margin: 0 auto;
-            background: var(--white);
-            border-radius: var(--radius-lg);
-            padding: 35px 30px;
-            box-shadow: 0 12px 36px rgba(12,45,74,0.06);
-            border: 1px solid rgba(52,152,219,0.06);
-        }
-
-        @media (min-width: 768px) {
-            .form-container {
-                padding: 45px 40px;
-            }
-        }
-
-        .form-header {
-            text-align: center;
-            margin-bottom: 30px;
-        }
-
-        .form-header h1 {
-            color: var(--primary-dark);
-            font-size: 1.8rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            font-weight: 800;
-        }
-
-        @media (min-width: 768px) {
-            .form-header h1 {
-                font-size: 2.2rem;
-            }
-        }
-
-        .form-header h1 i {
-            color: #3498db;
-        }
-
-        .form-header p {
-            color: var(--gray-dark);
-            margin-top: 8px;
-            font-size: 0.95rem;
-        }
-
-        .form-group {
-            margin-bottom: 22px;
-        }
-
-        label {
-            display: block;
-            margin-bottom: 6px;
-            font-weight: 700;
-            color: var(--text-dark);
-            font-size: 0.9rem;
-        }
-
-        .required::after {
-            content: '*';
-            color: var(--danger);
-            margin-right: 4px;
-        }
-
-        input, select, textarea {
-            width: 100%;
-            padding: 14px 18px;
-            border: 2px solid var(--gray);
-            border-radius: 30px;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            background: var(--gray-light);
-            font-family: inherit;
-        }
-
-        input:focus, select:focus, textarea:focus {
-            outline: none;
-            border-color: #3498db;
-            background: var(--white);
-            box-shadow: 0 0 0 4px rgba(52,152,219,0.10);
-        }
-
-        textarea {
-            border-radius: 24px;
-            resize: vertical;
-            min-height: 100px;
-        }
-
-        /* ===== زر الإرسال ===== */
-        .btn-submit {
-            width: 100%;
-            background: linear-gradient(145deg, #3498db, #2c81ba);
-            border: none;
-            padding: 16px;
-            border-radius: 40px;
-            font-weight: 800;
-            font-size: 1.1rem;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            color: white;
-            box-shadow: 0 4px 16px rgba(52,152,219,0.30);
-            margin-top: 5px;
-            font-family: inherit;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-        }
-
-        .btn-submit:hover {
-            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
-            transform: translateY(-3px);
-            box-shadow: 0 8px 28px rgba(26,74,110,0.35);
-        }
-
-        .btn-submit:disabled {
-            opacity: 0.6;
-            cursor: not-allowed;
-            transform: none !important;
-        }
-
-        /* ===== رسائل ===== */
-        .message {
-            margin-top: 20px;
-            padding: 14px 20px;
-            border-radius: 30px;
-            font-weight: 700;
-            text-align: center;
-        }
-
-        .message.success {
-            background: #c6f6d5;
-            color: #22543d;
-            border-right: 4px solid #22543d;
-        }
-
-        .message.error {
-            background: #fed7d7;
-            color: #742a2a;
-            border-right: 4px solid #742a2a;
-        }
-
-        .message.info {
-            background: #dbeafe;
-            color: #1e40af;
-            border-right: 4px solid #1e40af;
-        }
-
-        /* ===== تحميل ===== */
-        .loading {
-            display: none;
-            text-align: center;
-            padding: 20px;
-        }
-
-        .loading.show {
-            display: block;
-        }
-
-        .loading .spinner {
-            width: 50px;
-            height: 50px;
-            border: 4px solid var(--gray);
-            border-top: 4px solid #3498db;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-            margin: 0 auto 15px;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-
-        .loading p {
-            color: var(--gray-dark);
-            font-weight: 600;
-        }
-
-        /* ===== روابط ===== */
-        .back-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            text-align: center;
-            margin-top: 25px;
-            color: var(--primary);
-            text-decoration: none;
-            font-weight: 700;
-            transition: 0.3s;
-            padding: 10px 20px;
-            background: var(--white);
-            border-radius: 40px;
-            box-shadow: var(--shadow-sm);
-            border: 1px solid rgba(52,152,219,0.06);
-        }
-
-        .back-link:hover {
-            color: #3498db;
-            transform: translateX(-5px);
-            box-shadow: var(--shadow-md);
-        }
-
-        .text-center {
-            text-align: center;
-        }
-
-        /* ===== الفوتر ===== */
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: var(--gray-dark);
-            font-size: 0.8rem;
-        }
-
-        /* ===== استجابة ===== */
-        @media (max-width: 768px) {
-            .form-container {
-                padding: 20px;
-                border-radius: var(--radius-md);
-            }
-            
-            .navbar {
-                flex-direction: column;
-                gap: 12px;
-                padding: 14px 20px;
-                border-radius: 40px;
-            }
-            
-            .nav-links {
-                justify-content: center;
-            }
-            
-            .nav-links a {
-                padding: 6px 14px;
-                font-size: 12px;
-            }
-            
-            .form-header h1 {
-                font-size: 1.4rem;
-            }
-            
-            .logo-content {
-                font-size: 17px;
-            }
-            
-            .logo-img {
-                width: 35px;
-                height: 35px;
-            }
-            
-            .form-group {
-                margin-bottom: 18px;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .form-container {
-                padding: 16px;
-            }
-            
-            .form-header h1 {
-                font-size: 1.2rem;
-            }
-            
-            .form-header p {
-                font-size: 0.85rem;
-            }
-            
-            input, select, textarea {
-                padding: 12px 14px;
-                font-size: 0.95rem;
-            }
-            
-            .btn-submit {
-                padding: 14px;
-                font-size: 1rem;
-            }
-        }
-    </style>
+/* ========== Responsive ========== */
+@media (max-width: 768px) {
+    .navbar { flex-direction: column; gap: 12px; padding: 14px 20px; border-radius: 40px; }
+    .nav-links { justify-content: center; }
+    .nav-links a { padding: 6px 14px; font-size: 12px; }
+    .logo-content { font-size: 17px; }
+    .logo-img { width: 35px; height: 35px; }
+    .sidebar { position: static; }
+}
+</style>
 </head>
 <body>
 
+<!-- ========== Navbar ========== -->
 <div class="navbar">
     <div class="logo">
-        <a href="index.html" style="text-decoration:none;">
+        <a href="index.html">
             <div class="logo-content">
-                <img src="709548215_2209434319875128_7640925248715427952_n.jpg"
-                     class="logo-img" alt="كيماتو">
+                <img src="709548215_2209434319875128_7640925248715427952_n.jpg" class="logo-img" alt="كيماتو">
                 <div class="logo-text">
                     <span>كيماتو</span>
-                    <span> | طلب شراء</span>
+                    <span> | إضافة منتج</span>
                 </div>
             </div>
         </a>
@@ -498,7 +369,7 @@
         <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
         <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
         <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
-        <a href="buyer-dashboard.html"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+        <a href="supplier-dashboard.html"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
         <div class="dropdown">
             <button class="dropdown-btn"><i class="fas fa-user-circle"></i> القائمة</button>
             <div class="dropdown-content" id="dropdownContent"></div>
@@ -506,48 +377,270 @@
     </div>
 </div>
 
-<div class="form-container">
-    <div class="form-header">
-        <h1><i class="fas fa-bullhorn"></i> طلب شراء مواد كيماوية</h1>
-        <p>انشر طلب شراء ليصل إلى جميع الموردين في مصر</p>
-    </div>
+<!-- ========== Page ========== -->
+<div class="page-wrap">
 
-    <form id="requestForm">
-        <div class="form-group">
-            <label class="required">اسم المادة المطلوبة</label>
-            <input type="text" id="productName" required placeholder="مثال: كاوية صودا 99% - حمض كبريتيك">
+    <!-- ===== Main Form ===== -->
+    <form id="productForm">
+
+        <!-- ===== 1. Basic Info ===== -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-info-circle"></i>
+                البيانات الأساسية
+                <span class="optional-badge">مطلوب: الاسم والفئة</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group full">
+                    <label><span class="req">*</span> اسم المنتج</label>
+                    <input type="text" id="name" required placeholder="مثال: كاوية صودا 99% - هيدروكسيد الصوديوم">
+                </div>
+                <div class="form-group">
+                    <label><span class="req">*</span> الفئة الرئيسية</label>
+                    <select id="category_id" required>
+                        <option value="">— اختر الفئة —</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الفئة الفرعية <span class="opt">اختياري</span></label>
+                    <select id="subcategory_id">
+                        <option value="">— اختر الفئة الفرعية —</option>
+                    </select>
+                </div>
+                <div class="form-group full">
+                    <label>الوصف <span class="opt">اختياري</span></label>
+                    <textarea id="description" placeholder="وصف تفصيلي للمنتج، الاستخدامات، المواصفات..."></textarea>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>الكمية المطلوبة</label>
-            <input type="text" id="quantity" placeholder="مثال: 5 طن / 1000 كجم">
+        <!-- ===== 2. Pricing & Stock ===== -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-tag"></i>
+                السعر والمخزون
+                <span class="optional-badge">اختياري</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>السعر <span class="opt">اختياري</span></label>
+                    <input type="number" id="price" step="0.01" min="0" placeholder="0.00">
+                </div>
+                <div class="form-group">
+                    <label>الوحدة <span class="opt">اختياري</span></label>
+                    <select id="unit">
+                        <option value="كجم">كجم</option>
+                        <option value="طن">طن</option>
+                        <option value="لتر">لتر</option>
+                        <option value="مل">مل</option>
+                        <option value="جرام">جرام</option>
+                        <option value="عبوة">عبوة</option>
+                        <option value="شيكارة">شيكارة</option>
+                        <option value="برميل">برميل</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>الكمية المتاحة <span class="opt">اختياري</span></label>
+                    <input type="text" id="quantity_available" placeholder="مثال: 5000 كجم">
+                </div>
+                <div class="form-group">
+                    <label>الحد الأدنى للطلب (MOQ) <span class="opt">اختياري</span></label>
+                    <input type="text" id="min_order_quantity" placeholder="مثال: 100 كجم">
+                </div>
+                <div class="form-group">
+                    <label>حالة المخزون <span class="opt">اختياري</span></label>
+                    <select id="stock_status">
+                        <option value="available">متوفر</option>
+                        <option value="limited">كمية محدودة</option>
+                        <option value="out_of_stock">غير متوفر</option>
+                        <option value="pre_order">طلب مسبق</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>مميز؟ <span class="opt">اختياري</span></label>
+                    <select id="is_featured">
+                        <option value="false">لا</option>
+                        <option value="true">نعم — منتج مميز</option>
+                    </select>
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>المواصفات والتفاصيل</label>
-            <textarea id="description" rows="4" placeholder="التركيز المطلوب، درجة النقاء، تاريخ التسليم المطلوب..."></textarea>
+        <!-- ===== 3. Chemical Details ===== -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-flask"></i>
+                البيانات الكيميائية
+                <span class="optional-badge">اختياري</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>رقم CAS <span class="opt">اختياري</span></label>
+                    <input type="text" id="cas_number" placeholder="مثال: 1310-73-2">
+                </div>
+                <div class="form-group">
+                    <label>الصيغة الجزيئية <span class="opt">اختياري</span></label>
+                    <input type="text" id="formula" placeholder="مثال: NaOH">
+                </div>
+                <div class="form-group">
+                    <label>الوزن الجزيئي <span class="opt">اختياري</span></label>
+                    <input type="number" id="molecular_weight" step="0.01" placeholder="مثال: 40.00">
+                </div>
+                <div class="form-group">
+                    <label>النقاء <span class="opt">اختياري</span></label>
+                    <input type="text" id="purity" placeholder="مثال: 99%">
+                </div>
+                <div class="form-group">
+                    <label>الدرجة <span class="opt">اختياري</span></label>
+                    <input type="text" id="grade" placeholder="مثال: Industrial / Food Grade">
+                </div>
+                <div class="form-group">
+                    <label>المظهر <span class="opt">اختياري</span></label>
+                    <input type="text" id="appearance" placeholder="مثال: مسحوق أبيض">
+                </div>
+                <div class="form-group">
+                    <label>الكثافة <span class="opt">اختياري</span></label>
+                    <input type="text" id="density" placeholder="مثال: 2.13 g/cm³">
+                </div>
+                <div class="form-group">
+                    <label>نقطة الانصهار <span class="opt">اختياري</span></label>
+                    <input type="text" id="melting_point" placeholder="مثال: 318°C">
+                </div>
+                <div class="form-group">
+                    <label>نقطة الغليان <span class="opt">اختياري</span></label>
+                    <input type="text" id="boiling_point" placeholder="مثال: 1388°C">
+                </div>
+                <div class="form-group">
+                    <label>الذوبانية <span class="opt">اختياري</span></label>
+                    <input type="text" id="solubility" placeholder="مثال: قابل للذوبان في الماء">
+                </div>
+                <div class="form-group full">
+                    <label>ظروف التخزين <span class="opt">اختياري</span></label>
+                    <input type="text" id="storage_conditions" placeholder="مثال: مكان جاف، بعيد عن الرطوبة">
+                </div>
+                <div class="form-group full">
+                    <label>تصنيف الخطورة <span class="opt">اختياري</span></label>
+                    <input type="text" id="hazard_class" placeholder="مثال: مادة أكالة - Class 8">
+                </div>
+            </div>
         </div>
 
-        <div class="form-group">
-            <label>آخر موعد للاستلام</label>
-            <input type="date" id="deadline">
+        <!-- ===== 4. Packaging & Origin ===== -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-box"></i>
+                التعبئة والمنشأ
+                <span class="optional-badge">اختياري</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>التعبئة <span class="opt">اختياري</span></label>
+                    <input type="text" id="packaging" placeholder="مثال: شيكارة 25 كجم">
+                </div>
+                <div class="form-group">
+                    <label>بلد المنشأ <span class="opt">اختياري</span></label>
+                    <input type="text" id="origin_country" placeholder="مثال: مصر / الصين / ألمانيا">
+                </div>
+            </div>
         </div>
 
-        <button type="submit" class="btn-submit" id="submitBtn">
-            <i class="fas fa-rocket"></i> نشر طلب الشراء
-        </button>
+        <!-- ===== 5. Images ===== -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-images"></i>
+                صور المنتج
+                <span class="optional-badge">اختياري</span>
+            </div>
+            <div class="upload-zone" onclick="document.getElementById('imagesInput').click()">
+                <i class="fas fa-cloud-upload-alt"></i>
+                <p>اضغط لاختيار الصور أو اسحبها هنا</p>
+                <small>يمكنك رفع حتى 8 صور — JPG / PNG / WEBP</small>
+                <input type="file" id="imagesInput" accept="image/*" multiple>
+            </div>
+            <div class="preview-grid" id="imagesPreview"></div>
+        </div>
+
+        <!-- ===== 6. Documents ===== -->
+        <div class="card">
+            <div class="card-title">
+                <i class="fas fa-file-pdf"></i>
+                وثائق السلامة (MSDS / SDS)
+                <span class="optional-badge">اختياري</span>
+            </div>
+            <div class="form-grid">
+                <div class="form-group">
+                    <label>ملف MSDS <span class="opt">اختياري</span></label>
+                    <div class="upload-zone" style="padding:16px;" onclick="document.getElementById('msdsInput').click()">
+                        <i class="fas fa-file-upload" style="font-size:22px;"></i>
+                        <p style="font-size:13px;" id="msdsLabel">اختر ملف MSDS (PDF)</p>
+                        <input type="file" id="msdsInput" accept=".pdf">
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label>ملف SDS <span class="opt">اختياري</span></label>
+                    <div class="upload-zone" style="padding:16px;" onclick="document.getElementById('sdsInput').click()">
+                        <i class="fas fa-file-upload" style="font-size:22px;"></i>
+                        <p style="font-size:13px;" id="sdsLabel">اختر ملف SDS (PDF)</p>
+                        <input type="file" id="sdsInput" accept=".pdf">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ===== Submit ===== -->
+        <div class="card">
+            <div class="btn-row">
+                <button type="submit" class="btn btn-primary" id="submitBtn">
+                    <i class="fas fa-check-circle"></i> نشر المنتج
+                </button>
+                <button type="button" class="btn btn-secondary" onclick="window.location.href='supplier-dashboard.html'">
+                    <i class="fas fa-times"></i> إلغاء
+                </button>
+            </div>
+            <div id="messageDiv"></div>
+            <div id="loading" class="loading">
+                <div class="spinner"></div>
+                <p>⏳ جاري نشر المنتج...</p>
+            </div>
+        </div>
+
     </form>
 
-    <div id="messageDiv"></div>
-    <div id="loading" class="loading">
-        <div class="spinner"></div>
-        <p>⏳ جاري نشر طلب الشراء...</p>
-    </div>
+    <!-- ===== Sidebar ===== -->
+    <div class="sidebar">
 
-    <div class="text-center">
-        <a href="buyer-dashboard.html" class="back-link">
-            <i class="fas fa-arrow-right"></i> العودة للوحة التحكم
-        </a>
+        <!-- Preview Card -->
+        <div class="preview-card">
+            <div class="preview-img-wrap" id="previewImgWrap">
+                <div class="ph">
+                    <i class="fas fa-image"></i>
+                    <span style="font-size:13px;">لا توجد صورة</span>
+                </div>
+            </div>
+            <div class="preview-body">
+                <h3 id="previewName">اسم المنتج سيظهر هنا</h3>
+                <span class="cat" id="previewCat">— الفئة —</span>
+                <div class="price" id="previewPrice">السعر غير محدد <small>/ وحدة</small></div>
+                <div class="meta">
+                    <span><i class="fas fa-flask"></i> <span id="previewCAS">—</span></span>
+                    <span><i class="fas fa-percent"></i> <span id="previewPurity">—</span></span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Checklist -->
+        <div class="checklist">
+            <h4><i class="fas fa-list-check"></i> قائمة التحقق</h4>
+            <ul>
+                <li id="chk-name"><i class="fas fa-check"></i> اسم المنتج</li>
+                <li id="chk-cat"><i class="fas fa-check"></i> الفئة الرئيسية</li>
+                <li id="chk-price"><i class="fas fa-check"></i> السعر محدد</li>
+                <li id="chk-desc"><i class="fas fa-check"></i> الوصف مضاف</li>
+                <li id="chk-img"><i class="fas fa-check"></i> صورة واحدة على الأقل</li>
+                <li id="chk-cas"><i class="fas fa-check"></i> رقم CAS مضاف</li>
+            </ul>
+        </div>
+
     </div>
 </div>
 
@@ -556,120 +649,323 @@
 </div>
 
 <script type="module">
-    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
+import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm'
 
-    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
-    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
+const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co'
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA'
 
-    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
+const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY)
 
-    // ========== عناصر DOM ==========
-    const form = document.getElementById('requestForm')
-    const messageDiv = document.getElementById('messageDiv')
-    const loadingDiv = document.getElementById('loading')
-    const submitBtn = document.getElementById('submitBtn')
+// ========== State ==========
+let currentUser = null
+let selectedImages = []   // File[]
+let msdsFile = null
+let sdsFile = null
+let categoriesList = []
 
-    // ========== القائمة المنسدلة ==========
-    function setupDropdown() {
-        const dropdownBtn = document.querySelector('.dropdown-btn')
-        const dropdownContent = document.getElementById('dropdownContent')
-        
-        if (dropdownBtn && dropdownContent) {
-            dropdownBtn.addEventListener('click', (e) => {
-                e.stopPropagation()
-                dropdownContent.classList.toggle('show')
-            })
-            document.addEventListener('click', () => {
-                dropdownContent.classList.remove('show')
-            })
-        }
+// ========== DOM ==========
+const form = document.getElementById('productForm')
+const messageDiv = document.getElementById('messageDiv')
+const loadingDiv = document.getElementById('loading')
+const submitBtn = document.getElementById('submitBtn')
+
+// ========== Dropdown ==========
+function setupDropdown() {
+    const btn = document.querySelector('.dropdown-btn')
+    const content = document.getElementById('dropdownContent')
+    if (!btn || !content) return
+    btn.addEventListener('click', e => {
+        e.stopPropagation()
+        content.classList.toggle('show')
+    })
+    document.addEventListener('click', () => content.classList.remove('show'))
+}
+
+async function updateDropdownContent() {
+    const { data: { user } } = await supabase.auth.getUser()
+    const content = document.getElementById('dropdownContent')
+    if (user) {
+        const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
+        const dash = profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'
+        content.innerHTML = `
+            <a href="${dash}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+            <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+            <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+        `
+        document.getElementById('logoutLink')?.addEventListener('click', async e => {
+            e.preventDefault()
+            await supabase.auth.signOut()
+            window.location.href = 'index.html'
+        })
+    } else {
+        content.innerHTML = `
+            <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
+            <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
+            <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
+            <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
+        `
+    }
+}
+
+// ========== Auth Check ==========
+async function checkAuth() {
+    const { data: { user } } = await supabase.auth.getUser()
+    if (!user) {
+        messageDiv.innerHTML = '<div class="message error">❌ يجب تسجيل الدخول أولاً</div>'
+        setTimeout(() => window.location.href = 'auth.html', 1500)
+        return false
+    }
+    currentUser = user
+    return true
+}
+
+// ========== Load Categories ==========
+async function loadCategories() {
+    const catSelect = document.getElementById('category_id')
+    const subSelect = document.getElementById('subcategory_id')
+
+    const { data, error } = await supabase
+        .from('categories')
+        .select('id, name, icon')
+        .eq('is_active', true)
+        .order('display_order', { ascending: true })
+
+    if (error) {
+        console.error('Categories error:', error)
+        catSelect.innerHTML = '<option value="">فشل تحميل الفئات</option>'
+        return
     }
 
-    async function updateDropdownContent() {
-        const { data: { user } } = await supabase.auth.getUser()
-        const dropdownContent = document.getElementById('dropdownContent')
-        
-        if (user) {
-            const { data: profile } = await supabase.from('profiles').select('user_type').eq('id', user.id).single()
-            dropdownContent.innerHTML = `
-                <a href="${profile?.user_type === 'supplier' ? 'supplier-dashboard.html' : 'buyer-dashboard.html'}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
-                <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
-                <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-            `
-            const logoutLink = document.getElementById('logoutLink')
-            if (logoutLink) {
-                logoutLink.onclick = async (e) => {
-                    e.preventDefault()
-                    await supabase.auth.signOut()
-                    window.location.href = 'index.html'
-                }
-            }
-        } else {
-            dropdownContent.innerHTML = `
-                <a href="auth.html"><i class="fas fa-sign-in-alt"></i> تسجيل الدخول</a>
-                <a href="auth.html"><i class="fas fa-user-plus"></i> حساب جديد</a>
-                <a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> للموردين</a>
-                <a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> للعملاء</a>
-            `
-        }
-    }
+    categoriesList = data || []
+    catSelect.innerHTML = '<option value="">— اختر الفئة —</option>' +
+        categoriesList.map(c => `<option value="${c.id}">${c.icon || '📁'} ${c.name}</option>`).join('')
 
-    // ========== تقديم الطلب ==========
-    form.addEventListener('submit', async (e) => {
-        e.preventDefault()
-        messageDiv.innerHTML = ''
-        loadingDiv.classList.add('show')
-        submitBtn.disabled = true
+    // عند تغيير الفئة → حمل الفئات الفرعية
+    catSelect.addEventListener('change', async () => {
+        const catId = catSelect.value
+        subSelect.innerHTML = '<option value="">— اختر الفئة الفرعية —</option>'
+        if (!catId) return
 
-        const { data: { user } } = await supabase.auth.getUser()
-        if (!user) {
-            messageDiv.innerHTML = '<div class="message error">❌ يجب تسجيل الدخول أولاً</div>'
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
-            setTimeout(() => { window.location.href = 'auth.html' }, 1500)
-            return
-        }
+        const { data: subs } = await supabase
+            .from('subcategories')
+            .select('id, name, icon')
+            .eq('category_id', catId)
+            .order('display_order', { ascending: true })
 
-        const productName = document.getElementById('productName').value.trim()
-        const quantity = document.getElementById('quantity').value.trim()
-        const description = document.getElementById('description').value
-        const deadline = document.getElementById('deadline').value || null
-
-        if (!productName) {
-            messageDiv.innerHTML = '<div class="message error">❌ الرجاء إدخال اسم المادة المطلوبة</div>'
-            loadingDiv.classList.remove('show')
-            submitBtn.disabled = false
-            return
-        }
-
-        const { error } = await supabase
-            .from('purchase_requests')
-            .insert({
-                buyer_id: user.id,
-                product_name: productName,
-                quantity_needed: quantity,
-                description: description,
-                deadline: deadline,
-                status: 'open'
-            })
-
-        loadingDiv.classList.remove('show')
-        submitBtn.disabled = false
-
-        if (error) {
-            messageDiv.innerHTML = `<div class="message error">❌ ${error.message}</div>`
-        } else {
-            messageDiv.innerHTML = '<div class="message success">✅ تم نشر طلب الشراء بنجاح! جاري التحويل...</div>'
-            form.reset()
-            setTimeout(() => {
-                window.location.href = 'buyer-dashboard.html'
-            }, 1500)
+        if (subs?.length) {
+            subSelect.innerHTML += subs.map(s => `<option value="${s.id}">${s.icon || '📂'} ${s.name}</option>`).join('')
         }
     })
+}
 
-    // ========== بدء التشغيل ==========
+// ========== Images ==========
+const imagesInput = document.getElementById('imagesInput')
+const imagesPreview = document.getElementById('imagesPreview')
+
+imagesInput.addEventListener('change', e => {
+    const files = Array.from(e.target.files)
+    for (const f of files) {
+        if (selectedImages.length >= 8) break
+        if (!f.type.startsWith('image/')) continue
+        selectedImages.push(f)
+    }
+    renderImagesPreview()
+    updateChecklist()
+})
+
+function renderImagesPreview() {
+    imagesPreview.innerHTML = ''
+    selectedImages.forEach((file, idx) => {
+        const url = URL.createObjectURL(file)
+        const div = document.createElement('div')
+        div.className = 'preview-item'
+        div.innerHTML = `
+            <img src="${url}" alt="preview">
+            <button type="button" class="remove" data-idx="${idx}"><i class="fas fa-times"></i></button>
+        `
+        div.querySelector('.remove').addEventListener('click', () => {
+            selectedImages.splice(idx, 1)
+            renderImagesPreview()
+            updateChecklist()
+        })
+        imagesPreview.appendChild(div)
+    })
+    // تحديث صورة المعاينة الكبيرة
+    const wrap = document.getElementById('previewImgWrap')
+    if (selectedImages.length) {
+        wrap.innerHTML = `<img src="${URL.createObjectURL(selectedImages[0])}" alt="preview">`
+    } else {
+        wrap.innerHTML = `<div class="ph"><i class="fas fa-image"></i><span style="font-size:13px;">لا توجد صورة</span></div>`
+    }
+}
+
+// ========== MSDS / SDS ==========
+document.getElementById('msdsInput').addEventListener('change', e => {
+    msdsFile = e.target.files[0] || null
+    document.getElementById('msdsLabel').textContent = msdsFile ? `✅ ${msdsFile.name}` : 'اختر ملف MSDS (PDF)'
+})
+document.getElementById('sdsInput').addEventListener('change', e => {
+    sdsFile = e.target.files[0] || null
+    document.getElementById('sdsLabel').textContent = sdsFile ? `✅ ${sdsFile.name}` : 'اختر ملف SDS (PDF)'
+})
+
+// ========== Live Preview ==========
+const fieldsToWatch = ['name','price','unit','cas_number','purity','category_id','description']
+fieldsToWatch.forEach(id => {
+    const el = document.getElementById(id)
+    if (el) el.addEventListener('input', updatePreview)
+    if (el) el.addEventListener('change', updatePreview)
+})
+
+function updatePreview() {
+    const name = document.getElementById('name').value.trim()
+    const price = document.getElementById('price').value
+    const unit = document.getElementById('unit').value
+    const cas = document.getElementById('cas_number').value.trim()
+    const purity = document.getElementById('purity').value.trim()
+    const catId = document.getElementById('category_id').value
+
+    document.getElementById('previewName').textContent = name || 'اسم المنتج سيظهر هنا'
+    const cat = categoriesList.find(c => c.id === catId)
+    document.getElementById('previewCat').textContent = cat ? `${cat.icon || '📁'} ${cat.name}` : '— الفئة —'
+    document.getElementById('previewPrice').innerHTML = price
+        ? `${Number(price).toLocaleString('ar-EG')} ج.م <small>/ ${unit}</small>`
+        : 'السعر غير محدد <small>/ وحدة</small>'
+    document.getElementById('previewCAS').textContent = cas || '—'
+    document.getElementById('previewPurity').textContent = purity || '—'
+
+    updateChecklist()
+}
+
+function updateChecklist() {
+    const set = (id, ok) => document.getElementById(id).classList.toggle('done', ok)
+    set('chk-name', !!document.getElementById('name').value.trim())
+    set('chk-cat', !!document.getElementById('category_id').value)
+    set('chk-price', !!document.getElementById('price').value)
+    set('chk-desc', !!document.getElementById('description').value.trim())
+    set('chk-img', selectedImages.length > 0)
+    set('chk-cas', !!document.getElementById('cas_number').value.trim())
+}
+
+// ========== Upload File ==========
+async function uploadFile(file, folder = '') {
+    const ext = file.name.split('.').pop()
+    const path = `${currentUser.id}/${folder}${Date.now()}_${Math.random().toString(36).slice(2,8)}.${ext}`
+    const { error } = await supabase.storage.from('product-images').upload(path, file, { upsert: false })
+    if (error) throw error
+    const { data } = supabase.storage.from('product-images').getPublicUrl(path)
+    return data.publicUrl
+}
+
+// ========== Submit ==========
+form.addEventListener('submit', async e => {
+    e.preventDefault()
+    if (!currentUser) return
+
+    messageDiv.innerHTML = ''
+    loadingDiv.classList.add('show')
+    submitBtn.disabled = true
+
+    try {
+        // ===== 1. Validate =====
+        const name = document.getElementById('name').value.trim()
+        const categoryId = document.getElementById('category_id').value
+        if (!name) throw new Error('اسم المنتج مطلوب')
+        if (!categoryId) throw new Error('الفئة الرئيسية مطلوبة')
+
+        // ===== 2. Upload images =====
+        const uploadedImages = []
+        for (const img of selectedImages) {
+            const url = await uploadFile(img, '')
+            uploadedImages.push(url)
+        }
+
+        // ===== 3. Upload docs =====
+        let msdsUrl = null, sdsUrl = null
+        if (msdsFile) msdsUrl = await uploadFile(msdsFile, 'msds_')
+        if (sdsFile) sdsUrl = await uploadFile(sdsFile, 'sds_')
+
+        // ===== 4. Build payload =====
+        const catId = document.getElementById('category_id').value
+        const catName = categoriesList.find(c => c.id === catId)?.name || ''
+
+        const priceVal = document.getElementById('price').value
+        const mwVal = document.getElementById('molecular_weight').value
+
+        const payload = {
+            supplier_id: currentUser.id,
+            name: name,
+            category: catName,                    // اسم الفئة (backward-compat)
+            category_id: catId,
+            subcategory_id: document.getElementById('subcategory_id').value || null,
+            description: document.getElementById('description').value.trim() || null,
+            price: priceVal ? parseFloat(priceVal) : null,
+            unit: document.getElementById('unit').value || 'كجم',
+            min_order_quantity: document.getElementById('min_order_quantity').value.trim() || null,
+            quantity_available: document.getElementById('quantity_available').value.trim() || null,
+            purity: document.getElementById('purity').value.trim() || null,
+            cas_number: document.getElementById('cas_number').value.trim() || null,
+            formula: document.getElementById('formula').value.trim() || null,
+            molecular_weight: mwVal ? parseFloat(mwVal) : null,
+            grade: document.getElementById('grade').value.trim() || null,
+            appearance: document.getElementById('appearance').value.trim() || null,
+            density: document.getElementById('density').value.trim() || null,
+            melting_point: document.getElementById('melting_point').value.trim() || null,
+            boiling_point: document.getElementById('boiling_point').value.trim() || null,
+            solubility: document.getElementById('solubility').value.trim() || null,
+            storage_conditions: document.getElementById('storage_conditions').value.trim() || null,
+            hazard_class: document.getElementById('hazard_class').value.trim() || null,
+            packaging: document.getElementById('packaging').value.trim() || null,
+            origin_country: document.getElementById('origin_country').value.trim() || null,
+            stock_status: document.getElementById('stock_status').value || 'available',
+            is_featured: document.getElementById('is_featured').value === 'true',
+            image_url: uploadedImages[0] || null,
+            images: uploadedImages.length ? uploadedImages : null,
+            msds_url: msdsUrl,
+            sds_url: sdsUrl,
+            status: 'active'
+        }
+
+        // ===== 5. Insert =====
+        const { data: inserted, error } = await supabase
+            .from('products')
+            .insert(payload)
+            .select('id')
+            .single()
+
+        if (error) throw error
+
+        messageDiv.innerHTML = '<div class="message success">✅ تم نشر المنتج بنجاح! جاري التحويل...</div>'
+        form.reset()
+        selectedImages = []
+        msdsFile = null
+        sdsFile = null
+        renderImagesPreview()
+
+        setTimeout(() => {
+            window.location.href = `product-details.html?id=${inserted.id}`
+        }, 1400)
+
+    } catch (err) {
+        console.error(err)
+        messageDiv.innerHTML = `<div class="message error">❌ ${err.message || 'حدث خطأ غير متوقع'}</div>`
+    } finally {
+        loadingDiv.classList.remove('show')
+        submitBtn.disabled = false
+    }
+})
+
+// ========== Init ==========
+;(async function init() {
     setupDropdown()
     updateDropdownContent()
+    const authed = await checkAuth()
+    if (!authed) return
+    await loadCategories()
+    updatePreview()
+    updateChecklist()
+})()
 </script>
+
 </body>
 </html>
