@@ -142,8 +142,8 @@
         @keyframes rotateSlow { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
-        @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
+        @keyframes sparkle { 0%, 100% { transform: scale(1) rotate(0deg); opacity: 1; } 50% { transform: scale(1.2) rotate(10deg); opacity: 0.8; } }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
@@ -408,6 +408,56 @@
             box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3);
         }
 
+        /* ACTIVE FILTERS CHIPS */
+        .active-filters-bar {
+            display: none;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 18px;
+            animation: fadeUp 0.3s ease;
+        }
+        .active-filters-bar.visible { display: flex; }
+        .active-filter-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            padding: 5px 12px;
+            background: var(--c-primary-50);
+            color: var(--c-primary-700);
+            border: 1.5px solid var(--c-primary-100);
+            border-radius: var(--r-full);
+            font-size: 0.75rem;
+            font-weight: 700;
+        }
+        [data-theme="dark"] .active-filter-chip {
+            background: rgba(30, 136, 229, 0.15);
+            color: #7ec8e3;
+            border-color: rgba(30, 136, 229, 0.3);
+        }
+        .active-filter-chip button {
+            color: inherit;
+            font-size: 0.7rem;
+            opacity: 0.7;
+            transition: opacity var(--t-fast);
+            cursor: pointer;
+        }
+        .active-filter-chip button:hover { opacity: 1; }
+        .clear-all-filters {
+            padding: 5px 14px;
+            background: var(--c-danger);
+            color: #fff;
+            border-radius: var(--r-full);
+            font-size: 0.72rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+            transition: all var(--t-fast);
+            cursor: pointer;
+        }
+        .clear-all-filters:hover { transform: scale(1.05); }
+
         /* FEATURED */
         .featured-section {
             position: relative;
@@ -428,7 +478,7 @@
             padding-right: 14px;
             border-right: 4px solid var(--c-purple);
         }
-        .featured-header i { color: var(--c-purple); font-size: 1.3rem; }
+        .featured-header i { color: var(--c-purple); font-size: 1.3rem; animation: sparkle 3s ease-in-out infinite; }
         .featured-header h2 { font-size: 1.15rem; font-weight: 900; color: var(--c-text); }
         .featured-grid {
             display: grid;
@@ -574,6 +624,7 @@
             display: flex;
             gap: 8px;
             align-items: center;
+            flex-wrap: wrap;
         }
 
         /* RESULTS */
@@ -847,6 +898,7 @@
             font-size: 0.9rem;
             transition: all var(--t-base);
             box-shadow: 0 6px 20px rgba(30, 136, 229, 0.3);
+            cursor: pointer;
         }
         .empty-state .btn-reset-filters:hover {
             transform: translateY(-2px);
@@ -1064,8 +1116,6 @@
             .featured-side { flex-direction: column; }
 
             .posts-grid { grid-template-columns: 1fr; gap: 16px; }
-
-            
             .pagination button { min-width: 38px; height: 38px; font-size: 0.8rem; padding: 0 10px; }
 
             .footer { padding: 32px 16px 20px; }
@@ -1159,7 +1209,6 @@
                     اقرأ أحدث المقالات، الأدلة، والنصائح عن سوق المواد الكيماوية في مصر — أسعار، موردين، دراسات، وأخبار الصناعة
                 </p>
 
-                <!-- Search -->
                 <div class="search-wrapper" role="search">
                     <i class="fas fa-search search-icon" aria-hidden="true"></i>
                     <input
@@ -1208,6 +1257,9 @@
             </div>
         </section>
 
+        <!-- ACTIVE FILTERS -->
+        <div class="active-filters-bar" id="activeFiltersBar"></div>
+
         <!-- FEATURED POSTS -->
         <section id="featuredSection" class="featured-section animate-in" style="display: none; animation-delay: 0.15s;">
             <div class="featured-header">
@@ -1229,92 +1281,19 @@
                 </span>
             </div>
 
-            <!-- Posts Grid -->
-            <div id="postsList" class="posts-grid" aria-live="polite" aria-busy="true">
-                <!-- Skeletons -->
-                <div class="skeleton-card">
-                    <div class="skeleton-card-inner">
-                        <div class="skeleton skeleton-media"></div>
-                        <div class="skeleton-body">
-                            <div class="skeleton skeleton-line w-30"></div>
-                            <div class="skeleton skeleton-line h-20 w-90"></div>
-                            <div class="skeleton skeleton-line w-60"></div>
-                            <div class="skeleton skeleton-line w-90"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-card-inner">
-                        <div class="skeleton skeleton-media"></div>
-                        <div class="skeleton-body">
-                            <div class="skeleton skeleton-line w-30"></div>
-                            <div class="skeleton skeleton-line h-20 w-90"></div>
-                            <div class="skeleton skeleton-line w-60"></div>
-                            <div class="skeleton skeleton-line w-90"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-card-inner">
-                        <div class="skeleton skeleton-media"></div>
-                        <div class="skeleton-body">
-                            <div class="skeleton skeleton-line w-30"></div>
-                            <div class="skeleton skeleton-line h-20 w-90"></div>
-                            <div class="skeleton skeleton-line w-60"></div>
-                            <div class="skeleton skeleton-line w-90"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-card-inner">
-                        <div class="skeleton skeleton-media"></div>
-                        <div class="skeleton-body">
-                            <div class="skeleton skeleton-line w-30"></div>
-                            <div class="skeleton skeleton-line h-20 w-90"></div>
-                            <div class="skeleton skeleton-line w-60"></div>
-                            <div class="skeleton skeleton-line w-90"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-card-inner">
-                        <div class="skeleton skeleton-media"></div>
-                        <div class="skeleton-body">
-                            <div class="skeleton skeleton-line w-30"></div>
-                            <div class="skeleton skeleton-line h-20 w-90"></div>
-                            <div class="skeleton skeleton-line w-60"></div>
-                            <div class="skeleton skeleton-line w-90"></div>
-                        </div>
-                    </div>
-                </div>
-                <div class="skeleton-card">
-                    <div class="skeleton-card-inner">
-                        <div class="skeleton skeleton-media"></div>
-                        <div class="skeleton-body">
-                            <div class="skeleton skeleton-line w-30"></div>
-                            <div class="skeleton skeleton-line h-20 w-90"></div>
-                            <div class="skeleton skeleton-line w-60"></div>
-                            <div class="skeleton skeleton-line w-90"></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
+            <div id="postsList" class="posts-grid" aria-live="polite" aria-busy="true"></div>
 
-            <!-- Pagination -->
             <div class="pagination" id="pagination"></div>
         </section>
 
     </main>
 
-    <!-- SCROLL TOP -->
     <button class="scroll-top" id="scrollTopBtn" aria-label="العودة للأعلى" type="button">
         <i class="fas fa-chevron-up"></i>
     </button>
 
-    <!-- TOAST -->
     <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
-    <!-- FOOTER -->
     <footer class="footer" role="contentinfo">
         <div class="footer-inner">
             <div class="footer-links">
@@ -1384,6 +1363,19 @@
             const words = String(content).replace(/<[^>]*>/g, '').split(/\s+/).length;
             const minutes = Math.max(1, Math.ceil(words / 200));
             return `${minutes} دقيقة`;
+        };
+
+        const debounce = (fn, delay = 400) => {
+            let timer;
+            return (...args) => {
+                clearTimeout(timer);
+                timer = setTimeout(() => fn(...args), delay);
+            };
+        };
+
+        const isValidUrl = (url) => {
+            if (!url) return false;
+            return /^https?:\/\//i.test(url);
         };
 
         // ============================================================
@@ -1512,6 +1504,7 @@
 
                     dropdownContent.innerHTML = `
                         <a href="${dashboardUrl}"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
+                        <a href="messages.html"><i class="fas fa-comments"></i> المحادثات</a>
                         <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
                         <a href="#" id="logoutLink" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
                     `;
@@ -1564,6 +1557,110 @@
         };
 
         // ============================================================
+        // URL SYNC
+        // ============================================================
+        const syncToURL = () => {
+            const params = new URLSearchParams();
+            if (state.search) params.set('search', state.search);
+            if (state.category !== 'all') params.set('category', state.category);
+            if (state.page > 1) params.set('page', String(state.page));
+
+            const url = params.toString()
+                ? `${window.location.pathname}?${params.toString()}`
+                : window.location.pathname;
+
+            window.history.replaceState({}, '', url);
+        };
+
+        const readFromURL = () => {
+            const params = new URLSearchParams(window.location.search);
+            const search = params.get('search');
+            const category = params.get('category');
+            const page = params.get('page');
+
+            if (search) {
+                state.search = search.trim().slice(0, 100);
+                const input = document.getElementById('searchInput');
+                if (input) input.value = state.search;
+                document.getElementById('clearSearch')?.classList.add('visible');
+            }
+
+            if (category) {
+                state.category = category;
+                document.querySelectorAll('.filter-chip').forEach(c => {
+                    const isActive = c.dataset.category === category;
+                    c.classList.toggle('active', isActive);
+                    c.setAttribute('aria-selected', isActive);
+                });
+            }
+
+            if (page) {
+                const p = parseInt(page);
+                if (p > 0) state.page = p;
+            }
+        };
+
+        // ============================================================
+        // ACTIVE FILTERS
+        // ============================================================
+        const updateActiveFiltersUI = () => {
+            const container = document.getElementById('activeFiltersBar');
+            if (!container) return;
+
+            const chips = [];
+
+            if (state.search) {
+                chips.push(`<span class="active-filter-chip">🔍 "${escapeHtml(state.search)}" <button type="button" data-clear="search"><i class="fas fa-times"></i></button></span>`);
+            }
+            if (state.category !== 'all') {
+                chips.push(`<span class="active-filter-chip">🏷️ ${escapeHtml(state.category)} <button type="button" data-clear="category"><i class="fas fa-times"></i></button></span>`);
+            }
+
+            if (chips.length > 1) {
+                chips.push(`<button class="clear-all-filters" type="button" data-clear-all><i class="fas fa-trash-alt"></i> مسح الكل</button>`);
+            }
+
+            if (chips.length) {
+                container.innerHTML = chips.join('');
+                container.classList.add('visible');
+            } else {
+                container.classList.remove('visible');
+                container.innerHTML = '';
+            }
+        };
+
+        const initActiveFilters = () => {
+            document.getElementById('activeFiltersBar')?.addEventListener('click', (e) => {
+                const btn = e.target.closest('[data-clear], [data-clear-all]');
+                if (!btn) return;
+
+                if (btn.hasAttribute('data-clear-all')) {
+                    resetFilters();
+                    return;
+                }
+
+                const which = btn.dataset.clear;
+                if (which === 'search') {
+                    state.search = '';
+                    const input = document.getElementById('searchInput');
+                    if (input) input.value = '';
+                    document.getElementById('clearSearch')?.classList.remove('visible');
+                } else if (which === 'category') {
+                    state.category = 'all';
+                    document.querySelectorAll('.filter-chip').forEach(c => {
+                        const isAll = c.dataset.category === 'all';
+                        c.classList.toggle('active', isAll);
+                        c.setAttribute('aria-selected', isAll);
+                    });
+                }
+
+                state.page = 1;
+                syncToURL();
+                loadPosts();
+            });
+        };
+
+        // ============================================================
         // FEATURED POSTS
         // ============================================================
         const loadFeatured = async () => {
@@ -1590,7 +1687,7 @@
                 const mainPost = data[0];
                 const sidePosts = data.slice(1, 4);
 
-                const hasMainImage = mainPost.image_url && /^https?:\/\//i.test(mainPost.image_url);
+                const hasMainImage = isValidUrl(mainPost.image_url);
                 const mainImgHtml = hasMainImage
                     ? `<img src="${escapeHtml(mainPost.image_url)}" alt="${escapeHtml(mainPost.title)}" loading="lazy" />`
                     : `<div class="featured-main-placeholder">📰</div>`;
@@ -1598,7 +1695,7 @@
                 let sideHtml = '';
                 if (sidePosts.length > 0) {
                     sideHtml = sidePosts.map(p => {
-                        const hasImg = p.image_url && /^https?:\/\//i.test(p.image_url);
+                        const hasImg = isValidUrl(p.image_url);
                         return `
                             <a href="blog-post.html?slug=${encodeURIComponent(p.slug || p.id)}" class="featured-mini">
                                 <div class="featured-mini-media">
@@ -1713,12 +1810,14 @@
                     renderEmpty();
                     updateResultsCount();
                     renderPagination();
+                    updateActiveFiltersUI();
                     return;
                 }
 
                 renderPosts(state.posts);
                 updateResultsCount();
                 renderPagination();
+                updateActiveFiltersUI();
 
             } catch (e) {
                 console.error('Load posts error:', e);
@@ -1767,7 +1866,7 @@
         };
 
         const renderPostCard = (p, index = 0) => {
-            const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
+            const hasImage = isValidUrl(p.image_url);
             const imgHtml = hasImage
                 ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.title)}" loading="lazy" decoding="async" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'post-card-placeholder\\'><span>📰</span></div>';" />`
                 : `<div class="post-card-placeholder">
@@ -1876,6 +1975,7 @@
                     const page = Number(btn.dataset.page);
                     if (page < 1 || page > totalPages || page === state.page) return;
                     state.page = page;
+                    syncToURL();
                     loadPosts();
                     const postsSection = document.getElementById('postsTitle');
                     if (postsSection) {
@@ -1895,6 +1995,7 @@
             const input = document.getElementById('searchInput');
             state.search = (input?.value || '').trim().slice(0, 100);
             state.page = 1;
+            syncToURL();
             loadPosts();
         };
 
@@ -1903,8 +2004,14 @@
             const btn = document.getElementById('searchBtn');
             const clearBtn = document.getElementById('clearSearch');
 
+            const debouncedSearch = debounce(() => {
+                if (!state.search && !input?.value.trim()) return;
+                performSearch();
+            }, 500);
+
             input?.addEventListener('input', () => {
                 clearBtn?.classList.toggle('visible', input.value.length > 0);
+                debouncedSearch();
             });
 
             input?.addEventListener('keydown', (e) => {
@@ -1921,6 +2028,7 @@
                 state.search = '';
                 clearBtn.classList.remove('visible');
                 state.page = 1;
+                syncToURL();
                 loadPosts();
                 input?.focus();
             });
@@ -1941,6 +2049,7 @@
 
                     state.category = chip.dataset.category || 'all';
                     state.page = 1;
+                    syncToURL();
                     loadPosts();
                 });
             });
@@ -1961,6 +2070,7 @@
                 c.setAttribute('aria-selected', isAll);
             });
 
+            syncToURL();
             loadPosts();
             showToast('🔄', 'تم إعادة التعيين', 'كل الفلاتر رجعت افتراضي', 'info');
         };
@@ -1985,31 +2095,6 @@
         };
 
         // ============================================================
-        // READ URL
-        // ============================================================
-        const readURL = () => {
-            const params = new URLSearchParams(window.location.search);
-            const search = params.get('search');
-            const category = params.get('category');
-
-            if (search) {
-                state.search = search.trim().slice(0, 100);
-                const input = document.getElementById('searchInput');
-                if (input) input.value = state.search;
-                document.getElementById('clearSearch')?.classList.add('visible');
-            }
-
-            if (category) {
-                state.category = category;
-                document.querySelectorAll('.filter-chip').forEach(c => {
-                    const isActive = c.dataset.category === category;
-                    c.classList.toggle('active', isActive);
-                    c.setAttribute('aria-selected', isActive);
-                });
-            }
-        };
-
-        // ============================================================
         // INIT
         // ============================================================
         const init = async () => {
@@ -2021,9 +2106,10 @@
             initScrollTop();
             initSearch();
             initFilters();
+            initActiveFilters();
             initKeyboardShortcuts();
 
-            readURL();
+            readFromURL();
 
             await checkUser();
 
