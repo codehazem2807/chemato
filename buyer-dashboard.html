@@ -2044,11 +2044,11 @@
         return `messages.html?${params.toString()}`;
     };
 
-    // 🆕 رابط الملف العام — يستخدم supplier-profile.html?id=USER_ID
+    // 🆕 رابط الملف العام — يستخدم buyer-requests-profile.html?id=USER_ID
     const getPublicProfileUrl = (userId) => {
         if (!userId) return '#';
         const base = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
-        return `${base}supplier-profile.html?id=${userId}`;
+        return `${base}buyer-requests-profile.html?id=${userId}`;
     };
 
     const isValidUUID = (id) =>
