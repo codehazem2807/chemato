@@ -99,125 +99,27 @@ input,select,textarea{font-family:inherit}
 .dropdown-content a.logout{color:var(--c-danger)}
 .menu-toggle{display:none;width:42px;height:42px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:#fff;align-items:center;justify-content:center;font-size:1.1rem}
 
-/* ============ NEWS TICKER (REAL DB) ============ */
-.news-ticker {
-    background: rgba(0, 25, 51, 0.95);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-    padding: 0;
-    overflow: hidden;
-    position: relative;
-    display: none;
-    height: 40px;
-    line-height: 40px;
-    z-index: 98;
-}
-.news-ticker.show { display: block; }
-
-.news-ticker-content {
-    display: flex;
-    align-items: center;
-    gap: 48px;
-    animation: newsTickerScroll 60s linear infinite;
-    white-space: nowrap;
-    will-change: transform;
-    padding: 0 20px;
-}
-.news-ticker:hover .news-ticker-content { animation-play-state: paused; }
-.news-ticker-content.paused { animation-play-state: paused; }
-
-.news-item {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 0.82rem;
-    font-weight: 600;
-    color: rgba(255, 255, 255, 0.92);
-    flex-shrink: 0;
-    cursor: pointer;
-    padding: 0 4px;
-    transition: opacity 0.2s ease;
-    text-decoration: none;
-}
-.news-item:hover { opacity: 0.8; }
-
-.news-item .news-icon {
-    font-size: 1rem;
-    filter: drop-shadow(0 0 6px currentColor);
-    flex-shrink: 0;
-}
-
-.news-item .news-badge {
-    padding: 2px 8px;
-    border-radius: 4px;
-    font-size: 0.66rem;
-    font-weight: 800;
-    text-transform: uppercase;
-    letter-spacing: 0.5px;
-    flex-shrink: 0;
-}
-
-.news-item.info .news-badge { background: rgba(94, 184, 238, 0.2); color: #5eb8ee; }
-.news-item.success .news-badge { background: rgba(46, 204, 113, 0.2); color: #2ecc71; }
-.news-item.warning .news-badge { background: rgba(243, 156, 18, 0.2); color: #f39c12; }
-.news-item.danger .news-badge { background: rgba(231, 76, 60, 0.2); color: #e74c3c; }
-.news-item.primary .news-badge { background: rgba(139, 92, 246, 0.2); color: #8b5cf6; }
-
-.news-item .news-title {
-    color: rgba(255, 255, 255, 0.95);
-    font-weight: 700;
-}
-
-.news-item .news-desc {
-    color: rgba(255, 255, 255, 0.6);
-    font-weight: 500;
-}
-
-.news-item .news-link {
-    color: #5eb8ee;
-    font-weight: 700;
-    text-decoration: underline;
-    text-underline-offset: 3px;
-    padding: 2px 6px;
-    border-radius: 4px;
-    transition: all 0.2s ease;
-    font-size: 0.78rem;
-}
-.news-item .news-link:hover {
-    background: rgba(94, 184, 238, 0.15);
-    color: #8ecfff;
-}
-
-.news-item .news-sep {
-    color: rgba(255, 255, 255, 0.15);
-    font-weight: 300;
-    margin: 0 4px;
-}
-
-.news-ticker-close {
-    position: absolute;
-    right: 12px;
-    top: 50%;
-    transform: translateY(-50%);
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    background: rgba(255, 255, 255, 0.08);
-    color: rgba(255, 255, 255, 0.6);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 0.7rem;
-    cursor: pointer;
-    border: none;
-    z-index: 2;
-    transition: all 0.2s ease;
-}
-.news-ticker-close:hover {
-    background: rgba(231, 76, 60, 0.4);
-    color: #fff;
-}
+/* NEWS TICKER */
+.news-ticker{background:rgba(0,25,51,0.95);backdrop-filter:blur(20px);-webkit-backdrop-filter:blur(20px);border-bottom:1px solid rgba(255,255,255,0.08);padding:0;overflow:hidden;position:relative;display:none;height:40px;line-height:40px;z-index:98}
+.news-ticker.show{display:block}
+.news-ticker-content{display:flex;align-items:center;gap:48px;animation:newsTickerScroll 60s linear infinite;white-space:nowrap;will-change:transform;padding:0 20px}
+.news-ticker:hover .news-ticker-content{animation-play-state:paused}
+.news-item{display:inline-flex;align-items:center;gap:10px;font-size:0.82rem;font-weight:600;color:rgba(255,255,255,0.92);flex-shrink:0;cursor:pointer;padding:0 4px;transition:opacity 0.2s ease;text-decoration:none}
+.news-item:hover{opacity:0.8}
+.news-item .news-icon{font-size:1rem;filter:drop-shadow(0 0 6px currentColor);flex-shrink:0}
+.news-item .news-badge{padding:2px 8px;border-radius:4px;font-size:0.66rem;font-weight:800;text-transform:uppercase;letter-spacing:0.5px;flex-shrink:0}
+.news-item.info .news-badge{background:rgba(94,184,238,0.2);color:#5eb8ee}
+.news-item.success .news-badge{background:rgba(46,204,113,0.2);color:#2ecc71}
+.news-item.warning .news-badge{background:rgba(243,156,18,0.2);color:#f39c12}
+.news-item.danger .news-badge{background:rgba(231,76,60,0.2);color:#e74c3c}
+.news-item.primary .news-badge{background:rgba(139,92,246,0.2);color:#8b5cf6}
+.news-item .news-title{color:rgba(255,255,255,0.95);font-weight:700}
+.news-item .news-desc{color:rgba(255,255,255,0.6);font-weight:500}
+.news-item .news-link{color:#5eb8ee;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:2px 6px;border-radius:4px;transition:all 0.2s ease;font-size:0.78rem}
+.news-item .news-link:hover{background:rgba(94,184,238,0.15);color:#8ecfff}
+.news-item .news-sep{color:rgba(255,255,255,0.15);font-weight:300;margin:0 4px}
+.news-ticker-close{position:absolute;right:12px;top:50%;transform:translateY(-50%);width:24px;height:24px;border-radius:50%;background:rgba(255,255,255,0.08);color:rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;font-size:0.7rem;cursor:pointer;border:none;z-index:2;transition:all 0.2s ease}
+.news-ticker-close:hover{background:rgba(231,76,60,0.4);color:#fff}
 
 .main-container{max-width:var(--container);margin:0 auto;padding:20px 24px 60px}
 
@@ -365,6 +267,7 @@ input,select,textarea{font-family:inherit}
 [data-theme="dark"] .card-price{color:#7ec8e3}
 .card-price .currency{font-size:0.72rem;font-weight:600;color:var(--c-text-sub)}
 .card-price .moq{font-size:0.68rem;color:var(--c-text-sub);font-weight:600;margin-right:auto;background:var(--c-surface-2);padding:2px 8px;border-radius:var(--r-full)}
+.card-price .price-range-tag{font-size:0.68rem;color:var(--c-purple);font-weight:700;background:rgba(139,92,246,0.1);padding:2px 8px;border-radius:var(--r-full)}
 .card-supplier{display:flex;align-items:center;gap:6px;color:var(--c-text-muted);font-size:0.8rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card-supplier i{color:var(--c-primary-600);flex-shrink:0}
 .verified-badge{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#1e88e5,#1565c0);color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:var(--r-full);font-weight:700;margin-right:4px;box-shadow:0 2px 6px rgba(30,136,229,0.3)}
@@ -384,6 +287,9 @@ input,select,textarea{font-family:inherit}
 .btn-rfq:hover{transform:translateY(-1px);box-shadow:0 6px 16px rgba(46,204,113,0.35)}
 .btn-share-card{flex:0 0 auto;width:40px;background:var(--c-surface-2);color:var(--c-text-muted);border:1px solid var(--c-border)}
 .btn-share-card:hover{background:var(--c-primary-50);color:var(--c-primary-600);border-color:var(--c-primary-500)}
+.btn-follow{flex:0 0 auto;width:40px;background:var(--c-surface-2);color:var(--c-text-muted);border:1px solid var(--c-border)}
+.btn-follow:hover{background:var(--c-primary-50);color:var(--c-primary-600);border-color:var(--c-primary-500)}
+.btn-follow.following{background:var(--c-primary-500);color:#fff;border-color:var(--c-primary-500)}
 
 /* FEATURED / TRENDING */
 .featured-section{position:relative;border-radius:var(--r-xl);padding:24px;margin:12px 0 8px;background:linear-gradient(135deg,rgba(243,156,18,0.08),rgba(230,126,34,0.04));border:1.5px solid rgba(243,156,18,0.3)}
@@ -393,6 +299,10 @@ input,select,textarea{font-family:inherit}
 .trending-section{position:relative;border-radius:var(--r-xl);padding:28px;margin:24px 0;background:radial-gradient(circle at 20% 20%,rgba(231,76,60,0.06),transparent 50%),radial-gradient(circle at 80% 80%,rgba(243,156,18,0.06),transparent 50%),var(--c-surface);border:1.5px solid rgba(231,76,60,0.15)}
 .trending-section .section-header h2{border-right-color:#e74c3c}
 .trending-section .section-header h2 i{color:#e74c3c;animation:fireFlicker 1.5s ease-in-out infinite}
+
+/* QUOTES SECTION */
+.quotes-section{position:relative;border-radius:var(--r-xl);padding:24px;margin:24px 0;background:linear-gradient(135deg,rgba(44,122,184,0.04),rgba(139,92,246,0.03));border:1.5px solid rgba(44,122,184,0.2)}
+.quotes-section .section-header h2{border-right-color:var(--c-primary-500)}
 
 /* CATEGORIES */
 .category-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:20px 0}
@@ -670,7 +580,7 @@ input,select,textarea{font-family:inherit}
 </div>
 </header>
 
-<!-- NEWS TICKER (REAL DB DATA) -->
+<!-- NEWS TICKER -->
 <div class="news-ticker" id="newsTicker" aria-label="آخر الأخبار والإعلانات">
 <div class="news-ticker-content" id="newsTickerContent"></div>
 <button class="news-ticker-close" id="newsTickerClose" aria-label="إغلاق الشريط" title="إغلاق لمدة 24 ساعة">
@@ -877,6 +787,17 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 </a>
 </div>
 <div id="featuredProductsList" class="grid"></div>
+</div>
+
+<!-- QUOTES SECTION - استغلال quotes table -->
+<div id="latestQuotesSection" class="quotes-section" style="display:none;">
+<div class="section-header">
+<h2><i class="fas fa-file-invoice-dollar"></i> أحدث عروض الأسعار</h2>
+<a href="all-requests.html?status=quoted" class="view-all">
+عرض الكل <i class="fas fa-arrow-left"></i>
+</a>
+</div>
+<div id="latestQuotesList" class="grid"></div>
 </div>
 
 <!-- TRENDING -->
@@ -1105,6 +1026,9 @@ try {
     window.supabase = supabase;
 } catch(e) { console.error('Supabase init failed:', e); }
 
+// ============================================================
+// STATE
+// ============================================================
 const state = {
     categoryId: 'all',
     search: '',
@@ -1128,10 +1052,13 @@ const state = {
     userProfile: null,
     wishlist: new Set(),
     compareList: [],
+    following: new Set(),
     deferredInstallPrompt: null,
     categories: [],
     unreadMessages: 0,
     statsCache: { data: null, timestamp: 0 },
+    abortController: null,
+    recentRendered: false,
 };
 
 const WISHLIST_KEY = 'chemato-wishlist';
@@ -1140,9 +1067,14 @@ const THEME_KEY = 'chemato-theme';
 const SEARCH_MODE_KEY = 'chemato-search-mode';
 const RECENT_KEY = 'chemato-recently-viewed';
 const NEWS_HIDDEN_KEY = 'chemato-news-ticker-hidden-until';
+const FOLLOWING_KEY = 'chemato-following';
 const MAX_RECENT = 10;
 const STATS_CACHE_TTL = 30000;
+const VIEW_TRACK_DELAY = 3000;
 
+// ============================================================
+// HELPERS
+// ============================================================
 const escapeHtml = (str) => {
     if (str === null || str === undefined) return '';
     return String(str).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;').replace(/'/g,'&#039;');
@@ -1168,6 +1100,14 @@ const timeAgo = (dateString) => {
     return date.toLocaleDateString('ar-EG');
 };
 
+const getGradeLabel = (grade) => {
+    const labels = { 'technical': 'تقني', 'analytical': 'تحليلي', 'acs': 'ACS', 'pharma': 'صيدلاني', 'food': 'غذائي' };
+    return labels[grade] || grade || '—';
+};
+
+// ============================================================
+// THEME
+// ============================================================
 const initTheme = () => {
     const saved = localStorage.getItem(THEME_KEY);
     const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
@@ -1186,6 +1126,9 @@ const initTheme = () => {
     });
 };
 
+// ============================================================
+// TOAST
+// ============================================================
 const removeToast = (toast) => {
     if (!toast || !toast.parentNode) return;
     toast.classList.add('removing');
@@ -1238,6 +1181,9 @@ const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = ''
 
 window.showToast = showToast;
 
+// ============================================================
+// READING PROGRESS
+// ============================================================
 const initReadingProgress = () => {
     const bar = document.getElementById('readingProgress');
     if (!bar) return;
@@ -1250,6 +1196,9 @@ const initReadingProgress = () => {
     update();
 };
 
+// ============================================================
+// NAVBAR
+// ============================================================
 const initNavbar = () => {
     const menuToggle = document.getElementById('menuToggle');
     const navLinks = document.getElementById('navLinks');
@@ -1275,6 +1224,9 @@ const initNavbar = () => {
     });
 };
 
+// ============================================================
+// KEYBOARD SHORTCUTS
+// ============================================================
 const initKeyboardShortcuts = () => {
     document.addEventListener('keydown', (e) => {
         if ((e.ctrlKey || e.metaKey) && e.key.toLowerCase() === 'k') {
@@ -1296,7 +1248,7 @@ const initKeyboardShortcuts = () => {
 };
 
 // ============================================================
-// NEWS TICKER - Real Data from ticker_news table
+// NEWS TICKER
 // ============================================================
 const NewsTicker = {
     items: [],
@@ -1429,9 +1381,8 @@ const NewsTicker = {
 window.NewsTicker = NewsTicker;
 
 // ============================================================
-// REST OF THE CODE (same as before)
+// AUTH
 // ============================================================
-
 const checkUser = async () => {
     if (!supabase) return;
     try {
@@ -1498,18 +1449,23 @@ const checkUser = async () => {
 
             await syncFavoritesFromDB();
             await loadUnreadMessagesCount();
+            await loadFollowingFromDB();
         } else {
             state.userProfile = null;
             if (supplierBtn) supplierBtn.style.display = 'inline-flex';
             if (buyerBtn) buyerBtn.style.display = 'inline-flex';
             if (welcome) welcome.textContent = '';
             loadWishlistFromLocal();
+            loadFollowingFromLocal();
         }
 
         updateWishlistCount();
     } catch (e) { console.warn('Auth check:', e.message); }
 };
 
+// ============================================================
+// FAVORITES / WISHLIST
+// ============================================================
 const loadWishlistFromLocal = () => {
     try {
         const stored = localStorage.getItem(WISHLIST_KEY);
@@ -1564,6 +1520,67 @@ const removeFavoriteFromDB = async (productId) => {
     } catch { return false; }
 };
 
+// ============================================================
+// FOLLOWING (follows table)
+// ============================================================
+const loadFollowingFromLocal = () => {
+    try {
+        const stored = localStorage.getItem(FOLLOWING_KEY);
+        state.following = stored ? new Set(JSON.parse(stored)) : new Set();
+    } catch (e) { state.following = new Set(); }
+};
+
+const loadFollowingFromDB = async () => {
+    if (!state.user) return;
+    try {
+        const { data } = await supabase
+            .from('follows')
+            .select('target_id')
+            .eq('follower_id', state.user.id)
+            .eq('target_type', 'supplier');
+        state.following = new Set((data || []).map(f => f.target_id));
+    } catch (e) { loadFollowingFromLocal(); }
+};
+
+const toggleFollow = async (supplierId, btn) => {
+    if (!isValidUUID(supplierId)) return;
+    if (!state.user) {
+        showToast('🔒', 'سجّل دخولك', 'لازم تسجل دخولك لمتابعة الموردين', 'تسجيل الدخول', 'auth.html', 'warning');
+        return;
+    }
+
+    const isFollowing = state.following.has(supplierId);
+
+    if (isFollowing) {
+        state.following.delete(supplierId);
+        try {
+            await supabase.from('follows').delete()
+                .eq('follower_id', state.user.id)
+                .eq('target_type', 'supplier')
+                .eq('target_id', supplierId);
+        } catch (e) {}
+        btn?.classList.remove('following');
+        showToast('🔕', 'تم إلغاء المتابعة', '', null, null, 'info');
+    } else {
+        state.following.add(supplierId);
+        try {
+            await supabase.from('follows').insert({
+                follower_id: state.user.id,
+                following_id: supplierId,
+                target_type: 'supplier',
+                target_id: supplierId,
+                notify_new_products: true,
+                notify_price_changes: true,
+            });
+        } catch (e) {}
+        btn?.classList.add('following');
+        showToast('🔔', 'تتابع المورد', 'هتوصلك إشعارات بمنتجاته الجديدة', null, null, 'success');
+    }
+};
+
+// ============================================================
+// MESSAGES COUNT
+// ============================================================
 const loadUnreadMessagesCount = async () => {
     if (!state.user) return;
     try {
@@ -1582,6 +1599,9 @@ const loadUnreadMessagesCount = async () => {
     } catch (e) {}
 };
 
+// ============================================================
+// STATS - محسّن باستخدام RPC
+// ============================================================
 const animateNumber = (el, target) => {
     if (!el) return;
     const duration = 900;
@@ -1611,19 +1631,30 @@ const loadStats = async (force = false) => {
     }
 
     try {
+        // استخدام RPC function للكفاءة
+        const { data: rpcData, error: rpcError } = await supabase.rpc('get_public_stats');
+
+        if (!rpcError && rpcData) {
+            state.statsCache = { data: rpcData, timestamp: now };
+            applyStats(rpcData);
+            return;
+        }
+
+        // Fallback: queries مباشرة
         const [prodResult, reqResult, supResult] = await Promise.all([
             supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'active'),
             supabase.from('purchase_requests').select('*', { count: 'exact', head: true }).eq('status', 'open'),
             supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier'),
         ]);
 
+        // views_count + views معاً
         const { data: viewsData } = await supabase
             .from('products')
             .select('views, views_count')
             .eq('status', 'active');
 
         const totalViews = (viewsData || []).reduce((sum, p) => {
-            return sum + (Number(p.views) || 0) + (Number(p.views_count) || 0);
+            return sum + (Number(p.views_count) || 0) + (Number(p.views) || 0);
         }, 0);
 
         const { count: contactsCount } = await supabase
@@ -1653,6 +1684,9 @@ const applyStats = (data) => {
     animateNumber(document.getElementById('totalContacts'), data.total_contacts || 0);
 };
 
+// ============================================================
+// MOLECULE VISUALIZER
+// ============================================================
 const MolecularVisualizer = {
     init() {
         const container = document.getElementById('moleculeVisualizer');
@@ -1674,6 +1708,9 @@ const MolecularVisualizer = {
     }
 };
 
+// ============================================================
+// SKELETON
+// ============================================================
 const renderSkeleton = () => {
     const container = document.getElementById('productsList');
     if (!container) return;
@@ -1691,6 +1728,9 @@ const renderSkeleton = () => {
     `).join('');
 };
 
+// ============================================================
+// SUPPLIERS MAP
+// ============================================================
 const fetchSuppliersMap = async (supplierIds) => {
     const map = {};
     if (!supplierIds.length || !supabase) return map;
@@ -1704,8 +1744,16 @@ const fetchSuppliersMap = async (supplierIds) => {
     return map;
 };
 
+// ============================================================
+// LOAD PRODUCTS
+// ============================================================
 const loadProducts = async ({ append = false } = {}) => {
     if (!supabase || state.loading) return;
+
+    // Abort previous request
+    if (state.abortController) state.abortController.abort();
+    state.abortController = new AbortController();
+
     state.loading = true;
 
     const container = document.getElementById('productsList');
@@ -1775,7 +1823,7 @@ const loadProducts = async ({ append = false } = {}) => {
             'newest': ['created_at', false],
             'price-low': ['price', true],
             'price-high': ['price', false],
-            'popular': ['views', false],
+            'popular': ['views_count', false],
             'rating': ['avg_rating', false],
         };
         const [sortCol, asc] = sortMap[state.sort] || sortMap['newest'];
@@ -1831,6 +1879,7 @@ const loadProducts = async ({ append = false } = {}) => {
         enriched.forEach(p => trackView(p.id, p.supplier_id));
 
     } catch (error) {
+        if (error.name === 'AbortError') return;
         console.error('Products error:', error);
         if (!append && container) {
             container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:var(--c-danger);"></i><h3>حدث خطأ في التحميل</h3><p>${escapeHtml(error?.message || 'خطأ غير معروف')}</p><button onclick="location.reload()" class="btn btn-primary" style="margin-top:16px;"><i class="fas fa-redo"></i> إعادة المحاولة</button></div>`;
@@ -1843,6 +1892,9 @@ const loadProducts = async ({ append = false } = {}) => {
     }
 };
 
+// ============================================================
+// RENDER PRODUCTS
+// ============================================================
 const renderProducts = (products, replace = true) => {
     const container = document.getElementById('productsList');
     if (!container) return;
@@ -1882,7 +1934,7 @@ const renderProductCard = (p, index = 0) => {
         ? `<img class="card-img" src="${safeImageUrl}" alt="${name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'><span class=\\'emoji\\'>🧪</span><span class=\\'name\\'>${shortName.replace(/'/g, "&#39;")}</span></div>';" />`
         : `<div class="card-img-placeholder"><span class="emoji">🧪</span><span class="name">${shortName}</span></div>`;
 
-    const views = Number(p.views) || 0;
+    const views = Math.max(Number(p.views) || 0, Number(p.views_count) || 0);
     const rating = p.avg_rating && p.avg_rating > 0 ? Number(p.avg_rating).toFixed(1) : null;
 
     const badges = [];
@@ -1896,14 +1948,12 @@ const renderProductCard = (p, index = 0) => {
 
     const isWishlisted = state.wishlist.has(p.id);
     const isCompare = state.compareList.includes(p.id);
+    const isFollowing = state.following.has(supplierId);
 
     const specs = [];
     if (p.cas_number) specs.push(`<span class="spec-tag cas"><i class="fas fa-hashtag"></i>${escapeHtml(p.cas_number)}</span>`);
     if (p.purity) specs.push(`<span class="spec-tag purity"><i class="fas fa-percentage"></i>${escapeHtml(p.purity)}</span>`);
-    if (p.grade) {
-        const gradeLabels = { 'technical': 'تقني', 'analytical': 'تحليلي', 'acs': 'ACS', 'pharma': 'صيدلاني', 'food': 'غذائي' };
-        specs.push(`<span class="spec-tag grade"><i class="fas fa-layer-group"></i>${escapeHtml(gradeLabels[p.grade] || p.grade)}</span>`);
-    }
+    if (p.grade) specs.push(`<span class="spec-tag grade"><i class="fas fa-layer-group"></i>${escapeHtml(getGradeLabel(p.grade))}</span>`);
     const specsHtml = specs.length ? `<div class="card-specs">${specs.join('')}</div>` : '';
 
     const hasMsds = p.msds_url || p.sds_url;
@@ -1964,6 +2014,9 @@ const renderProductCard = (p, index = 0) => {
                     <button class="btn-card btn-rfq" type="button" data-action="rfq" data-product-id="${escapeHtml(p.id)}" data-name="${safeName}" data-cas="${escapeHtml(p.cas_number || '')}" data-purity="${escapeHtml(p.purity || '')}">
                         <i class="fas fa-file-invoice"></i> RFQ
                     </button>
+                    <button class="btn-card btn-follow ${isFollowing ? 'following' : ''}" type="button" data-action="follow" data-supplier-id="${escapeHtml(supplierId)}" title="${isFollowing ? 'إلغاء المتابعة' : 'متابعة المورد'}">
+                        <i class="fas fa-${isFollowing ? 'bell' : 'bell-slash'}"></i>
+                    </button>
                     <button class="btn-card btn-share-card" type="button" data-action="share" data-product-id="${escapeHtml(p.id)}" data-name="${safeName}">
                         <i class="fas fa-share-alt"></i>
                     </button>
@@ -1973,6 +2026,9 @@ const renderProductCard = (p, index = 0) => {
     `;
 };
 
+// ============================================================
+// CARD ACTIONS
+// ============================================================
 const initCardActions = () => {
     document.addEventListener('click', async (e) => {
         const btn = e.target.closest('[data-action]');
@@ -2002,6 +2058,15 @@ const initCardActions = () => {
                 cas: btn.dataset.cas,
                 purity: btn.dataset.purity,
             });
+        } else if (action === 'follow') {
+            e.preventDefault();
+            const supplierId = btn.dataset.supplierId;
+            await toggleFollow(supplierId, btn);
+            // Update icon
+            const icon = btn.querySelector('i');
+            if (icon) {
+                icon.className = state.following.has(supplierId) ? 'fas fa-bell' : 'fas fa-bell-slash';
+            }
         }
     });
 
@@ -2021,6 +2086,9 @@ const initCardActions = () => {
     }, { passive: true });
 };
 
+// ============================================================
+// WISHLIST HANDLERS
+// ============================================================
 const handleWishlistToggle = async (productId, productName, btn) => {
     const wasWishlisted = state.wishlist.has(productId);
     if (wasWishlisted) {
@@ -2039,6 +2107,18 @@ const handleWishlistToggle = async (productId, productName, btn) => {
     updateWishlistCount();
 };
 
+const updateWishlistCount = () => {
+    const count = state.wishlist.size;
+    const badge = document.getElementById('wishlistCount');
+    if (badge) {
+        badge.textContent = count > 99 ? '99+' : count;
+        badge.classList.toggle('show', count > 0);
+    }
+};
+
+// ============================================================
+// RFQ
+// ============================================================
 const openRfqForProduct = async (product) => {
     const productInput = document.getElementById('rfqProduct');
     const casInput = document.getElementById('rfqCas');
@@ -2049,6 +2129,80 @@ const openRfqForProduct = async (product) => {
     showRfqModal();
 };
 
+const showRfqModal = () => {
+    const notice = document.getElementById('rfqLoginNotice');
+    const submitBtn = document.getElementById('submitRfqBtn');
+    if (state.user) {
+        notice.style.display = 'none';
+        submitBtn.disabled = false;
+    } else {
+        notice.style.display = 'flex';
+        submitBtn.disabled = false;
+    }
+    document.getElementById('rfqModal').classList.add('show');
+    setTimeout(() => document.getElementById('rfqProduct')?.focus(), 300);
+};
+
+const initRfqForm = () => {
+    const form = document.getElementById('rfqForm');
+    form?.addEventListener('submit', async (e) => {
+        e.preventDefault();
+        if (!state.user) {
+            showToast('🔒', 'مطلوب تسجيل دخول', 'سجّل دخولك أولاً', 'تسجيل الدخول', 'auth.html?redirect=rfq', 'warning');
+            return;
+        }
+
+        const submitBtn = document.getElementById('submitRfqBtn');
+        const originalText = submitBtn.innerHTML;
+        submitBtn.disabled = true;
+        submitBtn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span> جاري الإرسال';
+
+        try {
+            const data = Object.fromEntries(new FormData(form));
+            if (!data.product_name?.trim()) throw new Error('اكتب اسم المنتج');
+            if (!data.quantity || Number(data.quantity) <= 0) throw new Error('الكمية لازم تكون أكبر من صفر');
+            if (data.cas_number && data.cas_number.trim() && !isValidCasFormat(data.cas_number)) {
+                throw new Error('صيغة رقم CAS غير صحيحة');
+            }
+
+            const { error } = await supabase
+                .from('purchase_requests')
+                .insert({
+                    buyer_id: state.user.id,
+                    product_name: data.product_name.trim(),
+                    cas_number: data.cas_number?.trim() || null,
+                    purity_required: data.purity?.trim() || null,
+                    category: data.category?.trim() || null,
+                    quantity_needed: `${data.quantity} ${data.unit || 'كجم'}`.trim(),
+                    preferred_unit: data.unit || 'كجم',
+                    description: data.notes?.trim() || null,
+                    location: data.location?.trim() || null,
+                    deadline: data.deadline || null,
+                    budget_min: data.budget_min ? Number(data.budget_min) : null,
+                    budget_max: data.budget_max ? Number(data.budget_max) : null,
+                    status: 'open',
+                });
+
+            if (error) throw error;
+
+            // Log analytics event
+            logAnalyticsEvent('rfq', { product_name: data.product_name });
+
+            showToast('✅', 'تم الإرسال!', 'هيتواصل معك الموردون قريباً', 'لوحة التحكم', 'buyer-dashboard.html', 'success');
+            form.reset();
+            document.getElementById('rfqModal').classList.remove('show');
+        } catch (err) {
+            showToast('⚠️', 'خطأ', err.message || 'تعذر إرسال الطلب', null, null, 'error');
+        } finally {
+            submitBtn.disabled = false;
+            submitBtn.innerHTML = originalText;
+        }
+    });
+};
+
+// ============================================================
+// WHATSAPP / SHARE
+// ============================================================
 const handleWhatsApp = async (supplierId, productId, phone, productName) => {
     const clean = sanitizePhone(phone);
     if (!clean) {
@@ -2057,6 +2211,7 @@ const handleWhatsApp = async (supplierId, productId, phone, productName) => {
     }
     const phoneWithCountry = clean.startsWith('20') ? clean : '20' + clean;
     logContact({ supplierId, productId, type: 'whatsapp' }).catch(() => {});
+    logAnalyticsEvent('whatsapp', { product_id: productId, supplier_id: supplierId });
     const message = encodeURIComponent(`مرحباً، مهتم بـ: ${productName} (كيماتو)`);
     window.open(`https://wa.me/${phoneWithCountry}?text=${message}`, '_blank', 'noopener,noreferrer');
 };
@@ -2077,15 +2232,9 @@ const handleShareProduct = async (productId, name) => {
     }
 };
 
-const updateWishlistCount = () => {
-    const count = state.wishlist.size;
-    const badge = document.getElementById('wishlistCount');
-    if (badge) {
-        badge.textContent = count > 99 ? '99+' : count;
-        badge.classList.toggle('show', count > 0);
-    }
-};
-
+// ============================================================
+// WISHLIST MODAL
+// ============================================================
 const showWishlistModal = async () => {
     const modal = document.getElementById('wishlistModal');
     const body = document.getElementById('wishlistModalBody');
@@ -2110,6 +2259,9 @@ const showWishlistModal = async () => {
     modal.classList.add('show');
 };
 
+// ============================================================
+// COMPARE
+// ============================================================
 const loadCompareList = () => {
     try {
         const stored = localStorage.getItem(COMPARE_KEY);
@@ -2177,7 +2329,6 @@ const showCompareModal = async () => {
             return;
         }
 
-        const gradeLabels = { 'technical': 'تقني', 'analytical': 'تحليلي', 'acs': 'ACS', 'pharma': 'صيدلاني', 'food': 'غذائي' };
         const stockLabels = { 'available': '✅ متوفر', 'low': '⚠️ محدود', 'out': '❌ غير متوفر' };
 
         const rows = [
@@ -2186,7 +2337,7 @@ const showCompareModal = async () => {
             { label: 'رقم CAS', render: p => p.cas_number ? `<code style="background:rgba(139,92,246,0.1);color:var(--c-purple);padding:2px 8px;border-radius:6px;direction:ltr;font-weight:700;">${escapeHtml(p.cas_number)}</code>` : '—' },
             { label: 'الصيغة', render: p => escapeHtml(p.formula || '—') },
             { label: 'النقاء', render: p => escapeHtml(p.purity || '—') },
-            { label: 'الدرجة', render: p => p.grade ? (gradeLabels[p.grade] || p.grade) : '—' },
+            { label: 'الدرجة', render: p => getGradeLabel(p.grade) },
             { label: 'السعر', render: p => p.price ? `<strong style="color:var(--c-primary-700);">${Number(p.price).toLocaleString('ar-EG')} ج.م</strong>` : 'عند الطلب' },
             { label: 'الوحدة', render: p => escapeHtml(p.unit || '—') },
             { label: 'الحد الأدنى', render: p => escapeHtml(p.min_order_quantity || '—') },
@@ -2213,6 +2364,9 @@ const showCompareModal = async () => {
     }
 };
 
+// ============================================================
+// RECENT TRACKER
+// ============================================================
 const RecentTracker = {
     add(product) {
         try {
@@ -2227,6 +2381,7 @@ const RecentTracker = {
         try { return JSON.parse(localStorage.getItem(RECENT_KEY) || '[]'); } catch { return []; }
     },
     render() {
+        if (state.recentRendered) return;
         const items = this.getAll();
         if (!items.length) return;
         const section = document.getElementById('recentlyViewedSection');
@@ -2248,16 +2403,21 @@ const RecentTracker = {
                 </div>
             `;
         }).join('');
+        state.recentRendered = true;
     },
     clear() {
         localStorage.removeItem(RECENT_KEY);
         const section = document.getElementById('recentlyViewedSection');
         if (section) section.style.display = 'none';
+        state.recentRendered = false;
     }
 };
 
 window.RecentTracker = RecentTracker;
 
+// ============================================================
+// FEATURED / TRENDING / QUOTES / RFQs
+// ============================================================
 const loadFeatured = async () => {
     if (!supabase) return;
     try {
@@ -2287,7 +2447,7 @@ const loadTrending = async () => {
     if (!supabase) return;
     try {
         let { data } = await supabase.from('products').select('*').eq('status', 'active')
-            .gt('views', 0).order('views', { ascending: false, nullsFirst: false }).limit(4);
+            .gt('views_count', 0).order('views_count', { ascending: false, nullsFirst: false }).limit(4);
 
         if (!data?.length) {
             const fallback = await supabase.from('products').select('*').eq('status', 'active')
@@ -2307,6 +2467,92 @@ const loadTrending = async () => {
         if (list) list.innerHTML = enriched.map((p, i) => renderProductCard(p, i)).join('');
         observeProductViews();
     } catch (e) {}
+};
+
+// استغلال quotes table - أحدث عروض الأسعار
+const loadLatestQuotes = async () => {
+    if (!supabase) return;
+    try {
+        const { data: quotes } = await supabase
+            .from('quotes')
+            .select(`
+                id, unit_price, currency, quantity_available, unit,
+                delivery_days, payment_terms, status, created_at,
+                supplier_id, rfq_id, product_id
+            `)
+            .eq('status', 'pending')
+            .order('created_at', { ascending: false })
+            .limit(4);
+
+        if (!quotes?.length) return;
+
+        // اجلب أسماء الموردين
+        const supplierIds = [...new Set(quotes.map(q => q.supplier_id).filter(Boolean))];
+        const suppliersMap = await fetchSuppliersMap(supplierIds);
+
+        // اجلب المنتجات المرتبطة
+        const productIds = [...new Set(quotes.map(q => q.product_id).filter(Boolean))];
+        let productsMap = {};
+        if (productIds.length) {
+            const { data: products } = await supabase
+                .from('products')
+                .select('id, name, image_url, cas_number')
+                .in('id', productIds);
+            (products || []).forEach(p => { productsMap[p.id] = p; });
+        }
+
+        // اجلب RFQs
+        const rfqIds = [...new Set(quotes.map(q => q.rfq_id).filter(Boolean))];
+        let rfqsMap = {};
+        if (rfqIds.length) {
+            const { data: rfqs } = await supabase
+                .from('purchase_requests')
+                .select('id, product_name, quantity_needed')
+                .in('id', rfqIds);
+            (rfqs || []).forEach(r => { rfqsMap[r.id] = r; });
+        }
+
+        const section = document.getElementById('latestQuotesSection');
+        const list = document.getElementById('latestQuotesList');
+        if (!section || !list) return;
+
+        section.style.display = 'block';
+        list.innerHTML = quotes.map(q => {
+            const supplier = suppliersMap[q.supplier_id];
+            const product = productsMap[q.product_id];
+            const rfq = rfqsMap[q.rfq_id];
+            const productName = product?.name || rfq?.product_name || 'منتج';
+            const supplierName = supplier?.company_name || supplier?.full_name || 'مورد';
+            const isVerified = supplier?.is_verified;
+            const currencySymbol = q.currency === 'EGP' ? 'ج.م' : q.currency || 'ج.م';
+
+            return `
+                <article class="rfq-card" onclick="window.location.href='request-details.html?id=${encodeURIComponent(q.rfq_id || '')}'">
+                    <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:12px;">
+                        <span style="background:rgba(44,122,184,0.1);color:var(--c-primary-600);padding:4px 12px;border-radius:999px;font-size:0.7rem;font-weight:800;">
+                            <i class="fas fa-file-invoice-dollar"></i> عرض سعر
+                        </span>
+                        <span style="font-size:0.75rem;color:var(--c-text-sub);">${timeAgo(q.created_at)}</span>
+                    </div>
+                    <h3 style="font-size:1rem;font-weight:800;margin-bottom:10px;color:var(--c-text);">${escapeHtml(productName)}</h3>
+                    <div style="font-size:1.3rem;font-weight:900;color:var(--c-accent-dark);margin-bottom:10px;">
+                        ${Number(q.unit_price).toLocaleString('ar-EG')} ${currencySymbol}
+                        ${q.unit ? `<span style="font-size:0.75rem;color:var(--c-text-sub);font-weight:600;">/ ${escapeHtml(q.unit)}</span>` : ''}
+                    </div>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.78rem;margin-bottom:12px;">
+                        ${q.quantity_available ? `<div><div style="color:var(--c-text-sub);font-size:0.68rem;">الكمية</div><div style="font-weight:700;">${escapeHtml(String(q.quantity_available))}</div></div>` : ''}
+                        ${q.delivery_days ? `<div><div style="color:var(--c-text-sub);font-size:0.68rem;">التوصيل</div><div style="font-weight:700;">${q.delivery_days} يوم</div></div>` : ''}
+                    </div>
+                    <div style="padding-top:10px;border-top:1px solid var(--c-border);display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--c-text-muted);">
+                        ${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
+                        <i class="fas fa-building"></i><span>${escapeHtml(supplierName)}</span>
+                    </div>
+                </article>
+            `;
+        }).join('');
+    } catch (e) {
+        console.warn('Quotes load:', e.message);
+    }
 };
 
 const loadLiveRfqs = async () => {
@@ -2357,6 +2603,9 @@ const loadLiveRfqs = async () => {
     } catch (e) {}
 };
 
+// ============================================================
+// SUGGESTIONS
+// ============================================================
 const loadSuggestionsPool = async () => {
     if (!supabase) return;
     try {
@@ -2364,7 +2613,7 @@ const loadSuggestionsPool = async () => {
             .from('products')
             .select('id, name, price, cas_number, purity, formula')
             .eq('status', 'active')
-            .order('views', { ascending: false, nullsFirst: false })
+            .order('views_count', { ascending: false, nullsFirst: false })
             .limit(300);
         state.allSuggestions = data || [];
     } catch { state.allSuggestions = []; }
@@ -2548,6 +2797,9 @@ const initSearch = () => {
     });
 };
 
+// ============================================================
+// CATEGORIES
+// ============================================================
 const loadCategories = async () => {
     if (!supabase) return;
     try {
@@ -2603,6 +2855,7 @@ const loadCategories = async () => {
 
         const rfqCatSelect = document.getElementById('rfqCategory');
         if (rfqCatSelect) {
+            rfqCatSelect.innerHTML = '<option value="">— اختر فئة —</option>';
             data.forEach(cat => {
                 const option = document.createElement('option');
                 option.value = cat.id;
@@ -2642,6 +2895,7 @@ const renderCategoryGrid = async () => {
         ];
     }
 
+    // اجلب العدادات
     const counts = {};
     try {
         const { data: productsData } = await supabase
@@ -2679,11 +2933,15 @@ const renderCategoryGrid = async () => {
         document.getElementById('productsList')?.scrollIntoView({ behavior: 'smooth' });
     });
 
+    // تفعيل reveal للكروت
     document.querySelectorAll('.reveal').forEach(el => {
         if (!el.classList.contains('revealed')) el.classList.add('revealed');
     });
 };
 
+// ============================================================
+// ADVANCED FILTERS
+// ============================================================
 const initAdvancedFilters = () => {
     const toggle = document.getElementById('advancedToggle');
     const panel = document.getElementById('advancedFilters');
@@ -2760,6 +3018,9 @@ const initPriceSlider = () => {
     maxInput.addEventListener('change', apply);
 };
 
+// ============================================================
+// URL
+// ============================================================
 const updateURL = () => {
     const params = new URLSearchParams();
     if (state.search) params.set('search', state.search);
@@ -2797,6 +3058,9 @@ const readURL = () => {
     if (stockFilterEl) stockFilterEl.value = state.stockFilter;
 };
 
+// ============================================================
+// INFINITE SCROLL
+// ============================================================
 const initInfiniteScroll = () => {
     const sentinel = document.getElementById('infiniteSentinel');
     if (!sentinel || !('IntersectionObserver' in window)) return;
@@ -2814,6 +3078,9 @@ const initInfiniteScroll = () => {
     observer.observe(sentinel);
 };
 
+// ============================================================
+// SCROLL TOP
+// ============================================================
 const initScrollTop = () => {
     const btn = document.getElementById('scrollTopBtn');
     if (!btn) return;
@@ -2823,6 +3090,9 @@ const initScrollTop = () => {
     btn.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
 };
 
+// ============================================================
+// SHARE
+// ============================================================
 const initShare = () => {
     document.getElementById('shareBtn')?.addEventListener('click', async () => {
         if (navigator.share) {
@@ -2838,6 +3108,9 @@ const initShare = () => {
     });
 };
 
+// ============================================================
+// QUICK VIEW
+// ============================================================
 const initQuickView = () => {
     document.addEventListener('dblclick', (e) => {
         const media = e.target.closest('.card-media');
@@ -2864,7 +3137,6 @@ const showQuickView = async (productId) => {
         const price = p.price ? `${Number(p.price).toLocaleString('ar-EG')} <span class="currency">ج.م</span>` : 'سعر عند الطلب';
         const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
         const mediaHtml = hasImage ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}">` : `<span>🧪</span>`;
-        const gradeLabels = { 'technical': 'تقني', 'analytical': 'تحليلي', 'acs': 'ACS', 'pharma': 'صيدلاني', 'food': 'غذائي' };
         const safeName = (p.name || '').replace(/'/g, '&#39;');
 
         body.innerHTML = `
@@ -2878,8 +3150,8 @@ const showQuickView = async (productId) => {
                         ${p.cas_number ? `<div class="qv-spec"><span class="label">رقم CAS</span><span class="value" style="font-family:monospace;direction:ltr;">${escapeHtml(p.cas_number)}</span></div>` : ''}
                         ${p.formula ? `<div class="qv-spec"><span class="label">الصيغة</span><span class="value" style="font-family:monospace;direction:ltr;">${escapeHtml(p.formula)}</span></div>` : ''}
                         ${p.purity ? `<div class="qv-spec"><span class="label">النقاء</span><span class="value">${escapeHtml(p.purity)}</span></div>` : ''}
-                        ${p.grade ? `<div class="qv-spec"><span class="label">الدرجة</span><span class="value">${escapeHtml(gradeLabels[p.grade] || p.grade)}</span></div>` : ''}
-                        ${p.molecular_weight ? `<div class="qv-spec"><span class="label">الوزن الجزيئي</span><span class="value">${escapeHtml(p.molecular_weight)}</span></div>` : ''}
+                        ${p.grade ? `<div class="qv-spec"><span class="label">الدرجة</span><span class="value">${escapeHtml(getGradeLabel(p.grade))}</span></div>` : ''}
+                        ${p.molecular_weight ? `<div class="qv-spec"><span class="label">الوزن الجزيئي</span><span class="value">${escapeHtml(String(p.molecular_weight))}</span></div>` : ''}
                         ${p.packaging ? `<div class="qv-spec"><span class="label">التعبئة</span><span class="value">${escapeHtml(p.packaging)}</span></div>` : ''}
                     </div>
                     ${p.description ? `<p style="color:var(--c-text-muted);font-size:0.85rem;line-height:1.6;margin-bottom:16px;">${escapeHtml(p.description.substring(0, 250))}</p>` : ''}
@@ -2906,74 +3178,9 @@ const showQuickView = async (productId) => {
     }
 };
 
-const showRfqModal = () => {
-    const notice = document.getElementById('rfqLoginNotice');
-    const submitBtn = document.getElementById('submitRfqBtn');
-    if (state.user) {
-        notice.style.display = 'none';
-        submitBtn.disabled = false;
-    } else {
-        notice.style.display = 'flex';
-        submitBtn.disabled = false;
-    }
-    document.getElementById('rfqModal').classList.add('show');
-    setTimeout(() => document.getElementById('rfqProduct')?.focus(), 300);
-};
-
-const initRfqForm = () => {
-    const form = document.getElementById('rfqForm');
-    form?.addEventListener('submit', async (e) => {
-        e.preventDefault();
-        if (!state.user) {
-            showToast('🔒', 'مطلوب تسجيل دخول', 'سجّل دخولك أولاً', 'تسجيل الدخول', 'auth.html?redirect=rfq', 'warning');
-            return;
-        }
-
-        const submitBtn = document.getElementById('submitRfqBtn');
-        const originalText = submitBtn.innerHTML;
-        submitBtn.disabled = true;
-        submitBtn.innerHTML = '<span style="display:inline-block;width:14px;height:14px;border:2px solid currentColor;border-right-color:transparent;border-radius:50%;animation:spin 0.8s linear infinite;"></span> جاري الإرسال';
-
-        try {
-            const data = Object.fromEntries(new FormData(form));
-            if (!data.product_name?.trim()) throw new Error('اكتب اسم المنتج');
-            if (!data.quantity || Number(data.quantity) <= 0) throw new Error('الكمية لازم تكون أكبر من صفر');
-            if (data.cas_number && data.cas_number.trim() && !isValidCasFormat(data.cas_number)) {
-                throw new Error('صيغة رقم CAS غير صحيحة');
-            }
-
-            const { error } = await supabase
-                .from('purchase_requests')
-                .insert({
-                    buyer_id: state.user.id,
-                    product_name: data.product_name.trim(),
-                    cas_number: data.cas_number?.trim() || null,
-                    purity_required: data.purity?.trim() || null,
-                    category: data.category?.trim() || null,
-                    quantity_needed: `${data.quantity} ${data.unit || 'كجم'}`.trim(),
-                    preferred_unit: data.unit || 'كجم',
-                    description: data.notes?.trim() || null,
-                    location: data.location?.trim() || null,
-                    deadline: data.deadline || null,
-                    budget_min: data.budget_min ? Number(data.budget_min) : null,
-                    budget_max: data.budget_max ? Number(data.budget_max) : null,
-                    status: 'open',
-                });
-
-            if (error) throw error;
-
-            showToast('✅', 'تم الإرسال!', 'هيتواصل معك الموردون قريباً', 'لوحة التحكم', 'buyer-dashboard.html', 'success');
-            form.reset();
-            document.getElementById('rfqModal').classList.remove('show');
-        } catch (err) {
-            showToast('⚠️', 'خطأ', err.message || 'تعذر إرسال الطلب', null, null, 'error');
-        } finally {
-            submitBtn.disabled = false;
-            submitBtn.innerHTML = originalText;
-        }
-    });
-};
-
+// ============================================================
+// CONTACT & ANALYTICS LOGGING
+// ============================================================
 const logContact = async ({ supplierId, productId, type }) => {
     if (!supabase || !isValidUUID(supplierId)) return;
     try {
@@ -2987,6 +3194,24 @@ const logContact = async ({ supplierId, productId, type }) => {
     } catch (e) {}
 };
 
+const logAnalyticsEvent = async (eventType, metadata = {}) => {
+    if (!supabase) return;
+    try {
+        await supabase.from('analytics_events').insert({
+            event_type: eventType,
+            user_id: state.user?.id || null,
+            session_id: sessionStorage.getItem('session_id') || (() => {
+                const sid = crypto.randomUUID?.() || Math.random().toString(36).substring(2);
+                sessionStorage.setItem('session_id', sid);
+                return sid;
+            })(),
+            metadata,
+            page_path: window.location.pathname,
+        });
+    } catch (e) {}
+};
+
+// Track View with rate limiting
 const trackView = (productId, supplierId) => {
     if (!productId || state.viewTracked.has(productId)) return;
     state.viewTracked.add(productId);
@@ -3002,7 +3227,7 @@ const observeProductViews = () => {
                 const productId = card.dataset.productId;
                 const supplierId = card.querySelector('[data-action="whatsapp"]')?.dataset.supplierId;
                 if (productId && supplierId && !state.viewTracked.has(productId)) {
-                    setTimeout(() => { if (card.isConnected) trackView(productId, supplierId); }, 3000);
+                    setTimeout(() => { if (card.isConnected) trackView(productId, supplierId); }, VIEW_TRACK_DELAY);
                 }
                 observer.unobserve(card);
             }
@@ -3011,8 +3236,13 @@ const observeProductViews = () => {
     document.querySelectorAll('.card[data-product-id]').forEach(card => observer.observe(card));
 };
 
+// ============================================================
+// SMART NOTIFICATIONS
+// ============================================================
 const SmartNotifications = {
     notifications: [],
+    channel: null,
+
     async load() {
         if (!state.user) return;
         try {
@@ -3030,6 +3260,7 @@ const SmartNotifications = {
         this.updateBadge();
         this.render();
     },
+
     updateBadge() {
         const unread = this.notifications.filter(n => !n.read).length;
         const badge = document.getElementById('notificationBadge');
@@ -3038,6 +3269,7 @@ const SmartNotifications = {
             badge.style.display = unread > 0 ? 'flex' : 'none';
         }
     },
+
     render() {
         const list = document.getElementById('notificationList');
         if (!list) return;
@@ -3045,17 +3277,65 @@ const SmartNotifications = {
             list.innerHTML = `<div class="empty-state" style="padding:40px 20px;border:none;"><i class="fas fa-bell-slash" style="font-size:2rem;opacity:0.3;"></i><p style="margin-top:12px;color:var(--c-text-sub);">لا توجد إشعارات</p></div>`;
             return;
         }
-        list.innerHTML = this.notifications.map(n => `
-            <div class="notification-item ${n.read ? '' : 'unread'}" data-id="${n.id}">
-                <div class="notification-icon default"><i class="fas fa-bell"></i></div>
-                <div style="flex:1;min-width:0;">
-                    <div style="font-weight:700;font-size:0.85rem;margin-bottom:2px;">${escapeHtml(n.title || 'إشعار')}</div>
-                    <div style="font-size:0.78rem;color:var(--c-text-muted);line-height:1.4;">${escapeHtml(n.message || '')}</div>
-                    <div style="font-size:0.7rem;color:var(--c-text-sub);margin-top:4px;">${timeAgo(n.created_at)}</div>
+        list.innerHTML = this.notifications.map(n => {
+            const iconMap = {
+                'new_product': 'fa-box',
+                'new_quote': 'fa-file-invoice-dollar',
+                'new_message': 'fa-envelope',
+                'new_review': 'fa-star',
+                'new_follower': 'fa-user-plus',
+                'price_drop': 'fa-arrow-down',
+                'stock_alert': 'fa-exclamation-triangle',
+            };
+            const iconClass = iconMap[n.type] || 'fa-bell';
+            const iconType = n.type === 'price_drop' ? 'price-drop' : n.type === 'new_quote' ? 'new-quote' : n.type === 'stock_alert' ? 'stock-alert' : 'default';
+
+            return `
+                <div class="notification-item ${n.read ? '' : 'unread'}" data-id="${n.id}">
+                    <div class="notification-icon ${iconType}"><i class="fas ${iconClass}"></i></div>
+                    <div style="flex:1;min-width:0;">
+                        <div style="font-weight:700;font-size:0.85rem;margin-bottom:2px;">${escapeHtml(n.title || 'إشعار')}</div>
+                        <div style="font-size:0.78rem;color:var(--c-text-muted);line-height:1.4;">${escapeHtml(n.message || '')}</div>
+                        <div style="font-size:0.7rem;color:var(--c-text-sub);margin-top:4px;">${timeAgo(n.created_at)}</div>
+                    </div>
                 </div>
-            </div>
-        `).join('');
+            `;
+        }).join('');
     },
+
+    async markAllRead() {
+        if (!state.user) return;
+        this.notifications.forEach(n => n.read = true);
+        this.updateBadge();
+        this.render();
+        try {
+            await supabase.from('notifications')
+                .update({ read: true })
+                .eq('user_id', state.user.id)
+                .eq('read', false);
+        } catch (e) {}
+    },
+
+    setupRealtime() {
+        if (!state.user || !supabase) return;
+        try {
+            this.channel = supabase
+                .channel('notifications_channel')
+                .on('postgres_changes', {
+                    event: 'INSERT',
+                    schema: 'public',
+                    table: 'notifications',
+                    filter: `user_id=eq.${state.user.id}`,
+                }, (payload) => {
+                    this.notifications.unshift(payload.new);
+                    this.updateBadge();
+                    this.render();
+                    showToast('🔔', 'إشعار جديد', payload.new.title || '', null, null, 'info');
+                })
+                .subscribe();
+        } catch (e) {}
+    },
+
     init() {
         this.load();
         document.getElementById('notificationBtn')?.addEventListener('click', (e) => {
@@ -3067,14 +3347,13 @@ const SmartNotifications = {
                 document.getElementById('notificationPanel')?.classList.remove('show');
             }
         });
-        document.getElementById('markAllReadBtn')?.addEventListener('click', () => {
-            this.notifications.forEach(n => n.read = true);
-            this.updateBadge();
-            this.render();
-        });
+        document.getElementById('markAllReadBtn')?.addEventListener('click', () => this.markAllRead());
     }
 };
 
+// ============================================================
+// SCROLL REVEAL
+// ============================================================
 const initScrollReveal = () => {
     if (!('IntersectionObserver' in window)) return;
     const observer = new IntersectionObserver((entries) => {
@@ -3088,6 +3367,9 @@ const initScrollReveal = () => {
     document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
 };
 
+// ============================================================
+// PWA
+// ============================================================
 const initPWA = () => {
     const installBtn = document.getElementById('installBtn');
     window.addEventListener('beforeinstallprompt', (e) => {
@@ -3108,6 +3390,9 @@ const initPWA = () => {
     });
 };
 
+// ============================================================
+// MODALS
+// ============================================================
 const initModals = () => {
     document.getElementById('compareToggle')?.addEventListener('click', showCompareModal);
     document.getElementById('openCompareBtn')?.addEventListener('click', showCompareModal);
@@ -3142,6 +3427,9 @@ const initModals = () => {
     });
 };
 
+// ============================================================
+// REALTIME
+// ============================================================
 const setupRealtime = () => {
     if (!supabase) return;
     try {
@@ -3157,8 +3445,11 @@ const setupRealtime = () => {
     } catch (e) {}
 };
 
+// ============================================================
+// INIT
+// ============================================================
 const init = async () => {
-    console.info('🚀 كيماتو 3.1 جاري التحميل...');
+    console.info('🚀 كيماتو 3.2 جاري التحميل...');
 
     if (!supabase) {
         const container = document.getElementById('productsList');
@@ -3166,8 +3457,15 @@ const init = async () => {
         return;
     }
 
+    // Session ID for analytics
+    if (!sessionStorage.getItem('session_id')) {
+        const sid = crypto.randomUUID?.() || Math.random().toString(36).substring(2);
+        sessionStorage.setItem('session_id', sid);
+    }
+
     loadWishlistFromLocal();
     loadCompareList();
+    loadFollowingFromLocal();
     state.searchMode = localStorage.getItem(SEARCH_MODE_KEY) || 'name';
 
     initTheme();
@@ -3208,6 +3506,7 @@ const init = async () => {
         loadFeatured().catch(e => console.warn('Featured:', e.message)),
         loadProducts().catch(e => console.warn('Products:', e.message)),
         loadLiveRfqs().catch(e => console.warn('RFQs:', e.message)),
+        loadLatestQuotes().catch(e => console.warn('Quotes:', e.message)),
     ]);
 
     setTimeout(() => {
@@ -3217,13 +3516,19 @@ const init = async () => {
 
     setupRealtime();
 
+    // إعداد Realtime للـ notifications بعد تسجيل الدخول
+    if (state.user) {
+        SmartNotifications.setupRealtime();
+    }
+
     setTimeout(() => {
         showToast('👋', 'مرحباً بك في كيماتو!', 'منصة الكيماويات B2B الاحترافية', 'استكشف', 'all-products.html', 'info');
     }, 1500);
 
+    // Refresh stats every 60s
     setInterval(() => loadStats(true).catch(() => {}), 60000);
 
-    console.info('✅ كيماتو 3.1 جاهز');
+    console.info('✅ كيماتو 3.2 جاهز');
 };
 
 if (supabase) {
@@ -3232,6 +3537,11 @@ if (supabase) {
             await checkUser().catch(() => {});
             loadProducts().catch(() => {});
             loadLiveRfqs().catch(() => {});
+            loadLatestQuotes().catch(() => {});
+            if (event === 'SIGNED_IN') {
+                SmartNotifications.load();
+                SmartNotifications.setupRealtime();
+            }
         }
     });
 }
