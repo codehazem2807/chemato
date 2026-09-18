@@ -113,6 +113,7 @@
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
         @keyframes spin { to { transform: rotate(360deg); } }
         @keyframes badgePop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
+        @keyframes slideDown { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
@@ -217,7 +218,7 @@
             border-radius: var(--r-md);
             box-shadow: var(--sh-xl);
             border: 1px solid var(--c-border);
-            min-width: 220px;
+            min-width: 240px;
             overflow: hidden;
             opacity: 0;
             visibility: hidden;
@@ -248,6 +249,17 @@
             padding-right: 24px;
         }
         .nav-dropdown a.logout { color: var(--c-danger); }
+        .nav-dropdown a.highlight {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(139, 92, 246, 0.03));
+            color: var(--c-chat);
+            font-weight: 700;
+        }
+        .nav-dropdown a.highlight:hover {
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            color: #fff;
+        }
+        .nav-dropdown a.highlight i { color: var(--c-chat); }
+        .nav-dropdown a.highlight:hover i { color: #fff; }
 
         .menu-toggle {
             display: none;
@@ -344,7 +356,7 @@
             color: var(--c-text-muted);
         }
 
-        /* 🆕 Sidebar Link Special (ملفي العام) */
+        /* Sidebar Special Link */
         .sidebar-link.special-link {
             background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(139, 92, 246, 0.03));
             color: var(--c-chat);
@@ -431,7 +443,7 @@
             color: var(--c-text);
         }
 
-        /* 🆕 زر ملفي العام (بنفسجي) */
+        /* زر ملفي العام (بنفسجي) */
         .btn-profile-public {
             display: inline-flex;
             align-items: center;
@@ -450,6 +462,34 @@
         .btn-profile-public:hover {
             transform: translateY(-2px);
             box-shadow: 0 12px 32px rgba(139, 92, 246, 0.45);
+        }
+
+        /* 🆕 زر مشاركة الملف */
+        .btn-share-profile {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 24px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: 0.88rem;
+            background: linear-gradient(135deg, #3498db, #2c81ba);
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(52, 152, 219, 0.3);
+            transition: all var(--t-base);
+            border: none;
+        }
+        .btn-share-profile:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(52, 152, 219, 0.45);
+        }
+
+        /* Action Buttons Group */
+        .action-buttons-group {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
         }
 
         /* STATS CARDS */
@@ -584,7 +624,6 @@
             transform: translateX(-3px);
         }
 
-        /* 🆕 زر عرض ملفي العام (بنفسجي) */
         .view-public-link {
             font-size: 0.82rem;
             color: #fff;
@@ -602,6 +641,27 @@
         .view-public-link:hover {
             transform: translateX(-3px);
             box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* 🆕 زر مشاركة صغير */
+        .view-share-link {
+            font-size: 0.82rem;
+            color: #fff;
+            background: linear-gradient(135deg, #3498db, #2c81ba);
+            padding: 7px 16px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--t-fast);
+            border: none;
+            box-shadow: 0 4px 12px rgba(52, 152, 219, 0.25);
+            cursor: pointer;
+        }
+        .view-share-link:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 8px 20px rgba(52, 152, 219, 0.4);
         }
 
         /* ITEM LIST */
@@ -778,7 +838,6 @@
             height: 36px;
             padding: 0;
         }
-        /* 🆕 Chat button */
         .item-action-btn.chat-btn {
             background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
             color: #fff;
@@ -788,7 +847,6 @@
             transform: translateY(-1px);
             box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
         }
-        /* 🆕 WhatsApp button */
         .item-action-btn.wa-btn {
             background: var(--c-whatsapp);
             color: #fff;
@@ -796,6 +854,16 @@
         .item-action-btn.wa-btn:hover {
             background: #1da851;
             transform: translateY(-1px);
+        }
+        /* 🆕 Share btn for item */
+        .item-action-btn.share-btn-item {
+            background: linear-gradient(135deg, #3498db, #2c81ba);
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(52, 152, 219, 0.25);
+        }
+        .item-action-btn.share-btn-item:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(52, 152, 219, 0.4);
         }
 
         /* Status badges */
@@ -1010,6 +1078,226 @@
             gap: 10px;
             justify-content: flex-end;
             margin-top: 8px;
+        }
+
+        /* SHARE PROFILE BANNER */
+        .share-profile-banner {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(52, 152, 219, 0.05));
+            border: 2px dashed rgba(139, 92, 246, 0.25);
+            border-radius: var(--r-lg);
+            padding: 20px 24px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            animation: fadeUp 0.5s ease;
+        }
+        .share-profile-banner-info {
+            display: flex;
+            align-items: center;
+            gap: 14px;
+            flex: 1;
+            min-width: 250px;
+        }
+        .share-profile-banner-icon {
+            width: 52px;
+            height: 52px;
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 1.3rem;
+            flex-shrink: 0;
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+        }
+        .share-profile-banner-text h4 {
+            font-size: 1.05rem;
+            font-weight: 800;
+            color: var(--c-text);
+            margin-bottom: 4px;
+        }
+        .share-profile-banner-text p {
+            font-size: 0.85rem;
+            color: var(--c-text-muted);
+        }
+        .share-profile-banner-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+        .share-profile-banner-actions .btn {
+            padding: 10px 22px;
+            border-radius: 30px;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.3s;
+            text-decoration: none;
+            white-space: nowrap;
+            color: #fff;
+        }
+        .share-profile-banner-actions .btn-view {
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            box-shadow: 0 4px 16px rgba(139, 92, 246, 0.3);
+        }
+        .share-profile-banner-actions .btn-view:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(139, 92, 246, 0.4);
+        }
+        .share-profile-banner-actions .btn-copy {
+            background: linear-gradient(135deg, #3498db, #2c81ba);
+            box-shadow: 0 4px 16px rgba(52, 152, 219, 0.3);
+        }
+        .share-profile-banner-actions .btn-copy:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(52, 152, 219, 0.4);
+        }
+        .share-profile-banner-actions .btn-share-social {
+            background: linear-gradient(135deg, var(--c-whatsapp), #128C7E);
+            box-shadow: 0 4px 16px rgba(37, 211, 102, 0.3);
+        }
+        .share-profile-banner-actions .btn-share-social:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(37, 211, 102, 0.4);
+        }
+
+        /* SHARE MODAL */
+        .share-modal-content {
+            text-align: center;
+        }
+        .share-modal-preview {
+            background: var(--c-surface-2);
+            border: 1px solid var(--c-border);
+            border-radius: var(--r-md);
+            padding: 20px;
+            margin-bottom: 20px;
+            text-align: center;
+        }
+        .share-modal-preview-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark));
+            color: #fff;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 800;
+            margin: 0 auto 12px;
+            text-transform: uppercase;
+            box-shadow: 0 8px 24px rgba(46, 204, 113, 0.25);
+        }
+        .share-modal-preview h3 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            color: var(--c-text);
+            margin-bottom: 6px;
+        }
+        .share-modal-preview p {
+            font-size: 0.85rem;
+            color: var(--c-text-muted);
+        }
+
+        .share-url-input {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 20px;
+        }
+        .share-url-input input {
+            flex: 1;
+            padding: 12px 16px;
+            border-radius: var(--r-md);
+            border: 1.5px solid var(--c-border);
+            background: var(--c-surface-2);
+            color: var(--c-text);
+            font-size: 0.85rem;
+            font-family: monospace;
+            direction: ltr;
+            text-align: left;
+        }
+        .share-url-input input:focus {
+            border-color: var(--c-chat);
+            outline: none;
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.15);
+        }
+        .share-url-input button {
+            padding: 12px 20px;
+            border-radius: var(--r-md);
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            color: #fff;
+            border: none;
+            cursor: pointer;
+            font-weight: 700;
+            font-size: 0.85rem;
+            font-family: inherit;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+        .share-url-input button:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.4);
+        }
+
+        .share-social-buttons {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+            justify-content: center;
+            margin-bottom: 20px;
+        }
+        .share-social-btn {
+            width: 52px;
+            height: 52px;
+            border-radius: 50%;
+            border: none;
+            cursor: pointer;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: white;
+            transition: all 0.3s;
+            text-decoration: none;
+            font-family: inherit;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+        .share-social-btn:hover {
+            transform: translateY(-4px) scale(1.08);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+        .share-social-btn.whatsapp { background: #25D366; }
+        .share-social-btn.facebook { background: #1877F2; }
+        .share-social-btn.twitter { background: #1DA1F2; }
+        .share-social-btn.linkedin { background: #0A66C2; }
+        .share-social-btn.telegram { background: #0088cc; }
+        .share-social-btn.qr { background: linear-gradient(135deg, #8b5cf6, #7c3aed); }
+
+        .qr-container-share {
+            text-align: center;
+            padding: 16px;
+            background: var(--c-surface-2);
+            border-radius: var(--r-md);
+            margin-top: 16px;
+        }
+        .qr-container-share img {
+            max-width: 200px;
+            border-radius: 12px;
+            box-shadow: var(--sh-md);
+            background: #fff;
+            padding: 8px;
+            margin: 0 auto;
         }
 
         /* NOTIFICATIONS PANEL */
@@ -1425,7 +1713,12 @@
             .page-title i { font-size: 1rem; }
             .btn-primary,
             .btn-profile-public,
+            .btn-share-profile,
             .btn-secondary { padding: 9px 18px; font-size: 0.82rem; }
+            .action-buttons-group { width: 100%; }
+            .action-buttons-group .btn-primary,
+            .action-buttons-group .btn-profile-public,
+            .action-buttons-group .btn-share-profile { flex: 1; justify-content: center; min-width: 140px; }
             .offer-mini { flex-direction: column; align-items: flex-start; gap: 8px; }
             .offer-mini-actions { width: 100%; justify-content: flex-end; }
             .notif-panel { left: 12px; right: 12px; width: auto; top: calc(var(--header-h) + 8px); }
@@ -1433,6 +1726,12 @@
             .modal-header { padding: 14px 16px; }
             .modal-header h3 { font-size: 0.95rem; }
             .modal-footer { padding: 12px 16px; }
+            .share-profile-banner { padding: 16px 18px; }
+            .share-profile-banner-actions { width: 100%; justify-content: center; }
+            .share-profile-banner-actions .btn { flex: 1; justify-content: center; min-width: 120px; }
+            .share-social-btn { width: 46px; height: 46px; font-size: 1.05rem; }
+            .share-url-input { flex-direction: column; }
+            .share-url-input button { width: 100%; justify-content: center; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1480,7 +1779,8 @@
                     <i class="fas fa-chevron-down" style="font-size:0.7rem; opacity:0.7;"></i>
                 </button>
                 <div class="nav-dropdown" id="userDropdown" role="menu">
-                    <a href="buyer-requests-profile.html"><i class="fas fa-user-tag"></i> ملفي العام</a>
+                    <a href="#" class="highlight" id="dropdownMyPublicProfile"><i class="fas fa-user-tag"></i> ملفي العام</a>
+                    <a href="#" id="dropdownShareProfile"><i class="fas fa-share-alt"></i> مشاركة ملفي</a>
                     <a href="#" id="dropdownProfile"><i class="fas fa-user"></i> الملف الشخصي</a>
                     <a href="index.html"><i class="fas fa-home"></i> الصفحة الرئيسية</a>
                     <a href="all-products.html"><i class="fas fa-flask"></i> تصفح المنتجات</a>
@@ -1534,7 +1834,7 @@
                 <i class="fas fa-user-circle"></i>
                 الملف الشخصي
             </button>
-            <a href="buyer-requests-profile.html" class="sidebar-link special-link">
+            <a href="#" id="sidebarMyPublicProfile" class="sidebar-link special-link">
                 <i class="fas fa-external-link-alt"></i>
                 ملفي العام
             </a>
@@ -1630,6 +1930,62 @@
     </div>
 </div>
 
+<!-- MODAL: Share Profile -->
+<div class="modal-overlay" id="shareProfileModal" role="dialog" aria-modal="true">
+    <div class="modal">
+        <div class="modal-header">
+            <h3><i class="fas fa-share-alt" style="color: var(--c-chat);"></i> مشاركة ملفي العام</h3>
+            <button class="modal-close" onclick="document.getElementById('shareProfileModal').classList.remove('show')" type="button" aria-label="إغلاق">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <div class="share-modal-content">
+                <div class="share-modal-preview">
+                    <div class="share-modal-preview-avatar" id="sharePreviewAvatar">؟</div>
+                    <h3 id="sharePreviewName">...</h3>
+                    <p id="sharePreviewDesc">شوف منتجاتي وطلباتي على منصة كيماتو</p>
+                </div>
+
+                <div class="share-url-input">
+                    <input type="text" id="shareProfileUrl" readonly />
+                    <button type="button" onclick="copyProfileUrl()">
+                        <i class="fas fa-copy"></i> نسخ
+                    </button>
+                </div>
+
+                <div class="share-social-buttons">
+                    <a class="share-social-btn whatsapp" id="shareProfileWhatsapp" target="_blank" rel="noopener" title="واتساب">
+                        <i class="fab fa-whatsapp"></i>
+                    </a>
+                    <a class="share-social-btn facebook" id="shareProfileFacebook" target="_blank" rel="noopener" title="فيسبوك">
+                        <i class="fab fa-facebook-f"></i>
+                    </a>
+                    <a class="share-social-btn twitter" id="shareProfileTwitter" target="_blank" rel="noopener" title="تويتر">
+                        <i class="fab fa-twitter"></i>
+                    </a>
+                    <a class="share-social-btn linkedin" id="shareProfileLinkedin" target="_blank" rel="noopener" title="لينكدإن">
+                        <i class="fab fa-linkedin-in"></i>
+                    </a>
+                    <a class="share-social-btn telegram" id="shareProfileTelegram" target="_blank" rel="noopener" title="تليجرام">
+                        <i class="fab fa-telegram-plane"></i>
+                    </a>
+                    <button class="share-social-btn qr" type="button" onclick="toggleQRCode()" title="QR Code">
+                        <i class="fas fa-qrcode"></i>
+                    </button>
+                </div>
+
+                <div class="qr-container-share" id="qrContainer" style="display: none;">
+                    <p style="margin-bottom: 12px; font-weight: 700; color: var(--c-text-muted); font-size: 0.85rem;">
+                        <i class="fas fa-qrcode"></i> امسح الـ QR للمشاركة
+                    </p>
+                    <img id="qrImage" src="" alt="QR Code" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!-- TOAST -->
 <div class="toast-container" id="toastContainer" aria-live="polite"></div>
 
@@ -1682,11 +2038,17 @@
 
     const sanitizePhone = (p) => p ? String(p).replace(/\D/g, '') : '';
 
-    // 🆕 بناء رابط المحادثة
     const buildMessageUrl = (userId, { requestId = null } = {}) => {
         const params = new URLSearchParams({ to: userId });
         if (requestId) params.set('request', requestId);
         return `messages.html?${params.toString()}`;
+    };
+
+    // 🆕 رابط الملف العام — يستخدم supplier-profile.html?id=USER_ID
+    const getPublicProfileUrl = (userId) => {
+        if (!userId) return '#';
+        const base = window.location.origin + window.location.pathname.replace(/[^/]*$/, '');
+        return `${base}supplier-profile.html?id=${userId}`;
     };
 
     const isValidUUID = (id) =>
@@ -1883,7 +2245,115 @@
         const nameEl = document.getElementById('userName');
         if (avatarEl) avatarEl.textContent = initial;
         if (nameEl) nameEl.textContent = name;
+
+        // 🆕 تحديث روابط الملف العام
+        const publicUrl = getPublicProfileUrl(state.user.id);
+
+        const sidebarLink = document.getElementById('sidebarMyPublicProfile');
+        if (sidebarLink) sidebarLink.href = publicUrl;
+
+        const dropdownLink = document.getElementById('dropdownMyPublicProfile');
+        if (dropdownLink) dropdownLink.href = publicUrl;
+
+        // 🆕 تحديث بيانات Share Modal
+        const sharePreviewAvatar = document.getElementById('sharePreviewAvatar');
+        const sharePreviewName = document.getElementById('sharePreviewName');
+        const shareProfileUrl = document.getElementById('shareProfileUrl');
+
+        if (sharePreviewAvatar) sharePreviewAvatar.textContent = initial;
+        if (sharePreviewName) sharePreviewName.textContent = name;
+        if (shareProfileUrl) shareProfileUrl.value = publicUrl;
     };
+
+    // ============================================================
+    // SHARE PROFILE
+    // ============================================================
+    const openShareModal = () => {
+        if (!state.user) return;
+
+        const publicUrl = getPublicProfileUrl(state.user.id);
+        const name = state.userProfile?.company_name || state.userProfile?.full_name || 'مستخدم';
+        const initial = name.charAt(0).toUpperCase();
+
+        // Update preview
+        const sharePreviewAvatar = document.getElementById('sharePreviewAvatar');
+        const sharePreviewName = document.getElementById('sharePreviewName');
+        const sharePreviewDesc = document.getElementById('sharePreviewDesc');
+        const shareProfileUrl = document.getElementById('shareProfileUrl');
+
+        if (sharePreviewAvatar) sharePreviewAvatar.textContent = initial;
+        if (sharePreviewName) sharePreviewName.textContent = name;
+        if (sharePreviewDesc) sharePreviewDesc.textContent = `${name} على كيماتو — تعرف على طلباتي ومنتجاتي`;
+        if (shareProfileUrl) shareProfileUrl.value = publicUrl;
+
+        // Update social links
+        const text = `تعرف على ${name} على منصة كيماتو - سوق الكيماويات B2B`;
+
+        const setHref = (id, href) => {
+            const el = document.getElementById(id);
+            if (el) el.href = href;
+        };
+
+        setHref('shareProfileWhatsapp', `https://wa.me/?text=${encodeURIComponent(text + '\n' + publicUrl)}`);
+        setHref('shareProfileFacebook', `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(publicUrl)}`);
+        setHref('shareProfileTwitter', `https://twitter.com/intent/tweet?text=${encodeURIComponent(text)}&url=${encodeURIComponent(publicUrl)}`);
+        setHref('shareProfileLinkedin', `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(publicUrl)}`);
+        setHref('shareProfileTelegram', `https://t.me/share/url?url=${encodeURIComponent(publicUrl)}&text=${encodeURIComponent(text)}`);
+
+        // Hide QR by default
+        const qrContainer = document.getElementById('qrContainer');
+        if (qrContainer) qrContainer.style.display = 'none';
+
+        // Show modal
+        document.getElementById('shareProfileModal').classList.add('show');
+    };
+
+    const copyProfileUrl = () => {
+        const url = document.getElementById('shareProfileUrl')?.value;
+        if (!url) return;
+
+        if (navigator.clipboard) {
+            navigator.clipboard.writeText(url).then(() => {
+                showToast('📋', 'تم النسخ!', 'تم نسخ رابط ملفك العام', null, null, 'success');
+            }).catch(() => fallbackCopy(url));
+        } else {
+            fallbackCopy(url);
+        }
+    };
+
+    const fallbackCopy = (text) => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try {
+            document.execCommand('copy');
+            showToast('📋', 'تم النسخ!', 'تم نسخ رابط ملفك العام', null, null, 'success');
+        } catch (e) {
+            showToast('⚠️', 'خطأ', 'تعذر نسخ الرابط', null, null, 'error');
+        }
+        document.body.removeChild(ta);
+    };
+
+    const toggleQRCode = () => {
+        const container = document.getElementById('qrContainer');
+        const img = document.getElementById('qrImage');
+        const url = document.getElementById('shareProfileUrl')?.value;
+
+        if (!container || !img || !url) return;
+
+        if (container.style.display === 'none') {
+            img.src = `https://api.qrserver.com/v1/create-qr-code/?size=300x300&data=${encodeURIComponent(url)}&bgcolor=ffffff&color=0a2540&margin=10`;
+            container.style.display = 'block';
+        } else {
+            container.style.display = 'none';
+        }
+    };
+
+    window.copyProfileUrl = copyProfileUrl;
+    window.toggleQRCode = toggleQRCode;
 
     // ============================================================
     // NAVBAR & DROPDOWN
@@ -1917,6 +2387,13 @@
             e.preventDefault();
             switchSection('profile');
             userDropdown?.classList.remove('show');
+        });
+
+        // 🆕 زر مشاركة ملفي (من Dropdown)
+        document.getElementById('dropdownShareProfile')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            userDropdown?.classList.remove('show');
+            openShareModal();
         });
 
         document.getElementById('dropdownLogout')?.addEventListener('click', async (e) => {
@@ -2211,6 +2688,7 @@
 
         await fetchAllData();
 
+        const publicUrl = getPublicProfileUrl(state.user.id);
         const recentRequests = state.requests.slice(0, 3);
         const recentOffers = Object.values(state.offersMap).flat()
             .filter(o => o.status === 'pending')
@@ -2226,12 +2704,39 @@
                     </h1>
                     <p class="page-subtitle">مرحباً ${escapeHtml(state.userProfile?.full_name || 'بك')} — دي ملخص نشاطك على كيماتو</p>
                 </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="buyer-requests-profile.html" class="btn-profile-public">
+                <div class="action-buttons-group">
+                    <a href="${publicUrl}" class="btn-profile-public">
                         <i class="fas fa-user-tag"></i> ملفي العام
                     </a>
+                    <button class="btn-share-profile" onclick="openShareModal()" type="button">
+                        <i class="fas fa-share-alt"></i> شارك ملفي
+                    </button>
                     <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                        <i class="fas fa-plus-circle"></i> اطلب عرض سعر جديد
+                        <i class="fas fa-plus-circle"></i> طلب جديد
+                    </button>
+                </div>
+            </div>
+
+            <!-- 🆕 Share Profile Banner -->
+            <div class="share-profile-banner animate-in" style="animation-delay: 0.03s;">
+                <div class="share-profile-banner-info">
+                    <div class="share-profile-banner-icon">
+                        <i class="fas fa-share-nodes"></i>
+                    </div>
+                    <div class="share-profile-banner-text">
+                        <h4>شارك ملفك العام مع الموردين 📢</h4>
+                        <p>خلي الموردين يشوفوا طلباتك ومنتجاتك المفضلة — وده هيساعدك تلاقي عروض أفضل</p>
+                    </div>
+                </div>
+                <div class="share-profile-banner-actions">
+                    <a href="${publicUrl}" class="btn btn-view" target="_blank" rel="noopener">
+                        <i class="fas fa-eye"></i> اعرض ملفي
+                    </a>
+                    <button class="btn btn-copy" onclick="openShareModal()" type="button">
+                        <i class="fas fa-link"></i> انسخ الرابط
+                    </button>
+                    <button class="btn btn-share-social" onclick="quickShareWhatsapp()" type="button">
+                        <i class="fab fa-whatsapp"></i> واتساب
                     </button>
                 </div>
             </div>
@@ -2282,9 +2787,9 @@
                         <span class="count-badge">${state.requests.length}</span>
                     </h2>
                     <div style="display: flex; gap: 8px; flex-wrap: wrap;">
-                        <a href="buyer-requests-profile.html" class="view-public-link">
-                            <i class="fas fa-user-tag"></i> ملفي العام
-                        </a>
+                        <button class="view-share-link" onclick="openShareModal()" type="button">
+                            <i class="fas fa-share-alt"></i> شارك
+                        </button>
                         <button class="view-all-link" onclick="window.switchSection('requests')">
                             عرض الكل <i class="fas fa-arrow-left"></i>
                         </button>
@@ -2350,6 +2855,8 @@
 
         await fetchAllData();
 
+        const publicUrl = getPublicProfileUrl(state.user.id);
+
         main.innerHTML = `
             <div class="page-header-bar animate-in">
                 <div>
@@ -2359,10 +2866,13 @@
                     </h1>
                     <p class="page-subtitle">إدارة كل طلبات الشراء الخاصة بك</p>
                 </div>
-                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
-                    <a href="buyer-requests-profile.html" class="btn-profile-public">
+                <div class="action-buttons-group">
+                    <a href="${publicUrl}" class="btn-profile-public">
                         <i class="fas fa-user-tag"></i> ملفي العام
                     </a>
+                    <button class="btn-share-profile" onclick="openShareModal()" type="button">
+                        <i class="fas fa-share-alt"></i> شارك
+                    </button>
                     <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
                         <i class="fas fa-plus-circle"></i> طلب جديد
                     </button>
@@ -2510,6 +3020,7 @@
         const main = document.getElementById('dashboardMain');
         if (!main) return;
         const p = state.userProfile || {};
+        const publicUrl = getPublicProfileUrl(state.user.id);
 
         main.innerHTML = `
             <div class="page-header-bar animate-in">
@@ -2519,6 +3030,14 @@
                         الملف الشخصي
                     </h1>
                     <p class="page-subtitle">بياناتك الأساسية على كيماتو</p>
+                </div>
+                <div class="action-buttons-group">
+                    <a href="${publicUrl}" class="btn-profile-public">
+                        <i class="fas fa-user-tag"></i> ملفي العام
+                    </a>
+                    <button class="btn-share-profile" onclick="openShareModal()" type="button">
+                        <i class="fas fa-share-alt"></i> شارك ملفي
+                    </button>
                 </div>
             </div>
 
@@ -2585,6 +3104,12 @@
                             <span style="color: var(--c-text-muted); font-weight: 700;">تاريخ التسجيل</span>
                             <span style="font-weight: 800;">${formatDate(p.created_at)}</span>
                         </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
+                            <span style="color: var(--c-text-muted); font-weight: 700;">رابط ملفي العام</span>
+                            <a href="${publicUrl}" target="_blank" rel="noopener" style="font-weight: 800; color: var(--c-chat); text-decoration: underline; direction: ltr; font-size: 0.78rem;">
+                                <i class="fas fa-external-link-alt"></i> فتح الرابط
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -2617,6 +3142,7 @@
             if (error) throw error;
 
             state.userProfile = { ...state.userProfile, ...updates };
+            updateUserUI();
             showToast('✅', 'تم الحفظ', 'تم تحديث بياناتك بنجاح', null, null, 'success');
         } catch (err) {
             console.error('Save profile error:', err);
@@ -3044,11 +3570,9 @@
                 action === 'accepted' ? 'success' : 'info'
             );
 
-            // Refresh data
             await fetchAllData();
             loadSection(state.activeSection);
 
-            // Suggest changing request status if accepted
             if (action === 'accepted') {
                 const offer = Object.values(state.offersMap).flat().find(o => o.id === offerId);
                 const request = offer ? state.requests.find(r => r.id === offer.request_id) : null;
@@ -3202,6 +3726,19 @@
     };
 
     // ============================================================
+    // QUICK SHARE
+    // ============================================================
+    window.quickShareWhatsapp = () => {
+        if (!state.user) return;
+        const publicUrl = getPublicProfileUrl(state.user.id);
+        const name = state.userProfile?.company_name || state.userProfile?.full_name || 'مستخدم';
+        const text = `تعرف على ${name} على منصة كيماتو - سوق الكيماويات B2B\n${publicUrl}`;
+        window.open(`https://wa.me/?text=${encodeURIComponent(text)}`, '_blank', 'noopener,noreferrer');
+    };
+
+    window.openShareModal = openShareModal;
+
+    // ============================================================
     // REALTIME
     // ============================================================
     const setupRealtime = () => {
@@ -3245,11 +3782,18 @@
             if (e.target.id === 'editRequestModal') closeEditModal();
         });
 
+        document.getElementById('shareProfileModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'shareProfileModal') {
+                document.getElementById('shareProfileModal').classList.remove('show');
+            }
+        });
+
         document.addEventListener('keydown', (e) => {
             if (e.key === 'Escape') {
                 closeEditModal();
                 document.getElementById('notifPanel')?.classList.remove('show');
                 document.getElementById('userDropdown')?.classList.remove('show');
+                document.getElementById('shareProfileModal')?.classList.remove('show');
             }
         });
     };
@@ -3269,7 +3813,7 @@
         initNavbar();
         initSidebar();
         initModals();
-        initOfferActions(); // 🆕
+        initOfferActions();
 
         const isAuthed = await checkAuthAndLoad();
         if (!isAuthed) return;
