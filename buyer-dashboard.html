@@ -38,6 +38,8 @@
             --c-warning:     #f39c12;
             --c-danger:      #e74c3c;
             --c-whatsapp:    #25D366;
+            --c-chat:        #8b5cf6;
+            --c-chat-dark:   #7c3aed;
             --c-purple:      #8b5cf6;
             --c-verified:    #1e88e5;
             --c-request:     #e67e22;
@@ -110,16 +112,11 @@
         @keyframes shimmer { 0% { background-position: -200% 0; } 100% { background-position: 200% 0; } }
         @keyframes pulse { 0%, 100% { transform: scale(1); } 50% { transform: scale(1.08); } }
         @keyframes spin { to { transform: rotate(360deg); } }
-        @keyframes cardIn { from { opacity: 0; transform: translateY(20px) scale(0.98); } to { opacity: 1; transform: translateY(0) scale(1); } }
-        @keyframes heartBeat { 0% { transform: scale(1); } 25% { transform: scale(1.3); } 50% { transform: scale(1); } 75% { transform: scale(1.2); } 100% { transform: scale(1); } }
         @keyframes badgePop { 0% { transform: scale(0.5); opacity: 0; } 60% { transform: scale(1.15); } 100% { transform: scale(1); opacity: 1; } }
-        @keyframes slideIn { from { opacity: 0; transform: translateX(20px); } to { opacity: 1; transform: translateX(0); } }
 
         .animate-in { animation: fadeUp 0.6s cubic-bezier(0.22, 1, 0.36, 1) backwards; }
 
-        /* ============================================================
-           TOP NAVBAR
-           ============================================================ */
+        /* NAVBAR */
         .navbar {
             position: sticky; top: 0; z-index: 100;
             background: rgba(10, 37, 64, 0.9);
@@ -141,11 +138,7 @@
         .logo-text .blue { color: #5eb8ee; }
         .logo-text .gray { color: rgba(255, 255, 255, 0.6); font-weight: 400; font-size: 0.9em; }
 
-        .nav-right {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
+        .nav-right { display: flex; align-items: center; gap: 10px; }
 
         .nav-action-btn {
             width: 40px; height: 40px; border-radius: 50%;
@@ -181,9 +174,7 @@
         }
         .nav-action-btn .notif-badge.show { display: flex; }
 
-        .nav-user-menu {
-            position: relative;
-        }
+        .nav-user-menu { position: relative; }
         .nav-user-btn {
             display: flex;
             align-items: center;
@@ -195,9 +186,7 @@
             transition: all var(--t-fast);
             font-family: inherit;
         }
-        .nav-user-btn:hover {
-            background: rgba(255, 255, 255, 0.15);
-        }
+        .nav-user-btn:hover { background: rgba(255, 255, 255, 0.15); }
         .nav-user-avatar {
             width: 32px;
             height: 32px;
@@ -272,9 +261,7 @@
             font-size: 1.1rem;
         }
 
-        /* ============================================================
-           LAYOUT
-           ============================================================ */
+        /* LAYOUT */
         .dashboard-layout {
             max-width: var(--container);
             margin: 0 auto;
@@ -285,7 +272,6 @@
             align-items: start;
         }
 
-        /* Sidebar */
         .sidebar {
             background: var(--c-surface);
             border: 1px solid var(--c-border);
@@ -358,7 +344,26 @@
             color: var(--c-text-muted);
         }
 
-        /* Main Content */
+        /* 🆕 Sidebar Link Special (ملفي العام) */
+        .sidebar-link.special-link {
+            background: linear-gradient(135deg, rgba(139, 92, 246, 0.08), rgba(139, 92, 246, 0.03));
+            color: var(--c-chat);
+            border: 1px solid rgba(139, 92, 246, 0.15);
+        }
+        .sidebar-link.special-link:hover {
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            color: #fff;
+            border-color: transparent;
+            transform: translateX(-3px);
+        }
+        .sidebar-link.special-link i {
+            color: var(--c-chat);
+        }
+        .sidebar-link.special-link:hover i {
+            color: #fff;
+        }
+
+        /* MAIN CONTENT */
         .dashboard-main {
             display: flex;
             flex-direction: column;
@@ -381,9 +386,7 @@
             align-items: center;
             gap: 12px;
         }
-        .page-title i {
-            color: var(--c-accent);
-        }
+        .page-title i { color: var(--c-accent); }
         .page-subtitle {
             font-size: 0.88rem;
             color: var(--c-text-muted);
@@ -410,9 +413,46 @@
             box-shadow: 0 12px 32px rgba(46, 204, 113, 0.45);
         }
 
-        /* ============================================================
-           STATS CARDS
-           ============================================================ */
+        .btn-secondary {
+            padding: 11px 24px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: 0.88rem;
+            background: var(--c-surface-2);
+            color: var(--c-text-muted);
+            border: 1px solid var(--c-border);
+            transition: all var(--t-base);
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+        .btn-secondary:hover {
+            background: var(--c-border);
+            color: var(--c-text);
+        }
+
+        /* 🆕 زر ملفي العام (بنفسجي) */
+        .btn-profile-public {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 11px 24px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            font-size: 0.88rem;
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            color: #fff;
+            box-shadow: 0 6px 20px rgba(139, 92, 246, 0.3);
+            transition: all var(--t-base);
+            border: none;
+        }
+        .btn-profile-public:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(139, 92, 246, 0.45);
+        }
+
+        /* STATS CARDS */
         .stats-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
@@ -459,10 +499,7 @@
             flex-shrink: 0;
         }
 
-        .stat-content {
-            flex: 1;
-            min-width: 0;
-        }
+        .stat-content { flex: 1; min-width: 0; }
         .stat-label {
             font-size: 0.78rem;
             color: var(--c-text-muted);
@@ -476,7 +513,6 @@
             line-height: 1;
             font-variant-numeric: tabular-nums;
         }
-        .stat-value.updated { animation: pulse 0.6s ease; }
         .stat-trend {
             font-size: 0.7rem;
             color: var(--c-text-sub);
@@ -486,9 +522,7 @@
             gap: 4px;
         }
 
-        /* ============================================================
-           SECTION CARDS
-           ============================================================ */
+        /* SECTION CARDS */
         .section-card {
             background: var(--c-surface);
             border: 1px solid var(--c-border);
@@ -514,9 +548,7 @@
             align-items: center;
             gap: 10px;
         }
-        .section-card-title i {
-            color: var(--c-accent);
-        }
+        .section-card-title i { color: var(--c-accent); }
         .section-card-title .count-badge {
             background: var(--c-surface-2);
             color: var(--c-text-muted);
@@ -530,9 +562,7 @@
             color: #fff;
         }
 
-        .section-card-body {
-            padding: 20px 22px;
-        }
+        .section-card-body { padding: 20px 22px; }
 
         .view-all-link {
             font-size: 0.82rem;
@@ -554,9 +584,27 @@
             transform: translateX(-3px);
         }
 
-        /* ============================================================
-           REQUEST ROW / OFFER ROW
-           ============================================================ */
+        /* 🆕 زر عرض ملفي العام (بنفسجي) */
+        .view-public-link {
+            font-size: 0.82rem;
+            color: #fff;
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            padding: 7px 16px;
+            border-radius: var(--r-full);
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            transition: all var(--t-fast);
+            border: none;
+            box-shadow: 0 4px 12px rgba(139, 92, 246, 0.25);
+        }
+        .view-public-link:hover {
+            transform: translateX(-3px);
+            box-shadow: 0 8px 20px rgba(139, 92, 246, 0.4);
+        }
+
+        /* ITEM LIST */
         .item-list {
             display: flex;
             flex-direction: column;
@@ -619,10 +667,7 @@
             color: var(--c-primary-600);
         }
 
-        .item-info {
-            flex: 1;
-            min-width: 200px;
-        }
+        .item-info { flex: 1; min-width: 200px; }
         .item-title {
             font-size: 0.92rem;
             font-weight: 800;
@@ -653,10 +698,7 @@
             font-weight: 700;
         }
 
-        .item-price-block {
-            text-align: left;
-            flex-shrink: 0;
-        }
+        .item-price-block { text-align: left; flex-shrink: 0; }
         .item-price {
             font-size: 1.15rem;
             font-weight: 900;
@@ -736,6 +778,25 @@
             height: 36px;
             padding: 0;
         }
+        /* 🆕 Chat button */
+        .item-action-btn.chat-btn {
+            background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
+            color: #fff;
+            box-shadow: 0 2px 8px rgba(139, 92, 246, 0.25);
+        }
+        .item-action-btn.chat-btn:hover {
+            transform: translateY(-1px);
+            box-shadow: 0 6px 16px rgba(139, 92, 246, 0.4);
+        }
+        /* 🆕 WhatsApp button */
+        .item-action-btn.wa-btn {
+            background: var(--c-whatsapp);
+            color: #fff;
+        }
+        .item-action-btn.wa-btn:hover {
+            background: #1da851;
+            transform: translateY(-1px);
+        }
 
         /* Status badges */
         .status-badge {
@@ -763,9 +824,7 @@
         [data-theme="dark"] .status-accepted { background: rgba(46, 204, 113, 0.2); color: #6ee7a0; }
         [data-theme="dark"] .status-rejected { background: rgba(255, 255, 255, 0.06); color: var(--c-text-sub); }
 
-        /* ============================================================
-           EMPTY STATES
-           ============================================================ */
+        /* EMPTY STATES */
         .empty-state {
             text-align: center;
             padding: 48px 24px;
@@ -788,21 +847,18 @@
             font-size: 0.85rem;
             margin-bottom: 18px;
         }
-        .empty-state .btn-primary {
-            margin: 0 auto;
-        }
+        .empty-state .btn-primary { margin: 0 auto; }
 
-        /* ============================================================
-           OFFERS ACCORDION (تحت كل طلب)
-           ============================================================ */
+        /* OFFERS ACCORDION */
         .offers-accordion {
             max-height: 0;
             overflow: hidden;
             transition: max-height 0.4s cubic-bezier(0.22, 1, 0.36, 1);
             margin-top: 0;
+            width: 100%;
         }
         .offers-accordion.open {
-            max-height: 2000px;
+            max-height: 3000px;
             margin-top: 14px;
         }
 
@@ -826,9 +882,7 @@
             transition: all var(--t-fast);
         }
         .offer-mini:last-child { margin-bottom: 0; }
-        .offer-mini:hover {
-            border-color: var(--c-primary-500);
-        }
+        .offer-mini:hover { border-color: var(--c-primary-500); }
         .offer-mini.is-best {
             border-color: var(--c-accent);
             background: linear-gradient(135deg, rgba(46, 204, 113, 0.04), var(--c-surface-2));
@@ -865,10 +919,7 @@
             flex-shrink: 0;
             text-transform: uppercase;
         }
-        .offer-mini-info {
-            flex: 1;
-            min-width: 0;
-        }
+        .offer-mini-info { flex: 1; min-width: 0; }
         .offer-mini-name {
             font-size: 0.85rem;
             font-weight: 800;
@@ -903,11 +954,10 @@
             display: flex;
             gap: 6px;
             flex-shrink: 0;
+            flex-wrap: wrap;
         }
 
-        /* ============================================================
-           PROFILE SECTION
-           ============================================================ */
+        /* PROFILE FORM */
         .profile-form {
             display: grid;
             grid-template-columns: repeat(2, 1fr);
@@ -961,27 +1011,8 @@
             justify-content: flex-end;
             margin-top: 8px;
         }
-                .btn-secondary {
-            padding: 11px 24px;
-            border-radius: var(--r-full);
-            font-weight: 700;
-            font-size: 0.88rem;
-            background: var(--c-surface-2);
-            color: var(--c-text-muted);
-            border: 1px solid var(--c-border);
-            transition: all var(--t-base);
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .btn-secondary:hover {
-            background: var(--c-border);
-            color: var(--c-text);
-        }
 
-        /* ============================================================
-           NOTIFICATIONS PANEL
-           ============================================================ */
+        /* NOTIFICATIONS PANEL */
         .notif-panel {
             position: fixed;
             top: calc(var(--header-h) + 12px);
@@ -1059,39 +1090,7 @@
         .notif-item.unread {
             background: linear-gradient(90deg, rgba(46, 204, 113, 0.04), transparent);
         }
-        .notif-item.unread::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: var(--c-accent);
-            flex-shrink: 0;
-            margin-top: 8px;
-        }
-        .notif-item:not(.unread)::before {
-            content: '';
-            width: 8px;
-            height: 8px;
-            border-radius: 50%;
-            background: transparent;
-            flex-shrink: 0;
-        }
-        .notif-icon {
-            width: 36px;
-            height: 36px;
-            border-radius: var(--r-md);
-            background: linear-gradient(135deg, rgba(46, 204, 113, 0.15), rgba(46, 204, 113, 0.05));
-            color: var(--c-accent-dark);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 0.9rem;
-            flex-shrink: 0;
-        }
-        .notif-content {
-            flex: 1;
-            min-width: 0;
-        }
+        .notif-content { flex: 1; min-width: 0; }
         .notif-title {
             font-size: 0.85rem;
             font-weight: 800;
@@ -1109,9 +1108,7 @@
             margin-top: 4px;
         }
 
-        /* ============================================================
-           MODAL
-           ============================================================ */
+        /* MODAL */
         .modal-overlay {
             position: fixed;
             inset: 0;
@@ -1196,9 +1193,7 @@
             background: var(--c-surface-2);
         }
 
-        /* ============================================================
-           SKELETON LOADING
-           ============================================================ */
+        /* SKELETON */
         .skeleton {
             background: linear-gradient(90deg, var(--c-border) 0%, var(--c-surface-2) 50%, var(--c-border) 100%);
             background-size: 200% 100%;
@@ -1215,9 +1210,7 @@
             border-radius: var(--r-lg);
         }
 
-        /* ============================================================
-           SPINNER
-           ============================================================ */
+        /* SPINNER */
         .spinner {
             width: 14px;
             height: 14px;
@@ -1229,9 +1222,7 @@
             vertical-align: middle;
         }
 
-        /* ============================================================
-           TOAST
-           ============================================================ */
+        /* TOAST */
         .toast-container {
             position: fixed;
             bottom: 24px;
@@ -1281,11 +1272,9 @@
         .toast.success { border-right-color: var(--c-accent); }
         .toast.warning { border-right-color: var(--c-warning); }
         .toast.error { border-right-color: var(--c-danger); }
-        .toast.info { border-right-color: var(--c-purple); }
+        .toast.info { border-right-color: var(--c-chat); }
 
-        /* ============================================================
-           MOBILE BOTTOM NAV
-           ============================================================ */
+        /* MOBILE BOTTOM NAV */
         .mobile-nav {
             display: none;
             position: fixed;
@@ -1317,9 +1306,7 @@
             border: none;
             cursor: pointer;
         }
-        .mobile-nav-item i {
-            font-size: 1.15rem;
-        }
+        .mobile-nav-item i { font-size: 1.15rem; }
         .mobile-nav-item.active {
             color: var(--c-accent-dark);
             background: rgba(46, 204, 113, 0.08);
@@ -1346,118 +1333,7 @@
         }
         .mobile-nav-item .count-pill.show { display: flex; }
 
-        /* ============================================================
-           RESPONSIVE
-           ============================================================ */
-        @media (max-width: 1024px) {
-            :root {
-                --sidebar-w: 100%;
-            }
-            .dashboard-layout {
-                grid-template-columns: 1fr;
-                padding: 16px;
-            }
-            .sidebar {
-                position: static;
-                display: none;
-            }
-            .sidebar.mobile-open {
-                display: block;
-                margin-bottom: 16px;
-            }
-            .profile-form {
-                grid-template-columns: 1fr;
-            }
-        }
-
-        @media (max-width: 860px) {
-            .menu-toggle { display: inline-flex; }
-            .nav-user-name { display: none; }
-            .nav-user-btn {
-                padding: 4px;
-            }
-            .mobile-nav {
-                display: grid;
-            }
-            body {
-                padding-bottom: 72px;
-            }
-        }
-
-        @media (max-width: 640px) {
-            .navbar { padding: 0 12px; }
-            .dashboard-layout { padding: 12px; gap: 16px; }
-            .stats-grid {
-                grid-template-columns: repeat(2, 1fr);
-                gap: 10px;
-            }
-            .stat-card {
-                padding: 14px;
-                gap: 10px;
-            }
-            .stat-icon {
-                width: 40px;
-                height: 40px;
-                font-size: 1.1rem;
-            }
-            .stat-value { font-size: 1.3rem; }
-            .stat-label { font-size: 0.7rem; }
-
-            .section-card-header { padding: 14px 16px; }
-            .section-card-body { padding: 16px; }
-            .section-card-title { font-size: 0.95rem; }
-
-            .item-row {
-                padding: 12px;
-                gap: 10px;
-            }
-            .item-icon-wrapper {
-                width: 38px;
-                height: 38px;
-                font-size: 1rem;
-            }
-            .item-title { font-size: 0.85rem; }
-            .item-meta { font-size: 0.7rem; gap: 8px; }
-            .item-price { font-size: 1rem; }
-            .item-actions {
-                width: 100%;
-                justify-content: flex-end;
-                margin-top: 6px;
-                padding-top: 10px;
-                border-top: 1px dashed var(--c-border);
-            }
-            .item-action-btn { padding: 7px 12px; font-size: 0.72rem; }
-
-            .page-title { font-size: 1.15rem; }
-            .page-title i { font-size: 1rem; }
-            .btn-primary { padding: 9px 18px; font-size: 0.82rem; }
-
-            .offer-mini {
-                flex-direction: column;
-                align-items: flex-start;
-                gap: 8px;
-            }
-            .offer-mini-actions {
-                width: 100%;
-                justify-content: flex-end;
-            }
-
-            .notif-panel {
-                left: 12px;
-                right: 12px;
-                width: auto;
-                top: calc(var(--header-h) + 8px);
-            }
-
-            .modal-body { padding: 16px; }
-            .modal-header { padding: 14px 16px; }
-            .modal-header h3 { font-size: 0.95rem; }
-            .modal-footer { padding: 12px 16px; }
-        }
-
-        /* ============================================================
-           LOGIN REQUIRED STATE
-           ============================================================ */
+        /* LOGIN REQUIRED */
         .login-required-state {
             min-height: 70vh;
             display: flex;
@@ -1498,14 +1374,65 @@
             justify-content: center;
         }
 
-        /* ============================================================
-           MISC
-           ============================================================ */
-        .hidden { display: none !important; }
-        .text-truncate {
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: nowrap;
+        /* RESPONSIVE */
+        @media (max-width: 1024px) {
+            :root { --sidebar-w: 100%; }
+            .dashboard-layout {
+                grid-template-columns: 1fr;
+                padding: 16px;
+            }
+            .sidebar {
+                position: static;
+                display: none;
+            }
+            .sidebar.mobile-open { display: block; margin-bottom: 16px; }
+            .profile-form { grid-template-columns: 1fr; }
+        }
+
+        @media (max-width: 860px) {
+            .menu-toggle { display: inline-flex; }
+            .nav-user-name { display: none; }
+            .nav-user-btn { padding: 4px; }
+            .mobile-nav { display: grid; }
+            body { padding-bottom: 72px; }
+        }
+
+        @media (max-width: 640px) {
+            .navbar { padding: 0 12px; }
+            .dashboard-layout { padding: 12px; gap: 16px; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+            .stat-card { padding: 14px; gap: 10px; }
+            .stat-icon { width: 40px; height: 40px; font-size: 1.1rem; }
+            .stat-value { font-size: 1.3rem; }
+            .stat-label { font-size: 0.7rem; }
+            .section-card-header { padding: 14px 16px; }
+            .section-card-body { padding: 16px; }
+            .section-card-title { font-size: 0.95rem; }
+            .item-row { padding: 12px; gap: 10px; }
+            .item-icon-wrapper { width: 38px; height: 38px; font-size: 1rem; }
+            .item-title { font-size: 0.85rem; }
+            .item-meta { font-size: 0.7rem; gap: 8px; }
+            .item-price { font-size: 1rem; }
+            .item-actions {
+                width: 100%;
+                justify-content: flex-end;
+                margin-top: 6px;
+                padding-top: 10px;
+                border-top: 1px dashed var(--c-border);
+            }
+            .item-action-btn { padding: 7px 12px; font-size: 0.72rem; }
+            .page-title { font-size: 1.15rem; }
+            .page-title i { font-size: 1rem; }
+            .btn-primary,
+            .btn-profile-public,
+            .btn-secondary { padding: 9px 18px; font-size: 0.82rem; }
+            .offer-mini { flex-direction: column; align-items: flex-start; gap: 8px; }
+            .offer-mini-actions { width: 100%; justify-content: flex-end; }
+            .notif-panel { left: 12px; right: 12px; width: auto; top: calc(var(--header-h) + 8px); }
+            .modal-body { padding: 16px; }
+            .modal-header { padding: 14px 16px; }
+            .modal-header h3 { font-size: 0.95rem; }
+            .modal-footer { padding: 12px 16px; }
         }
 
         @media (prefers-reduced-motion: reduce) {
@@ -1520,1742 +1447,1853 @@
 </head>
 <body>
 
-    <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
+<a href="#main" class="skip-link">تخطي إلى المحتوى</a>
 
-    <!-- NAVBAR -->
-    <header class="navbar" role="banner">
-        <div class="navbar-inner">
-            <div class="logo">
-                <a href="index.html" aria-label="كيماتو">
-                    <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager"
-                         onerror="this.style.display='none'" />
-                    <span class="logo-text">
-                        <span class="blue">كيماتو</span>
-                        <span class="gray">| لوحة المشتري</span>
-                    </span>
-                </a>
+<!-- NAVBAR -->
+<header class="navbar" role="banner">
+    <div class="navbar-inner">
+        <div class="logo">
+            <a href="index.html" aria-label="كيماتو">
+                <img src="logo.png" alt="كيماتو" width="42" height="42" loading="eager"
+                     onerror="this.style.display='none'" />
+                <span class="logo-text">
+                    <span class="blue">كيماتو</span>
+                    <span class="gray">| لوحة المشتري</span>
+                </span>
+            </a>
+        </div>
+
+        <div class="nav-right">
+            <button class="nav-action-btn" id="themeToggle" type="button" aria-label="الوضع الليلي" title="الوضع الليلي">
+                <i class="fas fa-moon" id="themeIcon"></i>
+            </button>
+
+            <button class="nav-action-btn" id="notifBtn" type="button" aria-label="الإشعارات" title="الإشعارات">
+                <i class="fas fa-bell"></i>
+                <span class="notif-badge" id="notifCount">0</span>
+            </button>
+
+            <div class="nav-user-menu">
+                <button class="nav-user-btn" id="userMenuBtn" type="button" aria-haspopup="true" aria-expanded="false">
+                    <span class="nav-user-avatar" id="userAvatar">؟</span>
+                    <span class="nav-user-name" id="userName">...</span>
+                    <i class="fas fa-chevron-down" style="font-size:0.7rem; opacity:0.7;"></i>
+                </button>
+                <div class="nav-dropdown" id="userDropdown" role="menu">
+                    <a href="buyer-requests-profile.html"><i class="fas fa-user-tag"></i> ملفي العام</a>
+                    <a href="#" id="dropdownProfile"><i class="fas fa-user"></i> الملف الشخصي</a>
+                    <a href="index.html"><i class="fas fa-home"></i> الصفحة الرئيسية</a>
+                    <a href="all-products.html"><i class="fas fa-flask"></i> تصفح المنتجات</a>
+                    <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> تصفح الطلبات</a>
+                    <a href="#" id="dropdownLogout" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                </div>
             </div>
 
-            <div class="nav-right">
-                <button class="nav-action-btn" id="themeToggle" type="button" aria-label="الوضع الليلي" title="الوضع الليلي">
-                    <i class="fas fa-moon" id="themeIcon"></i>
-                </button>
+            <button class="menu-toggle" id="menuToggle" type="button" aria-label="فتح القائمة الجانبية" aria-expanded="false">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </div>
+</header>
 
-                <button class="nav-action-btn" id="notifBtn" type="button" aria-label="الإشعارات" title="الإشعارات">
-                    <i class="fas fa-bell"></i>
-                    <span class="notif-badge" id="notifCount">0</span>
-                </button>
+<!-- NOTIFICATIONS PANEL -->
+<div class="notif-panel" id="notifPanel" role="region" aria-label="الإشعارات">
+    <div class="notif-header">
+        <h4><i class="fas fa-bell"></i> الإشعارات</h4>
+        <button class="notif-mark-read" id="notifMarkRead" type="button">تعليم الكل كمقروء</button>
+    </div>
+    <div class="notif-list" id="notifList"></div>
+</div>
 
-                <div class="nav-user-menu">
-                    <button class="nav-user-btn" id="userMenuBtn" type="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="nav-user-avatar" id="userAvatar">؟</span>
-                        <span class="nav-user-name" id="userName">...</span>
-                        <i class="fas fa-chevron-down" style="font-size:0.7rem; opacity:0.7;"></i>
-                    </button>
-                    <div class="nav-dropdown" id="userDropdown" role="menu">
-                        <a href="#" id="dropdownProfile"><i class="fas fa-user"></i> الملف الشخصي</a>
-                        <a href="index.html"><i class="fas fa-home"></i> الصفحة الرئيسية</a>
-                        <a href="all-products.html"><i class="fas fa-flask"></i> تصفح المنتجات</a>
-                        <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> تصفح الطلبات</a>
-                        <a href="#" id="dropdownLogout" class="logout"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+<!-- MAIN -->
+<main class="dashboard-layout" id="main">
+
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-title">القائمة الرئيسية</div>
+        <nav class="sidebar-nav" role="tablist">
+            <button class="sidebar-link active" data-section="overview" role="tab" aria-selected="true">
+                <i class="fas fa-th-large"></i>
+                نظرة عامة
+            </button>
+            <button class="sidebar-link" data-section="requests" role="tab" aria-selected="false">
+                <i class="fas fa-clipboard-list"></i>
+                طلباتي
+                <span class="count-pill" id="sidebarRequestsCount">0</span>
+            </button>
+            <button class="sidebar-link" data-section="offers" role="tab" aria-selected="false">
+                <i class="fas fa-hand-holding-usd"></i>
+                العروض المستلمة
+                <span class="count-pill" id="sidebarOffersCount">0</span>
+            </button>
+            <button class="sidebar-link" data-section="favorites" role="tab" aria-selected="false">
+                <i class="fas fa-heart"></i>
+                المفضلة
+                <span class="count-pill" id="sidebarFavoritesCount">0</span>
+            </button>
+            <button class="sidebar-link" data-section="profile" role="tab" aria-selected="false">
+                <i class="fas fa-user-circle"></i>
+                الملف الشخصي
+            </button>
+            <a href="buyer-requests-profile.html" class="sidebar-link special-link">
+                <i class="fas fa-external-link-alt"></i>
+                ملفي العام
+            </a>
+        </nav>
+    </aside>
+
+    <div class="dashboard-main" id="dashboardMain">
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+        <div class="skeleton skeleton-stat"></div>
+    </div>
+
+</main>
+
+<!-- MOBILE BOTTOM NAV -->
+<nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="التنقل السريع">
+    <button class="mobile-nav-item active" data-section="overview" type="button">
+        <i class="fas fa-th-large"></i>
+        <span>نظرة عامة</span>
+    </button>
+    <button class="mobile-nav-item" data-section="requests" type="button">
+        <i class="fas fa-clipboard-list"></i>
+        <span>طلباتي</span>
+        <span class="count-pill" id="mobileRequestsCount">0</span>
+    </button>
+    <button class="mobile-nav-item" data-section="offers" type="button">
+        <i class="fas fa-hand-holding-usd"></i>
+        <span>العروض</span>
+        <span class="count-pill" id="mobileOffersCount">0</span>
+    </button>
+    <button class="mobile-nav-item" data-section="favorites" type="button">
+        <i class="fas fa-heart"></i>
+        <span>المفضلة</span>
+    </button>
+    <button class="mobile-nav-item" data-section="profile" type="button">
+        <i class="fas fa-user-circle"></i>
+        <span>حسابي</span>
+    </button>
+</nav>
+
+<!-- MODAL: Edit Request -->
+<div class="modal-overlay" id="editRequestModal" role="dialog" aria-modal="true">
+    <div class="modal">
+        <div class="modal-header">
+            <h3><i class="fas fa-edit"></i> تعديل الطلب</h3>
+            <button class="modal-close" id="closeEditModal" type="button" aria-label="إغلاق">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        <div class="modal-body">
+            <form id="editRequestForm" class="profile-form" novalidate>
+                <div class="form-group full">
+                    <label for="editProductName">اسم المنتج <span class="req">*</span></label>
+                    <input type="text" id="editProductName" name="product_name" required />
+                </div>
+                <div class="form-group">
+                    <label for="editCasNumber">رقم CAS</label>
+                    <input type="text" id="editCasNumber" name="cas_number" dir="ltr" />
+                </div>
+                <div class="form-group">
+                    <label for="editQuantity">الكمية <span class="req">*</span></label>
+                    <input type="text" id="editQuantity" name="quantity_needed" required placeholder="500 كجم" />
+                </div>
+                <div class="form-group">
+                    <label for="editBudgetMin">الميزانية من (ج.م)</label>
+                    <input type="number" id="editBudgetMin" name="budget_min" min="0" step="0.01" />
+                </div>
+                <div class="form-group">
+                    <label for="editBudgetMax">الميزانية إلى (ج.م)</label>
+                    <input type="number" id="editBudgetMax" name="budget_max" min="0" step="0.01" />
+                </div>
+                <div class="form-group">
+                    <label for="editDeadline">الموعد النهائي</label>
+                    <input type="date" id="editDeadline" name="deadline" />
+                </div>
+                <div class="form-group">
+                    <label for="editLocation">موقع التسليم</label>
+                    <input type="text" id="editLocation" name="location" />
+                </div>
+                <div class="form-group full">
+                    <label for="editDescription">وصف إضافي</label>
+                    <textarea id="editDescription" name="description"></textarea>
+                </div>
+            </form>
+        </div>
+        <div class="modal-footer">
+            <button class="btn-secondary" id="cancelEditModal" type="button">إلغاء</button>
+            <button class="btn-primary" id="saveEditModal" type="button">
+                <i class="fas fa-save"></i> حفظ التعديلات
+            </button>
+        </div>
+    </div>
+</div>
+
+<!-- TOAST -->
+<div class="toast-container" id="toastContainer" aria-live="polite"></div>
+
+<script type="module">
+    import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
+
+    const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
+
+    const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
+        auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+    });
+
+    // ============================================================
+    // STATE
+    // ============================================================
+    const state = {
+        user: null,
+        userProfile: null,
+        activeSection: 'overview',
+        requests: [],
+        offersMap: {},
+        favoritesProducts: [],
+        notifications: [],
+        stats: {
+            totalRequests: 0,
+            openRequests: 0,
+            totalOffers: 0,
+            newOffers: 0,
+            favoritesCount: 0,
+        },
+        editingRequestId: null,
+        channel: null,
+    };
+
+    const THEME_KEY = 'chemato-theme';
+
+    // ============================================================
+    // UTILS
+    // ============================================================
+    const escapeHtml = (str) => {
+        if (str === null || str === undefined) return '';
+        return String(str)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#039;');
+    };
+
+    const sanitizePhone = (p) => p ? String(p).replace(/\D/g, '') : '';
+
+    // 🆕 بناء رابط المحادثة
+    const buildMessageUrl = (userId, { requestId = null } = {}) => {
+        const params = new URLSearchParams({ to: userId });
+        if (requestId) params.set('request', requestId);
+        return `messages.html?${params.toString()}`;
+    };
+
+    const isValidUUID = (id) =>
+        id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
+
+    const formatNumber = (n) => Number(n || 0).toLocaleString('ar-EG');
+    const formatPrice = (p) => Number(p || 0).toLocaleString('ar-EG');
+
+    const formatDate = (dateStr) => {
+        if (!dateStr) return '—';
+        return new Date(dateStr).toLocaleDateString('ar-EG', {
+            year: 'numeric', month: 'short', day: 'numeric',
+        });
+    };
+
+    const formatDateTime = (dateStr) => {
+        if (!dateStr) return '';
+        const date = new Date(dateStr);
+        const now = new Date();
+        const diffMs = now - date;
+        const diffMin = Math.floor(diffMs / 60000);
+        const diffHrs = Math.floor(diffMs / 3600000);
+        const diffDays = Math.floor(diffMs / 86400000);
+
+        if (diffMin < 1) return 'الآن';
+        if (diffMin < 60) return `منذ ${diffMin} د`;
+        if (diffHrs < 24) return `منذ ${diffHrs} س`;
+        if (diffDays < 7) return `منذ ${diffDays} يوم`;
+        return formatDate(dateStr);
+    };
+
+    const getStatusInfo = (status) => {
+        const map = {
+            'open':     { text: 'مفتوح',   cls: 'status-open',     icon: 'circle' },
+            'matched':  { text: 'تمت المطابقة', cls: 'status-matched',  icon: 'check-circle' },
+            'closed':   { text: 'مغلق',    cls: 'status-closed',   icon: 'lock' },
+            'expired':  { text: 'منتهي',   cls: 'status-expired',  icon: 'clock' },
+        };
+        return map[status] || map['open'];
+    };
+
+    const getOfferStatusInfo = (status) => {
+        const map = {
+            'pending':  { text: 'قيد المراجعة', cls: 'status-pending',  icon: 'clock' },
+            'accepted': { text: 'مقبول',       cls: 'status-accepted', icon: 'check-circle' },
+            'rejected': { text: 'مرفوض',       cls: 'status-rejected', icon: 'times-circle' },
+        };
+        return map[status] || map['pending'];
+    };
+
+    // ============================================================
+    // THEME
+    // ============================================================
+    const updateThemeIcon = (theme) => {
+        const icon = document.getElementById('themeIcon');
+        if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
+    };
+
+    const initTheme = () => {
+        const saved = localStorage.getItem(THEME_KEY);
+        const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+        const theme = saved || (prefersDark ? 'dark' : 'light');
+        document.documentElement.setAttribute('data-theme', theme);
+        updateThemeIcon(theme);
+
+        document.getElementById('themeToggle')?.addEventListener('click', () => {
+            const current = document.documentElement.getAttribute('data-theme');
+            const next = current === 'dark' ? 'light' : 'dark';
+            document.documentElement.setAttribute('data-theme', next);
+            localStorage.setItem(THEME_KEY, next);
+            updateThemeIcon(next);
+        });
+    };
+
+    // ============================================================
+    // TOAST
+    // ============================================================
+    const removeToast = (toast) => {
+        if (!toast || !toast.parentNode) return;
+        toast.classList.add('removing');
+        setTimeout(() => toast.remove(), 300);
+    };
+
+    const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = '') => {
+        const container = document.getElementById('toastContainer');
+        if (!container) return;
+
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+
+        const iconEl = document.createElement('div');
+        iconEl.className = 'toast-icon';
+        iconEl.textContent = icon;
+
+        const content = document.createElement('div');
+        content.className = 'toast-content';
+
+        const titleEl = document.createElement('div');
+        titleEl.className = 'toast-title';
+        titleEl.textContent = title;
+
+        const descEl = document.createElement('div');
+        descEl.className = 'toast-desc';
+        descEl.textContent = desc + (linkText ? ' ' : '');
+
+        if (linkText && linkUrl) {
+            const link = document.createElement('a');
+            link.href = linkUrl;
+            link.textContent = linkText;
+            descEl.appendChild(link);
+        }
+
+        content.appendChild(titleEl);
+        content.appendChild(descEl);
+
+        const closeBtn = document.createElement('button');
+        closeBtn.className = 'toast-close';
+        closeBtn.setAttribute('aria-label', 'إغلاق');
+        closeBtn.innerHTML = '<i class="fas fa-times"></i>';
+        closeBtn.onclick = () => removeToast(toast);
+
+        toast.appendChild(iconEl);
+        toast.appendChild(content);
+        toast.appendChild(closeBtn);
+        container.appendChild(toast);
+
+        setTimeout(() => removeToast(toast), 6000);
+    };
+
+    // ============================================================
+    // AUTH GUARD
+    // ============================================================
+    const checkAuthAndLoad = async () => {
+        const { data: { user } } = await supabase.auth.getUser();
+
+        if (!user) {
+            renderLoginRequired();
+            return false;
+        }
+
+        state.user = user;
+
+        const { data: profile } = await supabase
+            .from('profiles')
+            .select('id, full_name, company_name, phone, whatsapp, city, address, user_type, is_verified, avatar_url, created_at')
+            .eq('id', user.id)
+            .single();
+
+        state.userProfile = profile;
+
+        if (profile?.user_type === 'supplier') {
+            showToast('⚠️', 'تنبيه', 'هذه اللوحة للمشترين. جاري تحويلك...', null, null, 'warning');
+            setTimeout(() => window.location.href = 'supplier-dashboard.html', 1500);
+            return false;
+        }
+
+        updateUserUI();
+        return true;
+    };
+
+    const renderLoginRequired = () => {
+        const main = document.getElementById('dashboardMain');
+        if (main) {
+            main.innerHTML = `
+                <div class="login-required-state">
+                    <div class="big-icon"><i class="fas fa-lock"></i></div>
+                    <h2>سجّل دخولك أولاً</h2>
+                    <p>عشان تقدر تشوف لوحة التحكم، الطلبات، العروض، والمفضلة، لازم تسجّل دخولك.</p>
+                    <div class="login-required-actions">
+                        <a href="auth.html?redirect=buyer-dashboard" class="btn-primary">
+                            <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
+                        </a>
+                        <a href="auth.html?type=buyer" class="btn-secondary">
+                            <i class="fas fa-user-plus"></i> حساب جديد
+                        </a>
                     </div>
                 </div>
+            `;
+        }
+        const sidebar = document.getElementById('sidebar');
+        if (sidebar) sidebar.style.display = 'none';
+        const mobileNav = document.getElementById('mobileNav');
+        if (mobileNav) mobileNav.style.display = 'none';
+    };
 
-                <button class="menu-toggle" id="menuToggle" type="button" aria-label="فتح القائمة الجانبية" aria-expanded="false">
-                    <i class="fas fa-bars"></i>
-                </button>
-            </div>
-        </div>
-    </header>
+    const updateUserUI = () => {
+        const p = state.userProfile;
+        if (!p) return;
 
-    <!-- NOTIFICATIONS PANEL -->
-    <div class="notif-panel" id="notifPanel" role="region" aria-label="الإشعارات">
-        <div class="notif-header">
-            <h4><i class="fas fa-bell"></i> الإشعارات</h4>
-            <button class="notif-mark-read" id="notifMarkRead" type="button">تعليم الكل كمقروء</button>
-        </div>
-        <div class="notif-list" id="notifList">
-            <!-- Notifications injected here -->
-        </div>
-    </div>
+        const name = p.company_name || p.full_name || 'مستخدم';
+        const initial = name.charAt(0).toUpperCase();
 
-    <!-- MAIN -->
-    <main class="dashboard-layout" id="main">
+        const avatarEl = document.getElementById('userAvatar');
+        const nameEl = document.getElementById('userName');
+        if (avatarEl) avatarEl.textContent = initial;
+        if (nameEl) nameEl.textContent = name;
+    };
 
-        <!-- SIDEBAR (Right side in RTL = second in DOM) -->
-        <aside class="sidebar" id="sidebar">
-            <div class="sidebar-title">القائمة الرئيسية</div>
-            <nav class="sidebar-nav" role="tablist">
-                <button class="sidebar-link active" data-section="overview" role="tab" aria-selected="true">
-                    <i class="fas fa-th-large"></i>
-                    نظرة عامة
-                </button>
-                <button class="sidebar-link" data-section="requests" role="tab" aria-selected="false">
-                    <i class="fas fa-clipboard-list"></i>
-                    طلباتي
-                    <span class="count-pill" id="sidebarRequestsCount">0</span>
-                </button>
-                <button class="sidebar-link" data-section="offers" role="tab" aria-selected="false">
-                    <i class="fas fa-hand-holding-usd"></i>
-                    العروض المستلمة
-                    <span class="count-pill" id="sidebarOffersCount">0</span>
-                </button>
-                <button class="sidebar-link" data-section="favorites" role="tab" aria-selected="false">
-                    <i class="fas fa-heart"></i>
-                    المفضلة
-                    <span class="count-pill" id="sidebarFavoritesCount">0</span>
-                </button>
-                <button class="sidebar-link" data-section="profile" role="tab" aria-selected="false">
-                    <i class="fas fa-user-circle"></i>
-                    الملف الشخصي
-                </button>
-            </nav>
-        </aside>
-
-        <!-- MAIN CONTENT -->
-        <div class="dashboard-main" id="dashboardMain">
-
-            <!-- Content will be injected here -->
-            <div class="skeleton skeleton-stat"></div>
-            <div class="skeleton skeleton-stat"></div>
-            <div class="skeleton skeleton-stat"></div>
-            <div class="skeleton skeleton-stat"></div>
-
-        </div>
-
-    </main>
-
-    <!-- MOBILE BOTTOM NAV -->
-    <nav class="mobile-nav" id="mobileNav" role="navigation" aria-label="التنقل السريع">
-        <button class="mobile-nav-item active" data-section="overview" type="button">
-            <i class="fas fa-th-large"></i>
-            <span>نظرة عامة</span>
-        </button>
-        <button class="mobile-nav-item" data-section="requests" type="button">
-            <i class="fas fa-clipboard-list"></i>
-            <span>طلباتي</span>
-            <span class="count-pill" id="mobileRequestsCount">0</span>
-        </button>
-        <button class="mobile-nav-item" data-section="offers" type="button">
-            <i class="fas fa-hand-holding-usd"></i>
-            <span>العروض</span>
-            <span class="count-pill" id="mobileOffersCount">0</span>
-        </button>
-        <button class="mobile-nav-item" data-section="favorites" type="button">
-            <i class="fas fa-heart"></i>
-            <span>المفضلة</span>
-        </button>
-        <button class="mobile-nav-item" data-section="profile" type="button">
-            <i class="fas fa-user-circle"></i>
-            <span>حسابي</span>
-        </button>
-    </nav>
-
-    <!-- MODAL: Edit Request -->
-    <div class="modal-overlay" id="editRequestModal" role="dialog" aria-modal="true">
-        <div class="modal">
-            <div class="modal-header">
-                <h3><i class="fas fa-edit"></i> تعديل الطلب</h3>
-                <button class="modal-close" id="closeEditModal" type="button" aria-label="إغلاق">
-                    <i class="fas fa-times"></i>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="editRequestForm" class="profile-form" novalidate>
-                    <div class="form-group full">
-                        <label for="editProductName">اسم المنتج <span class="req">*</span></label>
-                        <input type="text" id="editProductName" name="product_name" required />
-                    </div>
-                    <div class="form-group">
-                        <label for="editCasNumber">رقم CAS</label>
-                        <input type="text" id="editCasNumber" name="cas_number" dir="ltr" />
-                    </div>
-                    <div class="form-group">
-                        <label for="editQuantity">الكمية <span class="req">*</span></label>
-                        <input type="text" id="editQuantity" name="quantity_needed" required placeholder="500 كجم" />
-                    </div>
-                    <div class="form-group">
-                        <label for="editBudgetMin">الميزانية من (ج.م)</label>
-                        <input type="number" id="editBudgetMin" name="budget_min" min="0" step="0.01" />
-                    </div>
-                    <div class="form-group">
-                        <label for="editBudgetMax">الميزانية إلى (ج.م)</label>
-                        <input type="number" id="editBudgetMax" name="budget_max" min="0" step="0.01" />
-                    </div>
-                    <div class="form-group">
-                        <label for="editDeadline">الموعد النهائي</label>
-                        <input type="date" id="editDeadline" name="deadline" />
-                    </div>
-                    <div class="form-group">
-                        <label for="editLocation">موقع التسليم</label>
-                        <input type="text" id="editLocation" name="location" />
-                    </div>
-                    <div class="form-group full">
-                        <label for="editDescription">وصف إضافي</label>
-                        <textarea id="editDescription" name="description"></textarea>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn-secondary" id="cancelEditModal" type="button">إلغاء</button>
-                <button class="btn-primary" id="saveEditModal" type="button">
-                    <i class="fas fa-save"></i> حفظ التعديلات
-                </button>
-            </div>
-        </div>
-    </div>
-
-    <!-- TOAST -->
-    <div class="toast-container" id="toastContainer" aria-live="polite"></div>
-
-    <script type="module">
-        import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
-
-        const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
-        const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
-
-        const supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
-            auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true },
+    // ============================================================
+    // NAVBAR & DROPDOWN
+    // ============================================================
+    const initNavbar = () => {
+        const menuToggle = document.getElementById('menuToggle');
+        const sidebar = document.getElementById('sidebar');
+        menuToggle?.addEventListener('click', () => {
+            sidebar?.classList.toggle('mobile-open');
         });
 
-        // ============================================================
-        // STATE
-        // ============================================================
-        const state = {
-            user: null,
-            userProfile: null,
-            activeSection: 'overview',
-            requests: [],
-            offersMap: {},       // { requestId: [offers] }
-            favorites: [],
-            favoritesProducts: [],
-            notifications: [],
-            stats: {
-                totalRequests: 0,
-                openRequests: 0,
-                totalOffers: 0,
-                newOffers: 0,
-                favoritesCount: 0,
-            },
-            editingRequestId: null,
-            channel: null,
-            loadedSections: {},
-        };
+        const userBtn = document.getElementById('userMenuBtn');
+        const userDropdown = document.getElementById('userDropdown');
+        userBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            userDropdown?.classList.toggle('show');
+            userBtn.setAttribute('aria-expanded', userDropdown?.classList.contains('show'));
+        });
 
-        const THEME_KEY = 'chemato-theme';
-
-        // ============================================================
-        // UTILS
-        // ============================================================
-        const escapeHtml = (str) => {
-            if (str === null || str === undefined) return '';
-            return String(str)
-                .replace(/&/g, '&amp;')
-                .replace(/</g, '&lt;')
-                .replace(/>/g, '&gt;')
-                .replace(/"/g, '&quot;')
-                .replace(/'/g, '&#039;');
-        };
-
-        const sanitizePhone = (p) => p ? String(p).replace(/\D/g, '') : '';
-        const isValidUUID = (id) =>
-            id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]{12}$/i.test(id);
-
-        const formatNumber = (n) => Number(n || 0).toLocaleString('ar-EG');
-        const formatPrice = (p) => Number(p || 0).toLocaleString('ar-EG');
-
-        const formatDate = (dateStr) => {
-            if (!dateStr) return '—';
-            return new Date(dateStr).toLocaleDateString('ar-EG', {
-                year: 'numeric', month: 'short', day: 'numeric',
-            });
-        };
-
-        const formatDateTime = (dateStr) => {
-            if (!dateStr) return '';
-            const date = new Date(dateStr);
-            const now = new Date();
-            const diffMs = now - date;
-            const diffMin = Math.floor(diffMs / 60000);
-            const diffHrs = Math.floor(diffMs / 3600000);
-            const diffDays = Math.floor(diffMs / 86400000);
-
-            if (diffMin < 1) return 'الآن';
-            if (diffMin < 60) return `منذ ${diffMin} د`;
-            if (diffHrs < 24) return `منذ ${diffHrs} س`;
-            if (diffDays < 7) return `منذ ${diffDays} يوم`;
-            return formatDate(dateStr);
-        };
-
-        const getStatusInfo = (status) => {
-            const map = {
-                'open':     { text: 'مفتوح',   cls: 'status-open',     icon: 'circle' },
-                'matched':  { text: 'تمت المطابقة', cls: 'status-matched',  icon: 'check-circle' },
-                'closed':   { text: 'مغلق',    cls: 'status-closed',   icon: 'lock' },
-                'expired':  { text: 'منتهي',   cls: 'status-expired',  icon: 'clock' },
-            };
-            return map[status] || map['open'];
-        };
-
-        const getOfferStatusInfo = (status) => {
-            const map = {
-                'pending':  { text: 'قيد المراجعة', cls: 'status-pending',  icon: 'clock' },
-                'accepted': { text: 'مقبول',       cls: 'status-accepted', icon: 'check-circle' },
-                'rejected': { text: 'مرفوض',       cls: 'status-rejected', icon: 'times-circle' },
-            };
-            return map[status] || map['pending'];
-        };
-
-        // ============================================================
-        // THEME
-        // ============================================================
-        const updateThemeIcon = (theme) => {
-            const icon = document.getElementById('themeIcon');
-            if (icon) icon.className = theme === 'dark' ? 'fas fa-sun' : 'fas fa-moon';
-        };
-
-        const initTheme = () => {
-            const saved = localStorage.getItem(THEME_KEY);
-            const prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
-            const theme = saved || (prefersDark ? 'dark' : 'light');
-            document.documentElement.setAttribute('data-theme', theme);
-            updateThemeIcon(theme);
-
-            document.getElementById('themeToggle')?.addEventListener('click', () => {
-                const current = document.documentElement.getAttribute('data-theme');
-                const next = current === 'dark' ? 'light' : 'dark';
-                document.documentElement.setAttribute('data-theme', next);
-                localStorage.setItem(THEME_KEY, next);
-                updateThemeIcon(next);
-            });
-        };
-
-        // ============================================================
-        // TOAST
-        // ============================================================
-        const removeToast = (toast) => {
-            if (!toast || !toast.parentNode) return;
-            toast.classList.add('removing');
-            setTimeout(() => toast.remove(), 300);
-        };
-
-        const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = '') => {
-            const container = document.getElementById('toastContainer');
-            if (!container) return;
-
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-
-            const iconEl = document.createElement('div');
-            iconEl.className = 'toast-icon';
-            iconEl.textContent = icon;
-
-            const content = document.createElement('div');
-            content.className = 'toast-content';
-
-            const titleEl = document.createElement('div');
-            titleEl.className = 'toast-title';
-            titleEl.textContent = title;
-
-            const descEl = document.createElement('div');
-            descEl.className = 'toast-desc';
-            descEl.textContent = desc + (linkText ? ' ' : '');
-
-            if (linkText && linkUrl) {
-                const link = document.createElement('a');
-                link.href = linkUrl;
-                link.textContent = linkText;
-                descEl.appendChild(link);
-            }
-
-            content.appendChild(titleEl);
-            content.appendChild(descEl);
-
-            const closeBtn = document.createElement('button');
-            closeBtn.className = 'toast-close';
-            closeBtn.setAttribute('aria-label', 'إغلاق');
-            closeBtn.innerHTML = '<i class="fas fa-times"></i>';
-            closeBtn.onclick = () => removeToast(toast);
-
-            toast.appendChild(iconEl);
-            toast.appendChild(content);
-            toast.appendChild(closeBtn);
-            container.appendChild(toast);
-
-            setTimeout(() => removeToast(toast), 6000);
-        };
-                // ============================================================
-        // AUTH GUARD
-        // ============================================================
-        const checkAuthAndLoad = async () => {
-            const { data: { user } } = await supabase.auth.getUser();
-
-            if (!user) {
-                renderLoginRequired();
-                return false;
-            }
-
-            state.user = user;
-
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('id, full_name, company_name, phone, whatsapp, city, address, user_type, is_verified, avatar_url, created_at')
-                .eq('id', user.id)
-                .single();
-
-            state.userProfile = profile;
-
-            // Verify user is a buyer
-            if (profile?.user_type === 'supplier') {
-                showToast('⚠️', 'تنبيه', 'هذه اللوحة للمشترين. جاري تحويلك...', null, null, 'warning');
-                setTimeout(() => window.location.href = 'supplier-dashboard.html', 1500);
-                return false;
-            }
-
-            updateUserUI();
-            return true;
-        };
-
-        const renderLoginRequired = () => {
-            const main = document.getElementById('dashboardMain');
-            if (main) {
-                main.innerHTML = `
-                    <div class="login-required-state">
-                        <div class="big-icon">
-                            <i class="fas fa-lock"></i>
-                        </div>
-                        <h2>سجّل دخولك أولاً</h2>
-                        <p>عشان تقدر تشوف لوحة التحكم، الطلبات، العروض، والمفضلة، لازم تسجّل دخولك.</p>
-                        <div class="login-required-actions">
-                            <a href="auth.html?redirect=buyer-dashboard" class="btn-primary">
-                                <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
-                            </a>
-                            <a href="auth.html?type=buyer" class="btn-secondary">
-                                <i class="fas fa-user-plus"></i> حساب جديد
-                            </a>
-                        </div>
-                    </div>
-                `;
-            }
-            const sidebar = document.getElementById('sidebar');
-            if (sidebar) sidebar.style.display = 'none';
-            const mobileNav = document.getElementById('mobileNav');
-            if (mobileNav) mobileNav.style.display = 'none';
-        };
-
-        const updateUserUI = () => {
-            const p = state.userProfile;
-            if (!p) return;
-
-            const name = p.company_name || p.full_name || 'مستخدم';
-            const initial = name.charAt(0).toUpperCase();
-
-            const avatarEl = document.getElementById('userAvatar');
-            const nameEl = document.getElementById('userName');
-            if (avatarEl) avatarEl.textContent = initial;
-            if (nameEl) nameEl.textContent = name;
-        };
-
-        // ============================================================
-        // NAVBAR & DROPDOWN
-        // ============================================================
-        const initNavbar = () => {
-            const menuToggle = document.getElementById('menuToggle');
-            const sidebar = document.getElementById('sidebar');
-            menuToggle?.addEventListener('click', () => {
-                sidebar?.classList.toggle('mobile-open');
-            });
-
-            const userBtn = document.getElementById('userMenuBtn');
-            const userDropdown = document.getElementById('userDropdown');
-            userBtn?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                userDropdown?.classList.toggle('show');
-                userBtn.setAttribute('aria-expanded', userDropdown?.classList.contains('show'));
-            });
-
-            document.addEventListener('click', (e) => {
-                if (!e.target.closest('.nav-user-menu')) {
-                    userDropdown?.classList.remove('show');
-                    userBtn?.setAttribute('aria-expanded', 'false');
-                }
-                if (!e.target.closest('#notifPanel') && !e.target.closest('#notifBtn')) {
-                    document.getElementById('notifPanel')?.classList.remove('show');
-                }
-            });
-
-            document.getElementById('dropdownProfile')?.addEventListener('click', (e) => {
-                e.preventDefault();
-                switchSection('profile');
+        document.addEventListener('click', (e) => {
+            if (!e.target.closest('.nav-user-menu')) {
                 userDropdown?.classList.remove('show');
-            });
-
-            document.getElementById('dropdownLogout')?.addEventListener('click', async (e) => {
-                e.preventDefault();
-                await supabase.auth.signOut();
-                window.location.href = 'index.html';
-            });
-
-            // Notifications
-            document.getElementById('notifBtn')?.addEventListener('click', (e) => {
-                e.stopPropagation();
-                document.getElementById('notifPanel')?.classList.toggle('show');
-            });
-            document.getElementById('notifMarkRead')?.addEventListener('click', () => {
-                markAllNotificationsRead();
-            });
-        };
-
-        // ============================================================
-        // SECTIONS NAVIGATION
-        // ============================================================
-        const switchSection = (section) => {
-            state.activeSection = section;
-
-            // Update sidebar active state
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                const isActive = link.dataset.section === section;
-                link.classList.toggle('active', isActive);
-                link.setAttribute('aria-selected', isActive);
-            });
-
-            // Update mobile nav active state
-            document.querySelectorAll('.mobile-nav-item').forEach(item => {
-                item.classList.toggle('active', item.dataset.section === section);
-            });
-
-            // Close mobile sidebar
-            document.getElementById('sidebar')?.classList.remove('mobile-open');
-
-            // Load section content
-            loadSection(section);
-        };
-
-        const initSidebar = () => {
-            document.querySelectorAll('.sidebar-link').forEach(link => {
-                link.addEventListener('click', () => switchSection(link.dataset.section));
-            });
-            document.querySelectorAll('.mobile-nav-item').forEach(item => {
-                item.addEventListener('click', () => switchSection(item.dataset.section));
-            });
-        };
-
-        const loadSection = async (section) => {
-            const main = document.getElementById('dashboardMain');
-            if (!main) return;
-
-            // Show skeleton while loading (except cached sections)
-            if (!state.loadedSections[section]) {
-                main.innerHTML = `
-                    <div class="skeleton skeleton-row" style="height: 60px;"></div>
-                    <div class="stats-grid">
-                        <div class="skeleton skeleton-stat"></div>
-                        <div class="skeleton skeleton-stat"></div>
-                        <div class="skeleton skeleton-stat"></div>
-                        <div class="skeleton skeleton-stat"></div>
-                    </div>
-                    <div class="skeleton skeleton-row"></div>
-                    <div class="skeleton skeleton-row"></div>
-                `;
+                userBtn?.setAttribute('aria-expanded', 'false');
             }
-
-            // Scroll to top
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            switch (section) {
-                case 'overview':
-                    await renderOverview();
-                    break;
-                case 'requests':
-                    await renderRequests();
-                    break;
-                case 'offers':
-                    await renderOffers();
-                    break;
-                case 'favorites':
-                    await renderFavorites();
-                    break;
-                case 'profile':
-                    renderProfile();
-                    break;
-                default:
-                    renderOverview();
+            if (!e.target.closest('#notifPanel') && !e.target.closest('#notifBtn')) {
+                document.getElementById('notifPanel')?.classList.remove('show');
             }
+        });
 
-            state.loadedSections[section] = true;
-        };
+        document.getElementById('dropdownProfile')?.addEventListener('click', (e) => {
+            e.preventDefault();
+            switchSection('profile');
+            userDropdown?.classList.remove('show');
+        });
 
-        // ============================================================
-        // FETCH DATA
-        // ============================================================
-        const fetchMyRequests = async () => {
-            if (!state.user) return [];
-            try {
-                const { data, error } = await supabase
-                    .from('purchase_requests')
-                    .select('*')
-                    .eq('buyer_id', state.user.id)
-                    .order('created_at', { ascending: false });
+        document.getElementById('dropdownLogout')?.addEventListener('click', async (e) => {
+            e.preventDefault();
+            await supabase.auth.signOut();
+            window.location.href = 'index.html';
+        });
 
-                if (error) throw error;
-                return data || [];
-            } catch (e) {
-                console.error('Fetch requests error:', e);
-                return [];
-            }
-        };
+        document.getElementById('notifBtn')?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            document.getElementById('notifPanel')?.classList.toggle('show');
+        });
+        document.getElementById('notifMarkRead')?.addEventListener('click', () => {
+            markAllNotificationsRead();
+        });
+    };
 
-        const fetchOffersForRequests = async (requestIds) => {
-            if (!requestIds.length) return {};
-            try {
-                const { data, error } = await supabase
-                    .from('offers')
-                    .select('*')
-                    .in('request_id', requestIds)
-                    .order('price', { ascending: true });
+    // ============================================================
+    // SECTIONS NAVIGATION
+    // ============================================================
+    const switchSection = (section) => {
+        state.activeSection = section;
 
-                if (error) throw error;
+        document.querySelectorAll('.sidebar-link').forEach(link => {
+            const isActive = link.dataset.section === section;
+            link.classList.toggle('active', isActive);
+            link.setAttribute('aria-selected', isActive);
+        });
 
-                // Group by request_id
-                const map = {};
-                (data || []).forEach(offer => {
-                    if (!map[offer.request_id]) map[offer.request_id] = [];
-                    map[offer.request_id].push(offer);
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.classList.toggle('active', item.dataset.section === section);
+        });
+
+        document.getElementById('sidebar')?.classList.remove('mobile-open');
+        loadSection(section);
+    };
+
+    const initSidebar = () => {
+        document.querySelectorAll('.sidebar-link[data-section]').forEach(link => {
+            link.addEventListener('click', () => switchSection(link.dataset.section));
+        });
+        document.querySelectorAll('.mobile-nav-item').forEach(item => {
+            item.addEventListener('click', () => switchSection(item.dataset.section));
+        });
+    };
+
+    const loadSection = async (section) => {
+        const main = document.getElementById('dashboardMain');
+        if (!main) return;
+
+        main.innerHTML = `
+            <div class="skeleton skeleton-row" style="height: 60px;"></div>
+            <div class="stats-grid">
+                <div class="skeleton skeleton-stat"></div>
+                <div class="skeleton skeleton-stat"></div>
+                <div class="skeleton skeleton-stat"></div>
+                <div class="skeleton skeleton-stat"></div>
+            </div>
+            <div class="skeleton skeleton-row"></div>
+            <div class="skeleton skeleton-row"></div>
+        `;
+
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+
+        switch (section) {
+            case 'overview':  await renderOverview(); break;
+            case 'requests':  await renderRequests(); break;
+            case 'offers':    await renderOffers(); break;
+            case 'favorites': await renderFavorites(); break;
+            case 'profile':   renderProfile(); break;
+            default:          renderOverview();
+        }
+    };
+
+    // ============================================================
+    // FETCH DATA
+    // ============================================================
+    const fetchMyRequests = async () => {
+        if (!state.user) return [];
+        try {
+            const { data, error } = await supabase
+                .from('purchase_requests')
+                .select('*')
+                .eq('buyer_id', state.user.id)
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+            return data || [];
+        } catch (e) {
+            console.error('Fetch requests error:', e);
+            return [];
+        }
+    };
+
+    const fetchOffersForRequests = async (requestIds) => {
+        if (!requestIds.length) return {};
+        try {
+            const { data, error } = await supabase
+                .from('offers')
+                .select('*')
+                .in('request_id', requestIds)
+                .order('price', { ascending: true });
+
+            if (error) throw error;
+
+            const map = {};
+            (data || []).forEach(offer => {
+                if (!map[offer.request_id]) map[offer.request_id] = [];
+                map[offer.request_id].push(offer);
+            });
+
+            const supplierIds = [...new Set((data || []).map(o => o.supplier_id).filter(Boolean))];
+            if (supplierIds.length) {
+                const { data: suppliers } = await supabase
+                    .from('profiles')
+                    .select('id, full_name, company_name, phone, whatsapp, city, is_verified')
+                    .in('id', supplierIds);
+
+                const suppliersMap = {};
+                (suppliers || []).forEach(s => { suppliersMap[s.id] = s; });
+
+                Object.keys(map).forEach(rid => {
+                    map[rid] = map[rid].map(o => ({
+                        ...o,
+                        supplier: suppliersMap[o.supplier_id] || null,
+                    }));
                 });
-
-                // Fetch supplier info for all offers
-                const supplierIds = [...new Set((data || []).map(o => o.supplier_id).filter(Boolean))];
-                if (supplierIds.length) {
-                    const { data: suppliers } = await supabase
-                        .from('profiles')
-                        .select('id, full_name, company_name, phone, whatsapp, city, is_verified')
-                        .in('id', supplierIds);
-
-                    const suppliersMap = {};
-                    (suppliers || []).forEach(s => { suppliersMap[s.id] = s; });
-
-                    // Enrich offers with supplier data
-                    Object.keys(map).forEach(rid => {
-                        map[rid] = map[rid].map(o => ({
-                            ...o,
-                            supplier: suppliersMap[o.supplier_id] || null,
-                        }));
-                    });
-                }
-
-                return map;
-            } catch (e) {
-                console.error('Fetch offers error:', e);
-                return {};
             }
+
+            return map;
+        } catch (e) {
+            console.error('Fetch offers error:', e);
+            return {};
+        }
+    };
+
+    const fetchFavorites = async () => {
+        if (!state.user) return [];
+        try {
+            const { data, error } = await supabase
+                .from('favorites')
+                .select('product_id, created_at')
+                .eq('user_id', state.user.id)
+                .not('product_id', 'is', null)
+                .order('created_at', { ascending: false });
+
+            if (error) throw error;
+
+            const productIds = (data || []).map(f => f.product_id).filter(isValidUUID);
+            if (!productIds.length) return [];
+
+            const { data: products } = await supabase
+                .from('products')
+                .select('id, name, price, image_url, cas_number, purity, unit, category, stock_status, status')
+                .in('id', productIds);
+
+            const productsMap = {};
+            (products || []).forEach(p => { productsMap[p.id] = p; });
+
+            return productIds.map(pid => productsMap[pid]).filter(Boolean);
+        } catch (e) {
+            console.error('Fetch favorites error:', e);
+            return [];
+        }
+    };
+
+    const fetchAllData = async () => {
+        if (!state.user) return;
+
+        const requests = await fetchMyRequests();
+        state.requests = requests;
+
+        const requestIds = requests.map(r => r.id);
+        state.offersMap = await fetchOffersForRequests(requestIds);
+
+        state.favoritesProducts = await fetchFavorites();
+
+        const allOffers = Object.values(state.offersMap).flat();
+        const newOffers = allOffers.filter(o => o.status === 'pending');
+
+        state.stats = {
+            totalRequests: requests.length,
+            openRequests: requests.filter(r => r.status === 'open').length,
+            totalOffers: allOffers.length,
+            newOffers: newOffers.length,
+            favoritesCount: state.favoritesProducts.length,
         };
 
-        const fetchFavorites = async () => {
-            if (!state.user) return [];
-            try {
-                const { data, error } = await supabase
-                    .from('favorites')
-                    .select('product_id, created_at')
-                    .eq('user_id', state.user.id)
-                    .not('product_id', 'is', null)
-                    .order('created_at', { ascending: false });
+        updateSidebarCounts();
+        buildNotifications(allOffers);
+    };
 
-                if (error) throw error;
+    const updateSidebarCounts = () => {
+        const requestsCount = document.getElementById('sidebarRequestsCount');
+        const offersCount = document.getElementById('sidebarOffersCount');
+        const favoritesCount = document.getElementById('sidebarFavoritesCount');
+        const mobileRequestsCount = document.getElementById('mobileRequestsCount');
+        const mobileOffersCount = document.getElementById('mobileOffersCount');
 
-                const productIds = (data || []).map(f => f.product_id).filter(isValidUUID);
-                if (!productIds.length) return [];
+        if (requestsCount) requestsCount.textContent = state.stats.totalRequests;
+        if (offersCount) offersCount.textContent = state.stats.totalOffers;
+        if (favoritesCount) favoritesCount.textContent = state.stats.favoritesCount;
+        if (mobileRequestsCount) mobileRequestsCount.textContent = state.stats.totalRequests;
+        if (mobileOffersCount) mobileOffersCount.textContent = state.stats.totalOffers;
 
-                const { data: products } = await supabase
-                    .from('products')
-                    .select('id, name, price, image_url, cas_number, purity, unit, category, stock_status, status')
-                    .in('id', productIds);
+        if (mobileRequestsCount) mobileRequestsCount.classList.toggle('show', state.stats.totalRequests > 0);
+        if (mobileOffersCount) mobileOffersCount.classList.toggle('show', state.stats.totalOffers > 0);
 
-                // Preserve order
-                const productsMap = {};
-                (products || []).forEach(p => { productsMap[p.id] = p; });
+        const notifCount = document.getElementById('notifCount');
+        if (notifCount) {
+            notifCount.textContent = state.stats.newOffers > 99 ? '99+' : state.stats.newOffers;
+            notifCount.classList.toggle('show', state.stats.newOffers > 0);
+        }
+    };
 
-                return productIds.map(pid => productsMap[pid]).filter(Boolean);
-            } catch (e) {
-                console.error('Fetch favorites error:', e);
-                return [];
-            }
-        };
+    // ============================================================
+    // NOTIFICATIONS
+    // ============================================================
+    const buildNotifications = (offers) => {
+        const recent = offers
+            .filter(o => o.status === 'pending')
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            .slice(0, 20);
 
-        const fetchAllData = async () => {
-            if (!state.user) return;
-
-            const requests = await fetchMyRequests();
-            state.requests = requests;
-
-            const requestIds = requests.map(r => r.id);
-            state.offersMap = await fetchOffersForRequests(requestIds);
-
-            state.favoritesProducts = await fetchFavorites();
-
-            // Calculate stats
-            const allOffers = Object.values(state.offersMap).flat();
-            const newOffers = allOffers.filter(o => o.status === 'pending');
-
-            state.stats = {
-                totalRequests: requests.length,
-                openRequests: requests.filter(r => r.status === 'open').length,
-                totalOffers: allOffers.length,
-                newOffers: newOffers.length,
-                favoritesCount: state.favoritesProducts.length,
+        state.notifications = recent.map(o => {
+            const request = state.requests.find(r => r.id === o.request_id);
+            const supplier = o.supplier;
+            const supplierName = supplier?.company_name || supplier?.full_name || 'مورد';
+            return {
+                id: o.id,
+                type: 'offer',
+                title: '💰 عرض جديد',
+                desc: `${supplierName} قدّم عرضاً بقيمة ${formatPrice(o.price)} ج.م على "${request?.product_name || 'طلبك'}"`,
+                time: o.created_at,
+                unread: true,
+                requestId: o.request_id,
             };
+        });
 
-            // Update badges
-            updateSidebarCounts();
-            buildNotifications(allOffers);
-        };
+        renderNotifications();
+    };
 
-        const updateSidebarCounts = () => {
-            const requestsCount = document.getElementById('sidebarRequestsCount');
-            const offersCount = document.getElementById('sidebarOffersCount');
-            const favoritesCount = document.getElementById('sidebarFavoritesCount');
-            const mobileRequestsCount = document.getElementById('mobileRequestsCount');
-            const mobileOffersCount = document.getElementById('mobileOffersCount');
+    const renderNotifications = () => {
+        const list = document.getElementById('notifList');
+        if (!list) return;
 
-            if (requestsCount) requestsCount.textContent = state.stats.totalRequests;
-            if (offersCount) offersCount.textContent = state.stats.totalOffers;
-            if (favoritesCount) favoritesCount.textContent = state.stats.favoritesCount;
-            if (mobileRequestsCount) mobileRequestsCount.textContent = state.stats.totalRequests;
-            if (mobileOffersCount) mobileOffersCount.textContent = state.stats.totalOffers;
-
-            if (mobileRequestsCount) mobileRequestsCount.classList.toggle('show', state.stats.totalRequests > 0);
-            if (mobileOffersCount) mobileOffersCount.classList.toggle('show', state.stats.totalOffers > 0);
-
-            // Notification badge
-            const notifCount = document.getElementById('notifCount');
-            if (notifCount) {
-                notifCount.textContent = state.stats.newOffers > 99 ? '99+' : state.stats.newOffers;
-                notifCount.classList.toggle('show', state.stats.newOffers > 0);
-            }
-        };
-
-        // ============================================================
-        // NOTIFICATIONS
-        // ============================================================
-        const buildNotifications = (offers) => {
-            const recent = offers
-                .filter(o => o.status === 'pending')
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .slice(0, 20);
-
-            state.notifications = recent.map(o => {
-                const request = state.requests.find(r => r.id === o.request_id);
-                const supplier = o.supplier;
-                const supplierName = supplier?.company_name || supplier?.full_name || 'مورد';
-                return {
-                    id: o.id,
-                    type: 'offer',
-                    title: '💰 عرض جديد',
-                    desc: `${supplierName} قدّم عرضاً بقيمة ${formatPrice(o.price)} ج.م على "${request?.product_name || 'طلبك'}"`,
-                    time: o.created_at,
-                    unread: true,
-                    requestId: o.request_id,
-                };
-            });
-
-            renderNotifications();
-        };
-
-        const renderNotifications = () => {
-            const list = document.getElementById('notifList');
-            if (!list) return;
-
-            if (!state.notifications.length) {
-                list.innerHTML = `
-                    <div class="empty-state" style="padding: 40px 20px;">
-                        <i class="fas fa-bell-slash empty-icon" style="font-size: 2rem;"></i>
-                        <p>لا توجد إشعارات جديدة</p>
-                    </div>
-                `;
-                return;
-            }
-
-            list.innerHTML = state.notifications.map(n => `
-                <div class="notif-item ${n.unread ? 'unread' : ''}" data-notif-id="${n.id}" data-request-id="${n.requestId}">
-                    <div class="notif-content">
-                        <div class="notif-title">${escapeHtml(n.title)}</div>
-                        <div class="notif-desc">${escapeHtml(n.desc)}</div>
-                        <div class="notif-time">${formatDateTime(n.time)}</div>
-                    </div>
+        if (!state.notifications.length) {
+            list.innerHTML = `
+                <div class="empty-state" style="padding: 40px 20px;">
+                    <i class="fas fa-bell-slash empty-icon" style="font-size: 2rem;"></i>
+                    <p>لا توجد إشعارات جديدة</p>
                 </div>
-            `).join('');
+            `;
+            return;
+        }
 
-            // Click handler
-            list.querySelectorAll('.notif-item').forEach(item => {
-                item.addEventListener('click', () => {
-                    const requestId = item.dataset.requestId;
-                    if (requestId) {
-                        document.getElementById('notifPanel')?.classList.remove('show');
-                        window.location.href = `request-details.html?id=${requestId}`;
-                    }
-                });
+        list.innerHTML = state.notifications.map(n => `
+            <div class="notif-item ${n.unread ? 'unread' : ''}" data-notif-id="${n.id}" data-request-id="${n.requestId}">
+                <div class="notif-content">
+                    <div class="notif-title">${escapeHtml(n.title)}</div>
+                    <div class="notif-desc">${escapeHtml(n.desc)}</div>
+                    <div class="notif-time">${formatDateTime(n.time)}</div>
+                </div>
+            </div>
+        `).join('');
+
+        list.querySelectorAll('.notif-item').forEach(item => {
+            item.addEventListener('click', () => {
+                const requestId = item.dataset.requestId;
+                if (requestId) {
+                    document.getElementById('notifPanel')?.classList.remove('show');
+                    window.location.href = `request-details.html?id=${requestId}`;
+                }
             });
-        };
+        });
+    };
 
-        const markAllNotificationsRead = () => {
-            state.notifications = state.notifications.map(n => ({ ...n, unread: false }));
-            renderNotifications();
-            const notifCount = document.getElementById('notifCount');
-            if (notifCount) notifCount.classList.remove('show');
-            showToast('✅', 'تم التعليم', 'كل الإشعارات اتعلّمت كمقروءة', null, null, 'success');
-        };
+    const markAllNotificationsRead = () => {
+        state.notifications = state.notifications.map(n => ({ ...n, unread: false }));
+        renderNotifications();
+        const notifCount = document.getElementById('notifCount');
+        if (notifCount) notifCount.classList.remove('show');
+        showToast('✅', 'تم التعليم', 'كل الإشعارات اتعلّمت كمقروءة', null, null, 'success');
+    };
 
-        // ============================================================
-        // RENDER: OVERVIEW
-        // ============================================================
-        const renderOverview = async () => {
-            const main = document.getElementById('dashboardMain');
-            if (!main) return;
+    // ============================================================
+    // RENDER: OVERVIEW
+    // ============================================================
+    const renderOverview = async () => {
+        const main = document.getElementById('dashboardMain');
+        if (!main) return;
 
-            await fetchAllData();
+        await fetchAllData();
 
-            const recentRequests = state.requests.slice(0, 3);
-            const recentOffers = Object.values(state.offersMap).flat()
-                .filter(o => o.status === 'pending')
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
-                .slice(0, 3);
+        const recentRequests = state.requests.slice(0, 3);
+        const recentOffers = Object.values(state.offersMap).flat()
+            .filter(o => o.status === 'pending')
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at))
+            .slice(0, 3);
 
-            main.innerHTML = `
-                <div class="page-header-bar animate-in">
-                    <div>
-                        <h1 class="page-title">
-                            <i class="fas fa-th-large"></i>
-                            نظرة عامة
-                        </h1>
-                        <p class="page-subtitle">مرحباً ${escapeHtml(state.userProfile?.full_name || 'بك')} — دي ملخص نشاطك على كيماتو</p>
-                    </div>
+        main.innerHTML = `
+            <div class="page-header-bar animate-in">
+                <div>
+                    <h1 class="page-title">
+                        <i class="fas fa-th-large"></i>
+                        نظرة عامة
+                    </h1>
+                    <p class="page-subtitle">مرحباً ${escapeHtml(state.userProfile?.full_name || 'بك')} — دي ملخص نشاطك على كيماتو</p>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="buyer-requests-profile.html" class="btn-profile-public">
+                        <i class="fas fa-user-tag"></i> ملفي العام
+                    </a>
                     <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
                         <i class="fas fa-plus-circle"></i> اطلب عرض سعر جديد
                     </button>
                 </div>
+            </div>
 
-                <!-- STATS -->
-                <div class="stats-grid animate-in" style="animation-delay: 0.05s;">
-                    <div class="stat-card" style="--stat-color: var(--c-request); --stat-bg: rgba(230, 126, 34, 0.12);">
-                        <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-label">إجمالي طلباتي</div>
-                            <div class="stat-value">${formatNumber(state.stats.totalRequests)}</div>
-                            <div class="stat-trend"><i class="fas fa-circle" style="color: var(--c-accent); font-size: 0.5rem;"></i> ${formatNumber(state.stats.openRequests)} مفتوح</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card" style="--stat-color: var(--c-accent); --stat-bg: rgba(46, 204, 113, 0.12);">
-                        <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-label">العروض المستلمة</div>
-                            <div class="stat-value">${formatNumber(state.stats.totalOffers)}</div>
-                            <div class="stat-trend"><i class="fas fa-bell" style="color: var(--c-warning); font-size: 0.6rem;"></i> ${formatNumber(state.stats.newOffers)} جديد</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card" style="--stat-color: var(--c-danger); --stat-bg: rgba(231, 76, 60, 0.12);">
-                        <div class="stat-icon"><i class="fas fa-heart"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-label">المفضلة</div>
-                            <div class="stat-value">${formatNumber(state.stats.favoritesCount)}</div>
-                            <div class="stat-trend"><i class="fas fa-star" style="color: var(--c-warning); font-size: 0.6rem;"></i> منتجات محفوظة</div>
-                        </div>
-                    </div>
-
-                    <div class="stat-card" style="--stat-color: var(--c-primary-600); --stat-bg: rgba(44, 122, 184, 0.12);">
-                        <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
-                        <div class="stat-content">
-                            <div class="stat-label">معدل العروض</div>
-                            <div class="stat-value">${state.stats.totalRequests > 0 ? (state.stats.totalOffers / state.stats.totalRequests).toFixed(1) : '0'}</div>
-                            <div class="stat-trend">عرض لكل طلب</div>
-                        </div>
+            <div class="stats-grid animate-in" style="animation-delay: 0.05s;">
+                <div class="stat-card" style="--stat-color: var(--c-request); --stat-bg: rgba(230, 126, 34, 0.12);">
+                    <div class="stat-icon"><i class="fas fa-clipboard-list"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-label">إجمالي طلباتي</div>
+                        <div class="stat-value">${formatNumber(state.stats.totalRequests)}</div>
+                        <div class="stat-trend"><i class="fas fa-circle" style="color: var(--c-accent); font-size: 0.5rem;"></i> ${formatNumber(state.stats.openRequests)} مفتوح</div>
                     </div>
                 </div>
 
-                <!-- RECENT REQUESTS -->
-                <div class="section-card animate-in" style="animation-delay: 0.1s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-clipboard-list"></i>
-                            آخر طلباتي
-                            <span class="count-badge">${state.requests.length}</span>
-                        </h2>
+                <div class="stat-card" style="--stat-color: var(--c-accent); --stat-bg: rgba(46, 204, 113, 0.12);">
+                    <div class="stat-icon"><i class="fas fa-hand-holding-usd"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-label">العروض المستلمة</div>
+                        <div class="stat-value">${formatNumber(state.stats.totalOffers)}</div>
+                        <div class="stat-trend"><i class="fas fa-bell" style="color: var(--c-warning); font-size: 0.6rem;"></i> ${formatNumber(state.stats.newOffers)} جديد</div>
+                    </div>
+                </div>
+
+                <div class="stat-card" style="--stat-color: var(--c-danger); --stat-bg: rgba(231, 76, 60, 0.12);">
+                    <div class="stat-icon"><i class="fas fa-heart"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-label">المفضلة</div>
+                        <div class="stat-value">${formatNumber(state.stats.favoritesCount)}</div>
+                        <div class="stat-trend"><i class="fas fa-star" style="color: var(--c-warning); font-size: 0.6rem;"></i> منتجات محفوظة</div>
+                    </div>
+                </div>
+
+                <div class="stat-card" style="--stat-color: var(--c-primary-600); --stat-bg: rgba(44, 122, 184, 0.12);">
+                    <div class="stat-icon"><i class="fas fa-chart-line"></i></div>
+                    <div class="stat-content">
+                        <div class="stat-label">معدل العروض</div>
+                        <div class="stat-value">${state.stats.totalRequests > 0 ? (state.stats.totalOffers / state.stats.totalRequests).toFixed(1) : '0'}</div>
+                        <div class="stat-trend">عرض لكل طلب</div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="section-card animate-in" style="animation-delay: 0.1s;">
+                <div class="section-card-header">
+                    <h2 class="section-card-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        آخر طلباتي
+                        <span class="count-badge">${state.requests.length}</span>
+                    </h2>
+                    <div style="display: flex; gap: 8px; flex-wrap: wrap;">
+                        <a href="buyer-requests-profile.html" class="view-public-link">
+                            <i class="fas fa-user-tag"></i> ملفي العام
+                        </a>
                         <button class="view-all-link" onclick="window.switchSection('requests')">
                             عرض الكل <i class="fas fa-arrow-left"></i>
                         </button>
                     </div>
-                    <div class="section-card-body">
-                        ${recentRequests.length ? `
-                            <div class="item-list">
-                                ${recentRequests.map(r => renderRequestRow(r, state.offersMap[r.id] || [])).join('')}
-                            </div>
-                        ` : `
-                            <div class="empty-state">
-                                <i class="fas fa-clipboard-list empty-icon"></i>
-                                <h4>لسه مفيش طلبات</h4>
-                                <p>ابدأ بطلب عرض سعر لأول منتج محتاجه</p>
-                                <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                                    <i class="fas fa-plus-circle"></i> اطلب عرض سعر
-                                </button>
-                            </div>
-                        `}
-                    </div>
                 </div>
-
-                <!-- RECENT OFFERS -->
-                <div class="section-card animate-in" style="animation-delay: 0.15s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-hand-holding-usd"></i>
-                            آخر العروض المستلمة
-                            ${state.stats.newOffers > 0 ? `<span class="count-badge accent">${state.stats.newOffers}</span>` : ''}
-                        </h2>
-                        <button class="view-all-link" onclick="window.switchSection('offers')">
-                            عرض الكل <i class="fas fa-arrow-left"></i>
-                        </button>
-                    </div>
-                    <div class="section-card-body">
-                        ${recentOffers.length ? `
-                            <div class="item-list">
-                                ${recentOffers.map(o => {
-                                    const req = state.requests.find(r => r.id === o.request_id);
-                                    return renderOfferRow(o, req);
-                                }).join('')}
-                            </div>
-                        ` : `
-                            <div class="empty-state">
-                                <i class="fas fa-hand-holding-usd empty-icon"></i>
-                                <h4>لسه مفيش عروض</h4>
-                                <p>العروض من الموردين هتظهر هنا لما يردوا على طلباتك</p>
-                            </div>
-                        `}
-                    </div>
+                <div class="section-card-body">
+                    ${recentRequests.length ? `
+                        <div class="item-list">
+                            ${recentRequests.map(r => renderRequestRow(r, state.offersMap[r.id] || [])).join('')}
+                        </div>
+                    ` : `
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-list empty-icon"></i>
+                            <h4>لسه مفيش طلبات</h4>
+                            <p>ابدأ بطلب عرض سعر لأول منتج محتاجه</p>
+                            <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
+                                <i class="fas fa-plus-circle"></i> اطلب عرض سعر
+                            </button>
+                        </div>
+                    `}
                 </div>
-            `;
+            </div>
 
-            bindRequestRowEvents();
-        };
+            <div class="section-card animate-in" style="animation-delay: 0.15s;">
+                <div class="section-card-header">
+                    <h2 class="section-card-title">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        آخر العروض المستلمة
+                        ${state.stats.newOffers > 0 ? `<span class="count-badge accent">${state.stats.newOffers}</span>` : ''}
+                    </h2>
+                    <button class="view-all-link" onclick="window.switchSection('offers')">
+                        عرض الكل <i class="fas fa-arrow-left"></i>
+                    </button>
+                </div>
+                <div class="section-card-body">
+                    ${recentOffers.length ? `
+                        <div class="item-list">
+                            ${recentOffers.map(o => {
+                                const req = state.requests.find(r => r.id === o.request_id);
+                                return renderOfferRow(o, req);
+                            }).join('')}
+                        </div>
+                    ` : `
+                        <div class="empty-state">
+                            <i class="fas fa-hand-holding-usd empty-icon"></i>
+                            <h4>لسه مفيش عروض</h4>
+                            <p>العروض من الموردين هتظهر هنا لما يردوا على طلباتك</p>
+                        </div>
+                    `}
+                </div>
+            </div>
+        `;
 
-        // ============================================================
-        // RENDER: REQUESTS
-        // ============================================================
-        const renderRequests = async () => {
-            const main = document.getElementById('dashboardMain');
-            if (!main) return;
+        bindRequestRowEvents();
+    };
 
-            await fetchAllData();
+    // ============================================================
+    // RENDER: REQUESTS
+    // ============================================================
+    const renderRequests = async () => {
+        const main = document.getElementById('dashboardMain');
+        if (!main) return;
 
-            main.innerHTML = `
-                <div class="page-header-bar animate-in">
-                    <div>
-                        <h1 class="page-title">
-                            <i class="fas fa-clipboard-list"></i>
-                            طلباتي
-                        </h1>
-                        <p class="page-subtitle">إدارة كل طلبات الشراء الخاصة بك</p>
-                    </div>
+        await fetchAllData();
+
+        main.innerHTML = `
+            <div class="page-header-bar animate-in">
+                <div>
+                    <h1 class="page-title">
+                        <i class="fas fa-clipboard-list"></i>
+                        طلباتي
+                    </h1>
+                    <p class="page-subtitle">إدارة كل طلبات الشراء الخاصة بك</p>
+                </div>
+                <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+                    <a href="buyer-requests-profile.html" class="btn-profile-public">
+                        <i class="fas fa-user-tag"></i> ملفي العام
+                    </a>
                     <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
                         <i class="fas fa-plus-circle"></i> طلب جديد
                     </button>
                 </div>
+            </div>
 
-                <div class="section-card animate-in" style="animation-delay: 0.05s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-list"></i>
-                            القائمة الكاملة
-                            <span class="count-badge">${state.requests.length}</span>
-                        </h2>
-                    </div>
-                    <div class="section-card-body">
-                        ${state.requests.length ? `
-                            <div class="item-list">
-                                ${state.requests.map(r => renderRequestRow(r, state.offersMap[r.id] || [], true)).join('')}
-                            </div>
-                        ` : `
-                            <div class="empty-state">
-                                <i class="fas fa-clipboard-list empty-icon"></i>
-                                <h4>لسه مفيش طلبات</h4>
-                                <p>ابدأ بطلب عرض سعر لأول منتج محتاجه</p>
-                                <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                                    <i class="fas fa-plus-circle"></i> اطلب عرض سعر
-                                </button>
-                            </div>
-                        `}
-                    </div>
+            <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                <div class="section-card-header">
+                    <h2 class="section-card-title">
+                        <i class="fas fa-list"></i>
+                        القائمة الكاملة
+                        <span class="count-badge">${state.requests.length}</span>
+                    </h2>
                 </div>
-            `;
-
-            bindRequestRowEvents();
-        };
-
-        // ============================================================
-        // RENDER: OFFERS
-        // ============================================================
-        const renderOffers = async () => {
-            const main = document.getElementById('dashboardMain');
-            if (!main) return;
-
-            await fetchAllData();
-
-            const allOffers = Object.values(state.offersMap).flat()
-                .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
-
-            main.innerHTML = `
-                <div class="page-header-bar animate-in">
-                    <div>
-                        <h1 class="page-title">
-                            <i class="fas fa-hand-holding-usd"></i>
-                            العروض المستلمة
-                        </h1>
-                        <p class="page-subtitle">كل العروض من الموردين على طلباتك</p>
-                    </div>
-                </div>
-
-                <div class="section-card animate-in" style="animation-delay: 0.05s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-list"></i>
-                            كل العروض
-                            <span class="count-badge">${allOffers.length}</span>
-                        </h2>
-                    </div>
-                    <div class="section-card-body">
-                        ${allOffers.length ? `
-                            <div class="item-list">
-                                ${allOffers.map(o => {
-                                    const req = state.requests.find(r => r.id === o.request_id);
-                                    return renderOfferRow(o, req, true);
-                                }).join('')}
-                            </div>
-                        ` : `
-                            <div class="empty-state">
-                                <i class="fas fa-hand-holding-usd empty-icon"></i>
-                                <h4>لسه مفيش عروض</h4>
-                                <p>العروض من الموردين هتظهر هنا لما يردوا على طلباتك</p>
-                                <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
-                                    <i class="fas fa-plus-circle"></i> اطلب عرض سعر
-                                </button>
-                            </div>
-                        `}
-                    </div>
-                </div>
-            `;
-        };
-
-        // ============================================================
-        // RENDER: FAVORITES
-        // ============================================================
-        const renderFavorites = async () => {
-            const main = document.getElementById('dashboardMain');
-            if (!main) return;
-
-            state.favoritesProducts = await fetchFavorites();
-
-            main.innerHTML = `
-                <div class="page-header-bar animate-in">
-                    <div>
-                        <h1 class="page-title">
-                            <i class="fas fa-heart"></i>
-                            المفضلة
-                        </h1>
-                        <p class="page-subtitle">المنتجات اللي حفظتها للرجوع لها</p>
-                    </div>
-                </div>
-
-                <div class="section-card animate-in" style="animation-delay: 0.05s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-heart"></i>
-                            منتجاتي المحفوظة
-                            <span class="count-badge">${state.favoritesProducts.length}</span>
-                        </h2>
-                    </div>
-                    <div class="section-card-body">
-                        ${state.favoritesProducts.length ? `
-                            <div class="item-list">
-                                ${state.favoritesProducts.map(p => renderFavoriteRow(p)).join('')}
-                            </div>
-                        ` : `
-                            <div class="empty-state">
-                                <i class="fas fa-heart empty-icon"></i>
-                                <h4>المفضلة فاضية</h4>
-                                <p>اضغط ❤️ على أي منتج لحفظه هنا</p>
-                                <a href="all-products.html" class="btn-primary">
-                                    <i class="fas fa-flask"></i> تصفح المنتجات
-                                </a>
-                            </div>
-                        `}
-                    </div>
-                </div>
-            `;
-
-            bindFavoriteEvents();
-        };
-
-        // ============================================================
-        // RENDER: PROFILE
-        // ============================================================
-        const renderProfile = () => {
-            const main = document.getElementById('dashboardMain');
-            if (!main) return;
-            const p = state.userProfile || {};
-
-            main.innerHTML = `
-                <div class="page-header-bar animate-in">
-                    <div>
-                        <h1 class="page-title">
-                            <i class="fas fa-user-circle"></i>
-                            الملف الشخصي
-                        </h1>
-                        <p class="page-subtitle">بياناتك الأساسية على كيماتو</p>
-                    </div>
-                </div>
-
-                <div class="section-card animate-in" style="animation-delay: 0.05s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-user-edit"></i>
-                            البيانات الشخصية
-                        </h2>
-                    </div>
-                    <div class="section-card-body">
-                        <form id="profileForm" class="profile-form" novalidate>
-                            <div class="form-group full">
-                                <label for="profFullName">الاسم الكامل</label>
-                                <input type="text" id="profFullName" name="full_name"
-                                       value="${escapeHtml(p.full_name || '')}" disabled />
-                            </div>
-                            <div class="form-group full">
-                                <label for="profCompany">اسم الشركة</label>
-                                <input type="text" id="profCompany" name="company_name"
-                                       value="${escapeHtml(p.company_name || '')}" />
-                            </div>
-                            <div class="form-group">
-                                <label for="profPhone">رقم الهاتف</label>
-                                <input type="tel" id="profPhone" name="phone" dir="ltr"
-                                       value="${escapeHtml(p.phone || '')}" placeholder="+20 1XX XXX XXXX" />
-                            </div>
-                            <div class="form-group">
-                                <label for="profWhatsapp">واتساب</label>
-                                <input type="tel" id="profWhatsapp" name="whatsapp" dir="ltr"
-                                       value="${escapeHtml(p.whatsapp || '')}" placeholder="+20 1XX XXX XXXX" />
-                            </div>
-                            <div class="form-group">
-                                <label for="profCity">المدينة</label>
-                                <input type="text" id="profCity" name="city"
-                                       value="${escapeHtml(p.city || '')}" placeholder="مثل: القاهرة" />
-                            </div>
-                            <div class="form-group">
-                                <label for="profAddress">العنوان</label>
-                                <input type="text" id="profAddress" name="address"
-                                       value="${escapeHtml(p.address || '')}" />
-                            </div>
-                            <div class="form-actions">
-                                <button type="submit" class="btn-primary" id="saveProfileBtn">
-                                    <i class="fas fa-save"></i> حفظ التعديلات
-                                </button>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-
-                <div class="section-card animate-in" style="animation-delay: 0.1s;">
-                    <div class="section-card-header">
-                        <h2 class="section-card-title">
-                            <i class="fas fa-info-circle"></i>
-                            معلومات الحساب
-                        </h2>
-                    </div>
-                    <div class="section-card-body">
-                        <div style="display: grid; gap: 12px; font-size: 0.88rem;">
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
-                                <span style="color: var(--c-text-muted); font-weight: 700;">نوع الحساب</span>
-                                <span style="font-weight: 800;">🛒 مشتري</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
-                                <span style="color: var(--c-text-muted); font-weight: 700;">حالة التحقق</span>
-                                <span style="font-weight: 800;">${p.is_verified ? '✅ موثّق' : '⏳ قيد التحقق'}</span>
-                            </div>
-                            <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
-                                <span style="color: var(--c-text-muted); font-weight: 700;">تاريخ التسجيل</span>
-                                <span style="font-weight: 800;">${formatDate(p.created_at)}</span>
-                            </div>
+                <div class="section-card-body">
+                    ${state.requests.length ? `
+                        <div class="item-list">
+                            ${state.requests.map(r => renderRequestRow(r, state.offersMap[r.id] || [], true)).join('')}
                         </div>
-                    </div>
-                </div>
-            `;
-
-            document.getElementById('profileForm')?.addEventListener('submit', saveProfile);
-        };
-
-        const saveProfile = async (e) => {
-            e.preventDefault();
-            const btn = document.getElementById('saveProfileBtn');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> جاري الحفظ...';
-
-            try {
-                const updates = {
-                    company_name: document.getElementById('profCompany').value.trim() || null,
-                    phone: document.getElementById('profPhone').value.trim() || null,
-                    whatsapp: document.getElementById('profWhatsapp').value.trim() || null,
-                    city: document.getElementById('profCity').value.trim() || null,
-                    address: document.getElementById('profAddress').value.trim() || null,
-                };
-
-                const { error } = await supabase
-                    .from('profiles')
-                    .update(updates)
-                    .eq('id', state.user.id);
-
-                if (error) throw error;
-
-                state.userProfile = { ...state.userProfile, ...updates };
-                showToast('✅', 'تم الحفظ', 'تم تحديث بياناتك بنجاح', null, null, 'success');
-            } catch (err) {
-                console.error('Save profile error:', err);
-                showToast('⚠️', 'خطأ', err.message || 'تعذر حفظ التعديلات', null, null, 'error');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-            }
-        };
-                // ============================================================
-        // RENDER: REQUEST ROW
-        // ============================================================
-        const renderRequestRow = (r, offers = [], showActions = false) => {
-            const status = getStatusInfo(r.status);
-            const offersCount = offers.length;
-            const pendingOffers = offers.filter(o => o.status === 'pending').length;
-            const bestPrice = offers.length
-                ? Math.min(...offers.filter(o => o.status !== 'rejected').map(o => Number(o.price)).filter(p => p > 0))
-                : null;
-
-            let budgetText = '';
-            if (r.budget_min || r.budget_max) {
-                const min = r.budget_min ? formatPrice(r.budget_min) : '';
-                const max = r.budget_max ? formatPrice(r.budget_max) : '';
-                if (min && max) budgetText = `${min} - ${max} ج.م`;
-                else if (min) budgetText = `من ${min} ج.م`;
-                else budgetText = `حتى ${max} ج.م`;
-            }
-
-            const hasNewOffers = pendingOffers > 0;
-
-            return `
-                <div class="item-row ${hasNewOffers ? 'is-new' : ''}" data-request-id="${escapeHtml(r.id)}">
-                    <div class="item-icon-wrapper">
-                        <i class="fas fa-clipboard-list"></i>
-                    </div>
-                    <div class="item-info">
-                        <div class="item-title">📦 ${escapeHtml(r.product_name)}</div>
-                        <div class="item-meta">
-                            <span class="status-badge ${status.cls}">
-                                <i class="fas fa-${status.icon}"></i> ${status.text}
-                            </span>
-                            ${r.quantity_needed ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(r.quantity_needed)}</span>` : ''}
-                            ${budgetText ? `<span><i class="fas fa-money-bill-wave"></i> ${budgetText}</span>` : ''}
-                            ${offersCount > 0 ? `<span class="highlight"><i class="fas fa-comments"></i> ${offersCount} عرض</span>` : ''}
-                            <span><i class="fas fa-clock"></i> ${formatDateTime(r.created_at)}</span>
-                        </div>
-                    </div>
-                    ${bestPrice ? `
-                        <div class="item-price-block">
-                            <div class="item-price">
-                                ${formatPrice(bestPrice)}
-                                <span class="currency">ج.م</span>
-                            </div>
-                            <div class="item-price-label">أقل سعر</div>
-                        </div>
-                    ` : ''}
-                    <div class="item-actions">
-                        ${offersCount > 0 ? `
-                            <button class="item-action-btn primary toggle-offers-btn"
-                                    type="button"
-                                    data-request-id="${escapeHtml(r.id)}">
-                                <i class="fas fa-eye"></i> عرض العروض (${offersCount})
+                    ` : `
+                        <div class="empty-state">
+                            <i class="fas fa-clipboard-list empty-icon"></i>
+                            <h4>لسه مفيش طلبات</h4>
+                            <p>ابدأ بطلب عرض سعر لأول منتج محتاجه</p>
+                            <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
+                                <i class="fas fa-plus-circle"></i> اطلب عرض سعر
                             </button>
-                        ` : ''}
-                        <a href="request-details.html?id=${encodeURIComponent(r.id)}" class="item-action-btn secondary">
-                            <i class="fas fa-info-circle"></i> تفاصيل
-                        </a>
-                        ${showActions ? `
-                            <button class="item-action-btn secondary icon-only edit-request-btn"
+                        </div>
+                    `}
+                </div>
+            </div>
+        `;
+
+        bindRequestRowEvents();
+    };
+
+    // ============================================================
+    // RENDER: OFFERS
+    // ============================================================
+    const renderOffers = async () => {
+        const main = document.getElementById('dashboardMain');
+        if (!main) return;
+
+        await fetchAllData();
+
+        const allOffers = Object.values(state.offersMap).flat()
+            .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
+
+        main.innerHTML = `
+            <div class="page-header-bar animate-in">
+                <div>
+                    <h1 class="page-title">
+                        <i class="fas fa-hand-holding-usd"></i>
+                        العروض المستلمة
+                    </h1>
+                    <p class="page-subtitle">كل العروض من الموردين على طلباتك</p>
+                </div>
+            </div>
+
+            <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                <div class="section-card-header">
+                    <h2 class="section-card-title">
+                        <i class="fas fa-list"></i>
+                        كل العروض
+                        <span class="count-badge">${allOffers.length}</span>
+                    </h2>
+                </div>
+                <div class="section-card-body">
+                    ${allOffers.length ? `
+                        <div class="item-list">
+                            ${allOffers.map(o => {
+                                const req = state.requests.find(r => r.id === o.request_id);
+                                return renderOfferRow(o, req, true);
+                            }).join('')}
+                        </div>
+                    ` : `
+                        <div class="empty-state">
+                            <i class="fas fa-hand-holding-usd empty-icon"></i>
+                            <h4>لسه مفيش عروض</h4>
+                            <p>العروض من الموردين هتظهر هنا لما يردوا على طلباتك</p>
+                            <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
+                                <i class="fas fa-plus-circle"></i> اطلب عرض سعر
+                            </button>
+                        </div>
+                    `}
+                </div>
+            </div>
+        `;
+    };
+
+    // ============================================================
+    // RENDER: FAVORITES
+    // ============================================================
+    const renderFavorites = async () => {
+        const main = document.getElementById('dashboardMain');
+        if (!main) return;
+
+        state.favoritesProducts = await fetchFavorites();
+
+        main.innerHTML = `
+            <div class="page-header-bar animate-in">
+                <div>
+                    <h1 class="page-title">
+                        <i class="fas fa-heart"></i>
+                        المفضلة
+                    </h1>
+                    <p class="page-subtitle">المنتجات اللي حفظتها للرجوع لها</p>
+                </div>
+            </div>
+
+            <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                <div class="section-card-header">
+                    <h2 class="section-card-title">
+                        <i class="fas fa-heart"></i>
+                        منتجاتي المحفوظة
+                        <span class="count-badge">${state.favoritesProducts.length}</span>
+                    </h2>
+                </div>
+                <div class="section-card-body">
+                    ${state.favoritesProducts.length ? `
+                        <div class="item-list">
+                            ${state.favoritesProducts.map(p => renderFavoriteRow(p)).join('')}
+                        </div>
+                    ` : `
+                        <div class="empty-state">
+                            <i class="fas fa-heart empty-icon"></i>
+                            <h4>المفضلة فاضية</h4>
+                            <p>اضغط ❤️ على أي منتج لحفظه هنا</p>
+                            <a href="all-products.html" class="btn-primary">
+                                <i class="fas fa-flask"></i> تصفح المنتجات
+                            </a>
+                        </div>
+                    `}
+                </div>
+            </div>
+        `;
+
+        bindFavoriteEvents();
+    };
+
+    // ============================================================
+    // RENDER: PROFILE
+    // ============================================================
+    const renderProfile = () => {
+        const main = document.getElementById('dashboardMain');
+        if (!main) return;
+        const p = state.userProfile || {};
+
+        main.innerHTML = `
+            <div class="page-header-bar animate-in">
+                <div>
+                    <h1 class="page-title">
+                        <i class="fas fa-user-circle"></i>
+                        الملف الشخصي
+                    </h1>
+                    <p class="page-subtitle">بياناتك الأساسية على كيماتو</p>
+                </div>
+            </div>
+
+            <div class="section-card animate-in" style="animation-delay: 0.05s;">
+                <div class="section-card-header">
+                    <h2 class="section-card-title">
+                        <i class="fas fa-user-edit"></i>
+                        البيانات الشخصية
+                    </h2>
+                </div>
+                <div class="section-card-body">
+                    <form id="profileForm" class="profile-form" novalidate>
+                        <div class="form-group full">
+                            <label for="profFullName">الاسم الكامل</label>
+                            <input type="text" id="profFullName" value="${escapeHtml(p.full_name || '')}" disabled />
+                        </div>
+                        <div class="form-group full">
+                            <label for="profCompany">اسم الشركة</label>
+                            <input type="text" id="profCompany" value="${escapeHtml(p.company_name || '')}" />
+                        </div>
+                        <div class="form-group">
+                            <label for="profPhone">رقم الهاتف</label>
+                            <input type="tel" id="profPhone" dir="ltr" value="${escapeHtml(p.phone || '')}" placeholder="+20 1XX XXX XXXX" />
+                        </div>
+                        <div class="form-group">
+                            <label for="profWhatsapp">واتساب</label>
+                            <input type="tel" id="profWhatsapp" dir="ltr" value="${escapeHtml(p.whatsapp || '')}" placeholder="+20 1XX XXX XXXX" />
+                        </div>
+                        <div class="form-group">
+                            <label for="profCity">المدينة</label>
+                            <input type="text" id="profCity" value="${escapeHtml(p.city || '')}" placeholder="مثل: القاهرة" />
+                        </div>
+                        <div class="form-group">
+                            <label for="profAddress">العنوان</label>
+                            <input type="text" id="profAddress" value="${escapeHtml(p.address || '')}" />
+                        </div>
+                        <div class="form-actions">
+                            <button type="submit" class="btn-primary" id="saveProfileBtn">
+                                <i class="fas fa-save"></i> حفظ التعديلات
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <div class="section-card animate-in" style="animation-delay: 0.1s;">
+                <div class="section-card-header">
+                    <h2 class="section-card-title">
+                        <i class="fas fa-info-circle"></i>
+                        معلومات الحساب
+                    </h2>
+                </div>
+                <div class="section-card-body">
+                    <div style="display: grid; gap: 12px; font-size: 0.88rem;">
+                        <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
+                            <span style="color: var(--c-text-muted); font-weight: 700;">نوع الحساب</span>
+                            <span style="font-weight: 800;">🛒 مشتري</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
+                            <span style="color: var(--c-text-muted); font-weight: 700;">حالة التحقق</span>
+                            <span style="font-weight: 800;">${p.is_verified ? '✅ موثّق' : '⏳ قيد التحقق'}</span>
+                        </div>
+                        <div style="display: flex; justify-content: space-between; padding: 10px; background: var(--c-surface-2); border-radius: var(--r-md);">
+                            <span style="color: var(--c-text-muted); font-weight: 700;">تاريخ التسجيل</span>
+                            <span style="font-weight: 800;">${formatDate(p.created_at)}</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        document.getElementById('profileForm')?.addEventListener('submit', saveProfile);
+    };
+
+    const saveProfile = async (e) => {
+        e.preventDefault();
+        const btn = document.getElementById('saveProfileBtn');
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> جاري الحفظ...';
+
+        try {
+            const updates = {
+                company_name: document.getElementById('profCompany').value.trim() || null,
+                phone: document.getElementById('profPhone').value.trim() || null,
+                whatsapp: document.getElementById('profWhatsapp').value.trim() || null,
+                city: document.getElementById('profCity').value.trim() || null,
+                address: document.getElementById('profAddress').value.trim() || null,
+            };
+
+            const { error } = await supabase
+                .from('profiles')
+                .update(updates)
+                .eq('id', state.user.id);
+
+            if (error) throw error;
+
+            state.userProfile = { ...state.userProfile, ...updates };
+            showToast('✅', 'تم الحفظ', 'تم تحديث بياناتك بنجاح', null, null, 'success');
+        } catch (err) {
+            console.error('Save profile error:', err);
+            showToast('⚠️', 'خطأ', err.message || 'تعذر حفظ التعديلات', null, null, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
+    };
+
+    // ============================================================
+    // RENDER: REQUEST ROW
+    // ============================================================
+    const renderRequestRow = (r, offers = [], showActions = false) => {
+        const status = getStatusInfo(r.status);
+        const offersCount = offers.length;
+        const pendingOffers = offers.filter(o => o.status === 'pending').length;
+        const bestPrice = offers.length
+            ? Math.min(...offers.filter(o => o.status !== 'rejected').map(o => Number(o.price)).filter(p => p > 0))
+            : null;
+
+        let budgetText = '';
+        if (r.budget_min || r.budget_max) {
+            const min = r.budget_min ? formatPrice(r.budget_min) : '';
+            const max = r.budget_max ? formatPrice(r.budget_max) : '';
+            if (min && max) budgetText = `${min} - ${max} ج.م`;
+            else if (min) budgetText = `من ${min} ج.م`;
+            else budgetText = `حتى ${max} ج.م`;
+        }
+
+        const hasNewOffers = pendingOffers > 0;
+
+        return `
+            <div class="item-row ${hasNewOffers ? 'is-new' : ''}" data-request-id="${escapeHtml(r.id)}">
+                <div class="item-icon-wrapper">
+                    <i class="fas fa-clipboard-list"></i>
+                </div>
+                <div class="item-info">
+                    <div class="item-title">📦 ${escapeHtml(r.product_name)}</div>
+                    <div class="item-meta">
+                        <span class="status-badge ${status.cls}">
+                            <i class="fas fa-${status.icon}"></i> ${status.text}
+                        </span>
+                        ${r.quantity_needed ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(r.quantity_needed)}</span>` : ''}
+                        ${budgetText ? `<span><i class="fas fa-money-bill-wave"></i> ${budgetText}</span>` : ''}
+                        ${offersCount > 0 ? `<span class="highlight"><i class="fas fa-comments"></i> ${offersCount} عرض</span>` : ''}
+                        <span><i class="fas fa-clock"></i> ${formatDateTime(r.created_at)}</span>
+                    </div>
+                </div>
+                ${bestPrice ? `
+                    <div class="item-price-block">
+                        <div class="item-price">
+                            ${formatPrice(bestPrice)}
+                            <span class="currency">ج.م</span>
+                        </div>
+                        <div class="item-price-label">أقل سعر</div>
+                    </div>
+                ` : ''}
+                <div class="item-actions">
+                    ${offersCount > 0 ? `
+                        <button class="item-action-btn primary toggle-offers-btn"
+                                type="button"
+                                data-request-id="${escapeHtml(r.id)}">
+                            <i class="fas fa-eye"></i> عرض العروض (${offersCount})
+                        </button>
+                    ` : ''}
+                    <a href="request-details.html?id=${encodeURIComponent(r.id)}" class="item-action-btn secondary">
+                        <i class="fas fa-info-circle"></i> تفاصيل
+                    </a>
+                    ${showActions ? `
+                        <button class="item-action-btn secondary icon-only edit-request-btn"
+                                type="button"
+                                data-request-id="${escapeHtml(r.id)}"
+                                title="تعديل">
+                            <i class="fas fa-edit"></i>
+                        </button>
+                        ${r.status === 'open' ? `
+                            <button class="item-action-btn danger icon-only delete-request-btn"
                                     type="button"
                                     data-request-id="${escapeHtml(r.id)}"
-                                    title="تعديل">
-                                <i class="fas fa-edit"></i>
+                                    data-request-name="${escapeHtml(r.product_name)}"
+                                    title="حذف">
+                                <i class="fas fa-trash"></i>
                             </button>
-                            ${r.status === 'open' ? `
-                                <button class="item-action-btn danger icon-only delete-request-btn"
-                                        type="button"
-                                        data-request-id="${escapeHtml(r.id)}"
-                                        data-request-name="${escapeHtml(r.product_name)}"
-                                        title="حذف">
-                                    <i class="fas fa-trash"></i>
-                                </button>
-                            ` : ''}
+                        ` : ''}
+                    ` : ''}
+                </div>
+
+                ${offersCount > 0 ? `
+                    <div class="offers-accordion" id="offers-${escapeHtml(r.id)}">
+                        <div class="offers-accordion-inner">
+                            ${offers.map(o => renderOfferMini(o, bestPrice)).join('')}
+                        </div>
+                    </div>
+                ` : ''}
+            </div>
+        `;
+    };
+
+    // ============================================================
+    // RENDER: OFFER MINI (داخل accordion)
+    // ============================================================
+    const renderOfferMini = (offer, bestPrice) => {
+        const supplier = offer.supplier || {};
+        const supplierName = supplier.company_name || supplier.full_name || 'مورد';
+        const supplierInitial = (supplierName || 'م').charAt(0).toUpperCase();
+        const isVerified = supplier.is_verified === true;
+        const isBest = bestPrice && Number(offer.price) === Number(bestPrice) && offer.status !== 'rejected';
+        const statusInfo = getOfferStatusInfo(offer.status);
+        const offerStatus = offer.status || 'pending';
+
+        const rawPhone = supplier.phone || supplier.whatsapp || '';
+        const cleanPhone = sanitizePhone(rawPhone);
+        const phoneWithCountry = cleanPhone
+            ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
+            : '';
+        const waMsg = encodeURIComponent(`مرحباً، بخصوص عرضكم بقيمة ${formatPrice(offer.price)} ج.م على كيماتو`);
+        const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMsg}` : '';
+
+        const chatUrl = supplier.id ? buildMessageUrl(supplier.id, { requestId: offer.request_id }) : '';
+
+        return `
+            <div class="offer-mini ${isBest ? 'is-best' : ''}" data-offer-id="${escapeHtml(offer.id)}">
+                <div class="offer-mini-supplier">
+                    <div class="offer-mini-avatar">${supplierInitial}</div>
+                    <div class="offer-mini-info">
+                        <div class="offer-mini-name">
+                            ${escapeHtml(supplierName)}
+                            ${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i></span>' : ''}
+                        </div>
+                        <div class="offer-mini-meta">
+                            <span class="status-badge ${statusInfo.cls}" style="font-size: 0.6rem; padding: 1px 6px;">
+                                <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}
+                            </span>
+                            ${offer.delivery_time ? `<span style="margin-right: 6px;"><i class="fas fa-truck"></i> ${escapeHtml(offer.delivery_time)}</span>` : ''}
+                            ${offer.created_at ? `<span style="margin-right: 6px;"><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>` : ''}
+                        </div>
+                        ${offer.message ? `
+                            <div style="font-size: 0.72rem; color: var(--c-text-muted); margin-top: 6px; padding: 6px 10px; background: var(--c-surface); border-radius: var(--r-sm); border-right: 2px solid var(--c-accent);">
+                                <i class="fas fa-comment-dots"></i> ${escapeHtml(offer.message).substring(0, 80)}${offer.message.length > 80 ? '...' : ''}
+                            </div>
                         ` : ''}
                     </div>
+                </div>
+                <div class="offer-mini-price">
+                    ${formatPrice(offer.price)}
+                    <span class="currency">ج.م</span>
+                </div>
+                <div class="offer-mini-actions">
+                    ${offerStatus === 'pending' ? `
+                        <button class="item-action-btn primary accept-offer-btn"
+                                type="button"
+                                data-offer-id="${escapeHtml(offer.id)}"
+                                data-request-id="${escapeHtml(offer.request_id)}"
+                                title="قبول العرض">
+                            <i class="fas fa-check"></i> قبول
+                        </button>
+                        <button class="item-action-btn danger icon-only reject-offer-btn"
+                                type="button"
+                                data-offer-id="${escapeHtml(offer.id)}"
+                                title="رفض">
+                            <i class="fas fa-times"></i>
+                        </button>
+                    ` : ''}
+                    ${chatUrl && offerStatus !== 'rejected' ? `
+                        <a href="${chatUrl}"
+                           class="item-action-btn chat-btn icon-only"
+                           data-action="chat-supplier"
+                           title="تواصل عبر الموقع">
+                            <i class="fas fa-comments"></i>
+                        </a>
+                    ` : ''}
+                    ${waLink && offerStatus !== 'rejected' ? `
+                        <a href="${waLink}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="item-action-btn wa-btn icon-only"
+                           title="واتساب">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    ` : ''}
+                    <a href="request-details.html?id=${encodeURIComponent(offer.request_id)}"
+                       class="item-action-btn secondary icon-only"
+                       title="تفاصيل الطلب">
+                        <i class="fas fa-info-circle"></i>
+                    </a>
+                </div>
+            </div>
+        `;
+    };
 
-                    ${offersCount > 0 ? `
-                        <div class="offers-accordion" id="offers-${escapeHtml(r.id)}">
-                            <div class="offers-accordion-inner">
-                                ${offers.map(o => renderOfferMini(o, bestPrice)).join('')}
-                            </div>
+    // ============================================================
+    // RENDER: OFFER ROW (صفحة العروض)
+    // ============================================================
+    const renderOfferRow = (offer, request, showDetails = false) => {
+        const supplier = offer.supplier || {};
+        const supplierName = supplier.company_name || supplier.full_name || 'مورد';
+        const supplierInitial = (supplierName || 'م').charAt(0).toUpperCase();
+        const isVerified = supplier.is_verified === true;
+        const statusInfo = getOfferStatusInfo(offer.status);
+        const offerStatus = offer.status || 'pending';
+
+        const rawPhone = supplier.phone || supplier.whatsapp || '';
+        const cleanPhone = sanitizePhone(rawPhone);
+        const phoneWithCountry = cleanPhone
+            ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
+            : '';
+        const waMsg = encodeURIComponent(`مرحباً، بخصوص عرضكم على كيماتو`);
+        const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMsg}` : '';
+
+        const chatUrl = supplier.id ? buildMessageUrl(supplier.id, { requestId: offer.request_id }) : '';
+
+        return `
+            <div class="item-row" data-offer-id="${escapeHtml(offer.id)}">
+                <div class="item-icon-wrapper supplier">
+                    <i class="fas fa-hand-holding-usd"></i>
+                </div>
+                <div class="item-info">
+                    <div class="item-title">
+                        ${escapeHtml(supplierName)}
+                        ${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
+                    </div>
+                    <div class="item-meta">
+                        <span class="status-badge ${statusInfo.cls}">
+                            <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}
+                        </span>
+                        ${request ? `<span><i class="fas fa-box"></i> ${escapeHtml(request.product_name)}</span>` : ''}
+                        ${offer.quantity_offered ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(offer.quantity_offered)}</span>` : ''}
+                        ${offer.delivery_time ? `<span><i class="fas fa-truck"></i> ${escapeHtml(offer.delivery_time)}</span>` : ''}
+                        <span><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>
+                    </div>
+                    ${offer.message ? `
+                        <div style="font-size: 0.78rem; color: var(--c-text-muted); margin-top: 6px; padding: 8px 10px; background: var(--c-surface); border-radius: var(--r-sm); border-right: 3px solid var(--c-accent);">
+                            <i class="fas fa-comment-dots"></i> ${escapeHtml(offer.message).substring(0, 120)}${offer.message.length > 120 ? '...' : ''}
                         </div>
                     ` : ''}
                 </div>
-            `;
-        };
-
-        // ============================================================
-        // RENDER: OFFER MINI (داخل accordion)
-        // ============================================================
-        const renderOfferMini = (offer, bestPrice) => {
-            const supplier = offer.supplier || {};
-            const supplierName = supplier.company_name || supplier.full_name || 'مورد';
-            const supplierInitial = (supplierName || 'م').charAt(0).toUpperCase();
-            const isVerified = supplier.is_verified === true;
-            const isBest = bestPrice && Number(offer.price) === Number(bestPrice) && offer.status !== 'rejected';
-            const statusInfo = getOfferStatusInfo(offer.status);
-
-            const rawPhone = supplier.phone || supplier.whatsapp || '';
-            const cleanPhone = sanitizePhone(rawPhone);
-            const phoneWithCountry = cleanPhone
-                ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
-                : '';
-            const waMsg = encodeURIComponent(`مرحباً، بخصوص عرضكم بقيمة ${formatPrice(offer.price)} ج.م على كيماتو`);
-            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMsg}` : '';
-
-            return `
-                <div class="offer-mini ${isBest ? 'is-best' : ''}">
-                    <div class="offer-mini-supplier">
-                        <div class="offer-mini-avatar">${supplierInitial}</div>
-                        <div class="offer-mini-info">
-                            <div class="offer-mini-name">
-                                ${escapeHtml(supplierName)}
-                                ${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i></span>' : ''}
-                            </div>
-                            <div class="offer-mini-meta">
-                                <span class="status-badge ${statusInfo.cls}" style="font-size: 0.6rem; padding: 1px 6px;">
-                                    <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}
-                                </span>
-                                ${offer.delivery_time ? `<span style="margin-right: 6px;"><i class="fas fa-truck"></i> ${escapeHtml(offer.delivery_time)}</span>` : ''}
-                                ${offer.created_at ? `<span style="margin-right: 6px;"><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>` : ''}
-                            </div>
-                        </div>
-                    </div>
-                    <div class="offer-mini-price">
+                <div class="item-price-block">
+                    <div class="item-price">
                         ${formatPrice(offer.price)}
                         <span class="currency">ج.م</span>
                     </div>
-                    <div class="offer-mini-actions">
-                        ${waLink ? `
-                            <a href="${waLink}" target="_blank" rel="noopener noreferrer"
-                               class="item-action-btn primary"
-                               title="تواصل واتساب">
-                                <i class="fab fa-whatsapp"></i>
-                            </a>
-                        ` : ''}
-                        <a href="request-details.html?id=${encodeURIComponent(offer.request_id)}"
-                           class="item-action-btn secondary"
-                           title="عرض التفاصيل">
+                    <div class="item-price-label">السعر المعروض</div>
+                </div>
+                <div class="item-actions">
+                    ${offerStatus === 'pending' ? `
+                        <button class="item-action-btn primary accept-offer-btn"
+                                type="button"
+                                data-offer-id="${escapeHtml(offer.id)}"
+                                data-request-id="${escapeHtml(offer.request_id)}">
+                            <i class="fas fa-check"></i> قبول
+                        </button>
+                        <button class="item-action-btn danger reject-offer-btn"
+                                type="button"
+                                data-offer-id="${escapeHtml(offer.id)}">
+                            <i class="fas fa-times"></i> رفض
+                        </button>
+                    ` : ''}
+                    ${chatUrl && offerStatus !== 'rejected' ? `
+                        <a href="${chatUrl}"
+                           class="item-action-btn chat-btn"
+                           data-action="chat-supplier"
+                           title="تواصل عبر الموقع">
+                            <i class="fas fa-comments"></i> تواصل
+                        </a>
+                    ` : ''}
+                    ${waLink && offerStatus !== 'rejected' ? `
+                        <a href="${waLink}"
+                           target="_blank"
+                           rel="noopener noreferrer"
+                           class="item-action-btn wa-btn"
+                           title="واتساب">
+                            <i class="fab fa-whatsapp"></i>
+                        </a>
+                    ` : ''}
+                    ${request ? `
+                        <a href="request-details.html?id=${encodeURIComponent(request.id)}"
+                           class="item-action-btn secondary">
                             <i class="fas fa-info-circle"></i>
                         </a>
+                    ` : ''}
+                </div>
+            </div>
+        `;
+    };
+
+    // ============================================================
+    // RENDER: FAVORITE ROW
+    // ============================================================
+    const renderFavoriteRow = (p) => {
+        const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
+        const isOutOfStock = p.stock_status === 'out';
+        const isInactive = p.status !== 'active';
+
+        return `
+            <div class="item-row" data-product-id="${escapeHtml(p.id)}">
+                <div class="item-icon-wrapper accent" style="overflow: hidden; padding: 0;">
+                    ${hasImage ? `
+                        <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}"
+                             style="width: 100%; height: 100%; object-fit: cover;"
+                             onerror="this.onerror=null;this.parentElement.innerHTML='<i class=\\'fas fa-flask\\' style=\\'font-size: 1.2rem;\\'></i>';" />
+                    ` : `
+                        <i class="fas fa-flask"></i>
+                    `}
+                </div>
+                <div class="item-info">
+                    <div class="item-title">${escapeHtml(p.name)}</div>
+                    <div class="item-meta">
+                        ${p.cas_number ? `<span style="font-family: monospace; direction: ltr;"><i class="fas fa-hashtag"></i> ${escapeHtml(p.cas_number)}</span>` : ''}
+                        ${p.purity ? `<span><i class="fas fa-percentage"></i> ${escapeHtml(p.purity)}</span>` : ''}
+                        ${p.category ? `<span><i class="fas fa-tag"></i> ${escapeHtml(p.category)}</span>` : ''}
+                        ${isOutOfStock ? `<span class="status-badge status-expired"><i class="fas fa-times-circle"></i> غير متوفر</span>` : ''}
+                        ${isInactive ? `<span class="status-badge status-closed"><i class="fas fa-lock"></i> غير نشط</span>` : ''}
                     </div>
                 </div>
-            `;
-        };
-
-        // ============================================================
-        // RENDER: OFFER ROW (صفحة العروض)
-        // ============================================================
-        const renderOfferRow = (offer, request, showDetails = false) => {
-            const supplier = offer.supplier || {};
-            const supplierName = supplier.company_name || supplier.full_name || 'مورد';
-            const supplierInitial = (supplierName || 'م').charAt(0).toUpperCase();
-            const isVerified = supplier.is_verified === true;
-            const statusInfo = getOfferStatusInfo(offer.status);
-
-            const rawPhone = supplier.phone || supplier.whatsapp || '';
-            const cleanPhone = sanitizePhone(rawPhone);
-            const phoneWithCountry = cleanPhone
-                ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone)
-                : '';
-            const waMsg = encodeURIComponent(`مرحباً، بخصوص عرضكم على كيماتو`);
-            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMsg}` : '';
-
-            return `
-                <div class="item-row">
-                    <div class="item-icon-wrapper supplier">
-                        <i class="fas fa-hand-holding-usd"></i>
-                    </div>
-                    <div class="item-info">
-                        <div class="item-title">
-                            ${escapeHtml(supplierName)}
-                            ${isVerified ? '<span class="verified-badge"><i class="fas fa-check-circle"></i> موثّق</span>' : ''}
-                        </div>
-                        <div class="item-meta">
-                            <span class="status-badge ${statusInfo.cls}">
-                                <i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}
-                            </span>
-                            ${request ? `<span><i class="fas fa-box"></i> ${escapeHtml(request.product_name)}</span>` : ''}
-                            ${offer.quantity_offered ? `<span><i class="fas fa-balance-scale"></i> ${escapeHtml(offer.quantity_offered)}</span>` : ''}
-                            ${offer.delivery_time ? `<span><i class="fas fa-truck"></i> ${escapeHtml(offer.delivery_time)}</span>` : ''}
-                            <span><i class="fas fa-clock"></i> ${formatDateTime(offer.created_at)}</span>
-                        </div>
-                        ${offer.message ? `
-                            <div style="font-size: 0.78rem; color: var(--c-text-muted); margin-top: 6px; padding: 8px 10px; background: var(--c-surface); border-radius: var(--r-sm); border-right: 3px solid var(--c-accent);">
-                                <i class="fas fa-comment-dots"></i> ${escapeHtml(offer.message).substring(0, 120)}${offer.message.length > 120 ? '...' : ''}
-                            </div>
-                        ` : ''}
-                    </div>
-                    <div class="item-price-block">
+                <div class="item-price-block">
+                    ${p.price ? `
                         <div class="item-price">
-                            ${formatPrice(offer.price)}
+                            ${formatPrice(p.price)}
                             <span class="currency">ج.م</span>
                         </div>
-                        <div class="item-price-label">السعر المعروض</div>
-                    </div>
-                    <div class="item-actions">
-                        ${waLink ? `
-                            <a href="${waLink}" target="_blank" rel="noopener noreferrer"
-                               class="item-action-btn primary"
-                               title="تواصل واتساب">
-                                <i class="fab fa-whatsapp"></i> تواصل
-                            </a>
-                        ` : ''}
-                        ${request ? `
-                            <a href="request-details.html?id=${encodeURIComponent(request.id)}"
-                               class="item-action-btn secondary">
-                                <i class="fas fa-info-circle"></i> تفاصيل الطلب
-                            </a>
-                        ` : ''}
-                    </div>
+                        ${p.unit ? `<div class="item-price-label">/ ${escapeHtml(p.unit)}</div>` : ''}
+                    ` : `
+                        <div class="item-price" style="font-size: 0.85rem; color: var(--c-text-sub);">عند الطلب</div>
+                    `}
                 </div>
-            `;
-        };
-
-        // ============================================================
-        // RENDER: FAVORITE ROW
-        // ============================================================
-        const renderFavoriteRow = (p) => {
-            const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
-            const isOutOfStock = p.stock_status === 'out';
-            const isInactive = p.status !== 'active';
-
-            return `
-                <div class="item-row" data-product-id="${escapeHtml(p.id)}">
-                    <div class="item-icon-wrapper accent" style="overflow: hidden; padding: 0;">
-                        ${hasImage ? `
-                            <img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}"
-                                 style="width: 100%; height: 100%; object-fit: cover;"
-                                 onerror="this.onerror=null;this.parentElement.innerHTML='<i class=\\'fas fa-flask\\' style=\\'font-size: 1.2rem;\\'></i>';" />
-                        ` : `
-                            <i class="fas fa-flask"></i>
-                        `}
-                    </div>
-                    <div class="item-info">
-                        <div class="item-title">${escapeHtml(p.name)}</div>
-                        <div class="item-meta">
-                            ${p.cas_number ? `<span style="font-family: monospace; direction: ltr;"><i class="fas fa-hashtag"></i> ${escapeHtml(p.cas_number)}</span>` : ''}
-                            ${p.purity ? `<span><i class="fas fa-percentage"></i> ${escapeHtml(p.purity)}</span>` : ''}
-                            ${p.category ? `<span><i class="fas fa-tag"></i> ${escapeHtml(p.category)}</span>` : ''}
-                            ${isOutOfStock ? `<span class="status-badge status-expired"><i class="fas fa-times-circle"></i> غير متوفر</span>` : ''}
-                            ${isInactive ? `<span class="status-badge status-closed"><i class="fas fa-lock"></i> غير نشط</span>` : ''}
-                        </div>
-                    </div>
-                    <div class="item-price-block">
-                        ${p.price ? `
-                            <div class="item-price">
-                                ${formatPrice(p.price)}
-                                <span class="currency">ج.م</span>
-                            </div>
-                            ${p.unit ? `<div class="item-price-label">/ ${escapeHtml(p.unit)}</div>` : ''}
-                        ` : `
-                            <div class="item-price" style="font-size: 0.85rem; color: var(--c-text-sub);">عند الطلب</div>
-                        `}
-                    </div>
-                    <div class="item-actions">
-                        <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="item-action-btn primary">
-                            <i class="fas fa-info-circle"></i> تفاصيل
-                        </a>
-                        <button class="item-action-btn danger icon-only remove-favorite-btn"
-                                type="button"
-                                data-product-id="${escapeHtml(p.id)}"
-                                data-product-name="${escapeHtml(p.name)}"
-                                title="إزالة من المفضلة">
-                            <i class="fas fa-heart-broken"></i>
-                        </button>
-                    </div>
+                <div class="item-actions">
+                    <a href="product-details.html?id=${encodeURIComponent(p.id)}" class="item-action-btn primary">
+                        <i class="fas fa-info-circle"></i> تفاصيل
+                    </a>
+                    <button class="item-action-btn danger icon-only remove-favorite-btn"
+                            type="button"
+                            data-product-id="${escapeHtml(p.id)}"
+                            data-product-name="${escapeHtml(p.name)}"
+                            title="إزالة من المفضلة">
+                        <i class="fas fa-heart-broken"></i>
+                    </button>
                 </div>
-            `;
-        };
+            </div>
+        `;
+    };
 
-        // ============================================================
-        // BIND: Request Row Events
-        // ============================================================
-        const bindRequestRowEvents = () => {
-            // Toggle offers accordion
-            document.querySelectorAll('.toggle-offers-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const rid = btn.dataset.requestId;
-                    const acc = document.getElementById(`offers-${rid}`);
-                    if (acc) {
-                        const isOpen = acc.classList.toggle('open');
-                        const icon = btn.querySelector('i');
-                        if (icon) {
-                            icon.className = isOpen ? 'fas fa-eye-slash' : 'fas fa-eye';
-                        }
+    // ============================================================
+    // BIND: Request Row Events
+    // ============================================================
+    const bindRequestRowEvents = () => {
+        document.querySelectorAll('.toggle-offers-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const rid = btn.dataset.requestId;
+                const acc = document.getElementById(`offers-${rid}`);
+                if (acc) {
+                    const isOpen = acc.classList.toggle('open');
+                    const icon = btn.querySelector('i');
+                    if (icon) {
+                        icon.className = isOpen ? 'fas fa-eye-slash' : 'fas fa-eye';
                     }
-                });
-            });
-
-            // Edit request
-            document.querySelectorAll('.edit-request-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const rid = btn.dataset.requestId;
-                    openEditRequestModal(rid);
-                });
-            });
-
-            // Delete request
-            document.querySelectorAll('.delete-request-btn').forEach(btn => {
-                btn.addEventListener('click', () => {
-                    const rid = btn.dataset.requestId;
-                    const name = btn.dataset.requestName;
-                    deleteRequest(rid, name);
-                });
-            });
-        };
-
-        // ============================================================
-        // BIND: Favorite Events
-        // ============================================================
-        const bindFavoriteEvents = () => {
-            document.querySelectorAll('.remove-favorite-btn').forEach(btn => {
-                btn.addEventListener('click', async () => {
-                    const pid = btn.dataset.productId;
-                    const name = btn.dataset.productName;
-                    if (!confirm(`هل تريد إزالة "${name}" من المفضلة؟`)) return;
-
-                    try {
-                        const { error } = await supabase
-                            .from('favorites')
-                            .delete()
-                            .eq('user_id', state.user.id)
-                            .eq('product_id', pid);
-
-                        if (error) throw error;
-
-                        showToast('💔', 'تم الحذف', `أُزيل "${name}" من المفضلة`, null, null, 'info');
-                        renderFavorites();
-                    } catch (err) {
-                        showToast('⚠️', 'خطأ', 'تعذر الحذف', null, null, 'error');
-                    }
-                });
-            });
-        };
-
-        // ============================================================
-        // EDIT REQUEST MODAL
-        // ============================================================
-        const openEditRequestModal = (requestId) => {
-            const request = state.requests.find(r => r.id === requestId);
-            if (!request) return;
-
-            state.editingRequestId = requestId;
-
-            document.getElementById('editProductName').value = request.product_name || '';
-            document.getElementById('editCasNumber').value = request.cas_number || '';
-            document.getElementById('editQuantity').value = request.quantity_needed || '';
-            document.getElementById('editBudgetMin').value = request.budget_min || '';
-            document.getElementById('editBudgetMax').value = request.budget_max || '';
-            document.getElementById('editDeadline').value = request.deadline || '';
-            document.getElementById('editLocation').value = request.location || '';
-            document.getElementById('editDescription').value = request.description || '';
-
-            document.getElementById('editRequestModal').classList.add('show');
-        };
-
-        const closeEditModal = () => {
-            document.getElementById('editRequestModal').classList.remove('show');
-            state.editingRequestId = null;
-        };
-
-        const saveEditRequest = async () => {
-            if (!state.editingRequestId) return;
-            const btn = document.getElementById('saveEditModal');
-            const originalText = btn.innerHTML;
-            btn.disabled = true;
-            btn.innerHTML = '<span class="spinner"></span> جاري الحفظ...';
-
-            try {
-                const productName = document.getElementById('editProductName').value.trim();
-                const quantity = document.getElementById('editQuantity').value.trim();
-
-                if (!productName) throw new Error('اسم المنتج مطلوب');
-                if (!quantity) throw new Error('الكمية مطلوبة');
-
-                const updates = {
-                    product_name: productName,
-                    cas_number: document.getElementById('editCasNumber').value.trim() || null,
-                    quantity_needed: quantity,
-                    budget_min: document.getElementById('editBudgetMin').value ? Number(document.getElementById('editBudgetMin').value) : null,
-                    budget_max: document.getElementById('editBudgetMax').value ? Number(document.getElementById('editBudgetMax').value) : null,
-                    deadline: document.getElementById('editDeadline').value || null,
-                    location: document.getElementById('editLocation').value.trim() || null,
-                    description: document.getElementById('editDescription').value.trim() || null,
-                };
-
-                const { error } = await supabase
-                    .from('purchase_requests')
-                    .update(updates)
-                    .eq('id', state.editingRequestId)
-                    .eq('buyer_id', state.user.id);
-
-                if (error) throw error;
-
-                showToast('✅', 'تم الحفظ', 'تم تحديث الطلب بنجاح', null, null, 'success');
-                closeEditModal();
-                await fetchAllData();
-                loadSection(state.activeSection);
-            } catch (err) {
-                console.error('Edit request error:', err);
-                showToast('⚠️', 'خطأ', err.message || 'تعذر حفظ التعديلات', null, null, 'error');
-            } finally {
-                btn.disabled = false;
-                btn.innerHTML = originalText;
-            }
-        };
-
-        // ============================================================
-        // DELETE REQUEST
-        // ============================================================
-        const deleteRequest = async (requestId, name) => {
-            if (!confirm(`هل أنت متأكد من حذف طلب "${name}"؟ لا يمكن التراجع.`)) return;
-
-            try {
-                const { error } = await supabase
-                    .from('purchase_requests')
-                    .delete()
-                    .eq('id', requestId)
-                    .eq('buyer_id', state.user.id);
-
-                if (error) throw error;
-
-                showToast('🗑️', 'تم الحذف', `حُذف طلب "${name}" بنجاح`, null, null, 'success');
-                await fetchAllData();
-                loadSection(state.activeSection);
-            } catch (err) {
-                console.error('Delete request error:', err);
-                showToast('⚠️', 'خطأ', err.message || 'تعذر حذف الطلب', null, null, 'error');
-            }
-        };
-
-        // ============================================================
-        // REALTIME
-        // ============================================================
-        const setupRealtime = () => {
-            if (state.channel) supabase.removeChannel(state.channel);
-            try {
-                state.channel = supabase
-                    .channel('buyer_dashboard_realtime')
-                    .on('postgres_changes', {
-                        event: 'INSERT',
-                        schema: 'public',
-                        table: 'offers',
-                    }, (payload) => {
-                        const offer = payload.new;
-                        // Check if this offer is on one of my requests
-                        const myRequest = state.requests.find(r => r.id === offer.request_id);
-                        if (myRequest) {
-                            showToast('💰', 'عرض جديد!', `عرض بقيمة ${formatPrice(offer.price)} ج.م على "${myRequest.product_name}"`,
-                                'عرض التفاصيل', `request-details.html?id=${offer.request_id}`, 'success');
-                            // Refresh current section
-                            loadSection(state.activeSection);
-                        }
-                    })
-                    .on('postgres_changes', {
-                        event: 'UPDATE',
-                        schema: 'public',
-                        table: 'offers',
-                    }, () => {
-                        loadSection(state.activeSection);
-                    })
-                    .subscribe();
-            } catch (e) { /* silent */ }
-        };
-
-        // ============================================================
-        // MODAL BINDINGS
-        // ============================================================
-        const initModals = () => {
-            document.getElementById('closeEditModal')?.addEventListener('click', closeEditModal);
-            document.getElementById('cancelEditModal')?.addEventListener('click', closeEditModal);
-            document.getElementById('saveEditModal')?.addEventListener('click', saveEditRequest);
-
-            document.getElementById('editRequestModal')?.addEventListener('click', (e) => {
-                if (e.target.id === 'editRequestModal') closeEditModal();
-            });
-
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape') {
-                    closeEditModal();
-                    document.getElementById('notifPanel')?.classList.remove('show');
-                    document.getElementById('userDropdown')?.classList.remove('show');
                 }
             });
-        };
-
-        // ============================================================
-        // EXPOSE FUNCTIONS GLOBALLY (for inline onclick)
-        // ============================================================
-        window.switchSection = switchSection;
-
-        // ============================================================
-        // INIT
-        // ============================================================
-        const init = async () => {
-            console.log('🚀 كيماتو | لوحة المشتري');
-
-            initTheme();
-            initNavbar();
-            initSidebar();
-            initModals();
-
-            // Check auth + load initial data
-            const isAuthed = await checkAuthAndLoad();
-            if (!isAuthed) return;
-
-            // Load default section
-            await loadSection('overview');
-
-            // Realtime
-            setupRealtime();
-
-            console.log('✅ جاهز');
-        };
-
-        // Handle auth changes
-        supabase.auth.onAuthStateChange(async (event) => {
-            if (event === 'SIGNED_OUT') {
-                window.location.href = 'index.html';
-            } else if (event === 'SIGNED_IN') {
-                const ok = await checkAuthAndLoad();
-                if (ok) await loadSection('overview');
-            }
         });
 
-        // Run
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', init);
-        } else {
-            init();
+        document.querySelectorAll('.edit-request-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const rid = btn.dataset.requestId;
+                openEditRequestModal(rid);
+            });
+        });
+
+        document.querySelectorAll('.delete-request-btn').forEach(btn => {
+            btn.addEventListener('click', () => {
+                const rid = btn.dataset.requestId;
+                const name = btn.dataset.requestName;
+                deleteRequest(rid, name);
+            });
+        });
+    };
+
+    // ============================================================
+    // BIND: Favorite Events
+    // ============================================================
+    const bindFavoriteEvents = () => {
+        document.querySelectorAll('.remove-favorite-btn').forEach(btn => {
+            btn.addEventListener('click', async () => {
+                const pid = btn.dataset.productId;
+                const name = btn.dataset.productName;
+                if (!confirm(`هل تريد إزالة "${name}" من المفضلة؟`)) return;
+
+                try {
+                    const { error } = await supabase
+                        .from('favorites')
+                        .delete()
+                        .eq('user_id', state.user.id)
+                        .eq('product_id', pid);
+
+                    if (error) throw error;
+
+                    showToast('💔', 'تم الحذف', `أُزيل "${name}" من المفضلة`, null, null, 'info');
+                    renderFavorites();
+                } catch (err) {
+                    showToast('⚠️', 'خطأ', 'تعذر الحذف', null, null, 'error');
+                }
+            });
+        });
+    };
+
+    // ============================================================
+    // ACCEPT / REJECT OFFER
+    // ============================================================
+    const handleOfferAction = async (offerId, action) => {
+        const actionText = action === 'accepted' ? 'قبول' : 'رفض';
+        if (!confirm(`هل أنت متأكد من ${actionText} هذا العرض؟`)) return;
+
+        try {
+            const { error } = await supabase
+                .from('offers')
+                .update({ status: action })
+                .eq('id', offerId);
+
+            if (error) throw error;
+
+            showToast(
+                action === 'accepted' ? '✅' : '❌',
+                action === 'accepted' ? 'تم القبول' : 'تم الرفض',
+                'تم تحديث حالة العرض بنجاح',
+                null, null,
+                action === 'accepted' ? 'success' : 'info'
+            );
+
+            // Refresh data
+            await fetchAllData();
+            loadSection(state.activeSection);
+
+            // Suggest changing request status if accepted
+            if (action === 'accepted') {
+                const offer = Object.values(state.offersMap).flat().find(o => o.id === offerId);
+                const request = offer ? state.requests.find(r => r.id === offer.request_id) : null;
+                if (request && request.status === 'open') {
+                    setTimeout(() => {
+                        if (confirm('هل تريد تغيير حالة الطلب إلى "تمت المطابقة"؟')) {
+                            supabase
+                                .from('purchase_requests')
+                                .update({ status: 'matched' })
+                                .eq('id', request.id)
+                                .then(() => {
+                                    showToast('🤝', 'تم التحديث', 'حالة الطلب أصبحت "تمت المطابقة"', null, null, 'success');
+                                    fetchAllData().then(() => loadSection(state.activeSection));
+                                });
+                        }
+                    }, 800);
+                }
+            }
+        } catch (err) {
+            console.error('Offer action error:', err);
+            showToast('⚠️', 'خطأ', err.message || `تعذر ${actionText} العرض`, null, null, 'error');
         }
-    </script>
+    };
+
+    const initOfferActions = () => {
+        document.addEventListener('click', (e) => {
+            const acceptBtn = e.target.closest('.accept-offer-btn');
+            if (acceptBtn) {
+                e.preventDefault();
+                handleOfferAction(acceptBtn.dataset.offerId, 'accepted');
+                return;
+            }
+
+            const rejectBtn = e.target.closest('.reject-offer-btn');
+            if (rejectBtn) {
+                e.preventDefault();
+                handleOfferAction(rejectBtn.dataset.offerId, 'rejected');
+                return;
+            }
+
+            const chatBtn = e.target.closest('[data-action="chat-supplier"]');
+            if (chatBtn) {
+                if (!state.user) {
+                    e.preventDefault();
+                    showToast('🔐', 'سجّل دخولك', 'لازم تسجل دخول للتواصل', null, null, 'warning');
+                    const url = chatBtn.getAttribute('href');
+                    setTimeout(() => {
+                        window.location.href = `auth.html?redirect=${encodeURIComponent(url)}`;
+                    }, 1200);
+                    return;
+                }
+                showToast('💬', 'جاري فتح المحادثة', 'يتم تحويلك لصفحة المحادثات...', null, null, 'info');
+            }
+        });
+    };
+
+    // ============================================================
+    // EDIT REQUEST MODAL
+    // ============================================================
+    const openEditRequestModal = (requestId) => {
+        const request = state.requests.find(r => r.id === requestId);
+        if (!request) return;
+
+        state.editingRequestId = requestId;
+
+        document.getElementById('editProductName').value = request.product_name || '';
+        document.getElementById('editCasNumber').value = request.cas_number || '';
+        document.getElementById('editQuantity').value = request.quantity_needed || '';
+        document.getElementById('editBudgetMin').value = request.budget_min || '';
+        document.getElementById('editBudgetMax').value = request.budget_max || '';
+        document.getElementById('editDeadline').value = request.deadline || '';
+        document.getElementById('editLocation').value = request.location || '';
+        document.getElementById('editDescription').value = request.description || '';
+
+        document.getElementById('editRequestModal').classList.add('show');
+    };
+
+    const closeEditModal = () => {
+        document.getElementById('editRequestModal').classList.remove('show');
+        state.editingRequestId = null;
+    };
+
+    const saveEditRequest = async () => {
+        if (!state.editingRequestId) return;
+        const btn = document.getElementById('saveEditModal');
+        const originalText = btn.innerHTML;
+        btn.disabled = true;
+        btn.innerHTML = '<span class="spinner"></span> جاري الحفظ...';
+
+        try {
+            const productName = document.getElementById('editProductName').value.trim();
+            const quantity = document.getElementById('editQuantity').value.trim();
+
+            if (!productName) throw new Error('اسم المنتج مطلوب');
+            if (!quantity) throw new Error('الكمية مطلوبة');
+
+            const updates = {
+                product_name: productName,
+                cas_number: document.getElementById('editCasNumber').value.trim() || null,
+                quantity_needed: quantity,
+                budget_min: document.getElementById('editBudgetMin').value ? Number(document.getElementById('editBudgetMin').value) : null,
+                budget_max: document.getElementById('editBudgetMax').value ? Number(document.getElementById('editBudgetMax').value) : null,
+                deadline: document.getElementById('editDeadline').value || null,
+                location: document.getElementById('editLocation').value.trim() || null,
+                description: document.getElementById('editDescription').value.trim() || null,
+            };
+
+            const { error } = await supabase
+                .from('purchase_requests')
+                .update(updates)
+                .eq('id', state.editingRequestId)
+                .eq('buyer_id', state.user.id);
+
+            if (error) throw error;
+
+            showToast('✅', 'تم الحفظ', 'تم تحديث الطلب بنجاح', null, null, 'success');
+            closeEditModal();
+            await fetchAllData();
+            loadSection(state.activeSection);
+        } catch (err) {
+            console.error('Edit request error:', err);
+            showToast('⚠️', 'خطأ', err.message || 'تعذر حفظ التعديلات', null, null, 'error');
+        } finally {
+            btn.disabled = false;
+            btn.innerHTML = originalText;
+        }
+    };
+
+    // ============================================================
+    // DELETE REQUEST
+    // ============================================================
+    const deleteRequest = async (requestId, name) => {
+        if (!confirm(`هل أنت متأكد من حذف طلب "${name}"؟ لا يمكن التراجع.`)) return;
+
+        try {
+            const { error } = await supabase
+                .from('purchase_requests')
+                .delete()
+                .eq('id', requestId)
+                .eq('buyer_id', state.user.id);
+
+            if (error) throw error;
+
+            showToast('🗑️', 'تم الحذف', `حُذف طلب "${name}" بنجاح`, null, null, 'success');
+            await fetchAllData();
+            loadSection(state.activeSection);
+        } catch (err) {
+            console.error('Delete request error:', err);
+            showToast('⚠️', 'خطأ', err.message || 'تعذر حذف الطلب', null, null, 'error');
+        }
+    };
+
+    // ============================================================
+    // REALTIME
+    // ============================================================
+    const setupRealtime = () => {
+        if (state.channel) supabase.removeChannel(state.channel);
+        try {
+            state.channel = supabase
+                .channel('buyer_dashboard_realtime')
+                .on('postgres_changes', {
+                    event: 'INSERT',
+                    schema: 'public',
+                    table: 'offers',
+                }, (payload) => {
+                    const offer = payload.new;
+                    const myRequest = state.requests.find(r => r.id === offer.request_id);
+                    if (myRequest) {
+                        showToast('💰', 'عرض جديد!', `عرض بقيمة ${formatPrice(offer.price)} ج.م على "${myRequest.product_name}"`,
+                            'عرض التفاصيل', `request-details.html?id=${offer.request_id}`, 'success');
+                        loadSection(state.activeSection);
+                    }
+                })
+                .on('postgres_changes', {
+                    event: 'UPDATE',
+                    schema: 'public',
+                    table: 'offers',
+                }, () => {
+                    loadSection(state.activeSection);
+                })
+                .subscribe();
+        } catch (e) { /* silent */ }
+    };
+
+    // ============================================================
+    // MODAL BINDINGS
+    // ============================================================
+    const initModals = () => {
+        document.getElementById('closeEditModal')?.addEventListener('click', closeEditModal);
+        document.getElementById('cancelEditModal')?.addEventListener('click', closeEditModal);
+        document.getElementById('saveEditModal')?.addEventListener('click', saveEditRequest);
+
+        document.getElementById('editRequestModal')?.addEventListener('click', (e) => {
+            if (e.target.id === 'editRequestModal') closeEditModal();
+        });
+
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                closeEditModal();
+                document.getElementById('notifPanel')?.classList.remove('show');
+                document.getElementById('userDropdown')?.classList.remove('show');
+            }
+        });
+    };
+
+    // ============================================================
+    // EXPOSE GLOBALLY
+    // ============================================================
+    window.switchSection = switchSection;
+
+    // ============================================================
+    // INIT
+    // ============================================================
+    const init = async () => {
+        console.log('🚀 كيماتو | لوحة المشتري');
+
+        initTheme();
+        initNavbar();
+        initSidebar();
+        initModals();
+        initOfferActions(); // 🆕
+
+        const isAuthed = await checkAuthAndLoad();
+        if (!isAuthed) return;
+
+        await loadSection('overview');
+        setupRealtime();
+
+        console.log('✅ جاهز');
+    };
+
+    supabase.auth.onAuthStateChange(async (event) => {
+        if (event === 'SIGNED_OUT') {
+            window.location.href = 'index.html';
+        } else if (event === 'SIGNED_IN') {
+            const ok = await checkAuthAndLoad();
+            if (ok) await loadSection('overview');
+        }
+    });
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+</script>
 </body>
 </html>
