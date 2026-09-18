@@ -13,7 +13,7 @@
     <link rel="apple-touch-icon" href="logo.png" />
     <meta name="theme-color" content="#0a2540" />
     
-    <!-- ========== Open Graph ========== -->
+    <!-- Open Graph -->
     <meta property="og:site_name" content="كيماتو" />
     <meta property="og:title" id="ogTitle" content="كيماتو | طلبات الشراء" />
     <meta property="og:description" id="ogDescription" content="استعرض طلبات الشراء على منصة كيماتو - سوق المواد الكيماوية B2B" />
@@ -25,7 +25,7 @@
     <meta property="og:image:alt" content="كيماتو - منصة الكيماويات B2B" />
     <meta property="og:locale" content="ar_EG" />
     
-    <!-- ========== Twitter Cards ========== -->
+    <!-- Twitter Cards -->
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" id="twTitle" content="كيماتو | طلبات الشراء" />
     <meta name="twitter:description" id="twDescription" content="استعرض طلبات الشراء على منصة كيماتو" />
@@ -62,6 +62,8 @@
             --whatsapp: #25D366;
             --chat: #8b5cf6;
             --chat-dark: #7c3aed;
+            --register: #10b981;
+            --register-dark: #059669;
             --shadow-sm: 0 4px 12px rgba(12,45,74,0.05);
             --shadow-md: 0 10px 25px rgba(12,45,74,0.08);
             --shadow-lg: 0 20px 40px rgba(12,45,74,0.12);
@@ -113,9 +115,9 @@
             100% { background-position: 200% 0; }
         }
 
-        @keyframes pulse {
-            0%, 100% { transform: scale(1); }
-            50% { transform: scale(1.05); }
+        @keyframes shineRegister {
+            0% { left: -100%; }
+            50%, 100% { left: 200%; }
         }
 
         .skeleton-card {
@@ -275,7 +277,7 @@
             border: 2px dashed rgba(52,152,219,0.3);
             border-radius: var(--radius-md);
             padding: 20px 25px;
-            margin-bottom: 25px;
+            margin-bottom: 20px;
             display: flex;
             align-items: center;
             justify-content: space-between;
@@ -332,14 +334,14 @@
             text-decoration: none;
             white-space: nowrap;
         }
-        .btn-register {
-            background: linear-gradient(135deg, var(--whatsapp), #128C7E);
+        .btn-register-banner {
+            background: linear-gradient(135deg, var(--register), var(--register-dark));
             color: white;
-            box-shadow: 0 4px 16px rgba(37,211,102,0.3);
+            box-shadow: 0 4px 16px rgba(16,185,129,0.3);
         }
-        .btn-register:hover {
+        .btn-register-banner:hover {
             transform: translateY(-2px);
-            box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+            box-shadow: 0 8px 24px rgba(16,185,129,0.4);
         }
         .btn-login-outline {
             background: transparent;
@@ -349,6 +351,101 @@
         .btn-login-outline:hover {
             background: var(--primary);
             color: white;
+        }
+
+        /* ========== Supplier CTA Banner ========== */
+        .supplier-cta-banner {
+            background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+            border-radius: var(--radius-md);
+            padding: 20px 24px;
+            margin-bottom: 25px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 16px;
+            flex-wrap: wrap;
+            box-shadow: 0 8px 24px rgba(16, 185, 129, 0.25);
+            animation: fadeUp 0.5s ease;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .supplier-cta-banner::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            right: -50%;
+            width: 200%;
+            height: 200%;
+            background: radial-gradient(circle, rgba(255,255,255,0.1) 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.5;
+            pointer-events: none;
+        }
+
+        .supplier-cta-content {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex: 1;
+            min-width: 250px;
+            position: relative;
+            z-index: 1;
+        }
+
+        .supplier-cta-icon {
+            width: 56px;
+            height: 56px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            flex-shrink: 0;
+            backdrop-filter: blur(10px);
+            border: 2px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .supplier-cta-text h4 {
+            font-size: 1.1rem;
+            font-weight: 800;
+            margin-bottom: 4px;
+            color: white;
+        }
+
+        .supplier-cta-text p {
+            font-size: 0.88rem;
+            opacity: 0.95;
+            color: white;
+        }
+
+        .supplier-cta-btn {
+            padding: 12px 28px;
+            border-radius: 40px;
+            background: white;
+            color: #059669;
+            font-weight: 800;
+            font-size: 0.92rem;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.3s;
+            white-space: nowrap;
+            position: relative;
+            z-index: 1;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+            border: none;
+            cursor: pointer;
+            font-family: inherit;
+        }
+
+        .supplier-cta-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+            background: #f0fdf4;
         }
 
         /* ========== Profile Header ========== */
@@ -495,6 +592,15 @@
         }
         .btn-chat:hover {
             background: linear-gradient(135deg, var(--chat-dark), #6d28d9);
+            transform: translateY(-2px);
+        }
+
+        .btn-register {
+            background: linear-gradient(135deg, var(--register), var(--register-dark));
+            box-shadow: 0 4px 16px rgba(16,185,129,0.35);
+        }
+        .btn-register:hover {
+            background: linear-gradient(135deg, var(--register-dark), #047857);
             transform: translateY(-2px);
         }
 
@@ -817,20 +923,37 @@
             box-shadow: 0 8px 20px rgba(139,92,246,0.4);
         }
 
+        /* 🆕 زر سجّل كمورد */
+        .btn-action-register {
+            background: linear-gradient(135deg, var(--register), var(--register-dark));
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .btn-action-register::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+            animation: shineRegister 2.5s infinite;
+        }
+
+        .btn-action-register:hover {
+            background: linear-gradient(135deg, var(--register-dark), #047857);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(16, 185, 129, 0.5);
+        }
+
         .btn-action-wa {
             background: var(--whatsapp);
             box-shadow: 0 4px 12px rgba(37,211,102,0.25);
         }
         .btn-action-wa:hover {
             background: #128C7E;
-            transform: translateY(-2px);
-        }
-
-        .btn-action-detail {
-            background: linear-gradient(145deg, #1a4a6e, #0c2d4a);
-        }
-        .btn-action-detail:hover {
-            background: linear-gradient(145deg, #3498db, #2c81ba);
             transform: translateY(-2px);
         }
 
@@ -1233,6 +1356,18 @@
             .quick-share-bar { justify-content: center; }
             .sticky-bottom-bar { padding: 10px 12px; gap: 6px; }
             .sticky-bottom-bar .btn { padding: 9px 16px; font-size: 0.8rem; }
+            .supplier-cta-banner {
+                flex-direction: column;
+                text-align: center;
+            }
+            .supplier-cta-content {
+                justify-content: center;
+                text-align: center;
+            }
+            .supplier-cta-btn {
+                width: 100%;
+                justify-content: center;
+            }
         }
 
         @media (max-width: 480px) {
@@ -1261,7 +1396,7 @@
         @media print {
             .navbar, .footer, .quick-share-bar, .sticky-bottom-bar,
             .guest-banner, .profile-actions, .request-actions,
-            .search-filter-bar, .toast-container { display: none !important; }
+            .search-filter-bar, .toast-container, .supplier-cta-banner { display: none !important; }
             body { background: #fff !important; }
             .profile-header { background: #0c2d4a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
             .request-card { break-inside: avoid; }
@@ -1308,13 +1443,29 @@
             </div>
         </div>
         <div class="guest-banner-actions">
-            <a href="auth.html" class="btn btn-register">
+            <a href="auth.html?type=buyer" class="btn btn-register-banner">
                 <i class="fas fa-user-plus"></i> سجّل مجاناً
             </a>
             <a href="auth.html" class="btn btn-login-outline">
                 <i class="fas fa-sign-in-alt"></i> دخول
             </a>
         </div>
+    </div>
+
+    <!-- ========== Supplier CTA Banner ========== -->
+    <div class="supplier-cta-banner" id="supplierCtaBanner" style="display: none;">
+        <div class="supplier-cta-content">
+            <div class="supplier-cta-icon">
+                <i class="fas fa-truck"></i>
+            </div>
+            <div class="supplier-cta-text">
+                <h4>🚀 هل أنت مورد كيماويات؟</h4>
+                <p>انضم لمنصة كيماتو مجاناً وابدأ استقبال طلبات الشراء مباشرة من العملاء</p>
+            </div>
+        </div>
+        <button class="supplier-cta-btn" onclick="handleRegisterAsSupplier(event)">
+            <i class="fas fa-user-plus"></i> سجّل كمورد مجاناً
+        </button>
     </div>
 
     <!-- ========== Profile Header ========== -->
@@ -1341,6 +1492,9 @@
                 <div class="profile-actions">
                     <button class="btn btn-chat" id="chatBtn" onclick="handleChatClick(event)" style="display:none;">
                         <i class="fas fa-comments"></i> تواصل عبر الموقع
+                    </button>
+                    <button class="btn btn-register" id="registerBtn" onclick="handleRegisterAsSupplier(event)" style="display:none;">
+                        <i class="fas fa-user-plus"></i> سجّل كمورد
                     </button>
                     <a href="#" id="whatsappBtn" target="_blank" rel="noopener noreferrer" class="btn btn-whatsapp" style="display:none;">
                         <i class="fab fa-whatsapp"></i> واتساب
@@ -1402,8 +1556,11 @@
 
 <!-- ========== Sticky Bottom Bar ========== -->
 <div class="sticky-bottom-bar" id="stickyBar">
-    <button class="btn" id="stickyChatBtn" onclick="handleChatClick(event)" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);">
+    <button class="btn" id="stickyChatBtn" onclick="handleChatClick(event)" style="background:linear-gradient(135deg,#8b5cf6,#7c3aed);display:none;">
         <i class="fas fa-comments"></i> تواصل عبر الموقع
+    </button>
+    <button class="btn" id="stickyRegisterBtn" onclick="handleRegisterAsSupplier(event)" style="background:linear-gradient(135deg,#10b981,#059669);display:none;">
+        <i class="fas fa-user-plus"></i> سجّل كمورد
     </button>
     <a href="#" id="stickyWhatsappBtn" class="btn" style="background:#25D366;" target="_blank" rel="noopener">
         <i class="fab fa-whatsapp"></i> واتساب
@@ -1596,7 +1753,6 @@
         document.getElementById('qrImage').src = qrUrl
         document.getElementById('qrUrl').textContent = url
         
-        // Close share modal if open
         document.getElementById('shareModal')?.classList.remove('show')
         document.getElementById('qrModal').classList.add('show')
     }
@@ -1606,14 +1762,12 @@
         const name = buyerData?.full_name || 'العميل'
         const text = `استعرض طلبات ${name} على منصة كيماتو - سوق الكيماويات B2B`
 
-        // Preview
         const initial = name.charAt(0).toUpperCase()
         document.getElementById('sharePreviewAvatar').textContent = initial
         document.getElementById('sharePreviewName').textContent = name
         document.getElementById('sharePreviewDesc').textContent = `جميع طلبات الشراء على منصة كيماتو`
         document.getElementById('shareUrl').value = url
 
-        // Social links
         const setHref = (id, href) => {
             const el = document.getElementById(id)
             if (el) el.href = href
@@ -1658,7 +1812,7 @@
     }
 
     // ============================================================
-    // DROPDOWN & AUTH UI
+    // DROPDOWN
     // ============================================================
     function setupDropdown() {
         const toggle = document.getElementById('dropdownToggle')
@@ -1672,6 +1826,9 @@
         }
     }
 
+    // ============================================================
+    // AUTH UI
+    // ============================================================
     async function updateAuthUI() {
         const { data: { user } } = await supabase.auth.getUser()
         currentUser = user
@@ -1679,6 +1836,7 @@
         const loginNavBtn = document.getElementById('loginNavBtn')
         const userDropdown = document.getElementById('userDropdown')
         const guestBanner = document.getElementById('guestBanner')
+        const supplierCtaBanner = document.getElementById('supplierCtaBanner')
 
         if (user) {
             const { data: profile } = await supabase
@@ -1707,17 +1865,51 @@
                 }
             }
             if (guestBanner) guestBanner.style.display = 'none'
+            if (supplierCtaBanner) supplierCtaBanner.style.display = 'none'
         } else {
             if (loginNavBtn) loginNavBtn.style.display = 'inline-flex'
             if (userDropdown) userDropdown.style.display = 'none'
             if (guestBanner) guestBanner.style.display = 'flex'
+            if (supplierCtaBanner) supplierCtaBanner.style.display = 'flex'
         }
 
-        updateChatButton()
+        updateContactButtons()
     }
 
     // ============================================================
-    // CHAT HANDLER
+    // CONTACT BUTTONS LOGIC
+    // ============================================================
+    function updateContactButtons() {
+        if (!buyerId) return
+
+        const isSelf = currentUser && currentUser.id === buyerId
+        const isGuest = !currentUser
+
+        // Header buttons
+        const chatBtn = document.getElementById('chatBtn')
+        const registerBtn = document.getElementById('registerBtn')
+
+        if (chatBtn) {
+            chatBtn.style.display = (!isSelf && !isGuest) ? 'inline-flex' : 'none'
+        }
+        if (registerBtn) {
+            registerBtn.style.display = (!isSelf && isGuest) ? 'inline-flex' : 'none'
+        }
+
+        // Sticky bar buttons
+        const stickyChatBtn = document.getElementById('stickyChatBtn')
+        const stickyRegisterBtn = document.getElementById('stickyRegisterBtn')
+
+        if (stickyChatBtn) {
+            stickyChatBtn.style.display = (!isSelf && !isGuest) ? 'inline-flex' : 'none'
+        }
+        if (stickyRegisterBtn) {
+            stickyRegisterBtn.style.display = (!isSelf && isGuest) ? 'inline-flex' : 'none'
+        }
+    }
+
+    // ============================================================
+    // CHAT HANDLER (للمسجلين)
     // ============================================================
     function handleChatClick(e) {
         if (e) e.preventDefault()
@@ -1750,20 +1942,23 @@
 
     window.handleChatClick = handleChatClick
 
-    function updateChatButton() {
-        const chatBtn = document.getElementById('chatBtn')
-        const stickyChatBtn = document.getElementById('stickyChatBtn')
-        if (!buyerId) return
+    // ============================================================
+    // REGISTER AS SUPPLIER (للزوار)
+    // ============================================================
+    function handleRegisterAsSupplier(e) {
+        if (e) e.preventDefault()
 
-        const isSelf = currentUser && currentUser.id === buyerId
+        showToast('🎉', 'سجّل كمورد مجاناً', 'سجّل حسابك خلال دقيقة وابدأ استقبال الطلبات', 'info')
 
-        if (chatBtn) {
-            chatBtn.style.display = isSelf ? 'none' : 'inline-flex'
-        }
-        if (stickyChatBtn) {
-            stickyChatBtn.style.display = isSelf ? 'none' : 'inline-flex'
-        }
+        const returnUrl = window.location.href
+        const authUrl = `auth.html?type=supplier&redirect=${encodeURIComponent(returnUrl)}&source=buyer-requests`
+
+        setTimeout(() => {
+            window.location.href = authUrl
+        }, 1000)
     }
+
+    window.handleRegisterAsSupplier = handleRegisterAsSupplier
 
     // ============================================================
     // WHATSAPP
@@ -1793,7 +1988,7 @@
     }
 
     // ============================================================
-    // UPDATE SEO
+    // SEO
     // ============================================================
     function updateSEO(buyer) {
         const name = buyer.full_name || 'العميل'
@@ -1819,10 +2014,9 @@
         setMeta('twDescription', desc)
         setMeta('canonicalUrl', url)
 
-        // Set OG image (avatar if available, else logo)
         const ogImage = buyer.avatar_url && /^https?:\/\//i.test(buyer.avatar_url)
             ? buyer.avatar_url
-            : 'https://chemato.vercel.app/logo.png'
+            : 'https://chemato.vercel.app/og-image.png'
         setMeta('ogImage', ogImage)
         setMeta('twImage', ogImage)
     }
@@ -1857,7 +2051,6 @@
             const avatarColor = colors[colorIndex]
             const initial = buyer.full_name?.charAt(0)?.toUpperCase() || 'م'
 
-            // Avatar
             const avatarEl = document.getElementById('profileAvatar')
             if (avatarEl) {
                 if (buyer.avatar_url && /^https?:\/\//i.test(buyer.avatar_url)) {
@@ -1885,14 +2078,15 @@
                 stickyWhatsappBtn.href = waLink
             }
 
-            // Show sticky bar
             setTimeout(() => {
                 document.getElementById('stickyBar').classList.add('show')
             }, 800)
 
-            // Update SEO + share links
             updateSEO(buyer)
             setupShareLinks()
+
+            // Update contact buttons after loading
+            updateContactButtons()
 
             await loadRequests()
         } catch (e) {
@@ -1940,7 +2134,7 @@
 
             buyerRequests = requests || []
 
-            // Update stats (with all requests, not just filtered)
+            // Update stats
             const { data: allRequests } = await supabase
                 .from('purchase_requests')
                 .select('status')
@@ -1976,9 +2170,41 @@
             const whatsappLink = getWhatsAppLink(buyerData?.phone || buyerData?.whatsapp, buyerData?.full_name)
             const hasPhone = !!(buyerData?.phone || buyerData?.whatsapp)
             const isSelf = currentUser && currentUser.id === buyerId
+            const isGuest = !currentUser
 
             container.innerHTML = buyerRequests.map((r, index) => {
                 const status = statusMap[r.status] || statusMap['open']
+                
+                // 🆕 تحديد الأزرار بناءً على حالة المستخدم
+                let actionButtons = ''
+                
+                if (!isSelf) {
+                    if (currentUser) {
+                        // مستخدم مسجل → زر "تواصل عبر الموقع"
+                        actionButtons = `
+                            <button class="btn-action btn-action-chat" onclick="handleChatClick(event)">
+                                <i class="fas fa-comments"></i> تواصل عبر الموقع
+                            </button>
+                            ${hasPhone ? `
+                                <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-wa">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </a>
+                            ` : ''}
+                        `
+                    } else {
+                        // زائر → زر "سجّل كمورد"
+                        actionButtons = `
+                            <button class="btn-action btn-action-register" onclick="handleRegisterAsSupplier(event)">
+                                <i class="fas fa-user-plus"></i> سجّل كمورد
+                            </button>
+                            ${hasPhone ? `
+                                <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-wa">
+                                    <i class="fab fa-whatsapp"></i> واتساب
+                                </a>
+                            ` : ''}
+                        `
+                    }
+                }
                 
                 return `
                     <div class="request-card" style="animation-delay:${(index % 6) * 0.05}s;">
@@ -2029,16 +2255,9 @@
                                     ${escapeHtml(r.description)}
                                 </div>
                             ` : ''}
-                            ${!isSelf ? `
+                            ${actionButtons ? `
                                 <div class="request-actions">
-                                    <button class="btn-action btn-action-chat" onclick="handleChatClick(event)">
-                                        <i class="fas fa-comments"></i> تواصل عبر الموقع
-                                    </button>
-                                    ${hasPhone ? `
-                                        <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-wa">
-                                            <i class="fab fa-whatsapp"></i> واتساب
-                                        </a>
-                                    ` : ''}
+                                    ${actionButtons}
                                 </div>
                             ` : ''}
                         </div>
