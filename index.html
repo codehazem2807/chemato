@@ -69,6 +69,7 @@ input,select,textarea{font-family:inherit}
 @keyframes fireFlicker{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.15) rotate(5deg)}}
 @keyframes nodePulse{0%,100%{transform:scale(1);opacity:0.6}50%{transform:scale(1.5);opacity:1}}
 @keyframes newsTickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+@keyframes highlightPulse{0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,0.7)}50%{box-shadow:0 0 0 12px rgba(46,204,113,0)}}
 .animate-in{animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) backwards}
 
 /* NAVBAR */
@@ -267,7 +268,6 @@ input,select,textarea{font-family:inherit}
 [data-theme="dark"] .card-price{color:#7ec8e3}
 .card-price .currency{font-size:0.72rem;font-weight:600;color:var(--c-text-sub)}
 .card-price .moq{font-size:0.68rem;color:var(--c-text-sub);font-weight:600;margin-right:auto;background:var(--c-surface-2);padding:2px 8px;border-radius:var(--r-full)}
-.card-price .price-range-tag{font-size:0.68rem;color:var(--c-purple);font-weight:700;background:rgba(139,92,246,0.1);padding:2px 8px;border-radius:var(--r-full)}
 .card-supplier{display:flex;align-items:center;gap:6px;color:var(--c-text-muted);font-size:0.8rem;font-weight:500;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .card-supplier i{color:var(--c-primary-600);flex-shrink:0}
 .verified-badge{display:inline-flex;align-items:center;gap:3px;background:linear-gradient(135deg,#1e88e5,#1565c0);color:#fff;font-size:0.6rem;padding:2px 7px;border-radius:var(--r-full);font-weight:700;margin-right:4px;box-shadow:0 2px 6px rgba(30,136,229,0.3)}
@@ -329,6 +329,9 @@ input,select,textarea{font-family:inherit}
 /* LIVE RFQs */
 .rfq-card{background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-lg);padding:20px;cursor:pointer;transition:all 0.3s ease;position:relative;overflow:hidden}
 .rfq-card:hover{border-color:var(--c-safety-orange);transform:translateY(-4px);box-shadow:var(--sh-lg)}
+
+/* HIGHLIGHT TARGET (للعناصر المستهدفة من URL) */
+.highlight-target{animation:highlightPulse 1.5s ease-in-out 3}
 
 /* SKELETON */
 .skeleton{background:linear-gradient(90deg,var(--c-border) 0%,var(--c-surface-2) 25%,var(--c-border) 50%,var(--c-surface-2) 75%,var(--c-border) 100%);background-size:200% 100%;animation:skeletonWave 1.5s ease-in-out infinite;border-radius:var(--r-md)}
@@ -789,7 +792,7 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <div id="featuredProductsList" class="grid"></div>
 </div>
 
-<!-- QUOTES SECTION - استغلال quotes table -->
+<!-- QUOTES SECTION -->
 <div id="latestQuotesSection" class="quotes-section" style="display:none;">
 <div class="section-header">
 <h2><i class="fas fa-file-invoice-dollar"></i> أحدث عروض الأسعار</h2>
@@ -1059,6 +1062,7 @@ const state = {
     statsCache: { data: null, timestamp: 0 },
     abortController: null,
     recentRendered: false,
+    actionHandled: false,
 };
 
 const WISHLIST_KEY = 'chemato-wishlist';
@@ -1464,7 +1468,7 @@ const checkUser = async () => {
 };
 
 // ============================================================
-// FAVORITES / WISHLIST
+// FAVORITES
 // ============================================================
 const loadWishlistFromLocal = () => {
     try {
@@ -1521,7 +1525,7 @@ const removeFavoriteFromDB = async (productId) => {
 };
 
 // ============================================================
-// FOLLOWING (follows table)
+// FOLLOWING
 // ============================================================
 const loadFollowingFromLocal = () => {
     try {
@@ -1600,7 +1604,7 @@ const loadUnreadMessagesCount = async () => {
 };
 
 // ============================================================
-// STATS - محسّن باستخدام RPC
+// STATS
 // ============================================================
 const animateNumber = (el, target) => {
     if (!el) return;
@@ -1631,7 +1635,6 @@ const loadStats = async (force = false) => {
     }
 
     try {
-        // استخدام RPC function للكفاءة
         const { data: rpcData, error: rpcError } = await supabase.rpc('get_public_stats');
 
         if (!rpcError && rpcData) {
@@ -1640,14 +1643,12 @@ const loadStats = async (force = false) => {
             return;
         }
 
-        // Fallback: queries مباشرة
         const [prodResult, reqResult, supResult] = await Promise.all([
             supabase.from('products').select('*', { count: 'exact', head: true }).eq('status', 'active'),
             supabase.from('purchase_requests').select('*', { count: 'exact', head: true }).eq('status', 'open'),
             supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier'),
         ]);
 
-        // views_count + views معاً
         const { data: viewsData } = await supabase
             .from('products')
             .select('views, views_count')
@@ -1750,7 +1751,6 @@ const fetchSuppliersMap = async (supplierIds) => {
 const loadProducts = async ({ append = false } = {}) => {
     if (!supabase || state.loading) return;
 
-    // Abort previous request
     if (state.abortController) state.abortController.abort();
     state.abortController = new AbortController();
 
@@ -2062,7 +2062,6 @@ const initCardActions = () => {
             e.preventDefault();
             const supplierId = btn.dataset.supplierId;
             await toggleFollow(supplierId, btn);
-            // Update icon
             const icon = btn.querySelector('i');
             if (icon) {
                 icon.className = state.following.has(supplierId) ? 'fas fa-bell' : 'fas fa-bell-slash';
@@ -2185,7 +2184,6 @@ const initRfqForm = () => {
 
             if (error) throw error;
 
-            // Log analytics event
             logAnalyticsEvent('rfq', { product_name: data.product_name });
 
             showToast('✅', 'تم الإرسال!', 'هيتواصل معك الموردون قريباً', 'لوحة التحكم', 'buyer-dashboard.html', 'success');
@@ -2469,7 +2467,6 @@ const loadTrending = async () => {
     } catch (e) {}
 };
 
-// استغلال quotes table - أحدث عروض الأسعار
 const loadLatestQuotes = async () => {
     if (!supabase) return;
     try {
@@ -2486,11 +2483,9 @@ const loadLatestQuotes = async () => {
 
         if (!quotes?.length) return;
 
-        // اجلب أسماء الموردين
         const supplierIds = [...new Set(quotes.map(q => q.supplier_id).filter(Boolean))];
         const suppliersMap = await fetchSuppliersMap(supplierIds);
 
-        // اجلب المنتجات المرتبطة
         const productIds = [...new Set(quotes.map(q => q.product_id).filter(Boolean))];
         let productsMap = {};
         if (productIds.length) {
@@ -2501,7 +2496,6 @@ const loadLatestQuotes = async () => {
             (products || []).forEach(p => { productsMap[p.id] = p; });
         }
 
-        // اجلب RFQs
         const rfqIds = [...new Set(quotes.map(q => q.rfq_id).filter(Boolean))];
         let rfqsMap = {};
         if (rfqIds.length) {
@@ -2895,7 +2889,6 @@ const renderCategoryGrid = async () => {
         ];
     }
 
-    // اجلب العدادات
     const counts = {};
     try {
         const { data: productsData } = await supabase
@@ -2933,7 +2926,6 @@ const renderCategoryGrid = async () => {
         document.getElementById('productsList')?.scrollIntoView({ behavior: 'smooth' });
     });
 
-    // تفعيل reveal للكروت
     document.querySelectorAll('.reveal').forEach(el => {
         if (!el.classList.contains('revealed')) el.classList.add('revealed');
     });
@@ -3019,7 +3011,7 @@ const initPriceSlider = () => {
 };
 
 // ============================================================
-// URL
+// URL HANDLING - مع دعم action
 // ============================================================
 const updateURL = () => {
     const params = new URLSearchParams();
@@ -3056,6 +3048,98 @@ const readURL = () => {
     if (gradeFilterEl) gradeFilterEl.value = state.gradeFilter;
     const stockFilterEl = document.getElementById('stockFilter');
     if (stockFilterEl) stockFilterEl.value = state.stockFilter;
+};
+
+// ============================================================
+// HANDLE URL ACTIONS - الإصلاح الجديد ✅
+// ============================================================
+const handleUrlActions = () => {
+    if (state.actionHandled) return;
+    const params = new URLSearchParams(window.location.search);
+    const action = params.get('action');
+
+    if (!action) return;
+    state.actionHandled = true;
+
+    console.info(`🎯 Handling URL action: ${action}`);
+
+    switch (action) {
+        case 'rfq':
+        case 'request_quote':
+        case 'quote':
+            // فتح نافذة طلب عرض السعر
+            setTimeout(() => {
+                const rfqBtn = document.getElementById('rfqBtn');
+                if (rfqBtn) {
+                    rfqBtn.click();
+                } else {
+                    showRfqModal();
+                }
+            }, 600);
+            break;
+
+        case 'supplier':
+        case 'register_supplier':
+            // التوجه لصفحة تسجيل المورد
+            setTimeout(() => {
+                window.location.href = 'auth.html?type=supplier';
+            }, 300);
+            break;
+
+        case 'buyer':
+        case 'register_buyer':
+            // التوجه لصفحة تسجيل المشتري
+            setTimeout(() => {
+                window.location.href = 'auth.html?type=buyer';
+            }, 300);
+            break;
+
+        case 'login':
+        case 'signin':
+            // التوجه لصفحة تسجيل الدخول
+            setTimeout(() => {
+                window.location.href = 'auth.html';
+            }, 300);
+            break;
+
+        case 'products':
+            // التوجه لصفحة المنتجات
+            setTimeout(() => {
+                window.location.href = 'all-products.html';
+            }, 300);
+            break;
+
+        case 'requests':
+            // التوجه لصفحة الطلبات
+            setTimeout(() => {
+                window.location.href = 'all-requests.html';
+            }, 300);
+            break;
+
+        case 'suppliers':
+            // التوجه لصفحة الموردين
+            setTimeout(() => {
+                window.location.href = 'chemato-suppliers.html';
+            }, 300);
+            break;
+
+        case 'wishlist':
+            // فتح المفضلة
+            setTimeout(() => {
+                document.getElementById('wishlistToggle')?.click();
+            }, 600);
+            break;
+
+        case 'notifications':
+            // فتح الإشعارات
+            setTimeout(() => {
+                document.getElementById('notificationBtn')?.click();
+            }, 600);
+            break;
+
+        default:
+            console.info(`Unknown action: ${action}`);
+    }
 };
 
 // ============================================================
@@ -3211,7 +3295,6 @@ const logAnalyticsEvent = async (eventType, metadata = {}) => {
     } catch (e) {}
 };
 
-// Track View with rate limiting
 const trackView = (productId, supplierId) => {
     if (!productId || state.viewTracked.has(productId)) return;
     state.viewTracked.add(productId);
@@ -3449,7 +3532,7 @@ const setupRealtime = () => {
 // INIT
 // ============================================================
 const init = async () => {
-    console.info('🚀 كيماتو 3.2 جاري التحميل...');
+    console.info('🚀 كيماتو 3.3 جاري التحميل...');
 
     if (!supabase) {
         const container = document.getElementById('productsList');
@@ -3516,19 +3599,23 @@ const init = async () => {
 
     setupRealtime();
 
-    // إعداد Realtime للـ notifications بعد تسجيل الدخول
+    // ✅ معالجة action من URL
+    handleUrlActions();
+
     if (state.user) {
         SmartNotifications.setupRealtime();
     }
 
     setTimeout(() => {
-        showToast('👋', 'مرحباً بك في كيماتو!', 'منصة الكيماويات B2B الاحترافية', 'استكشف', 'all-products.html', 'info');
+        // لا نظهر الترحيب لو فيه action
+        if (!state.actionHandled) {
+            showToast('👋', 'مرحباً بك في كيماتو!', 'منصة الكيماويات B2B الاحترافية', 'استكشف', 'all-products.html', 'info');
+        }
     }, 1500);
 
-    // Refresh stats every 60s
     setInterval(() => loadStats(true).catch(() => {}), 60000);
 
-    console.info('✅ كيماتو 3.2 جاهز');
+    console.info('✅ كيماتو 3.3 جاهز');
 };
 
 if (supabase) {
