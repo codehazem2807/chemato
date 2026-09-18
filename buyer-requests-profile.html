@@ -923,7 +923,6 @@
             box-shadow: 0 8px 20px rgba(139,92,246,0.4);
         }
 
-        /* 🆕 زر سجّل كمورد */
         .btn-action-register {
             background: linear-gradient(135deg, var(--register), var(--register-dark));
             box-shadow: 0 4px 12px rgba(16, 185, 129, 0.35);
@@ -1673,6 +1672,7 @@
     let buyerData = null
     let buyerRequests = []
     let currentUser = null
+    let currentUserProfile = null
     let currentSearch = ''
     let currentStatus = 'all'
 
@@ -1830,50 +1830,56 @@
     // AUTH UI
     // ============================================================
     async function updateAuthUI() {
-        const { data: { user } } = await supabase.auth.getUser()
-        currentUser = user
+        try {
+            const { data: { user } } = await supabase.auth.getUser()
+            currentUser = user || null
 
-        const loginNavBtn = document.getElementById('loginNavBtn')
-        const userDropdown = document.getElementById('userDropdown')
-        const guestBanner = document.getElementById('guestBanner')
-        const supplierCtaBanner = document.getElementById('supplierCtaBanner')
+            const loginNavBtn = document.getElementById('loginNavBtn')
+            const userDropdown = document.getElementById('userDropdown')
+            const guestBanner = document.getElementById('guestBanner')
+            const supplierCtaBanner = document.getElementById('supplierCtaBanner')
 
-        if (user) {
-            const { data: profile } = await supabase
-                .from('profiles')
-                .select('user_type, full_name')
-                .eq('id', user.id)
-                .single()
+            if (currentUser) {
+                const { data: profile } = await supabase
+                    .from('profiles')
+                    .select('user_type, full_name')
+                    .eq('id', currentUser.id)
+                    .single()
 
-            if (loginNavBtn) loginNavBtn.style.display = 'none'
-            if (userDropdown) {
-                userDropdown.style.display = 'inline-block'
-                const dropdownContent = document.getElementById('dropdownContent')
-                if (dropdownContent) {
-                    dropdownContent.innerHTML = `
-                        <a href="messages.html"><i class="fas fa-comments"></i> المحادثات</a>
-                        <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
-                        ${profile?.user_type === 'supplier' ? '<a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> لوحة المورد</a>' : ''}
-                        ${profile?.user_type === 'buyer' ? '<a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> لوحة العميل</a>' : ''}
-                        <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
-                    `
-                    document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
-                        e.preventDefault()
-                        await supabase.auth.signOut()
-                        window.location.href = 'index.html'
-                    })
+                currentUserProfile = profile
+
+                if (loginNavBtn) loginNavBtn.style.display = 'none'
+                if (userDropdown) {
+                    userDropdown.style.display = 'inline-block'
+                    const dropdownContent = document.getElementById('dropdownContent')
+                    if (dropdownContent) {
+                        dropdownContent.innerHTML = `
+                            <a href="messages.html"><i class="fas fa-comments"></i> المحادثات</a>
+                            <a href="profile.html"><i class="fas fa-user"></i> الملف الشخصي</a>
+                            ${profile?.user_type === 'supplier' ? '<a href="supplier-dashboard.html"><i class="fas fa-warehouse"></i> لوحة المورد</a>' : ''}
+                            ${profile?.user_type === 'buyer' ? '<a href="buyer-dashboard.html"><i class="fas fa-shopping-cart"></i> لوحة العميل</a>' : ''}
+                            <a href="#" id="logoutLink" class="logout-item"><i class="fas fa-sign-out-alt"></i> تسجيل خروج</a>
+                        `
+                        document.getElementById('logoutLink')?.addEventListener('click', async (e) => {
+                            e.preventDefault()
+                            await supabase.auth.signOut()
+                            window.location.href = 'index.html'
+                        })
+                    }
                 }
+                if (guestBanner) guestBanner.style.display = 'none'
+                if (supplierCtaBanner) supplierCtaBanner.style.display = 'none'
+            } else {
+                if (loginNavBtn) loginNavBtn.style.display = 'inline-flex'
+                if (userDropdown) userDropdown.style.display = 'none'
+                if (guestBanner) guestBanner.style.display = 'flex'
+                if (supplierCtaBanner) supplierCtaBanner.style.display = 'flex'
             }
-            if (guestBanner) guestBanner.style.display = 'none'
-            if (supplierCtaBanner) supplierCtaBanner.style.display = 'none'
-        } else {
-            if (loginNavBtn) loginNavBtn.style.display = 'inline-flex'
-            if (userDropdown) userDropdown.style.display = 'none'
-            if (guestBanner) guestBanner.style.display = 'flex'
-            if (supplierCtaBanner) supplierCtaBanner.style.display = 'flex'
-        }
 
-        updateContactButtons()
+            updateContactButtons()
+        } catch (e) {
+            console.error('Auth UI error:', e)
+        }
     }
 
     // ============================================================
@@ -1911,7 +1917,7 @@
     // ============================================================
     // CHAT HANDLER (للمسجلين)
     // ============================================================
-    function handleChatClick(e) {
+    async function handleChatClick(e) {
         if (e) e.preventDefault()
 
         if (!buyerId) {
@@ -1928,16 +1934,32 @@
             return
         }
 
-        // Log contact
+        // Prevent self-chat
+        if (currentUser.id === buyerId) {
+            showToast('⚠️', 'تنبيه', 'لا يمكنك التواصل مع نفسك', 'warning')
+            return
+        }
+
+        // Log contact in background (بدون await)
         supabase.from('supplier_contacts').insert({
             supplier_id: buyerId,
             buyer_id: currentUser.id,
             contact_type: 'chat',
-            contact_data: { timestamp: new Date().toISOString(), page: 'buyer-requests' }
-        }).catch(() => {})
+            contact_data: { 
+                timestamp: new Date().toISOString(), 
+                page: 'buyer-requests',
+                source: 'chat_button'
+            }
+        }).then(
+            () => console.log('✅ Contact logged'),
+            (err) => console.warn('⚠️ Contact log failed:', err?.message)
+        )
 
         // Redirect to messages
-        window.location.href = buildMessageUrl(buyerId)
+        showToast('💬', 'جاري فتح المحادثة', 'يتم تحويلك لصفحة المحادثات...', 'info')
+        setTimeout(() => {
+            window.location.href = buildMessageUrl(buyerId)
+        }, 500)
     }
 
     window.handleChatClick = handleChatClick
@@ -1963,7 +1985,7 @@
     // ============================================================
     // WHATSAPP
     // ============================================================
-    function getWhatsAppLink(phone, name) {
+    function getWhatsAppLink(phone) {
         if (!phone) return '#'
         const clean = String(phone).replace(/\D/g, '')
         const formatted = clean.startsWith('20') ? clean : `20${clean}`
@@ -2067,15 +2089,17 @@
             // WhatsApp button
             const whatsappBtn = document.getElementById('whatsappBtn')
             const stickyWhatsappBtn = document.getElementById('stickyWhatsappBtn')
-            const waLink = getWhatsAppLink(buyer.phone || buyer.whatsapp, buyer.full_name)
+            const waLink = getWhatsAppLink(buyer.phone || buyer.whatsapp)
             const hasPhone = !!(buyer.phone || buyer.whatsapp)
+            const isSelf = currentUser && currentUser.id === buyerId
 
             if (whatsappBtn) {
                 whatsappBtn.href = waLink
-                whatsappBtn.style.display = hasPhone ? 'inline-flex' : 'none'
+                whatsappBtn.style.display = (hasPhone && !isSelf) ? 'inline-flex' : 'none'
             }
             if (stickyWhatsappBtn) {
                 stickyWhatsappBtn.href = waLink
+                stickyWhatsappBtn.style.display = (hasPhone && !isSelf) ? 'inline-flex' : 'none'
             }
 
             setTimeout(() => {
@@ -2085,7 +2109,7 @@
             updateSEO(buyer)
             setupShareLinks()
 
-            // Update contact buttons after loading
+            // ⚡ مهم: تحديث الأزرار بعد تحميل البيانات
             updateContactButtons()
 
             await loadRequests()
@@ -2167,7 +2191,7 @@
                 'expired': { class: 'status-expired', text: '⏰ منتهي' }
             }
 
-            const whatsappLink = getWhatsAppLink(buyerData?.phone || buyerData?.whatsapp, buyerData?.full_name)
+            const whatsappLink = getWhatsAppLink(buyerData?.phone || buyerData?.whatsapp)
             const hasPhone = !!(buyerData?.phone || buyerData?.whatsapp)
             const isSelf = currentUser && currentUser.id === buyerId
             const isGuest = !currentUser
@@ -2175,15 +2199,14 @@
             container.innerHTML = buyerRequests.map((r, index) => {
                 const status = statusMap[r.status] || statusMap['open']
                 
-                // 🆕 تحديد الأزرار بناءً على حالة المستخدم
                 let actionButtons = ''
                 
                 if (!isSelf) {
-                    if (currentUser) {
-                        // مستخدم مسجل → زر "تواصل عبر الموقع"
+                    if (isGuest) {
+                        // 🆕 زائر → زر "سجّل كمورد"
                         actionButtons = `
-                            <button class="btn-action btn-action-chat" onclick="handleChatClick(event)">
-                                <i class="fas fa-comments"></i> تواصل عبر الموقع
+                            <button class="btn-action btn-action-register" onclick="handleRegisterAsSupplier(event)">
+                                <i class="fas fa-user-plus"></i> سجّل كمورد
                             </button>
                             ${hasPhone ? `
                                 <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-wa">
@@ -2192,10 +2215,10 @@
                             ` : ''}
                         `
                     } else {
-                        // زائر → زر "سجّل كمورد"
+                        // مستخدم مسجل → زر "تواصل عبر الموقع"
                         actionButtons = `
-                            <button class="btn-action btn-action-register" onclick="handleRegisterAsSupplier(event)">
-                                <i class="fas fa-user-plus"></i> سجّل كمورد
+                            <button class="btn-action btn-action-chat" onclick="handleChatClick(event)">
+                                <i class="fas fa-comments"></i> تواصل عبر الموقع
                             </button>
                             ${hasPhone ? `
                                 <a href="${whatsappLink}" target="_blank" rel="noopener noreferrer" class="btn-action btn-action-wa">
