@@ -2,83 +2,24 @@
 <html lang="ar" dir="rtl">
 <head>
 <meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
-<title>كيماتو - لا يوجد اتصال</title>
-<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;700;900&display=swap" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>غير متصل | كيماتو</title>
 <style>
-* { margin: 0; padding: 0; box-sizing: border-box; }
-body {
-    font-family: 'Cairo', sans-serif;
-    background: linear-gradient(135deg, #0a2540, #144167);
-    min-height: 100vh;
-    min-height: 100dvh;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px;
-    color: #fff;
-    text-align: center;
-}
-.container {
-    max-width: 420px;
-    padding: 32px 24px;
-}
-.icon {
-    width: 120px; height: 120px;
-    margin: 0 auto 24px;
-    background: rgba(255,255,255,0.1);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 3rem;
-    animation: pulse 2s ease-in-out infinite;
-}
-@keyframes pulse {
-    0%, 100% { transform: scale(1); opacity: 0.9; }
-    50% { transform: scale(1.05); opacity: 1; }
-}
-h1 {
-    font-size: 1.6rem;
-    font-weight: 900;
-    margin-bottom: 12px;
-}
-p {
-    color: rgba(255,255,255,0.75);
-    font-size: 0.95rem;
-    line-height: 1.6;
-    margin-bottom: 28px;
-}
-.btn {
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    padding: 14px 32px;
-    background: linear-gradient(135deg, #2ecc71, #22a95c);
-    color: #fff;
-    text-decoration: none;
-    border-radius: 999px;
-    font-weight: 800;
-    font-size: 0.95rem;
-    transition: transform 0.2s;
-    border: none;
-    cursor: pointer;
-    font-family: inherit;
-}
-.btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 12px 32px rgba(46,204,113,0.4);
-}
+body{font-family:'Cairo',system-ui,sans-serif;background:#f6f8fb;color:#0a1f33;margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;text-align:center}
+.card{background:#fff;padding:48px 32px;border-radius:28px;box-shadow:0 20px 48px rgba(10,37,64,0.14);max-width:440px;width:100%}
+.icon{font-size:4rem;margin-bottom:20px}
+h1{font-size:1.5rem;color:#0a2540;margin-bottom:12px}
+p{color:#5a6b7e;line-height:1.7;margin-bottom:24px}
+button{background:linear-gradient(135deg,#2ecc71,#22a95c);color:#fff;border:none;padding:14px 32px;border-radius:999px;font-weight:800;font-size:1rem;cursor:pointer;transition:transform 0.2s}
+button:active{transform:scale(0.96)}
 </style>
 </head>
 <body>
-<div class="container">
-    <div class="icon">📡</div>
-    <h1>لا يوجد اتصال بالإنترنت</h1>
-    <p>يبدو إنك غير متصل حالياً. تحقق من اتصالك وحاول مرة أخرى.</p>
-    <button class="btn" onclick="location.reload()">
-        🔄 حاول مرة أخرى
-    </button>
+<div class="card">
+<div class="icon">🔌</div>
+<h1>أنت غير متصل بالإنترنت</h1>
+<p>لا تقلق، يمكنك تصفح الصفحات التي زرتها سابقاً. يرجى التحقق من اتصالك بالإنترنت.</p>
+<button onclick="location.reload()">إعادة المحاولة</button>
 </div>
 </body>
 </html>
