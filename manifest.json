@@ -1,0 +1,85 @@
+{
+  "name": "كيماتو - منصة الكيماويات B2B",
+  "short_name": "كيماتو",
+  "description": "منصة B2B للمواد الكيماوية في مصر - ابحث برقم CAS، احصل على عروض أسعار، وتواصل مع موردين موثّقين",
+  "start_url": "/?utm_source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui"],
+  "orientation": "portrait-primary",
+  "background_color": "#0a2540",
+  "theme_color": "#0a2540",
+  "lang": "ar",
+  "dir": "rtl",
+  "categories": ["business", "shopping", "productivity"],
+  "prefer_related_applications": false,
+  "icons": [
+    { "src": "/logo-72.png", "sizes": "72x72", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-96.png", "sizes": "96x96", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-128.png", "sizes": "128x128", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-144.png", "sizes": "144x144", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-256.png", "sizes": "256x256", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-384.png", "sizes": "384x384", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/logo-maskable-192.png", "sizes": "192x192", "type": "image/png", "purpose": "maskable" },
+    { "src": "/logo-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "البحث بالمنتج",
+      "short_name": "بحث",
+      "description": "ابحث عن منتج بالاسم أو رقم CAS",
+      "url": "/all-products.html?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icon-search.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "طلب عرض سعر",
+      "short_name": "RFQ",
+      "description": "أنشئ طلب عرض سعر جديد",
+      "url": "/index.html?action=rfq&utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icon-rfq.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "طلبات الشراء",
+      "short_name": "طلبات",
+      "description": "تصفح طلبات الشراء المتاحة",
+      "url": "/all-requests.html?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icon-requests.png", "sizes": "96x96" }]
+    },
+    {
+      "name": "الرسائل",
+      "short_name": "رسائل",
+      "description": "افتح الرسائل والمحادثات",
+      "url": "/messages.html?utm_source=pwa_shortcut",
+      "icons": [{ "src": "/icon-messages.png", "sizes": "96x96" }]
+    }
+  ],
+  "share_target": {
+    "action": "/share-target",
+    "method": "GET",
+    "params": {
+      "title": "title",
+      "text": "text",
+      "url": "url"
+    }
+  },
+  "protocol_handlers": [
+    {
+      "protocol": "web+chemato",
+      "url": "/?url=%s"
+    }
+  ],
+  "screenshots": [
+    { "src": "/screenshots/home.png", "sizes": "1280x720", "type": "image/png", "form_factor": "wide", "label": "الصفحة الرئيسية" },
+    { "src": "/screenshots/mobile-home.png", "sizes": "750x1334", "type": "image/png", "form_factor": "narrow", "label": "الرئيسية على الموبايل" }
+  ],
+  "file_handlers": [
+    {
+      "action": "/open-file",
+      "accept": {
+        "application/pdf": [".pdf"]
+      }
+    }
+  ]
+}
