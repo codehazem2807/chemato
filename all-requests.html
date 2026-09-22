@@ -1034,7 +1034,6 @@
         }
         .btn-details:hover { background: var(--c-primary-600); }
 
-        /* 🆕 زر تواصل عبر الموقع */
         .btn-chat {
             background: linear-gradient(135deg, var(--c-chat), var(--c-chat-dark));
             color: #fff;
@@ -1733,6 +1732,7 @@
             hasMore: true,
             selectedSuggestionIndex: -1,
             channel: null,
+            fallbackAttempted: false,
         };
 
         const WISHLIST_KEY = 'chemato-request-wishlist';
@@ -1767,7 +1767,6 @@
             };
         };
 
-        // 🆕 بناء رابط المحادثة
         const buildMessageUrl = (userId, { requestId = null, productId = null } = {}) => {
             const params = new URLSearchParams({ to: userId });
             if (requestId) params.set('request', requestId);
@@ -2322,25 +2321,65 @@
                 state.requests = [];
                 renderSkeleton();
             } else {
-                infiniteLoading.style.display = 'flex';
+                if (infiniteLoading) infiniteLoading.style.display = 'flex';
             }
 
             try {
                 const from = state.page * state.pageSize;
                 const to = from + state.pageSize - 1;
 
-                const query = buildQuery().range(from, to);
+                // 🛡️ حماية: لو خلصنا خلاص، منعملش query
+                if (append && !state.hasMore) {
+                    state.loading = false;
+                    if (infiniteLoading) infiniteLoading.style.display = 'none';
+                    return;
+                }
 
+                const query = buildQuery().range(from, to);
                 const { data, error, count } = await query;
-                if (error) throw error;
+
+                // ✅ معالجة خطأ PGRST103 (Range Not Satisfiable) بهدوء
+                if (error) {
+                    const isRangeError =
+                        error.code === 'PGRST103' ||
+                        error.message?.toLowerCase().includes('range not satisfiable') ||
+                        error.message?.toLowerCase().includes('requested range') ||
+                        error.message?.toLowerCase().includes('offset');
+
+                    if (isRangeError) {
+                        console.info('📭 No more results (PGRST103) — stopping pagination');
+                        state.hasMore = false;
+
+                        // لو دي أول صفحة ومفيش نتايج → نعرض empty state
+                        if (!append && state.requests.length === 0) {
+                            renderRequests([], true);
+                        }
+                        return;
+                    }
+                    throw error;
+                }
 
                 let requests = data || [];
                 state.total = count || 0;
 
+                // 🛡️ لو مفيش نتايج في أول صفحة
+                if (!append && requests.length === 0) {
+                    state.hasMore = false;
+                    state.requests = [];
+                    renderRequests([], true);
+                    return;
+                }
+
+                // 🛡️ لو مفيش نتايج في صفحة إضافية → نوقف
+                if (append && requests.length === 0) {
+                    state.hasMore = false;
+                    return;
+                }
+
                 // Fetch offers count in batch
                 if (requests.length) {
-                    const requestIds = requests.map(r => r.id);
                     try {
+                        const requestIds = requests.map(r => r.id);
                         const { data: offersData } = await supabase
                             .from('offers')
                             .select('request_id')
@@ -2379,11 +2418,32 @@
 
                 renderRequests(requests, !append);
 
-                state.hasMore = state.requests.length < state.total;
+                // ✅ تحديد hasMore بناءً على عدد الصفوف اللي رجعت
+                const returnedCount = data?.length || 0;
+                const hasReachedTotal = count !== null && count !== undefined && state.requests.length >= count;
+                state.hasMore = returnedCount === state.pageSize && !hasReachedTotal;
+
                 updateResultsCount();
 
             } catch (error) {
                 console.error('❌ Requests error:', error);
+
+                // 🛡️ معالجة إضافية لأي شكل من أخطاء الـ range
+                const isRangeError =
+                    error?.code === 'PGRST103' ||
+                    error?.message?.toLowerCase().includes('range') ||
+                    error?.message?.toLowerCase().includes('offset');
+
+                if (isRangeError) {
+                    console.info('📭 Range error handled silently');
+                    state.hasMore = false;
+                    if (!append && state.requests.length === 0) {
+                        renderRequests([], true);
+                    }
+                    return;
+                }
+
+                // خطأ حقيقي
                 if (!append) {
                     container.innerHTML = `
                         <div class="empty-state">
@@ -2399,7 +2459,7 @@
                 showToast('⚠️', 'خطأ', 'تعذر تحميل الطلبات', null, null, 'error');
             } finally {
                 state.loading = false;
-                infiniteLoading.style.display = 'none';
+                if (infiniteLoading) infiniteLoading.style.display = 'none';
                 container?.setAttribute('aria-busy', 'false');
             }
         };
@@ -2445,30 +2505,25 @@
             const buyerName = escapeHtml(buyer.company_name || buyer.full_name || 'مشتري');
             const buyerInitial = (buyerName || 'م').charAt(0).toUpperCase();
             const buyerCity = escapeHtml(buyer.city || '');
-            const buyerPhone = buyer.phone || '';
             const isVerifiedBuyer = buyer.is_verified === true;
             const buyerId = buyer.id;
 
             const isOwn = state.user && r.buyer_id === state.user.id;
             const isWishlisted = state.wishlist.has(r.id);
 
-            // Status badge
             const statusInfo = getStatusLabel(r.status);
             const statusBadge = `<span class="badge-pill ${statusInfo.class}"><i class="fas fa-${statusInfo.icon}"></i> ${statusInfo.text}</span>`;
 
-            // Deadline badge
             const deadlineInfo = getDeadlineStatus(r.deadline);
             const deadlineBadge = deadlineInfo
                 ? `<span class="badge-pill ${deadlineInfo.class}"><i class="fas fa-clock"></i> ${deadlineInfo.text}</span>`
                 : '';
 
-            // Offers badge
             const offersCount = r.offers_count || 0;
             const offersBadge = offersCount > 0
                 ? `<span class="badge-pill badge-offers"><i class="fas fa-comments"></i> ${offersCount} عرض</span>`
                 : '';
 
-            // Budget display
             let budgetHtml = '';
             if (r.budget_min || r.budget_max) {
                 const min = r.budget_min ? Number(r.budget_min).toLocaleString('ar-EG') : '';
@@ -2477,13 +2532,6 @@
                 budgetHtml = `<div class="request-budget"><i class="fas fa-money-bill-wave"></i> ${display}</div>`;
             }
 
-            // WhatsApp link
-            const cleanPhone = sanitizePhone(buyerPhone);
-            const phoneWithCountry = cleanPhone ? (cleanPhone.startsWith('20') ? cleanPhone : '20' + cleanPhone) : '';
-            const waMessage = encodeURIComponent(`مرحباً، أرى طلبكم على كيماتو: ${r.product_name}. أريد تقديم عرض.`);
-            const waLink = phoneWithCountry ? `https://wa.me/${phoneWithCountry}?text=${waMessage}` : '';
-
-            // 🆕 Chat link
             const chatUrl = buyerId ? buildMessageUrl(buyerId, { requestId: r.id }) : '';
 
             return `
@@ -2627,7 +2675,6 @@
                     }
                     window.location.href = `request-details.html?id=${encodeURIComponent(requestId)}#offer`;
                 } else if (action === 'chat') {
-                    // السماح بالمرور الطبيعي للرابط
                     if (!state.user) {
                         e.preventDefault();
                         const chatUrl = btn.getAttribute('href');
@@ -2711,6 +2758,7 @@
                         return;
                     }
                     state.tab = tab;
+                    state.fallbackAttempted = false;
                     updateTabsUI();
                     resetAndLoad();
                 });
@@ -2887,7 +2935,7 @@
         };
 
         // ============================================================
-        // INFINITE SCROLL
+        // INFINITE SCROLL (مع حماية كاملة)
         // ============================================================
         const initInfiniteScroll = () => {
             const sentinel = document.getElementById('infiniteSentinel');
@@ -2895,10 +2943,18 @@
 
             let isLoading = false;
             const observer = new IntersectionObserver((entries) => {
-                if (entries[0].isIntersecting && !isLoading && state.hasMore && !state.loading) {
+                if (
+                    entries[0].isIntersecting &&
+                    !isLoading &&
+                    state.hasMore &&
+                    !state.loading &&
+                    state.requests.length > 0
+                ) {
                     isLoading = true;
                     state.page += 1;
-                    loadRequests({ append: true }).finally(() => { isLoading = false; });
+                    loadRequests({ append: true }).finally(() => {
+                        setTimeout(() => { isLoading = false; }, 500);
+                    });
                 }
             }, { rootMargin: '400px' });
 
@@ -2960,7 +3016,7 @@
         };
 
         // ============================================================
-        // REALTIME (بدون refresh مزعج)
+        // REALTIME
         // ============================================================
         const setupRealtime = () => {
             if (state.channel) supabase.removeChannel(state.channel);
@@ -3030,7 +3086,20 @@
 
             if (state.user) loadMyRequestsCount();
 
+            // تحميل أولي
             await loadRequests();
+
+            // 🆕 Fallback: لو تاب "open" فاضي والزائر مش مسجل → اجلب كل الطلبات
+            const noResults = state.requests.length === 0;
+            const cleanSearch = !state.search && state.categoryId === 'all' && state.budgetFilter === 'all' && !state.cityFilter;
+
+            if (noResults && state.tab === 'open' && cleanSearch && !state.fallbackAttempted) {
+                console.info('🔄 No open requests — trying "all" as fallback');
+                state.fallbackAttempted = true;
+                state.tab = 'all';
+                updateTabsUI();
+                await loadRequests();
+            }
 
             setupRealtime();
 
