@@ -88,8 +88,8 @@ body{
     width:100%;max-width:100vw;position:relative;
     transition:background-color var(--t-base),color var(--t-base);
     -webkit-font-smoothing:antialiased;
-    padding-bottom:env(safe-area-inset-bottom, 0);
 }
+body.no-scroll{overflow:hidden}
 img{max-width:100%;height:auto;display:block}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 a{color:inherit;text-decoration:none}
@@ -116,16 +116,11 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @keyframes newsTickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
 @keyframes highlightPulse{0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,0.7)}50%{box-shadow:0 0 0 12px rgba(46,204,113,0)}}
 @keyframes slideInUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
-@keyframes slideInDown{from{transform:translateY(-100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes bellRing{0%,100%{transform:rotate(0)}20%{transform:rotate(15deg)}40%{transform:rotate(-10deg)}60%{transform:rotate(5deg)}80%{transform:rotate(-5deg)}}
-@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-3px)}75%{transform:translateX(3px)}}
+@keyframes toastProgress{from{width:100%}to{width:0%}}
 @keyframes installPulse{
     0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,0.6)}
     50%{box-shadow:0 0 0 12px rgba(46,204,113,0)}
-}
-@keyframes notificationSlide{
-    0%{opacity:0;transform:translateY(-16px) scale(0.95)}
-    100%{opacity:1;transform:translateY(0) scale(1)}
 }
 @keyframes unreadPulse{
     0%,100%{background:rgba(46,204,113,0.08)}
@@ -135,10 +130,29 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .animate-in{animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) backwards}
 
 /* ============================================================
-   SKIP LINK & PROGRESS
+   SPINNER
+   ============================================================ */
+.spinner{
+    display:inline-block;width:14px;height:14px;
+    border:2px solid rgba(255,255,255,0.3);
+    border-top-color:#fff;border-radius:50%;
+    animation:spin 0.6s linear infinite;vertical-align:middle;
+}
+
+/* ============================================================
+   SKIP LINK
    ============================================================ */
 .skip-link{position:absolute;top:-100px;right:16px;background:var(--c-primary-900);color:#fff;padding:12px 20px;border-radius:var(--r-md);z-index:9999;transition:top var(--t-fast)}
 .skip-link:focus{top:16px}
+
+/* ============================================================
+   READING PROGRESS
+   ============================================================ */
+#readingProgress{
+    position:fixed;top:0;right:0;height:3px;width:0%;
+    background:linear-gradient(90deg,var(--c-accent),var(--c-primary-500));
+    z-index:9999;transition:width 100ms linear;
+}
 
 /* ============================================================
    NAVBAR
@@ -218,12 +232,11 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .dropdown-content a:last-child{border-bottom:none}
 .dropdown-content a:hover{background:var(--c-surface-2);color:var(--c-primary-600);padding-right:24px}
 .dropdown-content a.logout{color:var(--c-danger)}
-.dropdown-content a.highlight{background:linear-gradient(135deg,rgba(139,92,246,0.08),rgba(139,92,246,0.03));color:var(--c-purple);font-weight:700}
 
 .menu-toggle{display:none;width:40px;height:40px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:#fff;align-items:center;justify-content:center;font-size:1.05rem}
 
 /* ============================================================
-   INSTALL BANNER (يظهر تلقائياً لغير المثبتين)
+   INSTALL BANNER
    ============================================================ */
 .install-banner{
     position:fixed;bottom:0;left:0;right:0;
@@ -302,13 +315,13 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .news-ticker-close:hover{background:rgba(231,76,60,0.4);color:#fff}
 
 /* ============================================================
-   MAIN CONTAINER
+   MAIN CONTAINER — padding-bottom يحمي من Install Banner
    ============================================================ */
 .main-container{
     max-width:var(--container);margin:0 auto;
-    padding:16px max(14px, var(--safe-left)) 80px max(14px, var(--safe-right));
+    padding:16px max(14px, var(--safe-left)) 120px max(14px, var(--safe-right));
 }
-@media (min-width:640px){.main-container{padding:20px 24px 60px}}
+@media (min-width:640px){.main-container{padding:20px 24px 100px}}
 
 /* ============================================================
    HERO
@@ -342,7 +355,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .hero h1 .highlight{background:linear-gradient(135deg,#5eb8ee 0%,#2ecc71 50%,#5eb8ee 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 3s linear infinite}
 .hero p.subtitle{font-size:clamp(0.88rem,3vw,1.1rem);color:rgba(255,255,255,0.8);max-width:640px;margin:0 auto 24px;line-height:1.65}
 
-/* Stats Wrapper */
 .stats-wrapper{margin:0 auto 24px;max-width:900px;border-radius:var(--r-lg);padding:2px;background:linear-gradient(135deg,rgba(94,184,238,0.4),rgba(46,204,113,0.3));position:relative;overflow:hidden}
 .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;padding:12px 10px;background:rgba(10,37,64,0.65);backdrop-filter:blur(20px);border-radius:calc(var(--r-lg) - 2px);position:relative}
 @media (min-width:640px){.stats{grid-template-columns:repeat(5,1fr);gap:4px;padding:18px 20px}}
@@ -360,7 +372,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .stat-label{display:block;font-size:0.6rem;color:rgba(255,255,255,0.7);font-weight:500;margin-top:2px}
 @media (min-width:640px){.stat-label{font-size:0.68rem}}
 
-/* Hero Buttons */
 .hero-buttons{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
 @media (max-width:639px){
     .hero-buttons{flex-direction:column;width:100%}
@@ -384,7 +395,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.share-btn{padding:7px 16px;font-size:0.8rem}}
 .share-btn:hover{background:rgba(255,255,255,0.14);color:#fff}
 
-/* زر التثبيت الرئيسي في الهيرو */
 .install-btn-hero{
     background:linear-gradient(135deg,rgba(46,204,113,0.25),rgba(94,184,238,0.25));
     border:1.5px solid rgba(46,204,113,0.5);color:#fff;
@@ -434,7 +444,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .search-wrapper:focus-within .keyboard-hint{display:none}
 .keyboard-hint kbd{background:var(--c-surface);border:1px solid var(--c-border);border-radius:4px;padding:1px 5px;font-size:0.65rem}
 
-/* Suggestions */
 .suggestions-box{position:absolute;top:calc(100% + 10px);left:4px;right:4px;background:var(--c-surface);border-radius:var(--r-lg);box-shadow:var(--sh-2xl);border:1px solid var(--c-border);max-height:420px;overflow-y:auto;opacity:0;visibility:hidden;transform:translateY(-8px);transition:all var(--t-base);z-index:100;-webkit-overflow-scrolling:touch}
 .suggestions-box.show{opacity:1;visibility:visible;transform:translateY(0)}
 .suggestion-item{padding:12px 16px;cursor:pointer;display:flex;align-items:center;gap:10px;transition:background var(--t-fast);border-bottom:1px solid var(--c-border)}
@@ -663,7 +672,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .infinite-loading .dots span:nth-child(3){animation-delay:0.4s}
 
 /* ============================================================
-   FLOATING BARS
+   FLOATING BAR
    ============================================================ */
 .floating-bar{position:fixed;bottom:0;left:0;right:0;background:var(--c-surface);border-top:1px solid var(--c-border);box-shadow:0 -8px 32px rgba(10,37,64,0.12);padding:12px 16px;padding-bottom:calc(12px + var(--safe-bottom));z-index:95;transform:translateY(100%);transition:transform var(--t-base);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .floating-bar.show{transform:translateY(0)}
@@ -718,21 +727,18 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .quick-view-info .qv-spec .label{font-size:0.7rem;color:var(--c-text-sub);font-weight:600}
 .quick-view-info .qv-spec .value{font-size:0.85rem;color:var(--c-text);font-weight:700;word-break:break-word}
 
-/* Compare Table */
 .compare-table-wrapper{overflow-x:auto;-webkit-overflow-scrolling:touch}
 .compare-table{width:100%;border-collapse:separate;border-spacing:0;font-size:0.82rem;min-width:600px}
 .compare-table th,.compare-table td{padding:10px 12px;text-align:right;border-bottom:1px solid var(--c-border);vertical-align:top}
 .compare-table th{background:var(--c-surface-2);font-weight:700;color:var(--c-text);position:sticky;top:0;font-size:0.78rem}
 .compare-table td{color:var(--c-text-muted)}
 
-/* Form */
 .form-grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media (min-width:640px){.form-grid{grid-template-columns:1fr 1fr;gap:16px}}
 .form-group{display:flex;flex-direction:column;gap:6px;min-width:0}
 .form-group.full{grid-column:1/-1}
 .form-group label{font-size:0.82rem;font-weight:700;color:var(--c-text)}
 .form-group label .req{color:var(--c-danger)}
-.form-group label .hint{font-weight:400;font-size:0.72rem;color:var(--c-text-sub);margin-right:4px}
 .form-group input,.form-group textarea,.form-group select{padding:12px 14px;border-radius:var(--r-md);border:1.5px solid var(--c-border);background:var(--c-surface-2);color:var(--c-text);font-size:16px;transition:all var(--t-fast);width:100%;min-height:44px}
 .form-group input:focus,.form-group textarea:focus,.form-group select:focus{border-color:var(--c-primary-500);outline:none;background:var(--c-surface);box-shadow:0 0 0 3px rgba(44,122,184,0.1)}
 .form-group textarea{min-height:100px;resize:vertical}
@@ -745,7 +751,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .rfq-login-notice a{color:var(--c-primary-600);font-weight:700;text-decoration:underline}
 
 /* ============================================================
-   NOTIFICATION PANEL (Desktop: Side / Mobile: Bottom Sheet)
+   NOTIFICATION PANEL
    ============================================================ */
 .notification-panel{
     position:fixed;
@@ -833,7 +839,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     font-size:0.68rem;color:var(--c-text-sub);
     margin-top:4px;display:flex;align-items:center;gap:4px;
 }
-.notification-time .dot-sep{opacity:0.5}
 
 /* ============================================================
    MESSAGES PANEL
@@ -912,7 +917,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 }
 
 /* ============================================================
-   TOAST (متقدم مع Progress)
+   TOAST
    ============================================================ */
 .toast-container{
     position:fixed;
@@ -939,10 +944,8 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .toast-progress{
     position:absolute;bottom:0;right:0;height:3px;
     background:linear-gradient(90deg,var(--c-primary-500),var(--c-accent));
-    border-radius:0 0 0 0;
     animation:toastProgress 6s linear forwards;
 }
-@keyframes toastProgress{from{width:100%}to{width:0%}}
 .toast .toast-icon{font-size:1.4rem;flex-shrink:0;line-height:1}
 @media (min-width:640px){.toast .toast-icon{font-size:1.5rem}}
 .toast .toast-content{flex:1;min-width:0}
@@ -956,7 +959,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .toast.info{border-right-color:var(--c-purple)}
 
 /* ============================================================
-   PWA BANNER (iOS + شريط التثبيت)
+   PWA INSTALL MODAL
    ============================================================ */
 .pwa-install-modal{
     position:fixed;inset:0;background:rgba(10,20,30,0.85);
@@ -1099,20 +1102,20 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 }
 
 /* ============================================================
-   HIGHLIGHT TARGET
+   UTILITIES
    ============================================================ */
 .highlight-target{animation:highlightPulse 1.5s ease-in-out 3}
-
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.22,1,0.36,1)}
 .reveal.revealed{opacity:1;transform:translateY(0)}
-
 .hidden{display:none !important}
-.no-scroll{overflow:hidden !important;position:fixed !important;width:100% !important}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
 </style>
 </head>
 <body>
+
+<!-- READING PROGRESS BAR -->
+<div id="readingProgress" aria-hidden="true"></div>
 
 <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
 
@@ -1362,7 +1365,7 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <section id="recentlyViewedSection" style="display:none;" class="reveal">
 <div class="section-header">
 <h2><i class="fas fa-history"></i> شاهدتها مؤخراً</h2>
-<button class="view-all" onclick="window.RecentTracker.clear();this.closest('section').style.display='none';">
+<button class="view-all" id="clearRecentBtn" type="button">
 <i class="fas fa-trash"></i> مسح
 </button>
 </div>
@@ -1458,7 +1461,7 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 </div>
 </div>
 
-<!-- INSTALL BANNER (Fixed at bottom) -->
+<!-- INSTALL BANNER -->
 <div class="install-banner" id="installBanner">
 <div class="install-banner-icon">
 <img src="logo.png" alt="كيماتو" onerror="this.style.display='none'" />
@@ -1471,16 +1474,16 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <div class="install-banner-desc">تطبيق أسرع + إشعارات فورية + يعمل بدون إنترنت</div>
 </div>
 <div class="install-banner-actions">
-<button class="install-banner-btn" id="installBannerBtn">
+<button class="install-banner-btn" id="installBannerBtn" type="button">
 <i class="fas fa-download"></i> تثبيت
 </button>
-<button class="install-banner-close" id="installBannerClose" aria-label="إغلاق">
+<button class="install-banner-close" id="installBannerClose" aria-label="إغلاق" type="button">
 <i class="fas fa-times"></i>
 </button>
 </div>
 </div>
 
-<!-- PWA INSTALL MODAL (iOS + تفاصيل) -->
+<!-- PWA INSTALL MODAL -->
 <div class="pwa-install-modal" id="pwaInstallModal">
 <div class="pwa-install-card">
 <div class="pwa-install-icon">
@@ -1665,7 +1668,7 @@ import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js
 const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
 
-let supabase;
+let supabase = null;
 try {
     supabase = createClient(SUPABASE_URL, SUPABASE_ANON_KEY, {
         auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true, flowType: 'pkce' }
@@ -1690,9 +1693,7 @@ const state = {
     categories: [], unreadMessages: 0, unreadNotifications: 0,
     statsCache: { data: null, timestamp: 0 },
     abortController: null, recentRendered: false, actionHandled: false,
-    notifications: [], conversations: [],
     notifChannel: null, msgChannel: null,
-    pwaShownThisSession: false,
     visitCount: 0,
 };
 
@@ -1721,8 +1722,21 @@ const isValidUUID = (id) => id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]
 const sanitizeSearch = (s) => String(s || '').trim().slice(0, 100).replace(/[<>'"]/g, '');
 const isValidCasFormat = (s) => !s ? false : /^\d{2,7}-\d{2}-\d$/.test(String(s).trim());
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-const isAndroid = () => /Android/i.test(navigator.userAgent);
-const isStandalone = () => window.matchMedia('(display-mode: standalone)').matches || window.navigator.standalone === true;
+
+/**
+ * فحص دقيق لحالة التثبيت - يدعم Desktop PWA + iOS + Android
+ */
+const isStandalone = () => {
+    // 1) Check display-mode (works on Chrome/Edge Desktop PWA + Android)
+    if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
+    if (window.matchMedia && window.matchMedia('(display-mode: fullscreen)').matches) return true;
+    if (window.matchMedia && window.matchMedia('(display-mode: minimal-ui)').matches) return true;
+    // 2) Check iOS Safari standalone
+    if (window.navigator.standalone === true) return true;
+    // 3) Check referrer (opened from home screen)
+    if (document.referrer && document.referrer.startsWith('android-app://')) return true;
+    return false;
+};
 
 const debounce = (fn, delay = 300) => {
     let timer;
@@ -1767,12 +1781,12 @@ const initTheme = () => {
 };
 
 // ============================================================
-// TOAST (متقدم مع Progress Bar)
+// TOAST
 // ============================================================
 const removeToast = (toast) => {
     if (!toast || !toast.parentNode) return;
     toast.classList.add('removing');
-    setTimeout(() => toast.remove(), 300);
+    setTimeout(() => { if (toast.parentNode) toast.remove(); }, 300);
 };
 
 const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = '') => {
@@ -1830,31 +1844,32 @@ const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = ''
 window.showToast = showToast;
 
 // ============================================================
-// PWA INSTALL MANAGER (احترافي كامل)
+// PWA INSTALL MANAGER
 // ============================================================
 const PWAManager = {
     deferredPrompt: null,
     dismissed: false,
     isInstalled: false,
+    bannerShown: false,
 
     init() {
-        // Check if already installed
         this.isInstalled = isStandalone();
-        if (this.isInstalled) return;
+        if (this.isInstalled) {
+            this.hideAllInstallUI();
+            return;
+        }
 
-        // Check if user dismissed recently
         const dismissedUntil = localStorage.getItem(KEYS.INSTALL_DISMISSED);
         if (dismissedUntil && Date.now() < Number(dismissedUntil)) {
             this.dismissed = true;
         }
 
-        // Count visits
         let visits = parseInt(localStorage.getItem(KEYS.VISIT_COUNT) || '0', 10);
         visits++;
         localStorage.setItem(KEYS.VISIT_COUNT, String(visits));
         state.visitCount = visits;
 
-        // Setup install prompt (Android/Chrome/Edge)
+        // === Native install prompt (Chrome/Edge Android + Desktop) ===
         window.addEventListener('beforeinstallprompt', (e) => {
             e.preventDefault();
             this.deferredPrompt = e;
@@ -1862,54 +1877,83 @@ const PWAManager = {
             this.showInstallUI();
         });
 
-        // On installed
+        // === Installed event ===
         window.addEventListener('appinstalled', () => {
             this.isInstalled = true;
             this.deferredPrompt = null;
             state.deferredInstallPrompt = null;
             this.hideAllInstallUI();
-            showToast('🎉', 'تم التثبيت!', 'كيماتو على جهازك الآن', null, null, 'success');
-            // Save installed state
             localStorage.setItem('chemato-installed', 'true');
+            showToast('🎉', 'تم التثبيت!', 'كيماتو على جهازك الآن', null, null, 'success');
         });
 
-        // For iOS or when beforeinstallprompt isn't triggered
-        if (isIOS() && !this.isInstalled) {
-            // Show banner after a delay
-            setTimeout(() => this.showInstallUI(), 8000);
-        } else if (!isIOS() && !this.deferredPrompt) {
-            // Fallback: show banner if visited 3+ times
-            if (visits >= 3 && !this.dismissed) {
-                setTimeout(() => this.showInstallUI(), 5000);
-            }
-        }
+        // === Bind buttons with stopPropagation ===
+        const bannerBtn = document.getElementById('installBannerBtn');
+        const heroBtn = document.getElementById('installBtnHero');
+        const bannerClose = document.getElementById('installBannerClose');
+        const pwaInstallBtn = document.getElementById('pwaInstallBtn');
+        const pwaCancelBtn = document.getElementById('pwaCancelBtn');
 
-        // Bind buttons
-        document.getElementById('installBannerBtn')?.addEventListener('click', () => this.triggerInstall());
-        document.getElementById('installBtnHero')?.addEventListener('click', () => this.triggerInstall());
-        document.getElementById('installBannerClose')?.addEventListener('click', () => this.dismissBanner());
-        document.getElementById('pwaInstallBtn')?.addEventListener('click', () => this.triggerInstall());
-        document.getElementById('pwaCancelBtn')?.addEventListener('click', () => this.closeModal());
+        bannerBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            this.triggerInstall();
+        });
+        heroBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            this.triggerInstall();
+        });
+        bannerClose?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            this.dismissBanner();
+        });
+        pwaInstallBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            this.triggerInstall();
+        });
+        pwaCancelBtn?.addEventListener('click', (e) => {
+            e.stopPropagation();
+            e.preventDefault();
+            this.closeModal();
+        });
 
-        // Show iOS instruction if needed
+        // === Show UI for iOS / fallback ===
         if (isIOS()) {
             const instruction = document.getElementById('pwaIOSInstruction');
             if (instruction) instruction.style.display = 'block';
-            const installBtn = document.getElementById('pwaInstallBtn');
-            if (installBtn) installBtn.innerHTML = '<i class="fas fa-share"></i> افتح قائمة المشاركة';
+            if (pwaInstallBtn) pwaInstallBtn.innerHTML = '<i class="fas fa-share"></i> افتح قائمة المشاركة';
+            // Show iOS banner after delay
+            if (!this.dismissed) {
+                setTimeout(() => this.showInstallUI(), 8000);
+            }
+        } else if (!this.deferredPrompt) {
+            // Fallback: show banner after 3+ visits or 15s
+            if (!this.dismissed && (visits >= 3 || visits >= 1)) {
+                setTimeout(() => {
+                    if (!this.deferredPrompt && !this.dismissed) {
+                        this.showInstallUI();
+                    }
+                }, 15000);
+            }
         }
     },
 
     showInstallUI() {
-        if (this.dismissed || this.isInstalled) return;
+        if (this.dismissed || this.isInstalled || this.bannerShown) return;
+        this.bannerShown = true;
 
-        // Show hero button
-        document.getElementById('installBtnHero')?.classList.add('show');
+        // Hero button
+        const heroBtn = document.getElementById('installBtnHero');
+        if (heroBtn) heroBtn.classList.add('show');
 
-        // Show bottom banner (after 2s delay)
+        // Banner after 2s
         setTimeout(() => {
-            if (!this.dismissed) {
-                document.getElementById('installBanner')?.classList.add('show');
+            if (!this.dismissed && !this.isInstalled) {
+                const banner = document.getElementById('installBanner');
+                if (banner) banner.classList.add('show');
             }
         }, 2000);
     },
@@ -1927,22 +1971,27 @@ const PWAManager = {
             return;
         }
 
-        // If native prompt is available (Android/Chrome)
+        // Native prompt (Android/Chrome/Edge Desktop)
         if (this.deferredPrompt) {
-            this.deferredPrompt.prompt();
-            const { outcome } = await this.deferredPrompt.userChoice;
-            if (outcome === 'accepted') {
-                this.isInstalled = true;
-                this.deferredPrompt = null;
-                this.hideAllInstallUI();
-                showToast('🎉', 'جاري التثبيت...', 'كيماتو هيظهر على شاشتك', null, null, 'success');
-            } else {
-                this.dismissBanner();
+            try {
+                this.deferredPrompt.prompt();
+                const { outcome } = await this.deferredPrompt.userChoice;
+                if (outcome === 'accepted') {
+                    this.isInstalled = true;
+                    this.deferredPrompt = null;
+                    this.hideAllInstallUI();
+                    showToast('🎉', 'جاري التثبيت...', 'كيماتو هيظهر على شاشتك', null, null, 'success');
+                } else {
+                    this.dismissBanner();
+                }
+            } catch (e) {
+                console.warn('Install prompt error:', e);
+                this.showInstructionsModal();
             }
             return;
         }
 
-        // Otherwise, show manual instructions modal
+        // Manual instructions fallback
         this.showInstructionsModal();
     },
 
@@ -1962,7 +2011,6 @@ const PWAManager = {
         this.dismissed = true;
         document.getElementById('installBanner')?.classList.remove('show');
         document.getElementById('installBtnHero')?.classList.remove('show');
-        // Don't show again for 7 days
         const until = Date.now() + (7 * 24 * 60 * 60 * 1000);
         localStorage.setItem(KEYS.INSTALL_DISMISSED, String(until));
     }
@@ -1973,16 +2021,13 @@ const PWAManager = {
 // ============================================================
 const registerServiceWorker = async () => {
     if (!('serviceWorker' in navigator)) return;
-
     try {
-        const registration = await navigator.serviceWorker.register('/sw.js', {
-            scope: '/'
-        });
+        const registration = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
         console.log('✅ SW registered:', registration.scope);
 
-        // Handle updates
         registration.addEventListener('updatefound', () => {
             const newWorker = registration.installing;
+            if (!newWorker) return;
             newWorker.addEventListener('statechange', () => {
                 if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
                     showToast('🔄', 'تحديث متاح', 'اضغط هنا للتحديث', 'تحديث', 'javascript:window.location.reload()', 'info');
@@ -1995,7 +2040,7 @@ const registerServiceWorker = async () => {
 };
 
 // ============================================================
-// NOTIFICATIONS MANAGER (احترافي)
+// NOTIFICATIONS MANAGER
 // ============================================================
 const NotificationsManager = {
     notifications: [],
@@ -2019,7 +2064,6 @@ const NotificationsManager = {
 
         document.getElementById('markAllReadBtn')?.addEventListener('click', () => this.markAllRead());
 
-        // Load initial
         this.load();
     },
 
@@ -2027,12 +2071,8 @@ const NotificationsManager = {
         const panel = document.getElementById('notificationPanel');
         if (!panel) return;
         panel.classList.toggle('show');
-
-        // Remove ring animation
         document.getElementById('notificationBtn')?.classList.remove('ring-animation');
-
         if (panel.classList.contains('show')) {
-            // Mark as seen
             localStorage.setItem(KEYS.NOTIF_SEEN, new Date().toISOString());
         }
     },
@@ -2042,7 +2082,6 @@ const NotificationsManager = {
             this.renderEmpty('سجّل دخولك لعرض الإشعارات');
             return;
         }
-
         try {
             const { data, error } = await supabase
                 .from('notifications')
@@ -2094,11 +2133,9 @@ const NotificationsManager = {
                 'new_rfq': { icon: 'fa-bullhorn', type: 'new-quote' },
             };
             const meta = iconMap[n.type] || { icon: 'fa-bell', type: 'default' };
-
             const title = escapeHtml(n.title || 'إشعار');
             const message = escapeHtml(n.message || '');
             const time = timeAgo(n.created_at);
-
             const isUnread = !n.read;
 
             return `
@@ -2121,7 +2158,6 @@ const NotificationsManager = {
             `;
         }).join('');
 
-        // Bind clicks
         list.querySelectorAll('.notification-item').forEach(item => {
             item.addEventListener('click', () => {
                 const link = item.dataset.link;
@@ -2139,9 +2175,7 @@ const NotificationsManager = {
             notif.read = true;
             this.updateBadge();
             this.render();
-            try {
-                await supabase.from('notifications').update({ read: true }).eq('id', id);
-            } catch (e) {}
+            try { await supabase.from('notifications').update({ read: true }).eq('id', id); } catch (e) {}
         }
     },
 
@@ -2168,7 +2202,6 @@ const NotificationsManager = {
         }
         state.unreadNotifications = unread;
 
-        // Ring animation if new unread
         if (unread > 0) {
             document.getElementById('notificationBtn')?.classList.add('ring-animation');
             setTimeout(() => {
@@ -2179,7 +2212,7 @@ const NotificationsManager = {
 
     setupRealtime() {
         if (!state.user || !supabase) return;
-        if (this.channel) supabase.removeChannel(this.channel);
+        if (this.channel) { try { supabase.removeChannel(this.channel); } catch(e){} }
 
         try {
             this.channel = supabase
@@ -2195,7 +2228,6 @@ const NotificationsManager = {
                     this.updateBadge();
                     this.render();
 
-                    // Show toast with sound
                     const notifMeta = {
                         'new_product': { icon: '📦', msg: 'منتج جديد' },
                         'new_quote': { icon: '💰', msg: 'عرض سعر جديد' },
@@ -2205,16 +2237,14 @@ const NotificationsManager = {
                     };
                     const meta = notifMeta[n.type] || { icon: '🔔', msg: '' };
                     showToast(meta.icon, n.title || meta.msg, n.message || '', 'عرض', n.data?.link || null, 'info');
-
-                    // Play sound
                     this.playSound();
                 })
                 .subscribe();
-        } catch (e) {}
+        } catch (e) { console.warn('Notifications realtime:', e); }
     },
 
     playSound() {
-        // Play sound via Web Audio API (no file needed)
+        if (!this.soundEnabled) return;
         try {
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
             const osc = ctx.createOscillator();
@@ -2230,7 +2260,7 @@ const NotificationsManager = {
 };
 
 // ============================================================
-// MESSAGES MANAGER (احترافي)
+// MESSAGES MANAGER
 // ============================================================
 const MessagesManager = {
     conversations: [],
@@ -2258,8 +2288,6 @@ const MessagesManager = {
         const panel = document.getElementById('messagesPanel');
         if (!panel) return;
         panel.classList.toggle('show');
-
-        // Load previews when opened
         if (panel.classList.contains('show')) {
             this.loadPreviews();
         }
@@ -2273,7 +2301,6 @@ const MessagesManager = {
                 .select('*', { count: 'exact', head: true })
                 .eq('to_user_id', state.user.id)
                 .eq('is_read', false);
-
             this.updateBadge(count || 0);
         } catch (e) {}
     },
@@ -2314,7 +2341,6 @@ const MessagesManager = {
                 return;
             }
 
-            // Group by conversation
             const convMap = new Map();
             messages.forEach(msg => {
                 const otherId = msg.from_user_id === state.user.id ? msg.to_user_id : msg.from_user_id;
@@ -2324,8 +2350,6 @@ const MessagesManager = {
             });
 
             const conversations = Array.from(convMap.values()).slice(0, 15);
-
-            // Get profiles
             const userIds = conversations.map(c => c.other_user_id).filter(Boolean);
             const { data: profiles } = await supabase
                 .from('profiles')
@@ -2335,7 +2359,6 @@ const MessagesManager = {
             const profileMap = {};
             (profiles || []).forEach(p => { profileMap[p.id] = p; });
 
-            // Count unread per conversation
             const unreadMap = {};
             messages.forEach(msg => {
                 if (msg.to_user_id === state.user.id && !msg.is_read) {
@@ -2395,7 +2418,7 @@ const MessagesManager = {
 
     setupRealtime() {
         if (!state.user || !supabase) return;
-        if (this.channel) supabase.removeChannel(this.channel);
+        if (this.channel) { try { supabase.removeChannel(this.channel); } catch(e){} }
 
         try {
             this.channel = supabase
@@ -2408,16 +2431,12 @@ const MessagesManager = {
                 }, (payload) => {
                     const msg = payload.new;
                     this.updateBadge((state.unreadMessages || 0) + 1);
-
-                    // Show toast
                     const preview = (msg.message || '').substring(0, 60);
                     showToast('💬', 'رسالة جديدة!', preview, 'افتح الرسائل', `messages.html?to=${msg.from_user_id}`, 'info');
-
-                    // Play sound
                     NotificationsManager.playSound();
                 })
                 .subscribe();
-        } catch (e) {}
+        } catch (e) { console.warn('Messages realtime:', e); }
     }
 };
 
@@ -2493,7 +2512,7 @@ const initKeyboardShortcuts = () => {
 // NEWS TICKER
 // ============================================================
 const NewsTicker = {
-    items: [], ticker: null, content: null,
+    items: [], ticker: null, content: null, reloadTimer: null,
 
     async load() {
         this.ticker = document.getElementById('newsTicker');
@@ -2531,7 +2550,8 @@ const NewsTicker = {
             this.render();
             this.ticker.classList.add('show');
             this.items.forEach(item => this.trackView(item.id));
-            setTimeout(() => this.load(), 60000);
+            clearTimeout(this.reloadTimer);
+            this.reloadTimer = setTimeout(() => this.load(), 60000);
         } catch (e) {
             this.ticker.classList.remove('show');
         }
@@ -2563,8 +2583,7 @@ const NewsTicker = {
                 return `
                     <a class="news-item ${color}" href="${linkUrl}"
                        ${isExternal ? 'target="_blank" rel="noopener noreferrer"' : ''}
-                       data-news-id="${escapeHtml(item.id)}"
-                       onclick="NewsTicker.trackClick('${escapeHtml(item.id)}')">
+                       data-news-id="${escapeHtml(item.id)}">
                         ${innerContent}
                     </a>
                 `;
@@ -2580,6 +2599,13 @@ const NewsTicker = {
         this.content.innerHTML = itemsHtml + itemsHtml;
         const speed = Math.max(30, this.items.length * 12);
         this.content.style.animationDuration = `${speed}s`;
+
+        // Bind click tracking safely (no inline onclick with unescaped IDs)
+        this.content.querySelectorAll('.news-item[data-news-id]').forEach(el => {
+            el.addEventListener('click', () => {
+                this.trackClick(el.dataset.newsId);
+            });
+        });
     },
 
     async trackView(newsId) {
@@ -2680,7 +2706,6 @@ const checkUser = async () => {
             await loadUnreadMessagesCount();
             await loadFollowingFromDB();
 
-            // Start realtime for notifications and messages
             NotificationsManager.setupRealtime();
             MessagesManager.setupRealtime();
 
@@ -2800,7 +2825,6 @@ const toggleFollow = async (supplierId, btn) => {
         try {
             await supabase.from('follows').insert({
                 follower_id: state.user.id,
-                following_id: supplierId,
                 target_type: 'supplier',
                 target_id: supplierId,
                 notify_new_products: true,
@@ -2823,7 +2847,6 @@ const loadUnreadMessagesCount = async () => {
             .select('*', { count: 'exact', head: true })
             .eq('to_user_id', state.user.id)
             .eq('is_read', false);
-
         MessagesManager.updateBadge(count || 0);
     } catch (e) {}
 };
@@ -2962,9 +2985,6 @@ const fetchSuppliersMap = async (supplierIds) => {
 const loadProducts = async ({ append = false } = {}) => {
     if (!supabase || state.loading) return;
 
-    if (state.abortController) state.abortController.abort();
-    state.abortController = new AbortController();
-
     state.loading = true;
 
     const container = document.getElementById('productsList');
@@ -3079,7 +3099,6 @@ const loadProducts = async ({ append = false } = {}) => {
         enriched.forEach(p => trackView(p.id, p.supplier_id));
 
     } catch (error) {
-        if (error.name === 'AbortError') return;
         console.error('Products error:', error);
         if (!append && container) {
             container.innerHTML = `<div class="empty-state"><i class="fas fa-exclamation-triangle" style="color:var(--c-danger);"></i><h3>حدث خطأ</h3><p>${escapeHtml(error?.message || 'خطأ غير معروف')}</p></div>`;
@@ -3129,9 +3148,10 @@ const renderProductCard = (p, index = 0) => {
 
     const hasImage = p.image_url && p.image_url.trim() && /^https?:\/\//i.test(p.image_url);
     const safeImageUrl = hasImage ? escapeHtml(p.image_url) : '';
+    const safeShortName = shortName.replace(/'/g, "&#39;");
 
     const mediaHtml = safeImageUrl
-        ? `<img class="card-img" src="${safeImageUrl}" alt="${name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.parentElement.innerHTML='<div class=\\'card-img-placeholder\\'><span class=\\'emoji\\'>🧪</span><span class=\\'name\\'>${shortName.replace(/'/g, "&#39;")}</span></div>';" />`
+        ? `<img class="card-img" src="${safeImageUrl}" alt="${name}" loading="lazy" decoding="async" onerror="this.onerror=null;this.parentElement.innerHTML='&lt;div class=\\'card-img-placeholder\\'&gt;&lt;span class=\\'emoji\\'&gt;🧪&lt;/span&gt;&lt;span class=\\'name\\'&gt;${safeShortName}&lt;/span&gt;&lt;/div&gt;';" />`
         : `<div class="card-img-placeholder"><span class="emoji">🧪</span><span class="name">${shortName}</span></div>`;
 
     const views = Math.max(Number(p.views) || 0, Number(p.views_count) || 0);
@@ -3144,7 +3164,7 @@ const renderProductCard = (p, index = 0) => {
 
     const supplierId = p.supplier?.id || p.supplier_id || '';
     const supplierPhone = p.supplier?.phone || '';
-    const safeName = (p.name || '').replace(/'/g, '&#39;');
+    const safeName = (p.name || '').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
 
     const isWishlisted = state.wishlist.has(p.id);
     const isCompare = state.compareList.includes(p.id);
@@ -3267,7 +3287,7 @@ const initCardActions = () => {
 
     document.addEventListener('click', (e) => {
         const card = e.target.closest('.card[data-product-id]');
-        if (card) {
+        if (card && !e.target.closest('[data-action]') && !e.target.closest('a')) {
             const name = card.querySelector('.card-title')?.textContent;
             const priceText = card.querySelector('.card-price')?.textContent;
             const img = card.querySelector('.card-img')?.src;
@@ -3282,7 +3302,7 @@ const initCardActions = () => {
 };
 
 // ============================================================
-// WISHLIST / FOLLOW
+// WISHLIST
 // ============================================================
 const handleWishlistToggle = async (productId, productName, btn) => {
     const wasWishlisted = state.wishlist.has(productId);
@@ -3326,10 +3346,8 @@ const openRfqForProduct = async (product) => {
 
 const showRfqModal = () => {
     const notice = document.getElementById('rfqLoginNotice');
-    if (state.user) {
-        notice.style.display = 'none';
-    } else {
-        notice.style.display = 'flex';
+    if (notice) {
+        notice.style.display = state.user ? 'none' : 'flex';
     }
     document.getElementById('rfqModal').classList.add('show');
     document.body.classList.add('no-scroll');
@@ -3494,10 +3512,10 @@ const updateCompareUI = () => {
     }
     const bar = document.getElementById('compareBar');
     const barText = document.getElementById('compareBarText');
-    if (count > 0) {
+    if (count > 0 && bar) {
         bar.classList.add('show');
-        barText.textContent = `${count} منتج للمقارنة`;
-    } else {
+        if (barText) barText.textContent = `${count} منتج للمقارنة`;
+    } else if (bar) {
         bar.classList.remove('show');
     }
     document.querySelectorAll('[data-action="compare"]').forEach(btn => {
@@ -3584,7 +3602,7 @@ const RecentTracker = {
         list.innerHTML = items.map(p => {
             const price = p.price ? `${Number(p.price).toLocaleString('ar-EG')} ج.م` : 'عند الطلب';
             const thumb = p.image_url && /^https?:\/\//i.test(p.image_url)
-                ? `<img src="${p.image_url}" alt="" class="mini-thumb" onerror="this.style.display='none';this.parentElement.innerHTML='🧪'">`
+                ? `<img src="${escapeHtml(p.image_url)}" alt="" class="mini-thumb" onerror="this.style.display='none';this.parentElement.innerHTML='🧪'">`
                 : `<div class="mini-thumb">🧪</div>`;
             return `
                 <div class="mini-card" onclick="window.location.href='product-details.html?id=${encodeURIComponent(p.id)}'">
@@ -4079,10 +4097,6 @@ const renderCategoryGrid = async () => {
         loadProducts();
         document.getElementById('productsList')?.scrollIntoView({ behavior: 'smooth' });
     });
-
-    document.querySelectorAll('.reveal').forEach(el => {
-        if (!el.classList.contains('revealed')) el.classList.add('revealed');
-    });
 };
 
 // ============================================================
@@ -4321,7 +4335,7 @@ const showQuickView = async (productId) => {
         const price = p.price ? `${Number(p.price).toLocaleString('ar-EG')} <span class="currency">ج.م</span>` : 'سعر عند الطلب';
         const hasImage = p.image_url && /^https?:\/\//i.test(p.image_url);
         const mediaHtml = hasImage ? `<img src="${escapeHtml(p.image_url)}" alt="${escapeHtml(p.name)}">` : `<span>🧪</span>`;
-        const safeName = (p.name || '').replace(/'/g, '&#39;');
+        const safeName = (p.name || '').replace(/'/g, '&#39;').replace(/"/g, '&quot;');
 
         body.innerHTML = `
             <div class="quick-view-content">
@@ -4403,7 +4417,10 @@ const observeProductViews = () => {
 // SCROLL REVEAL
 // ============================================================
 const initScrollReveal = () => {
-    if (!('IntersectionObserver' in window)) return;
+    if (!('IntersectionObserver' in window)) {
+        document.querySelectorAll('.reveal').forEach(el => el.classList.add('revealed'));
+        return;
+    }
     const observer = new IntersectionObserver((entries) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
@@ -4447,6 +4464,9 @@ const initModals = () => {
         document.getElementById('quickViewModal').classList.remove('show');
         document.body.classList.remove('no-scroll');
     });
+    document.getElementById('clearRecentBtn')?.addEventListener('click', () => {
+        RecentTracker.clear();
+    });
     document.querySelectorAll('.modal-overlay').forEach(overlay => {
         overlay.addEventListener('click', (e) => {
             if (e.target === overlay) {
@@ -4488,15 +4508,17 @@ const init = async () => {
     }
 
     if (!sessionStorage.getItem('session_id')) {
-        const sid = crypto.randomUUID?.() || Math.random().toString(36).substring(2);
+        const sid = (crypto.randomUUID && crypto.randomUUID()) || Math.random().toString(36).substring(2);
         sessionStorage.setItem('session_id', sid);
     }
 
+    // ====== Load local state FIRST ======
     loadWishlistFromLocal();
     loadCompareList();
     loadFollowingFromLocal();
     state.searchMode = localStorage.getItem(KEYS.SEARCH_MODE) || 'name';
 
+    // ====== Init UI components ======
     initTheme();
     initNavbar();
     initKeyboardShortcuts();
@@ -4515,14 +4537,17 @@ const init = async () => {
     initScrollReveal();
     MolecularVisualizer.init();
 
-    // Start Notifications & Messages Managers
+    // ====== Notifications & Messages ======
     NotificationsManager.init();
     MessagesManager.init();
 
-    // PWA
-    PWAManager.init();
+    // ====== Service Worker (before PWA init) ======
     registerServiceWorker();
 
+    // ====== PWA (after SW registered) ======
+    PWAManager.init();
+
+    // ====== News Ticker ======
     NewsTicker.init();
 
     updateWishlistCount();
@@ -4530,6 +4555,7 @@ const init = async () => {
 
     readURL();
 
+    // ====== Load initial data ======
     await Promise.all([
         loadStats(true).catch(e => console.warn('Stats:', e.message)),
         loadCategories().catch(e => console.warn('Categories:', e.message)),
@@ -4564,6 +4590,9 @@ const init = async () => {
     console.info('✅ كيماتو 4.0 جاهز');
 };
 
+// ============================================================
+// AUTH STATE LISTENER
+// ============================================================
 if (supabase) {
     supabase.auth.onAuthStateChange(async (event) => {
         if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
@@ -4571,12 +4600,6 @@ if (supabase) {
             loadProducts().catch(() => {});
             loadLiveRfqs().catch(() => {});
             loadLatestQuotes().catch(() => {});
-            if (event === 'SIGNED_IN') {
-                NotificationsManager.load();
-                NotificationsManager.setupRealtime();
-                MessagesManager.load();
-                MessagesManager.setupRealtime();
-            }
         }
     });
 }
@@ -4587,6 +4610,9 @@ if (document.readyState === 'loading') {
     init();
 }
 
+// ============================================================
+// GLOBAL EXPORTS
+// ============================================================
 window.PWAManager = PWAManager;
 window.NotificationsManager = NotificationsManager;
 window.MessagesManager = MessagesManager;
