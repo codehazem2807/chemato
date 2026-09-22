@@ -6,164 +6,152 @@
 <title>لوحة الأدمن — كيماتو</title>
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/xlsx@0.18.5/dist/xlsx.full.min.js"></script>
 <style>
 :root {
-  --c-primary-50:#eef6fc; --c-primary-100:#d4e7f5; --c-primary-500:#2c7ab8;
-  --c-primary-600:#1d5b8e; --c-primary-700:#144167; --c-primary-800:#0d2e4a; --c-primary-900:#0a2540;
-  --c-accent:#2ecc71; --c-accent-dark:#22a95c;
-  --c-warning:#f39c12; --c-danger:#e74c3c;
-  --c-whatsapp:#25D366; --c-purple:#8b5cf6;
-  --c-verified:#1e88e5;
-  --c-request:#FF6B35; --c-request-dark:#E55A2B;
-  --c-register:#10b981; --c-register-dark:#059669;
-  --c-chat:#8b5cf6; --c-chat-dark:#7c3aed;
-  --c-bg:#f6f8fb; --c-surface:#ffffff; --c-surface-2:#f9fbfd; --c-border:#e3eaf2;
-  --c-text:#0a1f33; --c-text-muted:#5a6b7e; --c-text-sub:#8595a8;
-  --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-full:999px;
-  --header-h:68px; --sidebar-w:260px;
-  --shadow-sm: 0 1px 3px rgba(10,31,51,.06), 0 1px 2px rgba(10,31,51,.04);
-  --shadow-md: 0 4px 12px rgba(10,31,51,.08);
-  --shadow-lg: 0 12px 32px rgba(10,31,51,.12);
+  --c-primary-50:#eef6fc;--c-primary-100:#d4e7f5;--c-primary-500:#2c7ab8;
+  --c-primary-600:#1d5b8e;--c-primary-700:#144167;--c-primary-800:#0d2e4a;--c-primary-900:#0a2540;
+  --c-accent:#2ecc71;--c-accent-dark:#22a95c;
+  --c-warning:#f39c12;--c-danger:#e74c3c;--c-purple:#8b5cf6;--c-teal:#14b8a6;
+  --c-bg:#f6f8fb;--c-surface:#ffffff;--c-surface-2:#f9fbfd;--c-border:#e3eaf2;
+  --c-text:#0a1f33;--c-text-muted:#5a6b7e;--c-text-sub:#8595a8;
+  --r-sm:8px;--r-md:14px;--r-lg:20px;--r-xl:28px;--r-full:999px;
+  --header-h:68px;--sidebar-w:270px;
+  --shadow-sm:0 1px 3px rgba(10,31,51,.06);
+  --shadow-md:0 4px 12px rgba(10,31,51,.08);
+  --shadow-lg:0 12px 32px rgba(10,31,51,.12);
 }
-[data-theme="dark"] {
-  --c-bg:#0a1520; --c-surface:#101e2e; --c-surface-2:#16273a; --c-border:#1f3349;
-  --c-text:#e8eef5; --c-text-muted:#9fb1c4; --c-text-sub:#6e8298;
-  --shadow-sm: 0 1px 3px rgba(0,0,0,.3);
-  --shadow-md: 0 4px 12px rgba(0,0,0,.4);
-  --shadow-lg: 0 12px 32px rgba(0,0,0,.5);
-}
+[data-theme="dark"]{--c-bg:#0a1520;--c-surface:#101e2e;--c-surface-2:#16273a;--c-border:#1f3349;--c-text:#e8eef5;--c-text-muted:#9fb1c4;--c-text-sub:#6e8298;--shadow-sm:0 1px 3px rgba(0,0,0,.3);--shadow-md:0 4px 12px rgba(0,0,0,.4);--shadow-lg:0 12px 32px rgba(0,0,0,.5);}
 *{margin:0;padding:0;box-sizing:border-box}
 html,body{height:100%}
-body{
-  font-family:'Cairo',system-ui,-apple-system,sans-serif;
-  background:var(--c-bg); color:var(--c-text);
-  line-height:1.6; -webkit-font-smoothing:antialiased;
-  transition: background .3s ease, color .3s ease;
-}
+body{font-family:'Cairo',system-ui,sans-serif;background:var(--c-bg);color:var(--c-text);line-height:1.6;-webkit-font-smoothing:antialiased;transition:background .3s,color .3s}
 a{color:inherit;text-decoration:none}
 button{font-family:inherit;cursor:pointer;border:none;background:none}
 input,select,textarea{font-family:inherit}
 ::-webkit-scrollbar{width:10px;height:10px}
 ::-webkit-scrollbar-track{background:var(--c-surface-2)}
 ::-webkit-scrollbar-thumb{background:var(--c-border);border-radius:var(--r-full)}
-::-webkit-scrollbar-thumb:hover{background:var(--c-text-sub)}
 
 /* LOGIN */
-.login-screen{position:fixed; inset:0; z-index:9999; display:flex; align-items:center; justify-content:center; background: linear-gradient(135deg, var(--c-primary-900) 0%, var(--c-primary-700) 100%); padding:20px;}
+.login-screen{position:fixed;inset:0;z-index:9999;display:flex;align-items:center;justify-content:center;background:linear-gradient(135deg,var(--c-primary-900) 0%,var(--c-primary-700) 100%);padding:20px}
 .login-screen.hidden{display:none}
-.login-card{background:var(--c-surface); border-radius:var(--r-xl); padding:48px 40px; width:100%; max-width:440px; box-shadow: var(--shadow-lg); text-align:center; animation: slideUp .5s ease;}
+.login-card{background:var(--c-surface);border-radius:var(--r-xl);padding:48px 40px;width:100%;max-width:440px;box-shadow:var(--shadow-lg);text-align:center;animation:slideUp .5s}
 @keyframes slideUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
-.login-logo{width:80px; height:80px; margin:0 auto 20px; background: linear-gradient(135deg, var(--c-primary-500), var(--c-primary-700)); border-radius: var(--r-lg); display:flex; align-items:center; justify-content:center; font-size:38px; color:#fff; box-shadow: 0 8px 24px rgba(44,122,184,.35);}
-.login-card h1{font-size:26px; font-weight:800; margin-bottom:8px}
-.login-card p{color:var(--c-text-muted); font-size:14px; margin-bottom:32px}
-.password-wrap{position:relative; margin-bottom:20px}
-.password-wrap input{width:100%; padding:16px 52px 16px 20px; border:2px solid var(--c-border); border-radius:var(--r-md); background:var(--c-surface-2); color:var(--c-text); font-size:16px; transition: all .2s;}
-.password-wrap input:focus{outline:none; border-color:var(--c-primary-500); background:var(--c-surface); box-shadow:0 0 0 4px rgba(44,122,184,.1)}
-.password-wrap input.error{border-color:var(--c-danger); animation: shake .4s}
+.login-logo{width:80px;height:80px;margin:0 auto 20px;background:linear-gradient(135deg,var(--c-primary-500),var(--c-primary-700));border-radius:var(--r-lg);display:flex;align-items:center;justify-content:center;font-size:38px;color:#fff;box-shadow:0 8px 24px rgba(44,122,184,.35)}
+.login-card h1{font-size:26px;font-weight:800;margin-bottom:8px}
+.login-card p{color:var(--c-text-muted);font-size:14px;margin-bottom:32px}
+.password-wrap{position:relative;margin-bottom:20px}
+.password-wrap input{width:100%;padding:16px 52px 16px 20px;border:2px solid var(--c-border);border-radius:var(--r-md);background:var(--c-surface-2);color:var(--c-text);font-size:16px;transition:all .2s}
+.password-wrap input:focus{outline:none;border-color:var(--c-primary-500);background:var(--c-surface);box-shadow:0 0 0 4px rgba(44,122,184,.1)}
+.password-wrap input.error{border-color:var(--c-danger);animation:shake .4s}
 @keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-8px)}75%{transform:translateX(8px)}}
-.password-wrap .toggle-pass{position:absolute; left:12px; top:50%; transform:translateY(-50%); width:36px; height:36px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; color:var(--c-text-muted); font-size:18px;}
-.btn-login{width:100%; padding:16px; background: linear-gradient(135deg, var(--c-primary-500), var(--c-primary-700)); color:#fff; border-radius:var(--r-md); font-size:16px; font-weight:700; transition: all .2s; box-shadow: 0 4px 12px rgba(44,122,184,.3);}
+.password-wrap .toggle-pass{position:absolute;left:12px;top:50%;transform:translateY(-50%);width:36px;height:36px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--c-text-muted);font-size:18px}
+.btn-login{width:100%;padding:16px;background:linear-gradient(135deg,var(--c-primary-500),var(--c-primary-700));color:#fff;border-radius:var(--r-md);font-size:16px;font-weight:700;transition:all .2s;box-shadow:0 4px 12px rgba(44,122,184,.3)}
 .btn-login:hover{transform:translateY(-2px)}
-.login-hint{margin-top:20px; font-size:12px; color:var(--c-text-sub)}
+.login-hint{margin-top:20px;font-size:12px;color:var(--c-text-sub)}
 
 /* HEADER */
-.admin-header{position:sticky; top:0; z-index:100; background:var(--c-surface); border-bottom:1px solid var(--c-border); height:var(--header-h); display:flex; align-items:center; padding:0 24px; gap:16px; box-shadow: var(--shadow-sm);}
-.admin-header .logo{display:flex; align-items:center; gap:10px; font-weight:800; font-size:18px; color:var(--c-primary-700);}
-.admin-header .logo .logo-icon{width:38px; height:38px; border-radius:var(--r-sm); background: linear-gradient(135deg, var(--c-primary-500), var(--c-primary-700)); display:flex; align-items:center; justify-content:center; color:#fff; font-size:18px;}
-.admin-header .badge-admin{background: var(--c-danger); color:#fff; padding: 4px 12px; border-radius: var(--r-full); font-size:11px; font-weight:700;}
+.admin-header{position:sticky;top:0;z-index:100;background:var(--c-surface);border-bottom:1px solid var(--c-border);height:var(--header-h);display:flex;align-items:center;padding:0 24px;gap:16px;box-shadow:var(--shadow-sm)}
+.admin-header .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--c-primary-700)}
+.admin-header .logo .logo-icon{width:38px;height:38px;border-radius:var(--r-sm);background:linear-gradient(135deg,var(--c-primary-500),var(--c-primary-700));display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
+.admin-header .badge-admin{background:var(--c-danger);color:#fff;padding:4px 12px;border-radius:var(--r-full);font-size:11px;font-weight:700}
 .admin-header .spacer{flex:1}
-.admin-header .header-actions{display:flex; gap:8px; align-items:center}
-.icon-btn{width:40px; height:40px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; color:var(--c-text-muted); font-size:18px; transition: all .2s; position:relative}
-.icon-btn:hover{background:var(--c-surface-2); color:var(--c-text)}
-.icon-btn .dot{position:absolute; top:6px; right:6px; width:8px; height:8px; border-radius:50%; background:var(--c-danger);}
-.btn-logout{padding:8px 16px; border-radius:var(--r-sm); background: var(--c-danger); color:#fff; font-size:13px; font-weight:600;}
+.admin-header .header-actions{display:flex;gap:8px;align-items:center}
+.icon-btn{width:40px;height:40px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--c-text-muted);font-size:18px;transition:all .2s;position:relative}
+.icon-btn:hover{background:var(--c-surface-2);color:var(--c-text)}
+.btn-logout{padding:8px 16px;border-radius:var(--r-sm);background:var(--c-danger);color:#fff;font-size:13px;font-weight:600}
 
 /* LAYOUT */
-.admin-layout{display:grid; grid-template-columns: var(--sidebar-w) 1fr; min-height: calc(100vh - var(--header-h));}
-.admin-sidebar{background:var(--c-surface); border-left:1px solid var(--c-border); padding:20px 12px; position:sticky; top:var(--header-h); height: calc(100vh - var(--header-h)); overflow-y:auto;}
-.nav-section{margin-bottom:20px}
-.nav-section-title{font-size:11px; font-weight:700; color:var(--c-text-sub); text-transform:uppercase; letter-spacing:.5px; padding:0 12px; margin-bottom:8px;}
-.nav-link{display:flex; align-items:center; gap:12px; padding:11px 14px; border-radius:var(--r-sm); color:var(--c-text-muted); font-size:13.5px; font-weight:500; transition: all .2s; cursor:pointer; margin-bottom:2px;}
-.nav-link:hover{background:var(--c-surface-2); color:var(--c-text)}
-.nav-link.active{background: linear-gradient(135deg, var(--c-primary-500), var(--c-primary-700)); color:#fff; box-shadow: 0 4px 12px rgba(44,122,184,.25);}
-.nav-link .nav-icon{font-size:17px; width:22px; text-align:center}
-.nav-link .nav-count{margin-right:auto; background:var(--c-primary-50); color:var(--c-primary-700); padding:2px 10px; border-radius:var(--r-full); font-size:11px; font-weight:700;}
-[data-theme="dark"] .nav-link .nav-count{background:rgba(44,122,184,.2); color:var(--c-primary-100)}
-.nav-link.active .nav-count{background:rgba(255,255,255,.25); color:#fff}
+.admin-layout{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:calc(100vh - var(--header-h))}
+.admin-sidebar{background:var(--c-surface);border-left:1px solid var(--c-border);padding:20px 12px;position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));overflow-y:auto}
+.nav-section{margin-bottom:18px}
+.nav-section-title{font-size:11px;font-weight:700;color:var(--c-text-sub);text-transform:uppercase;letter-spacing:.5px;padding:0 12px;margin-bottom:6px}
+.nav-link{display:flex;align-items:center;gap:12px;padding:10px 14px;border-radius:var(--r-sm);color:var(--c-text-muted);font-size:13.5px;font-weight:500;transition:all .2s;cursor:pointer;margin-bottom:2px}
+.nav-link:hover{background:var(--c-surface-2);color:var(--c-text)}
+.nav-link.active{background:linear-gradient(135deg,var(--c-primary-500),var(--c-primary-700));color:#fff;box-shadow:0 4px 12px rgba(44,122,184,.25)}
+.nav-link .nav-icon{font-size:17px;width:22px;text-align:center}
+.nav-link .nav-count{margin-right:auto;background:var(--c-primary-50);color:var(--c-primary-700);padding:2px 10px;border-radius:var(--r-full);font-size:11px;font-weight:700}
+[data-theme="dark"] .nav-link .nav-count{background:rgba(44,122,184,.2);color:var(--c-primary-100)}
+.nav-link.active .nav-count{background:rgba(255,255,255,.25);color:#fff}
 
 /* MAIN */
-.admin-main{padding:24px; max-width:1600px; width:100%}
-.page-header{display:flex; align-items:center; justify-content:space-between; gap:16px; margin-bottom:24px; flex-wrap:wrap;}
-.page-title{font-size:24px; font-weight:800; display:flex; align-items:center; gap:12px}
+.admin-main{padding:24px;max-width:1600px;width:100%}
+.page-header{display:flex;align-items:center;justify-content:space-between;gap:16px;margin-bottom:20px;flex-wrap:wrap}
+.page-title{font-size:24px;font-weight:800;display:flex;align-items:center;gap:12px}
 .page-title .title-icon{font-size:28px}
-.page-subtitle{color:var(--c-text-muted); font-size:14px; margin-top:4px}
+.page-subtitle{color:var(--c-text-muted);font-size:14px;margin-top:4px}
+.header-actions-bar{display:flex;gap:8px;flex-wrap:wrap}
 
 /* BUTTONS */
-.btn{display:inline-flex; align-items:center; gap:8px; padding:11px 20px; border-radius:var(--r-sm); font-size:14px; font-weight:600; transition: all .2s; white-space:nowrap;}
-.btn:disabled{opacity:.5; cursor:not-allowed}
-.btn-primary{background: linear-gradient(135deg, var(--c-primary-500), var(--c-primary-700)); color:#fff; box-shadow: 0 4px 12px rgba(44,122,184,.25);}
+.btn{display:inline-flex;align-items:center;gap:8px;padding:10px 18px;border-radius:var(--r-sm);font-size:13.5px;font-weight:600;transition:all .2s;white-space:nowrap}
+.btn:disabled{opacity:.5;cursor:not-allowed}
+.btn-primary{background:linear-gradient(135deg,var(--c-primary-500),var(--c-primary-700));color:#fff;box-shadow:0 4px 12px rgba(44,122,184,.25)}
 .btn-primary:hover:not(:disabled){transform:translateY(-2px)}
-.btn-accent{background: linear-gradient(135deg, var(--c-accent), var(--c-accent-dark)); color:#fff; box-shadow: 0 4px 12px rgba(46,204,113,.25);}
-.btn-outline{background:var(--c-surface); color:var(--c-text); border:1.5px solid var(--c-border);}
-.btn-outline:hover:not(:disabled){border-color:var(--c-primary-500); color:var(--c-primary-600); background:var(--c-primary-50)}
+.btn-accent{background:linear-gradient(135deg,var(--c-accent),var(--c-accent-dark));color:#fff}
+.btn-accent:hover:not(:disabled){transform:translateY(-2px)}
+.btn-outline{background:var(--c-surface);color:var(--c-text);border:1.5px solid var(--c-border)}
+.btn-outline:hover:not(:disabled){border-color:var(--c-primary-500);color:var(--c-primary-600);background:var(--c-primary-50)}
 [data-theme="dark"] .btn-outline:hover{background:rgba(44,122,184,.1)}
-.btn-danger{background:var(--c-danger); color:#fff}
+.btn-danger{background:var(--c-danger);color:#fff}
 .btn-danger:hover:not(:disabled){opacity:.9}
-.btn-warning{background:var(--c-warning); color:#fff}
-.btn-sm{padding:6px 12px; font-size:12px}
-.btn-xs{padding:4px 8px; font-size:11px}
+.btn-warning{background:var(--c-warning);color:#fff}
+.btn-teal{background:var(--c-teal);color:#fff}
+.btn-sm{padding:6px 12px;font-size:12px}
+.btn-xs{padding:4px 9px;font-size:11px}
 
 /* CARDS */
-.card{background:var(--c-surface); border:1px solid var(--c-border); border-radius:var(--r-md); box-shadow: var(--shadow-sm); overflow:hidden;}
-.card-header{padding:18px 20px; border-bottom:1px solid var(--c-border); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;}
-.card-title{font-size:16px; font-weight:700; display:flex; align-items:center; gap:10px}
+.card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);box-shadow:var(--shadow-sm);overflow:hidden}
+.card-header{padding:16px 20px;border-bottom:1px solid var(--c-border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.card-title{font-size:16px;font-weight:700;display:flex;align-items:center;gap:10px}
 .card-body{padding:20px}
 
 /* FORM */
-.form-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:16px}
-.form-field{display:flex; flex-direction:column; gap:6px}
+.form-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:14px}
+.form-field{display:flex;flex-direction:column;gap:6px}
 .form-field.full{grid-column:1/-1}
-.form-label{font-size:13px; font-weight:600; color:var(--c-text)}
-.form-label .req{color:var(--c-danger); margin-right:2px}
-.form-label .hint{font-weight:400; color:var(--c-text-sub); font-size:11px; margin-right:6px}
-.form-input, .form-select, .form-textarea{width:100%; padding:11px 14px; background:var(--c-surface-2); color:var(--c-text); border:1.5px solid var(--c-border); border-radius:var(--r-sm); font-size:14px; transition: all .2s;}
-.form-input:focus, .form-select:focus, .form-textarea:focus{outline:none; border-color:var(--c-primary-500); background:var(--c-surface); box-shadow: 0 0 0 4px rgba(44,122,184,.1);}
-.form-textarea{resize:vertical; min-height:110px; line-height:1.6}
-.form-check{display:flex; align-items:center; gap:10px; padding:12px 14px; background:var(--c-surface-2); border:1.5px solid var(--c-border); border-radius:var(--r-sm); cursor:pointer; transition: all .2s;}
-.form-check:hover{border-color:var(--c-primary-500)}
-.form-check input{width:18px; height:18px; accent-color: var(--c-primary-600); cursor:pointer}
+.form-label{font-size:13px;font-weight:600}
+.form-label .req{color:var(--c-danger)}
+.form-label .hint{font-weight:400;color:var(--c-text-sub);font-size:11px;margin-right:6px}
+.form-input,.form-select,.form-textarea{width:100%;padding:10px 13px;background:var(--c-surface-2);color:var(--c-text);border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-size:13.5px;transition:all .2s}
+.form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--c-primary-500);background:var(--c-surface);box-shadow:0 0 0 4px rgba(44,122,184,.1)}
+.form-textarea{resize:vertical;min-height:100px;line-height:1.6}
+.form-check{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--c-surface-2);border:1.5px solid var(--c-border);border-radius:var(--r-sm);cursor:pointer}
+.form-check input{width:18px;height:18px;accent-color:var(--c-primary-600);cursor:pointer}
 
 /* TAGS */
-.tags-input-wrap{display:flex; flex-wrap:wrap; gap:6px; padding:8px; background:var(--c-surface-2); border:1.5px solid var(--c-border); border-radius:var(--r-sm); min-height:46px; align-items:center;}
-.tags-input-wrap:focus-within{border-color:var(--c-primary-500); background:var(--c-surface);}
-.tag-chip{display:inline-flex; align-items:center; gap:6px; padding:4px 10px; background:var(--c-primary-500); color:#fff; border-radius:var(--r-full); font-size:12px; font-weight:600;}
-.tag-chip button{color:#fff; font-size:14px; line-height:1; opacity:.8}
-.tags-input-wrap input{flex:1; min-width:120px; border:none; background:transparent; color:var(--c-text); font-size:14px; outline:none; padding:4px;}
+.tags-input-wrap{display:flex;flex-wrap:wrap;gap:6px;padding:8px;background:var(--c-surface-2);border:1.5px solid var(--c-border);border-radius:var(--r-sm);min-height:44px;align-items:center}
+.tags-input-wrap:focus-within{border-color:var(--c-primary-500);background:var(--c-surface)}
+.tag-chip{display:inline-flex;align-items:center;gap:6px;padding:4px 10px;background:var(--c-primary-500);color:#fff;border-radius:var(--r-full);font-size:12px;font-weight:600}
+.tag-chip button{color:#fff;font-size:14px;opacity:.8}
+.tags-input-wrap input{flex:1;min-width:120px;border:none;background:transparent;color:var(--c-text);font-size:13.5px;outline:none;padding:4px}
 
 /* TABLE */
-.table-wrap{overflow-x:auto; border-radius:var(--r-md); border:1px solid var(--c-border); background:var(--c-surface)}
-table{width:100%; border-collapse:collapse; font-size:13.5px}
+.table-wrap{overflow-x:auto;border-radius:var(--r-md);border:1px solid var(--c-border);background:var(--c-surface)}
+table{width:100%;border-collapse:collapse;font-size:13px}
 thead{background:var(--c-surface-2)}
-th{text-align:right; padding:12px 14px; font-weight:700; font-size:11.5px; color:var(--c-text-muted); text-transform:uppercase; letter-spacing:.3px; border-bottom:1.5px solid var(--c-border); white-space:nowrap;}
-td{padding:12px 14px; border-bottom:1px solid var(--c-border); vertical-align:middle}
-tbody tr{transition: background .15s}
+th{text-align:right;padding:11px 12px;font-weight:700;font-size:11px;color:var(--c-text-muted);text-transform:uppercase;letter-spacing:.3px;border-bottom:1.5px solid var(--c-border);white-space:nowrap}
+td{padding:11px 12px;border-bottom:1px solid var(--c-border);vertical-align:middle}
+tbody tr{transition:background .15s}
 tbody tr:hover{background:var(--c-surface-2)}
 tbody tr:last-child td{border-bottom:none}
-.td-title{font-weight:600; color:var(--c-text); max-width:280px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.td-muted{color:var(--c-text-muted); font-size:12px}
-.td-actions{display:flex; gap:6px; flex-wrap:wrap}
+.td-title{font-weight:600;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.td-muted{color:var(--c-text-muted);font-size:11.5px}
+.td-mono{font-family:'Courier New',monospace;font-size:11.5px;color:var(--c-text-muted);background:var(--c-surface-2);padding:2px 6px;border-radius:4px}
+.td-actions{display:flex;gap:5px;flex-wrap:wrap}
+.td-pass{font-family:'Courier New',monospace;font-size:12px;background:rgba(243,156,18,.15);color:#b9770e;padding:3px 8px;border-radius:4px;font-weight:700;cursor:pointer;user-select:all}
+.td-pass.hidden-pass{filter:blur(4px);transition:filter .2s}
+.td-pass.hidden-pass:hover{filter:blur(0)}
 
 /* BADGES */
-.badge{display:inline-flex; align-items:center; gap:5px; padding:4px 10px; border-radius:var(--r-full); font-size:11px; font-weight:700; white-space:nowrap;}
-.badge-success{background:rgba(46,204,113,.15); color:var(--c-accent-dark)}
-.badge-warning{background:rgba(243,156,18,.15); color:#b9770e}
-.badge-danger{background:rgba(231,76,60,.15); color:var(--c-danger)}
-.badge-info{background:rgba(44,122,184,.15); color:var(--c-primary-700)}
-.badge-gray{background:rgba(133,149,168,.15); color:var(--c-text-muted)}
-.badge-purple{background:rgba(139,92,246,.15); color:var(--c-purple)}
+.badge{display:inline-flex;align-items:center;gap:5px;padding:3px 9px;border-radius:var(--r-full);font-size:10.5px;font-weight:700;white-space:nowrap}
+.badge-success{background:rgba(46,204,113,.15);color:var(--c-accent-dark)}
+.badge-warning{background:rgba(243,156,18,.15);color:#b9770e}
+.badge-danger{background:rgba(231,76,60,.15);color:var(--c-danger)}
+.badge-info{background:rgba(44,122,184,.15);color:var(--c-primary-700)}
+.badge-gray{background:rgba(133,149,168,.15);color:var(--c-text-muted)}
+.badge-purple{background:rgba(139,92,246,.15);color:var(--c-purple)}
 [data-theme="dark"] .badge-success{color:#4ade80}
 [data-theme="dark"] .badge-warning{color:#fbbf24}
 [data-theme="dark"] .badge-danger{color:#f87171}
@@ -171,111 +159,123 @@ tbody tr:last-child td{border-bottom:none}
 [data-theme="dark"] .badge-purple{color:#a78bfa}
 
 /* TOGGLE */
-.toggle{position:relative; display:inline-block; width:40px; height:22px; flex-shrink:0}
-.toggle input{opacity:0; width:0; height:0}
-.toggle .slider{position:absolute; cursor:pointer; inset:0; background:var(--c-border); border-radius:var(--r-full); transition: .3s;}
-.toggle .slider:before{content:""; position:absolute; height:16px; width:16px; right:3px; bottom:3px; background:#fff; border-radius:50%; transition: .3s; box-shadow: 0 1px 3px rgba(0,0,0,.2);}
-.toggle input:checked + .slider{background: var(--c-accent)}
-.toggle input:checked + .slider:before{transform: translateX(-18px)}
+.toggle{position:relative;display:inline-block;width:40px;height:22px}
+.toggle input{opacity:0;width:0;height:0}
+.toggle .slider{position:absolute;cursor:pointer;inset:0;background:var(--c-border);border-radius:var(--r-full);transition:.3s}
+.toggle .slider:before{content:"";position:absolute;height:16px;width:16px;right:3px;bottom:3px;background:#fff;border-radius:50%;transition:.3s}
+.toggle input:checked + .slider{background:var(--c-accent)}
+.toggle input:checked + .slider:before{transform:translateX(-18px)}
 
 /* MODAL */
-.modal-overlay{position:fixed; inset:0; z-index:1000; background: rgba(10,31,51,.6); backdrop-filter: blur(4px); display:flex; align-items:center; justify-content:center; padding:20px; animation: fadeIn .2s ease;}
+.modal-overlay{position:fixed;inset:0;z-index:1000;background:rgba(10,31,51,.6);backdrop-filter:blur(4px);display:flex;align-items:center;justify-content:center;padding:20px;animation:fadeIn .2s}
 .modal-overlay.hidden{display:none}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.modal{background:var(--c-surface); border-radius:var(--r-lg); width:100%; max-width:720px; max-height:90vh; display:flex; flex-direction:column; box-shadow: var(--shadow-lg); animation: modalIn .3s ease;}
+.modal{background:var(--c-surface);border-radius:var(--r-lg);width:100%;max-width:720px;max-height:90vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);animation:modalIn .3s}
 .modal.wide{max-width:960px}
-.modal.xwide{max-width:1200px}
-@keyframes modalIn{from{opacity:0; transform:scale(.95) translateY(20px)}to{opacity:1; transform:scale(1) translateY(0)}}
-.modal-header{padding:18px 22px; border-bottom:1px solid var(--c-border); display:flex; align-items:center; justify-content:space-between; gap:12px; flex-shrink:0;}
-.modal-title{font-size:18px; font-weight:800; display:flex; align-items:center; gap:10px}
-.modal-close{width:36px; height:36px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; color:var(--c-text-muted); font-size:22px; line-height:1;}
-.modal-close:hover{background:var(--c-surface-2); color:var(--c-danger)}
-.modal-body{padding:22px; overflow-y:auto; flex:1}
-.modal-footer{padding:16px 22px; border-top:1px solid var(--c-border); display:flex; gap:10px; flex-shrink:0; background:var(--c-surface-2);}
+@keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
+.modal-header{padding:16px 22px;border-bottom:1px solid var(--c-border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0}
+.modal-title{font-size:17px;font-weight:800;display:flex;align-items:center;gap:10px}
+.modal-close{width:34px;height:34px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;color:var(--c-text-muted);font-size:20px}
+.modal-close:hover{background:var(--c-surface-2);color:var(--c-danger)}
+.modal-body{padding:20px;overflow-y:auto;flex:1}
+.modal-footer{padding:14px 22px;border-top:1px solid var(--c-border);display:flex;gap:10px;flex-shrink:0;background:var(--c-surface-2)}
 
 /* TOAST */
-.toast-container{position:fixed; top:20px; left:20px; z-index:2000; display:flex; flex-direction:column; gap:10px; pointer-events:none}
-.toast{background:var(--c-surface); border-radius:var(--r-md); padding:14px 18px; box-shadow: var(--shadow-lg); display:flex; align-items:center; gap:12px; min-width:300px; max-width:420px; border-right:4px solid var(--c-primary-500); pointer-events:auto; animation: toastIn .3s ease;}
-@keyframes toastIn{from{opacity:0; transform:translateX(-30px)}to{opacity:1; transform:translateX(0)}}
+.toast-container{position:fixed;top:20px;left:20px;z-index:2000;display:flex;flex-direction:column;gap:10px;pointer-events:none}
+.toast{background:var(--c-surface);border-radius:var(--r-md);padding:14px 18px;box-shadow:var(--shadow-lg);display:flex;align-items:center;gap:12px;min-width:300px;max-width:420px;border-right:4px solid var(--c-primary-500);pointer-events:auto;animation:toastIn .3s}
+@keyframes toastIn{from{opacity:0;transform:translateX(-30px)}to{opacity:1;transform:translateX(0)}}
 .toast.success{border-right-color:var(--c-accent)}
 .toast.error{border-right-color:var(--c-danger)}
 .toast.warning{border-right-color:var(--c-warning)}
 .toast-icon{font-size:22px}
 .toast-content{flex:1}
-.toast-title{font-weight:700; font-size:14px}
-.toast-desc{font-size:12px; color:var(--c-text-muted)}
+.toast-title{font-weight:700;font-size:14px}
+.toast-desc{font-size:12px;color:var(--c-text-muted)}
 
-/* EMPTY / LOADER */
-.empty-state{text-align:center; padding:60px 20px; color:var(--c-text-muted);}
-.empty-state .emoji{font-size:56px; margin-bottom:16px; display:block; opacity:.7}
-.empty-state h3{font-size:18px; font-weight:700; color:var(--c-text); margin-bottom:8px}
-.empty-state p{font-size:14px; max-width:400px; margin:0 auto 20px}
-.loader{display:flex; justify-content:center; padding:40px}
-.spinner{width:36px; height:36px; border:3px solid var(--c-border); border-top-color: var(--c-primary-500); border-radius:50%; animation: spin .8s linear infinite;}
+/* EMPTY */
+.empty-state{text-align:center;padding:60px 20px;color:var(--c-text-muted)}
+.empty-state .emoji{font-size:56px;margin-bottom:16px;display:block;opacity:.7}
+.empty-state h3{font-size:18px;font-weight:700;color:var(--c-text);margin-bottom:8px}
+
+/* LOADER */
+.loader{display:flex;justify-content:center;padding:40px}
+.spinner{width:36px;height:36px;border:3px solid var(--c-border);border-top-color:var(--c-primary-500);border-radius:50%;animation:spin .8s linear infinite}
 @keyframes spin{to{transform:rotate(360deg)}}
+
+/* SECTIONS */
 .admin-section{display:none}
-.admin-section.active{display:block; animation: fadeIn .3s}
+.admin-section.active{display:block;animation:fadeIn .3s}
 
 /* STATS */
-.stats-grid{display:grid; grid-template-columns:repeat(auto-fit, minmax(180px,1fr)); gap:14px; margin-bottom:24px;}
-.stat-card{background:var(--c-surface); border:1px solid var(--c-border); border-radius:var(--r-md); padding:16px 18px; display:flex; align-items:center; gap:12px; transition: all .2s;}
-.stat-card:hover{transform:translateY(-3px); box-shadow: var(--shadow-md)}
-.stat-icon{width:44px; height:44px; border-radius:var(--r-sm); display:flex; align-items:center; justify-content:center; font-size:20px; flex-shrink:0;}
-.stat-icon.blue{background:rgba(44,122,184,.15); color:var(--c-primary-600)}
-.stat-icon.green{background:rgba(46,204,113,.15); color:var(--c-accent-dark)}
-.stat-icon.orange{background:rgba(243,156,18,.15); color:var(--c-warning)}
-.stat-icon.purple{background:rgba(139,92,246,.15); color:var(--c-purple)}
-.stat-icon.red{background:rgba(231,76,60,.15); color:var(--c-danger)}
-.stat-icon.teal{background:rgba(20,184,166,.15); color:#14b8a6}
-.stat-info{flex:1; min-width:0}
-.stat-value{font-size:22px; font-weight:800; line-height:1.2}
-.stat-label{font-size:12px; color:var(--c-text-muted); margin-top:2px}
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:12px;margin-bottom:20px}
+.stat-card{background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);padding:14px 16px;display:flex;align-items:center;gap:12px;transition:all .2s}
+.stat-card:hover{transform:translateY(-3px);box-shadow:var(--shadow-md)}
+.stat-icon{width:42px;height:42px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.stat-icon.blue{background:rgba(44,122,184,.15);color:var(--c-primary-600)}
+.stat-icon.green{background:rgba(46,204,113,.15);color:var(--c-accent-dark)}
+.stat-icon.orange{background:rgba(243,156,18,.15);color:var(--c-warning)}
+.stat-icon.purple{background:rgba(139,92,246,.15);color:var(--c-purple)}
+.stat-icon.red{background:rgba(231,76,60,.15);color:var(--c-danger)}
+.stat-icon.teal{background:rgba(20,184,166,.15);color:var(--c-teal)}
+.stat-info{flex:1;min-width:0}
+.stat-value{font-size:20px;font-weight:800;line-height:1.2}
+.stat-label{font-size:11.5px;color:var(--c-text-muted);margin-top:2px}
 
-/* Filters bar */
-.filters-bar{display:flex; flex-wrap:wrap; gap:12px; align-items:end; padding:16px 20px; background:var(--c-surface); border:1px solid var(--c-border); border-radius:var(--r-md); margin-bottom:16px;}
-.filters-bar .form-field{flex:1; min-width:150px}
+/* FILTERS */
+.filters-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;padding:14px 18px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);margin-bottom:14px}
+.filters-bar .form-field{flex:1;min-width:140px}
 
-/* Chat viewer */
-.chat-viewer{display:grid; grid-template-columns: 280px 1fr; gap:0; height: 70vh; border:1px solid var(--c-border); border-radius:var(--r-md); overflow:hidden; background:var(--c-surface);}
-.chat-sidebar{background:var(--c-surface-2); border-left:1px solid var(--c-border); overflow-y:auto;}
-.chat-user-item{padding:14px 16px; border-bottom:1px solid var(--c-border); cursor:pointer; transition: background .15s;}
+/* CHAT */
+.chat-viewer{display:grid;grid-template-columns:300px 1fr;height:72vh;border:1px solid var(--c-border);border-radius:var(--r-md);overflow:hidden;background:var(--c-surface)}
+.chat-sidebar{background:var(--c-surface-2);border-left:1px solid var(--c-border);overflow-y:auto}
+.chat-user-item{padding:12px 14px;border-bottom:1px solid var(--c-border);cursor:pointer;transition:background .15s}
 .chat-user-item:hover{background:var(--c-surface)}
-.chat-user-item.active{background: var(--c-primary-50); border-right:3px solid var(--c-primary-500);}
+.chat-user-item.active{background:var(--c-primary-50);border-right:3px solid var(--c-primary-500)}
 [data-theme="dark"] .chat-user-item.active{background:rgba(44,122,184,.15)}
-.chat-user-name{font-weight:700; font-size:13px; margin-bottom:2px}
-.chat-user-preview{font-size:11.5px; color:var(--c-text-muted); overflow:hidden; text-overflow:ellipsis; white-space:nowrap;}
-.chat-messages{padding:20px; overflow-y:auto; display:flex; flex-direction:column; gap:12px; background:var(--c-bg);}
-.chat-msg{max-width:70%; padding:10px 14px; border-radius:var(--r-md); font-size:13.5px; line-height:1.5; word-wrap:break-word;}
-.chat-msg.sent{align-self:flex-start; background:var(--c-primary-500); color:#fff; border-bottom-right-radius:4px;}
-.chat-msg.received{align-self:flex-end; background:var(--c-surface); border:1px solid var(--c-border); border-bottom-left-radius:4px;}
-.chat-msg-meta{font-size:10.5px; opacity:.7; margin-top:4px}
+.chat-user-name{font-weight:700;font-size:12.5px;margin-bottom:2px}
+.chat-user-preview{font-size:11px;color:var(--c-text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.chat-messages{padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;background:var(--c-bg)}
+.chat-msg{max-width:70%;padding:9px 13px;border-radius:var(--r-md);font-size:13px;word-wrap:break-word}
+.chat-msg.sent{align-self:flex-start;background:var(--c-primary-500);color:#fff;border-bottom-right-radius:4px}
+.chat-msg.received{align-self:flex-end;background:var(--c-surface);border:1px solid var(--c-border);border-bottom-left-radius:4px}
+.chat-msg-meta{font-size:10px;opacity:.7;margin-top:3px}
 
-/* Tabs */
-.tabs{display:flex; gap:6px; border-bottom:2px solid var(--c-border); margin-bottom:16px; overflow-x:auto;}
-.tab{padding:10px 18px; font-size:13.5px; font-weight:600; color:var(--c-text-muted); cursor:pointer; border-bottom:2px solid transparent; margin-bottom:-2px; white-space:nowrap; transition: all .2s;}
-.tab:hover{color:var(--c-text)}
-.tab.active{color:var(--c-primary-600); border-bottom-color:var(--c-primary-500);}
+/* TABS */
+.tabs{display:flex;gap:6px;border-bottom:2px solid var(--c-border);margin-bottom:16px;overflow-x:auto}
+.tab{padding:10px 18px;font-size:13.5px;font-weight:600;color:var(--c-text-muted);cursor:pointer;border-bottom:2px solid transparent;margin-bottom:-2px;white-space:nowrap}
+.tab.active{color:var(--c-primary-600);border-bottom-color:var(--c-primary-500)}
+
+/* USER DETAIL */
+.user-detail-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:14px}
+.user-detail-item{background:var(--c-surface-2);padding:12px 14px;border-radius:var(--r-sm);border:1px solid var(--c-border)}
+.user-detail-item .label{font-size:11px;color:var(--c-text-muted);font-weight:600;text-transform:uppercase;margin-bottom:4px;letter-spacing:.3px}
+.user-detail-item .value{font-size:14px;font-weight:600;word-break:break-word}
+.user-detail-item .value.mono{font-family:'Courier New',monospace;font-size:12px}
+.user-detail-item.full{grid-column:1/-1}
+
+/* PASSWORD REVEAL */
+.pass-reveal{position:relative;display:inline-flex;align-items:center;gap:6px}
+.pass-reveal .toggle-eye{width:28px;height:28px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;background:var(--c-surface-2);color:var(--c-text-muted);font-size:14px;cursor:pointer}
+.pass-reveal .toggle-eye:hover{color:var(--c-primary-600)}
 
 /* RESPONSIVE */
-@media (max-width: 1000px){
+@media (max-width:1000px){
   .admin-layout{grid-template-columns:1fr}
-  .admin-sidebar{position:fixed; right:0; top:var(--header-h); height: calc(100vh - var(--header-h)); width: 280px; z-index: 90; transform: translateX(100%); transition: transform .3s ease; box-shadow: var(--shadow-lg);}
-  .admin-sidebar.open{transform: translateX(0)}
+  .admin-sidebar{position:fixed;right:0;top:var(--header-h);height:calc(100vh - var(--header-h));width:280px;z-index:90;transform:translateX(100%);transition:transform .3s;box-shadow:var(--shadow-lg)}
+  .admin-sidebar.open{transform:translateX(0)}
   .mobile-menu-btn{display:flex !important}
   .form-grid{grid-template-columns:1fr}
   .admin-main{padding:16px}
   .chat-viewer{grid-template-columns:1fr}
-  .chat-sidebar{display:none}
-  .chat-sidebar.show{display:block; position:absolute; inset:0; z-index:5;}
+  .dash-lower{grid-template-columns:1fr !important}
 }
 .mobile-menu-btn{display:none}
-@media (max-width: 600px){
-  .page-header{flex-direction:column; align-items:flex-start}
+@media (max-width:600px){
+  .page-header{flex-direction:column;align-items:flex-start}
   .modal-footer{flex-direction:column}
-  .modal-footer .btn{width:100%; justify-content:center}
+  .modal-footer .btn{width:100%;justify-content:center}
   .admin-header{padding:0 14px}
   .admin-header .logo span:not(.logo-icon){display:none}
-  .stat-value{font-size:18px}
 }
 </style>
 </head>
@@ -299,45 +299,36 @@ tbody tr:last-child td{border-bottom:none}
 <!-- HEADER -->
 <header class="admin-header hidden" id="adminHeader">
   <button class="icon-btn mobile-menu-btn" id="mobileMenuBtn">☰</button>
-  <div class="logo">
-    <div class="logo-icon">⚗️</div>
-    <span>كيماتو</span>
-  </div>
+  <div class="logo"><div class="logo-icon">⚗️</div><span>كيماتو</span></div>
   <span class="badge-admin">ADMIN</span>
   <div class="spacer"></div>
   <div class="header-actions">
-    <button class="icon-btn" id="themeToggle" title="الوضع الليلي">🌙</button>
-    <a href="index.html" target="_blank" class="icon-btn" title="عرض الموقع">🌐</a>
+    <button class="icon-btn" id="themeToggle">🌙</button>
+    <a href="index.html" target="_blank" class="icon-btn">🌐</a>
     <button class="btn-logout" id="logoutBtn">خروج</button>
   </div>
 </header>
 
 <!-- LAYOUT -->
 <div class="admin-layout hidden" id="adminLayout">
-
-  <!-- SIDEBAR -->
   <aside class="admin-sidebar" id="adminSidebar">
-
     <div class="nav-section">
       <div class="nav-section-title">نظرة عامة</div>
       <a class="nav-link active" data-section="dashboard"><span class="nav-icon">📊</span> لوحة التحكم</a>
       <a class="nav-link" data-section="analytics"><span class="nav-icon">📈</span> التحليلات</a>
-      <a class="nav-link" data-section="visitors"><span class="nav-icon">🌐</span> الزوار</a>
+      <a class="nav-link" data-section="visitors"><span class="nav-icon">🌐</span> الزوار والجلسات</a>
     </div>
-
     <div class="nav-section">
       <div class="nav-section-title">المحتوى</div>
       <a class="nav-link" data-section="articles"><span class="nav-icon">📝</span> المقالات <span class="nav-count" id="navCountArticles">0</span></a>
       <a class="nav-link" data-section="ticker"><span class="nav-icon">📢</span> شريط الأخبار <span class="nav-count" id="navCountTicker">0</span></a>
     </div>
-
     <div class="nav-section">
       <div class="nav-section-title">المستخدمين</div>
       <a class="nav-link" data-section="users"><span class="nav-icon">👥</span> المستخدمين <span class="nav-count" id="navCountUsers">0</span></a>
       <a class="nav-link" data-section="follows"><span class="nav-icon">🔗</span> المتابعات</a>
       <a class="nav-link" data-section="favorites"><span class="nav-icon">❤️</span> المفضلة</a>
     </div>
-
     <div class="nav-section">
       <div class="nav-section-title">المتجر</div>
       <a class="nav-link" data-section="products"><span class="nav-icon">📦</span> المنتجات <span class="nav-count" id="navCountProducts">0</span></a>
@@ -345,7 +336,6 @@ tbody tr:last-child td{border-bottom:none}
       <a class="nav-link" data-section="offers"><span class="nav-icon">💰</span> العروض والأسعار</a>
       <a class="nav-link" data-section="categories"><span class="nav-icon">🗂️</span> التصنيفات</a>
     </div>
-
     <div class="nav-section">
       <div class="nav-section-title">التفاعل</div>
       <a class="nav-link" data-section="messages"><span class="nav-icon">💬</span> المحادثات</a>
@@ -353,12 +343,9 @@ tbody tr:last-child td{border-bottom:none}
       <a class="nav-link" data-section="notifications"><span class="nav-icon">🔔</span> الإشعارات</a>
       <a class="nav-link" data-section="reviews"><span class="nav-icon">⭐</span> التقييمات</a>
     </div>
-
   </aside>
 
-  <!-- MAIN -->
   <main class="admin-main">
-
     <!-- DASHBOARD -->
     <section class="admin-section active" id="section-dashboard">
       <div class="page-header">
@@ -366,43 +353,26 @@ tbody tr:last-child td{border-bottom:none}
           <h1 class="page-title"><span class="title-icon">📊</span> لوحة التحكم</h1>
           <p class="page-subtitle">نظرة شاملة على كل ما يحدث في الموقع</p>
         </div>
-        <button class="btn btn-outline" onclick="App.loadAll()">🔄 تحديث الكل</button>
+        <div class="header-actions-bar">
+          <button class="btn btn-outline" onclick="App.exportAll()">📥 تصدير كامل</button>
+          <button class="btn btn-outline" onclick="App.loadAll()">🔄 تحديث</button>
+        </div>
       </div>
-
       <div class="stats-grid" id="mainStats"></div>
-
-      <div style="display:grid; grid-template-columns:1fr 1fr; gap:16px; margin-top:20px" class="dash-lower">
-        <div class="card">
-          <div class="card-header"><div class="card-title">🔥 أحدث النشاطات</div></div>
-          <div class="card-body" id="recentActivity"><div class="loader"><div class="spinner"></div></div></div>
-        </div>
-        <div class="card">
-          <div class="card-header"><div class="card-title">👥 أحدث المسجلين</div></div>
-          <div class="card-body" id="recentUsers"><div class="loader"><div class="spinner"></div></div></div>
-        </div>
-      </div>
-
-      <div class="card" style="margin-top:16px">
-        <div class="card-header"><div class="card-title">⚡ إجراءات سريعة</div></div>
-        <div class="card-body" style="display:flex; flex-wrap:wrap; gap:12px">
-          <button class="btn btn-primary" onclick="App.openArticleModal()">➕ مقال</button>
-          <button class="btn btn-accent" onclick="App.openTickerModal()">➕ خبر</button>
-          <button class="btn btn-outline" onclick="App.navigate('products')">📦 المنتجات</button>
-          <button class="btn btn-outline" onclick="App.navigate('users')">👥 المستخدمين</button>
-          <button class="btn btn-outline" onclick="App.navigate('messages')">💬 المحادثات</button>
-          <button class="btn btn-outline" onclick="App.navigate('analytics')">📈 التحليلات</button>
-        </div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:18px" class="dash-lower">
+        <div class="card"><div class="card-header"><div class="card-title">🔥 أحدث النشاطات</div></div><div class="card-body" id="recentActivity"><div class="loader"><div class="spinner"></div></div></div></div>
+        <div class="card"><div class="card-header"><div class="card-title">👥 أحدث المسجلين</div></div><div class="card-body" id="recentUsers"><div class="loader"><div class="spinner"></div></div></div></div>
       </div>
     </section>
 
     <!-- ARTICLES -->
     <section class="admin-section" id="section-articles">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">📝</span> المقالات</h1>
-          <p class="page-subtitle">إدارة مقالات المدونة</p>
+        <div><h1 class="page-title"><span class="title-icon">📝</span> المقالات</h1><p class="page-subtitle">إدارة مقالات المدونة</p></div>
+        <div class="header-actions-bar">
+          <button class="btn btn-outline" onclick="App.exportData('blog_posts')">📥 CSV</button>
+          <button class="btn btn-primary" onclick="App.openArticleModal()">➕ مقال جديد</button>
         </div>
-        <button class="btn btn-primary" onclick="App.openArticleModal()">➕ مقال جديد</button>
       </div>
       <div class="card"><div class="card-body" style="padding:0"><div id="articlesList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
@@ -410,11 +380,11 @@ tbody tr:last-child td{border-bottom:none}
     <!-- TICKER -->
     <section class="admin-section" id="section-ticker">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">📢</span> شريط الأخبار</h1>
-          <p class="page-subtitle">إدارة الأخبار الظاهرة في الشريط المتحرك</p>
+        <div><h1 class="page-title"><span class="title-icon">📢</span> شريط الأخبار</h1><p class="page-subtitle">إدارة الأخبار الظاهرة</p></div>
+        <div class="header-actions-bar">
+          <button class="btn btn-outline" onclick="App.exportData('ticker_news')">📥 CSV</button>
+          <button class="btn btn-accent" onclick="App.openTickerModal()">➕ خبر جديد</button>
         </div>
-        <button class="btn btn-accent" onclick="App.openTickerModal()">➕ خبر جديد</button>
       </div>
       <div class="card"><div class="card-body" style="padding:0"><div id="tickerList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
@@ -422,34 +392,17 @@ tbody tr:last-child td{border-bottom:none}
     <!-- PRODUCTS -->
     <section class="admin-section" id="section-products">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">📦</span> المنتجات</h1>
-          <p class="page-subtitle">إدارة كاملة لكل المنتجات</p>
-        </div>
+        <div><h1 class="page-title"><span class="title-icon">📦</span> المنتجات</h1><p class="page-subtitle">إدارة كاملة لكل المنتجات</p></div>
+        <button class="btn btn-outline" onclick="App.exportData('products')">📥 CSV</button>
       </div>
       <div class="filters-bar">
-        <div class="form-field">
-          <label class="form-label">بحث</label>
-          <input type="text" class="form-input" id="prodSearch" placeholder="اسم المنتج...">
+        <div class="form-field"><label class="form-label">بحث</label><input type="text" class="form-input" id="prodSearch" placeholder="اسم المنتج..."></div>
+        <div class="form-field"><label class="form-label">الحالة</label>
+          <select class="form-select" id="prodStatusFilter"><option value="">الكل</option><option value="active">نشط</option><option value="hidden">مخفي</option><option value="sold">مباع</option></select>
         </div>
-        <div class="form-field">
-          <label class="form-label">الحالة</label>
-          <select class="form-select" id="prodStatusFilter">
-            <option value="">الكل</option>
-            <option value="active">نشط</option>
-            <option value="hidden">مخفي</option>
-            <option value="sold">مباع</option>
-          </select>
+        <div class="form-field"><label class="form-label">التمييز</label>
+          <select class="form-select" id="prodFeaturedFilter"><option value="">الكل</option><option value="true">مميز</option><option value="false">عادي</option></select>
         </div>
-        <div class="form-field">
-          <label class="form-label">التمييز</label>
-          <select class="form-select" id="prodFeaturedFilter">
-            <option value="">الكل</option>
-            <option value="true">مميز</option>
-            <option value="false">عادي</option>
-          </select>
-        </div>
-        <button class="btn btn-outline" onclick="App.loadProducts()">🔄 تحديث</button>
       </div>
       <div class="card"><div class="card-body" style="padding:0"><div id="productsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
@@ -457,126 +410,79 @@ tbody tr:last-child td{border-bottom:none}
     <!-- USERS -->
     <section class="admin-section" id="section-users">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">👥</span> المستخدمين</h1>
-          <p class="page-subtitle">كل المسجلين في الموقع</p>
+        <div><h1 class="page-title"><span class="title-icon">👥</span> المستخدمين</h1><p class="page-subtitle">كل بيانات المستخدمين مع الإيميل وكلمة السر</p></div>
+        <div class="header-actions-bar">
+          <button class="btn btn-outline" onclick="App.exportUsers()">📥 تصدير Excel</button>
+          <button class="btn btn-primary" onclick="App.loadUsers()">🔄 تحديث</button>
         </div>
-        <button class="btn btn-outline" onclick="App.loadUsers()">🔄 تحديث</button>
       </div>
       <div class="filters-bar">
-        <div class="form-field">
-          <label class="form-label">بحث</label>
-          <input type="text" class="form-input" id="userSearch" placeholder="اسم / إيميل / شركة...">
+        <div class="form-field"><label class="form-label">بحث</label><input type="text" class="form-input" id="userSearch" placeholder="اسم / إيميل / شركة / هاتف..."></div>
+        <div class="form-field"><label class="form-label">النوع</label>
+          <select class="form-select" id="userTypeFilter"><option value="">الكل</option><option value="supplier">مورد</option><option value="buyer">مشتري</option><option value="admin">أدمن</option></select>
         </div>
-        <div class="form-field">
-          <label class="form-label">النوع</label>
-          <select class="form-select" id="userTypeFilter">
-            <option value="">الكل</option>
-            <option value="supplier">مورد</option>
-            <option value="buyer">مشتري</option>
-            <option value="admin">أدمن</option>
-          </select>
+        <div class="form-field"><label class="form-label">التحقق</label>
+          <select class="form-select" id="userVerifiedFilter"><option value="">الكل</option><option value="true">موثّق</option><option value="false">غير موثّق</option></select>
         </div>
-        <div class="form-field">
-          <label class="form-label">التحقق</label>
-          <select class="form-select" id="userVerifiedFilter">
-            <option value="">الكل</option>
-            <option value="true">موثّق</option>
-            <option value="false">غير موثّق</option>
-          </select>
+        <div class="form-field"><label class="form-label">الحالة</label>
+          <select class="form-select" id="userSuspendedFilter"><option value="">الكل</option><option value="false">نشط</option><option value="true">معلّق</option></select>
         </div>
       </div>
       <div class="card"><div class="card-body" style="padding:0"><div id="usersList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
 
-    <!-- RFQs -->
+    <!-- RFQS -->
     <section class="admin-section" id="section-rfqs">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">📋</span> طلبات الشراء (RFQs)</h1>
-          <p class="page-subtitle">كل طلبات الشراء على الموقع</p>
-        </div>
-        <button class="btn btn-outline" onclick="App.loadRfqs()">🔄 تحديث</button>
+        <div><h1 class="page-title"><span class="title-icon">📋</span> طلبات الشراء (RFQs)</h1></div>
+        <button class="btn btn-outline" onclick="App.exportData('purchase_requests')">📥 CSV</button>
       </div>
       <div class="filters-bar">
-        <div class="form-field">
-          <label class="form-label">بحث</label>
-          <input type="text" class="form-input" id="rfqSearch" placeholder="اسم المنتج...">
-        </div>
-        <div class="form-field">
-          <label class="form-label">الحالة</label>
-          <select class="form-select" id="rfqStatusFilter">
-            <option value="">الكل</option>
-            <option value="open">مفتوح</option>
-            <option value="matched">تم المطابقة</option>
-            <option value="closed">مغلق</option>
-            <option value="expired">منتهي</option>
-          </select>
+        <div class="form-field"><label class="form-label">بحث</label><input type="text" class="form-input" id="rfqSearch" placeholder="اسم المنتج..."></div>
+        <div class="form-field"><label class="form-label">الحالة</label>
+          <select class="form-select" id="rfqStatusFilter"><option value="">الكل</option><option value="open">مفتوح</option><option value="matched">مطابق</option><option value="closed">مغلق</option><option value="expired">منتهي</option></select>
         </div>
       </div>
       <div class="card"><div class="card-body" style="padding:0"><div id="rfqsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
 
-    <!-- OFFERS + QUOTES -->
+    <!-- OFFERS -->
     <section class="admin-section" id="section-offers">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">💰</span> العروض والأسعار</h1>
-          <p class="page-subtitle">كل العروض (offers) والعروض المتقدمة (quotes)</p>
-        </div>
+        <div><h1 class="page-title"><span class="title-icon">💰</span> العروض والأسعار</h1></div>
       </div>
       <div class="tabs">
-        <div class="tab active" data-tab="offers">عروض بسيطة (offers)</div>
-        <div class="tab" data-tab="quotes">عروض متقدمة (quotes)</div>
+        <div class="tab active" data-tab="offers">عروض بسيطة</div>
+        <div class="tab" data-tab="quotes">عروض متقدمة</div>
       </div>
-      <div id="offersTabContent">
-        <div class="card"><div class="card-body" style="padding:0"><div id="offersList"><div class="loader"><div class="spinner"></div></div></div></div></div>
-      </div>
-      <div id="quotesTabContent" style="display:none">
-        <div class="card"><div class="card-body" style="padding:0"><div id="quotesList"><div class="loader"><div class="spinner"></div></div></div></div></div>
-      </div>
+      <div id="offersTabContent"><div class="card"><div class="card-body" style="padding:0"><div id="offersList"><div class="loader"><div class="spinner"></div></div></div></div></div></div>
+      <div id="quotesTabContent" style="display:none"><div class="card"><div class="card-body" style="padding:0"><div id="quotesList"><div class="loader"><div class="spinner"></div></div></div></div></div></div>
     </section>
 
     <!-- MESSAGES -->
     <section class="admin-section" id="section-messages">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">💬</span> المحادثات</h1>
-          <p class="page-subtitle">مراقبة كل المحادثات على الموقع</p>
-        </div>
+        <div><h1 class="page-title"><span class="title-icon">💬</span> المحادثات</h1></div>
         <button class="btn btn-outline" onclick="App.loadMessages()">🔄 تحديث</button>
       </div>
-      <div class="chat-viewer" id="chatViewer">
-        <div class="chat-sidebar" id="chatSidebar">
-          <div class="loader"><div class="spinner"></div></div>
-        </div>
-        <div class="chat-messages" id="chatMessages">
-          <div class="empty-state" style="margin:auto"><span class="emoji">💬</span><h3>اختر محادثة</h3><p>اضغط على أي مستخدم لعرض المحادثة</p></div>
-        </div>
+      <div class="chat-viewer">
+        <div class="chat-sidebar" id="chatSidebar"><div class="loader"><div class="spinner"></div></div></div>
+        <div class="chat-messages" id="chatMessages"><div class="empty-state" style="margin:auto"><span class="emoji">💬</span><h3>اختر محادثة</h3></div></div>
       </div>
     </section>
 
-    <!-- CONTACTS (CRM) -->
+    <!-- CONTACTS -->
     <section class="admin-section" id="section-contacts">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">📞</span> سجل التواصل (CRM)</h1>
-          <p class="page-subtitle">كل تفاعلات الزوار والمستخدمين مع المنتجات</p>
-        </div>
-        <button class="btn btn-outline" onclick="App.loadContacts()">🔄 تحديث</button>
+        <div><h1 class="page-title"><span class="title-icon">📞</span> سجل التواصل (CRM)</h1></div>
+        <button class="btn btn-outline" onclick="App.exportData('supplier_contacts')">📥 CSV</button>
       </div>
       <div class="filters-bar">
-        <div class="form-field">
-          <label class="form-label">نوع التواصل</label>
+        <div class="form-field"><label class="form-label">نوع التواصل</label>
           <select class="form-select" id="contactTypeFilter">
-            <option value="">الكل</option>
-            <option value="view">مشاهدة</option>
-            <option value="whatsapp">واتساب</option>
-            <option value="chat">محادثة</option>
-            <option value="phone">هاتف</option>
-            <option value="inquiry">استفسار</option>
-            <option value="request_quote">طلب عرض</option>
-            <option value="email">إيميل</option>
+            <option value="">الكل</option><option value="view">مشاهدة</option><option value="whatsapp">واتساب</option>
+            <option value="chat">محادثة</option><option value="phone">هاتف</option>
+            <option value="inquiry">استفسار</option><option value="request_quote">طلب عرض</option>
           </select>
         </div>
       </div>
@@ -586,10 +492,7 @@ tbody tr:last-child td{border-bottom:none}
     <!-- NOTIFICATIONS -->
     <section class="admin-section" id="section-notifications">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">🔔</span> الإشعارات</h1>
-          <p class="page-subtitle">كل الإشعارات المُرسلة للمستخدمين</p>
-        </div>
+        <div><h1 class="page-title"><span class="title-icon">🔔</span> الإشعارات</h1></div>
         <button class="btn btn-primary" onclick="App.openNotifModal()">➕ إرسال إشعار</button>
       </div>
       <div class="card"><div class="card-body" style="padding:0"><div id="notificationsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
@@ -597,89 +500,45 @@ tbody tr:last-child td{border-bottom:none}
 
     <!-- REVIEWS -->
     <section class="admin-section" id="section-reviews">
-      <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">⭐</span> التقييمات</h1>
-          <p class="page-subtitle">تقييمات المنتجات والموردين</p>
-        </div>
-      </div>
-      <div class="tabs">
-        <div class="tab active" data-tab="reviews">تقييمات عامة (reviews)</div>
-        <div class="tab" data-tab="ratings">تقييمات مفصلة (supplier_ratings)</div>
-      </div>
-      <div id="reviewsTabContent">
-        <div class="card"><div class="card-body" style="padding:0"><div id="reviewsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
-      </div>
-      <div id="ratingsTabContent" style="display:none">
-        <div class="card"><div class="card-body" style="padding:0"><div id="ratingsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
-      </div>
+      <div class="page-header"><div><h1 class="page-title"><span class="title-icon">⭐</span> التقييمات</h1></div></div>
+      <div class="tabs"><div class="tab active" data-tab="reviews">تقييمات عامة</div><div class="tab" data-tab="ratings">تقييمات مفصلة</div></div>
+      <div id="reviewsTabContent"><div class="card"><div class="card-body" style="padding:0"><div id="reviewsList"><div class="loader"><div class="spinner"></div></div></div></div></div></div>
+      <div id="ratingsTabContent" style="display:none"><div class="card"><div class="card-body" style="padding:0"><div id="ratingsList"><div class="loader"><div class="spinner"></div></div></div></div></div></div>
     </section>
 
     <!-- FOLLOWS -->
     <section class="admin-section" id="section-follows">
-      <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">🔗</span> المتابعات</h1>
-          <p class="page-subtitle">كل المتابعات بين المستخدمين</p>
-        </div>
-        <button class="btn btn-outline" onclick="App.loadFollows()">🔄 تحديث</button>
-      </div>
+      <div class="page-header"><div><h1 class="page-title"><span class="title-icon">🔗</span> المتابعات</h1></div><button class="btn btn-outline" onclick="App.loadFollows()">🔄 تحديث</button></div>
       <div class="card"><div class="card-body" style="padding:0"><div id="followsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
 
     <!-- FAVORITES -->
     <section class="admin-section" id="section-favorites">
-      <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">❤️</span> المفضلة</h1>
-          <p class="page-subtitle">كل المنتجات المفضلة للمستخدمين</p>
-        </div>
-        <button class="btn btn-outline" onclick="App.loadFavorites()">🔄 تحديث</button>
-      </div>
+      <div class="page-header"><div><h1 class="page-title"><span class="title-icon">❤️</span> المفضلة</h1></div><button class="btn btn-outline" onclick="App.loadFavorites()">🔄 تحديث</button></div>
       <div class="card"><div class="card-body" style="padding:0"><div id="favoritesList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
 
     <!-- CATEGORIES -->
     <section class="admin-section" id="section-categories">
-      <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">🗂️</span> التصنيفات</h1>
-          <p class="page-subtitle">الفئات والتصنيفات الفرعية</p>
-        </div>
-      </div>
-      <div class="tabs">
-        <div class="tab active" data-tab="cats">الفئات (categories)</div>
-        <div class="tab" data-tab="subcats">التصنيفات الفرعية (subcategories)</div>
-      </div>
-      <div id="catsTabContent">
-        <div class="card"><div class="card-body" style="padding:0"><div id="catsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
-      </div>
-      <div id="subcatsTabContent" style="display:none">
-        <div class="card"><div class="card-body" style="padding:0"><div id="subcatsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
-      </div>
+      <div class="page-header"><div><h1 class="page-title"><span class="title-icon">🗂️</span> التصنيفات</h1></div></div>
+      <div class="tabs"><div class="tab active" data-tab="cats">الفئات</div><div class="tab" data-tab="subcats">التصنيفات الفرعية</div></div>
+      <div id="catsTabContent"><div class="card"><div class="card-body" style="padding:0"><div id="catsList"><div class="loader"><div class="spinner"></div></div></div></div></div></div>
+      <div id="subcatsTabContent" style="display:none"><div class="card"><div class="card-body" style="padding:0"><div id="subcatsList"><div class="loader"><div class="spinner"></div></div></div></div></div></div>
     </section>
 
     <!-- ANALYTICS -->
     <section class="admin-section" id="section-analytics">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">📈</span> التحليلات</h1>
-          <p class="page-subtitle">الأحداث والتفاعلات على الموقع (analytics_events)</p>
-        </div>
-        <button class="btn btn-outline" onclick="App.loadAnalytics()">🔄 تحديث</button>
+        <div><h1 class="page-title"><span class="title-icon">📈</span> التحليلات</h1></div>
+        <button class="btn btn-outline" onclick="App.exportData('analytics_events')">📥 CSV</button>
       </div>
       <div class="stats-grid" id="analyticsStats"></div>
       <div class="filters-bar">
-        <div class="form-field">
-          <label class="form-label">نوع الحدث</label>
+        <div class="form-field"><label class="form-label">نوع الحدث</label>
           <select class="form-select" id="eventTypeFilter">
-            <option value="">الكل</option>
-            <option value="view">مشاهدة</option>
-            <option value="search">بحث</option>
-            <option value="whatsapp">واتساب</option>
-            <option value="rfq">طلب شراء</option>
-            <option value="quote_sent">إرسال عرض</option>
-            <option value="order">طلب</option>
+            <option value="">الكل</option><option value="view">مشاهدة</option><option value="search">بحث</option>
+            <option value="whatsapp">واتساب</option><option value="rfq">طلب شراء</option>
+            <option value="quote_sent">إرسال عرض</option><option value="order">طلب</option>
           </select>
         </div>
       </div>
@@ -689,53 +548,59 @@ tbody tr:last-child td{border-bottom:none}
     <!-- VISITORS -->
     <section class="admin-section" id="section-visitors">
       <div class="page-header">
-        <div>
-          <h1 class="page-title"><span class="title-icon">🌐</span> الزوار</h1>
-          <p class="page-subtitle">متابعة الزوار والجلسات (session_id)</p>
-        </div>
+        <div><h1 class="page-title"><span class="title-icon">🌐</span> الزوار والجلسات</h1></div>
         <button class="btn btn-outline" onclick="App.loadVisitors()">🔄 تحديث</button>
       </div>
       <div class="stats-grid" id="visitorStats"></div>
       <div class="card"><div class="card-body" style="padding:0"><div id="visitorsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
-
   </main>
+</div>
+
+<!-- USER DETAIL MODAL -->
+<div class="modal-overlay hidden" id="userModal">
+  <div class="modal wide">
+    <div class="modal-header">
+      <div class="modal-title">👤 تفاصيل المستخدم الكاملة</div>
+      <button class="modal-close" onclick="App.closeModal('userModal')">✕</button>
+    </div>
+    <div class="modal-body" id="userModalBody"></div>
+    <div class="modal-footer">
+      <button class="btn btn-teal" id="btnSaveUser">💾 حفظ التعديلات</button>
+      <button class="btn btn-warning" id="btnChangePass">🔑 تغيير كلمة السر</button>
+      <button class="btn btn-outline" id="btnToggleVerify">✅ توثيق</button>
+      <button class="btn btn-outline" id="btnToggleSuspend">🚫 تعليق</button>
+      <button class="btn btn-outline" id="btnMakeAdmin">👑 Admin</button>
+      <button class="btn btn-danger" onclick="App.deleteCurrentUser()">🗑️ حذف</button>
+    </div>
+  </div>
 </div>
 
 <!-- ARTICLE MODAL -->
 <div class="modal-overlay hidden" id="articleModal">
   <div class="modal wide">
-    <div class="modal-header">
-      <div class="modal-title"><span id="articleModalIcon">📝</span> <span id="articleModalTitle">مقال جديد</span></div>
-      <button class="modal-close" onclick="App.closeModal('articleModal')">✕</button>
-    </div>
+    <div class="modal-header"><div class="modal-title"><span id="articleModalIcon">📝</span> <span id="articleModalTitle">مقال جديد</span></div><button class="modal-close" onclick="App.closeModal('articleModal')">✕</button></div>
     <div class="modal-body">
       <input type="hidden" id="artId">
       <div class="form-grid">
         <div class="form-field full"><label class="form-label"><span class="req">*</span> العنوان</label><input type="text" class="form-input" id="artTitle"></div>
-        <div class="form-field"><label class="form-label"><span class="req">*</span> Slug</label><input type="text" class="form-input" id="artSlug"></div>
+        <div class="form-field"><label class="form-label">Slug</label><input type="text" class="form-input" id="artSlug"></div>
         <div class="form-field"><label class="form-label">الفئة</label><input type="text" class="form-input" id="artCategory" value="عام"></div>
-        <div class="form-field full"><label class="form-label">المقتطف</label><textarea class="form-textarea" id="artExcerpt" style="min-height:70px"></textarea></div>
-        <div class="form-field full"><label class="form-label">المحتوى (HTML)</label><textarea class="form-textarea" id="artContent" style="min-height:220px"></textarea></div>
+        <div class="form-field full"><label class="form-label">المقتطف</label><textarea class="form-textarea" id="artExcerpt" style="min-height:60px"></textarea></div>
+        <div class="form-field full"><label class="form-label">المحتوى</label><textarea class="form-textarea" id="artContent" style="min-height:200px"></textarea></div>
         <div class="form-field full"><label class="form-label">رابط الصورة</label><input type="url" class="form-input" id="artImageUrl"></div>
-        <div class="form-field"><label class="form-label">اسم الكاتب</label><input type="text" class="form-input" id="artAuthorName"></div>
+        <div class="form-field"><label class="form-label">الكاتب</label><input type="text" class="form-input" id="artAuthorName"></div>
         <div class="form-field"><label class="form-label">الحالة</label>
-          <select class="form-select" id="artStatus">
-            <option value="draft">مسودة</option>
-            <option value="published">منشور</option>
-            <option value="archived">مؤرشف</option>
-          </select>
+          <select class="form-select" id="artStatus"><option value="draft">مسودة</option><option value="published">منشور</option><option value="archived">مؤرشف</option></select>
         </div>
         <div class="form-field"><label class="form-label">Meta Title</label><input type="text" class="form-input" id="artMetaTitle"></div>
         <div class="form-field"><label class="form-label">Meta Keywords</label><input type="text" class="form-input" id="artMetaKeywords"></div>
-        <div class="form-field full"><label class="form-label">Meta Description</label><textarea class="form-textarea" id="artMetaDescription" style="min-height:70px"></textarea></div>
+        <div class="form-field full"><label class="form-label">Meta Description</label><textarea class="form-textarea" id="artMetaDescription" style="min-height:60px"></textarea></div>
         <div class="form-field full">
           <label class="form-label">الوسوم</label>
           <div class="tags-input-wrap" id="artTagsWrap"><input type="text" id="artTagsInput" placeholder="اكتب ثم Enter..."></div>
         </div>
-        <div class="form-field full">
-          <label class="form-check"><input type="checkbox" id="artIsFeatured"><label for="artIsFeatured">⭐ مقال مميز</label></label>
-        </div>
+        <div class="form-field full"><label class="form-check"><input type="checkbox" id="artIsFeatured"><label for="artIsFeatured">⭐ مقال مميز</label></label></div>
       </div>
     </div>
     <div class="modal-footer">
@@ -748,25 +613,19 @@ tbody tr:last-child td{border-bottom:none}
 <!-- TICKER MODAL -->
 <div class="modal-overlay hidden" id="tickerModal">
   <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title"><span id="tickerModalIcon">📢</span> <span id="tickerModalTitle">خبر جديد</span></div>
-      <button class="modal-close" onclick="App.closeModal('tickerModal')">✕</button>
-    </div>
+    <div class="modal-header"><div class="modal-title"><span id="tickerModalIcon">📢</span> <span id="tickerModalTitle">خبر جديد</span></div><button class="modal-close" onclick="App.closeModal('tickerModal')">✕</button></div>
     <div class="modal-body">
       <input type="hidden" id="tnId">
       <div class="form-grid">
         <div class="form-field full"><label class="form-label"><span class="req">*</span> العنوان</label><input type="text" class="form-input" id="tnTitle"></div>
-        <div class="form-field full"><label class="form-label">الوصف</label><textarea class="form-textarea" id="tnDescription" style="min-height:70px"></textarea></div>
+        <div class="form-field full"><label class="form-label">الوصف</label><textarea class="form-textarea" id="tnDescription" style="min-height:60px"></textarea></div>
         <div class="form-field"><label class="form-label">نص الرابط</label><input type="text" class="form-input" id="tnLinkText"></div>
         <div class="form-field"><label class="form-label">رابط</label><input type="url" class="form-input" id="tnLinkUrl"></div>
         <div class="form-field"><label class="form-label">الأيقونة</label><input type="text" class="form-input" id="tnIcon" value="📢" maxlength="4"></div>
         <div class="form-field"><label class="form-label">اللون</label>
           <select class="form-select" id="tnColor">
-            <option value="info">🔵 معلومات</option>
-            <option value="success">🟢 نجاح</option>
-            <option value="warning">🟡 تحذير</option>
-            <option value="danger">🔴 خطر</option>
-            <option value="primary">🟣 أساسي</option>
+            <option value="info">🔵 معلومات</option><option value="success">🟢 نجاح</option>
+            <option value="warning">🟡 تحذير</option><option value="danger">🔴 خطر</option><option value="primary">🟣 أساسي</option>
           </select>
         </div>
         <div class="form-field"><label class="form-label">الأولوية</label><input type="number" class="form-input" id="tnPriority" value="0"></div>
@@ -783,25 +642,18 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<!-- PRODUCT EDIT MODAL -->
+<!-- PRODUCT MODAL -->
 <div class="modal-overlay hidden" id="productModal">
   <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">📦 تعديل المنتج</div>
-      <button class="modal-close" onclick="App.closeModal('productModal')">✕</button>
-    </div>
+    <div class="modal-header"><div class="modal-title">📦 تعديل المنتج</div><button class="modal-close" onclick="App.closeModal('productModal')">✕</button></div>
     <div class="modal-body">
       <input type="hidden" id="prdId">
       <div class="form-grid">
         <div class="form-field full"><label class="form-label">اسم المنتج</label><input type="text" class="form-input" id="prdName" disabled></div>
         <div class="form-field"><label class="form-label">الحالة</label>
-          <select class="form-select" id="prdStatus">
-            <option value="active">نشط</option>
-            <option value="hidden">مخفي</option>
-            <option value="sold">مباع</option>
-          </select>
+          <select class="form-select" id="prdStatus"><option value="active">نشط</option><option value="hidden">مخفي</option><option value="sold">مباع</option></select>
         </div>
-        <div class="form-field"><label class="form-label">المشاهدات</label><input type="number" class="form-input" id="prdViews" min="0"></div>
+        <div class="form-field"><label class="form-label">المشاهدات (views)</label><input type="number" class="form-input" id="prdViews" min="0"></div>
         <div class="form-field"><label class="form-label">views_count</label><input type="number" class="form-input" id="prdViewsCount" min="0"></div>
         <div class="form-field"><label class="form-label">التقييم</label><input type="number" class="form-input" id="prdRating" min="0" max="5" step="0.01"></div>
         <div class="form-field full"><label class="form-check"><input type="checkbox" id="prdFeatured"><label for="prdFeatured">⭐ مميز</label></label></div>
@@ -815,44 +667,40 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<!-- USER DETAIL MODAL -->
-<div class="modal-overlay hidden" id="userModal">
-  <div class="modal wide">
-    <div class="modal-header">
-      <div class="modal-title">👤 تفاصيل المستخدم</div>
-      <button class="modal-close" onclick="App.closeModal('userModal')">✕</button>
+<!-- CHANGE PASSWORD MODAL -->
+<div class="modal-overlay hidden" id="passModal">
+  <div class="modal" style="max-width:460px">
+    <div class="modal-header"><div class="modal-title">🔑 تغيير كلمة السر</div><button class="modal-close" onclick="App.closeModal('passModal')">✕</button></div>
+    <div class="modal-body">
+      <div class="form-field">
+        <label class="form-label">كلمة السر الجديدة</label>
+        <input type="text" class="form-input" id="newPassInput" placeholder="اكتب كلمة سر قوية">
+      </div>
+      <div style="margin-top:12px; font-size:12px; color:var(--c-text-muted); line-height:1.7">
+        ⚠️ <strong>ملاحظة:</strong> تغيير كلمة السر الفعلي في <code>auth.users</code> يحتاج <code>service_role</code> key.
+        هنا هنحدّث <code>password_plain</code> في <code>profiles</code> فقط + نحدّث باسورد Supabase Auth عبر Edge Function (اختياري).
+      </div>
+      <button class="btn btn-outline btn-sm" onclick="App.generateStrongPass()" style="margin-top:12px">🎲 توليد كلمة سر قوية</button>
     </div>
-    <div class="modal-body" id="userModalBody"></div>
     <div class="modal-footer">
-      <button class="btn btn-warning" id="userToggleVerify">✅ تغيير حالة التحقق</button>
-      <button class="btn btn-danger" onclick="App.deleteCurrentUser()">🗑️ حذف البروفايل</button>
-      <button class="btn btn-outline" onclick="App.closeModal('userModal')">إغلاق</button>
+      <button class="btn btn-primary" onclick="App.saveNewPassword()">💾 حفظ</button>
+      <button class="btn btn-outline" onclick="App.closeModal('passModal')">إلغاء</button>
     </div>
   </div>
 </div>
 
-<!-- NOTIFICATION SEND MODAL -->
+<!-- NOTIF MODAL -->
 <div class="modal-overlay hidden" id="notifModal">
   <div class="modal">
-    <div class="modal-header">
-      <div class="modal-title">🔔 إرسال إشعار</div>
-      <button class="modal-close" onclick="App.closeModal('notifModal')">✕</button>
-    </div>
+    <div class="modal-header"><div class="modal-title">🔔 إرسال إشعار</div><button class="modal-close" onclick="App.closeModal('notifModal')">✕</button></div>
     <div class="modal-body">
       <div class="form-grid">
-        <div class="form-field full">
-          <label class="form-label">المستخدم المستهدف</label>
+        <div class="form-field full"><label class="form-label">المستخدم</label>
           <select class="form-select" id="notifUserId"><option value="">جاري التحميل...</option></select>
         </div>
-        <div class="form-field"><label class="form-label">النوع</label>
-          <input type="text" class="form-input" id="notifType" value="admin_message">
-        </div>
-        <div class="form-field"><label class="form-label">العنوان</label>
-          <input type="text" class="form-input" id="notifTitle">
-        </div>
-        <div class="form-field full"><label class="form-label">الرسالة</label>
-          <textarea class="form-textarea" id="notifMessage" style="min-height:80px"></textarea>
-        </div>
+        <div class="form-field"><label class="form-label">النوع</label><input type="text" class="form-input" id="notifType" value="admin_message"></div>
+        <div class="form-field"><label class="form-label">العنوان</label><input type="text" class="form-input" id="notifTitle"></div>
+        <div class="form-field full"><label class="form-label">الرسالة</label><textarea class="form-textarea" id="notifMessage" style="min-height:70px"></textarea></div>
       </div>
     </div>
     <div class="modal-footer">
@@ -864,26 +712,18 @@ tbody tr:last-child td{border-bottom:none}
 
 <!-- CONFIRM MODAL -->
 <div class="modal-overlay hidden" id="confirmModal">
-  <div class="modal" style="max-width:440px">
-    <div class="modal-header">
-      <div class="modal-title">⚠️ تأكيد</div>
-      <button class="modal-close" onclick="App.closeModal('confirmModal')">✕</button>
-    </div>
+  <div class="modal" style="max-width:460px">
+    <div class="modal-header"><div class="modal-title">⚠️ تأكيد</div><button class="modal-close" onclick="App.closeModal('confirmModal')">✕</button></div>
     <div class="modal-body"><p id="confirmMessage" style="font-size:15px; line-height:1.7"></p></div>
     <div class="modal-footer">
-      <button class="btn btn-danger" id="confirmYes">نعم، احذف</button>
+      <button class="btn btn-danger" id="confirmYes">نعم، تأكيد</button>
       <button class="btn btn-outline" onclick="App.closeModal('confirmModal')">إلغاء</button>
     </div>
   </div>
 </div>
 
-<!-- TOASTS -->
 <div class="toast-container" id="toastContainer"></div>
-
 <script>
-/* ============================================================
-   CHEMato ADMIN - Full Control Panel
-   ============================================================ */
 const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
 const ADMIN_PASSWORD = '224466889900';
@@ -893,17 +733,13 @@ const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
 const App = {
   state: {
-    articles: [], ticker: [], products: [], users: [], rfqs: [],
-    offers: [], quotes: [], messages: [], contacts: [], notifications: [],
-    reviews: [], ratings: [], follows: [], favorites: [],
-    categories: [], subcategories: [], analytics: [], visitors: [],
-    artTags: [], editingIds: {},
-    currentUserDetail: null,
-    selectedChatUserId: null,
-    currentSection: 'dashboard'
+    articles: [], ticker: [], products: [], users: [], rfqs: [], offers: [], quotes: [],
+    messages: [], contacts: [], notifications: [], reviews: [], ratings: [],
+    follows: [], favorites: [], categories: [], subcategories: [],
+    analytics: [], visitors: [], artTags: [],
+    editingIds: {}, currentUser: null, selectedChatUser: null
   },
 
-  /* ============ INIT ============ */
   init() {
     this.setupTheme();
     this.setupLogin();
@@ -916,31 +752,30 @@ const App = {
   setupTheme() {
     const saved = localStorage.getItem('chemato-theme') || 'light';
     document.documentElement.setAttribute('data-theme', saved);
-    this.updateThemeIcon(saved);
+    document.getElementById('themeToggle').textContent = saved === 'dark' ? '☀️' : '🌙';
     document.getElementById('themeToggle').addEventListener('click', () => {
       const cur = document.documentElement.getAttribute('data-theme');
       const next = cur === 'dark' ? 'light' : 'dark';
       document.documentElement.setAttribute('data-theme', next);
       localStorage.setItem('chemato-theme', next);
-      this.updateThemeIcon(next);
+      document.getElementById('themeToggle').textContent = next === 'dark' ? '☀️' : '🌙';
     });
   },
-  updateThemeIcon(t) { document.getElementById('themeToggle').textContent = t === 'dark' ? '☀️' : '🌙'; },
 
   setupLogin() {
     const passInput = document.getElementById('passwordInput');
     const loginBtn = document.getElementById('loginBtn');
     const togglePass = document.getElementById('togglePass');
     togglePass.addEventListener('click', () => {
-      const type = passInput.type === 'password' ? 'text' : 'password';
-      passInput.type = type;
-      togglePass.textContent = type === 'password' ? '👁️' : '🙈';
+      const t = passInput.type === 'password' ? 'text' : 'password';
+      passInput.type = t;
+      togglePass.textContent = t === 'password' ? '👁️' : '🙈';
     });
     const attempt = () => {
       if (passInput.value === ADMIN_PASSWORD) {
         sessionStorage.setItem(SESSION_KEY, 'true');
         this.showAdmin();
-        this.showToast('success', 'مرحباً 👋', 'تم الدخول بنجاح');
+        this.showToast('success', 'مرحباً 👋', 'تم الدخول');
       } else {
         passInput.classList.add('error');
         this.showToast('error', 'خطأ', 'كلمة المرور غير صحيحة');
@@ -967,52 +802,39 @@ const App = {
   logout() { sessionStorage.removeItem(SESSION_KEY); location.reload(); },
 
   setupNav() {
-    document.querySelectorAll('.nav-link').forEach(link => {
-      link.addEventListener('click', () => this.navigate(link.dataset.section));
-    });
+    document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => this.navigate(l.dataset.section)));
     document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => {
-      document.getElementById('adminSidebar').classList.toggle('open');
-    });
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => document.getElementById('adminSidebar').classList.toggle('open'));
   },
 
   navigate(section) {
-    this.state.currentSection = section;
     document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.section === section));
     document.querySelectorAll('.admin-section').forEach(s => s.classList.toggle('active', s.id === `section-${section}`));
     document.getElementById('adminSidebar').classList.remove('open');
     const loaders = {
-      articles: () => this.loadArticles(),
-      ticker: () => this.loadTicker(),
-      products: () => this.loadProducts(),
-      users: () => this.loadUsers(),
-      rfqs: () => this.loadRfqs(),
-      offers: () => { this.loadOffers(); this.loadQuotes(); },
-      messages: () => this.loadMessages(),
-      contacts: () => this.loadContacts(),
+      articles: () => this.loadArticles(), ticker: () => this.loadTicker(),
+      products: () => this.loadProducts(), users: () => this.loadUsers(),
+      rfqs: () => this.loadRfqs(), offers: () => { this.loadOffers(); this.loadQuotes(); },
+      messages: () => this.loadMessages(), contacts: () => this.loadContacts(),
       notifications: () => this.loadNotifications(),
       reviews: () => { this.loadReviews(); this.loadRatings(); },
-      follows: () => this.loadFollows(),
-      favorites: () => this.loadFavorites(),
+      follows: () => this.loadFollows(), favorites: () => this.loadFavorites(),
       categories: () => { this.loadCategories(); this.loadSubcategories(); },
-      analytics: () => this.loadAnalytics(),
-      visitors: () => this.loadVisitors()
+      analytics: () => this.loadAnalytics(), visitors: () => this.loadVisitors()
     };
     if (loaders[section]) loaders[section]();
   },
 
   setupTabs() {
-    document.querySelectorAll('.tabs').forEach(tabGroup => {
-      const tabs = tabGroup.querySelectorAll('.tab');
-      tabs.forEach(tab => {
+    document.querySelectorAll('.tabs').forEach(tg => {
+      tg.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', () => {
-          tabs.forEach(t => t.classList.remove('active'));
+          tg.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
-          const target = tab.dataset.tab;
-          const parent = tabGroup.parentElement;
-          parent.querySelectorAll('[id$="TabContent"]').forEach(c => c.style.display = 'none');
-          const content = parent.querySelector(`#${target}TabContent`);
-          if (content) content.style.display = 'block';
+          const p = tg.parentElement;
+          p.querySelectorAll('[id$="TabContent"]').forEach(c => c.style.display = 'none');
+          const c = p.querySelector(`#${tab.dataset.tab}TabContent`);
+          if (c) c.style.display = 'block';
         });
       });
     });
@@ -1039,20 +861,14 @@ const App = {
   closeModal(id) { document.getElementById(id).classList.add('hidden'); },
 
   async loadAll() {
-    await Promise.all([
-      this.loadStats(), this.loadRecentActivity(), this.loadRecentUsers()
-    ]);
-    // Preload counts for nav badges in background
+    await Promise.all([this.loadStats(), this.loadRecentActivity(), this.loadRecentUsers()]);
     this.loadNavCounts();
   },
 
   async loadNavCounts() {
     const tables = [
-      ['blog_posts', 'navCountArticles'],
-      ['ticker_news', 'navCountTicker'],
-      ['products', 'navCountProducts'],
-      ['profiles', 'navCountUsers'],
-      ['purchase_requests', 'navCountRfqs']
+      ['blog_posts','navCountArticles'],['ticker_news','navCountTicker'],
+      ['products','navCountProducts'],['profiles','navCountUsers'],['purchase_requests','navCountRfqs']
     ];
     for (const [t, id] of tables) {
       try {
@@ -1063,21 +879,16 @@ const App = {
     }
   },
 
-  /* ============ DASHBOARD ============ */
+  /* ══════════ DASHBOARD ══════════ */
   async loadStats() {
     const wrap = document.getElementById('mainStats');
     try {
-      const [
-        arts, tick, prods, feat, users, suppliers, buyers,
-        rfqs, openRfqs, offers, quotes, msgs, contacts, notifs, reviews, follows
-      ] = await Promise.all([
-        supabaseClient.from('blog_posts').select('id', { count: 'exact', head: true }),
-        supabaseClient.from('ticker_news').select('id', { count: 'exact', head: true }).eq('is_active', true),
-        supabaseClient.from('products').select('id', { count: 'exact', head: true }),
-        supabaseClient.from('products').select('id', { count: 'exact', head: true }).eq('is_featured', true),
+      const r = await Promise.all([
         supabaseClient.from('profiles').select('id', { count: 'exact', head: true }),
         supabaseClient.from('profiles').select('id', { count: 'exact', head: true }).eq('user_type', 'supplier'),
         supabaseClient.from('profiles').select('id', { count: 'exact', head: true }).eq('user_type', 'buyer'),
+        supabaseClient.from('products').select('id', { count: 'exact', head: true }),
+        supabaseClient.from('products').select('id', { count: 'exact', head: true }).eq('is_featured', true),
         supabaseClient.from('purchase_requests').select('id', { count: 'exact', head: true }),
         supabaseClient.from('purchase_requests').select('id', { count: 'exact', head: true }).eq('status', 'open'),
         supabaseClient.from('offers').select('id', { count: 'exact', head: true }),
@@ -1086,94 +897,365 @@ const App = {
         supabaseClient.from('supplier_contacts').select('id', { count: 'exact', head: true }),
         supabaseClient.from('notifications').select('id', { count: 'exact', head: true }),
         supabaseClient.from('reviews').select('id', { count: 'exact', head: true }),
-        supabaseClient.from('follows').select('id', { count: 'exact', head: true })
+        supabaseClient.from('follows').select('id', { count: 'exact', head: true }),
+        supabaseClient.from('blog_posts').select('id', { count: 'exact', head: true }),
+        supabaseClient.from('ticker_news').select('id', { count: 'exact', head: true }).eq('is_active', true)
       ]);
-
-      const stats = [
-        { icon: '👥', val: users.count || 0, lbl: 'إجمالي المستخدمين', cls: 'blue' },
-        { icon: '🏭', val: suppliers.count || 0, lbl: 'موردين', cls: 'green' },
-        { icon: '🛒', val: buyers.count || 0, lbl: 'مشترين', cls: 'orange' },
-        { icon: '📦', val: prods.count || 0, lbl: 'منتجات', cls: 'blue' },
-        { icon: '⭐', val: feat.count || 0, lbl: 'منتجات مميزة', cls: 'purple' },
-        { icon: '📋', val: rfqs.count || 0, lbl: 'طلبات شراء', cls: 'orange' },
-        { icon: '🔥', val: openRfqs.count || 0, lbl: 'طلبات مفتوحة', cls: 'red' },
-        { icon: '💰', val: offers.count || 0, lbl: 'عروض بسيطة', cls: 'teal' },
-        { icon: '📊', val: quotes.count || 0, lbl: 'عروض متقدمة', cls: 'purple' },
-        { icon: '💬', val: msgs.count || 0, lbl: 'رسائل', cls: 'blue' },
-        { icon: '📞', val: contacts.count || 0, lbl: 'تفاعلات CRM', cls: 'teal' },
-        { icon: '🔔', val: notifs.count || 0, lbl: 'إشعارات', cls: 'orange' },
-        { icon: '⭐', val: reviews.count || 0, lbl: 'تقييمات', cls: 'purple' },
-        { icon: '🔗', val: follows.count || 0, lbl: 'متابعات', cls: 'green' },
-        { icon: '📝', val: arts.count || 0, lbl: 'مقالات', cls: 'blue' },
-        { icon: '📢', val: tick.count || 0, lbl: 'أخبار نشطة', cls: 'green' }
+      const s = [
+        { i: '👥', v: r[0].count || 0, l: 'إجمالي المستخدمين', c: 'blue' },
+        { i: '🏭', v: r[1].count || 0, l: 'موردين', c: 'green' },
+        { i: '🛒', v: r[2].count || 0, l: 'مشترين', c: 'orange' },
+        { i: '📦', v: r[3].count || 0, l: 'منتجات', c: 'blue' },
+        { i: '⭐', v: r[4].count || 0, l: 'منتجات مميزة', c: 'purple' },
+        { i: '📋', v: r[5].count || 0, l: 'طلبات شراء', c: 'orange' },
+        { i: '🔥', v: r[6].count || 0, l: 'طلبات مفتوحة', c: 'red' },
+        { i: '💰', v: r[7].count || 0, l: 'عروض', c: 'teal' },
+        { i: '📊', v: r[8].count || 0, l: 'عروض متقدمة', c: 'purple' },
+        { i: '💬', v: r[9].count || 0, l: 'رسائل', c: 'blue' },
+        { i: '📞', v: r[10].count || 0, l: 'تفاعلات CRM', c: 'teal' },
+        { i: '🔔', v: r[11].count || 0, l: 'إشعارات', c: 'orange' },
+        { i: '⭐', v: r[12].count || 0, l: 'تقييمات', c: 'purple' },
+        { i: '🔗', v: r[13].count || 0, l: 'متابعات', c: 'green' },
+        { i: '📝', v: r[14].count || 0, l: 'مقالات', c: 'blue' },
+        { i: '📢', v: r[15].count || 0, l: 'أخبار نشطة', c: 'green' }
       ];
-
-      wrap.innerHTML = stats.map(s => `
-        <div class="stat-card">
-          <div class="stat-icon ${s.cls}">${s.icon}</div>
-          <div class="stat-info">
-            <div class="stat-value">${(s.val).toLocaleString('ar-EG')}</div>
-            <div class="stat-label">${s.lbl}</div>
-          </div>
-        </div>
-      `).join('');
-    } catch (e) {
-      wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`;
-    }
+      wrap.innerHTML = s.map(x => `<div class="stat-card"><div class="stat-icon ${x.c}">${x.i}</div><div class="stat-info"><div class="stat-value">${x.v.toLocaleString('ar-EG')}</div><div class="stat-label">${x.l}</div></div></div>`).join('');
+    } catch (e) { wrap.innerHTML = `<p style="color:var(--c-danger)">${e.message}</p>`; }
   },
 
   async loadRecentActivity() {
     const wrap = document.getElementById('recentActivity');
     try {
-      const [contacts, msgs] = await Promise.all([
+      const [c, m] = await Promise.all([
         supabaseClient.from('supplier_contacts').select('*').order('contact_date', { ascending: false }).limit(8),
         supabaseClient.from('messages').select('*').order('created_at', { ascending: false }).limit(8)
       ]);
-      const activities = [
-        ...(contacts.data || []).map(c => ({ type: 'contact', icon: '📞', text: `تفاعل ${c.contact_type}`, date: c.contact_date })),
-        ...(msgs.data || []).map(m => ({ type: 'msg', icon: '💬', text: `رسالة: ${(m.message || '').slice(0, 40)}`, date: m.created_at }))
-      ].sort((a, b) => new Date(b.date) - new Date(a.date)).slice(0, 10);
-
-      if (!activities.length) { wrap.innerHTML = '<p class="td-muted" style="text-align:center; padding:20px">لا يوجد نشاط حديث</p>'; return; }
-      wrap.innerHTML = activities.map(a => `
-        <div style="display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--c-border); align-items:center">
-          <span style="font-size:18px">${a.icon}</span>
-          <div style="flex:1; min-width:0">
-            <div style="font-size:13px; font-weight:500; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(a.text)}</div>
-            <div class="td-muted">${this.timeAgo(a.date)}</div>
-          </div>
-        </div>
-      `).join('');
+      const acts = [
+        ...(c.data || []).map(x => ({ i: '📞', t: `تفاعل ${x.contact_type}`, d: x.contact_date })),
+        ...(m.data || []).map(x => ({ i: '💬', t: `رسالة: ${(x.message || '').slice(0, 40)}`, d: x.created_at }))
+      ].sort((a, b) => new Date(b.d) - new Date(a.d)).slice(0, 10);
+      if (!acts.length) return wrap.innerHTML = '<p class="td-muted" style="text-align:center; padding:20px">لا يوجد نشاط</p>';
+      wrap.innerHTML = acts.map(a => `<div style="display:flex; gap:10px; padding:9px 0; border-bottom:1px solid var(--c-border); align-items:center"><span style="font-size:18px">${a.i}</span><div style="flex:1; min-width:0"><div style="font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(a.t)}</div><div class="td-muted">${this.timeAgo(a.d)}</div></div></div>`).join('');
     } catch (e) { wrap.innerHTML = `<p style="color:var(--c-danger)">${e.message}</p>`; }
   },
 
   async loadRecentUsers() {
     const wrap = document.getElementById('recentUsers');
     try {
-      const { data, error } = await supabaseClient
-        .from('profiles')
-        .select('id, full_name, company_name, email, user_type, avatar_url, created_at, is_verified')
-        .order('created_at', { ascending: false })
-        .limit(8);
+      const { data, error } = await supabaseClient.from('profiles')
+        .select('id, full_name, company_name, email, user_type, is_verified, created_at')
+        .order('created_at', { ascending: false }).limit(8);
       if (error) throw error;
-      if (!data?.length) { wrap.innerHTML = '<p class="td-muted" style="text-align:center; padding:20px">لا يوجد مسجلين</p>'; return; }
-      wrap.innerHTML = data.map(u => `
-        <div style="display:flex; gap:10px; padding:10px 0; border-bottom:1px solid var(--c-border); align-items:center; cursor:pointer" onclick="App.viewUser('${u.id}')">
-          <div style="width:36px; height:36px; border-radius:50%; background:var(--c-primary-500); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:14px">${this.initials(u.full_name || u.company_name || '?')}</div>
-          <div style="flex:1; min-width:0">
-            <div style="font-size:13px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">
-              ${this.esc(u.full_name || u.company_name || 'بدون اسم')}
-              ${u.is_verified ? ' <span style="color:var(--c-verified)">✓</span>' : ''}
-            </div>
-            <div class="td-muted">${this.esc(u.email || '')} · ${u.user_type || ''}</div>
-          </div>
-          <div class="td-muted">${this.timeAgo(u.created_at)}</div>
+      if (!data?.length) return wrap.innerHTML = '<p class="td-muted" style="text-align:center; padding:20px">لا يوجد مسجلين</p>';
+      wrap.innerHTML = data.map(u => `<div style="display:flex; gap:10px; padding:9px 0; border-bottom:1px solid var(--c-border); align-items:center; cursor:pointer" onclick="App.viewUser('${u.id}')">
+        <div style="width:36px; height:36px; border-radius:50%; background:var(--c-primary-500); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px">${this.initials(u.full_name || u.email || '?')}</div>
+        <div style="flex:1; min-width:0">
+          <div style="font-size:13px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(u.full_name || 'بدون اسم')} ${u.is_verified ? '✓' : ''}</div>
+          <div class="td-muted">${this.esc(u.email || '—')}</div>
         </div>
-      `).join('');
+        <div class="td-muted">${this.timeAgo(u.created_at)}</div>
+      </div>`).join('');
     } catch (e) { wrap.innerHTML = `<p style="color:var(--c-danger)">${e.message}</p>`; }
   },
 
-  /* ============ ARTICLES ============ */
+  /* ══════════ USERS ══════════ */
+  async loadUsers() {
+    const wrap = document.getElementById('usersList');
+    wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
+    try {
+      const search = (document.getElementById('userSearch')?.value || '').trim();
+      const type = document.getElementById('userTypeFilter')?.value || '';
+      const verified = document.getElementById('userVerifiedFilter')?.value || '';
+      const suspended = document.getElementById('userSuspendedFilter')?.value || '';
+
+      let q = supabaseClient.from('profiles').select('*').order('created_at', { ascending: false }).limit(500);
+      if (type) q = q.eq('user_type', type);
+      if (verified === 'true') q = q.eq('is_verified', true);
+      if (verified === 'false') q = q.eq('is_verified', false);
+      if (suspended === 'true') q = q.eq('is_suspended', true);
+      if (suspended === 'false') q = q.eq('is_suspended', false);
+      if (search) q = q.or(`full_name.ilike.%${search}%,email.ilike.%${search}%,company_name.ilike.%${search}%,phone.ilike.%${search}%,whatsapp.ilike.%${search}%`);
+
+      const { data, error } = await q;
+      if (error) throw error;
+      this.state.users = data || [];
+      document.getElementById('navCountUsers').textContent = data?.length || 0;
+      this.renderUsers();
+    } catch (e) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`; }
+  },
+
+  renderUsers() {
+    const wrap = document.getElementById('usersList');
+    if (!this.state.users.length) {
+      wrap.innerHTML = `<div class="empty-state"><span class="emoji">👥</span><h3>لا يوجد مستخدمين</h3></div>`;
+      return;
+    }
+    const typeLabel = { supplier: 'مورد', buyer: 'مشتري', admin: 'أدمن' };
+    const typeBadge = { supplier: 'badge-success', buyer: 'badge-info', admin: 'badge-danger' };
+    wrap.innerHTML = `<div class="table-wrap"><table>
+      <thead><tr>
+        <th>المستخدم</th><th>الإيميل</th><th>الهاتف</th><th>كلمة السر</th><th>النوع</th>
+        <th>الشركة</th><th>موثّق</th><th>الحالة</th><th>آخر ظهور</th><th>إجراءات</th>
+      </tr></thead>
+      <tbody>${this.state.users.map(u => `<tr>
+        <td><div class="td-title">${this.esc(u.full_name || 'بدون اسم')}</div><div class="td-muted">${this.esc(u.city || '')}</div></td>
+        <td class="td-muted" style="font-size:11px">${this.esc(u.email || '—')}</td>
+        <td class="td-muted" style="font-size:11px">${this.esc(u.phone || '—')}</td>
+        <td>${u.password_plain ? `<span class="td-pass hidden-pass" onclick="this.classList.toggle('hidden-pass')">${this.esc(u.password_plain)}</span>` : '<span class="td-muted">—</span>'}</td>
+        <td><span class="badge ${typeBadge[u.user_type] || 'badge-gray'}">${typeLabel[u.user_type] || u.user_type || '—'}</span></td>
+        <td class="td-muted" style="font-size:11.5px">${this.esc(u.company_name || '—')}</td>
+        <td>${u.is_verified ? '<span class="badge badge-success">✓</span>' : '<span class="badge badge-gray">✗</span>'}</td>
+        <td>${u.is_suspended ? '<span class="badge badge-danger">معلّق</span>' : '<span class="badge badge-success">نشط</span>'}</td>
+        <td class="td-muted">${this.timeAgo(u.last_seen || u.last_login_at)}</td>
+        <td><div class="td-actions">
+          <button class="btn btn-outline btn-xs" onclick="App.viewUser('${u.id}')">👁️</button>
+          <button class="btn btn-outline btn-xs" onclick="App.quickToggleVerify('${u.id}', ${!u.is_verified})">${u.is_verified ? '❌' : '✅'}</button>
+          <button class="btn btn-danger btn-xs" onclick="App.confirmDeleteUser('${u.id}', '${this.escAttr(u.full_name || u.email)}')">🗑️</button>
+        </div></td>
+      </tr>`).join('')}</tbody>
+    </table></div>`;
+  },
+
+  async viewUser(id) {
+    const u = this.state.users.find(x => x.id === id);
+    if (!u) return;
+    this.state.currentUser = u;
+    const body = document.getElementById('userModalBody');
+    body.innerHTML = `
+      <div class="user-detail-grid">
+        <div class="user-detail-item"><div class="label">الاسم الكامل</div><div class="value">${this.esc(u.full_name || '—')}</div></div>
+        <div class="user-detail-item"><div class="label">الإيميل</div><div class="value">${this.esc(u.email || '—')}</div></div>
+        <div class="user-detail-item"><div class="label">كلمة السر</div><div class="value mono">
+          <span class="pass-reveal">
+            <span id="passValue">${u.password_plain ? '••••••••' : '—'}</span>
+            ${u.password_plain ? `<button class="toggle-eye" onclick="App.togglePassReveal('${this.escAttr(u.password_plain)}')">👁️</button>` : ''}
+          </span>
+        </div></div>
+        <div class="user-detail-item"><div class="label">الهاتف</div><div class="value">${this.esc(u.phone || '—')}</div></div>
+        <div class="user-detail-item"><div class="label">واتساب</div><div class="value">${this.esc(u.whatsapp || '—')}</div></div>
+        <div class="user-detail-item"><div class="label">الشركة</div><div class="value">${this.esc(u.company_name || '—')}</div></div>
+        <div class="user-detail-item"><div class="label">المدينة</div><div class="value">${this.esc(u.city || '—')}</div></div>
+        <div class="user-detail-item"><div class="label">النوع</div><div class="value">${this.esc(u.user_type || '—')}</div></div>
+        <div class="user-detail-item"><div class="label">موثّق</div><div class="value">${u.is_verified ? '✅ نعم' : '❌ لا'}</div></div>
+        <div class="user-detail-item"><div class="label">معلّق</div><div class="value">${u.is_suspended ? '🚫 نعم' : '✅ لا'}</div></div>
+        <div class="user-detail-item"><div class="label">Admin</div><div class="value">${u.is_admin ? '👑 نعم' : '❌ لا'}</div></div>
+        <div class="user-detail-item"><div class="label">عدد مرات الدخول</div><div class="value">${u.login_count || 0}</div></div>
+        <div class="user-detail-item"><div class="label">آخر دخول</div><div class="value">${this.fmtDate(u.last_login_at, true) || '—'}</div></div>
+        <div class="user-detail-item"><div class="label">تاريخ التسجيل</div><div class="value">${this.fmtDate(u.created_at)}</div></div>
+        <div class="user-detail-item full"><div class="label">ID</div><div class="value mono">${u.id}</div></div>
+        <div class="user-detail-item full"><div class="label">العنوان</div><div class="value">${this.esc(u.address || '—')}</div></div>
+        <div class="user-detail-item full"><div class="label">نبذة</div><div class="value">${this.esc(u.bio || '—')}</div></div>
+        <div class="user-detail-item full"><div class="label">ملاحظات الأدمن</div>
+          <textarea class="form-input" id="adminNotesInput" style="min-height:60px; font-size:12.5px">${this.esc(u.admin_notes || '')}</textarea>
+        </div>
+      </div>
+    `;
+    // Buttons
+    const bVerify = document.getElementById('btnToggleVerify');
+    bVerify.textContent = u.is_verified ? '❌ إلغاء التوثيق' : '✅ توثيق';
+    bVerify.onclick = () => { this.quickToggleVerify(u.id, !u.is_verified); this.closeModal('userModal'); };
+
+    const bSuspend = document.getElementById('btnToggleSuspend');
+    bSuspend.textContent = u.is_suspended ? '✅ إلغاء التعليق' : '🚫 تعليق';
+    bSuspend.onclick = () => { this.toggleSuspend(u.id, !u.is_suspended); this.closeModal('userModal'); };
+
+    const bAdmin = document.getElementById('btnMakeAdmin');
+    bAdmin.textContent = u.is_admin ? '❌ إزالة Admin' : '👑 تعيين Admin';
+    bAdmin.onclick = () => { this.toggleAdmin(u.id, !u.is_admin); this.closeModal('userModal'); };
+
+    document.getElementById('btnChangePass').onclick = () => {
+      document.getElementById('newPassInput').value = '';
+      this.openModal('passModal');
+    };
+
+    document.getElementById('btnSaveUser').onclick = () => this.saveUserChanges();
+
+    this.openModal('userModal');
+  },
+
+  togglePassReveal(pass) {
+    const el = document.getElementById('passValue');
+    if (!el) return;
+    el.textContent = el.textContent === '••••••••' ? pass : '••••••••';
+  },
+
+  async saveUserChanges() {
+    if (!this.state.currentUser) return;
+    const notes = document.getElementById('adminNotesInput')?.value || '';
+    try {
+      const { error } = await supabaseClient.from('profiles')
+        .update({ admin_notes: notes, updated_at: new Date().toISOString() })
+        .eq('id', this.state.currentUser.id);
+      if (error) throw error;
+      this.showToast('success', 'تم الحفظ ✅');
+      this.closeModal('userModal');
+      await this.loadUsers();
+    } catch (e) { this.showToast('error', 'فشل', e.message); }
+  },
+
+  async quickToggleVerify(id, verify) {
+    try {
+      const { error } = await supabaseClient.from('profiles').update({ is_verified: verify }).eq('id', id);
+      if (error) throw error;
+      this.showToast('success', verify ? 'تم التوثيق ✅' : 'تم الإلغاء');
+      await this.loadUsers();
+    } catch (e) { this.showToast('error', 'خطأ', e.message); }
+  },
+
+  async toggleSuspend(id, suspended) {
+    try {
+      const { error } = await supabaseClient.from('profiles').update({ is_suspended: suspended }).eq('id', id);
+      if (error) throw error;
+      this.showToast('success', suspended ? '🚫 تم التعليق' : '✅ تم الإلغاء');
+      await this.loadUsers();
+    } catch (e) { this.showToast('error', 'خطأ', e.message); }
+  },
+
+  async toggleAdmin(id, isAdmin) {
+    try {
+      const { error } = await supabaseClient.from('profiles').update({ is_admin: isAdmin, user_type: isAdmin ? 'admin' : 'buyer' }).eq('id', id);
+      if (error) throw error;
+      this.showToast('success', isAdmin ? '👑 تم التعيين' : 'تم الإزالة');
+      await this.loadUsers();
+    } catch (e) { this.showToast('error', 'خطأ', e.message); }
+  },
+
+  generateStrongPass() {
+    const chars = 'ABCDEFGHJKMNPQRSTUVWXYZabcdefghijkmnpqrstuvwxyz23456789!@#$%';
+    let p = '';
+    for (let i = 0; i < 12; i++) p += chars[Math.floor(Math.random() * chars.length)];
+    document.getElementById('newPassInput').value = p;
+  },
+
+  async saveNewPassword() {
+    if (!this.state.currentUser) return;
+    const newPass = document.getElementById('newPassInput').value.trim();
+    if (!newPass) return this.showToast('warning', 'تنبيه', 'اكتب كلمة السر');
+    try {
+      // 1) Update password_plain in profiles
+      const { error: e1 } = await supabaseClient.from('profiles')
+        .update({ password_plain: newPass, updated_at: new Date().toISOString() })
+        .eq('id', this.state.currentUser.id);
+      if (e1) throw e1;
+
+      // 2) Try RPC (in case service_role available)
+      await supabaseClient.rpc('admin_set_password_plain', {
+        p_user_id: this.state.currentUser.id, p_new_password: newPass
+      }).catch(() => {});
+
+      this.showToast('success', 'تم تغيير كلمة السر ✅', 'تم تحديث password_plain. لتحديث Auth فعلياً، استخدم Supabase Dashboard');
+      this.closeModal('passModal');
+      await this.loadUsers();
+    } catch (e) { this.showToast('error', 'فشل', e.message); }
+  },
+
+  confirmDeleteUser(id, name) {
+    document.getElementById('confirmMessage').textContent = `هل أنت متأكد من حذف "${name}"؟ هذا الإجراء نهائي.`;
+    document.getElementById('confirmYes').onclick = () => this.deleteUser(id);
+    this.openModal('confirmModal');
+  },
+
+  async deleteUser(id) {
+    try {
+      // 1) Try RPC (best-effort)
+      await supabaseClient.rpc('admin_delete_user', { p_user_id: id }).catch(() => {});
+      // 2) Delete from profiles
+      const { error } = await supabaseClient.from('profiles').delete().eq('id', id);
+      if (error) throw error;
+      this.showToast('success', 'تم الحذف 🗑️', 'ملاحظة: لو RLS يمنع، استخدم Supabase Dashboard لحذف من auth.users');
+      this.closeModal('confirmModal');
+      this.closeModal('userModal');
+      await this.loadUsers();
+    } catch (e) { this.showToast('error', 'فشل الحذف', e.message); }
+  },
+
+  deleteCurrentUser() {
+    if (!this.state.currentUser) return;
+    this.confirmDeleteUser(this.state.currentUser.id, this.state.currentUser.full_name || this.state.currentUser.email);
+  },
+
+  /* ══════════ EXPORT ══════════ */
+  exportUsers() {
+    if (!this.state.users.length) return this.showToast('warning', 'تنبيه', 'لا يوجد بيانات');
+    const rows = this.state.users.map(u => ({
+      'ID': u.id,
+      'الاسم الكامل': u.full_name || '',
+      'الإيميل': u.email || '',
+      'كلمة السر': u.password_plain || '',
+      'الهاتف': u.phone || '',
+      'واتساب': u.whatsapp || '',
+      'الشركة': u.company_name || '',
+      'المدينة': u.city || '',
+      'العنوان': u.address || '',
+      'النوع': u.user_type || '',
+      'موثّق': u.is_verified ? 'نعم' : 'لا',
+      'معلّق': u.is_suspended ? 'نعم' : 'لا',
+      'Admin': u.is_admin ? 'نعم' : 'لا',
+      'عدد الدخول': u.login_count || 0,
+      'آخر دخول': u.last_login_at ? this.fmtDate(u.last_login_at, true) : '',
+      'تاريخ التسجيل': u.created_at ? this.fmtDate(u.created_at) : '',
+      'ملاحظات': u.admin_notes || ''
+    }));
+    this.downloadExcel(rows, 'chemato-users');
+    this.showToast('success', 'تم التصدير ✅');
+  },
+
+  async exportData(table) {
+    try {
+      const { data, error } = await supabaseClient.from(table).select('*').limit(5000);
+      if (error) throw error;
+      if (!data?.length) return this.showToast('warning', 'تنبيه', 'لا يوجد بيانات');
+      const rows = data.map(row => {
+        const out = {};
+        Object.keys(row).forEach(k => {
+          let v = row[k];
+          if (v === null) v = '';
+          else if (typeof v === 'object') v = JSON.stringify(v);
+          out[k] = v;
+        });
+        return out;
+      });
+      this.downloadExcel(rows, `chemato-${table}`);
+      this.showToast('success', 'تم التصدير ✅', `${rows.length} صف`);
+    } catch (e) { this.showToast('error', 'فشل التصدير', e.message); }
+  },
+
+  async exportAll() {
+    const tables = ['profiles', 'products', 'purchase_requests', 'offers', 'quotes', 'messages', 'reviews', 'supplier_contacts', 'notifications', 'follows', 'favorites', 'blog_posts', 'ticker_news', 'analytics_events'];
+    try {
+      const wb = XLSX.utils.book_new();
+      for (const t of tables) {
+        try {
+          const { data } = await supabaseClient.from(t).select('*').limit(5000);
+          if (data?.length) {
+            const rows = data.map(row => {
+              const out = {};
+              Object.keys(row).forEach(k => {
+                let v = row[k];
+                if (v === null) v = '';
+                else if (typeof v === 'object') v = JSON.stringify(v);
+                out[k] = v;
+              });
+              return out;
+            });
+            const ws = XLSX.utils.json_to_sheet(rows);
+            XLSX.utils.book_append_sheet(wb, ws, t.slice(0, 30));
+          }
+        } catch {}
+      }
+      XLSX.writeFile(wb, `chemato-full-backup-${new Date().toISOString().slice(0,10)}.xlsx`);
+      this.showToast('success', 'تم التصدير الكامل ✅');
+    } catch (e) { this.showToast('error', 'فشل', e.message); }
+  },
+
+  downloadExcel(rows, filename) {
+    const ws = XLSX.utils.json_to_sheet(rows);
+    const wb = XLSX.utils.book_new();
+    XLSX.utils.book_append_sheet(wb, ws, 'Data');
+    XLSX.writeFile(wb, `${filename}-${new Date().toISOString().slice(0,10)}.xlsx`);
+  },
+
+  /* ══════════ ARTICLES ══════════ */
   async loadArticles() {
     const wrap = document.getElementById('articlesList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1188,19 +1270,17 @@ const App = {
 
   renderArticles() {
     const wrap = document.getElementById('articlesList');
-    if (!this.state.articles.length) {
-      wrap.innerHTML = `<div class="empty-state"><span class="emoji">📝</span><h3>لا توجد مقالات</h3><button class="btn btn-primary" onclick="App.openArticleModal()">➕ مقال جديد</button></div>`;
-      return;
-    }
-    const statusMap = { draft: { label: 'مسودة', cls: 'badge-gray' }, published: { label: 'منشور', cls: 'badge-success' }, archived: { label: 'مؤرشف', cls: 'badge-warning' } };
+    if (!this.state.articles.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📝</span><h3>لا توجد مقالات</h3><button class="btn btn-primary" onclick="App.openArticleModal()">➕ مقال جديد</button></div>`;
+    const sm = { draft: ['مسودة','badge-gray'], published: ['منشور','badge-success'], archived: ['مؤرشف','badge-warning'] };
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>العنوان</th><th>الفئة</th><th>الحالة</th><th>مميز</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
+      <thead><tr><th>العنوان</th><th>Slug</th><th>الفئة</th><th>الحالة</th><th>مميز</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.articles.map(a => {
-        const st = statusMap[a.status] || statusMap.draft;
+        const s = sm[a.status] || sm.draft;
         return `<tr>
-          <td><div class="td-title">${this.esc(a.title)}</div><div class="td-muted">${this.esc(a.slug)}</div></td>
+          <td><div class="td-title">${this.esc(a.title)}</div></td>
+          <td class="td-muted">${this.esc(a.slug)}</td>
           <td><span class="badge badge-info">${this.esc(a.category || 'عام')}</span></td>
-          <td><span class="badge ${st.cls}">${st.label}</span></td>
+          <td><span class="badge ${s[1]}">${s[0]}</span></td>
           <td>${a.is_featured ? '⭐' : '—'}</td>
           <td class="td-muted">${this.fmtDate(a.created_at)}</td>
           <td><div class="td-actions">
@@ -1216,7 +1296,7 @@ const App = {
     this.state.editingIds.article = null;
     this.state.artTags = [];
     document.getElementById('articleModalTitle').textContent = 'مقال جديد';
-    ['artId','artTitle','artSlug','artExcerpt','artContent','artImageUrl','artAuthorName','artMetaTitle','artMetaKeywords','artMetaDescription'].forEach(id => document.getElementById(id).value = '');
+    ['artId','artTitle','artSlug','artExcerpt','artContent','artImageUrl','artAuthorName','artMetaTitle','artMetaKeywords','artMetaDescription'].forEach(i => document.getElementById(i).value = '');
     document.getElementById('artCategory').value = 'عام';
     document.getElementById('artStatus').value = 'draft';
     document.getElementById('artIsFeatured').checked = false;
@@ -1230,17 +1310,21 @@ const App = {
     this.state.artTags = Array.isArray(a.tags) ? [...a.tags] : [];
     document.getElementById('articleModalTitle').textContent = 'تعديل مقال';
     document.getElementById('artId').value = a.id;
+    ['artTitle','artSlug','artExcerpt','artContent','artImageUrl','artAuthorName','artMetaTitle','artMetaKeywords','artMetaDescription'].forEach(i => {
+      document.getElementById(i).value = a[i.replace('art','').replace(/^./, c => c.toLowerCase()).replace('ImageUrl','image_url').replace('MetaTitle','meta_title').replace('MetaKeywords','meta_keywords').replace('MetaDescription','meta_description').replace('AuthorName','author_name')] || '';
+    });
+    // Direct assignment to be safe
     document.getElementById('artTitle').value = a.title || '';
     document.getElementById('artSlug').value = a.slug || '';
-    document.getElementById('artCategory').value = a.category || 'عام';
     document.getElementById('artExcerpt').value = a.excerpt || '';
     document.getElementById('artContent').value = a.content || '';
     document.getElementById('artImageUrl').value = a.image_url || '';
     document.getElementById('artAuthorName').value = a.author_name || '';
-    document.getElementById('artStatus').value = a.status || 'draft';
     document.getElementById('artMetaTitle').value = a.meta_title || '';
     document.getElementById('artMetaKeywords').value = a.meta_keywords || '';
     document.getElementById('artMetaDescription').value = a.meta_description || '';
+    document.getElementById('artCategory').value = a.category || 'عام';
+    document.getElementById('artStatus').value = a.status || 'draft';
     document.getElementById('artIsFeatured').checked = !!a.is_featured;
     this.renderTags();
     this.openModal('articleModal');
@@ -1250,20 +1334,18 @@ const App = {
     const wrap = document.getElementById('artTagsWrap');
     const input = document.getElementById('artTagsInput');
     wrap.querySelectorAll('.tag-chip').forEach(c => c.remove());
-    this.state.artTags.forEach((tag, idx) => {
+    this.state.artTags.forEach((tag, i) => {
       const chip = document.createElement('span');
       chip.className = 'tag-chip';
-      chip.innerHTML = `${this.esc(tag)} <button type="button" onclick="App.removeTag(${idx})">✕</button>`;
+      chip.innerHTML = `${this.esc(tag)} <button type="button" onclick="App.removeTag(${i})">✕</button>`;
       wrap.insertBefore(chip, input);
     });
   },
 
-  removeTag(idx) { this.state.artTags.splice(idx, 1); this.renderTags(); },
+  removeTag(i) { this.state.artTags.splice(i, 1); this.renderTags(); },
 
-  slugify(text) {
-    return text.toString().trim().toLowerCase()
-      .replace(/[\s_]+/g, '-').replace(/[^\w\u0600-\u06FF-]/g, '')
-      .replace(/-+/g, '-').replace(/^-|-$/g, '') || 'article-' + Date.now();
+  slugify(t) {
+    return t.toString().trim().toLowerCase().replace(/[\s_]+/g, '-').replace(/[^\w\u0600-\u06FF-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'article-' + Date.now();
   },
 
   async saveArticle() {
@@ -1287,7 +1369,7 @@ const App = {
       meta_description: document.getElementById('artMetaDescription').value.trim() || null,
       updated_at: new Date().toISOString()
     };
-    btn.disabled = true; btn.textContent = '⏳ جاري الحفظ...';
+    btn.disabled = true; btn.textContent = '⏳...';
     try {
       let error;
       if (this.state.editingIds.article) {
@@ -1305,13 +1387,13 @@ const App = {
     finally { btn.disabled = false; btn.textContent = '💾 حفظ'; }
   },
 
-  /* ============ TICKER ============ */
+  /* ══════════ TICKER ══════════ */
   async loadTicker() {
     const wrap = document.getElementById('tickerList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
     try {
       const { data, error } = await supabaseClient.from('ticker_news').select('*')
-        .order('priority', { ascending: false }).order('display_order', { ascending: true }).order('created_at', { ascending: false });
+        .order('priority', { ascending: false }).order('display_order').order('created_at', { ascending: false });
       if (error) throw error;
       this.state.ticker = data || [];
       document.getElementById('navCountTicker').textContent = data?.length || 0;
@@ -1321,16 +1403,13 @@ const App = {
 
   renderTicker() {
     const wrap = document.getElementById('tickerList');
-    if (!this.state.ticker.length) {
-      wrap.innerHTML = `<div class="empty-state"><span class="emoji">📢</span><h3>لا توجد أخبار</h3><button class="btn btn-accent" onclick="App.openTickerModal()">➕ خبر جديد</button></div>`;
-      return;
-    }
+    if (!this.state.ticker.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📢</span><h3>لا توجد أخبار</h3><button class="btn btn-accent" onclick="App.openTickerModal()">➕ خبر جديد</button></div>`;
     const cb = { info: 'badge-info', success: 'badge-success', warning: 'badge-warning', danger: 'badge-danger', primary: 'badge-purple' };
     wrap.innerHTML = `<div class="table-wrap"><table>
       <thead><tr><th>أيقونة</th><th>العنوان</th><th>اللون</th><th>أولوية</th><th>الحالة</th><th>مشاهدات</th><th>نقرات</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.ticker.map(t => `<tr>
         <td style="font-size:22px">${this.esc(t.icon || '📢')}</td>
-        <td><div class="td-title">${this.esc(t.title)}</div>${t.description ? `<div class="td-muted">${this.esc(t.description).slice(0,50)}...</div>` : ''}</td>
+        <td><div class="td-title">${this.esc(t.title)}</div></td>
         <td><span class="badge ${cb[t.color] || 'badge-info'}">${this.esc(t.color)}</span></td>
         <td>${t.priority ?? 0}</td>
         <td><label class="toggle"><input type="checkbox" ${t.is_active ? 'checked' : ''} onchange="App.toggleTickerActive('${t.id}', this.checked)"><span class="slider"></span></label></td>
@@ -1347,7 +1426,7 @@ const App = {
   openTickerModal() {
     this.state.editingIds.ticker = null;
     document.getElementById('tickerModalTitle').textContent = 'خبر جديد';
-    ['tnId','tnTitle','tnDescription','tnLinkText','tnLinkUrl','tnStartsAt','tnEndsAt'].forEach(id => document.getElementById(id).value = '');
+    ['tnId','tnTitle','tnDescription','tnLinkText','tnLinkUrl','tnStartsAt','tnEndsAt'].forEach(i => document.getElementById(i).value = '');
     document.getElementById('tnIcon').value = '📢';
     document.getElementById('tnColor').value = 'info';
     document.getElementById('tnPriority').value = 0;
@@ -1410,16 +1489,15 @@ const App = {
     finally { btn.disabled = false; btn.textContent = '💾 حفظ'; }
   },
 
-  async toggleTickerActive(id, active) {
+  async toggleTickerActive(id, a) {
     try {
-      const { error } = await supabaseClient.from('ticker_news')
-        .update({ is_active: active, updated_at: new Date().toISOString() }).eq('id', id);
+      const { error } = await supabaseClient.from('ticker_news').update({ is_active: a, updated_at: new Date().toISOString() }).eq('id', id);
       if (error) throw error;
       this.showToast('success', 'تم التحديث');
     } catch (e) { this.showToast('error', 'خطأ', e.message); await this.loadTicker(); }
   },
 
-  /* ============ PRODUCTS ============ */
+  /* ══════════ PRODUCTS ══════════ */
   async loadProducts() {
     const wrap = document.getElementById('productsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1442,19 +1520,19 @@ const App = {
 
   renderProducts() {
     const wrap = document.getElementById('productsList');
-    if (!this.state.products.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">📦</span><h3>لا توجد منتجات</h3></div>`; return; }
+    if (!this.state.products.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📦</span><h3>لا توجد منتجات</h3></div>`;
     const sb = { active: 'badge-success', hidden: 'badge-gray', sold: 'badge-warning' };
     const sl = { active: 'نشط', hidden: 'مخفي', sold: 'مباع' };
     wrap.innerHTML = `<div class="table-wrap"><table>
       <thead><tr><th>المنتج</th><th>الفئة</th><th>الحالة</th><th>مميز</th><th>مشاهدات</th><th>تقييم</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.products.map(p => {
-        const views = Math.max(p.views || 0, p.views_count || 0);
+        const v = Math.max(p.views || 0, p.views_count || 0);
         return `<tr>
-          <td><div class="td-title">${this.esc(p.name)}</div><div class="td-muted">${this.esc(p.cas_number || '')} ${p.price ? `· ${p.price} ${p.unit || ''}` : ''}</div></td>
+          <td><div class="td-title">${this.esc(p.name)}</div><div class="td-muted">${this.esc(p.cas_number || '')}</div></td>
           <td><span class="badge badge-info">${this.esc(p.category || '—')}</span></td>
           <td><span class="badge ${sb[p.status] || 'badge-gray'}">${sl[p.status] || p.status}</span></td>
           <td><label class="toggle"><input type="checkbox" ${p.is_featured ? 'checked' : ''} onchange="App.toggleFeatured('${p.id}', this.checked)"><span class="slider"></span></label></td>
-          <td class="td-muted">👁️ ${views.toLocaleString('ar-EG')}</td>
+          <td class="td-muted">👁️ ${v.toLocaleString('ar-EG')}</td>
           <td class="td-muted">⭐ ${(p.avg_rating || 0).toFixed(1)}</td>
           <td><div class="td-actions">
             <button class="btn btn-outline btn-xs" onclick="App.editProduct('${p.id}')">✏️</button>
@@ -1469,7 +1547,7 @@ const App = {
     try {
       const { error } = await supabaseClient.from('products').update({ is_featured: f }).eq('id', id);
       if (error) throw error;
-      this.showToast('success', f ? '⭐ مميز' : 'إلغاء التمييز');
+      this.showToast('success', f ? '⭐' : 'تم');
     } catch (e) { this.showToast('error', 'خطأ', e.message); await this.loadProducts(); }
   },
 
@@ -1507,104 +1585,13 @@ const App = {
     } catch (e) { this.showToast('error', 'فشل', e.message); }
   },
 
-  /* ============ USERS ============ */
-  async loadUsers() {
-    const wrap = document.getElementById('usersList');
-    wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
-    try {
-      const search = (document.getElementById('userSearch')?.value || '').trim();
-      const type = document.getElementById('userTypeFilter')?.value || '';
-      const verified = document.getElementById('userVerifiedFilter')?.value || '';
-      let q = supabaseClient.from('profiles').select('*').order('created_at', { ascending: false }).limit(300);
-      if (type) q = q.eq('user_type', type);
-      if (verified === 'true') q = q.eq('is_verified', true);
-      if (verified === 'false') q = q.eq('is_verified', false);
-      if (search) q = q.or(`full_name.ilike.%${search}%,email.ilike.%${search}%,company_name.ilike.%${search}%,phone.ilike.%${search}%`);
-      const { data, error } = await q;
-      if (error) throw error;
-      this.state.users = data || [];
-      document.getElementById('navCountUsers').textContent = data?.length || 0;
-      this.renderUsers();
-    } catch (e) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`; }
-  },
-
-  renderUsers() {
-    const wrap = document.getElementById('usersList');
-    if (!this.state.users.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">👥</span><h3>لا يوجد مستخدمين</h3></div>`; return; }
-    const typeLabel = { supplier: 'مورد', buyer: 'مشتري', admin: 'أدمن' };
-    const typeBadge = { supplier: 'badge-success', buyer: 'badge-info', admin: 'badge-danger' };
-    wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>المستخدم</th><th>النوع</th><th>الشركة</th><th>الهاتف</th><th>موثّق</th><th>آخر ظهور</th><th>إجراءات</th></tr></thead>
-      <tbody>${this.state.users.map(u => `<tr>
-        <td>
-          <div class="td-title">${this.esc(u.full_name || 'بدون اسم')}</div>
-          <div class="td-muted">${this.esc(u.email || '')}</div>
-        </td>
-        <td><span class="badge ${typeBadge[u.user_type] || 'badge-gray'}">${typeLabel[u.user_type] || u.user_type}</span></td>
-        <td class="td-muted">${this.esc(u.company_name || '—')}</td>
-        <td class="td-muted">${this.esc(u.phone || '—')}</td>
-        <td>${u.is_verified ? '<span class="badge badge-success">✓ موثّق</span>' : '<span class="badge badge-gray">✗</span>'}</td>
-        <td class="td-muted">${this.timeAgo(u.last_seen)}</td>
-        <td><div class="td-actions">
-          <button class="btn btn-outline btn-xs" onclick="App.viewUser('${u.id}')">👁️ عرض</button>
-          <button class="btn btn-outline btn-xs" onclick="App.toggleUserVerify('${u.id}', ${!u.is_verified})">${u.is_verified ? '❌' : '✅'}</button>
-        </div></td>
-      </tr>`).join('')}</tbody>
-    </table></div>`;
-  },
-
-  viewUser(id) {
-    const u = this.state.users.find(x => x.id === id); if (!u) return;
-    this.state.currentUserDetail = u;
-    const body = document.getElementById('userModalBody');
-    body.innerHTML = `
-      <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(200px, 1fr)); gap:12px">
-        <div><strong>ID:</strong><br><span class="td-muted" style="font-size:11px; word-break:break-all">${u.id}</span></div>
-        <div><strong>الاسم:</strong><br>${this.esc(u.full_name || '—')}</div>
-        <div><strong>الشركة:</strong><br>${this.esc(u.company_name || '—')}</div>
-        <div><strong>الإيميل:</strong><br>${this.esc(u.email || '—')}</div>
-        <div><strong>الهاتف:</strong><br>${this.esc(u.phone || '—')}</div>
-        <div><strong>واتساب:</strong><br>${this.esc(u.whatsapp || '—')}</div>
-        <div><strong>المدينة:</strong><br>${this.esc(u.city || '—')}</div>
-        <div><strong>النوع:</strong><br>${this.esc(u.user_type || '—')}</div>
-        <div><strong>موثّق:</strong><br>${u.is_verified ? '✅ نعم' : '❌ لا'}</div>
-        <div><strong>آخر ظهور:</strong><br>${this.timeAgo(u.last_seen)}</div>
-        <div><strong>تاريخ التسجيل:</strong><br>${this.fmtDate(u.created_at)}</div>
-        <div style="grid-column:1/-1"><strong>العنوان:</strong><br>${this.esc(u.address || '—')}</div>
-        <div style="grid-column:1/-1"><strong>نبذة:</strong><br>${this.esc(u.bio || '—')}</div>
-      </div>
-    `;
-    const btn = document.getElementById('userToggleVerify');
-    btn.textContent = u.is_verified ? '❌ إلغاء التحقق' : '✅ توثيق';
-    btn.onclick = () => { this.toggleUserVerify(u.id, !u.is_verified); this.closeModal('userModal'); };
-    this.openModal('userModal');
-  },
-
-  async toggleUserVerify(id, verify) {
-    try {
-      const { error } = await supabaseClient.from('profiles').update({ is_verified: verify }).eq('id', id);
-      if (error) throw error;
-      this.showToast('success', verify ? 'تم التوثيق ✅' : 'تم إلغاء التوثيق');
-      await this.loadUsers();
-      if (this.state.currentUserDetail?.id === id) {
-        this.state.currentUserDetail.is_verified = verify;
-      }
-    } catch (e) { this.showToast('error', 'خطأ', e.message); }
-  },
-
-  async deleteCurrentUser() {
-    if (!this.state.currentUserDetail) return;
-    const u = this.state.currentUserDetail;
-    this.confirmDelete('profile', u.id, u.full_name || u.email);
-  },
-
-  /* ============ RFQs ============ */
+  /* ══════════ RFQs ══════════ */
   async loadRfqs() {
     const wrap = document.getElementById('rfqsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
     try {
       const search = (document.getElementById('rfqSearch')?.value || '').trim();
-      const status = (document.getElementById('rfqStatusFilter')?.value || '');
+      const status = document.getElementById('rfqStatusFilter')?.value || '';
       let q = supabaseClient.from('purchase_requests').select('*').order('created_at', { ascending: false }).limit(300);
       if (status) q = q.eq('status', status);
       if (search) q = q.ilike('product_name', `%${search}%`);
@@ -1618,7 +1605,7 @@ const App = {
 
   renderRfqs() {
     const wrap = document.getElementById('rfqsList');
-    if (!this.state.rfqs.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">📋</span><h3>لا توجد طلبات</h3></div>`; return; }
+    if (!this.state.rfqs.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📋</span><h3>لا توجد طلبات</h3></div>`;
     const sb = { open: 'badge-success', matched: 'badge-warning', closed: 'badge-gray', expired: 'badge-danger' };
     const sl = { open: 'مفتوح', matched: 'مطابق', closed: 'مغلق', expired: 'منتهي' };
     wrap.innerHTML = `<div class="table-wrap"><table>
@@ -1626,18 +1613,16 @@ const App = {
       <tbody>${this.state.rfqs.map(r => `<tr>
         <td><div class="td-title">${this.esc(r.product_name)}</div><div class="td-muted">${this.esc(r.location || '')}</div></td>
         <td class="td-muted">${this.esc(r.cas_number || '—')}</td>
-        <td class="td-muted">${this.esc(r.quantity_needed || '—')} ${this.esc(r.preferred_unit || '')}</td>
-        <td class="td-muted">${r.budget_min || r.budget_max ? `${r.budget_min || '?'} - ${r.budget_max || '?'}` : '—'}</td>
+        <td class="td-muted">${this.esc(r.quantity_needed || '')} ${this.esc(r.preferred_unit || '')}</td>
+        <td class="td-muted">${r.budget_min || r.budget_max ? `${r.budget_min || '?'}-${r.budget_max || '?'}` : '—'}</td>
         <td><span class="badge ${sb[r.status] || 'badge-gray'}">${sl[r.status] || r.status}</span></td>
         <td class="td-muted">${r.views_count || 0}</td>
         <td class="td-muted">${this.fmtDate(r.created_at)}</td>
         <td><div class="td-actions">
-          <select class="form-select" style="padding:5px; font-size:11px" onchange="App.changeRfqStatus('${r.id}', this.value)">
+          <select class="form-select" style="padding:4px; font-size:11px" onchange="App.changeRfqStatus('${r.id}', this.value)">
             <option value="">تغيير...</option>
-            <option value="open">مفتوح</option>
-            <option value="matched">مطابق</option>
-            <option value="closed">مغلق</option>
-            <option value="expired">منتهي</option>
+            <option value="open">مفتوح</option><option value="matched">مطابق</option>
+            <option value="closed">مغلق</option><option value="expired">منتهي</option>
           </select>
           <button class="btn btn-danger btn-xs" onclick="App.confirmDelete('purchase_request','${r.id}')">🗑️</button>
         </div></td>
@@ -1645,16 +1630,16 @@ const App = {
     </table></div>`;
   },
 
-  async changeRfqStatus(id, status) {
-    if (!status) return;
+  async changeRfqStatus(id, s) {
+    if (!s) return;
     try {
-      const { error } = await supabaseClient.from('purchase_requests').update({ status, updated_at: new Date().toISOString() }).eq('id', id);
+      const { error } = await supabaseClient.from('purchase_requests').update({ status: s, updated_at: new Date().toISOString() }).eq('id', id);
       if (error) throw error;
-      this.showToast('success', 'تم تحديث الحالة');
+      this.showToast('success', 'تم');
     } catch (e) { this.showToast('error', 'خطأ', e.message); await this.loadRfqs(); }
   },
 
-  /* ============ OFFERS + QUOTES ============ */
+  /* ══════════ OFFERS + QUOTES ══════════ */
   async loadOffers() {
     const wrap = document.getElementById('offersList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1668,14 +1653,13 @@ const App = {
 
   renderOffers() {
     const wrap = document.getElementById('offersList');
-    if (!this.state.offers.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">💰</span><h3>لا توجد عروض</h3></div>`; return; }
+    if (!this.state.offers.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">💰</span><h3>لا توجد عروض</h3></div>`;
     const sb = { pending: 'badge-warning', accepted: 'badge-success', rejected: 'badge-gray' };
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>ID</th><th>الطلب</th><th>المورد</th><th>السعر</th><th>الكمية</th><th>التوصيل</th><th>الحالة</th><th>تاريخ</th></tr></thead>
+      <thead><tr><th>Request ID</th><th>Supplier ID</th><th>السعر</th><th>الكمية</th><th>التوصيل</th><th>الحالة</th><th>تاريخ</th></tr></thead>
       <tbody>${this.state.offers.map(o => `<tr>
-        <td class="td-muted" style="font-size:11px">${o.id.slice(0,8)}...</td>
-        <td class="td-muted" style="font-size:11px">${o.request_id ? o.request_id.slice(0,8) : '—'}</td>
-        <td class="td-muted" style="font-size:11px">${o.supplier_id ? o.supplier_id.slice(0,8) : '—'}</td>
+        <td class="td-muted td-mono">${o.request_id ? o.request_id.slice(0,8) : '—'}</td>
+        <td class="td-muted td-mono">${o.supplier_id ? o.supplier_id.slice(0,8) : '—'}</td>
         <td><strong>${o.price || '—'}</strong></td>
         <td class="td-muted">${this.esc(o.quantity_offered || '—')}</td>
         <td class="td-muted">${this.esc(o.delivery_time || '—')}</td>
@@ -1698,24 +1682,24 @@ const App = {
 
   renderQuotes() {
     const wrap = document.getElementById('quotesList');
-    if (!this.state.quotes.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">📊</span><h3>لا توجد عروض متقدمة</h3></div>`; return; }
+    if (!this.state.quotes.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📊</span><h3>لا توجد عروض متقدمة</h3></div>`;
     const sb = { pending: 'badge-warning', accepted: 'badge-success', rejected: 'badge-gray' };
     wrap.innerHTML = `<div class="table-wrap"><table>
       <thead><tr><th>ID</th><th>السعر</th><th>العملة</th><th>الكمية</th><th>الوحدة</th><th>التوصيل</th><th>الحالة</th><th>صالح حتى</th></tr></thead>
       <tbody>${this.state.quotes.map(q => `<tr>
-        <td class="td-muted" style="font-size:11px">${q.id.slice(0,8)}...</td>
+        <td class="td-muted td-mono">${q.id.slice(0,8)}</td>
         <td><strong>${q.unit_price || '—'}</strong></td>
         <td class="td-muted">${q.currency || 'EGP'}</td>
         <td class="td-muted">${q.quantity_available || '—'}</td>
         <td class="td-muted">${this.esc(q.unit || '—')}</td>
-        <td class="td-muted">${q.delivery_days ? `${q.delivery_days} يوم` : '—'}</td>
+        <td class="td-muted">${q.delivery_days ? q.delivery_days + ' يوم' : '—'}</td>
         <td><span class="badge ${sb[q.status] || 'badge-gray'}">${q.status || '—'}</span></td>
         <td class="td-muted">${this.fmtDate(q.valid_until)}</td>
       </tr>`).join('')}</tbody>
     </table></div>`;
   },
 
-  /* ============ MESSAGES ============ */
+  /* ══════════ MESSAGES ══════════ */
   async loadMessages() {
     const wrap = document.getElementById('chatSidebar');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1729,7 +1713,6 @@ const App = {
 
   renderChatSidebar() {
     const wrap = document.getElementById('chatSidebar');
-    // Group by conversation (pair of users)
     const convs = {};
     this.state.messages.forEach(m => {
       const key = [m.from_user_id, m.to_user_id].sort().join('_');
@@ -1741,34 +1724,39 @@ const App = {
       return { last: msgs[0], count: msgs.length };
     }).sort((a, b) => new Date(b.last.created_at) - new Date(a.last.created_at));
 
-    if (!list.length) { wrap.innerHTML = `<div class="empty-state" style="padding:30px"><span class="emoji">💬</span><h3>لا توجد محادثات</h3></div>`; return; }
+    if (!list.length) return wrap.innerHTML = `<div class="empty-state" style="padding:30px"><span class="emoji">💬</span><h3>لا توجد محادثات</h3></div>`;
 
     wrap.innerHTML = list.map(c => {
-      const other = c.last.from_user_id;
-      const me = c.last.to_user_id;
-      const preview = c.last.message || '';
-      const time = this.timeAgo(c.last.created_at);
-      return `<div class="chat-user-item" onclick="App.openChat('${other}', '${me}')">
-        <div class="chat-user-name">${other.slice(0,8)}... ↔ ${me.slice(0,8)}... <span class="badge badge-info" style="font-size:9px">${c.count}</span></div>
-        <div class="chat-user-preview">${this.esc(preview).slice(0, 50)}</div>
-        <div class="chat-user-preview" style="font-size:10px">${time}</div>
+      // Resolve names
+      const a = this.userName(c.last.from_user_id);
+      const b = this.userName(c.last.to_user_id);
+      return `<div class="chat-user-item" onclick="App.openChat('${c.last.from_user_id}', '${c.last.to_user_id}')">
+        <div class="chat-user-name">${this.esc(a)} ↔ ${this.esc(b)} <span class="badge badge-info" style="font-size:9px">${c.count}</span></div>
+        <div class="chat-user-preview">${this.esc((c.last.message || '').slice(0, 50))}</div>
+        <div class="chat-user-preview" style="font-size:10px">${this.timeAgo(c.last.created_at)}</div>
       </div>`;
     }).join('');
   },
 
-  async openChat(userA, userB) {
-    this.state.selectedChatUserId = userA;
+  userName(id) {
+    if (!id) return '—';
+    const u = this.state.users.find(x => x.id === id);
+    if (u) return u.full_name || u.email || id.slice(0,8);
+    return id.slice(0, 8) + '...';
+  },
+
+  async openChat(a, b) {
     const wrap = document.getElementById('chatMessages');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
     try {
       const { data, error } = await supabaseClient.from('messages').select('*')
-        .or(`and(from_user_id.eq.${userA},to_user_id.eq.${userB}),and(from_user_id.eq.${userB},to_user_id.eq.${userA})`)
-        .order('created_at', { ascending: true }).limit(500);
+        .or(`and(from_user_id.eq.${a},to_user_id.eq.${b}),and(from_user_id.eq.${b},to_user_id.eq.${a})`)
+        .order('created_at').limit(500);
       if (error) throw error;
-      if (!data?.length) { wrap.innerHTML = '<div class="empty-state"><p>لا توجد رسائل</p></div>'; return; }
+      if (!data?.length) return wrap.innerHTML = '<div class="empty-state"><p>لا توجد رسائل</p></div>';
       wrap.innerHTML = data.map(m => `
-        <div class="chat-msg ${m.from_user_id === userA ? 'sent' : 'received'}">
-          <div style="font-size:10px; opacity:.7; margin-bottom:2px">${m.from_user_id === userA ? '👤 ' + userA.slice(0,8) : '👤 ' + userB.slice(0,8)}</div>
+        <div class="chat-msg ${m.from_user_id === a ? 'sent' : 'received'}">
+          <div style="font-size:10px; opacity:.7; margin-bottom:2px">${this.esc(this.userName(m.from_user_id))}</div>
           ${this.esc(m.message || '')}
           <div class="chat-msg-meta">${this.fmtDate(m.created_at, true)} ${m.is_read ? '· ✓✓' : '· ✓'}</div>
         </div>
@@ -1777,7 +1765,7 @@ const App = {
     } catch (e) { wrap.innerHTML = `<div class="empty-state"><p style="color:var(--c-danger)">${e.message}</p></div>`; }
   },
 
-  /* ============ CONTACTS (CRM) ============ */
+  /* ══════════ CONTACTS ══════════ */
   async loadContacts() {
     const wrap = document.getElementById('contactsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1794,22 +1782,22 @@ const App = {
 
   renderContacts() {
     const wrap = document.getElementById('contactsList');
-    if (!this.state.contacts.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">📞</span><h3>لا يوجد تفاعلات</h3></div>`; return; }
+    if (!this.state.contacts.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📞</span><h3>لا يوجد تفاعلات</h3></div>`;
     const tb = { view: 'badge-info', whatsapp: 'badge-success', chat: 'badge-purple', phone: 'badge-info', inquiry: 'badge-warning', request_quote: 'badge-warning', email: 'badge-info' };
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>النوع</th><th>المورد/الشخص</th><th>المشتري</th><th>المنتج</th><th>بيانات إضافية</th><th>التاريخ</th></tr></thead>
+      <thead><tr><th>النوع</th><th>المورد/الشخص</th><th>المشتري</th><th>المنتج</th><th>بيانات</th><th>التاريخ</th></tr></thead>
       <tbody>${this.state.contacts.map(c => `<tr>
         <td><span class="badge ${tb[c.contact_type] || 'badge-gray'}">${c.contact_type}</span></td>
-        <td class="td-muted" style="font-size:11px">${c.supplier_id ? c.supplier_id.slice(0,8) : '—'}...</td>
-        <td class="td-muted" style="font-size:11px">${c.buyer_id ? c.buyer_id.slice(0,8) : 'زائر'}...</td>
-        <td class="td-muted" style="font-size:11px">${c.product_id ? c.product_id.slice(0,8) : '—'}</td>
-        <td class="td-muted" style="font-size:11px; max-width:200px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${JSON.stringify(c.contact_data || {}).slice(0, 60)}</td>
+        <td class="td-muted" style="font-size:11px">${this.esc(this.userName(c.supplier_id))}</td>
+        <td class="td-muted" style="font-size:11px">${c.buyer_id ? this.esc(this.userName(c.buyer_id)) : 'زائر'}</td>
+        <td class="td-muted td-mono">${c.product_id ? c.product_id.slice(0,8) : '—'}</td>
+        <td class="td-muted" style="font-size:11px; max-width:220px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${JSON.stringify(c.contact_data || {}).slice(0, 60)}</td>
         <td class="td-muted">${this.fmtDate(c.contact_date, true)}</td>
       </tr>`).join('')}</tbody>
     </table></div>`;
   },
 
-  /* ============ NOTIFICATIONS ============ */
+  /* ══════════ NOTIFICATIONS ══════════ */
   async loadNotifications() {
     const wrap = document.getElementById('notificationsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1823,15 +1811,15 @@ const App = {
 
   renderNotifications() {
     const wrap = document.getElementById('notificationsList');
-    if (!this.state.notifications.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">🔔</span><h3>لا توجد إشعارات</h3><button class="btn btn-primary" onclick="App.openNotifModal()">➕ إرسال إشعار</button></div>`; return; }
+    if (!this.state.notifications.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">🔔</span><h3>لا توجد إشعارات</h3><button class="btn btn-primary" onclick="App.openNotifModal()">➕ إرسال إشعار</button></div>`;
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>النوع</th><th>العنوان</th><th>الرسالة</th><th>مستخدم</th><th>مقروء</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
+      <thead><tr><th>النوع</th><th>العنوان</th><th>الرسالة</th><th>المستخدم</th><th>مقروء</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.notifications.map(n => `<tr>
         <td><span class="badge badge-info">${this.esc(n.type || '—')}</span></td>
         <td><strong>${this.esc(n.title || '—')}</strong></td>
         <td class="td-muted" style="max-width:250px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(n.message || '—')}</td>
-        <td class="td-muted" style="font-size:11px">${n.user_id ? n.user_id.slice(0,8) : '—'}...</td>
-        <td>${n.read ? '<span class="badge badge-success">✓</span>' : '<span class="badge badge-warning">غير مقروء</span>'}</td>
+        <td class="td-muted" style="font-size:11px">${this.esc(this.userName(n.user_id))}</td>
+        <td>${n.read ? '<span class="badge badge-success">✓</span>' : '<span class="badge badge-warning">جديد</span>'}</td>
         <td class="td-muted">${this.fmtDate(n.created_at, true)}</td>
         <td><button class="btn btn-danger btn-xs" onclick="App.confirmDelete('notification','${n.id}')">🗑️</button></td>
       </tr>`).join('')}</tbody>
@@ -1840,15 +1828,11 @@ const App = {
 
   async openNotifModal() {
     const sel = document.getElementById('notifUserId');
-    sel.innerHTML = '<option value="">جاري التحميل...</option>';
-    // Load users if not loaded
     if (!this.state.users.length) {
       const { data } = await supabaseClient.from('profiles').select('id, full_name, email').limit(500);
       this.state.users = data || [];
     }
-    sel.innerHTML = '<option value="">اختر مستخدم</option>' + this.state.users.map(u =>
-      `<option value="${u.id}">${this.esc(u.full_name || u.email || u.id.slice(0,8))}</option>`
-    ).join('');
+    sel.innerHTML = '<option value="">اختر مستخدم</option>' + this.state.users.map(u => `<option value="${u.id}">${this.esc(u.full_name || u.email || u.id.slice(0,8))}</option>`).join('');
     document.getElementById('notifType').value = 'admin_message';
     document.getElementById('notifTitle').value = '';
     document.getElementById('notifMessage').value = '';
@@ -1856,19 +1840,17 @@ const App = {
   },
 
   async sendNotification() {
-    const userId = document.getElementById('notifUserId').value;
+    const uid = document.getElementById('notifUserId').value;
     const type = document.getElementById('notifType').value.trim() || 'admin_message';
     const title = document.getElementById('notifTitle').value.trim();
-    const message = document.getElementById('notifMessage').value.trim();
-    if (!userId || !title) return this.showToast('warning', 'تنبيه', 'اختر المستخدم وأدخل العنوان');
+    const msg = document.getElementById('notifMessage').value.trim();
+    if (!uid || !title) return this.showToast('warning', 'تنبيه', 'املأ الحقول');
     try {
-      // Try RPC first
-      const { error: rpcError } = await supabaseClient.rpc('create_notification', {
-        p_user_id: userId, p_type: type, p_title: title, p_message: message || null, p_data: {}
+      const { error: rpcErr } = await supabaseClient.rpc('create_notification', {
+        p_user_id: uid, p_type: type, p_title: title, p_message: msg || null, p_data: {}
       });
-      if (rpcError) {
-        // Fallback direct insert
-        const { error } = await supabaseClient.from('notifications').insert({ user_id: userId, type, title, message: message || null, data: {} });
+      if (rpcErr) {
+        const { error } = await supabaseClient.from('notifications').insert({ user_id: uid, type, title, message: msg || null, data: {} });
         if (error) throw error;
       }
       this.showToast('success', 'تم الإرسال ✅');
@@ -1877,7 +1859,7 @@ const App = {
     } catch (e) { this.showToast('error', 'فشل', e.message); }
   },
 
-  /* ============ REVIEWS ============ */
+  /* ══════════ REVIEWS ══════════ */
   async loadReviews() {
     const wrap = document.getElementById('reviewsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1891,15 +1873,14 @@ const App = {
 
   renderReviews() {
     const wrap = document.getElementById('reviewsList');
-    if (!this.state.reviews.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⭐</span><h3>لا توجد تقييمات</h3></div>`; return; }
+    if (!this.state.reviews.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">⭐</span><h3>لا توجد تقييمات</h3></div>`;
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>النوع</th><th>التقييم</th><th>التعليق</th><th>من</th><th>إلى</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
+      <thead><tr><th>النوع</th><th>التقييم</th><th>التعليق</th><th>من</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.reviews.map(r => `<tr>
         <td><span class="badge badge-purple">${r.review_type || '—'}</span></td>
-        <td>${'⭐'.repeat(Math.min(r.rating || 0, 5))} (${r.rating || 0})</td>
+        <td>${'⭐'.repeat(Math.min(r.rating || 0, 5))}</td>
         <td class="td-muted" style="max-width:250px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(r.comment || '—')}</td>
-        <td class="td-muted" style="font-size:11px">${r.user_id ? r.user_id.slice(0,8) : '—'}</td>
-        <td class="td-muted" style="font-size:11px">${r.supplier_id ? r.supplier_id.slice(0,8) : (r.product_id ? 'منتج' : '—')}</td>
+        <td class="td-muted" style="font-size:11px">${this.esc(this.userName(r.user_id))}</td>
         <td class="td-muted">${this.fmtDate(r.created_at)}</td>
         <td><button class="btn btn-danger btn-xs" onclick="App.confirmDelete('review','${r.id}')">🗑️</button></td>
       </tr>`).join('')}</tbody>
@@ -1919,7 +1900,7 @@ const App = {
 
   renderRatings() {
     const wrap = document.getElementById('ratingsList');
-    if (!this.state.ratings.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">📊</span><h3>لا توجد تقييمات مفصلة</h3></div>`; return; }
+    if (!this.state.ratings.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📊</span><h3>لا توجد تقييمات مفصلة</h3></div>`;
     wrap.innerHTML = `<div class="table-wrap"><table>
       <thead><tr><th>عام</th><th>تواصل</th><th>توصيل</th><th>جودة</th><th>سعر</th><th>تعليق</th><th>تاريخ</th></tr></thead>
       <tbody>${this.state.ratings.map(r => `<tr>
@@ -1934,7 +1915,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ============ FOLLOWS ============ */
+  /* ══════════ FOLLOWS ══════════ */
   async loadFollows() {
     const wrap = document.getElementById('followsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1948,23 +1929,22 @@ const App = {
 
   renderFollows() {
     const wrap = document.getElementById('followsList');
-    if (!this.state.follows.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">🔗</span><h3>لا توجد متابعات</h3></div>`; return; }
+    if (!this.state.follows.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">🔗</span><h3>لا توجد متابعات</h3></div>`;
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>المتابع</th><th>يتابع</th><th>النوع</th><th>الهدف</th><th>تنبيهات المنتجات</th><th>تنبيهات الأسعار</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
+      <thead><tr><th>المتابع</th><th>يتابع</th><th>النوع</th><th>الهدف</th><th>تنبيهات</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.follows.map(f => `<tr>
-        <td class="td-muted" style="font-size:11px">${f.follower_id ? f.follower_id.slice(0,8) : '—'}</td>
-        <td class="td-muted" style="font-size:11px">${f.following_id ? f.following_id.slice(0,8) : '—'}</td>
+        <td class="td-muted" style="font-size:11px">${this.esc(this.userName(f.follower_id))}</td>
+        <td class="td-muted" style="font-size:11px">${this.esc(this.userName(f.following_id))}</td>
         <td><span class="badge badge-info">${f.target_type || '—'}</span></td>
-        <td class="td-muted" style="font-size:11px">${f.target_id ? f.target_id.slice(0,8) : '—'}</td>
-        <td>${f.notify_new_products ? '✅' : '❌'}</td>
-        <td>${f.notify_price_changes ? '✅' : '❌'}</td>
+        <td class="td-muted td-mono">${f.target_id ? f.target_id.slice(0,8) : '—'}</td>
+        <td class="td-muted">${f.notify_new_products ? '📦' : ''} ${f.notify_price_changes ? '💰' : ''}</td>
         <td class="td-muted">${this.fmtDate(f.created_at)}</td>
         <td><button class="btn btn-danger btn-xs" onclick="App.confirmDelete('follow','${f.id}')">🗑️</button></td>
       </tr>`).join('')}</tbody>
     </table></div>`;
   },
 
-  /* ============ FAVORITES ============ */
+  /* ══════════ FAVORITES ══════════ */
   async loadFavorites() {
     const wrap = document.getElementById('favoritesList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1978,24 +1958,24 @@ const App = {
 
   renderFavorites() {
     const wrap = document.getElementById('favoritesList');
-    if (!this.state.favorites.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">❤️</span><h3>لا توجد مفضلات</h3></div>`; return; }
+    if (!this.state.favorites.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">❤️</span><h3>لا توجد مفضلات</h3></div>`;
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>المستخدم</th><th>المنتج</th><th>تاريخ الإضافة</th><th>إجراءات</th></tr></thead>
+      <thead><tr><th>المستخدم</th><th>المنتج</th><th>تاريخ</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.favorites.map(f => `<tr>
-        <td class="td-muted" style="font-size:11px">${f.user_id ? f.user_id.slice(0,8) : '—'}...</td>
-        <td class="td-muted" style="font-size:11px">${f.product_id ? f.product_id.slice(0,8) : '—'}...</td>
+        <td class="td-muted">${this.esc(this.userName(f.user_id))}</td>
+        <td class="td-muted td-mono">${f.product_id ? f.product_id.slice(0,8) : '—'}</td>
         <td class="td-muted">${this.fmtDate(f.created_at, true)}</td>
         <td><button class="btn btn-danger btn-xs" onclick="App.confirmDelete('favorite','${f.id}')">🗑️</button></td>
       </tr>`).join('')}</tbody>
     </table></div>`;
   },
 
-  /* ============ CATEGORIES ============ */
+  /* ══════════ CATEGORIES ══════════ */
   async loadCategories() {
     const wrap = document.getElementById('catsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
     try {
-      const { data, error } = await supabaseClient.from('categories').select('*').order('display_order', { ascending: true });
+      const { data, error } = await supabaseClient.from('categories').select('*').order('display_order');
       if (error) throw error;
       this.state.categories = data || [];
       this.renderCategories();
@@ -2004,9 +1984,9 @@ const App = {
 
   renderCategories() {
     const wrap = document.getElementById('catsList');
-    if (!this.state.categories.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">🗂️</span><h3>لا توجد فئات</h3></div>`; return; }
+    if (!this.state.categories.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">🗂️</span><h3>لا توجد فئات</h3></div>`;
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>الأيقونة</th><th>الاسم</th><th>الوصف</th><th>الترتيب</th><th>الحالة</th></tr></thead>
+      <thead><tr><th>أيقونة</th><th>الاسم</th><th>الوصف</th><th>الترتيب</th><th>الحالة</th></tr></thead>
       <tbody>${this.state.categories.map(c => `<tr>
         <td style="font-size:22px">${this.esc(c.icon || '📦')}</td>
         <td><strong>${this.esc(c.name)}</strong></td>
@@ -2030,23 +2010,22 @@ const App = {
 
   renderSubcategories() {
     const wrap = document.getElementById('subcatsList');
-    if (!this.state.subcategories.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">📂</span><h3>لا توجد تصنيفات فرعية</h3></div>`; return; }
+    if (!this.state.subcategories.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📂</span><h3>لا توجد تصنيفات فرعية</h3></div>`;
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>الاسم</th><th>Category ID</th><th>الوصف</th></tr></thead>
+      <thead><tr><th>الاسم</th><th>Category</th><th>الوصف</th></tr></thead>
       <tbody>${this.state.subcategories.map(s => `<tr>
         <td><strong>${this.esc(s.name || '—')}</strong></td>
-        <td class="td-muted" style="font-size:11px">${s.category_id ? s.category_id.slice(0,8) : '—'}</td>
+        <td class="td-muted td-mono">${s.category_id ? s.category_id.slice(0,8) : '—'}</td>
         <td class="td-muted">${this.esc(s.description || '—')}</td>
       </tr>`).join('')}</tbody>
     </table></div>`;
   },
 
-  /* ============ ANALYTICS ============ */
+  /* ══════════ ANALYTICS ══════════ */
   async loadAnalytics() {
     const wrap = document.getElementById('analyticsList');
-    const statsWrap = document.getElementById('analyticsStats');
+    const sw = document.getElementById('analyticsStats');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
-    statsWrap.innerHTML = '';
     try {
       const type = document.getElementById('eventTypeFilter')?.value || '';
       let q = supabaseClient.from('analytics_events').select('*').order('created_at', { ascending: false }).limit(300);
@@ -2055,23 +2034,12 @@ const App = {
       if (error) throw error;
       this.state.analytics = data || [];
 
-      // Stats
       const types = ['view', 'whatsapp', 'rfq', 'quote_sent', 'search', 'order'];
       const counts = {};
       types.forEach(t => counts[t] = 0);
       this.state.analytics.forEach(e => { if (counts[e.event_type] !== undefined) counts[e.event_type]++; });
 
-      statsWrap.innerHTML = types.map(t => `
-        <div class="stat-card">
-          <div class="stat-icon ${t === 'view' ? 'blue' : t === 'whatsapp' ? 'green' : t === 'rfq' ? 'orange' : 'purple'}">
-            ${t === 'view' ? '👁️' : t === 'whatsapp' ? '💬' : t === 'rfq' ? '📋' : t === 'quote_sent' ? '💰' : t === 'search' ? '🔍' : '📦'}
-          </div>
-          <div class="stat-info">
-            <div class="stat-value">${counts[t].toLocaleString('ar-EG')}</div>
-            <div class="stat-label">${t}</div>
-          </div>
-        </div>
-      `).join('');
+      sw.innerHTML = types.map(t => `<div class="stat-card"><div class="stat-icon ${t === 'view' ? 'blue' : t === 'whatsapp' ? 'green' : 'orange'}">${t === 'view' ? '👁️' : t === 'whatsapp' ? '💬' : t === 'rfq' ? '📋' : '💰'}</div><div class="stat-info"><div class="stat-value">${counts[t].toLocaleString('ar-EG')}</div><div class="stat-label">${t}</div></div></div>`).join('');
 
       this.renderAnalytics();
     } catch (e) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`; }
@@ -2079,100 +2047,84 @@ const App = {
 
   renderAnalytics() {
     const wrap = document.getElementById('analyticsList');
-    if (!this.state.analytics.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">📈</span><h3>لا توجد أحداث</h3></div>`; return; }
+    if (!this.state.analytics.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📈</span><h3>لا توجد أحداث</h3></div>`;
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>الحدث</th><th>المستخدم</th><th>الجلسة</th><th>المنتج</th><th>المسار</th><th>المتصفح</th><th>التاريخ</th></tr></thead>
+      <thead><tr><th>الحدث</th><th>المستخدم</th><th>الجلسة</th><th>المنتج</th><th>المسار</th><th>التاريخ</th></tr></thead>
       <tbody>${this.state.analytics.map(e => `<tr>
         <td><span class="badge badge-info">${e.event_type}</span></td>
-        <td class="td-muted" style="font-size:11px">${e.user_id ? e.user_id.slice(0,8) + '...' : 'زائر'}</td>
-        <td class="td-muted" style="font-size:11px">${e.session_id ? e.session_id.slice(0,10) + '...' : '—'}</td>
-        <td class="td-muted" style="font-size:11px">${e.product_id ? e.product_id.slice(0,8) : '—'}</td>
+        <td class="td-muted" style="font-size:11px">${e.user_id ? this.esc(this.userName(e.user_id)) : 'زائر'}</td>
+        <td class="td-muted td-mono">${e.session_id ? e.session_id.slice(0,10) : '—'}</td>
+        <td class="td-muted td-mono">${e.product_id ? e.product_id.slice(0,8) : '—'}</td>
         <td class="td-muted" style="font-size:11px; max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(e.page_path || '—')}</td>
-        <td class="td-muted" style="font-size:11px; max-width:150px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" title="${this.esc(e.user_agent || '')}">${this.esc((e.user_agent || '').slice(0,30))}</td>
         <td class="td-muted">${this.fmtDate(e.created_at, true)}</td>
       </tr>`).join('')}</tbody>
     </table></div>`;
   },
 
-  /* ============ VISITORS ============ */
+  /* ══════════ VISITORS ══════════ */
   async loadVisitors() {
     const wrap = document.getElementById('visitorsList');
-    const statsWrap = document.getElementById('visitorStats');
+    const sw = document.getElementById('visitorStats');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
     try {
       const { data, error } = await supabaseClient.from('analytics_events')
         .select('session_id, user_id, created_at, user_agent, ip_address, page_path')
-        .order('created_at', { ascending: false }).limit(2000);
+        .order('created_at', { ascending: false }).limit(3000);
       if (error) throw error;
       this.state.visitors = data || [];
 
-      // Group by session
       const sessions = {};
       this.state.visitors.forEach(v => {
         if (!v.session_id) return;
         if (!sessions[v.session_id]) sessions[v.session_id] = {
           session_id: v.session_id, events: 0, pages: new Set(), user_id: v.user_id,
-          user_agent: v.user_agent, ip: v.ip_address,
-          first: v.created_at, last: v.created_at
+          user_agent: v.user_agent, ip: v.ip_address, first: v.created_at, last: v.created_at
         };
         sessions[v.session_id].events++;
         if (v.page_path) sessions[v.session_id].pages.add(v.page_path);
         if (new Date(v.created_at) < new Date(sessions[v.session_id].first)) sessions[v.session_id].first = v.created_at;
         if (new Date(v.created_at) > new Date(sessions[v.session_id].last)) sessions[v.session_id].last = v.created_at;
       });
-      const sessionList = Object.values(sessions).sort((a, b) => new Date(b.last) - new Date(a.last));
+      const list = Object.values(sessions).sort((a, b) => new Date(b.last) - new Date(a.last));
 
-      const uniqueVisitors = sessionList.filter(s => !s.user_id).length;
-      const loggedIn = sessionList.filter(s => s.user_id).length;
+      const guests = list.filter(s => !s.user_id).length;
+      const logged = list.filter(s => s.user_id).length;
 
-      statsWrap.innerHTML = `
-        <div class="stat-card"><div class="stat-icon blue">🌐</div><div class="stat-info"><div class="stat-value">${sessionList.length}</div><div class="stat-label">إجمالي الجلسات</div></div></div>
-        <div class="stat-card"><div class="stat-icon green">👤</div><div class="stat-info"><div class="stat-value">${uniqueVisitors}</div><div class="stat-label">زوار (بدون حساب)</div></div></div>
-        <div class="stat-card"><div class="stat-icon purple">✅</div><div class="stat-info"><div class="stat-value">${loggedIn}</div><div class="stat-label">مستخدمين مسجلين</div></div></div>
-        <div class="stat-card"><div class="stat-icon orange">📈</div><div class="stat-info"><div class="stat-value">${this.state.visitors.length}</div><div class="stat-label">إجمالي الأحداث</div></div></div>
+      sw.innerHTML = `
+        <div class="stat-card"><div class="stat-icon blue">🌐</div><div class="stat-info"><div class="stat-value">${list.length.toLocaleString('ar-EG')}</div><div class="stat-label">إجمالي الجلسات</div></div></div>
+        <div class="stat-card"><div class="stat-icon green">👤</div><div class="stat-info"><div class="stat-value">${guests.toLocaleString('ar-EG')}</div><div class="stat-label">زوار (بدون حساب)</div></div></div>
+        <div class="stat-card"><div class="stat-icon purple">✅</div><div class="stat-info"><div class="stat-value">${logged.toLocaleString('ar-EG')}</div><div class="stat-label">مسجلين</div></div></div>
+        <div class="stat-card"><div class="stat-icon orange">📈</div><div class="stat-info"><div class="stat-value">${this.state.visitors.length.toLocaleString('ar-EG')}</div><div class="stat-label">إجمالي الأحداث</div></div></div>
       `;
 
-      if (!sessionList.length) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">🌐</span><h3>لا توجد جلسات</h3></div>`; return; }
+      if (!list.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">🌐</span><h3>لا توجد جلسات</h3></div>`;
       wrap.innerHTML = `<div class="table-wrap"><table>
-        <thead><tr><th>الجلسة</th><th>النوع</th><th>المستخدم</th><th>الأحداث</th><th>الصفحات</th><th>المتصفح</th><th>IP</th><th>أول ظهور</th><th>آخر نشاط</th></tr></thead>
-        <tbody>${sessionList.map(s => `<tr>
-          <td class="td-muted" style="font-size:11px">${s.session_id.slice(0, 12)}...</td>
+        <thead><tr><th>الجلسة</th><th>النوع</th><th>المستخدم</th><th>الأحداث</th><th>الصفحات</th><th>المتصفح</th><th>IP</th><th>آخر نشاط</th></tr></thead>
+        <tbody>${list.map(s => `<tr>
+          <td class="td-muted td-mono">${s.session_id.slice(0, 12)}</td>
           <td>${s.user_id ? '<span class="badge badge-success">مسجل</span>' : '<span class="badge badge-gray">زائر</span>'}</td>
-          <td class="td-muted" style="font-size:11px">${s.user_id ? s.user_id.slice(0,8) + '...' : '—'}</td>
+          <td class="td-muted" style="font-size:11px">${s.user_id ? this.esc(this.userName(s.user_id)) : '—'}</td>
           <td><strong>${s.events}</strong></td>
           <td class="td-muted">${s.pages.size}</td>
           <td class="td-muted" style="font-size:11px; max-width:180px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap" title="${this.esc(s.user_agent || '')}">${this.esc((s.user_agent || '').slice(0, 30))}</td>
-          <td class="td-muted" style="font-size:11px">${this.esc(s.ip || '—')}</td>
-          <td class="td-muted">${this.fmtDate(s.first, true)}</td>
+          <td class="td-muted td-mono">${this.esc(s.ip || '—')}</td>
           <td class="td-muted">${this.timeAgo(s.last)}</td>
         </tr>`).join('')}</tbody>
       </table></div>`;
     } catch (e) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`; }
   },
 
-  /* ============ DELETE ============ */
+  /* ══════════ DELETE ══════════ */
   confirmDelete(type, id, name = '') {
-    const labels = {
-      article: 'المقال', ticker: 'الخبر', product: 'المنتج',
-      profile: 'بروفايل المستخدم', purchase_request: 'طلب الشراء',
-      notification: 'الإشعار', review: 'التقييم', follow: 'المتابعة',
-      favorite: 'المفضلة'
-    };
-    document.getElementById('confirmMessage').textContent =
-      `هل أنت متأكد من حذف ${labels[type] || 'العنصر'}${name ? ' "' + name + '"' : ''}؟ لا يمكن التراجع.`;
-    const btn = document.getElementById('confirmYes');
-    btn.onclick = () => this.doDelete(type, id);
+    const labels = { article: 'المقال', ticker: 'الخبر', product: 'المنتج', purchase_request: 'طلب الشراء', notification: 'الإشعار', review: 'التقييم', follow: 'المتابعة', favorite: 'المفضلة' };
+    document.getElementById('confirmMessage').textContent = `هل أنت متأكد من حذف ${labels[type] || 'العنصر'}${name ? ` "${name}"` : ''}؟`;
+    document.getElementById('confirmYes').onclick = () => this.doDelete(type, id);
     this.openModal('confirmModal');
   },
 
   async doDelete(type, id) {
-    const tableMap = {
-      article: 'blog_posts', ticker: 'ticker_news', product: 'products',
-      profile: 'profiles', purchase_request: 'purchase_requests',
-      notification: 'notifications', review: 'reviews',
-      follow: 'follows', favorite: 'favorites'
-    };
-    const table = tableMap[type];
+    const tm = { article: 'blog_posts', ticker: 'ticker_news', product: 'products', purchase_request: 'purchase_requests', notification: 'notifications', review: 'reviews', follow: 'follows', favorite: 'favorites' };
+    const table = tm[type];
     if (!table) return this.showToast('error', 'خطأ', 'نوع غير معروف');
     try {
       const { error } = await supabaseClient.from(table).delete().eq('id', id);
@@ -2182,101 +2134,76 @@ const App = {
       if (type === 'article') await this.loadArticles();
       if (type === 'ticker') await this.loadTicker();
       if (type === 'product') await this.loadProducts();
-      if (type === 'profile') { await this.loadUsers(); this.closeModal('userModal'); }
       if (type === 'purchase_request') await this.loadRfqs();
       if (type === 'notification') await this.loadNotifications();
       if (type === 'review') await this.loadReviews();
       if (type === 'follow') await this.loadFollows();
       if (type === 'favorite') await this.loadFavorites();
       await this.loadNavCounts();
-    } catch (e) { this.showToast('error', 'فشل الحذف', e.message); }
+    } catch (e) { this.showToast('error', 'فشل', e.message); }
   },
 
-  /* ============ TOAST ============ */
+  /* ══════════ TOAST + HELPERS ══════════ */
   showToast(type, title, desc) {
     const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
     const container = document.getElementById('toastContainer');
     const el = document.createElement('div');
     el.className = `toast ${type}`;
-    el.innerHTML = `
-      <div class="toast-icon">${icons[type] || 'ℹ️'}</div>
-      <div class="toast-content">
-        <div class="toast-title">${this.esc(title)}</div>
-        ${desc ? `<div class="toast-desc">${this.esc(desc)}</div>` : ''}
-      </div>
-    `;
+    el.innerHTML = `<div class="toast-icon">${icons[type] || 'ℹ️'}</div><div class="toast-content"><div class="toast-title">${this.esc(title)}</div>${desc ? `<div class="toast-desc">${this.esc(desc)}</div>` : ''}</div>`;
     container.appendChild(el);
-    setTimeout(() => {
-      el.style.transition = 'opacity .3s, transform .3s';
-      el.style.opacity = '0';
-      el.style.transform = 'translateX(-30px)';
-      setTimeout(() => el.remove(), 300);
-    }, 3500);
+    setTimeout(() => { el.style.transition = 'opacity .3s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 3500);
   },
 
-  /* ============ HELPERS ============ */
-  esc(str) {
-    if (str == null) return '';
-    return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
-  },
+  esc(s) { if (s == null) return ''; return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); },
+  escAttr(s) { return this.esc(s).replace(/'/g, "\\'"); },
+
   fmtDate(iso, withTime = false) {
     if (!iso) return '—';
     try {
       const d = new Date(iso);
-      const opts = { year: 'numeric', month: 'short', day: 'numeric' };
-      if (withTime) { opts.hour = '2-digit'; opts.minute = '2-digit'; }
-      return d.toLocaleDateString('ar-EG', opts);
+      const o = { year: 'numeric', month: 'short', day: 'numeric' };
+      if (withTime) { o.hour = '2-digit'; o.minute = '2-digit'; }
+      return d.toLocaleDateString('ar-EG', o);
     } catch { return '—'; }
   },
+
   timeAgo(iso) {
     if (!iso) return '—';
     try {
       const diff = (Date.now() - new Date(iso).getTime()) / 1000;
       if (diff < 60) return 'الآن';
-      if (diff < 3600) return `منذ ${Math.floor(diff / 60)} دقيقة`;
-      if (diff < 86400) return `منذ ${Math.floor(diff / 3600)} ساعة`;
+      if (diff < 3600) return `منذ ${Math.floor(diff / 60)} د`;
+      if (diff < 86400) return `منذ ${Math.floor(diff / 3600)} س`;
       if (diff < 2592000) return `منذ ${Math.floor(diff / 86400)} يوم`;
       return this.fmtDate(iso);
     } catch { return '—'; }
   },
+
   toLocalInput(iso) {
     if (!iso) return '';
     const d = new Date(iso);
-    const pad = n => String(n).padStart(2, '0');
-    return `${d.getFullYear()}-${pad(d.getMonth()+1)}-${pad(d.getDate())}T${pad(d.getHours())}:${pad(d.getMinutes())}`;
+    const p = n => String(n).padStart(2, '0');
+    return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
   },
-  initials(name) {
-    if (!name) return '?';
-    const parts = String(name).trim().split(/\s+/);
-    return (parts[0]?.[0] || '') + (parts[1]?.[0] || '');
-  }
+
+  initials(n) { if (!n) return '?'; const p = String(n).trim().split(/\s+/); return (p[0]?.[0] || '') + (p[1]?.[0] || ''); }
 };
 
-/* ============ EVENT LISTENERS ============ */
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
+  const ti = document.getElementById('artTitle'), si = document.getElementById('artSlug');
+  ti?.addEventListener('blur', () => { if (!si.value && ti.value) si.value = App.slugify(ti.value); });
 
-  const titleInput = document.getElementById('artTitle');
-  const slugInput = document.getElementById('artSlug');
-  titleInput?.addEventListener('blur', () => {
-    if (!slugInput.value && titleInput.value) slugInput.value = App.slugify(titleInput.value);
-  });
-
-  // Debounced filters
-  let t1;
+  let t1, t2, t3;
   document.getElementById('prodSearch')?.addEventListener('input', () => { clearTimeout(t1); t1 = setTimeout(() => App.loadProducts(), 400); });
   document.getElementById('prodStatusFilter')?.addEventListener('change', () => App.loadProducts());
   document.getElementById('prodFeaturedFilter')?.addEventListener('change', () => App.loadProducts());
-
-  let t2;
   document.getElementById('userSearch')?.addEventListener('input', () => { clearTimeout(t2); t2 = setTimeout(() => App.loadUsers(), 400); });
   document.getElementById('userTypeFilter')?.addEventListener('change', () => App.loadUsers());
   document.getElementById('userVerifiedFilter')?.addEventListener('change', () => App.loadUsers());
-
-  let t3;
+  document.getElementById('userSuspendedFilter')?.addEventListener('change', () => App.loadUsers());
   document.getElementById('rfqSearch')?.addEventListener('input', () => { clearTimeout(t3); t3 = setTimeout(() => App.loadRfqs(), 400); });
   document.getElementById('rfqStatusFilter')?.addEventListener('change', () => App.loadRfqs());
-
   document.getElementById('contactTypeFilter')?.addEventListener('change', () => App.loadContacts());
   document.getElementById('eventTypeFilter')?.addEventListener('change', () => App.loadAnalytics());
 });
