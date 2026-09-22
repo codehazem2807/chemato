@@ -1,36 +1,43 @@
 /* ============================================================
-   كيماتو - Service Worker v4.0
+   CHEMOTO 4.0 — Service Worker
+   Cache Strategy:
+   - App shell: Cache-first
+   - API (Supabase): Network-first
+   - Images: Stale-while-revalidate
    ============================================================ */
 
-const CACHE_VERSION = 'chemato-v4.0';
+const CACHE_VERSION = 'chemato-v4.0.0';
 const STATIC_CACHE = `${CACHE_VERSION}-static`;
 const DYNAMIC_CACHE = `${CACHE_VERSION}-dynamic`;
 const IMAGE_CACHE = `${CACHE_VERSION}-images`;
-const MAX_DYNAMIC_ITEMS = 50;
-const MAX_IMAGE_ITEMS = 100;
 
-const STATIC_ASSETS = [
+// Core assets to precache
+const PRECACHE_URLS = [
     '/',
     '/index.html',
-    '/all-products.html',
-    '/all-requests.html',
-    '/chemato-suppliers.html',
-    '/blog.html',
     '/manifest.json',
     '/logo.png',
-    '/offline.html',
-    'https://fonts.googleapis.com/css2?family=Cairo:wght@400;500;600;700;800;900&display=swap',
-    'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css',
+    '/logo-120.png',
+    '/logo-152.png',
+    '/logo-180.png',
+    '/logo-192.png',
+    '/logo-512.png',
+    '/offline.html'
 ];
 
 // ============================================================
 // INSTALL
 // ============================================================
 self.addEventListener('install', (event) => {
-    console.log('[SW] Installing...', CACHE_VERSION);
     event.waitUntil(
         caches.open(STATIC_CACHE)
-            .then((cache) => cache.addAll(STATIC_ASSETS).catch(err => console.warn('Cache addAll:', err)))
+            .then((cache) => {
+                return Promise.allSettled(
+                    PRECACHE_URLS.map(url =>
+                        cache.add(url).catch(err => console.warn('Precache failed:', url, err))
+                    )
+                );
+            })
             .then(() => self.skipWaiting())
     );
 });
@@ -39,17 +46,14 @@ self.addEventListener('install', (event) => {
 // ACTIVATE
 // ============================================================
 self.addEventListener('activate', (event) => {
-    console.log('[SW] Activating...', CACHE_VERSION);
     event.waitUntil(
-        caches.keys()
-            .then((cacheNames) => {
-                return Promise.all(
-                    cacheNames
-                        .filter(name => !name.startsWith(CACHE_VERSION))
-                        .map(name => caches.delete(name))
-                );
-            })
-            .then(() => self.clients.claim())
+        caches.keys().then((cacheNames) => {
+            return Promise.all(
+                cacheNames
+                    .filter(name => !name.startsWith(CACHE_VERSION))
+                    .map(name => caches.delete(name))
+            );
+        }).then(() => self.clients.claim())
     );
 });
 
@@ -60,86 +64,115 @@ self.addEventListener('fetch', (event) => {
     const { request } = event;
     const url = new URL(request.url);
 
-    // Skip non-GET requests
+    // Skip non-GET
     if (request.method !== 'GET') return;
 
-    // Skip supabase requests
+    // Skip chrome-extension, etc.
+    if (!url.protocol.startsWith('http')) return;
+
+    // Skip Supabase auth requests (always network)
+    if (url.hostname.includes('supabase.co') && url.pathname.includes('/auth/')) {
+        return;
+    }
+
+    // === API calls (Supabase) — Network-first ===
     if (url.hostname.includes('supabase.co')) {
-        event.respondWith(networkFirstWithCache(request, DYNAMIC_CACHE, 1000 * 60 * 5));
+        event.respondWith(networkFirst(request, DYNAMIC_CACHE));
         return;
     }
 
-    // Skip chrome-extension requests
-    if (url.protocol === 'chrome-extension:') return;
-
-    // Images: Cache first
-    if (request.destination === 'image') {
-        event.respondWith(cacheFirstWithLimit(request, IMAGE_CACHE, MAX_IMAGE_ITEMS));
+    // === Images — Stale-while-revalidate ===
+    if (request.destination === 'image' ||
+        url.pathname.match(/\.(png|jpg|jpeg|gif|webp|svg|ico)$/i)) {
+        event.respondWith(staleWhileRevalidate(request, IMAGE_CACHE));
         return;
     }
 
-    // Fonts/CSS/JS: Stale-while-revalidate
-    if (['style', 'script', 'font'].includes(request.destination)) {
-        event.respondWith(staleWhileRevalidate(request, STATIC_CACHE));
+    // === Fonts/CSS from CDN — Cache-first ===
+    if (url.hostname.includes('fonts.googleapis.com') ||
+        url.hostname.includes('fonts.gstatic.com') ||
+        url.hostname.includes('cdnjs.cloudflare.com') ||
+        url.hostname.includes('cdn.jsdelivr.net')) {
+        event.respondWith(cacheFirst(request, DYNAMIC_CACHE));
         return;
     }
 
-    // HTML: Network first with cache fallback
-    if (request.destination === 'document') {
-        event.respondWith(networkFirstWithCache(request, STATIC_CACHE));
+    // === Navigation (HTML pages) — Network-first with offline fallback ===
+    if (request.mode === 'navigate') {
+        event.respondWith(networkFirstNavigation(request));
         return;
     }
 
-    // Default
-    event.respondWith(networkFirstWithCache(request, DYNAMIC_CACHE));
+    // === Everything else — Cache-first ===
+    event.respondWith(cacheFirst(request, STATIC_CACHE));
 });
 
 // ============================================================
 // STRATEGIES
 // ============================================================
-async function cacheFirstWithLimit(request, cacheName, maxItems = MAX_DYNAMIC_ITEMS) {
-    const cache = await caches.open(cacheName);
-    const cached = await cache.match(request);
-    if (cached) return cached;
 
+async function cacheFirst(request, cacheName) {
     try {
+        const cached = await caches.match(request);
+        if (cached) return cached;
+
         const response = await fetch(request);
-        if (response.ok) {
+        if (response && response.status === 200 && response.type === 'basic') {
+            const cache = await caches.open(cacheName);
             cache.put(request, response.clone());
-            // Trim cache
-            trimCache(cacheName, maxItems);
         }
         return response;
     } catch (err) {
-        return new Response('', { status: 408, statusText: 'Offline' });
+        const cached = await caches.match(request);
+        if (cached) return cached;
+        return new Response('Offline', { status: 503, statusText: 'Offline' });
     }
 }
 
-async function networkFirstWithCache(request, cacheName, timeout = 3000) {
-    const cache = await caches.open(cacheName);
+async function networkFirst(request, cacheName) {
     try {
-        const networkPromise = fetch(request);
-        const timeoutPromise = new Promise((_, reject) =>
-            setTimeout(() => reject(new Error('timeout')), timeout)
-        );
-        const response = await Promise.race([networkPromise, timeoutPromise]);
-
-        if (response.ok) {
+        const response = await fetch(request);
+        if (response && response.status === 200) {
+            const cache = await caches.open(cacheName);
             cache.put(request, response.clone());
-            trimCache(cacheName, MAX_DYNAMIC_ITEMS);
         }
         return response;
     } catch (err) {
-        const cached = await cache.match(request);
+        const cached = await caches.match(request);
+        if (cached) return cached;
+        return new Response(JSON.stringify({ error: 'offline' }), {
+            status: 503,
+            headers: { 'Content-Type': 'application/json' }
+        });
+    }
+}
+
+async function networkFirstNavigation(request) {
+    try {
+        const response = await fetch(request);
+        if (response && response.status === 200) {
+            const cache = await caches.open(STATIC_CACHE);
+            cache.put(request, response.clone());
+        }
+        return response;
+    } catch (err) {
+        const cached = await caches.match(request);
         if (cached) return cached;
 
-        // If HTML and no cache → offline page
-        if (request.destination === 'document') {
-            const offlinePage = await caches.match('/offline.html');
-            if (offlinePage) return offlinePage;
-        }
+        // Fallback to offline page
+        const offline = await caches.match('/offline.html');
+        if (offline) return offline;
 
-        return new Response('Offline', { status: 503 });
+        // Ultimate fallback
+        return new Response(
+            `<!DOCTYPE html><html lang="ar" dir="rtl"><head><meta charset="UTF-8"><title>غير متصل</title></head>
+            <body style="font-family:sans-serif;text-align:center;padding:40px;background:#f6f8fb;">
+            <h1>🔌 أنت غير متصل بالإنترنت</h1>
+            <p>يرجى التحقق من اتصالك بالإنترنت والمحاولة مرة أخرى.</p>
+            <button onclick="location.reload()" style="padding:12px 24px;background:#2ecc71;color:#fff;border:none;border-radius:999px;font-weight:bold;cursor:pointer;">إعادة المحاولة</button>
+            </body></html>`,
+            { status: 200, headers: { 'Content-Type': 'text/html; charset=utf-8' } }
+        );
     }
 }
 
@@ -147,8 +180,10 @@ async function staleWhileRevalidate(request, cacheName) {
     const cache = await caches.open(cacheName);
     const cached = await cache.match(request);
 
-    const fetchPromise = fetch(request).then(response => {
-        if (response.ok) cache.put(request, response.clone());
+    const fetchPromise = fetch(request).then((response) => {
+        if (response && response.status === 200 && response.type === 'basic') {
+            cache.put(request, response.clone());
+        }
         return response;
     }).catch(() => cached);
 
@@ -156,93 +191,61 @@ async function staleWhileRevalidate(request, cacheName) {
 }
 
 // ============================================================
-// TRIM CACHE
+// MESSAGE HANDLING
 // ============================================================
-async function trimCache(cacheName, maxItems) {
-    const cache = await caches.open(cacheName);
-    const keys = await cache.keys();
-    if (keys.length > maxItems) {
-        await cache.delete(keys[0]);
-        trimCache(cacheName, maxItems);
+self.addEventListener('message', (event) => {
+    if (event.data && event.data.type === 'SKIP_WAITING') {
+        self.skipWaiting();
     }
-}
+    if (event.data && event.data.type === 'CLEAR_CACHE') {
+        caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))));
+    }
+});
 
 // ============================================================
 // PUSH NOTIFICATIONS
 // ============================================================
 self.addEventListener('push', (event) => {
-    console.log('[SW] Push received');
-    let data = { title: 'كيماتو', body: 'لديك إشعار جديد', icon: '/logo-192.png', url: '/' };
+    if (!event.data) return;
+
+    let data = { title: 'كيماتو', body: 'لديك إشعار جديد', icon: '/logo-192.png', badge: '/logo-192.png' };
+
     try {
-        if (event.data) data = { ...data, ...event.data.json() };
-    } catch (e) {}
+        const parsed = event.data.json();
+        data = { ...data, ...parsed };
+    } catch (e) {
+        data.body = event.data.text();
+    }
 
-    const options = {
-        body: data.body,
-        icon: data.icon || '/logo-192.png',
-        badge: '/badge-72.png',
-        vibrate: [100, 50, 100],
-        dir: 'rtl',
-        lang: 'ar',
-        tag: data.tag || 'chemato-notification',
-        renotify: true,
-        requireInteraction: false,
-        actions: data.actions || [
-            { action: 'open', title: 'افتح', icon: '/icon-open.png' },
-            { action: 'close', title: 'إغلاق', icon: '/icon-close.png' },
-        ],
-        data: { url: data.url || '/' },
-    };
-
-    event.waitUntil(self.registration.showNotification(data.title, options));
+    event.waitUntil(
+        self.registration.showNotification(data.title, {
+            body: data.body,
+            icon: data.icon || '/logo-192.png',
+            badge: data.badge || '/logo-192.png',
+            dir: 'rtl',
+            lang: 'ar',
+            tag: data.tag || 'chemato-notification',
+            data: { url: data.url || '/' },
+            vibrate: [200, 100, 200],
+            requireInteraction: false
+        })
+    );
 });
 
 self.addEventListener('notificationclick', (event) => {
     event.notification.close();
-    const action = event.action;
-    const url = event.notification.data?.url || '/';
-
-    if (action === 'close') return;
+    const urlToOpen = event.notification.data?.url || '/';
 
     event.waitUntil(
-        clients.matchAll({ type: 'window', includeUncontrolled: true })
-            .then((clientList) => {
-                for (const client of clientList) {
-                    if (client.url.includes(self.location.origin) && 'focus' in client) {
-                        client.navigate(url);
-                        return client.focus();
-                    }
+        clients.matchAll({ type: 'window', includeUncontrolled: true }).then((windowClients) => {
+            for (const client of windowClients) {
+                if (client.url === urlToOpen && 'focus' in client) {
+                    return client.focus();
                 }
-                if (clients.openWindow) return clients.openWindow(url);
-            })
+            }
+            if (clients.openWindow) {
+                return clients.openWindow(urlToOpen);
+            }
+        })
     );
 });
-
-// ============================================================
-// BACKGROUND SYNC
-// ============================================================
-self.addEventListener('sync', (event) => {
-    console.log('[SW] Background sync:', event.tag);
-    if (event.tag === 'chemato-sync') {
-        event.waitUntil(syncData());
-    }
-});
-
-async function syncData() {
-    // Placeholder for background sync
-    console.log('[SW] Syncing data...');
-}
-
-// ============================================================
-// MESSAGE FROM CLIENT
-// ============================================================
-self.addEventListener('message', (event) => {
-    if (event.data?.type === 'SKIP_WAITING') {
-        self.skipWaiting();
-    }
-    if (event.data?.type === 'CLEAR_CACHE') {
-        caches.keys().then(names => Promise.all(names.map(n => caches.delete(n))));
-    }
-});
-
-console.log('[SW] Loaded:', CACHE_VERSION);
