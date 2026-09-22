@@ -12,28 +12,23 @@
 <meta name="description" content="كيماتو - منصة B2B للمواد الكيماوية في مصر. ابحث برقم CAS، احصل على عروض أسعار متعددة، وتواصل مع موردين موثّقين." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://chemato.vercel.app/" />
+
+<!-- ✅ كل الأيقونات تشير لـ logo.png فقط -->
 <link rel="icon" type="image/png" href="logo.png" />
-<link rel="icon" type="image/png" sizes="192x192" href="logo-192.png" />
-<link rel="icon" type="image/png" sizes="512x512" href="logo-512.png" />
-<link rel="apple-touch-icon" href="logo-192.png" />
-<link rel="apple-touch-icon" sizes="180x180" href="logo-180.png" />
-<link rel="apple-touch-icon" sizes="152x152" href="logo-152.png" />
-<link rel="apple-touch-icon" sizes="120x120" href="logo-120.png" />
+<link rel="icon" type="image/png" sizes="192x192" href="logo.png" />
+<link rel="icon" type="image/png" sizes="512x512" href="logo.png" />
+<link rel="apple-touch-icon" href="logo.png" />
+<link rel="apple-touch-icon" sizes="180x180" href="logo.png" />
+<link rel="apple-touch-icon" sizes="152x152" href="logo.png" />
+<link rel="apple-touch-icon" sizes="120x120" href="logo.png" />
+<link rel="shortcut icon" href="logo.png" />
 <meta name="theme-color" content="#0a2540" />
 <meta name="msapplication-TileColor" content="#0a2540" />
+<meta name="msapplication-TileImage" content="logo.png" />
 <meta name="msapplication-tap-highlight" content="no" />
 
 <!-- PWA Manifest -->
 <link rel="manifest" href="/manifest.json" />
-
-<!-- Splash Screens for iOS -->
-<link rel="apple-touch-startup-image" href="splash/iphone5.png" media="(device-width: 320px) and (device-height: 568px) and (-webkit-device-pixel-ratio: 2)" />
-<link rel="apple-touch-startup-image" href="splash/iphone6.png" media="(device-width: 375px) and (device-height: 667px) and (-webkit-device-pixel-ratio: 2)" />
-<link rel="apple-touch-startup-image" href="splash/iphonex.png" media="(device-width: 375px) and (device-height: 812px) and (-webkit-device-pixel-ratio: 3)" />
-<link rel="apple-touch-startup-image" href="splash/iphonexr.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 2)" />
-<link rel="apple-touch-startup-image" href="splash/iphonexsmax.png" media="(device-width: 414px) and (device-height: 896px) and (-webkit-device-pixel-ratio: 3)" />
-<link rel="apple-touch-startup-image" href="splash/ipad.png" media="(device-width: 768px) and (device-height: 1024px) and (-webkit-device-pixel-ratio: 2)" />
-<link rel="apple-touch-startup-image" href="splash/ipadpro.png" media="(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2)" />
 
 <link rel="preconnect" href="https://soqvhvqtpgeoxwmkvbih.supabase.co" />
 <link rel="preconnect" href="https://cdn.jsdelivr.net" />
@@ -1626,7 +1621,6 @@ const isValidUUID = (id) => id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]
 const sanitizeSearch = (s) => String(s || '').trim().slice(0, 100).replace(/[<>'"]/g, '');
 const isValidCasFormat = (s) => !s ? false : /^\d{2,7}-\d{2}-\d$/.test(String(s).trim());
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
-const isAndroid = () => /Android/i.test(navigator.userAgent);
 
 const isStandalone = () => {
     if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
@@ -1743,11 +1737,11 @@ const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = ''
 window.showToast = showToast;
 
 // ============================================================
-// SERVICE WORKER REGISTRATION (قبل PWA)
+// SERVICE WORKER
 // ============================================================
 const registerServiceWorker = async () => {
     if (!('serviceWorker' in navigator)) {
-        console.warn('⚠️ Service Worker غير مدعوم في هذا المتصفح');
+        console.warn('⚠️ Service Worker غير مدعوم');
         return;
     }
     if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
@@ -1774,7 +1768,7 @@ const registerServiceWorker = async () => {
 };
 
 // ============================================================
-// PWA INSTALL MANAGER — V3 (يعمل 100%)
+// PWA INSTALL MANAGER
 // ============================================================
 const PWAManager = {
     deferredPrompt: null,
@@ -1788,7 +1782,7 @@ const PWAManager = {
         if (this.initDone) return;
         this.initDone = true;
 
-        console.log('🚀 PWAManager V3 initializing...');
+        console.log('🚀 PWAManager initializing...');
 
         this.isInstalled = isStandalone();
         console.log('📱 Standalone mode:', this.isInstalled);
@@ -1809,7 +1803,6 @@ const PWAManager = {
         localStorage.setItem(KEYS.VISIT_COUNT, String(visits));
         state.visitCount = visits;
 
-        // === الحدث الأهم ===
         window.addEventListener('beforeinstallprompt', (e) => {
             console.log('🎯 beforeinstallprompt FIRED!');
             e.preventDefault();
@@ -1831,7 +1824,6 @@ const PWAManager = {
 
         this.bindButtons();
 
-        // === Fallbacks ===
         if (isIOS()) {
             console.log('🍎 iOS detected');
             const instruction = document.getElementById('pwaIOSInstruction');
@@ -1844,7 +1836,6 @@ const PWAManager = {
                 setTimeout(() => this.showInstallUI(), 8000);
             }
         } else {
-            // Android/Desktop: أظهر الزر في الهيرو بعد 5 ثواني
             if (!this.dismissed) {
                 setTimeout(() => {
                     if (!this.isInstalled) {
@@ -1852,7 +1843,6 @@ const PWAManager = {
                     }
                 }, 5000);
 
-                // أظهر الشريط السفلي بعد 15 ثانية لو مفيش prompt
                 setTimeout(() => {
                     if (!this.promptReady && !this.isInstalled && !this.dismissed) {
                         document.getElementById('installBanner')?.classList.add('show');
@@ -1957,7 +1947,6 @@ const PWAManager = {
             return;
         }
 
-        // fallback — عرض التعليمات
         this.showInstructionsModal();
     },
 
@@ -2003,7 +1992,7 @@ const PWAManager = {
                 instruction.innerHTML = `
                     <strong><i class="fas fa-info-circle"></i> لتثبيت التطبيق:</strong>
                     <ol>
-                        <li>اضغط على أيقونة <strong><i class="fas fa-plus-square"></i> تثبيت</strong> في شريط العنوان (يمين أو يسار الشاشة)</li>
+                        <li>اضغط على أيقونة <strong><i class="fas fa-plus-square"></i> تثبيت</strong> في شريط العنوان</li>
                         <li>أو اضغط <strong>القائمة (⋮ أو ...)</strong> ← <strong>"تثبيت كيماتو"</strong></li>
                         <li>أو اضغط <strong>Ctrl+Shift+A</strong> (في Chrome على Windows)</li>
                     </ol>
@@ -4513,7 +4502,7 @@ const init = async () => {
     NotificationsManager.init();
     MessagesManager.init();
 
-    // ⚠️ الأهم: SW أولاً ثم PWA
+    // SW أولاً ثم PWA
     await registerServiceWorker();
     PWAManager.init();
 
