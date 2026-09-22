@@ -96,9 +96,6 @@ a{color:inherit;text-decoration:none}
 input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 :focus-visible{outline:3px solid var(--c-primary-500);outline-offset:2px;border-radius:var(--r-sm)}
 
-/* ============================================================
-   KEYFRAMES
-   ============================================================ */
 @keyframes fadeUp{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)}}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.08)}}
@@ -129,9 +126,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 
 .animate-in{animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) backwards}
 
-/* ============================================================
-   SPINNER
-   ============================================================ */
 .spinner{
     display:inline-block;width:14px;height:14px;
     border:2px solid rgba(255,255,255,0.3);
@@ -139,24 +133,15 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     animation:spin 0.6s linear infinite;vertical-align:middle;
 }
 
-/* ============================================================
-   SKIP LINK
-   ============================================================ */
 .skip-link{position:absolute;top:-100px;right:16px;background:var(--c-primary-900);color:#fff;padding:12px 20px;border-radius:var(--r-md);z-index:9999;transition:top var(--t-fast)}
 .skip-link:focus{top:16px}
 
-/* ============================================================
-   READING PROGRESS
-   ============================================================ */
 #readingProgress{
     position:fixed;top:0;right:0;height:3px;width:0%;
     background:linear-gradient(90deg,var(--c-accent),var(--c-primary-500));
     z-index:9999;transition:width 100ms linear;
 }
 
-/* ============================================================
-   NAVBAR
-   ============================================================ */
 .navbar{
     position:sticky;top:0;z-index:100;
     background:rgba(10,37,64,0.95);
@@ -235,9 +220,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 
 .menu-toggle{display:none;width:40px;height:40px;border-radius:var(--r-md);background:rgba(255,255,255,0.08);color:#fff;align-items:center;justify-content:center;font-size:1.05rem}
 
-/* ============================================================
-   INSTALL BANNER
-   ============================================================ */
 .install-banner{
     position:fixed;bottom:0;left:0;right:0;
     background:linear-gradient(135deg,#0a2540,#144167);
@@ -270,6 +252,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     font-weight:800;font-size:0.8rem;display:inline-flex;align-items:center;gap:5px;
     transition:all var(--t-fast);white-space:nowrap;
     animation:installPulse 2s ease-in-out infinite;
+    cursor:pointer;
 }
 .install-banner-btn:hover{background:var(--c-accent-dark);transform:scale(1.03)}
 .install-banner-btn:active{transform:scale(0.97)}
@@ -277,12 +260,10 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     width:32px;height:32px;border-radius:50%;background:rgba(255,255,255,0.1);
     color:#fff;display:flex;align-items:center;justify-content:center;
     font-size:0.85rem;flex-shrink:0;transition:all var(--t-fast);
+    cursor:pointer;
 }
 .install-banner-close:hover{background:rgba(231,76,60,0.4)}
 
-/* ============================================================
-   NEWS TICKER
-   ============================================================ */
 .news-ticker{
     background:rgba(0,25,51,0.95);backdrop-filter:blur(20px);
     border-bottom:1px solid rgba(255,255,255,0.08);
@@ -310,22 +291,16 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     position:absolute;right:8px;top:50%;transform:translateY(-50%);
     width:22px;height:22px;border-radius:50%;background:rgba(255,255,255,0.08);
     color:rgba(255,255,255,0.6);display:flex;align-items:center;justify-content:center;
-    font-size:0.65rem;z-index:2;transition:all 0.2s;
+    font-size:0.65rem;z-index:2;transition:all 0.2s;cursor:pointer;
 }
 .news-ticker-close:hover{background:rgba(231,76,60,0.4);color:#fff}
 
-/* ============================================================
-   MAIN CONTAINER — padding-bottom يحمي من Install Banner
-   ============================================================ */
 .main-container{
     max-width:var(--container);margin:0 auto;
     padding:16px max(14px, var(--safe-left)) 120px max(14px, var(--safe-right));
 }
 @media (min-width:640px){.main-container{padding:20px 24px 100px}}
 
-/* ============================================================
-   HERO
-   ============================================================ */
 .hero{
     position:relative;border-radius:var(--r-xl);padding:40px 20px 32px;overflow:hidden;
     background:
@@ -391,7 +366,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.welcome-msg{padding:10px 22px;font-size:0.9rem}}
 
 .share-buttons{margin-top:12px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
-.share-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);padding:7px 14px;border-radius:var(--r-full);font-size:0.76rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;transition:all var(--t-fast);min-height:38px}
+.share-btn{background:rgba(255,255,255,0.06);border:1px solid rgba(255,255,255,0.12);color:rgba(255,255,255,0.85);padding:7px 14px;border-radius:var(--r-full);font-size:0.76rem;font-weight:600;display:inline-flex;align-items:center;gap:5px;transition:all var(--t-fast);min-height:38px;cursor:pointer}
 @media (min-width:640px){.share-btn{padding:7px 16px;font-size:0.8rem}}
 .share-btn:hover{background:rgba(255,255,255,0.14);color:#fff}
 
@@ -401,19 +376,16 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     padding:7px 16px;border-radius:var(--r-full);font-size:0.8rem;font-weight:800;
     display:none;align-items:center;gap:6px;transition:all var(--t-fast);
     animation:installPulse 2s ease-in-out infinite;
-    min-height:38px;
+    min-height:38px;cursor:pointer;
 }
 .install-btn-hero.show{display:inline-flex}
 .install-btn-hero:hover{background:rgba(46,204,113,0.4);transform:translateY(-2px)}
 .install-btn-hero i{animation:pulse 2s ease-in-out infinite}
 
-/* ============================================================
-   SEARCH
-   ============================================================ */
 .search-container{position:relative;max-width:900px;margin:-20px auto 24px;z-index:50;padding:0 4px}
 @media (min-width:640px){.search-container{margin:-28px auto 24px}}
 .search-modes{display:flex;justify-content:center;gap:5px;margin-bottom:10px;flex-wrap:wrap}
-.search-mode-btn{background:rgba(255,255,255,0.7);border:1.5px solid rgba(255,255,255,0.4);color:var(--c-text-muted);padding:5px 12px;border-radius:var(--r-full);font-size:0.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px;transition:all var(--t-fast);backdrop-filter:blur(8px);min-height:34px}
+.search-mode-btn{background:rgba(255,255,255,0.7);border:1.5px solid rgba(255,255,255,0.4);color:var(--c-text-muted);padding:5px 12px;border-radius:var(--r-full);font-size:0.72rem;font-weight:700;display:inline-flex;align-items:center;gap:4px;transition:all var(--t-fast);backdrop-filter:blur(8px);min-height:34px;cursor:pointer}
 @media (min-width:640px){.search-mode-btn{padding:6px 16px;font-size:0.78rem;gap:6px}}
 [data-theme="dark"] .search-mode-btn{background:rgba(16,30,46,0.7);border-color:rgba(255,255,255,0.1)}
 .search-mode-btn:hover{color:var(--c-primary-600);border-color:var(--c-primary-500)}
@@ -429,12 +401,12 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.search-wrapper input{padding:14px 4px;width:auto}}
 .search-wrapper input::placeholder{color:var(--c-text-sub)}
 
-.search-btn{background:linear-gradient(135deg,var(--c-primary-600),var(--c-primary-800));color:#fff;padding:0 20px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all var(--t-base);min-height:46px;flex-shrink:0}
+.search-btn{background:linear-gradient(135deg,var(--c-primary-600),var(--c-primary-800));color:#fff;padding:0 20px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem;display:inline-flex;align-items:center;justify-content:center;gap:6px;transition:all var(--t-base);min-height:46px;flex-shrink:0;cursor:pointer}
 @media (min-width:640px){.search-btn{padding:0 26px;font-size:0.92rem;gap:8px}}
 .search-btn:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(29,91,142,0.35)}
 @media (max-width:639px){.search-btn{width:100%;margin-top:4px}}
 
-.ai-btn{background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;padding:0 16px;border-radius:var(--r-full);font-weight:700;font-size:0.8rem;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:all var(--t-base);min-height:46px;flex-shrink:0}
+.ai-btn{background:linear-gradient(135deg,#8b5cf6,#7c3aed);color:#fff;padding:0 16px;border-radius:var(--r-full);font-weight:700;font-size:0.8rem;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:all var(--t-base);min-height:46px;flex-shrink:0;cursor:pointer}
 @media (min-width:640px){.ai-btn{padding:0 20px;font-size:0.85rem;margin-right:6px;gap:6px}}
 .ai-btn:hover{transform:scale(1.02);box-shadow:0 8px 24px rgba(139,92,246,0.4)}
 @media (max-width:639px){.ai-btn{width:100%;margin-top:4px}}
@@ -457,9 +429,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .suggestion-view-all{background:linear-gradient(90deg,var(--c-primary-50),transparent);border-bottom:2px solid var(--c-primary-500) !important}
 .suggestion-empty{padding:24px;text-align:center;color:var(--c-text-muted);font-size:0.88rem}
 
-/* ============================================================
-   FILTERS
-   ============================================================ */
 .filters-wrapper{display:flex;justify-content:center;align-items:center;gap:8px;flex-wrap:wrap;margin-bottom:18px}
 .filters{display:flex;gap:5px;flex-wrap:wrap;justify-content:center}
 .filter-chip{background:var(--c-surface);padding:6px 14px;border-radius:var(--r-full);cursor:pointer;transition:all var(--t-fast);font-size:0.78rem;font-weight:600;color:var(--c-text-muted);border:1.5px solid var(--c-border);user-select:none;display:inline-flex;align-items:center;gap:5px;white-space:nowrap;min-height:36px}
@@ -467,7 +436,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .filter-chip:hover{border-color:var(--c-primary-500);color:var(--c-primary-600);transform:translateY(-1px)}
 .filter-chip.active{background:linear-gradient(135deg,var(--c-primary-700),var(--c-primary-900));color:#fff;border-color:transparent;box-shadow:0 6px 20px rgba(10,37,64,0.25)}
 
-.advanced-toggle{background:transparent;color:var(--c-primary-600);font-weight:600;font-size:0.78rem;padding:6px 12px;border-radius:var(--r-full);display:inline-flex;align-items:center;gap:5px;transition:all var(--t-fast);border:1.5px dashed var(--c-border);min-height:36px}
+.advanced-toggle{background:transparent;color:var(--c-primary-600);font-weight:600;font-size:0.78rem;padding:6px 12px;border-radius:var(--r-full);display:inline-flex;align-items:center;gap:5px;transition:all var(--t-fast);border:1.5px dashed var(--c-border);min-height:36px;cursor:pointer}
 .advanced-toggle:hover{background:var(--c-primary-50);border-color:var(--c-primary-500)}
 
 .advanced-filters{display:grid;grid-template-columns:1fr;gap:10px;max-width:720px;margin:0 auto 20px;padding:0 14px;background:var(--c-surface);border-radius:var(--r-lg);border:1px solid var(--c-border);max-height:0;overflow:hidden;opacity:0;transition:all var(--t-base)}
@@ -483,21 +452,15 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .price-range-input::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:22px;height:22px;border-radius:50%;background:#fff;border:3px solid var(--c-primary-500);cursor:pointer;pointer-events:auto;box-shadow:0 2px 8px rgba(44,122,184,0.4)}
 .price-range-labels{display:flex;justify-content:space-between;font-size:0.75rem;color:var(--c-text-muted);font-weight:700;margin-top:8px;grid-column:1/-1}
 
-/* ============================================================
-   SECTION HEADERS
-   ============================================================ */
 .section-header{display:flex;justify-content:space-between;align-items:center;margin:24px 0 14px;gap:10px;flex-wrap:wrap}
 @media (min-width:640px){.section-header{margin:32px 0 16px}}
 .section-header h2{font-size:clamp(1rem,4vw,1.3rem);color:var(--c-text);font-weight:800;display:flex;align-items:center;gap:8px;padding-right:12px;border-right:4px solid var(--c-primary-500);line-height:1.3;min-width:0}
 @media (min-width:640px){.section-header h2{gap:10px;padding-right:14px}}
 .section-header h2 i{color:var(--c-primary-600);flex-shrink:0}
-.section-header .view-all{font-size:0.76rem;color:var(--c-primary-600);background:var(--c-surface);padding:6px 14px;border-radius:var(--r-full);font-weight:600;display:inline-flex;align-items:center;gap:5px;transition:all var(--t-fast);border:1px solid var(--c-border);min-height:34px;white-space:nowrap}
+.section-header .view-all{font-size:0.76rem;color:var(--c-primary-600);background:var(--c-surface);padding:6px 14px;border-radius:var(--r-full);font-weight:600;display:inline-flex;align-items:center;gap:5px;transition:all var(--t-fast);border:1px solid var(--c-border);min-height:34px;white-space:nowrap;cursor:pointer}
 @media (min-width:640px){.section-header .view-all{font-size:0.82rem;padding:7px 16px;gap:6px}}
 .section-header .view-all:hover{background:var(--c-primary-600);color:#fff;border-color:transparent;transform:translateX(-3px)}
 
-/* ============================================================
-   GRID & CARDS
-   ============================================================ */
 .grid{display:grid;grid-template-columns:1fr;gap:14px}
 @media (min-width:480px){.grid{grid-template-columns:repeat(2,1fr);gap:16px}}
 @media (min-width:860px){.grid{grid-template-columns:repeat(auto-fill,minmax(288px,1fr));gap:20px}}
@@ -523,7 +486,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .badge-featured::after{content:'';position:absolute;top:0;left:-100%;width:100%;height:100%;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.5),transparent);animation:badgeShine 3s infinite}
 
 .card-float-actions{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:6px;z-index:5}
-.card-float-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);color:var(--c-text-muted);display:flex;align-items:center;justify-content:center;font-size:0.8rem;transition:all 0.3s var(--t-spring);box-shadow:0 4px 12px rgba(0,0,0,0.12);min-height:34px}
+.card-float-btn{width:34px;height:34px;border-radius:50%;background:rgba(255,255,255,0.92);backdrop-filter:blur(10px);color:var(--c-text-muted);display:flex;align-items:center;justify-content:center;font-size:0.8rem;transition:all 0.3s var(--t-spring);box-shadow:0 4px 12px rgba(0,0,0,0.12);min-height:34px;cursor:pointer}
 @media (min-width:640px){.card-float-btn{width:36px;height:36px;font-size:0.85rem}}
 .card-float-btn:hover{background:#fff;transform:scale(1.15);color:var(--c-primary-600)}
 .card-float-btn.active{background:var(--c-danger);color:#fff}
@@ -563,7 +526,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .stock-dot{width:6px;height:6px;border-radius:50%;background:currentColor}
 
 .card-actions{display:flex;gap:5px;margin-top:auto;padding-top:10px;flex-wrap:wrap}
-.btn-card{flex:1;min-height:38px;padding:8px 8px;border-radius:var(--r-md);font-weight:700;font-size:0.72rem;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:all var(--t-fast);text-decoration:none;border:none;white-space:nowrap;min-width:0}
+.btn-card{flex:1;min-height:38px;padding:8px 8px;border-radius:var(--r-md);font-weight:700;font-size:0.72rem;display:inline-flex;align-items:center;justify-content:center;gap:5px;transition:all var(--t-fast);text-decoration:none;border:none;white-space:nowrap;min-width:0;cursor:pointer}
 @media (min-width:640px){.btn-card{min-height:40px;padding:8px 10px;font-size:0.78rem}}
 .btn-card:active{transform:scale(0.96)}
 .btn-detail{background:var(--c-primary-900);color:#fff}
@@ -578,9 +541,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.btn-follow{width:40px}}
 .btn-follow.following{background:var(--c-primary-500);color:#fff;border-color:var(--c-primary-500)}
 
-/* ============================================================
-   FEATURED / TRENDING / QUOTES SECTIONS
-   ============================================================ */
 .featured-section{position:relative;border-radius:var(--r-xl);padding:16px;margin:12px 0 8px;background:linear-gradient(135deg,rgba(243,156,18,0.08),rgba(230,126,34,0.04));border:1.5px solid rgba(243,156,18,0.3)}
 @media (min-width:640px){.featured-section{padding:24px}}
 .featured-section .section-header{margin-top:0}
@@ -596,9 +556,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.quotes-section{padding:24px}}
 .quotes-section .section-header h2{border-right-color:var(--c-primary-500)}
 
-/* ============================================================
-   CATEGORIES
-   ============================================================ */
 .category-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin:16px 0}
 @media (min-width:480px){.category-grid{grid-template-columns:repeat(auto-fill,minmax(120px,1fr));gap:10px}}
 @media (min-width:640px){.category-grid{grid-template-columns:repeat(auto-fill,minmax(130px,1fr));gap:12px;margin:20px 0}}
@@ -614,9 +571,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.category-card .cat-name{font-size:0.82rem}}
 .category-card .cat-count{font-size:0.68rem;color:var(--c-text-sub);margin-top:3px}
 
-/* ============================================================
-   RECENTLY VIEWED
-   ============================================================ */
 .recently-viewed{display:flex;gap:10px;overflow-x:auto;padding:8px 4px 16px;scrollbar-width:thin;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .recently-viewed::-webkit-scrollbar{height:6px}
 .recently-viewed::-webkit-scrollbar-thumb{background:var(--c-primary-500);border-radius:var(--r-full)}
@@ -629,16 +583,10 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .recently-viewed .mini-card .mini-name{font-size:0.76rem;font-weight:700;color:var(--c-text);white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-bottom:2px}
 .recently-viewed .mini-card .mini-price{font-size:0.72rem;color:var(--c-primary-600);font-weight:700}
 
-/* ============================================================
-   RFQ CARD
-   ============================================================ */
 .rfq-card{background:var(--c-surface);border:1.5px solid var(--c-border);border-radius:var(--r-lg);padding:16px;cursor:pointer;transition:all 0.3s ease;position:relative;overflow:hidden}
 @media (min-width:640px){.rfq-card{padding:20px}}
 .rfq-card:hover{border-color:var(--c-safety-orange);transform:translateY(-4px);box-shadow:var(--sh-lg)}
 
-/* ============================================================
-   SKELETON
-   ============================================================ */
 .skeleton{background:linear-gradient(90deg,var(--c-border) 0%,var(--c-surface-2) 25%,var(--c-border) 50%,var(--c-surface-2) 75%,var(--c-border) 100%);background-size:200% 100%;animation:skeletonWave 1.5s ease-in-out infinite;border-radius:var(--r-md)}
 .skeleton-card{background:var(--c-surface);border-radius:var(--r-lg);overflow:hidden;border:1px solid var(--c-border)}
 .skeleton-media{aspect-ratio:16/10}
@@ -650,9 +598,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .skeleton-line.w-90{width:90%}
 .skeleton-line.h-20{height:20px}
 
-/* ============================================================
-   EMPTY STATE
-   ============================================================ */
 .empty-state{grid-column:1/-1;text-align:center;padding:40px 20px;background:var(--c-surface);border-radius:var(--r-lg);border:2px dashed var(--c-border)}
 @media (min-width:640px){.empty-state{padding:56px 24px}}
 .empty-state i{font-size:2.5rem;color:var(--c-primary-500);opacity:0.4;margin-bottom:14px}
@@ -661,9 +606,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.empty-state h3{font-size:1.15rem}}
 .empty-state p{color:var(--c-text-muted);font-size:0.85rem}
 
-/* ============================================================
-   INFINITE SCROLL
-   ============================================================ */
 .infinite-sentinel{height:20px;margin-top:20px}
 .infinite-loading{display:flex;justify-content:center;padding:24px;color:var(--c-text-muted);font-weight:600;font-size:0.85rem;align-items:center;gap:10px}
 .infinite-loading .dots{display:inline-flex;gap:4px}
@@ -671,9 +613,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .infinite-loading .dots span:nth-child(2){animation-delay:0.2s}
 .infinite-loading .dots span:nth-child(3){animation-delay:0.4s}
 
-/* ============================================================
-   FLOATING BAR
-   ============================================================ */
 .floating-bar{position:fixed;bottom:0;left:0;right:0;background:var(--c-surface);border-top:1px solid var(--c-border);box-shadow:0 -8px 32px rgba(10,37,64,0.12);padding:12px 16px;padding-bottom:calc(12px + var(--safe-bottom));z-index:95;transform:translateY(100%);transition:transform var(--t-base);display:flex;align-items:center;justify-content:space-between;gap:10px;flex-wrap:wrap}
 .floating-bar.show{transform:translateY(0)}
 .floating-bar-info{display:flex;align-items:center;gap:8px;font-weight:700;font-size:0.85rem;color:var(--c-text);min-width:0}
@@ -688,9 +627,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .floating-btn.danger{background:var(--c-surface-2);color:var(--c-danger);border:1px solid var(--c-border)}
 .floating-btn.danger:hover{background:rgba(231,76,60,0.1)}
 
-/* ============================================================
-   MODALS
-   ============================================================ */
 .modal-overlay{position:fixed;inset:0;background:rgba(10,20,30,0.7);backdrop-filter:blur(8px);z-index:1000;display:flex;align-items:flex-end;justify-content:center;padding:0;opacity:0;visibility:hidden;transition:all var(--t-base)}
 @media (min-width:640px){.modal-overlay{align-items:center;padding:20px}}
 .modal-overlay.show{opacity:1;visibility:visible}
@@ -706,7 +642,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.modal-header{padding:20px 24px}}
 .modal-header h3{font-size:1rem;font-weight:800;color:var(--c-text);display:flex;align-items:center;gap:8px;min-width:0}
 @media (min-width:640px){.modal-header h3{font-size:1.15rem;gap:10px}}
-.modal-close{width:34px;height:34px;border-radius:50%;background:var(--c-surface-2);color:var(--c-text-muted);display:flex;align-items:center;justify-content:center;transition:all var(--t-fast);font-size:0.9rem;flex-shrink:0}
+.modal-close{width:34px;height:34px;border-radius:50%;background:var(--c-surface-2);color:var(--c-text-muted);display:flex;align-items:center;justify-content:center;transition:all var(--t-fast);font-size:0.9rem;flex-shrink:0;cursor:pointer}
 .modal-close:hover{background:var(--c-danger);color:#fff}
 .modal-body{padding:16px 18px;overflow-y:auto;flex:1;-webkit-overflow-scrolling:touch}
 @media (min-width:640px){.modal-body{padding:24px}}
@@ -744,15 +680,12 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .form-group textarea{min-height:100px;resize:vertical}
 .form-actions{grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:8px;flex-wrap:wrap}
 @media (max-width:480px){.form-actions{flex-direction:column-reverse}.form-actions button{width:100%}}
-.btn-cancel{background:var(--c-surface-2);color:var(--c-text-muted);border:1px solid var(--c-border);padding:12px 22px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem}
-.btn-submit{background:linear-gradient(135deg,var(--c-accent),var(--c-accent-dark));color:#fff;box-shadow:0 4px 12px rgba(46,204,113,0.3);padding:12px 22px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem;display:inline-flex;align-items:center;gap:6px}
+.btn-cancel{background:var(--c-surface-2);color:var(--c-text-muted);border:1px solid var(--c-border);padding:12px 22px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem;cursor:pointer}
+.btn-submit{background:linear-gradient(135deg,var(--c-accent),var(--c-accent-dark));color:#fff;box-shadow:0 4px 12px rgba(46,204,113,0.3);padding:12px 22px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
 .rfq-login-notice{background:linear-gradient(135deg,rgba(243,156,18,0.1),rgba(230,126,34,0.05));border:1.5px solid rgba(243,156,18,0.3);border-radius:var(--r-md);padding:12px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;font-size:0.82rem;color:var(--c-text)}
 .rfq-login-notice i{color:var(--c-warning);font-size:1.1rem;flex-shrink:0;margin-top:2px}
 .rfq-login-notice a{color:var(--c-primary-600);font-weight:700;text-decoration:underline}
 
-/* ============================================================
-   NOTIFICATION PANEL
-   ============================================================ */
 .notification-panel{
     position:fixed;
     top:calc(var(--header-h) + var(--safe-top) + 8px);
@@ -840,9 +773,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     margin-top:4px;display:flex;align-items:center;gap:4px;
 }
 
-/* ============================================================
-   MESSAGES PANEL
-   ============================================================ */
 .messages-panel{
     position:fixed;
     top:calc(var(--header-h) + var(--safe-top) + 8px);
@@ -916,9 +846,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     display:flex;align-items:center;justify-content:center;
 }
 
-/* ============================================================
-   TOAST
-   ============================================================ */
 .toast-container{
     position:fixed;
     bottom:calc(16px + var(--safe-bottom));
@@ -951,16 +878,13 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .toast .toast-content{flex:1;min-width:0}
 .toast .toast-title{font-weight:800;font-size:0.85rem;margin-bottom:2px;word-break:break-word}
 .toast .toast-desc{font-size:0.76rem;color:var(--c-text-muted);line-height:1.4;word-break:break-word}
-.toast .toast-close{width:24px;height:24px;border-radius:50%;background:var(--c-surface-2);color:var(--c-text-muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;transition:all var(--t-fast)}
+.toast .toast-close{width:24px;height:24px;border-radius:50%;background:var(--c-surface-2);color:var(--c-text-muted);display:flex;align-items:center;justify-content:center;font-size:0.7rem;flex-shrink:0;transition:all var(--t-fast);cursor:pointer}
 .toast .toast-close:hover{background:var(--c-danger);color:#fff}
 .toast.success{border-right-color:var(--c-accent)}
 .toast.warning{border-right-color:var(--c-warning)}
 .toast.error{border-right-color:var(--c-danger)}
 .toast.info{border-right-color:var(--c-purple)}
 
-/* ============================================================
-   PWA INSTALL MODAL
-   ============================================================ */
 .pwa-install-modal{
     position:fixed;inset:0;background:rgba(10,20,30,0.85);
     backdrop-filter:blur(8px);z-index:10000;
@@ -1032,7 +956,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     color:#fff;font-weight:800;font-size:0.9rem;
     display:inline-flex;align-items:center;justify-content:center;gap:8px;
     transition:all var(--t-base);box-shadow:0 8px 24px rgba(46,204,113,0.35);
-    min-height:48px;
+    min-height:48px;cursor:pointer;
 }
 .pwa-btn-install:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(46,204,113,0.45)}
 .pwa-btn-cancel{
@@ -1040,7 +964,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     background:var(--c-surface-2);color:var(--c-text-muted);
     font-weight:700;font-size:0.9rem;border:1px solid var(--c-border);
     display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    min-height:48px;
+    min-height:48px;cursor:pointer;
 }
 .pwa-btn-cancel:hover{background:var(--c-border);color:var(--c-text)}
 
@@ -1061,17 +985,11 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     border:1px solid var(--c-border);
 }
 
-/* ============================================================
-   SCROLL TOP
-   ============================================================ */
-.scroll-top{position:fixed;bottom:calc(80px + var(--safe-bottom));right:16px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--c-primary-700),var(--c-primary-900));color:#fff;font-size:1rem;box-shadow:var(--sh-lg);display:flex;align-items:center;justify-content:center;transition:all var(--t-base);opacity:0;visibility:hidden;transform:translateY(16px);z-index:90}
+.scroll-top{position:fixed;bottom:calc(80px + var(--safe-bottom));right:16px;width:46px;height:46px;border-radius:50%;background:linear-gradient(135deg,var(--c-primary-700),var(--c-primary-900));color:#fff;font-size:1rem;box-shadow:var(--sh-lg);display:flex;align-items:center;justify-content:center;transition:all var(--t-base);opacity:0;visibility:hidden;transform:translateY(16px);z-index:90;cursor:pointer}
 @media (min-width:640px){.scroll-top{bottom:32px;right:24px;width:48px;height:48px}}
 .scroll-top.visible{opacity:1;visibility:visible;transform:translateY(0)}
 .scroll-top:hover{transform:translateY(-4px);box-shadow:var(--sh-xl)}
 
-/* ============================================================
-   FOOTER
-   ============================================================ */
 .footer{background:linear-gradient(180deg,var(--c-primary-900),#061a2e);color:rgba(255,255,255,0.8);padding:36px 16px 20px;margin-top:60px}
 @media (min-width:640px){.footer{padding:48px 24px 24px}}
 .footer-inner{max-width:var(--container);margin:0 auto}
@@ -1080,9 +998,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .footer-links a:hover{color:#5eb8ee}
 .footer-copy{text-align:center;font-size:0.78rem;color:rgba(255,255,255,0.4)}
 
-/* ============================================================
-   MOBILE MENU
-   ============================================================ */
 @media (max-width:860px){
     .menu-toggle{display:inline-flex}
     .nav-links{
@@ -1101,9 +1016,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     .dropdown-content a{color:rgba(255,255,255,0.85);border-bottom-color:rgba(255,255,255,0.05)}
 }
 
-/* ============================================================
-   UTILITIES
-   ============================================================ */
 .highlight-target{animation:highlightPulse 1.5s ease-in-out 3}
 .reveal{opacity:0;transform:translateY(30px);transition:opacity 0.6s ease,transform 0.6s cubic-bezier(0.22,1,0.36,1)}
 .reveal.revealed{opacity:1;transform:translateY(0)}
@@ -1114,7 +1026,6 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 </head>
 <body>
 
-<!-- READING PROGRESS BAR -->
 <div id="readingProgress" aria-hidden="true"></div>
 
 <a href="#main" class="skip-link">تخطي إلى المحتوى</a>
@@ -1500,14 +1411,7 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <div class="pwa-feature"><i class="fas fa-shield-alt"></i><span>آمن تماماً - لا يحتاج صلاحيات</span></div>
 </div>
 
-<div class="pwa-instruction" id="pwaIOSInstruction" style="display:none;">
-<strong><i class="fas fa-info-circle"></i> لأجهزة iPhone/iPad:</strong>
-<ol>
-<li>اضغط على زر <span class="icon-inline"><i class="fas fa-arrow-up-from-bracket"></i> مشاركة</span> أسفل Safari</li>
-<li>اسحب لأسفل واختر <strong>"إضافة إلى الشاشة الرئيسية"</strong></li>
-<li>اضغط <strong>"إضافة"</strong> في الأعلى</li>
-</ol>
-</div>
+<div class="pwa-instruction" id="pwaIOSInstruction" style="display:none;"></div>
 
 <div class="pwa-install-actions">
 <button class="pwa-btn-install" id="pwaInstallBtn">
@@ -1692,7 +1596,7 @@ const state = {
     deferredInstallPrompt: null,
     categories: [], unreadMessages: 0, unreadNotifications: 0,
     statsCache: { data: null, timestamp: 0 },
-    abortController: null, recentRendered: false, actionHandled: false,
+    recentRendered: false, actionHandled: false,
     notifChannel: null, msgChannel: null,
     visitCount: 0,
 };
@@ -1722,18 +1626,13 @@ const isValidUUID = (id) => id && /^[0-9a-f]{8}-[0-9a-f]{4}-[0-9a-f]{4}-[0-9a-f]
 const sanitizeSearch = (s) => String(s || '').trim().slice(0, 100).replace(/[<>'"]/g, '');
 const isValidCasFormat = (s) => !s ? false : /^\d{2,7}-\d{2}-\d$/.test(String(s).trim());
 const isIOS = () => /iPad|iPhone|iPod/.test(navigator.userAgent) && !window.MSStream;
+const isAndroid = () => /Android/i.test(navigator.userAgent);
 
-/**
- * فحص دقيق لحالة التثبيت - يدعم Desktop PWA + iOS + Android
- */
 const isStandalone = () => {
-    // 1) Check display-mode (works on Chrome/Edge Desktop PWA + Android)
     if (window.matchMedia && window.matchMedia('(display-mode: standalone)').matches) return true;
     if (window.matchMedia && window.matchMedia('(display-mode: fullscreen)').matches) return true;
     if (window.matchMedia && window.matchMedia('(display-mode: minimal-ui)').matches) return true;
-    // 2) Check iOS Safari standalone
     if (window.navigator.standalone === true) return true;
-    // 3) Check referrer (opened from home screen)
     if (document.referrer && document.referrer.startsWith('android-app://')) return true;
     return false;
 };
@@ -1844,17 +1743,58 @@ const showToast = (icon, title, desc, linkText = null, linkUrl = null, type = ''
 window.showToast = showToast;
 
 // ============================================================
-// PWA INSTALL MANAGER
+// SERVICE WORKER REGISTRATION (قبل PWA)
+// ============================================================
+const registerServiceWorker = async () => {
+    if (!('serviceWorker' in navigator)) {
+        console.warn('⚠️ Service Worker غير مدعوم في هذا المتصفح');
+        return;
+    }
+    if (location.protocol !== 'https:' && location.hostname !== 'localhost') {
+        console.warn('⚠️ Service Worker يحتاج HTTPS');
+        return;
+    }
+
+    try {
+        const registration = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
+        console.log('✅ SW registered:', registration.scope);
+
+        registration.addEventListener('updatefound', () => {
+            const newWorker = registration.installing;
+            if (!newWorker) return;
+            newWorker.addEventListener('statechange', () => {
+                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                    showToast('🔄', 'تحديث متاح', 'اضغط هنا للتحديث', 'تحديث', 'javascript:window.location.reload()', 'info');
+                }
+            });
+        });
+    } catch (err) {
+        console.error('❌ SW registration failed:', err);
+    }
+};
+
+// ============================================================
+// PWA INSTALL MANAGER — V3 (يعمل 100%)
 // ============================================================
 const PWAManager = {
     deferredPrompt: null,
     dismissed: false,
     isInstalled: false,
     bannerShown: false,
+    promptReady: false,
+    initDone: false,
 
     init() {
+        if (this.initDone) return;
+        this.initDone = true;
+
+        console.log('🚀 PWAManager V3 initializing...');
+
         this.isInstalled = isStandalone();
+        console.log('📱 Standalone mode:', this.isInstalled);
+
         if (this.isInstalled) {
+            console.log('✅ التطبيق مثبّت بالفعل');
             this.hideAllInstallUI();
             return;
         }
@@ -1869,75 +1809,96 @@ const PWAManager = {
         localStorage.setItem(KEYS.VISIT_COUNT, String(visits));
         state.visitCount = visits;
 
-        // === Native install prompt (Chrome/Edge Android + Desktop) ===
+        // === الحدث الأهم ===
         window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('🎯 beforeinstallprompt FIRED!');
             e.preventDefault();
             this.deferredPrompt = e;
             state.deferredInstallPrompt = e;
+            this.promptReady = true;
             this.showInstallUI();
         });
 
-        // === Installed event ===
         window.addEventListener('appinstalled', () => {
+            console.log('🎉 appinstalled!');
             this.isInstalled = true;
             this.deferredPrompt = null;
-            state.deferredInstallPrompt = null;
+            this.promptReady = false;
             this.hideAllInstallUI();
             localStorage.setItem('chemato-installed', 'true');
-            showToast('🎉', 'تم التثبيت!', 'كيماتو على جهازك الآن', null, null, 'success');
+            showToast('🎉', 'تم التثبيت بنجاح!', 'كيماتو على جهازك الآن', null, null, 'success');
         });
 
-        // === Bind buttons with stopPropagation ===
-        const bannerBtn = document.getElementById('installBannerBtn');
-        const heroBtn = document.getElementById('installBtnHero');
-        const bannerClose = document.getElementById('installBannerClose');
-        const pwaInstallBtn = document.getElementById('pwaInstallBtn');
-        const pwaCancelBtn = document.getElementById('pwaCancelBtn');
+        this.bindButtons();
 
-        bannerBtn?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            this.triggerInstall();
-        });
-        heroBtn?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            this.triggerInstall();
-        });
-        bannerClose?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            this.dismissBanner();
-        });
-        pwaInstallBtn?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            this.triggerInstall();
-        });
-        pwaCancelBtn?.addEventListener('click', (e) => {
-            e.stopPropagation();
-            e.preventDefault();
-            this.closeModal();
-        });
-
-        // === Show UI for iOS / fallback ===
+        // === Fallbacks ===
         if (isIOS()) {
+            console.log('🍎 iOS detected');
             const instruction = document.getElementById('pwaIOSInstruction');
             if (instruction) instruction.style.display = 'block';
-            if (pwaInstallBtn) pwaInstallBtn.innerHTML = '<i class="fas fa-share"></i> افتح قائمة المشاركة';
-            // Show iOS banner after delay
+            const installBtn = document.getElementById('pwaInstallBtn');
+            if (installBtn) {
+                installBtn.innerHTML = '<i class="fas fa-share"></i> افتح قائمة المشاركة';
+            }
             if (!this.dismissed) {
                 setTimeout(() => this.showInstallUI(), 8000);
             }
-        } else if (!this.deferredPrompt) {
-            // Fallback: show banner after 3+ visits or 15s
-            if (!this.dismissed && (visits >= 3 || visits >= 1)) {
+        } else {
+            // Android/Desktop: أظهر الزر في الهيرو بعد 5 ثواني
+            if (!this.dismissed) {
                 setTimeout(() => {
-                    if (!this.deferredPrompt && !this.dismissed) {
-                        this.showInstallUI();
+                    if (!this.isInstalled) {
+                        document.getElementById('installBtnHero')?.classList.add('show');
+                    }
+                }, 5000);
+
+                // أظهر الشريط السفلي بعد 15 ثانية لو مفيش prompt
+                setTimeout(() => {
+                    if (!this.promptReady && !this.isInstalled && !this.dismissed) {
+                        document.getElementById('installBanner')?.classList.add('show');
                     }
                 }, 15000);
             }
+        }
+
+        console.log('✅ PWAManager ready');
+    },
+
+    bindButtons() {
+        const ids = ['installBannerBtn', 'installBtnHero', 'pwaInstallBtn'];
+        ids.forEach(id => {
+            const btn = document.getElementById(id);
+            if (!btn) return;
+            const clone = btn.cloneNode(true);
+            btn.parentNode.replaceChild(clone, btn);
+            clone.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                console.log(`🖱️ Clicked: ${id}`);
+                this.triggerInstall();
+            });
+        });
+
+        const closeBtn = document.getElementById('installBannerClose');
+        if (closeBtn) {
+            const clone = closeBtn.cloneNode(true);
+            closeBtn.parentNode.replaceChild(clone, closeBtn);
+            clone.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.dismissBanner();
+            });
+        }
+
+        const cancelBtn = document.getElementById('pwaCancelBtn');
+        if (cancelBtn) {
+            const clone = cancelBtn.cloneNode(true);
+            cancelBtn.parentNode.replaceChild(clone, cancelBtn);
+            clone.addEventListener('click', (e) => {
+                e.preventDefault();
+                e.stopPropagation();
+                this.closeModal();
+            });
         }
     },
 
@@ -1945,17 +1906,13 @@ const PWAManager = {
         if (this.dismissed || this.isInstalled || this.bannerShown) return;
         this.bannerShown = true;
 
-        // Hero button
-        const heroBtn = document.getElementById('installBtnHero');
-        if (heroBtn) heroBtn.classList.add('show');
+        document.getElementById('installBtnHero')?.classList.add('show');
 
-        // Banner after 2s
         setTimeout(() => {
             if (!this.dismissed && !this.isInstalled) {
-                const banner = document.getElementById('installBanner');
-                if (banner) banner.classList.add('show');
+                document.getElementById('installBanner')?.classList.add('show');
             }
-        }, 2000);
+        }, 1500);
     },
 
     hideAllInstallUI() {
@@ -1966,38 +1923,104 @@ const PWAManager = {
     },
 
     async triggerInstall() {
+        console.log('🔧 triggerInstall — installed:', this.isInstalled, 'prompt:', !!this.deferredPrompt);
+
         if (this.isInstalled) {
             showToast('✅', 'التطبيق مثبّت', 'كيماتو موجود على جهازك بالفعل', null, null, 'info');
             return;
         }
 
-        // Native prompt (Android/Chrome/Edge Desktop)
+        if (isIOS()) {
+            this.showInstructionsModal();
+            return;
+        }
+
         if (this.deferredPrompt) {
             try {
                 this.deferredPrompt.prompt();
                 const { outcome } = await this.deferredPrompt.userChoice;
+                console.log('👤 User choice:', outcome);
+
                 if (outcome === 'accepted') {
                     this.isInstalled = true;
                     this.deferredPrompt = null;
+                    this.promptReady = false;
                     this.hideAllInstallUI();
                     showToast('🎉', 'جاري التثبيت...', 'كيماتو هيظهر على شاشتك', null, null, 'success');
                 } else {
                     this.dismissBanner();
                 }
             } catch (e) {
-                console.warn('Install prompt error:', e);
+                console.error('❌ Prompt error:', e);
                 this.showInstructionsModal();
             }
             return;
         }
 
-        // Manual instructions fallback
+        // fallback — عرض التعليمات
         this.showInstructionsModal();
     },
 
     showInstructionsModal() {
         const modal = document.getElementById('pwaInstallModal');
+        const instruction = document.getElementById('pwaIOSInstruction');
         if (!modal) return;
+
+        const ua = navigator.userAgent;
+        const isEdge = /Edg\//.test(ua);
+        const isChrome = /Chrome\//.test(ua) && !isEdge;
+        const isFirefox = /Firefox\//.test(ua);
+        const isSafari = /Safari\//.test(ua) && !/Chrome\//.test(ua) && !isEdge;
+
+        if (instruction) {
+            if (isIOS()) {
+                instruction.innerHTML = `
+                    <strong><i class="fas fa-info-circle"></i> لأجهزة iPhone/iPad (Safari):</strong>
+                    <ol>
+                        <li>اضغط على زر <span class="icon-inline"><i class="fas fa-arrow-up-from-bracket"></i> مشاركة</span> أسفل Safari</li>
+                        <li>اسحب لأسفل واختر <strong>"إضافة إلى الشاشة الرئيسية"</strong></li>
+                        <li>اضغط <strong>"إضافة"</strong> في الأعلى</li>
+                    </ol>
+                `;
+            } else if (isFirefox) {
+                instruction.innerHTML = `
+                    <strong><i class="fas fa-info-circle"></i> لمتصفح Firefox:</strong>
+                    <ol>
+                        <li>Firefox لا يدعم التثبيت المباشر حالياً</li>
+                        <li>افتح الموقع في <strong>Chrome</strong> أو <strong>Edge</strong> للحصول على زر التثبيت</li>
+                    </ol>
+                `;
+            } else if (isSafari) {
+                instruction.innerHTML = `
+                    <strong><i class="fas fa-info-circle"></i> لمتصفح Safari (Mac):</strong>
+                    <ol>
+                        <li>اضغط <strong>File</strong> في الأعلى</li>
+                        <li>اختر <strong>"Add to Dock"</strong></li>
+                        <li>أو من <strong>Share</strong> ← <strong>"Add to Home Screen"</strong></li>
+                    </ol>
+                `;
+            } else if (isChrome || isEdge) {
+                instruction.innerHTML = `
+                    <strong><i class="fas fa-info-circle"></i> لتثبيت التطبيق:</strong>
+                    <ol>
+                        <li>اضغط على أيقونة <strong><i class="fas fa-plus-square"></i> تثبيت</strong> في شريط العنوان (يمين أو يسار الشاشة)</li>
+                        <li>أو اضغط <strong>القائمة (⋮ أو ...)</strong> ← <strong>"تثبيت كيماتو"</strong></li>
+                        <li>أو اضغط <strong>Ctrl+Shift+A</strong> (في Chrome على Windows)</li>
+                    </ol>
+                    <div style="margin-top:10px;padding-top:10px;border-top:1px dashed rgba(243,156,18,0.3);font-size:0.75rem;">
+                        <i class="fas fa-lightbulb" style="color:#f39c12;"></i>
+                        <strong>ملاحظة:</strong> لو الأيقونة مش ظاهرة، جرّب تحديث الصفحة (F5) أو افتح الموقع في تاب جديد.
+                    </div>
+                `;
+            } else {
+                instruction.innerHTML = `
+                    <strong><i class="fas fa-info-circle"></i> لتثبيت التطبيق:</strong>
+                    <p>افتح قائمة المتصفح وابحث عن خيار "تثبيت التطبيق" أو "Add to Home Screen".</p>
+                `;
+            }
+            instruction.style.display = 'block';
+        }
+
         modal.classList.add('show');
         document.body.classList.add('no-scroll');
     },
@@ -2017,35 +2040,11 @@ const PWAManager = {
 };
 
 // ============================================================
-// SERVICE WORKER REGISTRATION
-// ============================================================
-const registerServiceWorker = async () => {
-    if (!('serviceWorker' in navigator)) return;
-    try {
-        const registration = await navigator.serviceWorker.register('/sw.js', { scope: '/' });
-        console.log('✅ SW registered:', registration.scope);
-
-        registration.addEventListener('updatefound', () => {
-            const newWorker = registration.installing;
-            if (!newWorker) return;
-            newWorker.addEventListener('statechange', () => {
-                if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                    showToast('🔄', 'تحديث متاح', 'اضغط هنا للتحديث', 'تحديث', 'javascript:window.location.reload()', 'info');
-                }
-            });
-        });
-    } catch (err) {
-        console.warn('SW registration failed:', err);
-    }
-};
-
-// ============================================================
 // NOTIFICATIONS MANAGER
 // ============================================================
 const NotificationsManager = {
     notifications: [],
     channel: null,
-    soundEnabled: true,
 
     init() {
         const toggle = document.getElementById('notificationBtn');
@@ -2244,7 +2243,6 @@ const NotificationsManager = {
     },
 
     playSound() {
-        if (!this.soundEnabled) return;
         try {
             const ctx = new (window.AudioContext || window.webkitAudioContext)();
             const osc = ctx.createOscillator();
@@ -2263,7 +2261,6 @@ const NotificationsManager = {
 // MESSAGES MANAGER
 // ============================================================
 const MessagesManager = {
-    conversations: [],
     channel: null,
 
     init() {
@@ -2600,7 +2597,6 @@ const NewsTicker = {
         const speed = Math.max(30, this.items.length * 12);
         this.content.style.animationDuration = `${speed}s`;
 
-        // Bind click tracking safely (no inline onclick with unescaped IDs)
         this.content.querySelectorAll('.news-item[data-news-id]').forEach(el => {
             el.addEventListener('click', () => {
                 this.trackClick(el.dataset.newsId);
@@ -2863,12 +2859,7 @@ const animateNumber = (el, target) => {
         const eased = 1 - Math.pow(1 - progress, 3);
         el.textContent = Math.floor(target * eased).toLocaleString('ar-EG');
         if (progress < 1) requestAnimationFrame(step);
-        else {
-            el.textContent = target.toLocaleString('ar-EG');
-            el.classList.remove('updated');
-            void el.offsetWidth;
-            el.classList.add('updated');
-        }
+        else el.textContent = target.toLocaleString('ar-EG');
     };
     requestAnimationFrame(step);
 };
@@ -2984,7 +2975,6 @@ const fetchSuppliersMap = async (supplierIds) => {
 // ============================================================
 const loadProducts = async ({ append = false } = {}) => {
     if (!supabase || state.loading) return;
-
     state.loading = true;
 
     const container = document.getElementById('productsList');
@@ -4231,26 +4221,11 @@ const handleUrlActions = () => {
                 else showRfqModal();
             }, 600);
             break;
-        case 'supplier':
-            setTimeout(() => { window.location.href = 'auth.html?type=supplier'; }, 300);
-            break;
-        case 'buyer':
-            setTimeout(() => { window.location.href = 'auth.html?type=buyer'; }, 300);
-            break;
-        case 'login':
-            setTimeout(() => { window.location.href = 'auth.html'; }, 300);
-            break;
-        case 'products':
-            setTimeout(() => { window.location.href = 'all-products.html'; }, 300);
-            break;
-        case 'requests':
-            setTimeout(() => { window.location.href = 'all-requests.html'; }, 300);
+        case 'install':
+            setTimeout(() => PWAManager.triggerInstall(), 800);
             break;
         case 'wishlist':
             setTimeout(() => { document.getElementById('wishlistToggle')?.click(); }, 600);
-            break;
-        case 'install':
-            setTimeout(() => PWAManager.triggerInstall(), 800);
             break;
     }
 };
@@ -4512,13 +4487,11 @@ const init = async () => {
         sessionStorage.setItem('session_id', sid);
     }
 
-    // ====== Load local state FIRST ======
     loadWishlistFromLocal();
     loadCompareList();
     loadFollowingFromLocal();
     state.searchMode = localStorage.getItem(KEYS.SEARCH_MODE) || 'name';
 
-    // ====== Init UI components ======
     initTheme();
     initNavbar();
     initKeyboardShortcuts();
@@ -4537,17 +4510,13 @@ const init = async () => {
     initScrollReveal();
     MolecularVisualizer.init();
 
-    // ====== Notifications & Messages ======
     NotificationsManager.init();
     MessagesManager.init();
 
-    // ====== Service Worker (before PWA init) ======
-    registerServiceWorker();
-
-    // ====== PWA (after SW registered) ======
+    // ⚠️ الأهم: SW أولاً ثم PWA
+    await registerServiceWorker();
     PWAManager.init();
 
-    // ====== News Ticker ======
     NewsTicker.init();
 
     updateWishlistCount();
@@ -4555,7 +4524,6 @@ const init = async () => {
 
     readURL();
 
-    // ====== Load initial data ======
     await Promise.all([
         loadStats(true).catch(e => console.warn('Stats:', e.message)),
         loadCategories().catch(e => console.warn('Categories:', e.message)),
@@ -4590,9 +4558,6 @@ const init = async () => {
     console.info('✅ كيماتو 4.0 جاهز');
 };
 
-// ============================================================
-// AUTH STATE LISTENER
-// ============================================================
 if (supabase) {
     supabase.auth.onAuthStateChange(async (event) => {
         if (event === 'SIGNED_IN' || event === 'SIGNED_OUT' || event === 'TOKEN_REFRESHED') {
@@ -4610,9 +4575,6 @@ if (document.readyState === 'loading') {
     init();
 }
 
-// ============================================================
-// GLOBAL EXPORTS
-// ============================================================
 window.PWAManager = PWAManager;
 window.NotificationsManager = NotificationsManager;
 window.MessagesManager = MessagesManager;
