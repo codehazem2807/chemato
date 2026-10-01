@@ -1,6 +1,7 @@
 {
   "rewrites": [
-    { "source": "/blog/:slug", "destination": "/api/blog-post?slug=:slug" },
+    { "source": "/chemicals/:slug", "destination": "/api/chemical-category?slug=:slug" },
+    { "source": "/blog/:slug", "destination": "/blog-post.html?slug=:slug" },
     { "source": "/sitemap.xml", "destination": "/api/sitemap" }
   ]
 }

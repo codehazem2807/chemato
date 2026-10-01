@@ -10,8 +10,8 @@
   "orientation": "portrait",
   "dir": "rtl",
   "lang": "ar-EG",
-  "theme_color": "#0a2540",
-  "background_color": "#f6f8fb",
+  "theme_color": "#172a3a",
+  "background_color": "#f4f6f8",
   "categories": ["business", "shopping", "productivity"],
   "prefer_related_applications": false,
   "icons": [

@@ -1,0 +1,1 @@
+window.CHEMATO_ONESIGNAL_APP_ID = '';

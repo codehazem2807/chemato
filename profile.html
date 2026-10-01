@@ -288,6 +288,7 @@ input,select,textarea{font-family:inherit}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
 </style>
+<link rel="stylesheet" href="/chemato-core.css?v=9" />
 </head>
 <body>
 
@@ -308,6 +309,8 @@ input,select,textarea{font-family:inherit}
 <a href="index.html"><i class="fas fa-home"></i> الرئيسية</a>
 <a href="all-products.html"><i class="fas fa-flask"></i> المنتجات</a>
 <a href="all-requests.html"><i class="fas fa-clipboard-list"></i> الطلبات</a>
+<a href="chemato-suppliers.html"><i class="fas fa-truck"></i> الموردون</a>
+<a href="blog.html"><i class="fas fa-book-open"></i> أدلة الصناعة</a>
 <a href="#" id="dashboardLink"><i class="fas fa-tachometer-alt"></i> لوحة التحكم</a>
 
 <div class="dropdown">
@@ -545,6 +548,16 @@ input,select,textarea{font-family:inherit}
 <p>تحكم في الإشعارات التي تصلك</p>
 </div>
 
+<div class="form-section push-settings">
+<div class="section-header">
+<h3><i class="fas fa-mobile-alt"></i> إشعارات هذا الجهاز</h3>
+<p id="pushStatus" role="status" aria-live="polite">جارٍ التحقق من حالة الإشعارات...</p>
+</div>
+<button type="button" class="btn btn-primary" id="pushToggleBtn">
+<i class="fas fa-bell"></i> تفعيل إشعارات هذا الجهاز
+</button>
+</div>
+
 <div style="display:flex;flex-direction:column;gap:12px;">
 <label style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--c-surface-2);border-radius:var(--r-md);border:1px solid var(--c-border);cursor:pointer;">
 <input type="checkbox" id="notifyProducts" checked style="width:20px;height:20px;accent-color:var(--c-accent);" />
@@ -573,8 +586,8 @@ input,select,textarea{font-family:inherit}
 <label style="display:flex;align-items:center;gap:12px;padding:14px;background:var(--c-surface-2);border-radius:var(--r-md);border:1px solid var(--c-border);cursor:pointer;">
 <input type="checkbox" id="notifyNews" style="width:20px;height:20px;accent-color:var(--c-accent);" />
 <div style="flex:1;">
-<div style="font-weight:700;font-size:0.9rem;">النشرة البريدية</div>
-<div style="font-size:0.78rem;color:var(--c-text-muted);">أخبار وتحديثات المنصة</div>
+<div style="font-weight:700;font-size:0.9rem;">أخبار وتحديثات المنصة</div>
+<div style="font-size:0.78rem;color:var(--c-text-muted);">إشعارات عن التحديثات المهمة على كيماتو</div>
 </div>
 </label>
 </div>
@@ -635,6 +648,8 @@ input,select,textarea{font-family:inherit}
 </div>
 </footer>
 
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 <script type="module">
 import { createClient } from 'https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm';
 
@@ -661,6 +676,7 @@ const state = {
         offers: true,
         messages: true,
         news: false,
+        pushEnabled: false,
     }
 };
 
@@ -910,6 +926,11 @@ const loadProfile = async () => {
             return;
         }
         state.user = user;
+        if (window.ChematoPush?.configured) {
+            window.ChematoPush.login(user.id).catch((error) => {
+                console.warn('Push identity linking failed:', error);
+            });
+        }
 
         const { data: profile, error } = await supabase
             .from('profiles')
@@ -1453,28 +1474,151 @@ const initDeleteAccount = () => {
 // ============================================================
 const loadNotificationPrefs = async () => {
     try {
-        const saved = localStorage.getItem(NOTIF_KEY);
-        if (saved) {
-            state.notifications = { ...state.notifications, ...JSON.parse(saved) };
+        const { data, error } = await supabase
+            .from('user_notification_preferences')
+            .select('products, offers, messages, news, push_enabled')
+            .eq('user_id', state.user.id)
+            .maybeSingle();
+        if (error) throw error;
+
+        if (data) {
+            state.notifications = {
+                products: data.products,
+                offers: data.offers,
+                messages: data.messages,
+                news: data.news,
+                pushEnabled: data.push_enabled,
+            };
+        } else {
+            const saved = localStorage.getItem(NOTIF_KEY);
+            if (saved) state.notifications = { ...state.notifications, ...JSON.parse(saved) };
         }
 
         document.getElementById('notifyProducts').checked = state.notifications.products;
         document.getElementById('notifyOffers').checked = state.notifications.offers;
         document.getElementById('notifyMessages').checked = state.notifications.messages;
         document.getElementById('notifyNews').checked = state.notifications.news;
-    } catch (e) {}
+    } catch (e) {
+        try {
+            const saved = localStorage.getItem(NOTIF_KEY);
+            if (saved) state.notifications = { ...state.notifications, ...JSON.parse(saved) };
+        } catch {}
+    }
+    await renderPushStatus();
+};
+
+const saveNotificationPrefs = async () => {
+    state.notifications = {
+        ...state.notifications,
+        products: document.getElementById('notifyProducts').checked,
+        offers: document.getElementById('notifyOffers').checked,
+        messages: document.getElementById('notifyMessages').checked,
+        news: document.getElementById('notifyNews').checked,
+    };
+    const preferences = {
+        user_id: state.user.id,
+        products: state.notifications.products,
+        offers: state.notifications.offers,
+        messages: state.notifications.messages,
+        news: state.notifications.news,
+        push_enabled: state.notifications.pushEnabled,
+        updated_at: new Date().toISOString(),
+    };
+
+    try {
+        const { error } = await supabase
+            .from('user_notification_preferences')
+            .upsert(preferences, { onConflict: 'user_id' });
+        if (error) throw error;
+        localStorage.setItem(NOTIF_KEY, JSON.stringify(state.notifications));
+        showToast('✅', 'تم الحفظ', 'تم تحديث تفضيلات الإشعارات على حسابك', 'success');
+    } catch (e) {
+        localStorage.setItem(NOTIF_KEY, JSON.stringify(state.notifications));
+        showToast('⚠️', 'حفظ محلي فقط', 'طبّق تحديث قاعدة البيانات لمزامنة التفضيلات بين أجهزتك', 'warning');
+    }
+};
+
+const renderPushStatus = async () => {
+    const statusEl = document.getElementById('pushStatus');
+    const button = document.getElementById('pushToggleBtn');
+    if (!statusEl || !button) return;
+
+    if (!window.ChematoPush?.configured) {
+        statusEl.textContent = 'إشعارات الخلفية تحتاج إعداد OneSignal على المنصة.';
+        button.disabled = true;
+        button.title = 'يلزم ضبط OneSignal App ID أولاً';
+        return;
+    }
+
+    try {
+        const status = await window.ChematoPush.status();
+        if (!status.supported) {
+            statusEl.textContent = 'المتصفح الحالي لا يدعم إشعارات الويب.';
+            button.disabled = true;
+            return;
+        }
+        button.disabled = false;
+        button.innerHTML = status.subscribed
+            ? '<i class="fas fa-bell-slash"></i> إيقاف إشعارات هذا الجهاز'
+            : '<i class="fas fa-bell"></i> تفعيل إشعارات هذا الجهاز';
+        statusEl.textContent = status.subscribed
+            ? 'الإشعارات مفعلة على هذا الجهاز.'
+            : status.permission === 'denied'
+                ? 'الإشعارات محظورة من إعدادات المتصفح. اسمح بها للموقع ثم أعد المحاولة.'
+                : 'فعّلها لتصلك عروضك ورسائلك حتى عندما لا يكون الموقع مفتوحًا.';
+    } catch (e) {
+        statusEl.textContent = 'تعذر الاتصال بخدمة الإشعارات. تحقق من إعداد OneSignal.';
+        button.disabled = true;
+    }
+};
+
+const savePushEnabled = async (enabled) => {
+    state.notifications.pushEnabled = enabled;
+    const { error } = await supabase
+        .from('user_notification_preferences')
+        .upsert({
+            user_id: state.user.id,
+            products: state.notifications.products,
+            offers: state.notifications.offers,
+            messages: state.notifications.messages,
+            news: state.notifications.news,
+            push_enabled: enabled,
+            updated_at: new Date().toISOString(),
+        }, { onConflict: 'user_id' });
+    if (error) throw error;
 };
 
 const initNotifications = () => {
-    document.getElementById('saveNotificationsBtn')?.addEventListener('click', () => {
-        state.notifications = {
-            products: document.getElementById('notifyProducts').checked,
-            offers: document.getElementById('notifyOffers').checked,
-            messages: document.getElementById('notifyMessages').checked,
-            news: document.getElementById('notifyNews').checked,
-        };
-        localStorage.setItem(NOTIF_KEY, JSON.stringify(state.notifications));
-        showToast('✅', 'تم الحفظ', 'تم تحديث إعدادات الإشعارات', 'success');
+    document.getElementById('saveNotificationsBtn')?.addEventListener('click', saveNotificationPrefs);
+    document.getElementById('pushToggleBtn')?.addEventListener('click', async (event) => {
+        const button = event.currentTarget;
+        button.disabled = true;
+        try {
+            const status = await window.ChematoPush.status();
+            if (status.subscribed) {
+                await window.ChematoPush.disable();
+                await savePushEnabled(false);
+                showToast('✅', 'تم الإيقاف', 'تم إيقاف إشعارات هذا الجهاز', 'success');
+            } else {
+                await window.ChematoPush.enable();
+                const updatedStatus = await window.ChematoPush.status();
+                if (updatedStatus.subscribed) {
+                    await savePushEnabled(true);
+                    showToast('✅', 'تم التفعيل', 'ستصلك إشعارات كيماتو على هذا الجهاز', 'success');
+                }
+            }
+        } catch (e) {
+            showToast('⚠️', 'تعذر تغيير الإعداد', 'تحقق من صلاحية الإشعارات وإعداد الخدمة', 'warning');
+        } finally {
+            await renderPushStatus();
+        }
+    });
+
+    window.addEventListener('chemato-push-permission-change', async (event) => {
+        if (event.detail?.permission) {
+            try { await savePushEnabled(true); } catch {}
+        }
+        await renderPushStatus();
     });
 };
 

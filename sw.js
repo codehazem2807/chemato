@@ -2,7 +2,7 @@
    CHEMOTO — Service Worker V5 (بسيط ومستقر)
    ============================================================ */
 
-const CACHE_VERSION = 'chemato-v5';
+const CACHE_VERSION = 'chemato-v9';
 const STATIC_CACHE = CACHE_VERSION + '-static';
 const DYNAMIC_CACHE = CACHE_VERSION + '-dynamic';
 
@@ -11,7 +11,10 @@ const PRECACHE_URLS = [
     '/',
     '/index.html',
     '/manifest.json',
-    '/logo.png'
+    '/logo.png',
+    '/chemato-core.css',
+    '/chemato-push.js',
+    '/chemato-push-config.js'
 ];
 
 // ============================================================
@@ -46,7 +49,7 @@ self.addEventListener('activate', (event) => {
         caches.keys().then((cacheNames) => {
             return Promise.all(
                 cacheNames
-                    .filter(name => !name.startsWith(CACHE_VERSION))
+                    .filter(name => name.startsWith('chemato-') && !name.startsWith(CACHE_VERSION))
                     .map(name => caches.delete(name))
             );
         }).then(() => {

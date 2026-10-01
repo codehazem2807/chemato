@@ -5,125 +5,40 @@
         xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9
                             http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd">
 
-    <!-- ============================================================
-         الصفحة الرئيسية — الأهم (Priority 1.0)
-         ============================================================ -->
     <url>
         <loc>https://chemato.vercel.app/</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>daily</changefreq>
-        <priority>1.0</priority>
-        <image:image>
-            <image:loc>https://chemato.vercel.app/og-image.png</image:loc>
-            <image:title>كيماتو — منصة الكيماويات B2B الأولى في مصر</image:title>
-        </image:image>
-    </url>
-
-    <url>
-        <loc>https://chemato.vercel.app/index.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>daily</changefreq>
         <priority>1.0</priority>
     </url>
 
-    <!-- ============================================================
-         المنتجات والطلبات — أولوية عالية (0.9)
-         ============================================================ -->
     <url>
         <loc>https://chemato.vercel.app/all-products.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
 
     <url>
         <loc>https://chemato.vercel.app/all-requests.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>daily</changefreq>
         <priority>0.9</priority>
     </url>
 
-    <!-- ============================================================
-         الموردين والبروفايلات العامة — أولوية عالية (0.8)
-         ============================================================ -->
     <url>
         <loc>https://chemato.vercel.app/chemato-suppliers.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>daily</changefreq>
         <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://chemato.vercel.app/supplier-profile.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <url>
-        <loc>https://chemato.vercel.app/buyer-requests-profile.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.8</priority>
-    </url>
-
-    <!-- ============================================================
-         صفحات مهمة — أولوية متوسطة-عالية (0.7)
-         ============================================================ -->
-    <url>
-        <loc>https://chemato.vercel.app/auth.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.7</priority>
     </url>
 
     <url>
         <loc>https://chemato.vercel.app/blog.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.7</priority>
+        <priority>0.8</priority>
     </url>
 
-    <!-- ============================================================
-         لوحات التحكم — أولوية متوسطة (0.6)
-         (noindex لكن نضعها للفهرسة الجزئية)
-         ============================================================ -->
-    <url>
-        <loc>https://chemato.vercel.app/buyer-dashboard.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>https://chemato.vercel.app/supplier-dashboard.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <url>
-        <loc>https://chemato.vercel.app/profile.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>monthly</changefreq>
-        <priority>0.6</priority>
-    </url>
-
-    <!-- ============================================================
-         صفحات التفاعل — أولوية متوسطة (0.5)
-         ============================================================ -->
-    <url>
-        <loc>https://chemato.vercel.app/messages.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
-
-    <url>
-        <loc>https://chemato.vercel.app/notifications.html</loc>
-        <lastmod>2026-01-15</lastmod>
-        <changefreq>weekly</changefreq>
-        <priority>0.5</priority>
-    </url>
+    <url><loc>https://chemato.vercel.app/chemicals/raw-materials</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/acids</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/solvents</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/cleaning-chemicals</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/polymers</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/cosmetics</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/construction-chemicals</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/paints-coatings</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/agrochemicals</loc><priority>0.8</priority></url>
+    <url><loc>https://chemato.vercel.app/chemicals/pharmaceutical-chemicals</loc><priority>0.8</priority></url>
 
 </urlset>

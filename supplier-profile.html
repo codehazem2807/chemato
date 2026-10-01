@@ -16,6 +16,7 @@
     <meta property="og:url" id="ogUrl" content="" />
     <meta property="og:image" id="ogImage" content="logo.png" />
     <meta property="og:locale" content="ar_EG" />
+    <link rel="canonical" id="canonicalUrl" href="https://chemato.vercel.app/supplier-profile.html" />
     
     <!-- ===== Twitter Cards ===== -->
     <meta name="twitter:card" content="summary_large_image" />
@@ -1738,6 +1739,7 @@
             .profile-header { background: #0c2d4a !important; -webkit-print-color-adjust: exact; print-color-adjust: exact; }
         }
     </style>
+<link rel="stylesheet" href="/chemato-core.css?v=9" />
 </head>
 <body>
 
@@ -2448,6 +2450,11 @@
         setMeta('ogUrl', window.location.href)
         setMeta('twTitle', title)
         setMeta('twDescription', description)
+        const canonicalUrl = new URL(window.location.href)
+        canonicalUrl.search = ''
+        canonicalUrl.searchParams.set('id', supplier.id)
+        const canonical = document.getElementById('canonicalUrl')
+        if (canonical) canonical.href = canonicalUrl.href
 
         if (supplier.avatar_url && /^https?:\/\//i.test(supplier.avatar_url)) {
             setMeta('ogImage', supplier.avatar_url)
@@ -2455,6 +2462,9 @@
         } else if (supplierProducts.length > 0 && supplierProducts[0].image_url) {
             setMeta('ogImage', supplierProducts[0].image_url)
             setMeta('twImage', supplierProducts[0].image_url)
+        } else {
+            setMeta('ogImage', 'https://chemato.vercel.app/logo.png')
+            setMeta('twImage', 'https://chemato.vercel.app/logo.png')
         }
     }
 

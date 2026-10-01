@@ -6,6 +6,17 @@
 <title>كيماتو | تفاصيل المنتج</title>
 <meta name="description" content="تفاصيل المنتج على كيماتو — تواصل مباشر مع المورد بدون عمولة" />
 <meta name="robots" content="index, follow" />
+<meta property="og:type" content="product" />
+<meta property="og:site_name" content="كيماتو" />
+<meta property="og:title" content="تفاصيل المنتج | كيماتو" />
+<meta property="og:description" content="تعرّف على تفاصيل المنتج وتواصل مباشرة مع المورد عبر كيماتو." />
+<meta property="og:image" content="https://chemato.vercel.app/logo.png" />
+<meta property="og:locale" content="ar_EG" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="تفاصيل المنتج | كيماتو" />
+<meta name="twitter:description" content="تعرّف على تفاصيل المنتج وتواصل مباشرة مع المورد عبر كيماتو." />
+<meta name="twitter:image" content="https://chemato.vercel.app/logo.png" />
+<link rel="canonical" id="productCanonical" href="https://chemato.vercel.app/product-details.html" />
 <link rel="icon" type="image/png" href="logo.png" />
 <meta name="theme-color" content="#0a2540" />
 <link rel="manifest" href='data:application/manifest+json,{"name":"كيماتو","short_name":"كيماتو","start_url":"/","display":"standalone","background_color":"%230a2540","theme_color":"%230a2540","lang":"ar","dir":"rtl"}' />
@@ -414,6 +425,7 @@ input,select,textarea{font-family:inherit}
 }
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
 </style>
+<link rel="stylesheet" href="/chemato-core.css?v=9" />
 </head>
 <body>
 
@@ -1066,6 +1078,53 @@ const loadProduct = async (productId) => {
     }
 };
 
+const updateProductSEO = (product) => {
+    const title = `${product.name || 'منتج كيماوي'} | كيماتو`;
+    const description = (product.description || `تفاصيل ${product.name || 'المنتج'} ومواصفاته والتواصل المباشر مع المورد عبر كيماتو.`)
+        .replace(/\s+/g, ' ').trim().slice(0, 160);
+    const canonical = `${window.location.origin}/product-details.html?id=${encodeURIComponent(state.productId)}`;
+    const image = product.image_url || (Array.isArray(product.images) ? product.images[0] : '') || `${window.location.origin}/logo.png`;
+    const absoluteImage = /^https?:\/\//i.test(image) ? image : new URL(image, window.location.origin).href;
+
+    document.title = title;
+    document.querySelector('meta[name="description"]')?.setAttribute('content', description);
+    document.querySelector('meta[property="og:title"]')?.setAttribute('content', title);
+    document.querySelector('meta[property="og:description"]')?.setAttribute('content', description);
+    document.querySelector('meta[property="og:url"]')?.setAttribute('content', canonical);
+    document.querySelector('meta[property="og:image"]')?.setAttribute('content', absoluteImage);
+    document.querySelector('meta[name="twitter:title"]')?.setAttribute('content', title);
+    document.querySelector('meta[name="twitter:description"]')?.setAttribute('content', description);
+    document.querySelector('meta[name="twitter:image"]')?.setAttribute('content', absoluteImage);
+    document.getElementById('productCanonical')?.setAttribute('href', canonical);
+
+    const structuredData = {
+        '@context': 'https://schema.org',
+        '@type': 'Product',
+        name: product.name || 'منتج كيماوي',
+        description,
+        category: product.category || 'مواد كيماوية',
+        image: absoluteImage,
+        url: canonical,
+        ...(product.cas_number ? { sku: product.cas_number } : {}),
+        ...(Number(product.price) > 0 ? {
+            offers: {
+                '@type': 'Offer',
+                price: Number(product.price),
+                priceCurrency: 'EGP',
+                url: canonical
+            }
+        } : {})
+    };
+    let schema = document.getElementById('productStructuredData');
+    if (!schema) {
+        schema = document.createElement('script');
+        schema.id = 'productStructuredData';
+        schema.type = 'application/ld+json';
+        document.head.appendChild(schema);
+    }
+    schema.textContent = JSON.stringify(structuredData).replace(/</g, '\\u003c');
+};
+
 const trackView = async (productId, supplierId) => {
     if (!productId || !isValidUUID(supplierId)) return;
     try {
@@ -1085,6 +1144,8 @@ const trackView = async (productId, supplierId) => {
 const renderProduct = () => {
     const p = state.product;
     if (!p) return;
+
+    updateProductSEO(p);
 
     // Hide skeleton, show content
     document.getElementById('productSkeleton').style.display = 'none';
@@ -1916,6 +1977,7 @@ const initTabs = () => {
 // ERROR RENDER
 // ============================================================
 const renderError = (message) => {
+    document.querySelector('meta[name="robots"]')?.setAttribute('content', 'noindex, nofollow');
     document.getElementById('productSkeleton').style.display = 'none';
     const main = document.getElementById('main');
     if (main) {

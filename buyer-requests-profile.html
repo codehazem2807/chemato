@@ -19,7 +19,7 @@
     <meta property="og:description" id="ogDescription" content="استعرض طلبات الشراء على منصة كيماتو - سوق المواد الكيماوية B2B" />
     <meta property="og:type" content="profile" />
     <meta property="og:url" id="ogUrl" content="" />
-    <meta property="og:image" id="ogImage" content="https://chemato.vercel.app/og-image.png" />
+    <meta property="og:image" id="ogImage" content="https://chemato.vercel.app/logo.png" />
     <meta property="og:image:width" content="1200" />
     <meta property="og:image:height" content="630" />
     <meta property="og:image:alt" content="كيماتو - منصة الكيماويات B2B" />
@@ -29,7 +29,7 @@
     <meta name="twitter:card" content="summary_large_image" />
     <meta name="twitter:title" id="twTitle" content="كيماتو | طلبات الشراء" />
     <meta name="twitter:description" id="twDescription" content="استعرض طلبات الشراء على منصة كيماتو" />
-    <meta name="twitter:image" id="twImage" content="https://chemato.vercel.app/og-image.png" />
+    <meta name="twitter:image" id="twImage" content="https://chemato.vercel.app/logo.png" />
     
     <link rel="canonical" id="canonicalUrl" href="" />
     
@@ -1401,6 +1401,7 @@
             .request-card { break-inside: avoid; }
         }
     </style>
+<link rel="stylesheet" href="/chemato-core.css?v=9" />
 </head>
 <body>
 
@@ -2038,7 +2039,7 @@
 
         const ogImage = buyer.avatar_url && /^https?:\/\//i.test(buyer.avatar_url)
             ? buyer.avatar_url
-            : 'https://chemato.vercel.app/og-image.png'
+            : 'https://chemato.vercel.app/logo.png'
         setMeta('ogImage', ogImage)
         setMeta('twImage', ogImage)
     }

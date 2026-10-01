@@ -8,7 +8,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="كيماتو" />
-<title>كيماتو | منصة الكيماويات B2B الأولى في مصر</title>
+<title>كيماتو | سوق B2B للمواد الكيماوية في مصر</title>
 <meta name="description" content="كيماتو - منصة B2B للمواد الكيماوية في مصر. ابحث برقم CAS، احصل على عروض أسعار متعددة، وتواصل مع موردين موثّقين." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://chemato.vercel.app/" />
@@ -22,8 +22,8 @@
 <link rel="apple-touch-icon" sizes="152x152" href="logo.png" />
 <link rel="apple-touch-icon" sizes="120x120" href="logo.png" />
 <link rel="shortcut icon" href="logo.png" />
-<meta name="theme-color" content="#0a2540" />
-<meta name="msapplication-TileColor" content="#0a2540" />
+<meta name="theme-color" content="#172a3a" />
+<meta name="msapplication-TileColor" content="#172a3a" />
 <meta name="msapplication-TileImage" content="logo.png" />
 <meta name="msapplication-tap-highlight" content="no" />
 
@@ -44,13 +44,13 @@
    CHEMOTO 4.0 — Design System
    ============================================================ */
 :root {
-    --c-primary-50:#eef6fc; --c-primary-100:#d4e7f5; --c-primary-500:#2c7ab8;
-    --c-primary-600:#1d5b8e; --c-primary-700:#144167; --c-primary-800:#0d2e4a; --c-primary-900:#0a2540;
-    --c-accent:#2ecc71; --c-accent-dark:#22a95c; --c-warning:#f39c12; --c-danger:#e74c3c;
+    --c-primary-50:#edf2f6; --c-primary-100:#dbe5ed; --c-primary-500:#496d8a;
+    --c-primary-600:#365873; --c-primary-700:#29445d; --c-primary-800:#20374b; --c-primary-900:#172a3a;
+    --c-accent:#bd5f37; --c-accent-dark:#a84d2c; --c-warning:#bd7e2f; --c-danger:#b4463d;
     --c-whatsapp:#25D366; --c-purple:#8b5cf6; --c-verified:#1e88e5;
-    --c-lab-green:#00A86B; --c-safety-orange:#FF6B35;
-    --c-bg:#f6f8fb; --c-surface:#ffffff; --c-surface-2:#f9fbfd; --c-border:#e3eaf2;
-    --c-text:#0a1f33; --c-text-muted:#5a6b7e; --c-text-sub:#8595a8;
+    --c-lab-green:#bd5f37; --c-safety-orange:#d97839;
+    --c-bg:#f4f6f8; --c-surface:#ffffff; --c-surface-2:#f7f9fb; --c-border:#dce3e9;
+    --c-text:#24313b; --c-text-muted:#586773; --c-text-sub:#84909a;
     --sh-sm:0 1px 3px rgba(10,37,64,0.06); --sh-md:0 4px 16px rgba(10,37,64,0.08);
     --sh-lg:0 12px 32px rgba(10,37,64,0.10); --sh-xl:0 20px 48px rgba(10,37,64,0.14);
     --sh-2xl:0 32px 64px rgba(10,37,64,0.18);
@@ -106,17 +106,17 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @keyframes fireFlicker{0%,100%{transform:scale(1) rotate(-5deg)}50%{transform:scale(1.15) rotate(5deg)}}
 @keyframes nodePulse{0%,100%{transform:scale(1);opacity:0.6}50%{transform:scale(1.5);opacity:1}}
 @keyframes newsTickerScroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
-@keyframes highlightPulse{0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,0.7)}50%{box-shadow:0 0 0 12px rgba(46,204,113,0)}}
+@keyframes highlightPulse{0%,100%{box-shadow:0 0 0 0 rgba(189,95,55,0.55)}50%{box-shadow:0 0 0 12px rgba(189,95,55,0)}}
 @keyframes slideInUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
 @keyframes bellRing{0%,100%{transform:rotate(0)}20%{transform:rotate(15deg)}40%{transform:rotate(-10deg)}60%{transform:rotate(5deg)}80%{transform:rotate(-5deg)}}
 @keyframes toastProgress{from{width:100%}to{width:0%}}
 @keyframes installPulse{
-    0%,100%{box-shadow:0 0 0 0 rgba(46,204,113,0.6)}
-    50%{box-shadow:0 0 0 12px rgba(46,204,113,0)}
+    0%,100%{box-shadow:0 0 0 0 rgba(189,95,55,0.45)}
+    50%{box-shadow:0 0 0 12px rgba(189,95,55,0)}
 }
 @keyframes unreadPulse{
-    0%,100%{background:rgba(46,204,113,0.08)}
-    50%{background:rgba(46,204,113,0.18)}
+    0%,100%{background:rgba(189,95,55,0.06)}
+    50%{background:rgba(189,95,55,0.14)}
 }
 
 .animate-in{animation:fadeUp 0.6s cubic-bezier(0.22,1,0.36,1) backwards}
@@ -154,11 +154,11 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     padding:0 max(12px, var(--safe-left)) 0 max(12px, var(--safe-right));
 }
 .logo a{display:flex;align-items:center;gap:8px;color:#fff;min-width:0;flex-shrink:1}
-.logo img{width:34px;height:34px;border-radius:50%;border:2px solid rgba(46,204,113,0.5);object-fit:cover;background:#fff;flex-shrink:0}
+.logo img{width:34px;height:34px;border-radius:50%;border:2px solid rgba(217,120,57,0.6);object-fit:cover;background:#fff;flex-shrink:0}
 @media (min-width:640px){.logo img{width:42px;height:42px}}
 .logo-text{font-weight:800;font-size:15px;color:#fff;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
 @media (min-width:640px){.logo-text{font-size:19px}}
-.logo-text .blue{color:#5eb8ee}
+.logo-text .blue{color:#c6d3df}
 .logo-text .gray{color:rgba(255,255,255,0.6);font-weight:400;font-size:0.85em}
 @media (max-width:400px){.logo-text .gray{display:none}}
 
@@ -171,7 +171,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 }
 @media (min-width:640px){.nav-links a,.dropdown-btn{padding:8px 16px;font-size:0.88rem;gap:6px}}
 .nav-links a:hover,.dropdown-btn:hover{background:rgba(255,255,255,0.1);color:#fff}
-.nav-links a.active{background:rgba(46,204,113,0.15);color:#5eb8ee}
+.nav-links a.active{background:rgba(217,120,57,0.18);color:#f1c7a9}
 
 .icon-btn{
     width:38px;height:38px;border-radius:50%;background:rgba(255,255,255,0.08);
@@ -217,7 +217,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 
 .install-banner{
     position:fixed;bottom:0;left:0;right:0;
-    background:linear-gradient(135deg,#0a2540,#144167);
+    background:linear-gradient(120deg,#172a3a,#29445d);
     color:#fff;padding:12px 16px;
     padding-bottom:calc(12px + var(--safe-bottom));
     z-index:9998;
@@ -272,14 +272,14 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .news-item .news-icon{font-size:0.95rem;flex-shrink:0}
 .news-item .news-badge{padding:2px 8px;border-radius:4px;font-size:0.62rem;font-weight:800;flex-shrink:0}
 .news-item.info .news-badge{background:rgba(94,184,238,0.2);color:#5eb8ee}
-.news-item.success .news-badge{background:rgba(46,204,113,0.2);color:#2ecc71}
+.news-item.success .news-badge{background:rgba(189,95,55,0.2);color:#f1c7a9}
 .news-item.warning .news-badge{background:rgba(243,156,18,0.2);color:#f39c12}
 .news-item.danger .news-badge{background:rgba(231,76,60,0.2);color:#e74c3c}
 .news-item.primary .news-badge{background:rgba(139,92,246,0.2);color:#8b5cf6}
 .news-item .news-title{color:rgba(255,255,255,0.95);font-weight:700}
 .news-item .news-desc{color:rgba(255,255,255,0.6);font-weight:500;display:none}
 @media (min-width:640px){.news-item .news-desc{display:inline}}
-.news-item .news-link{color:#5eb8ee;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:2px 6px;border-radius:4px;font-size:0.74rem}
+.news-item .news-link{color:#c6d3df;font-weight:700;text-decoration:underline;text-underline-offset:3px;padding:2px 6px;border-radius:4px;font-size:0.74rem}
 .news-item .news-link:hover{background:rgba(94,184,238,0.15)}
 .news-item .news-sep{color:rgba(255,255,255,0.15);margin:0 4px}
 .news-ticker-close{
@@ -297,48 +297,40 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.main-container{padding:20px 24px 100px}}
 
 .hero{
-    position:relative;border-radius:var(--r-xl);padding:40px 20px 32px;overflow:hidden;
-    background:
-        radial-gradient(ellipse 80% 50% at 50% -20%,rgba(46,204,113,0.25),transparent),
-        radial-gradient(ellipse 60% 50% at 80% 100%,rgba(94,184,238,0.2),transparent),
-        radial-gradient(ellipse 60% 50% at 10% 80%,rgba(139,92,246,0.15),transparent),
-        linear-gradient(135deg,#0a2540 0%,#144167 40%,#0d2e4a 100%);
-    background-size:200% 200%;animation:gradientShift 15s ease infinite;
-    color:#fff;box-shadow:var(--sh-xl);min-height:auto;
+    position:relative;border-radius:12px;padding:36px 20px 28px;overflow:hidden;
+    background:linear-gradient(115deg,#172a3a 0%,#29445d 58%,#3a5c76 100%);
+    color:#fff;box-shadow:var(--sh-lg);min-height:auto;
 }
-@media (min-width:640px){.hero{padding:56px 48px 44px;min-height:480px}}
+@media (min-width:640px){.hero{padding:54px 48px 40px;min-height:0}}
 .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(255,255,255,0.06) 1px,transparent 1px),radial-gradient(circle at 80% 60%,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:40px 40px,60px 60px;pointer-events:none}
 .hero::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");background-size:56px 100px;opacity:0.6;pointer-events:none}
 
 .molecule-visualizer{position:absolute;inset:0;pointer-events:none;z-index:1;overflow:hidden;display:none}
 @media (min-width:640px){.molecule-visualizer{display:block}}
-.molecule-node{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(46,204,113,0.6);box-shadow:0 0 20px rgba(46,204,113,0.8);animation:nodePulse 3s ease-in-out infinite}
+.molecule-node{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(217,120,57,0.65);box-shadow:0 0 16px rgba(217,120,57,0.45);animation:nodePulse 3s ease-in-out infinite}
 
 .hero-content{position:relative;z-index:2;text-align:center;max-width:960px;margin:0 auto}
-.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.3);color:#a8f0c6;padding:5px 14px;border-radius:var(--r-full);font-size:0.72rem;font-weight:700;margin-bottom:16px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.18);color:#e2eee9;padding:5px 14px;border-radius:7px;font-size:0.72rem;font-weight:700;margin-bottom:16px}
 @media (min-width:640px){.hero-badge{padding:6px 16px;font-size:0.78rem}}
-.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:#2ecc71;box-shadow:0 0 0 4px rgba(46,204,113,0.2);animation:pulse 2s ease-in-out infinite;position:relative;flex-shrink:0}
-.hero-badge .dot::before,.hero-badge .dot::after{content:'';position:absolute;inset:0;border-radius:50%;background:#2ecc71;animation:pulseRing 2s ease-out infinite}
+.hero-badge .dot{width:7px;height:7px;border-radius:50%;background:#e08a55;position:relative;flex-shrink:0}
+.hero-badge .dot::before,.hero-badge .dot::after{content:'';position:absolute;inset:0;border-radius:50%;background:#e08a55;animation:pulseRing 2s ease-out infinite}
 .hero-badge .dot::after{animation-delay:1s}
 
-.hero h1{font-size:clamp(1.5rem,6vw,3rem);font-weight:900;line-height:1.15;margin-bottom:12px;letter-spacing:-0.5px}
-.hero h1 .highlight{background:linear-gradient(135deg,#5eb8ee 0%,#2ecc71 50%,#5eb8ee 100%);background-size:200% auto;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;animation:shine 3s linear infinite}
-.hero p.subtitle{font-size:clamp(0.88rem,3vw,1.1rem);color:rgba(255,255,255,0.8);max-width:640px;margin:0 auto 24px;line-height:1.65}
+.hero h1{font-size:clamp(1.6rem,6vw,2.8rem);font-weight:900;line-height:1.35;margin-bottom:12px;letter-spacing:0}
+.hero h1 .highlight{color:#f1c7a9}
+.hero p.subtitle{font-size:0.98rem;color:rgba(255,255,255,0.86);max-width:700px;margin:0 auto 22px;line-height:1.85}
 
-.stats-wrapper{margin:0 auto 24px;max-width:900px;border-radius:var(--r-lg);padding:2px;background:linear-gradient(135deg,rgba(94,184,238,0.4),rgba(46,204,113,0.3));position:relative;overflow:hidden}
-.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:2px;padding:12px 10px;background:rgba(10,37,64,0.65);backdrop-filter:blur(20px);border-radius:calc(var(--r-lg) - 2px);position:relative}
-@media (min-width:640px){.stats{grid-template-columns:repeat(5,1fr);gap:4px;padding:18px 20px}}
+.stats-wrapper{margin:0 auto 24px;max-width:900px;border-radius:var(--r-lg);padding:2px;background:linear-gradient(135deg,rgba(73,109,138,0.55),rgba(217,120,57,0.4));position:relative;overflow:hidden}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;padding:10px 6px;background:rgba(10,37,64,0.3);border-radius:8px;position:relative}
+@media (min-width:640px){.stats{gap:4px;padding:14px 20px}}
 .stat-item{text-align:center;padding:6px 4px;transition:transform 0.3s ease;position:relative}
 @media (min-width:640px){.stat-item{border-left:1px solid rgba(255,255,255,0.08)}}
-@media (max-width:639px){
-    .stat-item:nth-child(even){border-right:1px solid rgba(255,255,255,0.08)}
-    .stat-item:nth-child(n+3){border-top:1px solid rgba(255,255,255,0.08);padding-top:12px}
-}
+@media (max-width:639px){.stat-item:not(:last-child){border-left:1px solid rgba(255,255,255,0.12)}}
 @media (min-width:640px){.stat-item:first-child{border-left:none}}
 .stat-item:hover{transform:translateY(-3px)}
-.stat-icon{display:block;font-size:1rem;margin-bottom:3px;opacity:0.9}
+.stat-icon{display:block;font-size:0.95rem;margin-bottom:3px;opacity:0.9}
 @media (min-width:640px){.stat-icon{font-size:1.15rem;margin-bottom:4px}}
-.stat-number{display:block;font-size:clamp(1.05rem,4vw,1.7rem);font-weight:900;line-height:1.15;background:linear-gradient(135deg,#ffffff,#a8f0c6);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-variant-numeric:tabular-nums}
+.stat-number{display:block;font-size:clamp(1.05rem,4vw,1.7rem);font-weight:900;line-height:1.15;background:linear-gradient(135deg,#ffffff,#f1c7a9);-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;font-variant-numeric:tabular-nums}
 .stat-label{display:block;font-size:0.6rem;color:rgba(255,255,255,0.7);font-weight:500;margin-top:2px}
 @media (min-width:640px){.stat-label{font-size:0.68rem}}
 
@@ -352,12 +344,12 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .btn::before{content:'';position:absolute;inset:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.2),transparent);transform:translateX(-100%);transition:transform 0.6s ease;z-index:-1}
 .btn:hover::before{transform:translateX(100%)}
 .btn:active{transform:scale(0.96)}
-.btn-primary{background:linear-gradient(135deg,#2ecc71,#22a95c);color:#fff;box-shadow:0 8px 24px rgba(46,204,113,0.3)}
-.btn-primary:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(46,204,113,0.45)}
+.btn-primary{background:linear-gradient(120deg,#bd5f37,#a84d2c);color:#fff;box-shadow:0 6px 18px rgba(189,95,55,0.24)}
+.btn-primary:hover{transform:translateY(-2px);box-shadow:0 10px 24px rgba(189,95,55,0.34)}
 .btn-outline{background:rgba(255,255,255,0.05);border-color:rgba(255,255,255,0.25);color:#fff}
 .btn-outline:hover{background:rgba(255,255,255,0.12);border-color:rgba(255,255,255,0.5);transform:translateY(-2px)}
 
-.welcome-msg{margin-top:12px;padding:8px 18px;background:rgba(46,204,113,0.15);border:1px solid rgba(46,204,113,0.3);border-radius:var(--r-full);display:inline-block;font-weight:600;font-size:0.82rem;color:#a8f0c6}
+.welcome-msg{margin-top:12px;padding:8px 18px;background:rgba(189,95,55,0.14);border:1px solid rgba(189,95,55,0.3);border-radius:var(--r-full);display:inline-block;font-weight:600;font-size:0.82rem;color:#f1c7a9}
 @media (min-width:640px){.welcome-msg{padding:10px 22px;font-size:0.9rem}}
 
 .share-buttons{margin-top:12px;display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
@@ -366,15 +358,15 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .share-btn:hover{background:rgba(255,255,255,0.14);color:#fff}
 
 .install-btn-hero{
-    background:linear-gradient(135deg,rgba(46,204,113,0.25),rgba(94,184,238,0.25));
-    border:1.5px solid rgba(46,204,113,0.5);color:#fff;
+    background:linear-gradient(135deg,rgba(217,120,57,0.24),rgba(73,109,138,0.22));
+    border:1.5px solid rgba(217,120,57,0.48);color:#fff;
     padding:7px 16px;border-radius:var(--r-full);font-size:0.8rem;font-weight:800;
     display:none;align-items:center;gap:6px;transition:all var(--t-fast);
     animation:installPulse 2s ease-in-out infinite;
     min-height:38px;cursor:pointer;
 }
 .install-btn-hero.show{display:inline-flex}
-.install-btn-hero:hover{background:rgba(46,204,113,0.4);transform:translateY(-2px)}
+.install-btn-hero:hover{background:rgba(217,120,57,0.35);transform:translateY(-2px)}
 .install-btn-hero i{animation:pulse 2s ease-in-out infinite}
 
 .search-container{position:relative;max-width:900px;margin:-20px auto 24px;z-index:50;padding:0 4px}
@@ -384,12 +376,12 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.search-mode-btn{padding:6px 16px;font-size:0.78rem;gap:6px}}
 [data-theme="dark"] .search-mode-btn{background:rgba(16,30,46,0.7);border-color:rgba(255,255,255,0.1)}
 .search-mode-btn:hover{color:var(--c-primary-600);border-color:var(--c-primary-500)}
-.search-mode-btn.active{background:#fff;color:var(--c-primary-700);border-color:var(--c-accent);box-shadow:0 4px 12px rgba(46,204,113,0.25)}
+.search-mode-btn.active{background:#fff;color:var(--c-primary-700);border-color:var(--c-accent);box-shadow:0 4px 12px rgba(189,95,55,0.18)}
 [data-theme="dark"] .search-mode-btn.active{background:var(--c-primary-700);color:#fff}
 
 .search-wrapper{background:var(--c-surface);border-radius:var(--r-full);padding:5px;display:flex;gap:6px;box-shadow:var(--sh-lg);border:2px solid transparent;transition:all var(--t-base)}
 @media (max-width:639px){.search-wrapper{flex-wrap:wrap;border-radius:var(--r-lg);padding:6px}}
-.search-wrapper:focus-within{border-color:var(--c-primary-500);box-shadow:0 20px 60px rgba(44,122,184,0.2),0 0 0 3px rgba(46,204,113,0.15);transform:translateY(-2px)}
+.search-wrapper:focus-within{border-color:var(--c-primary-500);box-shadow:0 12px 32px rgba(41,68,93,0.16),0 0 0 3px rgba(189,95,55,0.12);transform:translateY(-2px)}
 .search-icon{padding:0 8px 0 16px;color:var(--c-text-sub);font-size:0.95rem;align-self:center;flex-shrink:0;display:none}
 @media (min-width:640px){.search-icon{padding:0 8px 0 20px;font-size:1rem;display:block}}
 .search-wrapper input{flex:1;padding:12px 16px;border:none;background:transparent;font-size:0.95rem;color:var(--c-text);outline:none;min-width:0;width:100%}
@@ -499,7 +491,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .card-specs{display:flex;flex-wrap:wrap;gap:5px;margin:2px 0 4px}
 .spec-tag{display:inline-flex;align-items:center;gap:3px;padding:3px 8px;border-radius:var(--r-sm);font-size:0.65rem;font-weight:700;background:var(--c-surface-2);color:var(--c-text-muted);border:1px solid var(--c-border);line-height:1.2}
 .spec-tag.cas{background:rgba(139,92,246,0.08);color:var(--c-purple);border-color:rgba(139,92,246,0.2);font-family:monospace;direction:ltr}
-.spec-tag.purity{background:rgba(46,204,113,0.08);color:var(--c-accent-dark);border-color:rgba(46,204,113,0.2)}
+.spec-tag.purity{background:rgba(189,95,55,0.08);color:var(--c-accent-dark);border-color:rgba(189,95,55,0.2)}
 .spec-tag.grade{background:rgba(44,122,184,0.08);color:var(--c-primary-600);border-color:rgba(44,122,184,0.2)}
 
 .msds-indicator{display:inline-flex;align-items:center;gap:3px;font-size:0.63rem;font-weight:700;color:var(--c-primary-600);background:var(--c-primary-50);padding:2px 8px;border-radius:var(--r-full);align-self:flex-start}
@@ -565,6 +557,18 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .category-card .cat-name{font-size:0.78rem;font-weight:700;color:var(--c-text);line-height:1.3}
 @media (min-width:640px){.category-card .cat-name{font-size:0.82rem}}
 .category-card .cat-count{font-size:0.68rem;color:var(--c-text-sub);margin-top:3px}
+
+.procurement-guide{margin:44px 0 12px;padding:28px 0;border-top:1px solid var(--c-border);border-bottom:1px solid var(--c-border)}
+.procurement-guide-header{max-width:760px;margin-bottom:20px}
+.procurement-guide-header p{color:var(--c-text-muted);line-height:1.8}
+.procurement-guide-grid{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:12px}
+.procurement-guide-item{padding:18px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:8px}
+.procurement-guide-item .step{color:var(--c-accent-dark);font-size:0.78rem;font-weight:800;margin-bottom:8px}
+.procurement-guide-item h3{font-size:0.96rem;margin:0 0 8px;color:var(--c-text)}
+.procurement-guide-item p{font-size:0.85rem;line-height:1.75;color:var(--c-text-muted);margin:0}
+.procurement-guide-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
+.procurement-guide-links a{color:var(--c-primary-700);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+@media(max-width:700px){.procurement-guide-grid{grid-template-columns:1fr}.procurement-guide-item{padding:15px}}
 
 .recently-viewed{display:flex;gap:10px;overflow-x:auto;padding:8px 4px 16px;scrollbar-width:thin;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .recently-viewed::-webkit-scrollbar{height:6px}
@@ -676,7 +680,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .form-actions{grid-column:1/-1;display:flex;gap:10px;justify-content:flex-end;margin-top:8px;flex-wrap:wrap}
 @media (max-width:480px){.form-actions{flex-direction:column-reverse}.form-actions button{width:100%}}
 .btn-cancel{background:var(--c-surface-2);color:var(--c-text-muted);border:1px solid var(--c-border);padding:12px 22px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem;cursor:pointer}
-.btn-submit{background:linear-gradient(135deg,var(--c-accent),var(--c-accent-dark));color:#fff;box-shadow:0 4px 12px rgba(46,204,113,0.3);padding:12px 22px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
+.btn-submit{background:linear-gradient(120deg,var(--c-accent),var(--c-accent-dark));color:#fff;box-shadow:0 4px 12px rgba(189,95,55,0.24);padding:12px 22px;border-radius:var(--r-full);font-weight:700;font-size:0.85rem;display:inline-flex;align-items:center;gap:6px;cursor:pointer}
 .rfq-login-notice{background:linear-gradient(135deg,rgba(243,156,18,0.1),rgba(230,126,34,0.05));border:1.5px solid rgba(243,156,18,0.3);border-radius:var(--r-md);padding:12px 14px;margin-bottom:16px;display:flex;align-items:flex-start;gap:10px;font-size:0.82rem;color:var(--c-text)}
 .rfq-login-notice i{color:var(--c-warning);font-size:1.1rem;flex-shrink:0;margin-top:2px}
 .rfq-login-notice a{color:var(--c-primary-600);font-weight:700;text-decoration:underline}
@@ -726,13 +730,13 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 }
 .notification-item:hover{background:var(--c-surface-2)}
 .notification-item.unread{
-    background:linear-gradient(90deg,rgba(46,204,113,0.08),transparent);
+    background:linear-gradient(90deg,rgba(189,95,55,0.08),transparent);
     animation:unreadPulse 3s ease-in-out infinite;
 }
 .notification-item.unread::after{
     content:'';position:absolute;top:50%;left:10px;
     transform:translateY(-50%);width:8px;height:8px;border-radius:50%;
-    background:var(--c-accent);box-shadow:0 0 8px rgba(46,204,113,0.6);
+    background:var(--c-accent);box-shadow:0 0 8px rgba(189,95,55,0.45);
 }
 .notification-icon{
     width:42px;height:42px;border-radius:12px;
@@ -740,11 +744,11 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     font-size:1.05rem;flex-shrink:0;
     position:relative;
 }
-.notification-icon.price-drop{background:rgba(0,168,107,0.1);color:var(--c-lab-green)}
+.notification-icon.price-drop{background:rgba(189,95,55,0.1);color:var(--c-accent-dark)}
 .notification-icon.new-quote{background:rgba(44,122,184,0.1);color:var(--c-primary-600)}
 .notification-icon.stock-alert{background:rgba(255,107,53,0.1);color:var(--c-safety-orange)}
 .notification-icon.new-message{background:rgba(139,92,246,0.1);color:var(--c-purple)}
-.notification-icon.new-product{background:rgba(46,204,113,0.1);color:var(--c-accent)}
+.notification-icon.new-product{background:rgba(189,95,55,0.1);color:var(--c-accent-dark)}
 .notification-icon.default{background:var(--c-surface-2);color:var(--c-text-muted)}
 
 .notification-body{flex:1;min-width:0}
@@ -803,7 +807,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     transition:background 0.2s;cursor:pointer;min-width:0;text-decoration:none;color:inherit;
 }
 .message-preview:hover{background:var(--c-surface-2)}
-.message-preview.unread{background:linear-gradient(90deg,rgba(46,204,113,0.06),transparent)}
+.message-preview.unread{background:linear-gradient(90deg,rgba(189,95,55,0.06),transparent)}
 .message-avatar{
     width:42px;height:42px;border-radius:50%;
     background:linear-gradient(135deg,var(--c-primary-600),var(--c-primary-900));
@@ -813,7 +817,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 }
 .message-avatar .online-dot{
     position:absolute;bottom:0;right:0;width:12px;height:12px;
-    background:#2ecc71;border-radius:50%;border:2px solid var(--c-surface);
+    background:#d97839;border-radius:50%;border:2px solid var(--c-surface);
 }
 .message-avatar img{width:100%;height:100%;object-fit:cover;border-radius:50%}
 .message-content{flex:1;min-width:0}
@@ -938,7 +942,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 }
 .pwa-feature i{
     width:28px;height:28px;border-radius:50%;
-    background:rgba(46,204,113,0.1);color:var(--c-accent);
+    background:rgba(189,95,55,0.1);color:var(--c-accent-dark);
     display:flex;align-items:center;justify-content:center;
     font-size:0.8rem;flex-shrink:0;
 }
@@ -950,10 +954,10 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
     background:linear-gradient(135deg,var(--c-accent),var(--c-accent-dark));
     color:#fff;font-weight:800;font-size:0.9rem;
     display:inline-flex;align-items:center;justify-content:center;gap:8px;
-    transition:all var(--t-base);box-shadow:0 8px 24px rgba(46,204,113,0.35);
+    transition:all var(--t-base);box-shadow:0 8px 24px rgba(189,95,55,0.24);
     min-height:48px;cursor:pointer;
 }
-.pwa-btn-install:hover{transform:translateY(-2px);box-shadow:0 12px 32px rgba(46,204,113,0.45)}
+.pwa-btn-install:hover{transform:translateY(-2px);box-shadow:0 12px 28px rgba(189,95,55,0.32)}
 .pwa-btn-cancel{
     flex:1;padding:14px 20px;border-radius:var(--r-full);
     background:var(--c-surface-2);color:var(--c-text-muted);
@@ -1018,6 +1022,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 
 @media (prefers-reduced-motion:reduce){*,*::before,*::after{animation-duration:0.01ms !important;animation-iteration-count:1 !important;transition-duration:0.01ms !important}}
 </style>
+<link rel="stylesheet" href="/chemato-core.css?v=9" />
 </head>
 <body>
 
@@ -1104,62 +1109,49 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 <div class="hero-content">
 <div class="hero-badge">
 <span class="dot"></span>
-<span>المنصة رقم 1 للكيماويات في مصر • B2B</span>
+<span>سوق توريد بين الشركات • مصر</span>
 </div>
 
 <h1 id="heroTitle">
-🏭 <span class="highlight">منصة الكيماويات</span><br>الاحترافية في مصر
+<span class="highlight">توريد المواد الكيميائية</span><br>بمواصفات أوضح في مصر
 </h1>
 
 <p class="subtitle">
-ابحث برقم CAS أو بالاسم، احصل على <strong>عروض أسعار من موردين متعددين</strong>، وتواصل مباشرة مع موردين موثّقين
+ابحث بالاسم أو رقم CAS أو الصيغة، قارن بيانات المنتجات، وأرسل طلب شراء يصل إلى الموردين المناسبين.
 </p>
 
 <div class="stats-wrapper">
 <div class="stats" id="statsContainer" role="list">
 <div class="stat-item">
 <span class="stat-icon">📦</span>
-<span class="stat-number" id="totalProducts">0</span>
+<span class="stat-number" id="totalProducts">—</span>
 <span class="stat-label">منتج</span>
 </div>
 <div class="stat-item">
 <span class="stat-icon">📋</span>
-<span class="stat-number" id="totalRequests">0</span>
+<span class="stat-number" id="totalRequests">—</span>
 <span class="stat-label">طلب شراء</span>
 </div>
 <div class="stat-item">
 <span class="stat-icon">🚛</span>
-<span class="stat-number" id="totalSuppliers">0</span>
+<span class="stat-number" id="totalSuppliers">—</span>
 <span class="stat-label">مورد</span>
-</div>
-<div class="stat-item">
-<span class="stat-icon">👁️</span>
-<span class="stat-number" id="totalViews">0</span>
-<span class="stat-label">مشاهدة</span>
-</div>
-<div class="stat-item">
-<span class="stat-icon">💬</span>
-<span class="stat-number" id="totalContacts">0</span>
-<span class="stat-label">تواصل</span>
 </div>
 </div>
 </div>
 
 <div class="hero-buttons" id="heroButtons">
-<a href="auth.html?type=supplier" class="btn btn-primary" id="supplierBtn">
-<i class="fas fa-truck"></i> انضم كمورد
+<a href="auth.html?type=buyer" class="btn btn-primary" id="buyerBtn">
+<i class="fas fa-search"></i> ابدأ كمشتري
 </a>
-<a href="auth.html?type=buyer" class="btn btn-outline" id="buyerBtn">
-<i class="fas fa-user-plus"></i> انضم كمشتري
+<a href="auth.html?type=supplier" class="btn btn-outline" id="supplierBtn">
+<i class="fas fa-truck"></i> اعرض منتجاتك كمورد
 </a>
 </div>
 
 <div id="welcomeContainer"></div>
 
 <div class="share-buttons">
-<button class="share-btn" id="shareBtn" type="button">
-<i class="fas fa-share-alt"></i> مشاركة
-</button>
 <button class="install-btn-hero" id="installBtnHero" type="button">
 <i class="fas fa-download"></i> تثبيت التطبيق
 </button>
@@ -1192,12 +1184,49 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <button id="searchBtn" class="search-btn" type="button">
 <i class="fas fa-search" aria-hidden="true"></i> بحث
 </button>
-<button id="aiSearchBtn" class="ai-btn" type="button" title="بحث ذكي">
-<i class="fas fa-robot"></i> AI
-</button>
 </div>
 <div class="suggestions-box" id="suggestionsBox" role="listbox"></div>
 </div>
+
+<!-- CATEGORIES -->
+<section aria-labelledby="categoriesTitle" class="category-section">
+<div class="section-header">
+<h2 id="categoriesTitle"><i class="fas fa-th-large"></i> الفئات الرئيسية</h2>
+<a href="all-products.html" class="view-all">عرض كل المنتجات <i class="fas fa-arrow-left"></i></a>
+</div>
+<div class="category-grid" id="categoryGrid">
+<a class="category-card" href="/chemicals/raw-materials" aria-label="تصفح الخامات الكيميائية">
+<span class="cat-icon">🧪</span><span class="cat-name">خامات كيماوية</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/acids" aria-label="تصفح الأحماض الكيميائية">
+<span class="cat-icon">⚗️</span><span class="cat-name">أحماض</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/solvents" aria-label="تصفح المذيبات الكيميائية">
+<span class="cat-icon">🧴</span><span class="cat-name">مذيبات</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/cleaning-chemicals" aria-label="تصفح مواد التنظيف">
+<span class="cat-icon">🧼</span><span class="cat-name">منظفات</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/polymers" aria-label="تصفح البوليمرات">
+<span class="cat-icon">🧬</span><span class="cat-name">بوليمرات</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/cosmetics" aria-label="تصفح خامات مستحضرات التجميل">
+<span class="cat-icon">🧴</span><span class="cat-name">مستحضرات تجميل</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/construction-chemicals" aria-label="تصفح كيماويات البناء">
+<span class="cat-icon">🏗️</span><span class="cat-name">مواد بناء</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/paints-coatings" aria-label="تصفح الدهانات والطلاءات">
+<span class="cat-icon">🎨</span><span class="cat-name">دهانات</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/agrochemicals" aria-label="تصفح الكيماويات الزراعية">
+<span class="cat-icon">🌱</span><span class="cat-name">أدوية زراعية</span><span class="cat-count">تصفح المواد</span>
+</a>
+<a class="category-card" href="/chemicals/pharmaceutical-chemicals" aria-label="تصفح المواد الكيميائية الدوائية">
+<span class="cat-icon">🧫</span><span class="cat-name">أدوية ومواد دوائية</span><span class="cat-count">تصفح المواد</span>
+</a>
+</div>
+</section>
 
 <!-- FILTERS -->
 <div class="filters-wrapper animate-in" style="animation-delay:0.15s;">
@@ -1257,15 +1286,6 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <option value="out">غير متوفر</option>
 </select>
 </div>
-
-<!-- CATEGORIES -->
-<section aria-labelledby="categoriesTitle" class="reveal">
-<div class="section-header">
-<h2 id="categoriesTitle"><i class="fas fa-th-large"></i> الفئات الرئيسية</h2>
-<a href="all-products.html" class="view-all">عرض الكل <i class="fas fa-arrow-left"></i></a>
-</div>
-<div class="category-grid" id="categoryGrid"></div>
-</section>
 
 <!-- RECENTLY VIEWED -->
 <section id="recentlyViewedSection" style="display:none;" class="reveal">
@@ -1331,6 +1351,36 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 </div>
 </section>
 
+<section class="procurement-guide" aria-labelledby="procurementGuideTitle">
+<div class="procurement-guide-header">
+<p class="eyebrow" style="color:var(--c-accent-dark);">دليل شراء للشركات</p>
+<h2 id="procurementGuideTitle">قرار توريد كيميائي مبني على مواصفة، لا على اسم فقط</h2>
+<p>استخدم بيانات المنتج واطلب المعلومات الناقصة قبل اعتماد المورد. اختلاف التركيز أو الدرجة أو العبوة قد يغيّر ملاءمة المادة وسعرها.</p>
+</div>
+<div class="procurement-guide-grid">
+<article class="procurement-guide-item">
+<p class="step">01 · حدّد المادة</p>
+<h3>ابدأ بالاسم ورقم CAS</h3>
+<p>أضف الصيغة أو رقم CAS والدرجة والنقاء المطلوب لتقليل الالتباس بين الأسماء التجارية والمواد المتشابهة.</p>
+</article>
+<article class="procurement-guide-item">
+<p class="step">02 · قارن العرض كاملًا</p>
+<h3>السعر جزء من القرار</h3>
+<p>قارن الكمية والعبوة والحد الأدنى للطلب ومكان التسليم ومدة التوريد وشروط الدفع، بجانب المواصفات الفنية.</p>
+</article>
+<article class="procurement-guide-item">
+<p class="step">03 · راجع المستندات</p>
+<h3>اطلب SDS وCOA عند الحاجة</h3>
+<p>تحقق من صحيفة بيانات السلامة وشهادة التحليل والمستندات التنظيمية المناسبة لاستخدام منشأتك قبل الشراء.</p>
+</article>
+</div>
+<div class="procurement-guide-links" aria-label="روابط سوق كيماتو">
+<a href="all-products.html">تصفح المنتجات الكيميائية</a>
+<a href="all-requests.html">راجع طلبات الشراء المفتوحة</a>
+<a href="blog.html">اقرأ أدلة المواد والصناعة</a>
+</div>
+</section>
+
 </main>
 
 <!-- NOTIFICATION PANEL -->
@@ -1377,7 +1427,7 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 ثبّت كيماتو على جهازك
 <span class="new-badge">جديد</span>
 </div>
-<div class="install-banner-desc">تطبيق أسرع + إشعارات فورية + يعمل بدون إنترنت</div>
+<div class="install-banner-desc">اختصار سريع إلى كيماتو من الشاشة الرئيسية</div>
 </div>
 <div class="install-banner-actions">
 <button class="install-banner-btn" id="installBannerBtn" type="button">
@@ -1396,14 +1446,12 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <img src="logo.png" alt="كيماتو" onerror="this.style.display='none'" />
 </div>
 <h3 class="pwa-install-title">ثبّت كيماتو على جهازك</h3>
-<p class="pwa-install-subtitle">تجربة تطبيق كامل - بدون متجر، بدون تحميل ملفات كبيرة</p>
+<p class="pwa-install-subtitle">أضف اختصارًا سريعًا لكيماتو على الشاشة الرئيسية.</p>
 
 <div class="pwa-install-features">
-<div class="pwa-feature"><i class="fas fa-bolt"></i><span>يفتح أسرع 3 مرات</span></div>
-<div class="pwa-feature"><i class="fas fa-bell"></i><span>إشعارات فورية بالعروض الجديدة</span></div>
-<div class="pwa-feature"><i class="fas fa-wifi"></i><span>يعمل بدون إنترنت</span></div>
-<div class="pwa-feature"><i class="fas fa-mobile-alt"></i><span>يظهر كأيقونة على شاشتك الرئيسية</span></div>
-<div class="pwa-feature"><i class="fas fa-shield-alt"></i><span>آمن تماماً - لا يحتاج صلاحيات</span></div>
+<div class="pwa-feature"><i class="fas fa-mobile-alt"></i><span>اختصار للموقع على الشاشة الرئيسية</span></div>
+<div class="pwa-feature"><i class="fas fa-globe"></i><span>يفتح مباشرة في المتصفح</span></div>
+<div class="pwa-feature"><i class="fas fa-store"></i><span>لا يحتاج إلى متجر تطبيقات</span></div>
 </div>
 
 <div class="pwa-instruction" id="pwaIOSInstruction" style="display:none;"></div>
@@ -2526,7 +2574,10 @@ const NewsTicker = {
                 .limit(20);
 
             if (error) throw error;
-            this.items = data || [];
+            const promotionalContent = /(wa\.me|whatsapp|واتساب|(?:\+?20)?0?1[0125]\d{8}|مجاني|مجاناً|مجانًا|لحظة\s*بلحظة|آلاف\s+المشترين|تم\s+تطوير\s+هذا\s+الموقع)/i;
+            this.items = (data || []).filter(item => !promotionalContent.test([
+                item.title, item.description, item.link_url, item.link_text
+            ].filter(Boolean).join(' ')));
 
             if (!this.items.length) {
                 this.ticker.classList.remove('show');
@@ -2875,17 +2926,17 @@ const loadStats = async (force = false) => {
             supabase.from('profiles').select('*', { count: 'exact', head: true }).eq('user_type', 'supplier'),
         ]);
 
-        const { data: viewsData } = await supabase.from('products').select('views, views_count').eq('status', 'active');
+        const { data: viewsData, error: viewsError } = await supabase.from('products').select('views, views_count').eq('status', 'active');
         const totalViews = (viewsData || []).reduce((sum, p) => sum + (Number(p.views_count) || 0) + (Number(p.views) || 0), 0);
 
-        const { count: contactsCount } = await supabase.from('supplier_contacts').select('*', { count: 'exact', head: true });
+        const { count: contactsCount, error: contactsError } = await supabase.from('supplier_contacts').select('*', { count: 'exact', head: true });
 
         const data = {
-            total_products: prodResult.count || 0,
-            total_requests: reqResult.count || 0,
-            total_suppliers: supResult.count || 0,
-            total_views: totalViews,
-            total_contacts: contactsCount || 0,
+            total_products: prodResult.error ? null : prodResult.count ?? 0,
+            total_requests: reqResult.error ? null : reqResult.count ?? 0,
+            total_suppliers: supResult.error ? null : supResult.count ?? 0,
+            total_views: viewsError ? null : totalViews,
+            total_contacts: contactsError ? null : contactsCount ?? 0,
         };
 
         state.statsCache = { data, timestamp: now };
@@ -2896,11 +2947,22 @@ const loadStats = async (force = false) => {
 };
 
 const applyStats = (data) => {
-    animateNumber(document.getElementById('totalProducts'), data.total_products || 0);
-    animateNumber(document.getElementById('totalRequests'), data.total_requests || 0);
-    animateNumber(document.getElementById('totalSuppliers'), data.total_suppliers || 0);
-    animateNumber(document.getElementById('totalViews'), data.total_views || 0);
-    animateNumber(document.getElementById('totalContacts'), data.total_contacts || 0);
+    const statValues = [
+        ['totalProducts', data.total_products],
+        ['totalRequests', data.total_requests],
+        ['totalSuppliers', data.total_suppliers],
+        ['totalViews', data.total_views],
+        ['totalContacts', data.total_contacts],
+    ];
+    statValues.forEach(([id, value]) => {
+        const element = document.getElementById(id);
+        if (!element) return;
+        if (value === null || value === undefined || !Number.isFinite(Number(value))) {
+            element.textContent = '—';
+            return;
+        }
+        animateNumber(element, Number(value));
+    });
 };
 
 // ============================================================
@@ -3757,7 +3819,7 @@ const loadLiveRfqs = async () => {
                     <h3 style="font-size:1rem;font-weight:800;margin-bottom:10px;color:var(--c-text);word-break:break-word;">${escapeHtml(rfq.product_name)}</h3>
                     <div style="display:grid;grid-template-columns:1fr 1fr;gap:8px;font-size:0.8rem;">
                         <div><div style="color:var(--c-text-sub);font-size:0.7rem;">الكمية</div><div style="font-weight:700;">${escapeHtml(rfq.quantity_needed || '—')}</div></div>
-                        <div><div style="color:var(--c-text-sub);font-size:0.7rem;">الميزانية</div><div style="font-weight:700;color:#00A86B;">${budget}</div></div>
+                        <div><div style="color:var(--c-text-sub);font-size:0.7rem;">الميزانية</div><div style="font-weight:700;color:var(--c-accent-dark);">${budget}</div></div>
                     </div>
                     <div style="margin-top:12px;padding-top:12px;border-top:1px solid var(--c-border);display:flex;align-items:center;gap:6px;font-size:0.78rem;color:var(--c-text-muted);">
                         <i class="fas fa-user-circle"></i><span>${escapeHtml(buyerName)}</span>
@@ -3963,6 +4025,28 @@ const initSearch = () => {
 // ============================================================
 // CATEGORIES
 // ============================================================
+const CATEGORY_LANDING_SLUGS = new Map([
+    ['خامات كيماوية', 'raw-materials'],
+    ['أحماض', 'acids'],
+    ['مذيبات', 'solvents'],
+    ['منظفات', 'cleaning-chemicals'],
+    ['بوليمرات', 'polymers'],
+    ['مستحضرات تجميل', 'cosmetics'],
+    ['مواد بناء', 'construction-chemicals'],
+    ['دهانات', 'paints-coatings'],
+    ['ادوية زراعيه', 'agrochemicals'],
+    ['أدوية زراعية', 'agrochemicals'],
+    ['ادوية', 'pharmaceutical-chemicals'],
+    ['أدوية', 'pharmaceutical-chemicals'],
+]);
+
+const getCategoryHref = (category) => {
+    const slug = CATEGORY_LANDING_SLUGS.get(String(category.name || '').trim());
+    return slug
+        ? `/chemicals/${slug}`
+        : `all-products.html?category=${encodeURIComponent(category.id)}`;
+};
+
 const loadCategories = async () => {
     if (!supabase) return;
     try {
@@ -4033,20 +4117,24 @@ const renderCategoryGrid = async () => {
 
     if (!categories.length) {
         categories = [
-            { id: 'fallback-acids', name: 'أحماض', icon: '🧪' },
-            { id: 'fallback-bases', name: 'قواعد', icon: '🧴' },
-            { id: 'fallback-solvents', name: 'مذيبات', icon: '⚗️' },
-            { id: 'fallback-salts', name: 'أملاح', icon: '🧂' },
-            { id: 'fallback-polymers', name: 'بوليمرات', icon: '🧬' },
-            { id: 'fallback-surfactants', name: 'مواد سطحية', icon: '💧' },
-            { id: 'fallback-pigments', name: 'أصباغ', icon: '🎨' },
-            { id: 'fallback-food', name: 'إضافات غذائية', icon: '🍯' },
+            { id: '', name: 'خامات كيماوية', icon: '🧪' },
+            { id: '', name: 'أحماض', icon: '⚗️' },
+            { id: '', name: 'مذيبات', icon: '🧴' },
+            { id: '', name: 'منظفات', icon: '🧼' },
+            { id: '', name: 'بوليمرات', icon: '🧬' },
+            { id: '', name: 'مستحضرات تجميل', icon: '🧴' },
+            { id: '', name: 'مواد بناء', icon: '🏗️' },
+            { id: '', name: 'دهانات', icon: '🎨' },
+            { id: '', name: 'أدوية زراعية', icon: '🌱' },
+            { id: '', name: 'أدوية', icon: '🧫' },
         ];
     }
 
     const counts = {};
+    let productCountsAvailable = false;
     try {
-        const { data: productsData } = await supabase.from('products').select('category_id').eq('status', 'active');
+        const { data: productsData, error } = await supabase.from('products').select('category_id').eq('status', 'active');
+        productCountsAvailable = !error && Array.isArray(productsData);
         (productsData || []).forEach(p => {
             const catId = p.category_id;
             if (catId) counts[catId] = (counts[catId] || 0) + 1;
@@ -4054,16 +4142,17 @@ const renderCategoryGrid = async () => {
     } catch (e) {}
 
     grid.innerHTML = categories.slice(0, 12).map(cat => `
-        <div class="category-card reveal" data-category-id="${escapeHtml(cat.id)}" data-category-name="${escapeHtml(cat.name)}">
+        <a class="category-card" href="${escapeHtml(getCategoryHref(cat))}" data-category-id="${escapeHtml(cat.id)}" data-category-name="${escapeHtml(cat.name)}">
             <span class="cat-icon">${cat.icon || '📁'}</span>
-            <div class="cat-name">${escapeHtml(cat.name)}</div>
-            <div class="cat-count">${counts[cat.id] || 0} منتج</div>
-        </div>
+            <span class="cat-name">${escapeHtml(cat.name)}</span>
+            <span class="cat-count">${cat.id && productCountsAvailable ? `${counts[cat.id] || 0} منتج` : 'تصفح المواد'}</span>
+        </a>
     `).join('');
 
     grid.addEventListener('click', (e) => {
         const card = e.target.closest('.category-card');
         if (!card) return;
+        if (card.tagName === 'A') return;
         state.categoryId = card.dataset.categoryId;
 
         document.querySelectorAll('.filter-chip').forEach(c => {

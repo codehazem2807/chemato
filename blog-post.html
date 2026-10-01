@@ -14,7 +14,7 @@
 <meta property="og:title" id="ogTitle" content="المقال | كيماتو">
 <meta property="og:description" id="ogDescription" content="اقرأ المقال كاملاً">
 <meta property="og:url" id="ogUrl" content="https://chemato.vercel.app/blog.html">
-<meta property="og:image" id="ogImage" content="https://chemato.vercel.app/og-default.jpg">
+<meta property="og:image" id="ogImage" content="https://chemato.vercel.app/logo.png">
 <meta property="og:image:width" content="1200">
 <meta property="og:image:height" content="630">
 <meta property="og:locale" content="ar_EG">
@@ -22,7 +22,7 @@
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" id="twTitle" content="المقال | كيماتو">
 <meta name="twitter:description" id="twDescription" content="اقرأ المقال كاملاً">
-<meta name="twitter:image" id="twImage" content="https://chemato.vercel.app/og-default.jpg">
+<meta name="twitter:image" id="twImage" content="https://chemato.vercel.app/logo.png">
 
 <link rel="canonical" id="pageCanonical" href="https://chemato.vercel.app/blog.html">
 <link rel="icon" type="image/x-icon" href="logo.ico">
@@ -1170,6 +1170,7 @@ a { color: inherit; text-decoration: none; }
   }
 }
 </style>
+<link rel="stylesheet" href="/chemato-core.css?v=9" />
 </head>
 <body>
 
@@ -1586,8 +1587,8 @@ const initScrollTop = () => {
 const updateMetaTags = (post) => {
   const title = post.title || 'مقال';
   const description = (post.excerpt || stripHtml(post.content).substring(0, 160) || '').substring(0, 160);
-  const image = isValidUrl(post.image_url) ? post.image_url : SITE_URL + '/og-default.jpg';
-  const canonical = SITE_URL + '/blog-post.html?slug=' + encodeURIComponent(post.slug || post.id);
+  const image = isValidUrl(post.image_url) ? post.image_url : SITE_URL + '/logo.png';
+  const canonical = SITE_URL + '/blog/' + encodeURIComponent(post.slug || post.id);
 
   document.title = title + ' | كيماتو';
 
