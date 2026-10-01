@@ -2,6 +2,8 @@
    CHEMOTO — Service Worker V5 (بسيط ومستقر)
    ============================================================ */
 
+importScripts('https://cdn.onesignal.com/sdks/web/v16/OneSignalSDK.sw.js');
+
 const CACHE_VERSION = 'chemato-v9';
 const STATIC_CACHE = CACHE_VERSION + '-static';
 const DYNAMIC_CACHE = CACHE_VERSION + '-dynamic';

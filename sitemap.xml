@@ -29,6 +29,10 @@
         <loc>https://chemato.vercel.app/blog.html</loc>
         <priority>0.8</priority>
     </url>
+    <url>
+        <loc>https://chemato.vercel.app/chemical-buying-guide.html</loc>
+        <priority>0.8</priority>
+    </url>
 
     <url><loc>https://chemato.vercel.app/chemicals/raw-materials</loc><priority>0.8</priority></url>
     <url><loc>https://chemato.vercel.app/chemicals/acids</loc><priority>0.8</priority></url>

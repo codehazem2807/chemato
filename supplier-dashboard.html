@@ -8,7 +8,7 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <title>كيماتو | لوحة المورد</title>
-<meta name="description" content="لوحة تحكم المورد على كيماتو — إدارة منتجاتك، عروضك، والعملاء المحتملين." />
+<meta name="description" content="أدر منتجاتك وعروض التوريد والطلبات المتاحة ومحادثات العملاء من لوحة المورد في كيماتو." />
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" type="image/png" href="logo.png" />
 <meta name="theme-color" content="#0a2540" />
@@ -1797,7 +1797,7 @@ const renderLoginRequired = () => {
             <div class="login-required-state">
                 <div class="big-icon"><i class="fas fa-warehouse"></i></div>
                 <h2>سجّل دخولك كمورد</h2>
-                <p>عشان تدير منتجاتك، عروضك، والعملاء المحتملين، لازم تسجّل دخولك كمورد.</p>
+                <p>سجّل الدخول بحساب مورد لإدارة المنتجات والعروض ومتابعة طلبات الشراء والعملاء المحتملين.</p>
                 <div class="login-required-actions">
                     <a href="auth.html?redirect=supplier-dashboard" class="btn btn-primary">
                         <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
@@ -1849,7 +1849,7 @@ const renderVerifBanner = () => {
         slot.innerHTML = `
             <div class="verif-banner verif-done">
                 <div class="icon-row"><i class="fas fa-check-circle"></i> حساب موثّق</div>
-                <div>حسابك موثّق، عملاؤك يثقون بك أكثر.</div>
+                <div>تظهر شارة التوثيق على ملفك عندما تكون حالة حسابك موثّقة.</div>
             </div>
         `;
     } else {
@@ -1857,7 +1857,7 @@ const renderVerifBanner = () => {
             <div class="verif-banner">
                 <div class="icon-row"><i class="fas fa-shield-alt"></i> اكتمال الملف (${score}%)</div>
                 <div class="verif-progress"><div class="verif-progress-bar" style="width:${score}%"></div></div>
-                <div>أكمل بياناتك لزيادة الثقة والمشاهدات.</div>
+                <div>أكمل بيانات الشركة ووسائل التواصل ليعرض ملفك المعلومات المتاحة بصورة أوضح.</div>
                 <a href="#" id="completeProfileBtn">أكمل بياناتك ←</a>
             </div>
         `;
@@ -2397,7 +2397,7 @@ const renderOverview = async () => {
             <button class="quick-action-card" onclick="window.switchSection('analytics')" type="button">
                 <div class="qa-icon purple"><i class="fas fa-chart-line"></i></div>
                 <div class="qa-title">التحليلات</div>
-                <div class="qa-desc">شوف أداء منتجاتك</div>
+                <div class="qa-desc">راجع أداء منتجاتك</div>
             </button>
         </div>
 
@@ -2406,7 +2406,7 @@ const renderOverview = async () => {
                 <div class="banner-icon"><i class="fas fa-comments"></i></div>
                 <div class="banner-content">
                     <h4>لديك ${formatNumber(state.stats.totalMessages)} محادثة على كيماتو</h4>
-                    <p>${state.stats.unreadMessages > 0 ? `عندك ${formatNumber(state.stats.unreadMessages)} رسالة غير مقروءة — ` : ''}تواصل مباشر مع عملائك بدون عمولة.</p>
+                    <p>${state.stats.unreadMessages > 0 ? `لديك ${formatNumber(state.stats.unreadMessages)} رسالة غير مقروءة. ` : ''}تابع استفسارات العملاء وطلبات التوريد من خلال الرسائل.</p>
                 </div>
                 <a href="messages.html" class="banner-action">
                     <i class="fas fa-arrow-left"></i> افتح الرسائل
@@ -2416,8 +2416,8 @@ const renderOverview = async () => {
             <div class="messaging-banner animate-in" style="animation-delay:0.03s;">
                 <div class="banner-icon"><i class="fas fa-comments"></i></div>
                 <div class="banner-content">
-                    <h4>تواصل مع عملائك عبر الموقع — بدون عمولة</h4>
-                    <p>استخدم نظام المراسلات المدمج. <strong>0% عمولة</strong> على جميع المحادثات.</p>
+                    <h4>تابع تواصل العملاء من لوحة المورد</h4>
+                    <p>استخدم الرسائل لمراجعة الاستفسارات وتنسيق تفاصيل عروض التوريد.</p>
                 </div>
                 <a href="messages.html" class="banner-action">
                     <i class="fas fa-comments"></i> ابدأ الآن
@@ -2495,9 +2495,9 @@ const renderOverview = async () => {
                 ${recentOffers.length ? `<div class="item-list">${recentOffers.map(o => renderMyOfferRow(o)).join('')}</div>` : `
                     <div class="empty-state">
                         <i class="fas fa-hand-holding-usd empty-icon"></i>
-                        <h4>لسه مفيش عروض</h4>
+                        <h4>لا توجد عروض حتى الآن</h4>
                         <p>قدّم عرضك الأول على طلب شراء متاح</p>
-                        <button class="btn btn-primary" onclick="window.switchSection('available-requests')"><i class="fas fa-bullhorn"></i> شوف الطلبات المتاحة</button>
+                        <button class="btn btn-primary" onclick="window.switchSection('available-requests')"><i class="fas fa-bullhorn"></i> عرض الطلبات المتاحة</button>
                     </div>
                 `}
             </div>
@@ -2512,8 +2512,8 @@ const renderOverview = async () => {
                 ${recentRequests.length ? `<div class="item-list">${recentRequests.map(r => renderAvailableRequestRow(r)).join('')}</div>` : `
                     <div class="empty-state">
                         <i class="fas fa-bullhorn empty-icon"></i>
-                        <h4>مفيش طلبات جديدة</h4>
-                        <p>هتلاقي هنا طلبات الشراء اللي المشترين بيعملوها</p>
+                        <h4>لا توجد طلبات شراء جديدة حاليًا</h4>
+                        <p>ستظهر هنا طلبات الشراء الجديدة المنشورة على المنصة.</p>
                     </div>
                 `}
             </div>
@@ -2608,8 +2608,8 @@ const renderProducts = async () => {
                 <div class="section-card-body">
                     <div class="empty-state">
                         <i class="fas fa-flask empty-icon"></i>
-                        <h4>لسه مفيش منتجات</h4>
-                        <p>ابدأ بإضافة أول منتج عشان العملاء يلاقوك</p>
+                        <h4>لم تضف منتجات بعد</h4>
+                        <p>أضف منتجاتك لعرض مواصفاتها وبياناتها للمشترين.</p>
                         <a href="add-product.html" class="btn btn-primary"><i class="fas fa-plus-circle"></i> أضف أول منتج</a>
                     </div>
                 </div>
@@ -2721,9 +2721,9 @@ const renderMyOffers = async () => {
                 <div class="section-card-body">
                     <div class="empty-state">
                         <i class="fas fa-hand-holding-usd empty-icon"></i>
-                        <h4>لسه مفيش عروض</h4>
+                        <h4>لا توجد عروض حتى الآن</h4>
                         <p>قدّم عرضك الأول على طلب شراء متاح</p>
-                        <button class="btn btn-primary" onclick="window.switchSection('available-requests')"><i class="fas fa-bullhorn"></i> شوف الطلبات المتاحة</button>
+                        <button class="btn btn-primary" onclick="window.switchSection('available-requests')"><i class="fas fa-bullhorn"></i> عرض الطلبات المتاحة</button>
                     </div>
                 </div>
             </div>
@@ -2767,7 +2767,7 @@ const renderMyOfferRow = (offer) => {
                     <i class="fas fa-info-circle"></i> التفاصيل
                 </a>
                 ${offer.status === 'accepted' && messagingUrl ? `
-                    <a href="${messagingUrl}" class="item-action-btn messaging" title="تواصل عبر الموقع — 0% عمولة">
+                    <a href="${messagingUrl}" class="item-action-btn messaging" title="تواصل عبر الرسائل">
                         <i class="fas fa-comments"></i> تواصل
                     </a>
                 ` : ''}
@@ -2822,8 +2822,8 @@ const renderAvailableRequests = async () => {
                 <div class="section-card-body">
                     <div class="empty-state">
                         <i class="fas fa-bullhorn empty-icon"></i>
-                        <h4>مفيش طلبات متاحة حالياً</h4>
-                        <p>هتلاقي هنا طلبات الشراء اللي المشترين بيعملوها</p>
+                        <h4>لا توجد طلبات متاحة حاليًا</h4>
+                        <p>ستظهر هنا الطلبات المفتوحة التي يمكن تقديم عروض عليها.</p>
                         <a href="all-requests.html" class="btn btn-primary"><i class="fas fa-clipboard-list"></i> تصفح كل الطلبات</a>
                     </div>
                 </div>
@@ -3061,8 +3061,8 @@ const renderContacts = async () => {
                 ` : `
                     <div class="empty-state">
                         <i class="fas fa-users empty-icon"></i>
-                        <h4>لسه مفيش تواصلات</h4>
-                        <p>لما العملاء يتواصلوا معاك، هتلاقيهم هنا</p>
+                        <h4>لا توجد جهات تواصل بعد</h4>
+                        <p>ستظهر هنا الجهات التي تواصلت معك بشأن المنتجات وطلبات الشراء.</p>
                     </div>
                 `}
             </div>
@@ -3074,7 +3074,7 @@ const renderContacts = async () => {
 
 const exportContactsCsv = () => {
     if (!state.contacts.length) {
-        showToast('⚠️', 'مفيش بيانات', 'لا توجد تواصلات للتصدير', null, null, 'warning');
+        showToast('⚠️', 'لا توجد بيانات', 'لا توجد جهات تواصل للتصدير.', null, null, 'warning');
         return;
     }
     const rows = [['العميل','الشركة','المنتج','نوع التواصل','المدينة','الهاتف','التاريخ']];
@@ -3180,7 +3180,7 @@ const renderAnalytics = () => {
                     <div class="empty-state">
                         <i class="fas fa-chart-line empty-icon"></i>
                         <h4>لا توجد بيانات بعد</h4>
-                        <p>ابدأ بإضافة منتجات وشوف أدائها هنا</p>
+                        <p>أضف منتجات لمتابعة بيانات الأداء المتاحة هنا.</p>
                     </div>
                 `}
             </div>
@@ -3349,7 +3349,7 @@ const setupRealtime = () => {
             .on('postgres_changes', { event: 'INSERT', schema: 'public', table: 'supplier_contacts', filter: `supplier_id=eq.${state.user?.id}` }, (payload) => {
                 const contact = payload.new;
                 if (contact.contact_type === 'whatsapp' || contact.contact_type === 'phone' || contact.contact_type === 'inquiry') {
-                    showToast('👤', 'عميل مهتم!', 'عميل جديد تواصل معك', 'افتح الرسائل', 'messages.html', 'success');
+                    showToast('👤', 'طلب تواصل جديد', 'تلقّيت طلب تواصل من أحد العملاء.', 'افتح الرسائل', 'messages.html', 'success');
                 }
                 loadSection(state.activeSection);
             })
@@ -3393,5 +3393,8 @@ if (document.readyState === 'loading') {
     init();
 }
 </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

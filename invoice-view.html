@@ -5,15 +5,15 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0, viewport-fit=cover">
 <meta name="theme-color" content="#1d5b8e" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0a1628" media="(prefers-color-scheme: dark)">
-<meta name="description" content="عرض فاتورة - إلكترونك لصيانة الأجهزة الإلكترونية">
+<meta name="description" content="عرض فاتورة تجارية صادرة عبر منصة كيماتو. راجع بيانات الفاتورة وتواصل مع الجهة المصدرة عند الحاجة.">
 <meta name="format-detection" content="telephone=no">
 <meta name="color-scheme" content="light dark">
 <meta name="mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
-<meta name="apple-mobile-web-app-title" content="إلكترونك">
+<meta name="apple-mobile-web-app-title" content="كيماتو">
 <meta name="robots" content="noindex, nofollow">
-<title>فاتورة | إلكترونك</title>
+<title>فاتورة تجارية | كيماتو</title>
 
 <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
 <link rel="apple-touch-icon" sizes="180x180" href="logo.png">
@@ -1046,10 +1046,10 @@ img { max-width: 100%; height: auto; display: block; }
 <!-- Top Bar (بدون تسجيل دخول) -->
 <div class="top-bar">
     <div class="top-brand">
-        <img src="logo.png" alt="إلكترونك" class="top-logo" onerror="this.style.display='none'">
+        <img src="logo.png" alt="كيماتو" class="top-logo" onerror="this.style.display='none'">
         <div class="top-brand-text">
-            <strong>إلكترونك</strong>
-            <span>لصيانة الأجهزة الإلكترونية</span>
+            <strong>كيماتو</strong>
+            <span>منصة توريد المواد الكيميائية</span>
         </div>
     </div>
     <div class="top-actions">
@@ -1076,12 +1076,11 @@ img { max-width: 100%; height: auto; display: block; }
     </div>
     <h2>الفاتورة غير موجودة</h2>
     <p id="errorMessage">
-        لا يمكن العثور على هذه الفاتورة. تأكد من صحة الرابط الذي استلمته،
-        أو تواصل مع مركز الصيانة للحصول على رابط جديد.
+        لا يمكن العثور على هذه الفاتورة. تحقق من الرابط، أو تواصل مع الجهة التي أصدرتها.
     </p>
-    <a href="track.html" class="btn">
-        <i class="fas fa-magnifying-glass"></i>
-        تتبع الجهاز
+    <a href="index.html" class="btn">
+        <i class="fas fa-house"></i>
+        العودة إلى كيماتو
     </a>
 </div>
 
@@ -1093,10 +1092,10 @@ img { max-width: 100%; height: auto; display: block; }
         <div class="invoice-header">
             <div class="invoice-header-inner">
                 <div class="invoice-brand">
-                    <img src="logo.png" alt="إلكترونك" class="invoice-brand-logo" onerror="this.style.display='none'">
+                    <img src="logo.png" alt="كيماتو" class="invoice-brand-logo" onerror="this.style.display='none'">
                     <div class="invoice-brand-text">
-                        <h1>إلكترونك</h1>
-                        <p>لصيانة الأجهزة الإلكترونية</p>
+                        <h1>كيماتو</h1>
+                        <p>منصة توريد المواد الكيميائية</p>
                     </div>
                 </div>
                 <div class="invoice-meta">
@@ -1226,15 +1225,11 @@ img { max-width: 100%; height: auto; display: block; }
             <div class="footer-contact">
                 <div class="footer-contact-item">
                     <i class="fas fa-location-dot"></i>
-                    <span>مركز إلكترونك لصيانة الأجهزة الإلكترونية</span>
+                    <span>فاتورة صادرة عن مورد عبر منصة كيماتو</span>
                 </div>
                 <div class="footer-contact-item">
-                    <i class="fas fa-phone"></i>
-                    <span dir="ltr">01000000000</span>
-                </div>
-                <div class="footer-contact-item">
-                    <i class="fas fa-clock"></i>
-                    <span>يومياً من 10 ص إلى 10 م</span>
+                    <i class="fas fa-circle-info"></i>
+                    <span>للاستفسارات، تواصل مع الجهة المصدرة للفاتورة.</span>
                 </div>
             </div>
             <div class="footer-qr">
@@ -1887,5 +1882,8 @@ document.addEventListener('DOMContentLoaded', function() {
 })();
 </script>
 
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

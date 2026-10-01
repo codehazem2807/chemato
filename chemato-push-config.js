@@ -1,1 +1,1 @@
-window.CHEMATO_ONESIGNAL_APP_ID = '';
+window.CHEMATO_ONESIGNAL_APP_ID = 'a9e85b5f-bcf4-4867-a586-d0119c5dce89';

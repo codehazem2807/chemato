@@ -4,8 +4,8 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <title>المدونة | كيماتو — مقالات عن سوق الكيماويات في مصر</title>
-    <meta name="description" content="اقرأ أحدث المقالات عن سوق المواد الكيماوية في مصر — أسعار، أدلة شراء، نصائح، وأخبار الصناعة." />
+    <title>أدلة ومقالات المواد الكيميائية في مصر | كيماتو</title>
+    <meta name="description" content="اقرأ أدلة الشراء والمقالات الفنية عن المواد الكيميائية ومواصفاتها وتطبيقاتها في السوق المصري." />
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content="مدونة كيماويات,مقالات كيماوية,أسعار الكيماويات,دليل شراء,موردين كيماويات,مصر" />
     <meta name="theme-color" content="#0a2540" />
@@ -1199,15 +1199,15 @@
             <div class="hero-content">
                 <div class="hero-badge">
                     <span class="dot"></span>
-                    <span>مدونة كيماتو — مقالات سوق الكيماويات</span>
+                    <span>أدلة ومقالات كيماتو للمواد الكيميائية</span>
                 </div>
 
                 <h1 id="heroTitle">
-                    📰 <span class="highlight">مقالات</span> عن سوق الكيماويات
+                    📰 <span class="highlight">أدلة ومقالات</span> المواد الكيميائية
                 </h1>
 
                 <p class="subtitle">
-                    اقرأ أحدث المقالات، الأدلة، والنصائح عن سوق المواد الكيماوية في مصر — أسعار، موردين، دراسات، وأخبار الصناعة
+                    استكشف موضوعات تساعد فرق المشتريات والجودة على فهم المواصفات، ومقارنة عروض التوريد، ومراجعة مستندات المواد.
                 </p>
 
                 <div class="search-wrapper" role="search">
@@ -1302,6 +1302,7 @@
                 <a href="all-products.html">المنتجات</a>
                 <a href="all-requests.html">الطلبات</a>
                 <a href="chemato-suppliers.html">الموردين</a>
+                <a href="chemical-buying-guide.html">دليل شراء المواد الكيميائية</a>
                 <a href="blog.html">المدونة</a>
                 <a href="auth.html">تسجيل الدخول</a>
                 <a href="supplier-dashboard.html">للموردين</a>
@@ -1847,7 +1848,7 @@
                 <div class="empty-state">
                     <i class="fas fa-newspaper empty-icon"></i>
                     <h3>${hasFilters ? 'لا توجد نتائج' : 'لا توجد مقالات'}</h3>
-                    <p>${hasFilters ? 'لم نجد أي مقالات تطابق معايير البحث' : 'لسه مفيش مقالات منشورة'}</p>
+                    <p>${hasFilters ? 'لا توجد مقالات تطابق معايير البحث الحالية' : 'لا توجد مقالات منشورة حاليًا'}</p>
                     ${hasFilters ? `
                         <button class="btn-reset-filters" id="emptyResetBtn" type="button">
                             <i class="fas fa-redo"></i> إعادة تعيين الفلاتر
@@ -2138,5 +2139,8 @@
             init();
         }
     </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

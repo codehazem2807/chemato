@@ -4,6 +4,8 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 <title>غير متصل | كيماتو</title>
+<meta name="description" content="تعذر الاتصال بمنصة كيماتو. أعد المحاولة أو افتح صفحة سبق تحميلها إذا كانت متاحة دون اتصال." />
+<meta name="robots" content="noindex, nofollow" />
 <style>
 body{font-family:'Cairo',system-ui,sans-serif;background:#f6f8fb;color:#0a1f33;margin:0;display:flex;align-items:center;justify-content:center;min-height:100vh;padding:20px;text-align:center}
 .card{background:#fff;padding:48px 32px;border-radius:28px;box-shadow:0 20px 48px rgba(10,37,64,0.14);max-width:440px;width:100%}
@@ -19,8 +21,11 @@ button:active{transform:scale(0.96)}
 <div class="card">
 <div class="icon">🔌</div>
 <h1>أنت غير متصل بالإنترنت</h1>
-<p>لا تقلق، يمكنك تصفح الصفحات التي زرتها سابقاً. يرجى التحقق من اتصالك بالإنترنت.</p>
+<p>تحقق من اتصالك بالإنترنت ثم أعد المحاولة. قد تبقى بعض الصفحات التي زرتها متاحة دون اتصال.</p>
 <button onclick="location.reload()">إعادة المحاولة</button>
 </div>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

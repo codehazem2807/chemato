@@ -3,7 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>لوحة الأدمن — كيماتو</title>
+<title>إدارة المنصة | كيماتو</title>
+<meta name="description" content="لوحة داخلية لإدارة حسابات المستخدمين والمنتجات والطلبات ومحتوى منصة كيماتو.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -302,14 +303,14 @@ tbody tr:last-child td{border-bottom:none}
 <div class="login-screen" id="loginScreen">
   <div class="login-card">
     <div class="login-logo">🔐</div>
-    <h1>لوحة الأدمن</h1>
+    <h1>لوحة إدارة كيماتو</h1>
     <p>كيماتو — منصة الكيماويات B2B</p>
     <div class="password-wrap">
       <input type="password" id="passwordInput" placeholder="أدخل كلمة المرور" autocomplete="off">
       <button class="toggle-pass" id="togglePass" type="button">👁️</button>
     </div>
     <button class="btn-login" id="loginBtn">دخول للوحة التحكم</button>
-    <div class="login-hint">🔒 محمي بكلمة مرور — للأدمن فقط</div>
+    <div class="login-hint">🔒 مساحة مخصصة لفريق الإدارة</div>
   </div>
 </div>
 
@@ -427,7 +428,7 @@ tbody tr:last-child td{border-bottom:none}
     <!-- USERS -->
     <section class="admin-section" id="section-users">
       <div class="page-header">
-        <div><h1 class="page-title"><span class="title-icon">👥</span> المستخدمين</h1><p class="page-subtitle">كل بيانات المستخدمين مع الإيميل وكلمة السر</p></div>
+        <div><h1 class="page-title"><span class="title-icon">👥</span> المستخدمون</h1><p class="page-subtitle">إدارة حسابات المشترين والموردين وبياناتهم وحالات التوثيق.</p></div>
         <div class="header-actions-bar">
           <button class="btn btn-outline" onclick="App.exportUsers()">📥 تصدير Excel</button>
           <button class="btn btn-primary" onclick="App.loadUsers()">🔄 تحديث</button>
@@ -436,7 +437,7 @@ tbody tr:last-child td{border-bottom:none}
       <div class="filters-bar">
         <div class="form-field"><label class="form-label">بحث</label><input type="text" class="form-input" id="userSearch" placeholder="اسم / إيميل / شركة / هاتف..."></div>
         <div class="form-field"><label class="form-label">النوع</label>
-          <select class="form-select" id="userTypeFilter"><option value="">الكل</option><option value="supplier">مورد</option><option value="buyer">مشتري</option><option value="admin">أدمن</option></select>
+          <select class="form-select" id="userTypeFilter"><option value="">الكل</option><option value="supplier">مورد</option><option value="buyer">مشتري</option><option value="admin">مدير</option></select>
         </div>
         <div class="form-field"><label class="form-label">التحقق</label>
           <select class="form-select" id="userVerifiedFilter"><option value="">الكل</option><option value="true">موثّق</option><option value="false">غير موثّق</option></select>
@@ -1118,7 +1119,7 @@ const App = {
       const type = document.getElementById('userTypeFilter')?.value || '';
       const verified = document.getElementById('userVerifiedFilter')?.value || '';
       const suspended = document.getElementById('userSuspendedFilter')?.value || '';
-      let q = supabaseClient.from('profiles').select('*').order('created_at', { ascending: false }).limit(500);
+      let q = supabaseClient.from('profiles').select('id, full_name, email, phone, whatsapp, company_name, city, user_type, avatar_url, is_verified, is_suspended, is_admin, login_count, last_login_at, last_seen, created_at, updated_at, address, bio, admin_notes').order('created_at', { ascending: false }).limit(500);
       if (type) q = q.eq('user_type', type);
       if (verified === 'true') q = q.eq('is_verified', true);
       if (verified === 'false') q = q.eq('is_verified', false);
@@ -1143,15 +1144,14 @@ const App = {
   renderUsers() {
     const wrap = document.getElementById('usersList');
     if (!this.state.users.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">👥</span><h3>لا يوجد مستخدمين</h3></div>`;
-    const typeLabel = { supplier: 'مورد', buyer: 'مشتري', admin: 'أدمن' };
+    const typeLabel = { supplier: 'مورد', buyer: 'مشتري', admin: 'مدير' };
     const typeBadge = { supplier: 'badge-success', buyer: 'badge-info', admin: 'badge-danger' };
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>المستخدم</th><th>الإيميل</th><th>الهاتف</th><th>كلمة السر</th><th>النوع</th><th>موثّق</th><th>الحالة</th><th>آخر ظهور</th><th>إجراءات</th></tr></thead>
+      <thead><tr><th>المستخدم</th><th>البريد الإلكتروني</th><th>الهاتف</th><th>النوع</th><th>حالة التوثيق</th><th>الحالة</th><th>آخر ظهور</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.users.map(u => `<tr>
         <td><div class="td-title">${this.esc(u.full_name || 'بدون اسم')}</div><div class="td-muted">${this.esc(u.company_name || u.city || '')}</div></td>
         <td class="td-muted" style="font-size:11.5px">${this.esc(u.email || '—')}</td>
         <td class="td-muted" style="font-size:11.5px">${this.esc(u.phone || '—')}</td>
-        <td>${u.password_plain ? `<span class="td-pass hidden-pass" onclick="this.classList.toggle('hidden-pass')" title="اضغط للإظهار">${this.esc(u.password_plain)}</span>` : '<span class="td-muted">—</span>'}</td>
         <td><span class="badge ${typeBadge[u.user_type] || 'badge-gray'}">${typeLabel[u.user_type] || u.user_type || '—'}</span></td>
         <td>${u.is_verified ? '<span class="badge badge-success">✓</span>' : '<span class="badge badge-gray">✗</span>'}</td>
         <td>${u.is_suspended ? '<span class="badge badge-danger">معلّق</span>' : '<span class="badge badge-success">نشط</span>'}</td>
@@ -1174,12 +1174,6 @@ const App = {
       <div class="user-detail-grid">
         <div class="user-detail-item"><div class="label">الاسم الكامل</div><div class="value">${this.esc(u.full_name || '—')}</div></div>
         <div class="user-detail-item"><div class="label">الإيميل</div><div class="value">${this.esc(u.email || '—')}</div></div>
-        <div class="user-detail-item"><div class="label">كلمة السر</div><div class="value mono">
-          <span class="pass-reveal">
-            <span id="passValue">${u.password_plain ? '••••••••' : '—'}</span>
-            ${u.password_plain ? `<button class="toggle-eye" onclick="App.togglePassReveal('${this.escAttr(u.password_plain)}')">👁️</button>` : ''}
-          </span>
-        </div></div>
         <div class="user-detail-item"><div class="label">الهاتف</div><div class="value">${this.esc(u.phone || '—')}</div></div>
         <div class="user-detail-item"><div class="label">واتساب</div><div class="value">${this.esc(u.whatsapp || '—')}</div></div>
         <div class="user-detail-item"><div class="label">الشركة</div><div class="value">${this.esc(u.company_name || '—')}</div></div>
@@ -1194,7 +1188,7 @@ const App = {
         <div class="user-detail-item full"><div class="label">ID</div><div class="value mono">${u.id}</div></div>
         <div class="user-detail-item full"><div class="label">العنوان</div><div class="value">${this.esc(u.address || '—')}</div></div>
         <div class="user-detail-item full"><div class="label">نبذة</div><div class="value">${this.esc(u.bio || '—')}</div></div>
-        <div class="user-detail-item full"><div class="label">ملاحظات الأدمن</div>
+        <div class="user-detail-item full"><div class="label">ملاحظات الإدارة</div>
           <textarea class="form-input" id="adminNotesInput" style="min-height:60px; font-size:12.5px">${this.esc(u.admin_notes || '')}</textarea>
         </div>
       </div>
@@ -1218,12 +1212,6 @@ const App = {
     document.getElementById('btnSaveUser').onclick = () => this.saveUserChanges();
 
     this.openModal('userModal');
-  },
-
-  togglePassReveal(pass) {
-    const el = document.getElementById('passValue');
-    if (!el) return;
-    el.textContent = el.textContent === '••••••••' ? pass : '••••••••';
   },
 
   async saveUserChanges() {
@@ -1291,25 +1279,15 @@ const App = {
     if (btn) { btn.disabled = true; btn.textContent = '⏳...'; }
 
     try {
-      const res = await callAdminEdge('change_password', {
+      await callAdminEdge('change_password', {
         userId: this.state.currentUser.id,
         newPassword: newPass
       });
-      this.showToast('success', 'تم تغيير كلمة السر ✅', 'تم التحديث في Auth وفي profiles');
+      this.showToast('success', 'تم تغيير كلمة المرور', 'تم تحديث بيانات تسجيل الدخول.');
       this.closeModal('passModal');
       await this.loadUsers();
     } catch (e) {
-      // Fallback: حدّث profiles فقط
-      try {
-        await supabaseClient.from('profiles')
-          .update({ password_plain: newPass, updated_at: new Date().toISOString() })
-          .eq('id', this.state.currentUser.id);
-        this.showToast('warning', 'تم التحديث في profiles فقط', 'السبب: ' + e.message);
-        this.closeModal('passModal');
-        await this.loadUsers();
-      } catch (e2) {
-        this.showToast('error', 'فشل', e.message);
-      }
+      this.showToast('error', 'تعذر تغيير كلمة المرور', e.message);
     } finally {
       if (btn) { btn.disabled = false; btn.textContent = oldTxt || '💾 حفظ'; }
     }
@@ -1457,7 +1435,6 @@ const App = {
       'ID': u.id,
       'الاسم الكامل': u.full_name || '',
       'الإيميل': u.email || '',
-      'كلمة السر': u.password_plain || '',
       'الهاتف': u.phone || '',
       'واتساب': u.whatsapp || '',
       'الشركة': u.company_name || '',
@@ -1478,7 +1455,8 @@ const App = {
 
   async exportData(table) {
     try {
-      const { data, error } = await supabaseClient.from(table).select('*').limit(5000);
+      const profileFields = 'id, full_name, email, phone, whatsapp, company_name, city, user_type, avatar_url, is_verified, is_suspended, is_admin, login_count, last_login_at, last_seen, created_at, updated_at, address, bio, admin_notes';
+      const { data, error } = await supabaseClient.from(table).select(table === 'profiles' ? profileFields : '*').limit(5000);
       if (error) throw error;
       if (!data?.length) return this.showToast('warning', 'تنبيه', 'لا يوجد بيانات');
       const rows = data.map(row => {
@@ -1498,11 +1476,12 @@ const App = {
 
   async exportAll() {
     const tables = ['profiles', 'products', 'purchase_requests', 'offers', 'quotes', 'messages', 'reviews', 'supplier_contacts', 'notifications', 'follows', 'favorites', 'blog_posts', 'ticker_news', 'analytics_events'];
+    const profileFields = 'id, full_name, email, phone, whatsapp, company_name, city, user_type, avatar_url, is_verified, is_suspended, is_admin, login_count, last_login_at, last_seen, created_at, updated_at, address, bio, admin_notes';
     try {
       const wb = XLSX.utils.book_new();
       for (const t of tables) {
         try {
-          const { data } = await supabaseClient.from(t).select('*').limit(5000);
+          const { data } = await supabaseClient.from(t).select(t === 'profiles' ? profileFields : '*').limit(5000);
           if (data?.length) {
             const rows = data.map(row => {
               const out = {};
@@ -2434,5 +2413,8 @@ document.addEventListener('DOMContentLoaded', () => {
   document.getElementById('eventTypeFilter')?.addEventListener('change', () => App.loadAnalytics());
 });
 </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

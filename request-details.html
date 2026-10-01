@@ -5,12 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
     <title>كيماتو | تفاصيل طلب الشراء</title>
-    <meta name="description" content="تفاصيل طلب شراء المواد الكيماوية على كيماتو — شاهد العروض من الموردين وقدّم عرضك الآن." />
+    <meta name="description" content="راجع مواصفات طلب شراء مادة كيميائية والعروض المقدمة، أو أرسل عرض توريد مناسبًا من حساب المورد." />
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content="طلبات شراء,كيماويات,كيماتو,عروض أسعار,RFQ,مواد خام,مصر" />
 
     <meta property="og:title" content="كيماتو | تفاصيل طلب الشراء" />
-    <meta property="og:description" content="شاهد تفاصيل الطلب والعروض من الموردين على كيماتو." />
+    <meta property="og:description" content="راجع مواصفات الطلب والعروض المقدمة من الموردين على كيماتو." />
     <meta property="og:type" content="article" />
     <meta property="og:url" content="https://chemato.vercel.app/request-details.html" />
     <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
@@ -806,7 +806,7 @@
             background: linear-gradient(135deg, rgba(46, 204, 113, 0.04), var(--c-surface));
         }
         .offer-card.is-best::before {
-            content: '⭐ الأفضل سعراً';
+            content: 'أقل سعر معلن';
             position: absolute;
             top: -10px;
             right: 16px;
@@ -2611,7 +2611,7 @@ const renderOffersContent = () => {
                 <i class="fas fa-inbox"></i>
                 <h4>لا توجد عروض بعد</h4>
                 <p>${state.isOwnRequest
-                    ? 'لسه محدش قدّم عرض على طلبك. هيتواصلوا معك قريباً.'
+                    ? 'لم يقدّم أي مورد عرضًا على طلبك بعد. ستظهر العروض هنا عند ورودها.'
                     : 'كن أول مورد يقدّم عرضاً على هذا الطلب!'}</p>
                 ${!state.isOwnRequest && state.isSupplier && !state.hasUserOffered ? `
                     <button class="btn-offer-submit" id="openOfferBtnEmpty" type="button">
@@ -3184,5 +3184,8 @@ if (document.readyState === 'loading') {
     init();
 }
 </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

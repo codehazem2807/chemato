@@ -5,8 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
     <meta name="format-detection" content="telephone=no" />
 
-    <title>كيماتو | لوحة المشتري</title>
-    <meta name="description" content="لوحة تحكم المشتري على كيماتو" />
+    <title>لوحة المشتري | كيماتو</title>
+    <meta name="description" content="تابع طلبات الشراء والعروض المستلمة والمنتجات المحفوظة وبيانات حسابك من لوحة المشتري في كيماتو." />
     <meta name="robots" content="noindex, nofollow" />
 
     <link rel="icon" type="image/png" href="logo.png" />
@@ -2216,7 +2216,7 @@
                 <div class="share-modal-preview">
                     <div class="share-modal-preview-avatar" id="sharePreviewAvatar">؟</div>
                     <h3 id="sharePreviewName">...</h3>
-                    <p id="sharePreviewDesc">شوف منتجاتي وطلباتي على منصة كيماتو</p>
+                    <p id="sharePreviewDesc">استعرض منتجاتي وطلبات الشراء على منصة كيماتو</p>
                 </div>
 
                 <div class="share-url-input">
@@ -2463,7 +2463,7 @@
                 <div class="login-required-state">
                     <div class="big-icon"><i class="fas fa-lock"></i></div>
                     <h2>سجّل دخولك أولاً</h2>
-                    <p>عشان تقدر تشوف لوحة التحكم، الطلبات، العروض، والمفضلة، لازم تسجّل دخولك.</p>
+                    <p>سجّل الدخول لمتابعة لوحة التحكم وطلبات الشراء والعروض والمنتجات المحفوظة.</p>
                     <div class="login-required-actions">
                         <a href="auth.html?redirect=buyer-dashboard" class="btn-primary">
                             <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
@@ -2914,8 +2914,8 @@
                     ` : `
                         <div class="empty-state">
                             <i class="fas fa-clipboard-list empty-icon"></i>
-                            <h4>لسه مفيش طلبات</h4>
-                            <p>ابدأ بطلب عرض سعر لأول منتج محتاجه</p>
+                            <h4>لا توجد طلبات شراء حتى الآن</h4>
+                            <p>أنشئ طلب شراء يتضمن المادة والمواصفات والكمية المطلوبة.</p>
                             <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
                                 <i class="fas fa-plus-circle"></i> اطلب عرض سعر
                             </button>
@@ -2946,8 +2946,8 @@
                     ` : `
                         <div class="empty-state">
                             <i class="fas fa-hand-holding-usd empty-icon"></i>
-                            <h4>لسه مفيش عروض</h4>
-                            <p>العروض من الموردين هتظهر هنا لما يردوا على طلباتك</p>
+                            <h4>لا توجد عروض مستلمة حتى الآن</h4>
+                            <p>ستظهر هنا عروض الموردين عند ورودها على طلباتك.</p>
                         </div>
                     `}
                 </div>
@@ -3014,8 +3014,8 @@
                     ` : `
                         <div class="empty-state">
                             <i class="fas fa-clipboard-list empty-icon"></i>
-                            <h4>لسه مفيش طلبات</h4>
-                            <p>ابدأ بطلب عرض سعر لأول منتج محتاجه</p>
+                            <h4>لا توجد طلبات شراء حتى الآن</h4>
+                            <p>أنشئ طلب شراء يتضمن المادة والمواصفات والكمية المطلوبة.</p>
                             <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
                                 <i class="fas fa-plus-circle"></i> اطلب عرض سعر
                             </button>
@@ -3067,8 +3067,8 @@
                     ` : `
                         <div class="empty-state">
                             <i class="fas fa-hand-holding-usd empty-icon"></i>
-                            <h4>لسه مفيش عروض</h4>
-                            <p>العروض من الموردين هتظهر هنا لما يردوا على طلباتك</p>
+                            <h4>لا توجد عروض مستلمة حتى الآن</h4>
+                            <p>ستظهر هنا عروض الموردين عند ورودها على طلباتك.</p>
                             <button class="btn-primary" onclick="window.location.href='index.html?action=rfq'">
                                 <i class="fas fa-plus-circle"></i> اطلب عرض سعر
                             </button>
@@ -3092,7 +3092,7 @@
             <div class="page-header-bar animate-in">
                 <div>
                     <h1 class="page-title"><i class="fas fa-heart"></i> المفضلة</h1>
-                    <p class="page-subtitle">المنتجات اللي حفظتها للرجوع لها</p>
+                    <p class="page-subtitle">المنتجات التي حفظتها للرجوع إليها لاحقًا</p>
                 </div>
             </div>
 
@@ -3111,8 +3111,8 @@
                     ` : `
                         <div class="empty-state">
                             <i class="fas fa-heart empty-icon"></i>
-                            <h4>المفضلة فاضية</h4>
-                            <p>اضغط ❤️ على أي منتج لحفظه هنا</p>
+                            <h4>قائمة المفضلة فارغة</h4>
+                            <p>احفظ المنتجات التي تود الرجوع إليها لتظهر هنا.</p>
                             <a href="all-products.html" class="btn-primary">
                                 <i class="fas fa-flask"></i> تصفح المنتجات
                             </a>
@@ -3742,5 +3742,8 @@
         init();
     }
 </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <title>كيماتو | جميع طلبات الشراء في مصر | B2B Purchase Requests</title>
-    <meta name="description" content="استعرض جميع طلبات شراء المواد الكيماوية في مصر. صودا كاوية، حمض كبريتيك، مذيبات — تواصل مباشر مع العملاء على كيماتو." />
+    <title>طلبات شراء المواد الكيميائية في مصر | كيماتو</title>
+    <meta name="description" content="استعرض طلبات شراء المواد الكيميائية المنشورة على كيماتو. تعرّف على احتياجات المشترين ومتطلبات التوريد، وقدّم عرضًا مناسبًا من حساب المورد." />
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content="طلبات شراء,كيماويات,كيماتو,CAS,مواد خام,صودا كاوية,حمض كبريتيك,موردين,مصر,RFQ" />
 
     <meta property="og:title" content="كيماتو | جميع طلبات الشراء" />
-    <meta property="og:description" content="استعرض طلبات شراء المواد الكيماوية في مصر. تواصل مباشر مع العملاء." />
+    <meta property="og:description" content="راجع احتياجات المشترين ومتطلبات التوريد، وقدّم عرضًا مناسبًا من حساب المورد." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chemato.vercel.app/all-requests.html" />
     <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
@@ -1492,15 +1492,15 @@
             <div class="header-content">
                 <div class="header-badge">
                     <span class="dot"></span>
-                    <span>سوق طلبات الشراء في مصر</span>
+                    <span>طلبات توريد المواد الكيميائية</span>
                 </div>
 
                 <h1 id="pageTitle">
-                    📋 <span class="highlight">طلبات شراء</span> المواد الكيماوية
+                    📋 <span class="highlight">طلبات شراء</span> المواد الكيميائية
                 </h1>
 
                 <p class="subtitle">
-                    استعرض أحدث الطلبات من العملاء والمصانع، تصفح حسب الفئة أو الميزانية، وتواصل مباشرة لعرض منتجاتك
+                    استعرض الطلبات حسب المادة والفئة والكمية، وافتح التفاصيل لمعرفة المتطلبات وإرسال عرض توريد مناسب.
                 </p>
 
                 <div class="header-cta">
@@ -2491,7 +2491,7 @@
                     <div class="empty-state">
                         <i class="fas fa-inbox empty-icon"></i>
                         <h3>لا توجد طلبات</h3>
-                        <p>${state.search ? 'جرب البحث بكلمات مختلفة' : 'لم نجد أي طلبات تطابق معايير البحث'}</p>
+                        <p>${state.search ? 'جرّب كلمات بحث أخرى أو غيّر معايير التصفية' : 'لا توجد طلبات تطابق معايير البحث الحالية'}</p>
                         <button class="btn-create" onclick="document.getElementById('createRequestBtn').click()">
                             <i class="fas fa-plus-circle"></i> كن أول من ينشئ طلب
                         </button>
@@ -2688,7 +2688,7 @@
                 } else if (action === 'offer') {
                     e.preventDefault();
                     if (!state.user) {
-                        showToast('🔒', 'سجّل دخولك', 'لازم تكون مسجّل كمورد لتقديم عرض', 'تسجيل الدخول', 'auth.html?redirect=' + encodeURIComponent(`request-details.html?id=${requestId}`), 'warning');
+                        showToast('🔒', 'تسجيل الدخول مطلوب', 'سجّل الدخول بحساب مورد لتقديم عرض.', 'تسجيل الدخول', 'auth.html?redirect=' + encodeURIComponent(`request-details.html?id=${requestId}`), 'warning');
                         return;
                     }
                     window.location.href = `request-details.html?id=${encodeURIComponent(requestId)}#offer`;
@@ -2696,7 +2696,7 @@
                     if (!state.user) {
                         e.preventDefault();
                         const chatUrl = btn.getAttribute('href');
-                        showToast('🔐', 'سجّل دخولك', 'لازم تسجل دخول للتواصل عبر الموقع', 'تسجيل الدخول', `auth.html?redirect=${encodeURIComponent(chatUrl)}`, 'warning');
+                        showToast('🔐', 'تسجيل الدخول مطلوب', 'سجّل الدخول للتواصل عبر الموقع.', 'تسجيل الدخول', `auth.html?redirect=${encodeURIComponent(chatUrl)}`, 'warning');
                         setTimeout(() => {
                             window.location.href = `auth.html?redirect=${encodeURIComponent(chatUrl)}`;
                         }, 1200);
@@ -2772,7 +2772,7 @@
                 chip.addEventListener('click', () => {
                     const tab = chip.dataset.tab;
                     if (tab === 'mine' && !state.user) {
-                        showToast('🔒', 'سجّل دخولك', 'عشان تشوف طلباتك', 'تسجيل الدخول', 'auth.html', 'warning');
+                        showToast('🔒', 'تسجيل الدخول مطلوب', 'سجّل الدخول لعرض طلباتك.', 'تسجيل الدخول', 'auth.html', 'warning');
                         return;
                     }
                     state.tab = tab;
@@ -2997,7 +2997,7 @@
         const initCreateRequest = () => {
             const handler = () => {
                 if (!state.user) {
-                    showToast('🔒', 'سجّل دخولك أولاً', 'محتاج تسجّل دخولك لإنشاء طلب شراء', 'تسجيل الدخول', 'auth.html?redirect=rfq', 'warning');
+                    showToast('🔒', 'تسجيل الدخول مطلوب', 'سجّل الدخول لإنشاء طلب شراء.', 'تسجيل الدخول', 'auth.html?redirect=rfq', 'warning');
                     return;
                 }
                 window.location.href = 'index.html?action=rfq';
@@ -3016,7 +3016,7 @@
                     try {
                         await navigator.share({
                             title: 'كيماتو - طلبات الشراء',
-                            text: 'شوف أحدث طلبات شراء المواد الكيماوية في مصر',
+                            text: 'استعرض أحدث طلبات شراء المواد الكيميائية في مصر.',
                             url: window.location.href,
                         });
                         return;
@@ -3142,5 +3142,8 @@
             init();
         }
     </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

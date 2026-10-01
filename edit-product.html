@@ -4,7 +4,7 @@
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 <title>كيماتو | تعديل منتج</title>
-<meta name="description" content="تعديل بيانات منتجك على كيماتو" />
+<meta name="description" content="حدّث بيانات منتجك على كيماتو، بما يشمل المواصفات الفنية والعبوة والسعر وحالة التوفر." />
 <meta name="robots" content="noindex, nofollow" />
 <link rel="icon" type="image/png" href="logo.png" />
 <meta name="theme-color" content="#0a2540" />
@@ -345,11 +345,11 @@ input,select,textarea{font-family:inherit}
 <section class="page-header animate-in">
 <div class="page-header-content">
 <h1><i class="fas fa-edit"></i> تعديل المنتج</h1>
-<p>عدّل بيانات منتجك بكل سهولة، شوف المعاينة الحية، واحفظ التغييرات</p>
+<p>حدّث بيانات المنتج وراجع المعاينة قبل حفظ التغييرات.</p>
 <div class="page-header-actions">
-<span class="header-badge"><i class="fas fa-check-circle"></i> تعديل فوري</span>
+<span class="header-badge"><i class="fas fa-check-circle"></i> حفظ التعديلات</span>
 <span class="header-badge"><i class="fas fa-eye"></i> معاينة حية</span>
-<span class="header-badge"><i class="fas fa-shield-alt"></i> حفظ آمن</span>
+<span class="header-badge"><i class="fas fa-eye"></i> معاينة قبل الحفظ</span>
 </div>
 </div>
 </section>
@@ -494,8 +494,8 @@ input,select,textarea{font-family:inherit}
 
 <div class="form-grid">
 <div class="form-group">
-<label for="price"><i class="fas fa-money-bill-wave"></i> السعر (ج.م) <span class="hint">(اختياري — اتركه فاضي لو السعر عند الطلب)</span></label>
-<input type="number" id="price" class="form-input" placeholder="اتركه فارغًا لو السعر عند الطلب" step="0.01" min="0" />
+<label for="price"><i class="fas fa-money-bill-wave"></i> السعر (ج.م) <span class="hint">(اختياري — اترك الحقل فارغًا إذا كان السعر عند الطلب)</span></label>
+<input type="number" id="price" class="form-input" placeholder="اترك الحقل فارغًا عند طلب السعر" step="0.01" min="0" />
 </div>
 
 <div class="form-group">
@@ -918,7 +918,7 @@ const renderLoginRequired = () => {
             <div class="login-required-state">
                 <div class="big-icon"><i class="fas fa-lock"></i></div>
                 <h2>سجّل دخولك</h2>
-                <p>عشان تعدل منتجك، لازم تسجّل دخولك كمورد أولاً.</p>
+                <p>سجّل الدخول بحساب مورد لتعديل بيانات المنتج.</p>
                 <div class="login-required-actions">
                     <a href="auth.html?redirect=edit-product" class="btn btn-primary">
                         <i class="fas fa-sign-in-alt"></i> تسجيل الدخول
@@ -1584,5 +1584,8 @@ if (document.readyState === 'loading') {
     init();
 }
 </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

@@ -1,4 +1,12 @@
 {
+  "headers": [
+    {
+      "source": "/chemato.png",
+      "headers": [
+        { "key": "Cache-Control", "value": "public, max-age=0, must-revalidate" }
+      ]
+    }
+  ],
   "rewrites": [
     { "source": "/chemicals/:slug", "destination": "/api/chemical-category?slug=:slug" },
     { "source": "/blog/:slug", "destination": "/blog-post.html?slug=:slug" },

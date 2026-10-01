@@ -8,10 +8,21 @@
 <meta name="mobile-web-app-capable" content="yes" />
 <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
 <meta name="apple-mobile-web-app-title" content="كيماتو" />
-<title>كيماتو | سوق B2B للمواد الكيماوية في مصر</title>
-<meta name="description" content="كيماتو - منصة B2B للمواد الكيماوية في مصر. ابحث برقم CAS، احصل على عروض أسعار متعددة، وتواصل مع موردين موثّقين." />
+<title>شراء وبيع المواد الكيميائية في مصر | كيماتو</title>
+<meta name="description" content="كيماتو منصة توريد B2B للمواد الكيميائية في مصر. اكتشف الخامات الصناعية، قارن المواصفات، واطلب عروض أسعار من الموردين بالاسم أو رقم CAS." />
 <meta name="robots" content="index, follow" />
 <link rel="canonical" href="https://chemato.vercel.app/" />
+<meta property="og:type" content="website" />
+<meta property="og:locale" content="ar_EG" />
+<meta property="og:site_name" content="كيماتو" />
+<meta property="og:title" content="شراء وبيع المواد الكيميائية في مصر | كيماتو" />
+<meta property="og:description" content="اكتشف الخامات الصناعية، قارن المواصفات، واطلب عروض أسعار من الموردين بالاسم أو رقم CAS." />
+<meta property="og:url" content="https://chemato.vercel.app/" />
+<meta property="og:image" content="https://chemato.vercel.app/chemato.png" />
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content="شراء وبيع المواد الكيميائية في مصر | كيماتو" />
+<meta name="twitter:description" content="اكتشف الخامات الصناعية، قارن المواصفات، واطلب عروض أسعار من الموردين بالاسم أو رقم CAS." />
+<meta name="twitter:image" content="https://chemato.vercel.app/chemato.png" />
 
 <!-- ✅ كل الأيقونات تشير لـ logo.png فقط -->
 <link rel="icon" type="image/png" href="logo.png" />
@@ -38,6 +49,7 @@
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
 
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"WebSite","name":"كيماتو","url":"https://chemato.vercel.app","inLanguage":"ar-EG"}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"FAQPage","mainEntity":[{"@type":"Question","name":"ما البيانات التي أضيفها إلى طلب شراء مادة كيميائية؟","acceptedAnswer":{"@type":"Answer","text":"اذكر الاسم الكيميائي ورقم CAS أو الصيغة إن توفرا، والدرجة أو النقاء، والكمية، ونوع العبوة، ومكان وموعد التسليم. أضف متطلبات المستندات الفنية إذا كانت لازمة."}},{"@type":"Question","name":"كيف أقارن عروض موردي المواد الكيميائية؟","acceptedAnswer":{"@type":"Answer","text":"قارن العروض على مواصفة وكمية موحدتين، ثم راجع الحد الأدنى للطلب والعبوة ومكان التسليم ومدة التوريد وشروط السداد والمستندات الفنية."}},{"@type":"Question","name":"ماذا أفعل إذا لم أعرف رقم CAS؟","acceptedAnswer":{"@type":"Answer","text":"ابدأ بالاسم الشائع أو التجاري والصيغة والاستخدام المقصود، واطلب تأكيد الهوية الكيميائية ورقم CAS من المورد قبل اعتماد العرض."}}]}</script>
 
 <style>
 /* ============================================================
@@ -298,7 +310,9 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 
 .hero{
     position:relative;border-radius:12px;padding:36px 20px 28px;overflow:hidden;
-    background:linear-gradient(115deg,#172a3a 0%,#29445d 58%,#3a5c76 100%);
+    background-color:#172a3a;
+    background-image:linear-gradient(115deg,rgba(15,32,46,0.9),rgba(31,57,75,0.68)),url("chemato.png");
+    background-position:center;background-size:cover;background-repeat:no-repeat;
     color:#fff;box-shadow:var(--sh-lg);min-height:auto;
 }
 @media (min-width:640px){.hero{padding:54px 48px 40px;min-height:0}}
@@ -568,6 +582,14 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .procurement-guide-item p{font-size:0.85rem;line-height:1.75;color:var(--c-text-muted);margin:0}
 .procurement-guide-links{display:flex;gap:10px;flex-wrap:wrap;margin-top:18px}
 .procurement-guide-links a{color:var(--c-primary-700);font-weight:800;text-decoration:underline;text-underline-offset:3px}
+.procurement-guide-faq{max-width:900px;margin-top:28px}
+.procurement-guide-faq h3{font-size:1.15rem;margin-bottom:6px;color:var(--c-text)}
+.procurement-guide-faq details{border-bottom:1px solid var(--c-border);padding:12px 0}
+.procurement-guide-faq summary{display:flex;align-items:center;justify-content:space-between;gap:12px;list-style:none;cursor:pointer;color:var(--c-text);font-weight:700}
+.procurement-guide-faq summary::-webkit-details-marker{display:none}
+.procurement-guide-faq summary i{color:var(--c-accent-dark);transition:transform var(--t-fast)}
+.procurement-guide-faq details[open] summary i{transform:rotate(45deg)}
+.procurement-guide-faq details p{max-width:760px;margin:9px 0 0;color:var(--c-text-muted);font-size:0.9rem;line-height:1.8}
 @media(max-width:700px){.procurement-guide-grid{grid-template-columns:1fr}.procurement-guide-item{padding:15px}}
 
 .recently-viewed{display:flex;gap:10px;overflow-x:auto;padding:8px 4px 16px;scrollbar-width:thin;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
@@ -1109,15 +1131,15 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 <div class="hero-content">
 <div class="hero-badge">
 <span class="dot"></span>
-<span>سوق توريد بين الشركات • مصر</span>
+<span>منصة توريد B2B للمواد الكيميائية • مصر</span>
 </div>
 
 <h1 id="heroTitle">
-<span class="highlight">توريد المواد الكيميائية</span><br>بمواصفات أوضح في مصر
+<span class="highlight">سوق المواد الكيميائية</span><br>للمصانع والشركات في مصر
 </h1>
 
 <p class="subtitle">
-ابحث بالاسم أو رقم CAS أو الصيغة، قارن بيانات المنتجات، وأرسل طلب شراء يصل إلى الموردين المناسبين.
+اكتشف الخامات الصناعية، وابحث بالاسم أو رقم CAS أو الصيغة. قارن الدرجة والنقاء والعبوة، ثم أرسل طلب شراء واضحًا للموردين.
 </p>
 
 <div class="stats-wrapper">
@@ -1142,10 +1164,10 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 
 <div class="hero-buttons" id="heroButtons">
 <a href="auth.html?type=buyer" class="btn btn-primary" id="buyerBtn">
-<i class="fas fa-search"></i> ابدأ كمشتري
+<i class="fas fa-search"></i> تصفح المواد واطلب عرض سعر
 </a>
 <a href="auth.html?type=supplier" class="btn btn-outline" id="supplierBtn">
-<i class="fas fa-truck"></i> اعرض منتجاتك كمورد
+<i class="fas fa-truck"></i> أنشئ حساب مورد واعرض منتجاتك
 </a>
 </div>
 
@@ -1178,7 +1200,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 
 <div class="search-wrapper" role="search">
 <i class="fas fa-search search-icon" aria-hidden="true"></i>
-<input type="text" id="searchInput" placeholder="ابحث عن منتج... مثل: صودا كاوية، NaOH"
+<input type="text" id="searchInput" placeholder="مثال: هيدروكسيد الصوديوم، NaOH أو CAS 1310-73-2"
 autocomplete="off" maxlength="100" aria-label="البحث" />
 <span class="keyboard-hint"><kbd>Ctrl</kbd>+<kbd>K</kbd></span>
 <button id="searchBtn" class="search-btn" type="button">
@@ -1354,30 +1376,46 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <section class="procurement-guide" aria-labelledby="procurementGuideTitle">
 <div class="procurement-guide-header">
 <p class="eyebrow" style="color:var(--c-accent-dark);">دليل شراء للشركات</p>
-<h2 id="procurementGuideTitle">قرار توريد كيميائي مبني على مواصفة، لا على اسم فقط</h2>
-<p>استخدم بيانات المنتج واطلب المعلومات الناقصة قبل اعتماد المورد. اختلاف التركيز أو الدرجة أو العبوة قد يغيّر ملاءمة المادة وسعرها.</p>
+<h2 id="procurementGuideTitle">دليل شراء المواد الكيميائية للشركات</h2>
+<p>ابدأ بمواصفة واضحة، ثم قارن عروضًا على أساس واحد. فالتركيز والدرجة والعبوة والكمية وشروط التسليم عوامل تؤثر في ملاءمة العرض وتكلفته.</p>
 </div>
 <div class="procurement-guide-grid">
 <article class="procurement-guide-item">
 <p class="step">01 · حدّد المادة</p>
-<h3>ابدأ بالاسم ورقم CAS</h3>
-<p>أضف الصيغة أو رقم CAS والدرجة والنقاء المطلوب لتقليل الالتباس بين الأسماء التجارية والمواد المتشابهة.</p>
+<h3>اكتب مواصفة يمكن التحقق منها</h3>
+<p>أدرج الاسم الكيميائي ورقم CAS أو الصيغة، ثم حدّد الدرجة والنقاء والاستخدام والكمية والعبوة المطلوبة.</p>
 </article>
 <article class="procurement-guide-item">
 <p class="step">02 · قارن العرض كاملًا</p>
-<h3>السعر جزء من القرار</h3>
-<p>قارن الكمية والعبوة والحد الأدنى للطلب ومكان التسليم ومدة التوريد وشروط الدفع، بجانب المواصفات الفنية.</p>
+<h3>وحّد أساس المقارنة</h3>
+<p>راجع السعر مقابل المواصفة والكمية نفسيهما، مع الحد الأدنى للطلب ومكان التسليم ومدة التوريد وشروط السداد.</p>
 </article>
 <article class="procurement-guide-item">
 <p class="step">03 · راجع المستندات</p>
-<h3>اطلب SDS وCOA عند الحاجة</h3>
-<p>تحقق من صحيفة بيانات السلامة وشهادة التحليل والمستندات التنظيمية المناسبة لاستخدام منشأتك قبل الشراء.</p>
+<h3>تحقق من المستندات الفنية</h3>
+<p>اطلب صحيفة بيانات السلامة (SDS) وشهادة التحليل (COA) والمستندات ذات الصلة، وراجعها وفق متطلبات الجودة والسلامة في منشأتك.</p>
 </article>
 </div>
 <div class="procurement-guide-links" aria-label="روابط سوق كيماتو">
 <a href="all-products.html">تصفح المنتجات الكيميائية</a>
 <a href="all-requests.html">راجع طلبات الشراء المفتوحة</a>
+<a href="chemical-buying-guide.html">دليل شراء المواد الكيميائية</a>
 <a href="blog.html">اقرأ أدلة المواد والصناعة</a>
+</div>
+<div class="procurement-guide-faq" aria-labelledby="procurementFaqTitle">
+<h3 id="procurementFaqTitle">أسئلة شائعة حول شراء المواد الكيميائية</h3>
+<details>
+<summary>ما البيانات التي أضيفها إلى طلب الشراء؟ <i class="fas fa-plus" aria-hidden="true"></i></summary>
+<p>اذكر الاسم الكيميائي ورقم CAS أو الصيغة إن توفرا، والدرجة أو النقاء، والكمية، ونوع العبوة، ومكان وموعد التسليم. أضف متطلبات المستندات الفنية إذا كانت لازمة.</p>
+</details>
+<details>
+<summary>كيف أقارن عروض الموردين؟ <i class="fas fa-plus" aria-hidden="true"></i></summary>
+<p>قارن العروض على مواصفة وكمية موحدتين، ثم راجع الحد الأدنى للطلب والعبوة ومكان التسليم ومدة التوريد وشروط السداد والمستندات الفنية.</p>
+</details>
+<details>
+<summary>ماذا أفعل إذا لم أعرف رقم CAS؟ <i class="fas fa-plus" aria-hidden="true"></i></summary>
+<p>ابدأ بالاسم الشائع أو التجاري والصيغة والاستخدام المقصود، واطلب تأكيد الهوية الكيميائية ورقم CAS من المورد قبل اعتماد العرض.</p>
+</details>
 </div>
 </section>
 
@@ -1508,7 +1546,7 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <div class="rfq-login-notice" id="rfqLoginNotice" style="display:none;">
 <i class="fas fa-info-circle"></i>
 <div>
-<strong>لاحظ:</strong> لإرسال طلب عرض سعر، لازم تسجّل دخولك أولاً.
+<strong>ملاحظة:</strong> سجّل الدخول لإرسال طلب عرض سعر.
 <a href="auth.html?redirect=rfq">تسجيل الدخول من هنا</a>
 </div>
 </div>
@@ -2046,7 +2084,7 @@ const PWAManager = {
                     </ol>
                     <div style="margin-top:10px;padding-top:10px;border-top:1px dashed rgba(243,156,18,0.3);font-size:0.75rem;">
                         <i class="fas fa-lightbulb" style="color:#f39c12;"></i>
-                        <strong>ملاحظة:</strong> لو الأيقونة مش ظاهرة، جرّب تحديث الصفحة (F5) أو افتح الموقع في تاب جديد.
+                        <strong>ملاحظة:</strong> إذا لم تظهر الأيقونة، أعد تحميل الصفحة أو افتح الموقع في علامة تبويب جديدة.
                     </div>
                 `;
             } else {
@@ -2840,7 +2878,7 @@ const loadFollowingFromDB = async () => {
 const toggleFollow = async (supplierId, btn) => {
     if (!isValidUUID(supplierId)) return;
     if (!state.user) {
-        showToast('🔒', 'سجّل دخولك', 'لازم تسجل دخولك لمتابعة الموردين', 'تسجيل الدخول', 'auth.html', 'warning');
+        showToast('🔒', 'تسجيل الدخول مطلوب', 'سجّل الدخول لمتابعة الموردين.', 'تسجيل الدخول', 'auth.html', 'warning');
         return;
     }
 
@@ -2868,7 +2906,7 @@ const toggleFollow = async (supplierId, btn) => {
             });
         } catch (e) {}
         btn?.classList.add('following');
-        showToast('🔔', 'تتابع المورد', 'هتوصلك إشعارات بمنتجاته الجديدة', null, null, 'success');
+        showToast('🔔', 'تتابع المورد', 'ستتلقى إشعارات عند إضافة منتجات جديدة.', null, null, 'success');
     }
 };
 
@@ -3101,7 +3139,7 @@ const loadProducts = async ({ append = false } = {}) => {
                 state.hasMore = false;
                 if (sentinel) sentinel.style.display = 'none';
                 if (!append && container && !state.products.length) {
-                    container.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><h3>لا توجد منتجات</h3><p>جرب تغيير الفلاتر</p></div>`;
+                    container.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><h3>لا توجد منتجات</h3><p>عدّل خيارات التصفية وحاول مرة أخرى.</p></div>`;
                 }
                 state.loading = false;
                 if (infiniteLoading) infiniteLoading.style.display = 'none';
@@ -3117,7 +3155,7 @@ const loadProducts = async ({ append = false } = {}) => {
             state.hasMore = false;
             if (sentinel) sentinel.style.display = 'none';
             if (!append && container) {
-                container.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><h3>لا توجد منتجات</h3><p>جرب تغيير الفلاتر</p></div>`;
+                container.innerHTML = `<div class="empty-state"><i class="fas fa-box-open"></i><h3>لا توجد منتجات</h3><p>عدّل خيارات التصفية وحاول مرة أخرى.</p></div>`;
             }
             state.loading = false;
             if (infiniteLoading) infiniteLoading.style.display = 'none';
@@ -3493,7 +3531,7 @@ const showWishlistModal = async () => {
     const body = document.getElementById('wishlistModalBody');
 
     if (!state.wishlist.size) {
-        body.innerHTML = `<div class="empty-state" style="border:none;"><i class="fas fa-heart"></i><h3>المفضلة فاضية</h3><p>اضغط ❤️ على أي منتج لحفظه هنا</p></div>`;
+        body.innerHTML = `<div class="empty-state" style="border:none;"><i class="fas fa-heart"></i><h3>قائمة المفضلة فارغة</h3><p>احفظ المنتجات التي تود الرجوع إليها لتظهر هنا.</p></div>`;
     } else {
         body.innerHTML = `<div class="infinite-loading"><span>جاري التحميل</span><div class="dots"><span></span><span></span><span></span></div></div>`;
         try {
@@ -3959,7 +3997,7 @@ const initSearchModes = () => {
                 input.setAttribute('dir', 'ltr');
                 input.style.textAlign = 'left';
             } else {
-                input.placeholder = 'ابحث عن منتج... مثل: صودا كاوية';
+                input.placeholder = 'مثال: هيدروكسيد الصوديوم أو NaOH';
                 input.removeAttribute('dir');
                 input.style.textAlign = '';
             }
@@ -4658,5 +4696,8 @@ window.NotificationsManager = NotificationsManager;
 window.MessagesManager = MessagesManager;
 window.openShareModal = () => {};
 </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

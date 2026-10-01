@@ -4,13 +4,13 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
 
-    <title>كيماتو | جميع المنتجات الكيماوية في مصر | B2B Chemicals Marketplace</title>
-    <meta name="description" content="تصفح جميع المواد الكيماوية في مصر — صودا كاوية، حمض كبريتيك، مذيبات، وكل المواد الخام. ابحث برقم CAS، قارن الأسعار، وتواصل مباشرة مع موردين موثّقين." />
+    <title>كتالوج المنتجات الكيميائية في مصر | كيماتو</title>
+    <meta name="description" content="تصفح منتجات المواد الكيميائية والخامات الصناعية على كيماتو. ابحث بالاسم أو رقم CAS، وراجع الدرجة والنقاء والعبوة وبيانات التواصل مع المورد." />
     <meta name="robots" content="index, follow" />
     <meta name="keywords" content="كيماويات,كيماتو,CAS,صودا كاوية,حمض كبريتيك,مذيبات,مواد خام,موردين كيماويات,مصر,B2B" />
 
     <meta property="og:title" content="كيماتو | جميع المنتجات الكيماوية" />
-    <meta property="og:description" content="تصفح كل المواد الكيماوية في مصر. ابحث برقم CAS وقارن الأسعار." />
+    <meta property="og:description" content="ابحث بالاسم أو رقم CAS، وراجع المواصفات المنشورة وبيانات التواصل مع المورد." />
     <meta property="og:type" content="website" />
     <meta property="og:url" content="https://chemato.vercel.app/all-products.html" />
     <meta property="og:image" content="https://chemato.vercel.app/logo.png" />
@@ -1701,15 +1701,15 @@
             <div class="header-content">
                 <div class="header-badge">
                     <span class="dot"></span>
-                    <span>سوق المواد الكيماوية في مصر</span>
+                    <span>كتالوج المواد الكيميائية في مصر</span>
                 </div>
 
                 <h1 id="pageTitle">
-                    🧪 <span class="highlight">جميع المنتجات</span> الكيماوية
+                    🧪 <span class="highlight">المنتجات الكيميائية</span> والخامات الصناعية
                 </h1>
 
                 <p class="subtitle">
-                    ابحث برقم CAS أو بالاسم، قارن الأسعار، وتواصل مباشرة مع موردين موثّقين — أكثر من صنف من المواد الخام والمذيبات والمواد الكيميائية
+                    ابحث بالاسم أو رقم CAS، واستخدم الفلاتر لمراجعة المواصفات المتاحة. افتح صفحة المنتج للتواصل مع المورد وطلب تفاصيل العرض.
                 </p>
 
                 <div class="stats-bar" role="list">
@@ -2721,7 +2721,7 @@
                     <div class="empty-state">
                         <i class="fas fa-box-open empty-icon"></i>
                         <h3>لا توجد منتجات</h3>
-                        <p>${state.search ? 'جرب البحث بكلمات مختلفة' : 'لم نجد أي منتجات تطابق معايير البحث'}</p>
+                        <p>${state.search ? 'جرّب كلمات بحث أخرى أو رقم CAS مختلفًا' : 'لا توجد منتجات تطابق معايير البحث الحالية'}</p>
                         <button class="btn-reset-filters" id="emptyResetBtn" type="button">
                             <i class="fas fa-redo"></i> إعادة تعيين الفلاتر
                         </button>
@@ -3027,7 +3027,7 @@
                     // معالج النقر على زر "تواصل عبر الموقع"
                     if (!state.user) {
                         e.preventDefault();
-                        showToast('🔐', 'سجّل دخولك', 'لازم تسجل دخول للتواصل عبر الموقع', 'warning');
+                        showToast('🔐', 'تسجيل الدخول مطلوب', 'سجّل الدخول للتواصل مع المورد عبر الموقع.', 'warning');
                         const chatUrl = btn.getAttribute('href');
                         setTimeout(() => {
                             window.location.href = `auth.html?redirect=${encodeURIComponent(chatUrl)}`;
@@ -3484,8 +3484,8 @@
                 body.innerHTML = `
                     <div class="empty-state" style="border: none; padding: 40px 20px;">
                         <i class="fas fa-heart empty-icon"></i>
-                        <h3>المفضلة فاضية</h3>
-                        <p>اضغط ❤️ على أي منتج لحفظه هنا</p>
+                        <h3>قائمة المفضلة فارغة</h3>
+                        <p>احفظ المنتجات التي تود الرجوع إليها لتظهر هنا.</p>
                     </div>
                 `;
             } else {
@@ -3683,5 +3683,8 @@
             init();
         }
     </script>
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>

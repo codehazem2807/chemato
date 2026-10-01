@@ -5,14 +5,14 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 
 <title id="pageTitle">المقال | كيماتو</title>
-<meta name="description" id="pageDescription" content="اقرأ المقال كاملاً على كيماتو">
+<meta name="description" id="pageDescription" content="أدلة ومقالات كيماتو عن المواد الكيميائية ومواصفات الشراء والتوريد في مصر.">
 <meta name="robots" content="index, follow">
 <meta name="theme-color" content="#0a2540">
 
 <meta property="og:type" content="article">
 <meta property="og:site_name" content="كيماتو">
 <meta property="og:title" id="ogTitle" content="المقال | كيماتو">
-<meta property="og:description" id="ogDescription" content="اقرأ المقال كاملاً">
+<meta property="og:description" id="ogDescription" content="أدلة ومقالات عن المواد الكيميائية ومواصفات الشراء والتوريد في مصر.">
 <meta property="og:url" id="ogUrl" content="https://chemato.vercel.app/blog.html">
 <meta property="og:image" id="ogImage" content="https://chemato.vercel.app/logo.png">
 <meta property="og:image:width" content="1200">
@@ -21,7 +21,7 @@
 
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" id="twTitle" content="المقال | كيماتو">
-<meta name="twitter:description" id="twDescription" content="اقرأ المقال كاملاً">
+<meta name="twitter:description" id="twDescription" content="أدلة ومقالات عن المواد الكيميائية ومواصفات الشراء والتوريد في مصر.">
 <meta name="twitter:image" id="twImage" content="https://chemato.vercel.app/logo.png">
 
 <link rel="canonical" id="pageCanonical" href="https://chemato.vercel.app/blog.html">
@@ -1236,7 +1236,7 @@ a { color: inherit; text-decoration: none; }
       <a href="blog.html">المدونة</a>
       <a href="auth.html">تسجيل الدخول</a>
     </div>
-    <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيماوية في مصر</div>
+    <div class="footer-copy">© 2026 كيماتو — سوق المواد الكيميائية في مصر</div>
   </div>
 </footer>
 
@@ -1585,8 +1585,8 @@ const initScrollTop = () => {
 // UPDATE META
 // ============================================================
 const updateMetaTags = (post) => {
-  const title = post.title || 'مقال';
-  const description = (post.excerpt || stripHtml(post.content).substring(0, 160) || '').substring(0, 160);
+  const title = post.title || 'مقال عن المواد الكيميائية';
+  const description = (post.excerpt || stripHtml(post.content) || 'دليل ومقال عن المواد الكيميائية ومواصفات الشراء والتوريد في مصر.').trim().substring(0, 160);
   const image = isValidUrl(post.image_url) ? post.image_url : SITE_URL + '/logo.png';
   const canonical = SITE_URL + '/blog/' + encodeURIComponent(post.slug || post.id);
 
@@ -2115,5 +2115,8 @@ if (document.readyState === 'loading') {
 }
 </script>
 
+
+<script src="/chemato-push-config.js"></script>
+<script src="/chemato-push.js"></script>
 </body>
 </html>
