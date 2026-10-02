@@ -25,6 +25,19 @@
 <meta name="twitter:image" id="twImage" content="https://chemato.vercel.app/logo.png">
 
 <link rel="canonical" id="pageCanonical" href="https://chemato.vercel.app/blog.html">
+<script>
+(() => {
+  const params = new URLSearchParams(window.location.search);
+  const pathMatch = window.location.pathname.match(/^\/blog\/([^/]+)\/?$/);
+  const pathSlug = pathMatch ? decodeURIComponent(pathMatch[1]) : '';
+  const slug = params.get('slug') || pathSlug;
+  if (!slug) return;
+
+  const canonical = `https://chemato.vercel.app/blog/${encodeURIComponent(slug)}`;
+  document.getElementById('pageCanonical')?.setAttribute('href', canonical);
+  document.getElementById('ogUrl')?.setAttribute('content', canonical);
+})();
+</script>
 <link rel="icon" type="image/x-icon" href="logo.ico">
 <link rel="icon" type="image/png" sizes="32x32" href="logo.png">
 <link rel="apple-touch-icon" href="logo.png">
@@ -1169,6 +1182,97 @@ a { color: inherit; text-decoration: none; }
     transition-duration: 0.01ms !important;
   }
 }
+/* Editorial article layout */
+:root {
+  --bg: #f3f6f2; --surface: #fff; --surface-2: #eaf0eb; --border: #d9e3dc;
+  --text: #172c26; --text-muted: #586c63; --text-sub: #77887f;
+  --primary-500: #496d8a; --primary-600: #3d607c; --primary-700: #294f57;
+  --accent: #d97839; --accent-dark: #a84d2c;
+  --r-sm: 6px; --r-md: 8px; --r-lg: 8px; --r-xl: 8px;
+}
+[data-theme="dark"] {
+  --bg: #101b18; --surface: #182722; --surface-2: #21342d; --border: #30453c;
+  --text: #edf3ee; --text-muted: #b2c0b8; --text-sub: #85988e;
+  --primary-500: #82a6c0; --primary-600: #7397b2; --primary-700: #9db7c9;
+  --accent: #f1a16e; --accent-dark: #e08a55;
+}
+.main-container { max-width: 1220px; padding-top: 28px; }
+.back-btn { border-radius: 5px; box-shadow: none; margin-bottom: 18px; }
+.back-btn:hover { transform: translateX(2px); box-shadow: none; }
+.post-hero {
+  max-width: 1040px; margin: 0 auto 22px;
+  padding: clamp(30px, 5vw, 58px) clamp(24px, 6vw, 76px);
+  border-radius: 8px;
+  background: var(--grad-hero, linear-gradient(120deg, #172f38, #294f57 62%, #47757a));
+  box-shadow: 0 14px 32px rgba(23,60,51,.14);
+}
+.post-hero::before, .post-hero::after { display: none; }
+.hero-content { max-width: 850px; margin: 0; }
+.hero-category {
+  padding: 5px 11px; margin-bottom: 18px; border: 1px solid rgba(255,255,255,.22);
+  border-radius: 4px; background: rgba(255,255,255,.08); color: #e2c09e;
+}
+.hero-category i { color: #f1c7a9; }
+.hero-category:hover { transform: none; background: rgba(255,255,255,.13); }
+.post-hero h1 {
+  max-width: 820px; margin-bottom: 24px; font-size: clamp(1.8rem, 4vw, 3rem);
+  line-height: 1.45; letter-spacing: 0; background: none; color: #fff;
+  -webkit-text-fill-color: currentColor;
+}
+.hero-meta { gap: 12px 22px; padding-top: 17px; }
+.hero-meta-item { font-size: .82rem; }
+.hero-meta-item i { color: #f1c7a9; }
+.post-controls { max-width: 1040px; margin: 0 auto 20px; padding: 8px 10px; border-radius: 6px; box-shadow: none; }
+.control-btn { border-radius: 4px; }
+.post-featured-image { max-width: 1040px; margin: 0 auto 30px; border-radius: 7px; box-shadow: none; }
+.post-layout { max-width: 1040px; margin: 0 auto; grid-template-columns: minmax(0, 1fr) 280px; gap: 40px; }
+.post-content {
+  padding: 14px 0 28px; border: 0; border-radius: 0; background: transparent;
+  box-shadow: none; font-size: calc(1.08rem * var(--font-scale)); line-height: 2.05;
+}
+.post-content h1, .post-content h2, .post-content h3, .post-content h4 { letter-spacing: 0; }
+.post-content h2 { margin-top: 44px; padding-right: 14px; border-right: 3px solid var(--accent); }
+.post-content h3 { color: var(--primary-700); }
+.post-content p, .post-content li { color: var(--text-muted); }
+.post-content blockquote { border-radius: 5px; background: var(--surface-2); border-right-color: var(--accent); }
+.post-content img { border-radius: 6px; box-shadow: none; }
+.post-sidebar { gap: 14px; }
+.author-card, .toc-card, .sidebar-share { border-radius: 7px; box-shadow: none; }
+.author-card { background: var(--surface); border-width: 1px; }
+.author-card::before { display: none; }
+.author-contact-btn { border-radius: 5px; background: #496d8a; box-shadow: none; }
+.author-contact-btn:hover { background: #3d607c; transform: none; box-shadow: none; }
+.toc-link { border-radius: 4px; }
+.share-section { padding-top: 22px; }
+.share-btn { width: 40px; height: 40px; box-shadow: none; }
+.share-btn:hover { transform: translateY(-2px); box-shadow: none; }
+.related-section { max-width: 1040px; margin: 52px auto 0; }
+.related-header { border-right-color: var(--accent); }
+.related-header i { color: var(--accent); }
+.related-card { border-radius: 7px; }
+.related-card:hover { transform: translateY(-3px); }
+.footer { background: #172f38; }
+@media (max-width: 1024px) {
+  .post-layout { grid-template-columns: 1fr; gap: 20px; }
+  .post-sidebar { order: 0; }
+  .toc-card { display: block; }
+  .post-content { max-width: 780px; margin: 0 auto; }
+}
+@media (max-width: 640px) {
+  .main-container { padding: 16px 14px 48px; }
+  .post-hero { padding: 30px 22px 25px; margin-bottom: 16px; }
+  .post-hero h1 { font-size: 1.65rem; line-height: 1.55; }
+  .hero-meta { gap: 10px 14px; }
+  .hero-meta-item { font-size: .74rem; }
+  .post-controls { gap: 5px; }
+  .control-btn { padding: 7px 9px; }
+  .post-featured-image { margin-bottom: 18px; aspect-ratio: 4 / 3; }
+  .post-content { padding: 4px 2px 20px; font-size: calc(1rem * var(--font-scale)); line-height: 1.95; }
+  .post-content h2 { margin: 32px 0 14px; }
+  .post-sidebar { gap: 12px; }
+  .toc-card { display: none; }
+  .related-section { margin-top: 36px; }
+}
 </style>
 <link rel="stylesheet" href="/chemato-core.css?v=9" />
 </head>
@@ -1622,6 +1726,10 @@ const updateMetaTags = (post) => {
       "headline": title,
       "description": description,
       "image": image,
+      "inLanguage": "ar-EG",
+      "articleSection": post.category || undefined,
+      "keywords": Array.isArray(post.tags) ? post.tags.join(', ') : undefined,
+      "wordCount": stripHtml(post.content || '').trim().split(/\s+/).filter(Boolean).length,
       "datePublished": post.published_at || post.created_at,
       "dateModified": post.updated_at || post.created_at,
       "author": { "@type": "Person", "name": post.author_name || "كيماتو" },

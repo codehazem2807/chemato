@@ -1134,6 +1134,91 @@
             }
         }
     </style>
+    <style>
+        /* Editorial refresh */
+        :root {
+            --c-bg: #f3f6f2; --c-surface: #fff; --c-surface-2: #eaf0eb;
+            --c-border: #d9e3dc; --c-text: #172c26; --c-text-muted: #586c63;
+            --c-text-sub: #77887f; --c-verified: #496d8a; --c-purple: #d97839;
+            --r-sm: 6px; --r-md: 8px; --r-lg: 8px; --r-xl: 8px;
+        }
+        [data-theme="dark"] {
+            --c-bg: #101b18; --c-surface: #182722; --c-surface-2: #21342d;
+            --c-border: #30453c; --c-text: #edf3ee; --c-text-muted: #b2c0b8;
+            --c-text-sub: #85988e; --c-verified: #82a6c0; --c-purple: #f1a16e;
+        }
+        .main-container { max-width: 1240px; padding-top: 28px; }
+        .hero {
+            text-align: right; padding: 54px clamp(24px, 5vw, 72px); margin-bottom: 30px;
+            border-radius: 8px; background: linear-gradient(115deg, #173e35, #235648 58%, #2f6754);
+            box-shadow: 0 16px 36px rgba(23, 60, 51, .16);
+        }
+        .hero::before, .hero-bg-icons { display: none; }
+        .hero-content { max-width: 760px; margin: 0; }
+        .hero-badge { color: #d9e8db; background: rgba(255,255,255,.08); border-color: rgba(255,255,255,.2); border-radius: 4px; }
+        .hero-badge .dot { background: #d49a69; box-shadow: none; }
+        .hero h1 { max-width: 680px; font-size: clamp(2rem, 4vw, 3.2rem); line-height: 1.35; }
+        .hero h1 .highlight { background: none; color: #d8aa7f; -webkit-text-fill-color: currentColor; }
+        .hero p.subtitle { margin: 0 0 28px; max-width: 680px; color: rgba(255,255,255,.78); }
+        .search-wrapper { max-width: 620px; margin: 0; border: 1px solid rgba(255,255,255,.28); border-radius: 6px; box-shadow: none; }
+        .search-btn { border-radius: 4px; background: #496d8a; }
+        .filters-section { margin: 0 0 30px; }
+        .filters-label, .filters { justify-content: flex-start; text-align: right; }
+        .filters-label { color: var(--c-text-muted); }
+        .filter-chip { border-radius: 5px; padding: 8px 15px; }
+        .filter-chip:hover { transform: none; }
+        .filter-chip.active { background: #496d8a; box-shadow: none; }
+        [data-theme="dark"] .filter-chip.active { background: #426980; }
+        .featured-section, [data-theme="dark"] .featured-section { padding: 0; margin-bottom: 38px; border: 0; border-radius: 0; background: transparent; }
+        .featured-header { margin-bottom: 16px; border-right-color: #d97839; }
+        .featured-header i { color: #d97839; animation: none; }
+        [data-theme="dark"] .featured-header i { color: #f1a16e; }
+        .featured-main, .featured-mini, .post-card { border-radius: 7px; }
+        .featured-main { border-color: var(--c-border); }
+        .featured-main:hover { border-color: var(--c-verified); transform: translateY(-2px); }
+        .featured-main-media { aspect-ratio: 1.72 / 1; }
+        .featured-main-badge { border-radius: 4px; background: #172f38; box-shadow: none; }
+        .featured-main-body { padding: 22px 24px 24px; }
+        .featured-main-category, .post-card-category { border-radius: 4px; }
+        .featured-main-title { font-size: 1.45rem; line-height: 1.5; }
+        .featured-mini { border-radius: 6px; padding: 9px; }
+        .featured-mini:hover { border-color: var(--c-verified); transform: translateX(-2px); }
+        .featured-mini-media { border-radius: 4px; }
+        .section-header { margin-bottom: 20px; }
+        .section-title { border-right-color: var(--c-verified); }
+        .section-title i { color: var(--c-verified); }
+        .posts-grid { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 20px; }
+        .post-card { border-width: 1px; box-shadow: 0 2px 8px rgba(23,44,38,.035); }
+        .post-card:hover { transform: translateY(-3px); border-color: var(--c-verified); box-shadow: 0 10px 24px rgba(23,44,38,.09); }
+        .post-card-media { aspect-ratio: 1.58 / 1; }
+        .post-card-body { padding: 18px 19px 17px; gap: 9px; }
+        .post-card-title { font-size: 1.04rem; line-height: 1.65; }
+        .post-card-excerpt { line-height: 1.8; }
+        .post-card-footer { border-top-color: var(--c-border); }
+        .read-more { color: var(--c-verified); }
+        .footer { margin-top: 48px; background: #172f38; }
+        @media (max-width: 900px) { .posts-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); } }
+        @media (max-width: 640px) {
+            .main-container { padding: 16px 14px 40px; }
+            .hero { padding: 32px 22px; margin-bottom: 24px; }
+            .hero h1 { font-size: 1.8rem; }
+            .hero p.subtitle { font-size: .94rem; }
+            .featured-main-body { padding: 17px; }
+            .featured-main-title { font-size: 1.15rem; }
+            .featured-side { flex-direction: column; overflow: visible; }
+            .featured-mini { min-width: 0; }
+            .posts-grid { grid-template-columns: 1fr; gap: 14px; }
+            .post-card { display: grid; grid-template-columns: 112px minmax(0, 1fr); }
+            .post-card-media { aspect-ratio: auto; min-height: 100%; }
+            .post-card-category { top: 7px; right: 7px; padding: 4px 7px; font-size: .62rem; }
+            .post-card-category i { display: none; }
+            .post-card-body { padding: 12px 13px; gap: 6px; }
+            .post-card-title { min-height: 0; font-size: .9rem; line-height: 1.55; -webkit-line-clamp: 3; }
+            .post-card-excerpt { font-size: .76rem; -webkit-line-clamp: 2; }
+            .post-card-tags, .post-card-footer { display: none; }
+            .post-card-meta { gap: 8px; font-size: .65rem; padding-top: 5px; }
+        }
+    </style>
 <link rel="stylesheet" href="/chemato-core.css?v=9" />
 </head>
 <body>
@@ -1203,7 +1288,7 @@
                 </div>
 
                 <h1 id="heroTitle">
-                    📰 <span class="highlight">أدلة ومقالات</span> المواد الكيميائية
+                    <span class="highlight">أدلة ومقالات</span> المواد الكيميائية
                 </h1>
 
                 <p class="subtitle">
@@ -1239,21 +1324,6 @@
             <div class="filters" id="filterButtons" role="tablist">
                 <button class="filter-chip active" data-category="all" role="tab" aria-selected="true">
                     <i class="fas fa-globe"></i> الكل
-                </button>
-                <button class="filter-chip" data-category="دليل شراء" role="tab" aria-selected="false">
-                    <i class="fas fa-shopping-cart"></i> دليل شراء
-                </button>
-                <button class="filter-chip" data-category="موردين" role="tab" aria-selected="false">
-                    <i class="fas fa-building"></i> موردين
-                </button>
-                <button class="filter-chip" data-category="أسعار" role="tab" aria-selected="false">
-                    <i class="fas fa-money-bill-wave"></i> أسعار
-                </button>
-                <button class="filter-chip" data-category="ريادة أعمال" role="tab" aria-selected="false">
-                    <i class="fas fa-rocket"></i> ريادة أعمال
-                </button>
-                <button class="filter-chip" data-category="أخبار" role="tab" aria-selected="false">
-                    <i class="fas fa-bullhorn"></i> أخبار
                 </button>
             </div>
         </section>
@@ -2040,21 +2110,67 @@
         // FILTERS
         // ============================================================
         const initFilters = () => {
-            document.querySelectorAll('.filter-chip').forEach(chip => {
-                chip.addEventListener('click', () => {
-                    document.querySelectorAll('.filter-chip').forEach(c => {
-                        c.classList.remove('active');
-                        c.setAttribute('aria-selected', 'false');
-                    });
-                    chip.classList.add('active');
-                    chip.setAttribute('aria-selected', 'true');
+            const container = document.getElementById('filterButtons');
+            container?.addEventListener('click', (event) => {
+                const chip = event.target.closest('.filter-chip');
+                if (!chip || !container.contains(chip)) return;
 
-                    state.category = chip.dataset.category || 'all';
+                container.querySelectorAll('.filter-chip').forEach(item => {
+                    item.classList.remove('active');
+                    item.setAttribute('aria-selected', 'false');
+                });
+                chip.classList.add('active');
+                chip.setAttribute('aria-selected', 'true');
+
+                state.category = chip.dataset.category || 'all';
+                state.page = 1;
+                syncToURL();
+                loadPosts();
+            });
+        };
+
+        const loadCategories = async () => {
+            const container = document.getElementById('filterButtons');
+            if (!container) return;
+
+            try {
+                const { data, error } = await supabase
+                    .from('blog_posts')
+                    .select('category')
+                    .eq('status', 'published')
+                    .order('category', { ascending: true });
+
+                if (error) throw error;
+
+                const counts = new Map();
+                (data || []).forEach(({ category }) => {
+                    const name = String(category || '').trim();
+                    if (name) counts.set(name, (counts.get(name) || 0) + 1);
+                });
+
+                const categories = [...counts.entries()].sort(([left], [right]) => left.localeCompare(right, 'ar'));
+                const hasSelectedCategory = categories.some(([name]) => name === state.category);
+                const categoryWasReset = state.category !== 'all' && !hasSelectedCategory;
+                if (categoryWasReset) {
+                    state.category = 'all';
                     state.page = 1;
                     syncToURL();
-                    loadPosts();
-                });
-            });
+                }
+
+                const allButton = `<button class="filter-chip" data-category="all" role="tab" aria-selected="${state.category === 'all'}"><i class="fas fa-globe"></i> الكل</button>`;
+                const categoryButtons = categories.map(([name, count]) => `
+                    <button class="filter-chip" data-category="${escapeHtml(name)}" role="tab" aria-selected="${state.category === name}">
+                        <span>${escapeHtml(name)}</span><small>${count.toLocaleString('ar-EG')}</small>
+                    </button>
+                `).join('');
+
+                container.innerHTML = allButton + categoryButtons;
+                container.querySelector(`[data-category="${CSS.escape(state.category)}"]`)?.classList.add('active');
+                return categoryWasReset;
+            } catch (error) {
+                console.warn('Category load error:', error.message);
+                return false;
+            }
         };
 
         const resetFilters = () => {
@@ -2115,10 +2231,8 @@
 
             await checkUser();
 
-            await Promise.all([
-                loadFeatured(),
-                loadPosts(),
-            ]);
+            const [categoryWasReset] = await Promise.all([loadCategories(), loadFeatured(), loadPosts()]);
+            if (categoryWasReset) await loadPosts();
 
             setTimeout(() => {
                 if (state.total > 0) {
