@@ -26,20 +26,20 @@
    CHEMOTO 4.0 — Design System (Mobile-First)
    ============================================================ */
 :root {
-    --c-primary-50:#eef6fc; --c-primary-100:#d4e7f5; --c-primary-500:#2c7ab8;
-    --c-primary-600:#1d5b8e; --c-primary-700:#144167; --c-primary-800:#0d2e4a; --c-primary-900:#0a2540;
-    --c-accent:#2ecc71; --c-accent-dark:#22a95c; --c-warning:#f39c12; --c-danger:#e74c3c;
-    --c-whatsapp:#25D366; --c-purple:#8b5cf6; --c-verified:#1e88e5;
-    --c-request:#FF6B35; --c-request-dark:#E55A2B;
-    --c-bg:#f6f8fb; --c-surface:#ffffff; --c-surface-2:#f9fbfd; --c-border:#e3eaf2;
-    --c-text:#0a1f33; --c-text-muted:#5a6b7e; --c-text-sub:#8595a8;
+    --c-primary-50:#edf4f3; --c-primary-100:#d8e7e4; --c-primary-500:#47757a;
+    --c-primary-600:#35636a; --c-primary-700:#294f57; --c-primary-800:#203f47; --c-primary-900:#172f38;
+    --c-accent:#087f70; --c-accent-dark:#06695e; --c-warning:#b5792e; --c-danger:#b54c45;
+    --c-whatsapp:#20a86b; --c-purple:#64729b; --c-verified:#397c9c;
+    --c-request:#c8793f; --c-request-dark:#a85e32;
+    --c-bg:#f2f6f5; --c-surface:#ffffff; --c-surface-2:#f7f9f8; --c-border:#dce6e3;
+    --c-text:#1d3034; --c-text-muted:#56696b; --c-text-sub:#7b8c8d;
     --sh-sm:0 1px 3px rgba(10,37,64,0.06); --sh-md:0 4px 16px rgba(10,37,64,0.08);
     --sh-lg:0 12px 32px rgba(10,37,64,0.10); --sh-xl:0 20px 48px rgba(10,37,64,0.14);
     --sh-2xl:0 32px 64px rgba(10,37,64,0.18);
-    --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-full:999px;
+    --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:18px; --r-full:999px;
     --t-fast:150ms cubic-bezier(0.4,0,0.2,1); --t-base:250ms cubic-bezier(0.4,0,0.2,1);
     --t-slow:400ms cubic-bezier(0.4,0,0.2,1); --t-spring:400ms cubic-bezier(0.34,1.56,0.64,1);
-    --container:1320px; --header-h:64px; --sidebar-w:280px;
+    --container:1480px; --header-h:64px; --sidebar-w:288px;
     --safe-area-top: env(safe-area-inset-top, 0px);
     --safe-area-bottom: env(safe-area-inset-bottom, 0px);
     --safe-area-left: env(safe-area-inset-left, 0px);
@@ -262,7 +262,7 @@ input,select,textarea{font-family:inherit;font-size:16px} /* Prevents iOS zoom *
     .dashboard-layout{
         padding:24px;
         padding-bottom:24px;
-        grid-template-columns:1fr var(--sidebar-w);
+        grid-template-columns:var(--sidebar-w) minmax(0,1fr);
         gap:24px;
     }
 }
@@ -427,6 +427,7 @@ input,select,textarea{font-family:inherit;font-size:16px} /* Prevents iOS zoom *
     overflow-x:hidden;
 }
 @media (min-width:640px){.dashboard-main{gap:20px}}
+.dashboard-layout.auth-required .dashboard-main{grid-column:1/-1}
 
 /* ============================================================
    PAGE HEADER
@@ -1792,6 +1793,7 @@ const checkAuthAndLoad = async () => {
 
 const renderLoginRequired = () => {
     const main = document.getElementById('dashboardMain');
+    document.querySelector('.dashboard-layout')?.classList.add('auth-required');
     if (main) {
         main.innerHTML = `
             <div class="login-required-state">

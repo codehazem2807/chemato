@@ -56,17 +56,17 @@
    CHEMOTO 4.0 — Design System
    ============================================================ */
 :root {
-    --c-primary-50:#edf2f6; --c-primary-100:#dbe5ed; --c-primary-500:#496d8a;
-    --c-primary-600:#365873; --c-primary-700:#29445d; --c-primary-800:#20374b; --c-primary-900:#172a3a;
-    --c-accent:#bd5f37; --c-accent-dark:#a84d2c; --c-warning:#bd7e2f; --c-danger:#b4463d;
-    --c-whatsapp:#25D366; --c-purple:#8b5cf6; --c-verified:#1e88e5;
-    --c-lab-green:#bd5f37; --c-safety-orange:#d97839;
-    --c-bg:#f4f6f8; --c-surface:#ffffff; --c-surface-2:#f7f9fb; --c-border:#dce3e9;
-    --c-text:#24313b; --c-text-muted:#586773; --c-text-sub:#84909a;
+    --c-primary-50:#edf4f3; --c-primary-100:#d8e7e4; --c-primary-500:#47757a;
+    --c-primary-600:#35636a; --c-primary-700:#294f57; --c-primary-800:#203f47; --c-primary-900:#172f38;
+    --c-accent:#087f70; --c-accent-dark:#06695e; --c-warning:#b5792e; --c-danger:#b54c45;
+    --c-whatsapp:#20a86b; --c-purple:#64729b; --c-verified:#397c9c;
+    --c-lab-green:#087f70; --c-safety-orange:#c8793f;
+    --c-bg:#f2f6f5; --c-surface:#ffffff; --c-surface-2:#f7f9f8; --c-border:#dce6e3;
+    --c-text:#1d3034; --c-text-muted:#56696b; --c-text-sub:#7b8c8d;
     --sh-sm:0 1px 3px rgba(10,37,64,0.06); --sh-md:0 4px 16px rgba(10,37,64,0.08);
     --sh-lg:0 12px 32px rgba(10,37,64,0.10); --sh-xl:0 20px 48px rgba(10,37,64,0.14);
     --sh-2xl:0 32px 64px rgba(10,37,64,0.18);
-    --r-sm:8px; --r-md:14px; --r-lg:20px; --r-xl:28px; --r-full:999px;
+    --r-sm:6px; --r-md:10px; --r-lg:14px; --r-xl:18px; --r-full:999px;
     --t-fast:150ms cubic-bezier(0.4,0,0.2,1); --t-base:250ms cubic-bezier(0.4,0,0.2,1);
     --t-slow:400ms cubic-bezier(0.4,0,0.2,1); --t-spring:400ms cubic-bezier(0.34,1.56,0.64,1);
     --container:1320px; --header-h:64px;
@@ -272,7 +272,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .install-banner-close:hover{background:rgba(231,76,60,0.4)}
 
 .news-ticker{
-    background:rgba(0,25,51,0.95);backdrop-filter:blur(20px);
+    background:rgba(23,47,56,0.97);backdrop-filter:blur(20px);
     border-bottom:1px solid rgba(255,255,255,0.08);
     overflow:hidden;position:relative;display:none;height:38px;line-height:38px;z-index:98;
 }
@@ -309,13 +309,16 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.main-container{padding:20px 24px 100px}}
 
 .hero{
-    position:relative;border-radius:12px;padding:36px 20px 28px;overflow:hidden;
-    background-color:#172a3a;
-    background-image:linear-gradient(115deg,rgba(15,32,46,0.9),rgba(31,57,75,0.68)),url("chemato.png");
-    background-position:center;background-size:cover;background-repeat:no-repeat;
-    color:#fff;box-shadow:var(--sh-lg);min-height:auto;
+    position:relative;display:grid;grid-template-columns:minmax(0,1.05fr) minmax(280px,.95fr);
+    align-items:center;gap:clamp(24px,4vw,56px);border-radius:var(--r-lg);
+    padding:clamp(28px,4vw,54px);overflow:hidden;
+    background:linear-gradient(120deg,#17343d 0%,#214853 60%,#315b62 100%);
+    color:#fff;box-shadow:var(--sh-lg);min-height:480px;
 }
-@media (min-width:640px){.hero{padding:54px 48px 40px;min-height:0}}
+@media (min-width:640px){.hero{padding:54px 48px 46px}}
+.hero-media{position:relative;min-height:370px;height:100%;max-height:440px;overflow:hidden;border-radius:var(--r-sm);background:#dce9e7;isolation:isolate}
+.hero-media img{position:absolute;inset:0 0 0 auto;width:220%;height:100%;max-width:none;object-fit:cover;object-position:right center}
+@media (max-width:900px){.hero{grid-template-columns:minmax(0,1fr);gap:24px;min-height:0}.hero-content{text-align:center}.hero-media{min-height:220px;max-height:260px}.hero-media img{width:220%;object-position:right center}}
 .hero::before{content:'';position:absolute;inset:0;background-image:radial-gradient(circle at 20% 20%,rgba(255,255,255,0.06) 1px,transparent 1px),radial-gradient(circle at 80% 60%,rgba(255,255,255,0.06) 1px,transparent 1px);background-size:40px 40px,60px 60px;pointer-events:none}
 .hero::after{content:'';position:absolute;inset:0;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='56' height='100' viewBox='0 0 56 100'%3E%3Cpath d='M28 66L0 50L0 16L28 0L56 16L56 50L28 66L28 100' fill='none' stroke='rgba(255,255,255,0.03)' stroke-width='1'/%3E%3C/svg%3E");background-size:56px 100px;opacity:0.6;pointer-events:none}
 
@@ -323,7 +326,7 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 @media (min-width:640px){.molecule-visualizer{display:block}}
 .molecule-node{position:absolute;width:10px;height:10px;border-radius:50%;background:rgba(217,120,57,0.65);box-shadow:0 0 16px rgba(217,120,57,0.45);animation:nodePulse 3s ease-in-out infinite}
 
-.hero-content{position:relative;z-index:2;text-align:center;max-width:960px;margin:0 auto}
+.hero-content{position:relative;z-index:2;text-align:right;max-width:720px;margin:0;width:100%}
 .hero-badge{display:inline-flex;align-items:center;gap:8px;background:rgba(255,255,255,0.09);border:1px solid rgba(255,255,255,0.18);color:#e2eee9;padding:5px 14px;border-radius:7px;font-size:0.72rem;font-weight:700;margin-bottom:16px}
 @media (min-width:640px){.hero-badge{padding:6px 16px;font-size:0.78rem}}
 .hero-badge .dot{width:7px;height:7px;border-radius:50%;background:#e08a55;position:relative;flex-shrink:0}
@@ -331,10 +334,10 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .hero-badge .dot::after{animation-delay:1s}
 
 .hero h1{font-size:clamp(1.6rem,6vw,2.8rem);font-weight:900;line-height:1.35;margin-bottom:12px;letter-spacing:0}
-.hero h1 .highlight{color:#f1c7a9}
+.hero h1 .highlight{color:#a9dbcf}
 .hero p.subtitle{font-size:0.98rem;color:rgba(255,255,255,0.86);max-width:700px;margin:0 auto 22px;line-height:1.85}
 
-.stats-wrapper{margin:0 auto 24px;max-width:900px;border-radius:var(--r-lg);padding:2px;background:linear-gradient(135deg,rgba(73,109,138,0.55),rgba(217,120,57,0.4));position:relative;overflow:hidden}
+.stats-wrapper{margin:0 0 24px;max-width:900px;border-radius:var(--r-md);padding:1px;background:rgba(255,255,255,0.24);position:relative;overflow:hidden}
 .stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:2px;padding:10px 6px;background:rgba(10,37,64,0.3);border-radius:8px;position:relative}
 @media (min-width:640px){.stats{gap:4px;padding:14px 20px}}
 .stat-item{text-align:center;padding:6px 4px;transition:transform 0.3s ease;position:relative}
@@ -348,10 +351,15 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 .stat-label{display:block;font-size:0.6rem;color:rgba(255,255,255,0.7);font-weight:500;margin-top:2px}
 @media (min-width:640px){.stat-label{font-size:0.68rem}}
 
-.hero-buttons{display:flex;gap:8px;justify-content:center;flex-wrap:wrap;margin-bottom:14px}
+.hero-buttons{display:flex;gap:8px;justify-content:flex-start;flex-wrap:wrap;margin-bottom:14px}
 @media (max-width:639px){
-    .hero-buttons{flex-direction:column;width:100%}
+    .hero-buttons{flex-direction:column;width:100%;align-items:stretch}
     .hero-buttons .btn{width:100%}
+    .hero .hero-badge,.hero #welcomeContainer,.hero .share-buttons{display:none}
+    .hero h1{font-size:1.42rem;line-height:1.3}
+    .hero p.subtitle{font-size:0.88rem;line-height:1.55;margin-bottom:14px}
+    .hero .stats-wrapper{display:none}
+    .hero-media{min-height:140px;max-height:140px}
 }
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;padding:12px 24px;border-radius:var(--r-full);font-weight:700;font-size:0.88rem;transition:all var(--t-base);border:2px solid transparent;white-space:nowrap;position:relative;overflow:hidden;isolation:isolate;min-height:44px}
 @media (min-width:640px){.btn{padding:13px 28px;font-size:0.92rem}}
@@ -1182,6 +1190,9 @@ input,select,textarea{font-family:inherit;font-size:16px;max-width:100%}
 </button>
 </div>
 </div>
+<figure class="hero-media">
+<img src="chemato.png" alt="عبوات وخامات كيميائية ضمن منصة كيماتو للتوريد" fetchpriority="high" />
+</figure>
 </section>
 
 <!-- SEARCH -->
@@ -1217,34 +1228,34 @@ autocomplete="off" maxlength="100" aria-label="البحث" />
 <a href="all-products.html" class="view-all">عرض كل المنتجات <i class="fas fa-arrow-left"></i></a>
 </div>
 <div class="category-grid" id="categoryGrid">
-<a class="category-card" href="/chemicals/raw-materials" aria-label="تصفح الخامات الكيميائية">
+<a class="category-card" href="all-products.html?categorySlug=raw-materials" aria-label="تصفح الخامات الكيميائية">
 <span class="cat-icon">🧪</span><span class="cat-name">خامات كيماوية</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/acids" aria-label="تصفح الأحماض الكيميائية">
+<a class="category-card" href="all-products.html?categorySlug=acids" aria-label="تصفح الأحماض الكيميائية">
 <span class="cat-icon">⚗️</span><span class="cat-name">أحماض</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/solvents" aria-label="تصفح المذيبات الكيميائية">
+<a class="category-card" href="all-products.html?categorySlug=solvents" aria-label="تصفح المذيبات الكيميائية">
 <span class="cat-icon">🧴</span><span class="cat-name">مذيبات</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/cleaning-chemicals" aria-label="تصفح مواد التنظيف">
+<a class="category-card" href="all-products.html?categorySlug=cleaning-chemicals" aria-label="تصفح مواد التنظيف">
 <span class="cat-icon">🧼</span><span class="cat-name">منظفات</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/polymers" aria-label="تصفح البوليمرات">
+<a class="category-card" href="all-products.html?categorySlug=polymers" aria-label="تصفح البوليمرات">
 <span class="cat-icon">🧬</span><span class="cat-name">بوليمرات</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/cosmetics" aria-label="تصفح خامات مستحضرات التجميل">
+<a class="category-card" href="all-products.html?categorySlug=cosmetics" aria-label="تصفح خامات مستحضرات التجميل">
 <span class="cat-icon">🧴</span><span class="cat-name">مستحضرات تجميل</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/construction-chemicals" aria-label="تصفح كيماويات البناء">
+<a class="category-card" href="all-products.html?categorySlug=construction-chemicals" aria-label="تصفح كيماويات البناء">
 <span class="cat-icon">🏗️</span><span class="cat-name">مواد بناء</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/paints-coatings" aria-label="تصفح الدهانات والطلاءات">
+<a class="category-card" href="all-products.html?categorySlug=paints-coatings" aria-label="تصفح الدهانات والطلاءات">
 <span class="cat-icon">🎨</span><span class="cat-name">دهانات</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/agrochemicals" aria-label="تصفح الكيماويات الزراعية">
+<a class="category-card" href="all-products.html?categorySlug=agrochemicals" aria-label="تصفح الكيماويات الزراعية">
 <span class="cat-icon">🌱</span><span class="cat-name">أدوية زراعية</span><span class="cat-count">تصفح المواد</span>
 </a>
-<a class="category-card" href="/chemicals/pharmaceutical-chemicals" aria-label="تصفح المواد الكيميائية الدوائية">
+<a class="category-card" href="all-products.html?categorySlug=pharmaceutical-chemicals" aria-label="تصفح المواد الكيميائية الدوائية">
 <span class="cat-icon">🧫</span><span class="cat-name">أدوية ومواد دوائية</span><span class="cat-count">تصفح المواد</span>
 </a>
 </div>
@@ -2601,21 +2612,25 @@ const NewsTicker = {
 
         try {
             const now = new Date().toISOString();
-            const { data, error } = await supabase
-                .from('ticker_news')
-                .select('id, title, description, link_url, link_text, icon, color, priority')
-                .eq('is_active', true)
-                .or(`starts_at.is.null,starts_at.lte.${now}`)
-                .or(`ends_at.is.null,ends_at.gte.${now}`)
-                .order('priority', { ascending: false })
-                .order('display_order', { ascending: true })
-                .limit(20);
+            const pageSize = 100;
+            const allItems = [];
+            for (let offset = 0; ; offset += pageSize) {
+                const { data, error } = await supabase
+                    .from('ticker_news')
+                    .select('id, title, description, link_url, link_text, icon, color, priority')
+                    .eq('is_active', true)
+                    .or(`starts_at.is.null,starts_at.lte.${now}`)
+                    .or(`ends_at.is.null,ends_at.gte.${now}`)
+                    .order('priority', { ascending: false })
+                    .order('display_order', { ascending: true })
+                    .range(offset, offset + pageSize - 1);
 
-            if (error) throw error;
-            const promotionalContent = /(wa\.me|whatsapp|واتساب|(?:\+?20)?0?1[0125]\d{8}|مجاني|مجاناً|مجانًا|لحظة\s*بلحظة|آلاف\s+المشترين|تم\s+تطوير\s+هذا\s+الموقع)/i;
-            this.items = (data || []).filter(item => !promotionalContent.test([
-                item.title, item.description, item.link_url, item.link_text
-            ].filter(Boolean).join(' ')));
+                if (error) throw error;
+                const pageItems = data || [];
+                allItems.push(...pageItems);
+                if (pageItems.length < pageSize) break;
+            }
+            this.items = allItems;
 
             if (!this.items.length) {
                 this.ticker.classList.remove('show');
@@ -2672,7 +2687,7 @@ const NewsTicker = {
         }).join('');
 
         this.content.innerHTML = itemsHtml + itemsHtml;
-        const speed = Math.max(30, this.items.length * 12);
+        const speed = Math.min(240, Math.max(30, this.items.length * 9));
         this.content.style.animationDuration = `${speed}s`;
 
         this.content.querySelectorAll('.news-item[data-news-id]').forEach(el => {
@@ -4081,7 +4096,7 @@ const CATEGORY_LANDING_SLUGS = new Map([
 const getCategoryHref = (category) => {
     const slug = CATEGORY_LANDING_SLUGS.get(String(category.name || '').trim());
     return slug
-        ? `/chemicals/${slug}`
+    ? `all-products.html?categorySlug=${encodeURIComponent(slug)}`
         : `all-products.html?category=${encodeURIComponent(category.id)}`;
 };
 

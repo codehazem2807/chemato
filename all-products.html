@@ -1996,6 +1996,19 @@
             viewTracked: new Set(),
         };
 
+        const CATEGORY_NAMES_BY_SLUG = {
+            'raw-materials': ['خامات كيماوية'],
+            acids: ['أحماض'],
+            solvents: ['مذيبات'],
+            'cleaning-chemicals': ['منظفات'],
+            polymers: ['بوليمرات'],
+            cosmetics: ['مستحضرات تجميل'],
+            'construction-chemicals': ['مواد بناء'],
+            'paints-coatings': ['دهانات'],
+            agrochemicals: ['ادوية زراعيه', 'أدوية زراعية'],
+            'pharmaceutical-chemicals': ['ادوية', 'أدوية'],
+        };
+
         const WISHLIST_KEY = 'chemato-wishlist';
         const COMPARE_KEY = 'chemato-compare';
         const THEME_KEY = 'chemato-theme';
@@ -2380,6 +2393,19 @@
                     select.appendChild(option);
                 });
             } catch { /* silent */ }
+        };
+
+        const applyCategorySlugFromURL = () => {
+            const slug = new URLSearchParams(window.location.search).get('categorySlug');
+            const names = CATEGORY_NAMES_BY_SLUG[slug];
+            if (!names) return;
+
+            const category = state.allCategories.find(item => names.includes(item.name));
+            if (!category) return;
+
+            state.categoryId = category.id;
+            const select = document.getElementById('categoryFilter');
+            if (select) select.value = category.id;
         };
 
         // ============================================================
@@ -3632,7 +3658,6 @@
             initSearch();
             initFilters();
             initActiveFilters();
-            initInfiniteScroll();
             initScrollTop();
             initCardActions();
             initModals();
@@ -3650,12 +3675,16 @@
                 loadSuggestions(),
             ]);
 
+            applyCategorySlugFromURL();
+
             if (state.user) await syncWishlistFromDB();
 
             await Promise.all([
                 loadFeatured(),
                 loadProducts(),
             ]);
+
+            initInfiniteScroll();
 
             setupRealtime();
 

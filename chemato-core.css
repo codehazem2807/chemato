@@ -4,15 +4,15 @@
    ============================================================ */
 
 :root {
-    --c-corporate-blue: #29445d;
-    --c-corporate-light: #eaf0f5;
-    --c-safety-orange: #d97839;
+    --c-corporate-blue: #294f57;
+    --c-corporate-light: #edf4f3;
+    --c-safety-orange: #c8793f;
     --c-safety-yellow: #d9a344;
-    --c-lab-green: #bd5f37;
+    --c-lab-green: #087f70;
     --c-glass-white: rgba(255, 255, 255, 0.72);
-    --grad-hero: linear-gradient(120deg, #172a3a 0%, #29445d 58%, #3a5c76 100%);
-    --grad-accent: linear-gradient(120deg, #bd5f37 0%, #a84d2c 100%);
-    --grad-danger: linear-gradient(135deg, #d97839 0%, #b95531 100%);
+    --grad-hero: linear-gradient(120deg, #172f38 0%, #294f57 58%, #47757a 100%);
+    --grad-accent: linear-gradient(120deg, #087f70 0%, #06695e 100%);
+    --grad-danger: linear-gradient(135deg, #c8793f 0%, #a85e32 100%);
     --grad-glass: linear-gradient(135deg, rgba(255,255,255,0.95) 0%, rgba(255,255,255,0.85) 100%);
     --space-xs: 4px;
     --space-sm: 8px;
@@ -658,7 +658,7 @@
     --text-light: #586773;
     --gray-light: #f4f6f8;
     --gray: #dce3e9;
-    --grad-hero: linear-gradient(120deg, #172a3a 0%, #29445d 62%, #3a5c76 100%);
+    --grad-hero: linear-gradient(120deg, #172f38 0%, #294f57 62%, #47757a 100%);
     --grad-accent: linear-gradient(120deg, #bd5f37 0%, #a84d2c 100%);
     --shadow-card: 0 2px 12px rgba(29, 48, 64, 0.07);
     --shadow-hover: 0 12px 28px rgba(29, 48, 64, 0.13);
