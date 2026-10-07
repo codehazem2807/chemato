@@ -305,14 +305,21 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
 #csvPreviewTable th{padding:8px 6px;font-size:10px;min-width:100px}
 #csvPreviewTable td{padding:6px;font-size:11px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 #csvPreviewTable td.wrap{white-space:normal;word-break:break-word;max-width:250px}
-#csvPreviewTable th.sticky-col,
-#csvPreviewTable td.sticky-col{position:sticky;right:0;background:var(--c-surface);z-index:2;box-shadow:-2px 0 4px rgba(0,0,0,.05);font-weight:700}
 
 /* CSV COLUMN SELECTOR */
 .col-selector{display:flex;flex-wrap:wrap;gap:6px;padding:10px;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-sm);margin-bottom:10px;max-height:130px;overflow-y:auto}
 .col-checkbox{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-full);font-size:11.5px;cursor:pointer;user-select:none}
 .col-checkbox input{width:14px;height:14px;accent-color:var(--c-primary-600)}
 .col-checkbox.checked{background:var(--c-primary-50);border-color:var(--c-primary-500);color:var(--c-primary-700)}
+
+/* MIGRATION PROGRESS */
+.migration-progress{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);background:var(--c-surface);padding:20px 30px;border-radius:var(--r-md);box-shadow:0 12px 40px rgba(0,0,0,0.3);z-index:9999;min-width:420px;max-width:90%;border:2px solid var(--c-primary-500)}
+.migration-progress .title{font-weight:700;margin-bottom:10px;font-size:14px}
+.migration-progress .bar{background:var(--c-border);height:10px;border-radius:5px;overflow:hidden;margin-bottom:8px}
+.migration-progress .bar-fill{background:linear-gradient(90deg,var(--c-primary-500),var(--c-accent));height:100%;width:0%;transition:width 0.3s;border-radius:5px}
+.migration-progress .text{font-size:12px;color:var(--c-text-muted);font-family:monospace}
+.migration-progress .stats{display:flex;gap:16px;margin-top:8px;font-size:12px}
+.migration-progress .stat{display:flex;align-items:center;gap:4px}
 
 /* RESPONSIVE */
 @media (max-width:1000px){
@@ -333,6 +340,7 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
   .modal-footer .btn{width:100%;justify-content:center}
   .admin-header{padding:0 14px}
   .admin-header .logo span:not(.logo-icon){display:none}
+  .migration-progress{min-width:auto;width:90%;padding:14px 18px}
 }
 </style>
 <link rel="stylesheet" href="/chemato-core.css?v=9" />
@@ -453,6 +461,7 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
         <div><h1 class="page-title"><span class="title-icon">📦</span> المنتجات</h1><p class="page-subtitle">إدارة كاملة + استيراد CSV + رفع صور و MSDS</p></div>
         <div class="header-actions-bar">
           <button class="btn btn-outline" onclick="App.exportData('products')">📥 تصدير Excel</button>
+          <button class="btn btn-warning" onclick="App.migrateAllImagesToSupabase(event)">🖼️ رفع الصور على Supabase</button>
           <button class="btn btn-teal" onclick="App.openCsvImportModal()">📤 استيراد CSV</button>
           <button class="btn btn-accent" onclick="App.openProductCreateModal()">➕ منتج جديد</button>
         </div>
@@ -802,7 +811,7 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
             <select class="form-select" id="prdFullSubcategory"><option value="">اختر تصنيف</option></select>
           </div>
           <div class="form-field full">
-            <label class="form-label">الوصف <span class="hint">(يدعم الأسطر المتعددة - اضغط Enter لإضافة سطر جديد)</span></label>
+            <label class="form-label">الوصف <span class="hint">(يدعم الأسطر المتعددة)</span></label>
             <textarea class="form-textarea" id="prdFullDescription" style="min-height:120px; font-family:'Cairo',sans-serif" placeholder="مثال:&#10;صودا كاوية نقية 99%&#10;تُستخدم في:&#10;- التنظيف&#10;- صناعة الصابون"></textarea>
           </div>
           <div class="form-field">
@@ -904,13 +913,13 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
         </div>
 
         <div class="info-box green">
-          ✅ <strong>دعم كامل لـ Google Drive:</strong> النظام يحوّل روابط Drive تلقائياً لروابط مباشرة قابلة للعرض<br>
+          ✅ <strong>دعم كامل لـ Google Drive:</strong> عند الحفظ، سيتم تحميل الصور من Drive ورفعها تلقائياً على Supabase Storage<br>
           <strong>الصيغ المدعومة:</strong><br>
           • <code dir="ltr">https://drive.google.com/file/d/FILE_ID/view</code><br>
           • <code dir="ltr">https://drive.google.com/open?id=FILE_ID</code><br>
           • <code dir="ltr">https://drive.google.com/uc?id=FILE_ID</code><br>
           <br>
-          <strong>⚠️ مهم:</strong> تأكد أن الملف في Google Drive <strong>Public</strong> (Anyone with the link can view)
+          <strong>⚠️ مهم:</strong> تأكد أن الملف في Google Drive <strong>Public</strong>
         </div>
       </div>
 
@@ -947,7 +956,7 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
           <li>عدّل البيانات في Excel (يدعم الأسطر المتعددة داخل الخلايا)</li>
           <li>احفظ الملف بصيغة <strong>CSV UTF-8</strong></li>
           <li>ارفع الملف → ستشاهد معاينة كاملة لكل الأعمدة</li>
-          <li>اختر المورد → اضغط استيراد</li>
+          <li>اختر المورد → اضغط استيراد (سيتم رفع الصور على Supabase تلقائياً)</li>
         </ol>
       </div>
 
@@ -981,7 +990,6 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
           </div>
         </div>
 
-        <!-- Column Selector -->
         <div style="font-size:12px; font-weight:700; margin-bottom:6px">📌 اختر الأعمدة للعرض:</div>
         <div class="col-selector" id="csvColSelector"></div>
 
@@ -1097,6 +1105,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 const ADMIN_PASSWORD = '224466889900';
 const SESSION_KEY = 'chemato_admin_session';
 const EDGE_FN_URL = `${SUPABASE_URL}/functions/v1/admin-actions`;
+const STORAGE_BUCKET = 'chemato-files';
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
@@ -1118,49 +1127,35 @@ async function callAdminEdge(action, params = {}) {
 
 /* ═══════════════════════════════════════════════════════
    GOOGLE DRIVE URL CONVERTER
-   يحوّل روابط Google Drive إلى روابط مباشرة قابلة للعرض
    ═══════════════════════════════════════════════════════ */
 function convertGoogleDriveUrl(url) {
   if (!url || typeof url !== 'string') return url;
   url = url.trim();
   
-  // لو مش رابط Drive → رجعه كما هو
   if (!url.includes('drive.google.com') && !url.includes('docs.google.com')) {
     return url;
   }
   
-  // استخراج FILE_ID من جميع الأشكال
   let fileId = null;
-  
-  // شكل 1: https://drive.google.com/file/d/FILE_ID/view
   let m = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
   if (m) fileId = m[1];
-  
-  // شكل 2: https://drive.google.com/open?id=FILE_ID
   if (!fileId) {
     m = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
     if (m) fileId = m[1];
   }
-  
-  // شكل 3: https://drive.google.com/uc?id=FILE_ID
   if (!fileId) {
     m = url.match(/\/uc\?.*?id=([a-zA-Z0-9_-]+)/);
     if (m) fileId = m[1];
   }
-  
-  // شكل 4: https://drive.google.com/thumbnail?id=FILE_ID
   if (!fileId) {
     m = url.match(/\/thumbnail\?.*?id=([a-zA-Z0-9_-]+)/);
     if (m) fileId = m[1];
   }
   
   if (!fileId) return url;
-  
-  // ✅ الرابط المباشر الجديد - يعمل مع الصور والـ PDF
   return `https://lh3.googleusercontent.com/d/${fileId}`;
 }
 
-/* رابط بديل للـ iframe والعرض المضمّن */
 function convertGoogleDriveEmbed(url) {
   if (!url || typeof url !== 'string') return url;
   url = url.trim();
@@ -1173,8 +1168,6 @@ function convertGoogleDriveEmbed(url) {
     if (m) fileId = m[1];
   }
   if (!fileId) return url;
-  
-  // للـ PDF والملفات
   return `https://drive.google.com/file/d/${fileId}/preview`;
 }
 
@@ -1363,6 +1356,235 @@ const App = {
 
   openModal(id) { document.getElementById(id).classList.remove('hidden'); },
   closeModal(id) { document.getElementById(id).classList.add('hidden'); },
+
+  /* ═══════════════════════════════════════════════════════
+     FILE MIGRATION - تحميل من Drive ورفع على Supabase
+     ═══════════════════════════════════════════════════════ */
+  
+  /* تحويل رابط خارجي إلى Supabase Storage */
+  async migrateUrlToSupabase(sourceUrl, folder = 'products/images') {
+    if (!sourceUrl || typeof sourceUrl !== 'string') return null;
+    sourceUrl = sourceUrl.trim();
+    if (!sourceUrl) return null;
+    
+    // لو الرابط أصلاً من Supabase → رجعه كما هو
+    if (sourceUrl.includes('supabase.co/storage')) {
+      return sourceUrl;
+    }
+    
+    // لو الرابط مش http → رجعه
+    if (!/^https?:\/\//i.test(sourceUrl)) {
+      return sourceUrl;
+    }
+    
+    const isDrive = sourceUrl.includes('drive.google.com') || 
+                    sourceUrl.includes('docs.google.com') ||
+                    sourceUrl.includes('lh3.googleusercontent.com');
+    
+    // حوّل رابط Drive للصيغة المباشرة
+    const directUrl = convertGoogleDriveUrl(sourceUrl);
+    
+    try {
+      // حمّل الملف
+      const response = await fetch(directUrl, {
+        method: 'GET',
+        mode: 'cors',
+        cache: 'no-cache'
+      });
+      
+      if (!response.ok) {
+        throw new Error(`HTTP ${response.status}`);
+      }
+      
+      const blob = await response.blob();
+      
+      // تحقق من الحجم
+      if (blob.size > 25 * 1024 * 1024) {
+        throw new Error('الملف أكبر من 25MB');
+      }
+      
+      // ارفع على Supabase
+      const publicUrl = await this._uploadBlobToSupabase(blob, folder, sourceUrl);
+      console.log(`✅ رُفعت الصورة: ${publicUrl}`);
+      return publicUrl;
+      
+    } catch (e) {
+      console.error(`❌ فشل تحميل ${sourceUrl}:`, e.message);
+      // Fallback: رجّع الرابط المحوّل
+      return isDrive ? directUrl : sourceUrl;
+    }
+  },
+
+  /* رفع blob على Supabase Storage */
+  async _uploadBlobToSupabase(blob, folder, originalUrl) {
+    // استخرج الامتداد
+    let ext = 'jpg';
+    const extMatch = originalUrl.match(/\.(jpg|jpeg|png|gif|webp|svg|bmp|pdf|doc|docx)/i);
+    if (extMatch) {
+      ext = extMatch[1].toLowerCase();
+    } else if (blob.type) {
+      const mimeExt = blob.type.split('/')[1];
+      if (mimeExt) {
+        ext = mimeExt === 'jpeg' ? 'jpg' : mimeExt;
+        if (ext === 'svg+xml') ext = 'svg';
+        if (ext === 'vnd.openxmlformats-officedocument.wordprocessingml.document') ext = 'docx';
+        if (ext === 'msword') ext = 'doc';
+      }
+    }
+    
+    const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
+    
+    const { data, error } = await supabaseClient.storage
+      .from(STORAGE_BUCKET)
+      .upload(fileName, blob, {
+        cacheControl: '31536000',
+        upsert: false,
+        contentType: blob.type || 'image/jpeg'
+      });
+    
+    if (error) throw new Error(error.message || 'فشل رفع Supabase');
+    
+    const { data: urlData } = supabaseClient.storage
+      .from(STORAGE_BUCKET)
+      .getPublicUrl(data.path);
+    
+    return urlData.publicUrl;
+  },
+
+  /* ═══════════ MIGRATE ALL IMAGES TO SUPABASE ═══════════ */
+  async migrateAllImagesToSupabase(event) {
+    const btn = event?.target;
+    const oldTxt = btn?.textContent;
+    
+    if (!confirm('🖼️ سيتم تحميل كل صور المنتجات من Google Drive ورفعها على Supabase Storage.\n\n⚠️ العملية قد تأخذ عدة دقائق حسب عدد الصور.\n\nهل تريد المتابعة؟')) {
+      return;
+    }
+    
+    if (btn) { btn.disabled = true; btn.textContent = '⏳ جاري الفحص...'; }
+    
+    // Progress UI
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'migration-progress';
+    progressWrap.id = 'migrationProgress';
+    progressWrap.innerHTML = `
+      <div class="title">🖼️ جاري رفع الصور على Supabase...</div>
+      <div class="bar"><div class="bar-fill" id="migProgressBar"></div></div>
+      <div class="text" id="migProgressText">جاري التحضير...</div>
+      <div class="stats">
+        <div class="stat"><span style="color:var(--c-accent)">✅</span> <span id="migSuccess">0</span></div>
+        <div class="stat"><span style="color:var(--c-text-muted)">⏭️</span> <span id="migSkipped">0</span></div>
+        <div class="stat"><span style="color:var(--c-danger)">❌</span> <span id="migFailed">0</span></div>
+      </div>
+    `;
+    document.body.appendChild(progressWrap);
+    
+    try {
+      // جلب كل المنتجات
+      const allProducts = await this.fetchAllData('products', 
+        'id, name, image_url, images, msds_url, sds_url'
+      );
+      
+      const total = allProducts.length;
+      let success = 0, skipped = 0, failed = 0;
+      const errors = [];
+      
+      for (let i = 0; i < allProducts.length; i++) {
+        const p = allProducts[i];
+        
+        // تحديث Progress
+        const percent = Math.round(((i + 1) / total) * 100);
+        const bar = document.getElementById('migProgressBar');
+        const txt = document.getElementById('migProgressText');
+        const sucEl = document.getElementById('migSuccess');
+        const skipEl = document.getElementById('migSkipped');
+        const failEl = document.getElementById('migFailed');
+        
+        if (bar) bar.style.width = percent + '%';
+        if (txt) txt.textContent = `${i + 1} / ${total} - ${(p.name || '').slice(0, 40)}`;
+        if (sucEl) sucEl.textContent = success;
+        if (skipEl) skipEl.textContent = skipped;
+        if (failEl) failEl.textContent = failed;
+        
+        // تحقق من الحاجة للترحيل
+        const imageNeeds = p.image_url && !p.image_url.includes('supabase.co/storage');
+        const msdsNeeds = p.msds_url && !p.msds_url.includes('supabase.co/storage');
+        const sdsNeeds = p.sds_url && !p.sds_url.includes('supabase.co/storage');
+        const extrasNeed = Array.isArray(p.images) && 
+          p.images.some(url => url && !url.includes('supabase.co/storage'));
+        
+        if (!imageNeeds && !msdsNeeds && !sdsNeeds && !extrasNeed) {
+          skipped++;
+          continue;
+        }
+        
+        try {
+          const updatePayload = {};
+          
+          if (imageNeeds) {
+            updatePayload.image_url = await this.migrateUrlToSupabase(p.image_url, 'products/images');
+          }
+          if (msdsNeeds) {
+            updatePayload.msds_url = await this.migrateUrlToSupabase(p.msds_url, 'products/msds');
+          }
+          if (sdsNeeds) {
+            updatePayload.sds_url = await this.migrateUrlToSupabase(p.sds_url, 'products/sds');
+          }
+          if (extrasNeed) {
+            const newExtra = [];
+            for (const url of p.images) {
+              if (!url) continue;
+              if (url.includes('supabase.co/storage')) {
+                newExtra.push(url);
+              } else {
+                const newUrl = await this.migrateUrlToSupabase(url, 'products/images');
+                if (newUrl) newExtra.push(newUrl);
+              }
+            }
+            updatePayload.images = newExtra.length > 0 ? newExtra : null;
+          }
+          
+          if (Object.keys(updatePayload).length > 0) {
+            updatePayload.updated_at = new Date().toISOString();
+            const { error } = await supabaseClient
+              .from('products')
+              .update(updatePayload)
+              .eq('id', p.id);
+            if (error) throw error;
+          }
+          
+          success++;
+        } catch (e) {
+          failed++;
+          errors.push(`${(p.name || p.id).slice(0, 40)}: ${e.message}`);
+        }
+        
+        // اسمح للـ UI يتحدث
+        if (i % 3 === 0) await new Promise(r => setTimeout(r, 30));
+      }
+      
+      // إزالة Progress
+      progressWrap.remove();
+      
+      this.showToast(success > 0 ? 'success' : 'info', 
+        success > 0 ? 'تم الرفع ✅' : 'لا حاجة للترحيل',
+        `✅ ${success} محدّث • ⏭️ ${skipped} بدون تغيير • ❌ ${failed} فشل`);
+      
+      if (errors.length) {
+        console.warn('Migration errors:', errors);
+        this.showToast('warning', 'تنبيه', `${errors.length} فشل - تحقق من Console (F12)`);
+      }
+      
+      // أعد التحميل
+      await this.loadProducts();
+      
+    } catch (e) {
+      console.error('Migration error:', e);
+      this.showToast('error', 'فشل Migration', e.message);
+      document.getElementById('migrationProgress')?.remove();
+    } finally {
+      if (btn) { btn.disabled = false; btn.textContent = oldTxt || '🖼️ رفع الصور على Supabase'; }
+    }
+  },
 
   /* ═══════════ USER CACHE ═══════════ */
   async buildUserCache() {
@@ -1862,7 +2084,7 @@ const App = {
       'الهاتف': u.phone || '', 'واتساب': u.whatsapp || '',
       'الشركة': u.company_name || '', 'المدينة': u.city || '', 'العنوان': u.address || '',
       'النوع': u.user_type || '', 'موثّق': u.is_verified ? 'نعم' : 'لا',
-      'معلّق': u.is_suspended ? 'نعم' : 'لا', 'Admin': u.is_admin ? 'نعم' : 'لا',
+      'معلق': u.is_suspended ? 'نعم' : 'لا', 'Admin': u.is_admin ? 'نعم' : 'لا',
       'عدد الدخول': u.login_count || 0,
       'آخر دخول': u.last_login_at ? this.fmtDate(u.last_login_at, true) : '',
       'تاريخ التسجيل': u.created_at ? this.fmtDate(u.created_at) : '',
@@ -2002,23 +2224,35 @@ const App = {
     let slug = document.getElementById('artSlug').value.trim();
     if (!title) return this.showToast('warning', 'تنبيه', 'العنوان مطلوب');
     if (!slug) slug = this.slugify(title);
-    const payload = {
-      title, slug,
-      excerpt: document.getElementById('artExcerpt').value.trim() || null,
-      content: document.getElementById('artContent').value.trim() || null,
-      image_url: document.getElementById('artImageUrl').value.trim() || null,
-      author_name: document.getElementById('artAuthorName').value.trim() || null,
-      category: document.getElementById('artCategory').value.trim() || 'عام',
-      tags: this.state.artTags,
-      status: document.getElementById('artStatus').value,
-      is_featured: document.getElementById('artIsFeatured').checked,
-      meta_title: document.getElementById('artMetaTitle').value.trim() || null,
-      meta_keywords: document.getElementById('artMetaKeywords').value.trim() || null,
-      meta_description: document.getElementById('artMetaDescription').value.trim() || null,
-      updated_at: new Date().toISOString()
-    };
-    btn.disabled = true; btn.textContent = '⏳...';
+    
+    btn.disabled = true; btn.textContent = '⏳ معالجة الصورة...';
+    
     try {
+      // ✅ رفع صورة المقال على Supabase
+      const rawImageUrl = document.getElementById('artImageUrl').value.trim();
+      let imageUrl = null;
+      if (rawImageUrl) {
+        imageUrl = await this.migrateUrlToSupabase(rawImageUrl, 'articles/images');
+      }
+      
+      btn.textContent = '⏳ حفظ...';
+      
+      const payload = {
+        title, slug,
+        excerpt: document.getElementById('artExcerpt').value.trim() || null,
+        content: document.getElementById('artContent').value.trim() || null,
+        image_url: imageUrl,
+        author_name: document.getElementById('artAuthorName').value.trim() || null,
+        category: document.getElementById('artCategory').value.trim() || 'عام',
+        tags: this.state.artTags,
+        status: document.getElementById('artStatus').value,
+        is_featured: document.getElementById('artIsFeatured').checked,
+        meta_title: document.getElementById('artMetaTitle').value.trim() || null,
+        meta_keywords: document.getElementById('artMetaKeywords').value.trim() || null,
+        meta_description: document.getElementById('artMetaDescription').value.trim() || null,
+        updated_at: new Date().toISOString()
+      };
+      
       let error;
       if (this.state.editingIds.article) {
         ({ error } = await supabaseClient.from('blog_posts').update(payload).eq('id', this.state.editingIds.article));
@@ -2145,7 +2379,7 @@ const App = {
   },
 
   /* ═══════════════════════════════════════════════════════
-     PRODUCTS - FULL SYSTEM
+     PRODUCTS
      ═══════════════════════════════════════════════════════ */
   async loadProducts() {
     const wrap = document.getElementById('productsList');
@@ -2248,7 +2482,7 @@ const App = {
     const totalViews = products.reduce((s, p) => s + (p.views_count || 0), 0);
     const outOfStock = products.filter(p => p.stock_status === 'out_of_stock').length;
     const available = products.filter(p => p.stock_status === 'available').length;
-    const withImages = products.filter(p => p.image_url).length;
+    const withImages = products.filter(p => p.image_url && p.image_url.includes('supabase.co/storage')).length;
     const withMsds = products.filter(p => p.msds_url || p.sds_url).length;
 
     document.getElementById('productStats').innerHTML = `
@@ -2258,7 +2492,7 @@ const App = {
       <div class="stat-card"><div class="stat-icon orange">👁️</div><div class="stat-info"><div class="stat-value">${totalViews.toLocaleString('ar-EG')}</div><div class="stat-label">إجمالي المشاهدات</div></div></div>
       <div class="stat-card"><div class="stat-icon red">⚠️</div><div class="stat-info"><div class="stat-value">${outOfStock.toLocaleString('ar-EG')}</div><div class="stat-label">غير متوفر</div></div></div>
       <div class="stat-card"><div class="stat-icon teal">📊</div><div class="stat-info"><div class="stat-value">${available.toLocaleString('ar-EG')}</div><div class="stat-label">متوفر</div></div></div>
-      <div class="stat-card"><div class="stat-icon green">🖼️</div><div class="stat-info"><div class="stat-value">${withImages.toLocaleString('ar-EG')}</div><div class="stat-label">بها صور</div></div></div>
+      <div class="stat-card"><div class="stat-icon green">🖼️</div><div class="stat-info"><div class="stat-value">${withImages.toLocaleString('ar-EG')}</div><div class="stat-label">صور على Supabase</div></div></div>
       <div class="stat-card"><div class="stat-icon blue">📄</div><div class="stat-info"><div class="stat-value">${withMsds.toLocaleString('ar-EG')}</div><div class="stat-label">بها MSDS/SDS</div></div></div>
     `;
   },
@@ -2292,11 +2526,13 @@ const App = {
       </tr></thead>
       <tbody>${this.state.products.map(p => {
         const isSelected = this.state.selectedProductIds.has(p.id);
-        const convertedUrl = convertGoogleDriveUrl(p.image_url);
-        const thumb = convertedUrl 
-          ? `<img src="${this.esc(convertedUrl)}" class="prod-thumb" onerror="this.outerHTML='<div class=\\'prod-thumb-placeholder\\'>🧪</div>'">`
+        const isSupabase = p.image_url && p.image_url.includes('supabase.co/storage');
+        const displayUrl = isSupabase ? p.image_url : convertGoogleDriveUrl(p.image_url);
+        const thumb = displayUrl 
+          ? `<img src="${this.esc(displayUrl)}" class="prod-thumb" onerror="this.outerHTML='<div class=\\'prod-thumb-placeholder\\'>🧪</div>'">`
           : '<div class="prod-thumb-placeholder">🧪</div>';
         const hasMsds = p.msds_url || p.sds_url;
+        const imgStatus = isSupabase ? '☁️' : (p.image_url ? '🔗' : '❌');
         
         return `<tr class="${isSelected ? 'row-selected' : ''}">
           <td><input type="checkbox" class="row-checkbox" data-pid="${p.id}" ${isSelected ? 'checked' : ''} onchange="App.toggleProductSelect('${p.id}', this.checked)"></td>
@@ -2316,7 +2552,7 @@ const App = {
           <td><span class="badge ${stockB[p.stock_status] || 'badge-gray'}">${stockL[p.stock_status] || '—'}</span></td>
           <td><label class="toggle"><input type="checkbox" ${p.is_featured ? 'checked' : ''} onchange="App.toggleProductFeatured('${p.id}', this.checked)"><span class="slider"></span></label></td>
           <td class="td-muted">👁️ ${(p.views_count || 0).toLocaleString('ar-EG')}</td>
-          <td>${hasMsds ? '<span class="badge badge-success" title="يحتوي على MSDS/SDS">📄</span>' : '<span class="td-muted">—</span>'}</td>
+          <td title="${isSupabase ? 'صورة على Supabase' : 'صورة خارجية'}">${imgStatus} ${hasMsds ? '📄' : ''}</td>
           <td><div class="td-actions">
             <button class="btn btn-outline btn-xs" onclick="App.editProduct('${p.id}')" title="تعديل">✏️</button>
             <a href="product-details.html?id=${p.id}" target="_blank" class="btn btn-outline btn-xs" title="عرض">👁️</a>
@@ -2534,14 +2770,16 @@ const App = {
   renderMainImagePreview(url) {
     const wrap = document.getElementById('prdMainImagePreview');
     if (!url) { wrap.innerHTML = ''; return; }
-    const convertedUrl = convertGoogleDriveUrl(url);
-    const isDrive = url.includes('drive.google.com');
+    const isSupabase = url.includes('supabase.co/storage');
+    const displayUrl = isSupabase ? url : convertGoogleDriveUrl(url);
     wrap.innerHTML = `
       <div style="position:relative; display:inline-block">
-        <img src="${this.esc(convertedUrl)}" class="img-preview-main" onerror="this.outerHTML='<div class=\\'info-box warning\\'>⚠️ تعذر تحميل الصورة. تأكد أن الملف Public في Google Drive.</div>'">
+        <img src="${this.esc(displayUrl)}" class="img-preview-main" onerror="this.outerHTML='<div class=\\'info-box warning\\'>⚠️ تعذر تحميل الصورة</div>'">
         <button type="button" onclick="App.clearMainImage()" style="position:absolute; top:6px; left:6px; width:28px; height:28px; border-radius:50%; background:rgba(231,76,60,.9); color:#fff; border:none; cursor:pointer; font-size:14px">✕</button>
       </div>
-      ${isDrive ? '<div class="info-box green" style="margin-top:8px; font-size:11.5px">✅ تم تحويل رابط Google Drive تلقائياً</div>' : ''}
+      ${isSupabase 
+        ? '<div class="info-box green" style="margin-top:8px; font-size:11.5px">✅ الصورة على Supabase Storage</div>'
+        : '<div class="info-box" style="margin-top:8px; font-size:11.5px">💡 عند الحفظ، سيتم رفعها تلقائياً على Supabase</div>'}
     `;
   },
 
@@ -2554,10 +2792,11 @@ const App = {
     const wrap = document.getElementById('prdExtraImagesPreview');
     if (!this.state.extraImages.length) { wrap.innerHTML = ''; return; }
     wrap.innerHTML = this.state.extraImages.map((url, i) => {
-      const convertedUrl = convertGoogleDriveUrl(url);
+      const isSupabase = url.includes('supabase.co/storage');
+      const displayUrl = isSupabase ? url : convertGoogleDriveUrl(url);
       return `
-        <div class="img-preview-item">
-          <img src="${this.esc(convertedUrl)}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23fee%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23c00%22 font-size=%2212%22%3E⚠️%3C/text%3E%3C/svg%3E'">
+        <div class="img-preview-item" title="${isSupabase ? 'على Supabase' : 'خارجي'}">
+          <img src="${this.esc(displayUrl)}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23fee%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23c00%22 font-size=%2212%22%3E⚠️%3C/text%3E%3C/svg%3E'">
           <button type="button" class="remove-img" onclick="App.removeExtraImage(${i})">✕</button>
         </div>
       `;
@@ -2592,11 +2831,11 @@ const App = {
     if (file.size > 5 * 1024 * 1024) return this.showToast('error', 'خطأ', 'حجم الصورة يتجاوز 5MB');
     try {
       this.showToast('info', '⏳', 'جاري رفع الصورة...');
-      const url = await this.uploadFileToStorage(file, 'products/images');
+      const url = await this._uploadBlobToSupabase(file, 'products/images', file.name);
       if (!url) throw new Error('فشل الرفع');
       document.getElementById('prdFullImageUrl').value = url;
       this.renderMainImagePreview(url);
-      this.showToast('success', 'تم رفع الصورة ✅');
+      this.showToast('success', 'تم رفع الصورة على Supabase ✅');
     } catch (e) { this.showToast('error', 'فشل الرفع', e.message); }
     event.target.value = '';
   },
@@ -2610,12 +2849,12 @@ const App = {
       if (!file.type.startsWith('image/')) continue;
       if (file.size > 5 * 1024 * 1024) continue;
       try {
-        const url = await this.uploadFileToStorage(file, 'products/images');
+        const url = await this._uploadBlobToSupabase(file, 'products/images', file.name);
         if (url) { this.state.extraImages.push(url); success++; }
       } catch (e) { console.warn('Upload failed:', e); }
     }
     this.renderExtraImagesPreview();
-    this.showToast(success > 0 ? 'success' : 'error', success > 0 ? 'تم الرفع' : 'فشل', success > 0 ? `${success} صورة` : 'لم يتم رفع أي صورة');
+    this.showToast(success > 0 ? 'success' : 'error', success > 0 ? 'تم الرفع' : 'فشل', success > 0 ? `${success} صورة على Supabase` : 'لم يتم رفع أي صورة');
     event.target.value = '';
   },
 
@@ -2625,7 +2864,7 @@ const App = {
     if (file.size > 20 * 1024 * 1024) return this.showToast('error', 'خطأ', 'حجم الملف يتجاوز 20MB');
     try {
       this.showToast('info', '⏳', 'جاري رفع MSDS...');
-      const url = await this.uploadFileToStorage(file, 'products/msds');
+      const url = await this._uploadBlobToSupabase(file, 'products/msds', file.name);
       if (!url) throw new Error('فشل الرفع');
       document.getElementById('prdFullMsdsUrl').value = url;
       this.showToast('success', 'تم رفع MSDS ✅');
@@ -2639,21 +2878,12 @@ const App = {
     if (file.size > 20 * 1024 * 1024) return this.showToast('error', 'خطأ', 'حجم الملف يتجاوز 20MB');
     try {
       this.showToast('info', '⏳', 'جاري رفع SDS...');
-      const url = await this.uploadFileToStorage(file, 'products/sds');
+      const url = await this._uploadBlobToSupabase(file, 'products/sds', file.name);
       if (!url) throw new Error('فشل الرفع');
       document.getElementById('prdFullSdsUrl').value = url;
       this.showToast('success', 'تم رفع SDS ✅');
     } catch (e) { this.showToast('error', 'فشل الرفع', e.message); }
     event.target.value = '';
-  },
-
-  async uploadFileToStorage(file, folder = 'uploads') {
-    const ext = file.name.split('.').pop() || 'bin';
-    const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
-    const { data, error } = await supabaseClient.storage.from('chemato-files').upload(fileName, file, { cacheControl: '3600', upsert: false, contentType: file.type });
-    if (error) throw new Error(error.message || 'فشل الرفع');
-    const { data: urlData } = supabaseClient.storage.from('chemato-files').getPublicUrl(data.path);
-    return urlData.publicUrl;
   },
 
   async saveFullProduct() {
@@ -2674,55 +2904,73 @@ const App = {
       categoryName = document.getElementById('prdFullSubCatText').value.trim() || 'مواد كيماوية';
     }
     
-    // ✅ حفظ الوصف مع الأسطر المتعددة
-    const descriptionRaw = document.getElementById('prdFullDescription').value;
-    const description = descriptionRaw ? descriptionRaw.trim() : null;
-    
-    const payload = {
-      supplier_id: supplierId,
-      name,
-      cas_number: document.getElementById('prdFullCas').value.trim() || null,
-      formula: document.getElementById('prdFullFormula').value.trim() || null,
-      category: categoryName,
-      category_id: categoryId,
-      subcategory_id: document.getElementById('prdFullSubcategory').value || null,
-      sub_category: document.getElementById('prdFullSubCatText').value.trim() || null,
-      description: description,
-      price: parseFloat(document.getElementById('prdFullPrice').value) || null,
-      unit: document.getElementById('prdFullUnit').value || 'كجم',
-      quantity_available: document.getElementById('prdFullQuantity').value.trim() || null,
-      min_order_quantity: document.getElementById('prdFullMinOrder').value.trim() || null,
-      stock_status: document.getElementById('prdFullStock').value || 'available',
-      status: document.getElementById('prdFullStatus').value || 'active',
-      purity: document.getElementById('prdFullPurity').value.trim() || null,
-      grade: document.getElementById('prdFullGrade').value.trim() || null,
-      origin_country: document.getElementById('prdFullOrigin').value.trim() || null,
-      packaging: document.getElementById('prdFullPackaging').value.trim() || null,
-      molecular_weight: parseFloat(document.getElementById('prdFullMolecularWeight').value) || null,
-      density: document.getElementById('prdFullDensity').value.trim() || null,
-      melting_point: document.getElementById('prdFullMelting').value.trim() || null,
-      boiling_point: document.getElementById('prdFullBoiling').value.trim() || null,
-      solubility: document.getElementById('prdFullSolubility').value.trim() || null,
-      appearance: document.getElementById('prdFullAppearance').value.trim() || null,
-      hazard_class: document.getElementById('prdFullHazard').value.trim() || null,
-      storage_conditions: document.getElementById('prdFullStorage').value.trim() || null,
-      image_url: document.getElementById('prdFullImageUrl').value.trim() || null,
-      images: this.state.extraImages.length > 0 ? this.state.extraImages : null,
-      msds_url: document.getElementById('prdFullMsdsUrl').value.trim() || null,
-      sds_url: document.getElementById('prdFullSdsUrl').value.trim() || null,
-      views: parseInt(document.getElementById('prdFullViews').value) || 0,
-      views_count: parseInt(document.getElementById('prdFullViewsCount').value) || 0,
-      avg_rating: parseFloat(document.getElementById('prdFullRating').value) || 0,
-      is_featured: document.getElementById('prdFullFeatured').checked,
-      hide_price: document.getElementById('prdFullHidePrice').checked,
-      updated_at: new Date().toISOString()
-    };
-    
     btn.disabled = true;
     const oldTxt = btn.textContent;
-    btn.textContent = '⏳ جاري الحفظ...';
+    btn.textContent = '⏳ معالجة الصور...';
     
     try {
+      // ✅ حمّل وارفع الصور على Supabase
+      const rawImageUrl = document.getElementById('prdFullImageUrl').value.trim();
+      const rawMsdsUrl = document.getElementById('prdFullMsdsUrl').value.trim();
+      const rawSdsUrl = document.getElementById('prdFullSdsUrl').value.trim();
+      
+      // معالجة متوازية
+      const [imageUrl, msdsUrl, sdsUrl, extraImages] = await Promise.all([
+        rawImageUrl ? this.migrateUrlToSupabase(rawImageUrl, 'products/images') : null,
+        rawMsdsUrl ? this.migrateUrlToSupabase(rawMsdsUrl, 'products/msds') : null,
+        rawSdsUrl ? this.migrateUrlToSupabase(rawSdsUrl, 'products/sds') : null,
+        Promise.all(
+          this.state.extraImages
+            .filter(url => url && !url.includes('supabase.co/storage'))
+            .map(url => this.migrateUrlToSupabase(url, 'products/images'))
+        ).then(results => [
+          ...this.state.extraImages.filter(url => url && url.includes('supabase.co/storage')),
+          ...results.filter(Boolean)
+        ])
+      ]);
+      
+      btn.textContent = '⏳ حفظ...';
+      
+      const payload = {
+        supplier_id: supplierId,
+        name,
+        cas_number: document.getElementById('prdFullCas').value.trim() || null,
+        formula: document.getElementById('prdFullFormula').value.trim() || null,
+        category: categoryName,
+        category_id: categoryId,
+        subcategory_id: document.getElementById('prdFullSubcategory').value || null,
+        sub_category: document.getElementById('prdFullSubCatText').value.trim() || null,
+        description: document.getElementById('prdFullDescription').value.trim() || null,
+        price: parseFloat(document.getElementById('prdFullPrice').value) || null,
+        unit: document.getElementById('prdFullUnit').value || 'كجم',
+        quantity_available: document.getElementById('prdFullQuantity').value.trim() || null,
+        min_order_quantity: document.getElementById('prdFullMinOrder').value.trim() || null,
+        stock_status: document.getElementById('prdFullStock').value || 'available',
+        status: document.getElementById('prdFullStatus').value || 'active',
+        purity: document.getElementById('prdFullPurity').value.trim() || null,
+        grade: document.getElementById('prdFullGrade').value.trim() || null,
+        origin_country: document.getElementById('prdFullOrigin').value.trim() || null,
+        packaging: document.getElementById('prdFullPackaging').value.trim() || null,
+        molecular_weight: parseFloat(document.getElementById('prdFullMolecularWeight').value) || null,
+        density: document.getElementById('prdFullDensity').value.trim() || null,
+        melting_point: document.getElementById('prdFullMelting').value.trim() || null,
+        boiling_point: document.getElementById('prdFullBoiling').value.trim() || null,
+        solubility: document.getElementById('prdFullSolubility').value.trim() || null,
+        appearance: document.getElementById('prdFullAppearance').value.trim() || null,
+        hazard_class: document.getElementById('prdFullHazard').value.trim() || null,
+        storage_conditions: document.getElementById('prdFullStorage').value.trim() || null,
+        image_url: imageUrl,
+        images: extraImages.length > 0 ? extraImages : null,
+        msds_url: msdsUrl,
+        sds_url: sdsUrl,
+        views: parseInt(document.getElementById('prdFullViews').value) || 0,
+        views_count: parseInt(document.getElementById('prdFullViewsCount').value) || 0,
+        avg_rating: parseFloat(document.getElementById('prdFullRating').value) || 0,
+        is_featured: document.getElementById('prdFullFeatured').checked,
+        hide_price: document.getElementById('prdFullHidePrice').checked,
+        updated_at: new Date().toISOString()
+      };
+      
       let error;
       if (this.state.editingIds.product) {
         ({ error } = await supabaseClient.from('products').update(payload).eq('id', this.state.editingIds.product));
@@ -2730,7 +2978,7 @@ const App = {
         ({ error } = await supabaseClient.from('products').insert(payload));
       }
       if (error) throw error;
-      this.showToast('success', this.state.editingIds.product ? 'تم التحديث ✅' : 'تمت الإضافة ✅');
+      this.showToast('success', this.state.editingIds.product ? 'تم التحديث ✅' : 'تمت الإضافة ✅', 'تم رفع الصور على Supabase');
       this.closeModal('productFullModal');
       await this.loadProducts();
       await this.loadNavCounts();
@@ -2744,7 +2992,7 @@ const App = {
   },
 
   /* ═══════════════════════════════════════════════════════
-     CSV IMPORT - الاحترافي مع معاينة كاملة
+     CSV IMPORT
      ═══════════════════════════════════════════════════════ */
   async openCsvImportModal() {
     if (!this.state.productSuppliers.length) await this.loadProductSuppliers();
@@ -2781,12 +3029,9 @@ const App = {
       
       this.state.csvParsedData = rows;
       
-      // استخرج كل الأعمدة الفريدة
       const allCols = new Set();
       rows.forEach(r => Object.keys(r).forEach(k => allCols.add(k)));
       this.state.csvAllColumns = Array.from(allCols);
-      
-      // عرض كل الأعمدة افتراضياً
       this.state.csvVisibleColumns = new Set(this.state.csvAllColumns);
       
       this.renderCsvColumnSelector();
@@ -2830,7 +3075,6 @@ const App = {
     this.renderCsvPreview();
   },
 
-  /* ✅ PARSER احترافي - يدعم كل الحالات */
   parseCsv(text) {
     if (!text || typeof text !== 'string') return [];
     text = text.replace(/^\ufeff/, '');
@@ -2896,51 +3140,43 @@ const App = {
     const visibleCols = this.state.csvAllColumns.filter(c => this.state.csvVisibleColumns.has(c));
     if (!visibleCols.length) {
       wrap.querySelector('thead').innerHTML = '<tr><th>لا توجد أعمدة محددة</th></tr>';
-      wrap.querySelector('tbody').innerHTML = '<tr><td>اختر أعمدة للعرض من الأعلى</td></tr>';
+      wrap.querySelector('tbody').innerHTML = '<tr><td>اختر أعمدة للعرض</td></tr>';
       return;
     }
     
-    // الرؤوس
     wrap.querySelector('thead').innerHTML = '<tr>' + visibleCols.map(h => `<th>${this.esc(h)}</th>`).join('') + '</tr>';
     
-    // الصفوف (50 صف أول + عداد للباقي)
     const previewRows = rows.slice(0, 100);
-    wrap.querySelector('tbody').innerHTML = previewRows.map((r, idx) => 
+    wrap.querySelector('tbody').innerHTML = previewRows.map(r => 
       '<tr>' + visibleCols.map(h => {
         let v = r[h] || '';
         const isLongText = v.length > 60;
         const isUrl = /^https?:\/\//i.test(v);
         
         if (isUrl) {
-          // عرض الصورة إذا كانت صورة
           const isImage = /\.(jpg|jpeg|png|gif|webp|svg|bmp)/i.test(v) || v.includes('drive.google.com');
           if (isImage) {
             const converted = convertGoogleDriveUrl(v);
-            return `<td><img src="${this.esc(converted)}" style="width:50px; height:50px; object-fit:cover; border-radius:6px; border:1px solid var(--c-border)" onerror="this.outerHTML='<span class=\\'badge badge-danger\\'>❌ فشل</span>'"><br><a href="${this.esc(v)}" target="_blank" style="font-size:10px">🔗 فتح</a></td>`;
-          } else {
-            return `<td><a href="${this.esc(v)}" target="_blank" class="badge badge-info">🔗 ملف</a></td>`;
+            return `<td><img src="${this.esc(converted)}" style="width:50px; height:50px; object-fit:cover; border-radius:6px; border:1px solid var(--c-border)" onerror="this.outerHTML='<span class=\\'badge badge-danger\\'>❌</span>'"><br><a href="${this.esc(v)}" target="_blank" style="font-size:10px">🔗</a></td>`;
           }
+          return `<td><a href="${this.esc(v)}" target="_blank" class="badge badge-info">🔗 ملف</a></td>`;
         }
         
         if (isLongText) {
           const escaped = this.esc(v);
-          const short = this.esc(v.slice(0, 100));
           return `<td class="wrap" title="${escaped}">
-            <div style="max-height:80px; overflow-y:auto; font-size:10.5px; line-height:1.4">${short.replace(/\n/g, '<br>')}${v.length > 100 ? '...' : ''}</div>
+            <div style="max-height:80px; overflow-y:auto; font-size:10.5px; line-height:1.4">${this.esc(v.slice(0, 100)).replace(/\n/g, '<br>')}${v.length > 100 ? '...' : ''}</div>
           </td>`;
         }
         
-        // عرض النص العادي
         return `<td title="${this.esc(v)}">${this.esc(v.slice(0, 50))}${v.length > 50 ? '...' : ''}</td>`;
       }).join('') + '</tr>'
     ).join('');
     
-    // إظهار ملاحظة لو فيه صفوف كتير
     if (rows.length > 100) {
-      wrap.querySelector('tbody').innerHTML += `<tr><td colspan="${visibleCols.length}" style="text-align:center; padding:15px; background:var(--c-surface-2); font-weight:700">📌 يتم عرض أول 100 صف فقط. الإجمالي: ${rows.length} منتج</td></tr>`;
+      wrap.querySelector('tbody').innerHTML += `<tr><td colspan="${visibleCols.length}" style="text-align:center; padding:15px; background:var(--c-surface-2); font-weight:700">📌 يتم عرض أول 100 صف فقط. الإجمالي: ${rows.length}</td></tr>`;
     }
     
-    // Validation
     const errors = [];
     rows.forEach((r, i) => {
       if (!r.name) errors.push(`صف ${i + 2}: اسم المنتج مفقود`);
@@ -2961,7 +3197,6 @@ const App = {
   },
 
   downloadCsvTemplate() {
-    // ✅ نموذج كامل فيه كل الأعمدة
     const headers = [
       'name', 'cas_number', 'category', 'sub_category', 'description',
       'price', 'unit', 'min_order_quantity', 'quantity_available',
@@ -2972,7 +3207,6 @@ const App = {
       'status', 'stock_status', 'is_featured', 'hide_price'
     ];
     
-    // وصف فيه أسطر متعددة (المشكلة الأصلية)
     const exampleDescription = `صودا كاوية نقية 99% للاستخدام الصناعي
 تُستخدم في:
 - التنظيف العميق
@@ -2986,33 +3220,17 @@ const App = {
       'مواد قلوية',
       'هيدروكسيدات',
       exampleDescription,
-      '25.50',
-      'كجم',
-      '50 كجم',
-      '5000 كجم',
-      '99%',
-      'Technical',
-      'أكياس 25 كجم',
-      'مصر',
-      'NaOH',
-      '40.00',
-      '2.13 g/cm³',
-      '318°C',
-      '1390°C',
-      'Soluble in water',
-      'White solid',
-      '8 - Corrosive',
-      'مكان جاف بعيد عن الرطوبة المباشرة',
+      '25.50', 'كجم', '50 كجم', '5000 كجم',
+      '99%', 'Technical', 'أكياس 25 كجم', 'مصر',
+      'NaOH', '40.00', '2.13 g/cm³', '318°C', '1390°C',
+      'Soluble in water', 'White solid', '8 - Corrosive',
+      'مكان جاف بعيد عن الرطوبة',
       'https://drive.google.com/file/d/YOUR_FILE_ID/view',
       'https://drive.google.com/file/d/MSDS_FILE_ID/view',
       '',
-      'active',
-      'available',
-      'false',
-      'false'
+      'active', 'available', 'false', 'false'
     ];
     
-    // دالة escape كاملة
     const escapeCSV = (v) => {
       const str = String(v ?? '');
       if (str.includes(',') || str.includes('\n') || str.includes('\r') || str.includes('"')) {
@@ -3074,24 +3292,79 @@ const App = {
     btn.disabled = true;
     btn.textContent = '⏳ جاري الاستيراد...';
     
-    let success = 0;
-    let updated = 0;
-    let failed = 0;
+    const total = rows.length;
+    let success = 0, updated = 0, failed = 0, imagesMigrated = 0;
     const errors = [];
+    
+    // Progress UI
+    const progressWrap = document.createElement('div');
+    progressWrap.className = 'migration-progress';
+    progressWrap.id = 'csvImportProgress';
+    progressWrap.innerHTML = `
+      <div class="title">📤 جاري الاستيراد ورفع الصور على Supabase...</div>
+      <div class="bar"><div class="bar-fill" id="csvProgressBar"></div></div>
+      <div class="text" id="csvProgressText">0 / ${total}</div>
+      <div class="stats">
+        <div class="stat"><span style="color:var(--c-accent)">✅</span> <span id="csvSuccess">0</span></div>
+        <div class="stat"><span style="color:var(--c-primary-500)">🔄</span> <span id="csvUpdated">0</span></div>
+        <div class="stat"><span style="color:var(--c-purple)">🖼️</span> <span id="csvImages">0</span></div>
+        <div class="stat"><span style="color:var(--c-danger)">❌</span> <span id="csvFailed">0</span></div>
+      </div>
+    `;
+    document.body.appendChild(progressWrap);
     
     for (let i = 0; i < rows.length; i++) {
       const r = rows[i];
+      
+      const percent = Math.round(((i + 1) / total) * 100);
+      const bar = document.getElementById('csvProgressBar');
+      const txt = document.getElementById('csvProgressText');
+      if (bar) bar.style.width = percent + '%';
+      if (txt) txt.textContent = `${i + 1} / ${total} - ${(r.name || '').slice(0, 30)}`;
+      const sucEl = document.getElementById('csvSuccess');
+      const updEl = document.getElementById('csvUpdated');
+      const imgEl = document.getElementById('csvImages');
+      const failEl = document.getElementById('csvFailed');
+      if (sucEl) sucEl.textContent = success;
+      if (updEl) updEl.textContent = updated;
+      if (imgEl) imgEl.textContent = imagesMigrated;
+      if (failEl) failEl.textContent = failed;
+      
       if (!r.name) { failed++; errors.push(`صف ${i + 2}: اسم مفقود`); continue; }
       
       try {
         const priceNum = parseFloat(r.price);
+        
+        // ✅ حمّل وارفع الصور
+        let imageUrl = null, msdsUrl = null, sdsUrl = null;
+        
+        try {
+          if (r.image_url && r.image_url.trim()) {
+            const before = r.image_url;
+            imageUrl = await this.migrateUrlToSupabase(r.image_url, 'products/images');
+            if (imageUrl && imageUrl.includes('supabase.co/storage') && !before.includes('supabase.co/storage')) {
+              imagesMigrated++;
+            }
+          }
+          if (r.msds_url && r.msds_url.trim()) {
+            msdsUrl = await this.migrateUrlToSupabase(r.msds_url, 'products/msds');
+          }
+          if (r.sds_url && r.sds_url.trim()) {
+            sdsUrl = await this.migrateUrlToSupabase(r.sds_url, 'products/sds');
+          }
+        } catch (imgErr) {
+          console.warn(`⚠️ فشل رفع صورة ${r.name}:`, imgErr.message);
+          imageUrl = r.image_url ? convertGoogleDriveUrl(r.image_url) : null;
+          msdsUrl = r.msds_url ? convertGoogleDriveUrl(r.msds_url) : null;
+          sdsUrl = r.sds_url ? convertGoogleDriveUrl(r.sds_url) : null;
+        }
+        
         const payload = {
           supplier_id: supplierId,
           name: r.name,
           cas_number: r.cas_number || null,
           category: r.category || 'مواد كيماوية',
           sub_category: r.sub_category || null,
-          // ✅ الوصف مع الأسطر المتعددة
           description: r.description ? r.description.trim() : null,
           price: !isNaN(priceNum) && priceNum > 0 ? priceNum : null,
           unit: r.unit || 'كجم',
@@ -3110,9 +3383,9 @@ const App = {
           appearance: r.appearance || null,
           hazard_class: r.hazard_class || null,
           storage_conditions: r.storage_conditions || null,
-          image_url: r.image_url || null,
-          msds_url: r.msds_url || null,
-          sds_url: r.sds_url || null,
+          image_url: imageUrl,
+          msds_url: msdsUrl,
+          sds_url: sdsUrl,
           status: ['active', 'hidden', 'sold'].includes(r.status) ? r.status : 'active',
           stock_status: ['available', 'limited', 'out_of_stock', 'discontinued'].includes(r.stock_status) ? r.stock_status : 'available',
           is_featured: r.is_featured === 'true' || r.is_featured === '1',
@@ -3139,13 +3412,16 @@ const App = {
         failed++;
         errors.push(`صف ${i + 2}: ${e.message}`);
       }
+      
+      if (i % 3 === 0) await new Promise(r => setTimeout(r, 30));
     }
     
+    progressWrap.remove();
     btn.disabled = false;
     btn.textContent = oldTxt;
     
     this.showToast(success + updated > 0 ? 'success' : 'error', 'تم الاستيراد', 
-      `✅ ${success} مضاف • 🔄 ${updated} محدّث • ❌ ${failed} فشل`);
+      `✅ ${success} مضاف • 🔄 ${updated} محدّث • 🖼️ ${imagesMigrated} صورة على Supabase • ❌ ${failed} فشل`);
     
     if (errors.length) {
       document.getElementById('csvErrors').innerHTML = `<div class="info-box warning" style="margin-bottom:10px">
@@ -3168,7 +3444,7 @@ const App = {
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
     try {
       const search = (document.getElementById('rfqSearch')?.value || '').trim();
-      const status = document.getElementById('rfqStatusFilter')?.value || '';
+      const status = (document.getElementById('rfqStatusFilter')?.value || '').trim();
       const data = await this.fetchAllData('purchase_requests', '*', (q) => {
         if (status) q = q.eq('status', status);
         if (search) q = q.ilike('product_name', `%${search}%`);
@@ -3674,7 +3950,7 @@ const App = {
     el.className = `toast ${type}`;
     el.innerHTML = `<div class="toast-icon">${icons[type] || 'ℹ️'}</div><div class="toast-content"><div class="toast-title">${this.esc(title)}</div>${desc ? `<div class="toast-desc">${this.esc(desc)}</div>` : ''}</div>`;
     container.appendChild(el);
-    setTimeout(() => { el.style.transition = 'opacity .3s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 3500);
+    setTimeout(() => { el.style.transition = 'opacity .3s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 4000);
   },
 
   esc(s) { 
