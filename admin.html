@@ -55,6 +55,7 @@ input,select,textarea{font-family:inherit}
 
 /* HEADER */
 .admin-header{position:sticky;top:0;z-index:100;background:var(--c-surface);border-bottom:1px solid var(--c-border);height:var(--header-h);display:flex;align-items:center;padding:0 24px;gap:16px;box-shadow:var(--shadow-sm)}
+.admin-header.hidden{display:none}
 .admin-header .logo{display:flex;align-items:center;gap:10px;font-weight:800;font-size:18px;color:var(--c-primary-700)}
 .admin-header .logo .logo-icon{width:38px;height:38px;border-radius:var(--r-sm);background:linear-gradient(135deg,var(--c-primary-500),var(--c-primary-700));display:flex;align-items:center;justify-content:center;color:#fff;font-size:18px}
 .admin-header .badge-admin{background:var(--c-danger);color:#fff;padding:4px 12px;border-radius:var(--r-full);font-size:11px;font-weight:700}
@@ -66,6 +67,7 @@ input,select,textarea{font-family:inherit}
 
 /* LAYOUT */
 .admin-layout{display:grid;grid-template-columns:var(--sidebar-w) 1fr;min-height:calc(100vh - var(--header-h))}
+.admin-layout.hidden{display:none}
 .admin-sidebar{background:var(--c-surface);border-left:1px solid var(--c-border);padding:20px 12px;position:sticky;top:var(--header-h);height:calc(100vh - var(--header-h));overflow-y:auto}
 .nav-section{margin-bottom:18px}
 .nav-section-title{font-size:11px;font-weight:700;color:var(--c-text-sub);text-transform:uppercase;letter-spacing:.5px;padding:0 12px;margin-bottom:6px}
@@ -138,13 +140,19 @@ td{padding:11px 12px;border-bottom:1px solid var(--c-border);vertical-align:midd
 tbody tr{transition:background .15s}
 tbody tr:hover{background:var(--c-surface-2)}
 tbody tr:last-child td{border-bottom:none}
+tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
 .td-title{font-weight:600;max-width:240px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .td-muted{color:var(--c-text-muted);font-size:11.5px}
 .td-mono{font-family:'Courier New',monospace;font-size:11.5px;color:var(--c-text-muted);background:var(--c-surface-2);padding:2px 6px;border-radius:4px}
 .td-actions{display:flex;gap:5px;flex-wrap:wrap}
 .td-pass{font-family:'Courier New',monospace;font-size:12px;background:rgba(243,156,18,.15);color:#b9770e;padding:3px 8px;border-radius:4px;font-weight:700;cursor:pointer;user-select:all}
-.td-pass.hidden-pass{filter:blur(4px);transition:filter .2s}
-.td-pass.hidden-pass:hover{filter:blur(0)}
+
+/* CHECKBOXES */
+.row-checkbox{width:18px;height:18px;accent-color:var(--c-primary-600);cursor:pointer}
+
+/* PRODUCT THUMB */
+.prod-thumb{width:44px;height:44px;border-radius:var(--r-sm);object-fit:cover;background:var(--c-surface-2);border:1px solid var(--c-border)}
+.prod-thumb-placeholder{width:44px;height:44px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;background:var(--c-surface-2);border:1px solid var(--c-border);font-size:20px}
 
 /* USER CHIP */
 .user-chip{display:flex;align-items:center;gap:8px}
@@ -234,13 +242,31 @@ tbody tr:last-child td{border-bottom:none}
 .filters-bar{display:flex;flex-wrap:wrap;gap:10px;align-items:end;padding:14px 18px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-md);margin-bottom:14px}
 .filters-bar .form-field{flex:1;min-width:140px}
 
+/* BULK ACTIONS */
+.bulk-bar{background:linear-gradient(135deg,var(--c-primary-500),var(--c-primary-700));color:#fff;padding:12px 18px;border-radius:var(--r-md);margin-bottom:12px;display:none;align-items:center;gap:12px;flex-wrap:wrap;box-shadow:0 4px 12px rgba(44,122,184,.3)}
+.bulk-bar.show{display:flex}
+.bulk-bar .btn{background:rgba(255,255,255,.2);color:#fff;border:none}
+.bulk-bar .btn:hover{background:rgba(255,255,255,.3)}
+.bulk-bar .btn.danger{background:var(--c-danger)}
+
+/* IMAGE PREVIEW */
+.img-preview-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(110px,1fr));gap:10px;margin-top:10px}
+.img-preview-item{position:relative;aspect-ratio:1;border-radius:var(--r-sm);overflow:hidden;border:2px solid var(--c-border);background:var(--c-surface-2)}
+.img-preview-item img{width:100%;height:100%;object-fit:cover}
+.img-preview-item .remove-img{position:absolute;top:4px;right:4px;width:24px;height:24px;border-radius:50%;background:rgba(231,76,60,.9);color:#fff;display:flex;align-items:center;justify-content:center;font-size:14px;cursor:pointer;border:none}
+.img-preview-item .remove-img:hover{background:var(--c-danger)}
+.img-preview-main{max-width:220px;max-height:220px;border-radius:var(--r-md);border:2px solid var(--c-border);object-fit:cover}
+
+/* FILE LINK */
+.file-link{display:inline-flex;align-items:center;gap:6px;padding:6px 12px;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-sm);font-size:12.5px;color:var(--c-primary-600);text-decoration:none}
+.file-link:hover{background:var(--c-primary-50)}
+
 /* CHAT */
 .chat-viewer{display:grid;grid-template-columns:300px 1fr;height:72vh;border:1px solid var(--c-border);border-radius:var(--r-md);overflow:hidden;background:var(--c-surface)}
 .chat-sidebar{background:var(--c-surface-2);border-left:1px solid var(--c-border);overflow-y:auto}
 .chat-user-item{padding:12px 14px;border-bottom:1px solid var(--c-border);cursor:pointer;transition:background .15s}
 .chat-user-item:hover{background:var(--c-surface)}
 .chat-user-item.active{background:var(--c-primary-50);border-right:3px solid var(--c-primary-500)}
-[data-theme="dark"] .chat-user-item.active{background:rgba(44,122,184,.15)}
 .chat-user-name{font-weight:700;font-size:12.5px;margin-bottom:2px}
 .chat-user-preview{font-size:11px;color:var(--c-text-muted);overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .chat-messages{padding:18px;overflow-y:auto;display:flex;flex-direction:column;gap:10px;background:var(--c-bg)}
@@ -261,18 +287,19 @@ tbody tr:last-child td{border-bottom:none}
 .user-detail-item .value{font-size:14px;font-weight:600;word-break:break-word}
 .user-detail-item .value.mono{font-family:'Courier New',monospace;font-size:12px}
 .user-detail-item.full{grid-column:1/-1}
-.pass-reveal{position:relative;display:inline-flex;align-items:center;gap:6px}
-.pass-reveal .toggle-eye{width:28px;height:28px;border-radius:var(--r-sm);display:flex;align-items:center;justify-content:center;background:var(--c-surface-2);color:var(--c-text-muted);font-size:14px;cursor:pointer}
-.pass-reveal .toggle-eye:hover{color:var(--c-primary-600)}
 
-/* BROADCAST TARGET */
+/* TARGET SELECTOR */
 .target-selector{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;margin-bottom:12px}
 .target-option{padding:14px;text-align:center;background:var(--c-surface-2);border:2px solid var(--c-border);border-radius:var(--r-md);cursor:pointer;transition:all .2s}
 .target-option:hover{border-color:var(--c-primary-500)}
 .target-option.active{border-color:var(--c-primary-500);background:var(--c-primary-50)}
-[data-theme="dark"] .target-option.active{background:rgba(44,122,184,.15)}
 .target-option .icon{font-size:24px;display:block;margin-bottom:4px}
 .target-option .label{font-size:12.5px;font-weight:700}
+
+/* INFO BOX */
+.info-box{padding:12px 14px;background:linear-gradient(135deg, rgba(44,122,184,.1), rgba(44,122,184,.04));border:1.5px solid rgba(44,122,184,.25);border-radius:var(--r-sm);font-size:12.5px;line-height:1.7}
+.info-box.green{background:linear-gradient(135deg, rgba(46,204,113,.1), rgba(46,204,113,.04));border-color:rgba(46,204,113,.3)}
+.info-box.warning{background:linear-gradient(135deg, rgba(243,156,18,.1), rgba(243,156,18,.04));border-color:rgba(243,156,18,.3)}
 
 /* RESPONSIVE */
 @media (max-width:1000px){
@@ -410,25 +437,74 @@ tbody tr:last-child td{border-bottom:none}
     <!-- PRODUCTS -->
     <section class="admin-section" id="section-products">
       <div class="page-header">
-        <div><h1 class="page-title"><span class="title-icon">📦</span> المنتجات</h1><p class="page-subtitle">إدارة كاملة لكل المنتجات</p></div>
-        <button class="btn btn-outline" onclick="App.exportData('products')">📥 CSV</button>
+        <div><h1 class="page-title"><span class="title-icon">📦</span> المنتجات</h1><p class="page-subtitle">إدارة كاملة + استيراد CSV + رفع صور و MSDS</p></div>
+        <div class="header-actions-bar">
+          <button class="btn btn-outline" onclick="App.exportData('products')">📥 تصدير</button>
+          <button class="btn btn-teal" onclick="App.openCsvImportModal()">📤 استيراد CSV</button>
+          <button class="btn btn-accent" onclick="App.openProductCreateModal()">➕ منتج جديد</button>
+        </div>
       </div>
+
+      <div class="stats-grid" id="productStats"></div>
+
       <div class="filters-bar">
-        <div class="form-field"><label class="form-label">بحث</label><input type="text" class="form-input" id="prodSearch" placeholder="اسم المنتج..."></div>
-        <div class="form-field"><label class="form-label">الحالة</label>
-          <select class="form-select" id="prodStatusFilter"><option value="">الكل</option><option value="active">نشط</option><option value="hidden">مخفي</option><option value="sold">مباع</option></select>
+        <div class="form-field"><label class="form-label">بحث</label>
+          <input type="text" class="form-input" id="prodSearch" placeholder="اسم / CAS / وصف...">
         </div>
-        <div class="form-field"><label class="form-label">التمييز</label>
-          <select class="form-select" id="prodFeaturedFilter"><option value="">الكل</option><option value="true">مميز</option><option value="false">عادي</option></select>
+        <div class="form-field"><label class="form-label">المورد</label>
+          <select class="form-select" id="prodSupplierFilter"><option value="">كل الموردين</option></select>
+        </div>
+        <div class="form-field"><label class="form-label">الفئة</label>
+          <select class="form-select" id="prodCategoryFilter"><option value="">كل الفئات</option></select>
+        </div>
+        <div class="form-field"><label class="form-label">الحالة</label>
+          <select class="form-select" id="prodStatusFilter">
+            <option value="">الكل</option>
+            <option value="active">نشط</option>
+            <option value="hidden">مخفي</option>
+            <option value="sold">مباع</option>
+          </select>
+        </div>
+        <div class="form-field"><label class="form-label">مميز</label>
+          <select class="form-select" id="prodFeaturedFilter">
+            <option value="">الكل</option>
+            <option value="true">مميز</option>
+            <option value="false">عادي</option>
+          </select>
+        </div>
+        <div class="form-field"><label class="form-label">مخزون</label>
+          <select class="form-select" id="prodStockFilter">
+            <option value="">الكل</option>
+            <option value="available">متوفر</option>
+            <option value="limited">محدود</option>
+            <option value="out_of_stock">غير متوفر</option>
+            <option value="discontinued">متوقف</option>
+          </select>
+        </div>
+        <div class="form-field" style="display:flex; align-items:flex-end">
+          <button class="btn btn-outline btn-sm" onclick="App.resetProductFilters()">🔄 مسح الفلاتر</button>
         </div>
       </div>
+
+      <div class="bulk-bar" id="bulkActionsBar">
+        <strong>✓ <span id="selectedCount">0</span> منتج محدد</strong>
+        <div style="flex:1"></div>
+        <button class="btn btn-sm" onclick="App.bulkChangeStatus('active')">✅ تفعيل</button>
+        <button class="btn btn-sm" onclick="App.bulkChangeStatus('hidden')">🙈 إخفاء</button>
+        <button class="btn btn-sm" onclick="App.bulkChangeStatus('sold')">💰 بيع</button>
+        <button class="btn btn-sm" onclick="App.bulkFeature(true)">⭐ تمييز</button>
+        <button class="btn btn-sm" onclick="App.bulkFeature(false)">☆ إلغاء التمييز</button>
+        <button class="btn btn-sm danger" onclick="App.bulkDelete()">🗑️ حذف المحدد</button>
+        <button class="btn btn-sm" onclick="App.clearSelection()">✕ إلغاء</button>
+      </div>
+
       <div class="card"><div class="card-body" style="padding:0"><div id="productsList"><div class="loader"><div class="spinner"></div></div></div></div></div>
     </section>
 
     <!-- USERS -->
     <section class="admin-section" id="section-users">
       <div class="page-header">
-        <div><h1 class="page-title"><span class="title-icon">👥</span> المستخدمون</h1><p class="page-subtitle">إدارة حسابات المشترين والموردين وبياناتهم وحالات التوثيق.</p></div>
+        <div><h1 class="page-title"><span class="title-icon">👥</span> المستخدمون</h1><p class="page-subtitle">إدارة حسابات المشترين والموردين وبياناتهم</p></div>
         <div class="header-actions-bar">
           <button class="btn btn-outline" onclick="App.exportUsers()">📥 تصدير Excel</button>
           <button class="btn btn-primary" onclick="App.loadUsers()">🔄 تحديث</button>
@@ -661,27 +737,284 @@ tbody tr:last-child td{border-bottom:none}
   </div>
 </div>
 
-<!-- PRODUCT MODAL -->
-<div class="modal-overlay hidden" id="productModal">
-  <div class="modal">
-    <div class="modal-header"><div class="modal-title">📦 تعديل المنتج</div><button class="modal-close" onclick="App.closeModal('productModal')">✕</button></div>
+<!-- ═══════════ PRODUCT FULL MODAL ═══════════ -->
+<div class="modal-overlay hidden" id="productFullModal">
+  <div class="modal wide" style="max-width:1100px">
+    <div class="modal-header">
+      <div class="modal-title">📦 <span id="prdModalTitle">منتج جديد</span></div>
+      <button class="modal-close" onclick="App.closeModal('productFullModal')">✕</button>
+    </div>
     <div class="modal-body">
-      <input type="hidden" id="prdId">
-      <div class="form-grid">
-        <div class="form-field full"><label class="form-label">اسم المنتج</label><input type="text" class="form-input" id="prdName" disabled></div>
-        <div class="form-field"><label class="form-label">الحالة</label>
-          <select class="form-select" id="prdStatus"><option value="active">نشط</option><option value="hidden">مخفي</option><option value="sold">مباع</option></select>
+      <input type="hidden" id="prdFullId">
+      
+      <div class="tabs" style="margin-bottom:16px">
+        <div class="tab active" data-prdtab="basic">📋 الأساسية</div>
+        <div class="tab" data-prdtab="chemical">⚗️ الكيميائية</div>
+        <div class="tab" data-prdtab="media">🖼️ الصور والملفات</div>
+        <div class="tab" data-prdtab="meta">🔧 إضافية</div>
+      </div>
+
+      <div id="prdTab-basic">
+        <div class="form-grid">
+          <div class="form-field full">
+            <label class="form-label"><span class="req">*</span> المورد</label>
+            <select class="form-select" id="prdFullSupplier"></select>
+          </div>
+          <div class="form-field full">
+            <label class="form-label"><span class="req">*</span> اسم المنتج</label>
+            <input type="text" class="form-input" id="prdFullName" placeholder="مثال: صودا كاوية 99%">
+          </div>
+          <div class="form-field">
+            <label class="form-label">CAS Number</label>
+            <input type="text" class="form-input" id="prdFullCas" placeholder="1310-73-2" dir="ltr">
+          </div>
+          <div class="form-field">
+            <label class="form-label">الصيغة الكيميائية</label>
+            <input type="text" class="form-input" id="prdFullFormula" placeholder="NaOH" dir="ltr">
+          </div>
+          <div class="form-field">
+            <label class="form-label">الفئة</label>
+            <select class="form-select" id="prdFullCategory"><option value="">اختر فئة</option></select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">التصنيف الفرعي</label>
+            <select class="form-select" id="prdFullSubcategory"><option value="">اختر تصنيف</option></select>
+          </div>
+          <div class="form-field full">
+            <label class="form-label">الوصف</label>
+            <textarea class="form-textarea" id="prdFullDescription" style="min-height:90px"></textarea>
+          </div>
+          <div class="form-field">
+            <label class="form-label">السعر (جنيه)</label>
+            <input type="number" class="form-input" id="prdFullPrice" step="0.01" min="0">
+          </div>
+          <div class="form-field">
+            <label class="form-label">الوحدة</label>
+            <select class="form-select" id="prdFullUnit">
+              <option value="كجم">كجم</option><option value="طن">طن</option>
+              <option value="لتر">لتر</option><option value="عبوة">عبوة</option>
+              <option value="برميل">برميل</option><option value="جرام">جرام</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">الكمية المتاحة</label>
+            <input type="text" class="form-input" id="prdFullQuantity" placeholder="مثال: 500 كجم">
+          </div>
+          <div class="form-field">
+            <label class="form-label">الحد الأدنى للطلب</label>
+            <input type="text" class="form-input" id="prdFullMinOrder" placeholder="مثال: 50 كجم">
+          </div>
+          <div class="form-field">
+            <label class="form-label">حالة المخزون</label>
+            <select class="form-select" id="prdFullStock">
+              <option value="available">متوفر</option>
+              <option value="limited">محدود</option>
+              <option value="out_of_stock">غير متوفر</option>
+              <option value="discontinued">متوقف</option>
+            </select>
+          </div>
+          <div class="form-field">
+            <label class="form-label">الحالة</label>
+            <select class="form-select" id="prdFullStatus">
+              <option value="active">✅ نشط</option>
+              <option value="hidden">🙈 مخفي</option>
+              <option value="sold">💰 مباع</option>
+            </select>
+          </div>
         </div>
-        <div class="form-field"><label class="form-label">المشاهدات (views)</label><input type="number" class="form-input" id="prdViews" min="0"></div>
-        <div class="form-field"><label class="form-label">views_count</label><input type="number" class="form-input" id="prdViewsCount" min="0"></div>
-        <div class="form-field"><label class="form-label">التقييم</label><input type="number" class="form-input" id="prdRating" min="0" max="5" step="0.01"></div>
-        <div class="form-field full"><label class="form-check"><input type="checkbox" id="prdFeatured"><label for="prdFeatured">⭐ مميز</label></label></div>
-        <div class="form-field full"><label class="form-check"><input type="checkbox" id="prdHidePrice"><label for="prdHidePrice">🙈 إخفاء السعر</label></label></div>
+      </div>
+
+      <div id="prdTab-chemical" style="display:none">
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">النقاء (Purity)</label>
+            <input type="text" class="form-input" id="prdFullPurity" placeholder="99%">
+          </div>
+          <div class="form-field">
+            <label class="form-label">الدرجة (Grade)</label>
+            <input type="text" class="form-input" id="prdFullGrade" placeholder="Technical / Food / Pharma">
+          </div>
+          <div class="form-field">
+            <label class="form-label">بلد المنشأ</label>
+            <input type="text" class="form-input" id="prdFullOrigin" placeholder="مصر / الصين">
+          </div>
+          <div class="form-field">
+            <label class="form-label">التعبئة (Packaging)</label>
+            <input type="text" class="form-input" id="prdFullPackaging" placeholder="أكياس 25 كجم">
+          </div>
+          <div class="form-field">
+            <label class="form-label">الوزن الجزيئي</label>
+            <input type="number" class="form-input" id="prdFullMolecularWeight" step="0.001" placeholder="40.00">
+          </div>
+          <div class="form-field">
+            <label class="form-label">الكثافة</label>
+            <input type="text" class="form-input" id="prdFullDensity" placeholder="2.13 g/cm³">
+          </div>
+          <div class="form-field">
+            <label class="form-label">نقطة الانصهار</label>
+            <input type="text" class="form-input" id="prdFullMelting" placeholder="318°C">
+          </div>
+          <div class="form-field">
+            <label class="form-label">نقطة الغليان</label>
+            <input type="text" class="form-input" id="prdFullBoiling" placeholder="1390°C">
+          </div>
+          <div class="form-field">
+            <label class="form-label">الذوبانية</label>
+            <input type="text" class="form-input" id="prdFullSolubility" placeholder="Soluble in water">
+          </div>
+          <div class="form-field">
+            <label class="form-label">المظهر</label>
+            <input type="text" class="form-input" id="prdFullAppearance" placeholder="White solid">
+          </div>
+          <div class="form-field">
+            <label class="form-label">تصنيف الخطر</label>
+            <input type="text" class="form-input" id="prdFullHazard" placeholder="8 - Corrosive">
+          </div>
+          <div class="form-field full">
+            <label class="form-label">شروط التخزين</label>
+            <textarea class="form-textarea" id="prdFullStorage" style="min-height:60px" placeholder="يُخزن في مكان جاف..."></textarea>
+          </div>
+        </div>
+      </div>
+
+      <div id="prdTab-media" style="display:none">
+        <div class="form-field full" style="margin-bottom:16px">
+          <label class="form-label">🖼️ الصورة الرئيسية</label>
+          <div style="display:flex; gap:8px; flex-wrap:wrap">
+            <input type="url" class="form-input" id="prdFullImageUrl" placeholder="https://... (Supabase / Google Drive / أي مصدر)" style="flex:1; min-width:250px" dir="ltr">
+            <button class="btn btn-outline btn-sm" type="button" onclick="App.triggerMainImageUpload()">📤 رفع ملف</button>
+            <input type="file" id="prdMainImageFile" accept="image/*" style="display:none" onchange="App.handleMainImageUpload(event)">
+          </div>
+          <div id="prdMainImagePreview" style="margin-top:10px"></div>
+        </div>
+
+        <div class="form-field full" style="margin-bottom:16px">
+          <label class="form-label">📸 صور إضافية</label>
+          <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px">
+            <input type="url" class="form-input" id="prdExtraImageUrl" placeholder="الصق رابط صورة..." style="flex:1; min-width:250px" dir="ltr">
+            <button class="btn btn-outline btn-sm" type="button" onclick="App.addExtraImageFromInput()">➕ إضافة</button>
+            <button class="btn btn-outline btn-sm" type="button" onclick="App.triggerExtraImagesUpload()">📤 رفع ملفات</button>
+            <input type="file" id="prdExtraImagesFiles" accept="image/*" multiple style="display:none" onchange="App.handleExtraImagesUpload(event)">
+          </div>
+          <div id="prdExtraImagesPreview" class="img-preview-grid"></div>
+        </div>
+
+        <div class="form-grid" style="margin-bottom:16px">
+          <div class="form-field">
+            <label class="form-label">📄 رابط MSDS</label>
+            <div style="display:flex; gap:6px">
+              <input type="url" class="form-input" id="prdFullMsdsUrl" placeholder="https://..." style="flex:1" dir="ltr">
+              <button class="btn btn-outline btn-sm" type="button" onclick="App.triggerMsdsUpload()">📤</button>
+              <input type="file" id="prdMsdsFile" accept=".pdf,.doc,.docx" style="display:none" onchange="App.handleMsdsUpload(event)">
+            </div>
+          </div>
+          <div class="form-field">
+            <label class="form-label">📄 رابط SDS</label>
+            <div style="display:flex; gap:6px">
+              <input type="url" class="form-input" id="prdFullSdsUrl" placeholder="https://..." style="flex:1" dir="ltr">
+              <button class="btn btn-outline btn-sm" type="button" onclick="App.triggerSdsUpload()">📤</button>
+              <input type="file" id="prdSdsFile" accept=".pdf,.doc,.docx" style="display:none" onchange="App.handleSdsUpload(event)">
+            </div>
+          </div>
+        </div>
+
+        <div class="info-box">
+          ℹ️ <strong>مدعوم:</strong> Supabase Storage • Google Drive (روابط مباشرة) • Dropbox • أي رابط مباشر<br>
+          💡 لـ Google Drive: <code dir="ltr">https://drive.google.com/uc?export=view&id=FILE_ID</code>
+        </div>
+      </div>
+
+      <div id="prdTab-meta" style="display:none">
+        <div class="form-grid">
+          <div class="form-field">
+            <label class="form-label">عدد المشاهدات (views)</label>
+            <input type="number" class="form-input" id="prdFullViews" min="0" value="0">
+          </div>
+          <div class="form-field">
+            <label class="form-label">views_count</label>
+            <input type="number" class="form-input" id="prdFullViewsCount" min="0" value="0">
+          </div>
+          <div class="form-field">
+            <label class="form-label">متوسط التقييم</label>
+            <input type="number" class="form-input" id="prdFullRating" min="0" max="5" step="0.01" value="0">
+          </div>
+          <div class="form-field">
+            <label class="form-label">Sub Category (نص)</label>
+            <input type="text" class="form-input" id="prdFullSubCatText">
+          </div>
+          <div class="form-field full">
+            <label class="form-check"><input type="checkbox" id="prdFullFeatured"><label for="prdFullFeatured">⭐ منتج مميز</label></label>
+          </div>
+          <div class="form-field full">
+            <label class="form-check"><input type="checkbox" id="prdFullHidePrice"><label for="prdFullHidePrice">🙈 إخفاء السعر</label></label>
+          </div>
+        </div>
       </div>
     </div>
     <div class="modal-footer">
-      <button class="btn btn-primary" onclick="App.saveProduct()">💾 حفظ</button>
-      <button class="btn btn-outline" onclick="App.closeModal('productModal')">إلغاء</button>
+      <button class="btn btn-primary" id="prdFullSaveBtn" onclick="App.saveFullProduct()">💾 حفظ المنتج</button>
+      <button class="btn btn-outline" onclick="App.closeModal('productFullModal')">إلغاء</button>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════ CSV IMPORT MODAL ═══════════ -->
+<div class="modal-overlay hidden" id="csvImportModal">
+  <div class="modal wide" style="max-width:1000px">
+    <div class="modal-header">
+      <div class="modal-title">📤 استيراد منتجات من CSV</div>
+      <button class="modal-close" onclick="App.closeModal('csvImportModal')">✕</button>
+    </div>
+    <div class="modal-body">
+      <div class="info-box green" style="margin-bottom:16px">
+        <div style="font-weight:700; margin-bottom:6px">📋 خطوات الاستيراد</div>
+        <ol style="margin-right:20px; font-size:13px; line-height:1.9">
+          <li>حمّل ملف CSV النموذجي</li>
+          <li>عدّل البيانات في Excel أو Google Sheets</li>
+          <li>احفظ الملف بصيغة CSV UTF-8</li>
+          <li>ارفع الملف واختر المورد</li>
+        </ol>
+      </div>
+
+      <div class="form-grid">
+        <div class="form-field full">
+          <label class="form-label"><span class="req">*</span> المورد المستهدف</label>
+          <select class="form-select" id="csvSupplierSelect"></select>
+          <small style="color:var(--c-text-muted); font-size:11.5px; margin-top:4px">
+            💡 كل المنتجات في الملف ستُنسب لهذا المورد
+          </small>
+        </div>
+
+        <div class="form-field full">
+          <label class="form-label"><span class="req">*</span> ملف CSV</label>
+          <div style="display:flex; gap:8px; flex-wrap:wrap">
+            <input type="file" id="csvFileInput" accept=".csv" class="form-input" style="flex:1; min-width:200px">
+            <button class="btn btn-outline" type="button" onclick="App.downloadCsvTemplate()">📥 تحميل النموذج</button>
+          </div>
+        </div>
+
+        <div class="form-field full">
+          <label class="form-check">
+            <input type="checkbox" id="csvUpdateExisting">
+            <label for="csvUpdateExisting">تحديث المنتجات الموجودة (بنفس CAS + الاسم)</label>
+          </label>
+        </div>
+      </div>
+
+      <div id="csvPreviewWrap" style="display:none; margin-top:16px">
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px">
+          <strong>📊 معاينة (<span id="csvPreviewCount">0</span> صف)</strong>
+          <button class="btn btn-sm btn-outline" onclick="App.downloadPreviewCsv()">📥 تحميل المعاينة</button>
+        </div>
+        <div id="csvErrors"></div>
+        <div class="table-wrap" style="max-height:400px; overflow:auto">
+          <table id="csvPreviewTable"><thead></thead><tbody></tbody></table>
+        </div>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn btn-teal" id="csvImportBtn" onclick="App.executeCsvImport()" disabled>📤 استيراد المنتجات</button>
+      <button class="btn btn-outline" onclick="App.closeModal('csvImportModal')">إلغاء</button>
     </div>
   </div>
 </div>
@@ -699,8 +1032,8 @@ tbody tr:last-child td{border-bottom:none}
         <button class="btn btn-outline btn-sm" onclick="App.generateStrongPass()">🎲 توليد قوية</button>
         <button class="btn btn-outline btn-sm" onclick="App.copyPassToClipboard()">📋 نسخ</button>
       </div>
-      <div style="margin-top:14px; padding:12px; background:var(--c-primary-50); border-radius:var(--r-sm); font-size:12.5px; line-height:1.7">
-        ℹ️ <strong>ملاحظة:</strong> سيتم تحديث كلمة السر في <code>auth.users</code> وفي <code>profiles</code> مباشرة عبر Edge Function.
+      <div class="info-box" style="margin-top:14px">
+        ℹ️ سيتم تحديث كلمة السر في <code>auth.users</code> وفي <code>profiles</code> عبر Edge Function.
       </div>
     </div>
     <div class="modal-footer">
@@ -738,7 +1071,7 @@ tbody tr:last-child td{border-bottom:none}
         </div>
         <div class="form-field full">
           <label class="form-label">الرسالة</label>
-          <textarea class="form-textarea" id="bcNotifMessage" style="min-height:100px" placeholder="اكتب تفاصيل الإشعار..."></textarea>
+          <textarea class="form-textarea" id="bcNotifMessage" style="min-height:100px"></textarea>
         </div>
         <div class="form-field">
           <label class="form-label">النوع</label>
@@ -771,12 +1104,12 @@ tbody tr:last-child td{border-bottom:none}
       <div class="form-grid">
         <div class="form-field full">
           <label class="form-label"><span class="req">*</span> نص الرسالة</label>
-          <textarea class="form-textarea" id="bcMsgText" style="min-height:120px" placeholder="اكتب نص الرسالة..."></textarea>
+          <textarea class="form-textarea" id="bcMsgText" style="min-height:120px"></textarea>
         </div>
       </div>
 
-      <div style="margin-top:14px; padding:12px; background:rgba(139,92,246,.1); border-radius:var(--r-sm); font-size:12.5px; line-height:1.7">
-        ℹ️ سيتم إرسال رسالة واحدة لكل مستخدم في الفئة المستهدفة، وستظهر في صندوق الرسائل الخاص به.
+      <div class="info-box" style="margin-top:14px">
+        ℹ️ سيتم إرسال رسالة واحدة لكل مستخدم في الفئة المستهدفة.
       </div>
     </div>
     <div class="modal-footer">
@@ -801,6 +1134,9 @@ tbody tr:last-child td{border-bottom:none}
 <div class="toast-container" id="toastContainer"></div>
 
 <script>
+/* ═══════════════════════════════════════════════════════
+   INITIAL CONFIG & SUPABASE
+   ═══════════════════════════════════════════════════════ */
 const SUPABASE_URL = 'https://soqvhvqtpgeoxwmkvbih.supabase.co';
 const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InNvcXZodnF0cGdlb3h3bWt2YmloIiwicm9sZSI6ImFub24iLCJpYXQiOjE3ODAwOTYwODQsImV4cCI6MjA5NTY3MjA4NH0.7o0KP2SEV4Pr2Y_tEcQ3rEFyo_PBwI8rbq9CMh2AveA';
 const ADMIN_PASSWORD = '224466889900';
@@ -809,9 +1145,7 @@ const EDGE_FN_URL = `${SUPABASE_URL}/functions/v1/admin-actions`;
 
 const supabaseClient = supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
-/* ══════════════════════════════════════════════════
-   Edge Function Caller — لحل مشاكل الباسورد والحذف
-   ══════════════════════════════════════════════════ */
+/* ═══════════ Edge Function Caller ═══════════ */
 async function callAdminEdge(action, params = {}) {
   const res = await fetch(EDGE_FN_URL, {
     method: 'POST',
@@ -828,6 +1162,9 @@ async function callAdminEdge(action, params = {}) {
   return data;
 }
 
+/* ═══════════════════════════════════════════════════════
+   APP OBJECT
+   ═══════════════════════════════════════════════════════ */
 const App = {
   state: {
     articles: [], ticker: [], products: [], users: [], rfqs: [], offers: [], quotes: [],
@@ -836,14 +1173,29 @@ const App = {
     analytics: [], visitors: [], artTags: [],
     userCache: {},
     editingIds: {}, currentUser: null, selectedChatUser: null,
-    notifTarget: 'all', msgTarget: 'all'
+    notifTarget: 'all', msgTarget: 'all',
+    // Products state
+    productFilters: { search: '', supplier: '', category: '', status: '', featured: '', stock: '' },
+    selectedProductIds: new Set(),
+    extraImages: [],
+    productSuppliers: [],
+    productCategories: [],
+    productSubcategories: [],
+    csvParsedData: []
   },
 
   init() {
-    this.setupTheme(); this.setupLogin(); this.setupNav(); this.setupModals();
-    this.setupTabs(); this.setupTargetSelectors(); this.checkSession();
+    this.setupTheme();
+    this.setupLogin();
+    this.setupNav();
+    this.setupModals();
+    this.setupTabs();
+    this.setupTargetSelectors();
+    this.setupProductTabs();
+    this.checkSession();
   },
 
+  /* ═══════════════ THEME ═══════════════ */
   setupTheme() {
     const saved = localStorage.getItem('chemato-theme') || 'light';
     document.documentElement.setAttribute('data-theme', saved);
@@ -857,6 +1209,7 @@ const App = {
     });
   },
 
+  /* ═══════════════ LOGIN ═══════════════ */
   setupLogin() {
     const p = document.getElementById('passwordInput');
     const b = document.getElementById('loginBtn');
@@ -882,7 +1235,9 @@ const App = {
     p.focus();
   },
 
-  checkSession() { if (sessionStorage.getItem(SESSION_KEY) === 'true') this.showAdmin(); },
+  checkSession() {
+    if (sessionStorage.getItem(SESSION_KEY) === 'true') this.showAdmin();
+  },
 
   showAdmin() {
     document.getElementById('loginScreen').classList.add('hidden');
@@ -891,36 +1246,57 @@ const App = {
     this.loadAll();
   },
 
-  logout() { sessionStorage.removeItem(SESSION_KEY); location.reload(); },
+  logout() {
+    sessionStorage.removeItem(SESSION_KEY);
+    location.reload();
+  },
 
+  /* ═══════════════ NAV ═══════════════ */
   setupNav() {
-    document.querySelectorAll('.nav-link').forEach(l => l.addEventListener('click', () => this.navigate(l.dataset.section)));
+    document.querySelectorAll('.nav-link').forEach(l => 
+      l.addEventListener('click', () => this.navigate(l.dataset.section))
+    );
     document.getElementById('logoutBtn').addEventListener('click', () => this.logout());
-    document.getElementById('mobileMenuBtn').addEventListener('click', () => document.getElementById('adminSidebar').classList.toggle('open'));
+    document.getElementById('mobileMenuBtn').addEventListener('click', () => 
+      document.getElementById('adminSidebar').classList.toggle('open')
+    );
   },
 
   navigate(section) {
-    document.querySelectorAll('.nav-link').forEach(l => l.classList.toggle('active', l.dataset.section === section));
-    document.querySelectorAll('.admin-section').forEach(s => s.classList.toggle('active', s.id === `section-${section}`));
+    document.querySelectorAll('.nav-link').forEach(l => 
+      l.classList.toggle('active', l.dataset.section === section)
+    );
+    document.querySelectorAll('.admin-section').forEach(s => 
+      s.classList.toggle('active', s.id === `section-${section}`)
+    );
     document.getElementById('adminSidebar').classList.remove('open');
+    
     const loaders = {
-      articles: () => this.loadArticles(), ticker: () => this.loadTicker(),
-      products: () => this.loadProducts(), users: () => this.loadUsers(),
-      rfqs: () => this.loadRfqs(), offers: () => { this.loadOffers(); this.loadQuotes(); },
-      messages: () => this.loadMessages(), contacts: () => this.loadContacts(),
+      articles: () => this.loadArticles(),
+      ticker: () => this.loadTicker(),
+      products: () => this.loadProducts(),
+      users: () => this.loadUsers(),
+      rfqs: () => this.loadRfqs(),
+      offers: () => { this.loadOffers(); this.loadQuotes(); },
+      messages: () => this.loadMessages(),
+      contacts: () => this.loadContacts(),
       notifications: () => this.loadNotifications(),
       reviews: () => { this.loadReviews(); this.loadRatings(); },
-      follows: () => this.loadFollows(), favorites: () => this.loadFavorites(),
+      follows: () => this.loadFollows(),
+      favorites: () => this.loadFavorites(),
       categories: () => { this.loadCategories(); this.loadSubcategories(); },
-      analytics: () => this.loadAnalytics(), visitors: () => this.loadVisitors()
+      analytics: () => this.loadAnalytics(),
+      visitors: () => this.loadVisitors()
     };
     if (loaders[section]) loaders[section]();
   },
 
+  /* ═══════════════ TABS ═══════════════ */
   setupTabs() {
     document.querySelectorAll('.tabs').forEach(tg => {
       tg.querySelectorAll('.tab').forEach(tab => {
         tab.addEventListener('click', () => {
+          if (tab.dataset.prdtab) return; // skip product modal tabs
           tg.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
           tab.classList.add('active');
           const p = tg.parentElement;
@@ -932,17 +1308,30 @@ const App = {
     });
   },
 
+  setupProductTabs() {
+    document.querySelectorAll('[data-prdtab]').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('[data-prdtab]').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        ['basic', 'chemical', 'media', 'meta'].forEach(t => {
+          const el = document.getElementById(`prdTab-${t}`);
+          if (el) el.style.display = t === tab.dataset.prdtab ? 'block' : 'none';
+        });
+      });
+    });
+  },
+
+  /* ═══════════════ TARGET SELECTORS ═══════════════ */
   setupTargetSelectors() {
-    // Notif target selector
     document.querySelectorAll('#notifTargetSelector .target-option').forEach(opt => {
       opt.addEventListener('click', () => {
         document.querySelectorAll('#notifTargetSelector .target-option').forEach(o => o.classList.remove('active'));
         opt.classList.add('active');
         this.state.notifTarget = opt.dataset.target;
-        document.getElementById('notifSpecificUserWrap').style.display = opt.dataset.target === 'specific' ? 'block' : 'none';
+        document.getElementById('notifSpecificUserWrap').style.display = 
+          opt.dataset.target === 'specific' ? 'block' : 'none';
       });
     });
-    // Msg target selector
     document.querySelectorAll('#msgTargetSelector .target-option').forEach(opt => {
       opt.addEventListener('click', () => {
         document.querySelectorAll('#msgTargetSelector .target-option').forEach(o => o.classList.remove('active'));
@@ -952,27 +1341,36 @@ const App = {
     });
   },
 
+  /* ═══════════════ MODALS ═══════════════ */
   setupModals() {
     document.querySelectorAll('.modal-overlay').forEach(o => {
       o.addEventListener('click', e => { if (e.target === o) o.classList.add('hidden'); });
     });
-    const ti = document.getElementById('artTagsInput');
-    ti.addEventListener('keydown', e => {
-      if (e.key === 'Enter' || e.key === ',') {
-        e.preventDefault();
-        const v = ti.value.trim().replace(/,$/, '');
-        if (v && !this.state.artTags.includes(v)) { this.state.artTags.push(v); this.renderTags(); }
-        ti.value = '';
-      } else if (e.key === 'Backspace' && !ti.value && this.state.artTags.length) {
-        this.state.artTags.pop(); this.renderTags();
-      }
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape') document.querySelectorAll('.modal-overlay:not(.hidden)').forEach(m => m.classList.add('hidden'));
     });
+    
+    const ti = document.getElementById('artTagsInput');
+    if (ti) {
+      ti.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ',') {
+          e.preventDefault();
+          const v = ti.value.trim().replace(/,$/, '');
+          if (v && !this.state.artTags.includes(v)) { this.state.artTags.push(v); this.renderTags(); }
+          ti.value = '';
+        } else if (e.key === 'Backspace' && !ti.value && this.state.artTags.length) {
+          this.state.artTags.pop(); this.renderTags();
+        }
+      });
+    }
   },
 
   openModal(id) { document.getElementById(id).classList.remove('hidden'); },
   closeModal(id) { document.getElementById(id).classList.add('hidden'); },
 
-  /* ═══════════ USER CACHE ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     USER CACHE
+     ═══════════════════════════════════════════════════════ */
   async buildUserCache() {
     try {
       const { data, error } = await supabaseClient
@@ -1018,7 +1416,7 @@ const App = {
     </div>`;
   },
 
-  /* ═══════════ LOAD ALL ═══════════ */
+  /* ═══════════════ LOAD ALL ═══════════════ */
   async loadAll() {
     await this.buildUserCache();
     await Promise.all([this.loadStats(), this.loadRecentActivity(), this.loadRecentUsers()]);
@@ -1026,7 +1424,13 @@ const App = {
   },
 
   async loadNavCounts() {
-    const tables = [['blog_posts','navCountArticles'],['ticker_news','navCountTicker'],['products','navCountProducts'],['profiles','navCountUsers'],['purchase_requests','navCountRfqs']];
+    const tables = [
+      ['blog_posts', 'navCountArticles'],
+      ['ticker_news', 'navCountTicker'],
+      ['products', 'navCountProducts'],
+      ['profiles', 'navCountUsers'],
+      ['purchase_requests', 'navCountRfqs']
+    ];
     for (const [t, id] of tables) {
       try {
         const { count } = await supabaseClient.from(t).select('id', { count: 'exact', head: true });
@@ -1036,7 +1440,9 @@ const App = {
     }
   },
 
-  /* ═══════════ DASHBOARD ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     DASHBOARD
+     ═══════════════════════════════════════════════════════ */
   async loadStats() {
     const wrap = document.getElementById('mainStats');
     try {
@@ -1076,7 +1482,9 @@ const App = {
         { i: '📝', v: r[14].count || 0, l: 'مقالات', c: 'blue' },
         { i: '📢', v: r[15].count || 0, l: 'أخبار نشطة', c: 'green' }
       ];
-      wrap.innerHTML = s.map(x => `<div class="stat-card"><div class="stat-icon ${x.c}">${x.i}</div><div class="stat-info"><div class="stat-value">${x.v.toLocaleString('ar-EG')}</div><div class="stat-label">${x.l}</div></div></div>`).join('');
+      wrap.innerHTML = s.map(x => 
+        `<div class="stat-card"><div class="stat-icon ${x.c}">${x.i}</div><div class="stat-info"><div class="stat-value">${x.v.toLocaleString('ar-EG')}</div><div class="stat-label">${x.l}</div></div></div>`
+      ).join('');
     } catch (e) { wrap.innerHTML = `<p style="color:var(--c-danger)">${e.message}</p>`; }
   },
 
@@ -1092,7 +1500,9 @@ const App = {
         ...(m.data || []).map(x => ({ i: '💬', t: `رسالة: ${(x.message || '').slice(0, 40)}`, d: x.created_at, uid: x.from_user_id }))
       ].sort((a, b) => new Date(b.d) - new Date(a.d)).slice(0, 10);
       if (!acts.length) return wrap.innerHTML = '<p class="td-muted" style="text-align:center; padding:20px">لا يوجد نشاط</p>';
-      wrap.innerHTML = acts.map(a => `<div style="display:flex; gap:10px; padding:9px 0; border-bottom:1px solid var(--c-border); align-items:center"><span style="font-size:18px">${a.i}</span><div style="flex:1; min-width:0"><div style="font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(a.t)}</div><div class="td-muted">${this.esc(this.userName(a.uid))} · ${this.timeAgo(a.d)}</div></div></div>`).join('');
+      wrap.innerHTML = acts.map(a => 
+        `<div style="display:flex; gap:10px; padding:9px 0; border-bottom:1px solid var(--c-border); align-items:center"><span style="font-size:18px">${a.i}</span><div style="flex:1; min-width:0"><div style="font-size:13px; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(a.t)}</div><div class="td-muted">${this.esc(this.userName(a.uid))} · ${this.timeAgo(a.d)}</div></div></div>`
+      ).join('');
     } catch (e) { wrap.innerHTML = `<p style="color:var(--c-danger)">${e.message}</p>`; }
   },
 
@@ -1102,7 +1512,8 @@ const App = {
       const { data, error } = await supabaseClient.from('profiles').select('*').order('created_at', { ascending: false }).limit(8);
       if (error) throw error;
       if (!data?.length) return wrap.innerHTML = '<p class="td-muted" style="text-align:center; padding:20px">لا يوجد مسجلين</p>';
-      wrap.innerHTML = data.map(u => `<div style="display:flex; gap:10px; padding:9px 0; border-bottom:1px solid var(--c-border); align-items:center; cursor:pointer" onclick="App.viewUser('${u.id}')">
+      wrap.innerHTML = data.map(u => 
+        `<div style="display:flex; gap:10px; padding:9px 0; border-bottom:1px solid var(--c-border); align-items:center; cursor:pointer" onclick="App.viewUser('${u.id}')">
         <div style="width:36px; height:36px; border-radius:50%; background:var(--c-primary-500); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:13px">${this.initials(u.full_name || u.email || '?')}</div>
         <div style="flex:1; min-width:0"><div style="font-size:13px; font-weight:600; overflow:hidden; text-overflow:ellipsis; white-space:nowrap">${this.esc(u.full_name || 'بدون اسم')} ${u.is_verified ? '✓' : ''}</div><div class="td-muted">${this.esc(u.email || '—')}</div></div>
         <div class="td-muted">${this.timeAgo(u.created_at)}</div>
@@ -1110,7 +1521,9 @@ const App = {
     } catch (e) { wrap.innerHTML = `<p style="color:var(--c-danger)">${e.message}</p>`; }
   },
 
-  /* ═══════════ USERS ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     USERS
+     ═══════════════════════════════════════════════════════ */
   async loadUsers() {
     const wrap = document.getElementById('usersList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1119,7 +1532,9 @@ const App = {
       const type = document.getElementById('userTypeFilter')?.value || '';
       const verified = document.getElementById('userVerifiedFilter')?.value || '';
       const suspended = document.getElementById('userSuspendedFilter')?.value || '';
-      let q = supabaseClient.from('profiles').select('id, full_name, email, phone, whatsapp, company_name, city, user_type, avatar_url, is_verified, is_suspended, is_admin, login_count, last_login_at, last_seen, created_at, updated_at, address, bio, admin_notes').order('created_at', { ascending: false }).limit(500);
+      let q = supabaseClient.from('profiles')
+        .select('id, full_name, email, phone, whatsapp, company_name, city, user_type, avatar_url, is_verified, is_suspended, is_admin, login_count, last_login_at, last_seen, created_at, updated_at, address, bio, admin_notes')
+        .order('created_at', { ascending: false }).limit(500);
       if (type) q = q.eq('user_type', type);
       if (verified === 'true') q = q.eq('is_verified', true);
       if (verified === 'false') q = q.eq('is_verified', false);
@@ -1147,7 +1562,7 @@ const App = {
     const typeLabel = { supplier: 'مورد', buyer: 'مشتري', admin: 'مدير' };
     const typeBadge = { supplier: 'badge-success', buyer: 'badge-info', admin: 'badge-danger' };
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>المستخدم</th><th>البريد الإلكتروني</th><th>الهاتف</th><th>النوع</th><th>حالة التوثيق</th><th>الحالة</th><th>آخر ظهور</th><th>إجراءات</th></tr></thead>
+      <thead><tr><th>المستخدم</th><th>البريد</th><th>الهاتف</th><th>النوع</th><th>التوثيق</th><th>الحالة</th><th>آخر ظهور</th><th>إجراءات</th></tr></thead>
       <tbody>${this.state.users.map(u => `<tr>
         <td><div class="td-title">${this.esc(u.full_name || 'بدون اسم')}</div><div class="td-muted">${this.esc(u.company_name || u.city || '')}</div></td>
         <td class="td-muted" style="font-size:11.5px">${this.esc(u.email || '—')}</td>
@@ -1248,7 +1663,8 @@ const App = {
 
   async toggleAdmin(id, isAdmin) {
     try {
-      const { error } = await supabaseClient.from('profiles').update({ is_admin: isAdmin, user_type: isAdmin ? 'admin' : 'buyer' }).eq('id', id);
+      const { error } = await supabaseClient.from('profiles')
+        .update({ is_admin: isAdmin, user_type: isAdmin ? 'admin' : 'buyer' }).eq('id', id);
       if (error) throw error;
       this.showToast('success', isAdmin ? '👑 تم التعيين' : 'تم الإزالة');
       await this.loadUsers();
@@ -1268,7 +1684,6 @@ const App = {
     navigator.clipboard.writeText(v).then(() => this.showToast('success', 'تم النسخ ✅'));
   },
 
-  /* ✅ تغيير كلمة السر عبر Edge Function */
   async saveNewPassword() {
     if (!this.state.currentUser) return;
     const newPass = document.getElementById('newPassInput').value.trim();
@@ -1299,23 +1714,21 @@ const App = {
     this.openModal('confirmModal');
   },
 
-  /* ✅ حذف المستخدم عبر Edge Function */
   async deleteUser(id) {
     const btn = document.getElementById('confirmYes');
     const oldTxt = btn?.textContent;
     if (btn) { btn.disabled = true; btn.textContent = '⏳...'; }
 
     try {
-      const res = await callAdminEdge('delete_user', { userId: id });
-      this.showToast('success', 'تم الحذف 🗑️', 'تم الحذف من auth.users ومن profiles');
+      await callAdminEdge('delete_user', { userId: id });
+      this.showToast('success', 'تم الحذف 🗑️');
       this.closeModal('confirmModal');
       this.closeModal('userModal');
       await this.loadUsers();
     } catch (e) {
-      // Fallback: احذف من profiles فقط
       try {
         await supabaseClient.from('profiles').delete().eq('id', id);
-        this.showToast('warning', 'تم الحذف من profiles فقط', 'السبب: ' + e.message);
+        this.showToast('warning', 'تم الحذف من profiles فقط', e.message);
         this.closeModal('confirmModal');
         this.closeModal('userModal');
         await this.loadUsers();
@@ -1332,9 +1745,10 @@ const App = {
     this.confirmDeleteUser(this.state.currentUser.id, this.state.currentUser.full_name || this.state.currentUser.email);
   },
 
-  /* ═══════════ BROADCAST NOTIFICATION ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     BROADCAST
+     ═══════════════════════════════════════════════════════ */
   async openBroadcastNotifModal() {
-    // Reset
     document.querySelectorAll('#notifTargetSelector .target-option').forEach(o => o.classList.remove('active'));
     document.querySelector('#notifTargetSelector .target-option[data-target="all"]').classList.add('active');
     this.state.notifTarget = 'all';
@@ -1343,7 +1757,6 @@ const App = {
     document.getElementById('bcNotifMessage').value = '';
     document.getElementById('bcNotifType').value = 'admin_broadcast';
 
-    // Load users in selector
     const sel = document.getElementById('notifSpecificUser');
     if (!this.state.users.length) {
       const { data } = await supabaseClient.from('profiles').select('id, full_name, email, user_type').limit(1000);
@@ -1395,7 +1808,6 @@ const App = {
     }
   },
 
-  /* ═══════════ BROADCAST MESSAGE ═══════════ */
   openBroadcastMessageModal() {
     document.querySelectorAll('#msgTargetSelector .target-option').forEach(o => o.classList.remove('active'));
     document.querySelector('#msgTargetSelector .target-option[data-target="all"]').classList.add('active');
@@ -1428,22 +1840,17 @@ const App = {
     }
   },
 
-  /* ═══════════ EXPORT ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     EXPORT
+     ═══════════════════════════════════════════════════════ */
   exportUsers() {
     if (!this.state.users.length) return this.showToast('warning', 'تنبيه', 'لا يوجد بيانات');
     const rows = this.state.users.map(u => ({
-      'ID': u.id,
-      'الاسم الكامل': u.full_name || '',
-      'الإيميل': u.email || '',
-      'الهاتف': u.phone || '',
-      'واتساب': u.whatsapp || '',
-      'الشركة': u.company_name || '',
-      'المدينة': u.city || '',
-      'العنوان': u.address || '',
-      'النوع': u.user_type || '',
-      'موثّق': u.is_verified ? 'نعم' : 'لا',
-      'معلّق': u.is_suspended ? 'نعم' : 'لا',
-      'Admin': u.is_admin ? 'نعم' : 'لا',
+      'ID': u.id, 'الاسم الكامل': u.full_name || '', 'الإيميل': u.email || '',
+      'الهاتف': u.phone || '', 'واتساب': u.whatsapp || '',
+      'الشركة': u.company_name || '', 'المدينة': u.city || '', 'العنوان': u.address || '',
+      'النوع': u.user_type || '', 'موثّق': u.is_verified ? 'نعم' : 'لا',
+      'معلّق': u.is_suspended ? 'نعم' : 'لا', 'Admin': u.is_admin ? 'نعم' : 'لا',
       'عدد الدخول': u.login_count || 0,
       'آخر دخول': u.last_login_at ? this.fmtDate(u.last_login_at, true) : '',
       'تاريخ التسجيل': u.created_at ? this.fmtDate(u.created_at) : '',
@@ -1510,7 +1917,9 @@ const App = {
     XLSX.writeFile(wb, `${filename}-${new Date().toISOString().slice(0,10)}.xlsx`);
   },
 
-  /* ═══════════ ARTICLES ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     ARTICLES
+     ═══════════════════════════════════════════════════════ */
   async loadArticles() {
     const wrap = document.getElementById('articlesList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1583,6 +1992,7 @@ const App = {
 
   renderTags() {
     const wrap = document.getElementById('artTagsWrap');
+    if (!wrap) return;
     const input = document.getElementById('artTagsInput');
     wrap.querySelectorAll('.tag-chip').forEach(c => c.remove());
     this.state.artTags.forEach((tag, i) => {
@@ -1596,7 +2006,11 @@ const App = {
   removeTag(i) { this.state.artTags.splice(i, 1); this.renderTags(); },
 
   slugify(t) {
-    return t.toString().trim().toLowerCase().replace(/[\s_]+/g, '-').replace(/[^\w\u0600-\u06FF-]/g, '').replace(/-+/g, '-').replace(/^-|-$/g, '') || 'article-' + Date.now();
+    return t.toString().trim().toLowerCase()
+      .replace(/[\s_]+/g, '-')
+      .replace(/[^\w\u0600-\u06FF-]/g, '')
+      .replace(/-+/g, '-')
+      .replace(/^-|-$/g, '') || 'article-' + Date.now();
   },
 
   async saveArticle() {
@@ -1638,13 +2052,17 @@ const App = {
     finally { btn.disabled = false; btn.textContent = '💾 حفظ'; }
   },
 
-  /* ═══════════ TICKER ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     TICKER
+     ═══════════════════════════════════════════════════════ */
   async loadTicker() {
     const wrap = document.getElementById('tickerList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
     try {
       const { data, error } = await supabaseClient.from('ticker_news').select('*')
-        .order('priority', { ascending: false }).order('display_order').order('created_at', { ascending: false });
+        .order('priority', { ascending: false })
+        .order('display_order')
+        .order('created_at', { ascending: false });
       if (error) throw error;
       this.state.ticker = data || [];
       document.getElementById('navCountTicker').textContent = data?.length || 0;
@@ -1742,102 +2160,16 @@ const App = {
 
   async toggleTickerActive(id, a) {
     try {
-      const { error } = await supabaseClient.from('ticker_news').update({ is_active: a, updated_at: new Date().toISOString() }).eq('id', id);
+      const { error } = await supabaseClient.from('ticker_news')
+        .update({ is_active: a, updated_at: new Date().toISOString() }).eq('id', id);
       if (error) throw error;
       this.showToast('success', 'تم التحديث');
     } catch (e) { this.showToast('error', 'خطأ', e.message); await this.loadTicker(); }
   },
 
-  /* ═══════════ PRODUCTS ═══════════ */
-  async loadProducts() {
-    const wrap = document.getElementById('productsList');
-    wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
-    try {
-      const search = (document.getElementById('prodSearch')?.value || '').trim();
-      const status = document.getElementById('prodStatusFilter')?.value || '';
-      const featured = document.getElementById('prodFeaturedFilter')?.value || '';
-      let q = supabaseClient.from('products').select('*').order('created_at', { ascending: false }).limit(300);
-      if (status) q = q.eq('status', status);
-      if (featured === 'true') q = q.eq('is_featured', true);
-      if (featured === 'false') q = q.eq('is_featured', false);
-      if (search) q = q.or(`name.ilike.%${search}%,category.ilike.%${search}%`);
-      const { data, error } = await q;
-      if (error) throw error;
-      this.state.products = data || [];
-      document.getElementById('navCountProducts').textContent = data?.length || 0;
-      this.renderProducts();
-    } catch (e) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`; }
-  },
-
-  renderProducts() {
-    const wrap = document.getElementById('productsList');
-    if (!this.state.products.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📦</span><h3>لا توجد منتجات</h3></div>`;
-    const sb = { active: 'badge-success', hidden: 'badge-gray', sold: 'badge-warning' };
-    const sl = { active: 'نشط', hidden: 'مخفي', sold: 'مباع' };
-    wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>المنتج</th><th>المورد</th><th>الفئة</th><th>الحالة</th><th>مميز</th><th>مشاهدات</th><th>تقييم</th><th>إجراءات</th></tr></thead>
-      <tbody>${this.state.products.map(p => {
-        const v = Math.max(p.views || 0, p.views_count || 0);
-        return `<tr>
-          <td><div class="td-title">${this.esc(p.name)}</div><div class="td-muted">${this.esc(p.cas_number || '')}</div></td>
-          <td>${this.userChip(p.supplier_id)}</td>
-          <td><span class="badge badge-info">${this.esc(p.category || '—')}</span></td>
-          <td><span class="badge ${sb[p.status] || 'badge-gray'}">${sl[p.status] || p.status}</span></td>
-          <td><label class="toggle"><input type="checkbox" ${p.is_featured ? 'checked' : ''} onchange="App.toggleFeatured('${p.id}', this.checked)"><span class="slider"></span></label></td>
-          <td class="td-muted">👁️ ${v.toLocaleString('ar-EG')}</td>
-          <td class="td-muted">⭐ ${(p.avg_rating || 0).toFixed(1)}</td>
-          <td><div class="td-actions">
-            <button class="btn btn-outline btn-xs" onclick="App.editProduct('${p.id}')">✏️</button>
-            <button class="btn btn-danger btn-xs" onclick="App.confirmDelete('product','${p.id}')">🗑️</button>
-          </div></td>
-        </tr>`;
-      }).join('')}</tbody>
-    </table></div>`;
-  },
-
-  async toggleFeatured(id, f) {
-    try {
-      const { error } = await supabaseClient.from('products').update({ is_featured: f }).eq('id', id);
-      if (error) throw error;
-      this.showToast('success', f ? '⭐' : 'تم');
-    } catch (e) { this.showToast('error', 'خطأ', e.message); await this.loadProducts(); }
-  },
-
-  editProduct(id) {
-    const p = this.state.products.find(x => x.id === id); if (!p) return;
-    this.state.editingIds.product = id;
-    document.getElementById('prdId').value = p.id;
-    document.getElementById('prdName').value = p.name || '';
-    document.getElementById('prdStatus').value = p.status || 'active';
-    document.getElementById('prdViews').value = p.views || 0;
-    document.getElementById('prdViewsCount').value = p.views_count || 0;
-    document.getElementById('prdRating').value = p.avg_rating || 0;
-    document.getElementById('prdFeatured').checked = !!p.is_featured;
-    document.getElementById('prdHidePrice').checked = !!p.hide_price;
-    this.openModal('productModal');
-  },
-
-  async saveProduct() {
-    if (!this.state.editingIds.product) return;
-    const payload = {
-      status: document.getElementById('prdStatus').value,
-      views: parseInt(document.getElementById('prdViews').value) || 0,
-      views_count: parseInt(document.getElementById('prdViewsCount').value) || 0,
-      avg_rating: parseFloat(document.getElementById('prdRating').value) || 0,
-      is_featured: document.getElementById('prdFeatured').checked,
-      hide_price: document.getElementById('prdHidePrice').checked,
-      updated_at: new Date().toISOString()
-    };
-    try {
-      const { error } = await supabaseClient.from('products').update(payload).eq('id', this.state.editingIds.product);
-      if (error) throw error;
-      this.showToast('success', 'تم الحفظ ✅');
-      this.closeModal('productModal');
-      await this.loadProducts();
-    } catch (e) { this.showToast('error', 'فشل', e.message); }
-  },
-
-  /* ═══════════ RFQs ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     RFQs
+     ═══════════════════════════════════════════════════════ */
   async loadRfqs() {
     const wrap = document.getElementById('rfqsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1884,13 +2216,16 @@ const App = {
   async changeRfqStatus(id, s) {
     if (!s) return;
     try {
-      const { error } = await supabaseClient.from('purchase_requests').update({ status: s, updated_at: new Date().toISOString() }).eq('id', id);
+      const { error } = await supabaseClient.from('purchase_requests')
+        .update({ status: s, updated_at: new Date().toISOString() }).eq('id', id);
       if (error) throw error;
       this.showToast('success', 'تم');
     } catch (e) { this.showToast('error', 'خطأ', e.message); await this.loadRfqs(); }
   },
 
-  /* ═══════════ OFFERS + QUOTES ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     OFFERS & QUOTES
+     ═══════════════════════════════════════════════════════ */
   async loadOffers() {
     const wrap = document.getElementById('offersList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1947,7 +2282,9 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════ MESSAGES ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     MESSAGES
+     ═══════════════════════════════════════════════════════ */
   async loadMessages() {
     const wrap = document.getElementById('chatSidebar');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -2005,7 +2342,9 @@ const App = {
     } catch (e) { wrap.innerHTML = `<div class="empty-state"><p style="color:var(--c-danger)">${e.message}</p></div>`; }
   },
 
-  /* ═══════════ CONTACTS ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     CONTACTS
+     ═══════════════════════════════════════════════════════ */
   async loadContacts() {
     const wrap = document.getElementById('contactsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -2025,7 +2364,7 @@ const App = {
     if (!this.state.contacts.length) return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📞</span><h3>لا يوجد تفاعلات</h3></div>`;
     const tb = { view: 'badge-info', whatsapp: 'badge-success', chat: 'badge-purple', phone: 'badge-info', inquiry: 'badge-warning', request_quote: 'badge-warning', email: 'badge-info' };
     wrap.innerHTML = `<div class="table-wrap"><table>
-      <thead><tr><th>النوع</th><th>المورد/الشخص</th><th>المشتري</th><th>بيانات</th><th>التاريخ</th></tr></thead>
+      <thead><tr><th>النوع</th><th>المورد</th><th>المشتري</th><th>بيانات</th><th>التاريخ</th></tr></thead>
       <tbody>${this.state.contacts.map(c => `<tr>
         <td><span class="badge ${tb[c.contact_type] || 'badge-gray'}">${c.contact_type}</span></td>
         <td>${this.userChip(c.supplier_id)}</td>
@@ -2036,7 +2375,9 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════ NOTIFICATIONS ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     NOTIFICATIONS
+     ═══════════════════════════════════════════════════════ */
   async loadNotifications() {
     const wrap = document.getElementById('notificationsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -2065,7 +2406,9 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════ REVIEWS ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     REVIEWS
+     ═══════════════════════════════════════════════════════ */
   async loadReviews() {
     const wrap = document.getElementById('reviewsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -2122,7 +2465,9 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════ FOLLOWS ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     FOLLOWS
+     ═══════════════════════════════════════════════════════ */
   async loadFollows() {
     const wrap = document.getElementById('followsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -2150,7 +2495,9 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════ FAVORITES ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     FAVORITES
+     ═══════════════════════════════════════════════════════ */
   async loadFavorites() {
     const wrap = document.getElementById('favoritesList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -2176,7 +2523,9 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════ CATEGORIES ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     CATEGORIES
+     ═══════════════════════════════════════════════════════ */
   async loadCategories() {
     const wrap = document.getElementById('catsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -2227,7 +2576,9 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════ ANALYTICS ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     ANALYTICS
+     ═══════════════════════════════════════════════════════ */
   async loadAnalytics() {
     const wrap = document.getElementById('analyticsList');
     const sw = document.getElementById('analyticsStats');
@@ -2245,7 +2596,9 @@ const App = {
       types.forEach(t => counts[t] = 0);
       this.state.analytics.forEach(e => { if (counts[e.event_type] !== undefined) counts[e.event_type]++; });
 
-      sw.innerHTML = types.map(t => `<div class="stat-card"><div class="stat-icon ${t === 'view' ? 'blue' : t === 'whatsapp' ? 'green' : 'orange'}">${t === 'view' ? '👁️' : t === 'whatsapp' ? '💬' : t === 'rfq' ? '📋' : '💰'}</div><div class="stat-info"><div class="stat-value">${counts[t].toLocaleString('ar-EG')}</div><div class="stat-label">${t}</div></div></div>`).join('');
+      sw.innerHTML = types.map(t => 
+        `<div class="stat-card"><div class="stat-icon ${t === 'view' ? 'blue' : t === 'whatsapp' ? 'green' : 'orange'}">${t === 'view' ? '👁️' : t === 'whatsapp' ? '💬' : t === 'rfq' ? '📋' : '💰'}</div><div class="stat-info"><div class="stat-value">${counts[t].toLocaleString('ar-EG')}</div><div class="stat-label">${t}</div></div></div>`
+      ).join('');
 
       this.renderAnalytics();
     } catch (e) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`; }
@@ -2266,7 +2619,9 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════ VISITORS ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     VISITORS
+     ═══════════════════════════════════════════════════════ */
   async loadVisitors() {
     const wrap = document.getElementById('visitorsList');
     const sw = document.getElementById('visitorStats');
@@ -2319,7 +2674,9 @@ const App = {
     } catch (e) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`; }
   },
 
-  /* ═══════════ DELETE ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     DELETE
+     ═══════════════════════════════════════════════════════ */
   confirmDelete(type, id, name = '') {
     const labels = { article: 'المقال', ticker: 'الخبر', product: 'المنتج', purchase_request: 'طلب الشراء', notification: 'الإشعار', review: 'التقييم', follow: 'المتابعة', favorite: 'المفضلة' };
     document.getElementById('confirmMessage').textContent = `هل أنت متأكد من حذف ${labels[type] || 'العنصر'}${name ? ` "${name}"` : ''}؟`;
@@ -2348,7 +2705,9 @@ const App = {
     } catch (e) { this.showToast('error', 'فشل', e.message); }
   },
 
-  /* ═══════════ TOAST + HELPERS ═══════════ */
+  /* ═══════════════════════════════════════════════════════
+     TOAST + HELPERS
+     ═══════════════════════════════════════════════════════ */
   showToast(type, title, desc) {
     const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
     const container = document.getElementById('toastContainer');
@@ -2359,7 +2718,11 @@ const App = {
     setTimeout(() => { el.style.transition = 'opacity .3s'; el.style.opacity = '0'; setTimeout(() => el.remove(), 300); }, 3500);
   },
 
-  esc(s) { if (s == null) return ''; return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); },
+  esc(s) { 
+    if (s == null) return ''; 
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;'); 
+  },
+
   escAttr(s) { return this.esc(s).replace(/'/g, "\\'"); },
 
   fmtDate(iso, withTime = false) {
@@ -2391,24 +2754,1052 @@ const App = {
     return `${d.getFullYear()}-${p(d.getMonth()+1)}-${p(d.getDate())}T${p(d.getHours())}:${p(d.getMinutes())}`;
   },
 
-  initials(n) { if (!n) return '?'; const p = String(n).trim().split(/\s+/); return (p[0]?.[0] || '') + (p[1]?.[0] || ''); }
+  initials(n) { 
+    if (!n) return '?'; 
+    const p = String(n).trim().split(/\s+/); 
+    return (p[0]?.[0] || '') + (p[1]?.[0] || ''); 
+  }
+};
+/* ═══════════════════════════════════════════════════════
+   PRODUCTS MANAGEMENT - FULL SYSTEM
+   ═══════════════════════════════════════════════════════ */
+
+/* ═══════════ LOAD PRODUCTS ═══════════ */
+App.loadProducts = async function() {
+  const wrap = document.getElementById('productsList');
+  wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
+  
+  try {
+    // Load suppliers & categories for filters (only once)
+    if (!this.state.productSuppliers.length) {
+      await this.loadProductSuppliers();
+    }
+    if (!this.state.productCategories.length) {
+      await this.loadProductCategories();
+    }
+
+    const f = this.state.productFilters;
+    let q = supabaseClient.from('products').select('*')
+      .order('created_at', { ascending: false }).limit(500);
+    
+    if (f.status) q = q.eq('status', f.status);
+    if (f.featured === 'true') q = q.eq('is_featured', true);
+    if (f.featured === 'false') q = q.eq('is_featured', false);
+    if (f.stock) q = q.eq('stock_status', f.stock);
+    if (f.supplier) q = q.eq('supplier_id', f.supplier);
+    if (f.category) q = q.eq('category_id', f.category);
+    if (f.search) {
+      q = q.or(`name.ilike.%${f.search}%,cas_number.ilike.%${f.search}%,description.ilike.%${f.search}%`);
+    }
+
+    const { data, error } = await q;
+    if (error) throw error;
+    
+    this.state.products = data || [];
+    document.getElementById('navCountProducts').textContent = data?.length || 0;
+    
+    this.renderProductStats();
+    this.renderProducts();
+  } catch (e) {
+    wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${this.esc(e.message)}</p></div>`;
+  }
 };
 
+/* ═══════════ LOAD SUPPLIERS ═══════════ */
+App.loadProductSuppliers = async function() {
+  try {
+    const { data } = await supabaseClient.from('profiles')
+      .select('id, full_name, company_name, email')
+      .eq('user_type', 'supplier')
+      .order('full_name')
+      .limit(1000);
+    
+    this.state.productSuppliers = data || [];
+    
+    const filterSel = document.getElementById('prodSupplierFilter');
+    if (filterSel) {
+      filterSel.innerHTML = '<option value="">كل الموردين</option>' + 
+        this.state.productSuppliers.map(s => 
+          `<option value="${s.id}">${this.esc(s.company_name || s.full_name || s.email)}</option>`
+        ).join('');
+    }
+    
+    const modalSel = document.getElementById('prdFullSupplier');
+    if (modalSel) {
+      modalSel.innerHTML = '<option value="">— اختر مورد —</option>' + 
+        this.state.productSuppliers.map(s => 
+          `<option value="${s.id}">${this.esc(s.company_name || s.full_name || s.email)}</option>`
+        ).join('');
+    }
+    
+    const csvSel = document.getElementById('csvSupplierSelect');
+    if (csvSel) {
+      csvSel.innerHTML = '<option value="">— اختر مورد —</option>' + 
+        this.state.productSuppliers.map(s => 
+          `<option value="${s.id}">${this.esc(s.company_name || s.full_name || s.email)}</option>`
+        ).join('');
+    }
+  } catch (e) {
+    console.warn('Failed to load suppliers:', e);
+  }
+};
+
+/* ═══════════ LOAD CATEGORIES ═══════════ */
+App.loadProductCategories = async function() {
+  try {
+    const { data } = await supabaseClient.from('categories')
+      .select('id, name, icon').order('display_order').limit(500);
+    this.state.productCategories = data || [];
+    
+    const filterSel = document.getElementById('prodCategoryFilter');
+    if (filterSel) {
+      filterSel.innerHTML = '<option value="">كل الفئات</option>' + 
+        this.state.productCategories.map(c => 
+          `<option value="${c.id}">${c.icon || '📦'} ${this.esc(c.name)}</option>`
+        ).join('');
+    }
+    
+    const modalSel = document.getElementById('prdFullCategory');
+    if (modalSel) {
+      modalSel.innerHTML = '<option value="">اختر فئة</option>' + 
+        this.state.productCategories.map(c => 
+          `<option value="${c.id}">${c.icon || '📦'} ${this.esc(c.name)}</option>`
+        ).join('');
+    }
+    
+    const { data: subs } = await supabaseClient.from('subcategories')
+      .select('id, name, category_id').limit(1000);
+    this.state.productSubcategories = subs || [];
+    
+    this.updateSubcategorySelect();
+  } catch (e) {
+    console.warn('Failed to load categories:', e);
+  }
+};
+
+App.updateSubcategorySelect = function(categoryId = null) {
+  const sel = document.getElementById('prdFullSubcategory');
+  if (!sel) return;
+  const catId = categoryId || document.getElementById('prdFullCategory')?.value;
+  const subs = catId 
+    ? this.state.productSubcategories.filter(s => s.category_id === catId)
+    : this.state.productSubcategories;
+  sel.innerHTML = '<option value="">اختر تصنيف فرعي</option>' + 
+    subs.map(s => `<option value="${s.id}">${this.esc(s.name)}</option>`).join('');
+};
+
+/* ═══════════ RENDER STATS ═══════════ */
+App.renderProductStats = function() {
+  const products = this.state.products;
+  const total = products.length;
+  const active = products.filter(p => p.status === 'active').length;
+  const featured = products.filter(p => p.is_featured).length;
+  const totalViews = products.reduce((s, p) => s + (p.views_count || 0), 0);
+  const outOfStock = products.filter(p => p.stock_status === 'out_of_stock').length;
+  const available = products.filter(p => p.stock_status === 'available').length;
+  const withImages = products.filter(p => p.image_url).length;
+  const withMsds = products.filter(p => p.msds_url || p.sds_url).length;
+
+  document.getElementById('productStats').innerHTML = `
+    <div class="stat-card"><div class="stat-icon blue">📦</div><div class="stat-info"><div class="stat-value">${total.toLocaleString('ar-EG')}</div><div class="stat-label">إجمالي المنتجات</div></div></div>
+    <div class="stat-card"><div class="stat-icon green">✅</div><div class="stat-info"><div class="stat-value">${active.toLocaleString('ar-EG')}</div><div class="stat-label">منتجات نشطة</div></div></div>
+    <div class="stat-card"><div class="stat-icon purple">⭐</div><div class="stat-info"><div class="stat-value">${featured.toLocaleString('ar-EG')}</div><div class="stat-label">منتجات مميزة</div></div></div>
+    <div class="stat-card"><div class="stat-icon orange">👁️</div><div class="stat-info"><div class="stat-value">${totalViews.toLocaleString('ar-EG')}</div><div class="stat-label">إجمالي المشاهدات</div></div></div>
+    <div class="stat-card"><div class="stat-icon red">⚠️</div><div class="stat-info"><div class="stat-value">${outOfStock.toLocaleString('ar-EG')}</div><div class="stat-label">غير متوفر</div></div></div>
+    <div class="stat-card"><div class="stat-icon teal">📊</div><div class="stat-info"><div class="stat-value">${available.toLocaleString('ar-EG')}</div><div class="stat-label">متوفر</div></div></div>
+    <div class="stat-card"><div class="stat-icon green">🖼️</div><div class="stat-info"><div class="stat-value">${withImages.toLocaleString('ar-EG')}</div><div class="stat-label">بها صور</div></div></div>
+    <div class="stat-card"><div class="stat-icon blue">📄</div><div class="stat-info"><div class="stat-value">${withMsds.toLocaleString('ar-EG')}</div><div class="stat-label">بها MSDS/SDS</div></div></div>
+  `;
+};
+
+/* ═══════════ RENDER PRODUCTS TABLE ═══════════ */
+App.renderProducts = function() {
+  const wrap = document.getElementById('productsList');
+  if (!this.state.products.length) {
+    return wrap.innerHTML = `<div class="empty-state"><span class="emoji">📦</span><h3>لا توجد منتجات مطابقة</h3><button class="btn btn-primary" onclick="App.openProductCreateModal()">➕ إضافة منتج جديد</button></div>`;
+  }
+  
+  const sb = { active: 'badge-success', hidden: 'badge-gray', sold: 'badge-warning' };
+  const sl = { active: 'نشط', hidden: 'مخفي', sold: 'مباع' };
+  const stockB = { available: 'badge-success', limited: 'badge-warning', out_of_stock: 'badge-danger', discontinued: 'badge-gray' };
+  const stockL = { available: 'متوفر', limited: 'محدود', out_of_stock: 'غير متوفر', discontinued: 'متوقف' };
+  
+  const allSelected = this.state.products.length > 0 && this.state.products.every(p => this.state.selectedProductIds.has(p.id));
+  
+  wrap.innerHTML = `<div class="table-wrap"><table>
+    <thead><tr>
+      <th style="width:40px"><input type="checkbox" class="row-checkbox" id="selectAllProducts" ${allSelected ? 'checked' : ''} onchange="App.toggleSelectAll(this.checked)"></th>
+      <th>المنتج</th>
+      <th>المورد</th>
+      <th>الفئة</th>
+      <th>السعر</th>
+      <th>الحالة</th>
+      <th>المخزون</th>
+      <th>مميز</th>
+      <th>مشاهدات</th>
+      <th>ملفات</th>
+      <th>إجراءات</th>
+    </tr></thead>
+    <tbody>${this.state.products.map(p => {
+      const isSelected = this.state.selectedProductIds.has(p.id);
+      const thumb = p.image_url 
+        ? `<img src="${this.esc(p.image_url)}" class="prod-thumb" onerror="this.outerHTML='<div class=\\'prod-thumb-placeholder\\'>🧪</div>'">`
+        : '<div class="prod-thumb-placeholder">🧪</div>';
+      const hasMsds = p.msds_url || p.sds_url;
+      
+      return `<tr class="${isSelected ? 'row-selected' : ''}">
+        <td><input type="checkbox" class="row-checkbox" data-pid="${p.id}" ${isSelected ? 'checked' : ''} onchange="App.toggleProductSelect('${p.id}', this.checked)"></td>
+        <td>
+          <div style="display:flex; align-items:center; gap:10px">
+            ${thumb}
+            <div style="min-width:0">
+              <div class="td-title" title="${this.esc(p.name)}">${this.esc(p.name)}</div>
+              <div class="td-muted">${p.cas_number ? 'CAS: ' + this.esc(p.cas_number) : '—'}</div>
+            </div>
+          </div>
+        </td>
+        <td>${this.userChip(p.supplier_id)}</td>
+        <td><span class="badge badge-info">${this.esc(p.category || '—')}</span></td>
+        <td><strong>${p.price ? Number(p.price).toLocaleString('ar-EG') : '—'}</strong> <span class="td-muted">${this.esc(p.unit || '')}</span></td>
+        <td><span class="badge ${sb[p.status] || 'badge-gray'}">${sl[p.status] || p.status}</span></td>
+        <td><span class="badge ${stockB[p.stock_status] || 'badge-gray'}">${stockL[p.stock_status] || '—'}</span></td>
+        <td><label class="toggle"><input type="checkbox" ${p.is_featured ? 'checked' : ''} onchange="App.toggleProductFeatured('${p.id}', this.checked)"><span class="slider"></span></label></td>
+        <td class="td-muted">👁️ ${(p.views_count || 0).toLocaleString('ar-EG')}</td>
+        <td>${hasMsds ? '<span class="badge badge-success" title="يحتوي على MSDS/SDS">📄</span>' : '<span class="td-muted">—</span>'}</td>
+        <td><div class="td-actions">
+          <button class="btn btn-outline btn-xs" onclick="App.editProduct('${p.id}')" title="تعديل">✏️</button>
+          <a href="product-details.html?id=${p.id}" target="_blank" class="btn btn-outline btn-xs" title="عرض">👁️</a>
+          <button class="btn btn-danger btn-xs" onclick="App.confirmDelete('product','${p.id}', '${this.escAttr(p.name)}')" title="حذف">🗑️</button>
+        </div></td>
+      </tr>`;
+    }).join('')}</tbody>
+  </table></div>`;
+  
+  this.updateBulkBar();
+};
+
+/* ═══════════ SELECTION SYSTEM ═══════════ */
+App.toggleProductSelect = function(id, checked) {
+  if (checked) this.state.selectedProductIds.add(id);
+  else this.state.selectedProductIds.delete(id);
+  
+  const row = document.querySelector(`[data-pid="${id}"]`)?.closest('tr');
+  if (row) row.classList.toggle('row-selected', checked);
+  
+  this.updateBulkBar();
+};
+
+App.toggleSelectAll = function(checked) {
+  this.state.selectedProductIds.clear();
+  if (checked) this.state.products.forEach(p => this.state.selectedProductIds.add(p.id));
+  
+  document.querySelectorAll('[data-pid]').forEach(cb => {
+    cb.checked = checked;
+    cb.closest('tr')?.classList.toggle('row-selected', checked);
+  });
+  
+  this.updateBulkBar();
+};
+
+App.updateBulkBar = function() {
+  const bar = document.getElementById('bulkActionsBar');
+  const count = this.state.selectedProductIds.size;
+  document.getElementById('selectedCount').textContent = count;
+  bar.classList.toggle('show', count > 0);
+};
+
+App.clearSelection = function() {
+  this.state.selectedProductIds.clear();
+  document.querySelectorAll('[data-pid]').forEach(cb => {
+    cb.checked = false;
+    cb.closest('tr')?.classList.remove('row-selected');
+  });
+  const selAll = document.getElementById('selectAllProducts');
+  if (selAll) selAll.checked = false;
+  this.updateBulkBar();
+};
+
+/* ═══════════ BULK ACTIONS ═══════════ */
+App.bulkChangeStatus = async function(status) {
+  const ids = Array.from(this.state.selectedProductIds);
+  if (!ids.length) return;
+  if (!confirm(`تغيير حالة ${ids.length} منتج إلى "${status}"؟`)) return;
+  
+  try {
+    const { error } = await supabaseClient.from('products')
+      .update({ status, updated_at: new Date().toISOString() })
+      .in('id', ids);
+    if (error) throw error;
+    this.showToast('success', `تم تحديث ${ids.length} منتج ✅`);
+    this.clearSelection();
+    await this.loadProducts();
+  } catch (e) { this.showToast('error', 'فشل', e.message); }
+};
+
+App.bulkFeature = async function(featured) {
+  const ids = Array.from(this.state.selectedProductIds);
+  if (!ids.length) return;
+  
+  try {
+    const { error } = await supabaseClient.from('products')
+      .update({ is_featured: featured, updated_at: new Date().toISOString() })
+      .in('id', ids);
+    if (error) throw error;
+    this.showToast('success', `تم ${featured ? 'تمييز' : 'إلغاء تمييز'} ${ids.length} منتج ✅`);
+    this.clearSelection();
+    await this.loadProducts();
+  } catch (e) { this.showToast('error', 'فشل', e.message); }
+};
+
+App.bulkDelete = async function() {
+  const ids = Array.from(this.state.selectedProductIds);
+  if (!ids.length) return;
+  if (!confirm(`⚠️ هل أنت متأكد من حذف ${ids.length} منتج نهائياً؟\n\nلا يمكن التراجع!`)) return;
+  
+  try {
+    const { error } = await supabaseClient.from('products').delete().in('id', ids);
+    if (error) throw error;
+    this.showToast('success', `تم حذف ${ids.length} منتج 🗑️`);
+    this.clearSelection();
+    await this.loadProducts();
+    await this.loadNavCounts();
+  } catch (e) { this.showToast('error', 'فشل الحذف', e.message); }
+};
+
+/* ═══════════ TOGGLE FEATURED ═══════════ */
+App.toggleProductFeatured = async function(id, featured) {
+  try {
+    const { error } = await supabaseClient.from('products')
+      .update({ is_featured: featured, updated_at: new Date().toISOString() }).eq('id', id);
+    if (error) throw error;
+    this.showToast('success', featured ? '⭐ تم التمييز' : 'تم إلغاء التمييز');
+  } catch (e) { 
+    this.showToast('error', 'خطأ', e.message);
+    await this.loadProducts();
+  }
+};
+
+/* ═══════════ RESET FILTERS ═══════════ */
+App.resetProductFilters = function() {
+  document.getElementById('prodSearch').value = '';
+  document.getElementById('prodSupplierFilter').value = '';
+  document.getElementById('prodCategoryFilter').value = '';
+  document.getElementById('prodStatusFilter').value = '';
+  document.getElementById('prodFeaturedFilter').value = '';
+  document.getElementById('prodStockFilter').value = '';
+  this.state.productFilters = { search: '', supplier: '', category: '', status: '', featured: '', stock: '' };
+  this.loadProducts();
+};
+
+/* ═══════════════════════════════════════════════════════
+   PRODUCT CREATE / EDIT MODAL
+   ═══════════════════════════════════════════════════════ */
+App.openProductCreateModal = async function() {
+  this.state.editingIds.product = null;
+  this.state.extraImages = [];
+  
+  if (!this.state.productSuppliers.length) await this.loadProductSuppliers();
+  if (!this.state.productCategories.length) await this.loadProductCategories();
+  
+  document.getElementById('prdModalTitle').textContent = 'منتج جديد';
+  document.getElementById('prdFullId').value = '';
+  
+  // Reset all fields
+  const fields = ['prdFullName', 'prdFullCas', 'prdFullFormula', 'prdFullDescription', 
+                  'prdFullPrice', 'prdFullQuantity', 'prdFullMinOrder', 'prdFullPurity', 
+                  'prdFullGrade', 'prdFullOrigin', 'prdFullPackaging', 'prdFullMolecularWeight',
+                  'prdFullDensity', 'prdFullMelting', 'prdFullBoiling', 'prdFullSolubility',
+                  'prdFullAppearance', 'prdFullHazard', 'prdFullStorage', 'prdFullImageUrl',
+                  'prdFullMsdsUrl', 'prdFullSdsUrl', 'prdFullSubCatText'];
+  fields.forEach(id => { const el = document.getElementById(id); if (el) el.value = ''; });
+  
+  document.getElementById('prdFullSupplier').value = '';
+  document.getElementById('prdFullCategory').value = '';
+  document.getElementById('prdFullSubcategory').value = '';
+  document.getElementById('prdFullUnit').value = 'كجم';
+  document.getElementById('prdFullStock').value = 'available';
+  document.getElementById('prdFullStatus').value = 'active';
+  document.getElementById('prdFullViews').value = '0';
+  document.getElementById('prdFullViewsCount').value = '0';
+  document.getElementById('prdFullRating').value = '0';
+  document.getElementById('prdFullFeatured').checked = false;
+  document.getElementById('prdFullHidePrice').checked = false;
+  
+  document.getElementById('prdMainImagePreview').innerHTML = '';
+  document.getElementById('prdExtraImagesPreview').innerHTML = '';
+  
+  // Reset tabs
+  document.querySelectorAll('[data-prdtab]').forEach(t => t.classList.remove('active'));
+  document.querySelector('[data-prdtab="basic"]').classList.add('active');
+  ['basic', 'chemical', 'media', 'meta'].forEach(t => {
+    const el = document.getElementById(`prdTab-${t}`);
+    if (el) el.style.display = t === 'basic' ? 'block' : 'none';
+  });
+  
+  this.openModal('productFullModal');
+};
+
+App.editProduct = async function(id) {
+  const p = this.state.products.find(x => x.id === id);
+  if (!p) return;
+  
+  if (!this.state.productSuppliers.length) await this.loadProductSuppliers();
+  if (!this.state.productCategories.length) await this.loadProductCategories();
+  
+  this.state.editingIds.product = id;
+  this.state.extraImages = Array.isArray(p.images) ? [...p.images] : [];
+  
+  document.getElementById('prdModalTitle').textContent = 'تعديل منتج';
+  document.getElementById('prdFullId').value = p.id;
+  document.getElementById('prdFullSupplier').value = p.supplier_id || '';
+  document.getElementById('prdFullName').value = p.name || '';
+  document.getElementById('prdFullCas').value = p.cas_number || '';
+  document.getElementById('prdFullFormula').value = p.formula || '';
+  document.getElementById('prdFullCategory').value = p.category_id || '';
+  this.updateSubcategorySelect(p.category_id);
+  document.getElementById('prdFullSubcategory').value = p.subcategory_id || '';
+  document.getElementById('prdFullDescription').value = p.description || '';
+  document.getElementById('prdFullPrice').value = p.price || '';
+  document.getElementById('prdFullUnit').value = p.unit || 'كجم';
+  document.getElementById('prdFullQuantity').value = p.quantity_available || '';
+  document.getElementById('prdFullMinOrder').value = p.min_order_quantity || '';
+  document.getElementById('prdFullStock').value = p.stock_status || 'available';
+  document.getElementById('prdFullStatus').value = p.status || 'active';
+  document.getElementById('prdFullPurity').value = p.purity || '';
+  document.getElementById('prdFullGrade').value = p.grade || '';
+  document.getElementById('prdFullOrigin').value = p.origin_country || '';
+  document.getElementById('prdFullPackaging').value = p.packaging || '';
+  document.getElementById('prdFullMolecularWeight').value = p.molecular_weight || '';
+  document.getElementById('prdFullDensity').value = p.density || '';
+  document.getElementById('prdFullMelting').value = p.melting_point || '';
+  document.getElementById('prdFullBoiling').value = p.boiling_point || '';
+  document.getElementById('prdFullSolubility').value = p.solubility || '';
+  document.getElementById('prdFullAppearance').value = p.appearance || '';
+  document.getElementById('prdFullHazard').value = p.hazard_class || '';
+  document.getElementById('prdFullStorage').value = p.storage_conditions || '';
+  document.getElementById('prdFullImageUrl').value = p.image_url || '';
+  document.getElementById('prdFullMsdsUrl').value = p.msds_url || '';
+  document.getElementById('prdFullSdsUrl').value = p.sds_url || '';
+  document.getElementById('prdFullViews').value = p.views || 0;
+  document.getElementById('prdFullViewsCount').value = p.views_count || 0;
+  document.getElementById('prdFullRating').value = p.avg_rating || 0;
+  document.getElementById('prdFullSubCatText').value = p.sub_category || '';
+  document.getElementById('prdFullFeatured').checked = !!p.is_featured;
+  document.getElementById('prdFullHidePrice').checked = !!p.hide_price;
+  
+  this.renderMainImagePreview(p.image_url);
+  this.renderExtraImagesPreview();
+  
+  document.querySelectorAll('[data-prdtab]').forEach(t => t.classList.remove('active'));
+  document.querySelector('[data-prdtab="basic"]').classList.add('active');
+  ['basic', 'chemical', 'media', 'meta'].forEach(t => {
+    const el = document.getElementById(`prdTab-${t}`);
+    if (el) el.style.display = t === 'basic' ? 'block' : 'none';
+  });
+  
+  this.openModal('productFullModal');
+};
+
+/* ═══════════ MAIN IMAGE PREVIEW ═══════════ */
+App.renderMainImagePreview = function(url) {
+  const wrap = document.getElementById('prdMainImagePreview');
+  if (!url) { wrap.innerHTML = ''; return; }
+  wrap.innerHTML = `
+    <div style="position:relative; display:inline-block">
+      <img src="${this.esc(url)}" class="img-preview-main" onerror="this.outerHTML='<div class=\\'info-box warning\\'>⚠️ تعذر تحميل الصورة</div>'">
+      <button type="button" onclick="App.clearMainImage()" style="position:absolute; top:6px; left:6px; width:28px; height:28px; border-radius:50%; background:rgba(231,76,60,.9); color:#fff; border:none; cursor:pointer; font-size:14px">✕</button>
+    </div>
+  `;
+};
+
+App.clearMainImage = function() {
+  document.getElementById('prdFullImageUrl').value = '';
+  document.getElementById('prdMainImagePreview').innerHTML = '';
+};
+
+/* ═══════════ EXTRA IMAGES PREVIEW ═══════════ */
+App.renderExtraImagesPreview = function() {
+  const wrap = document.getElementById('prdExtraImagesPreview');
+  if (!this.state.extraImages.length) { wrap.innerHTML = ''; return; }
+  wrap.innerHTML = this.state.extraImages.map((url, i) => `
+    <div class="img-preview-item">
+      <img src="${this.esc(url)}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23fee%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23c00%22 font-size=%2212%22%3E⚠️%3C/text%3E%3C/svg%3E'">
+      <button type="button" class="remove-img" onclick="App.removeExtraImage(${i})">✕</button>
+    </div>
+  `).join('');
+};
+
+App.addExtraImageFromInput = function() {
+  const input = document.getElementById('prdExtraImageUrl');
+  const url = input.value.trim();
+  if (!url) return this.showToast('warning', 'تنبيه', 'الصق رابط الصورة أولاً');
+  if (!/^https?:\/\//i.test(url)) return this.showToast('error', 'خطأ', 'الرابط غير صالح (يجب أن يبدأ بـ http/https)');
+  this.state.extraImages.push(url);
+  input.value = '';
+  this.renderExtraImagesPreview();
+  this.showToast('success', 'تمت الإضافة');
+};
+
+App.removeExtraImage = function(i) {
+  this.state.extraImages.splice(i, 1);
+  this.renderExtraImagesPreview();
+};
+
+/* ═══════════ TRIGGER FILE UPLOADS ═══════════ */
+App.triggerMainImageUpload = function() { document.getElementById('prdMainImageFile').click(); };
+App.triggerExtraImagesUpload = function() { document.getElementById('prdExtraImagesFiles').click(); };
+App.triggerMsdsUpload = function() { document.getElementById('prdMsdsFile').click(); };
+App.triggerSdsUpload = function() { document.getElementById('prdSdsFile').click(); };
+
+/* ═══════════ UPLOAD MAIN IMAGE ═══════════ */
+App.handleMainImageUpload = async function(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  if (!file.type.startsWith('image/')) return this.showToast('error', 'خطأ', 'اختر صورة صحيحة');
+  if (file.size > 5 * 1024 * 1024) return this.showToast('error', 'خطأ', 'حجم الصورة يتجاوز 5MB');
+
+  try {
+    this.showToast('info', '⏳', 'جاري رفع الصورة...');
+    const url = await this.uploadFileToStorage(file, 'products/images');
+    if (!url) throw new Error('فشل الرفع');
+    document.getElementById('prdFullImageUrl').value = url;
+    this.renderMainImagePreview(url);
+    this.showToast('success', 'تم رفع الصورة ✅');
+  } catch (e) {
+    this.showToast('error', 'فشل الرفع', e.message);
+  }
+  event.target.value = '';
+};
+
+/* ═══════════ UPLOAD EXTRA IMAGES ═══════════ */
+App.handleExtraImagesUpload = async function(event) {
+  const files = Array.from(event.target.files || []);
+  if (!files.length) return;
+  this.showToast('info', '⏳', `جاري رفع ${files.length} صورة...`);
+  
+  let success = 0;
+  for (const file of files) {
+    if (!file.type.startsWith('image/')) continue;
+    if (file.size > 5 * 1024 * 1024) continue;
+    try {
+      const url = await this.uploadFileToStorage(file, 'products/images');
+      if (url) { this.state.extraImages.push(url); success++; }
+    } catch (e) { console.warn('Upload failed:', e); }
+  }
+  
+  this.renderExtraImagesPreview();
+  this.showToast(success > 0 ? 'success' : 'error', 
+    success > 0 ? 'تم الرفع' : 'فشل', 
+    success > 0 ? `${success} صورة` : 'لم يتم رفع أي صورة');
+  event.target.value = '';
+};
+
+/* ═══════════ UPLOAD MSDS ═══════════ */
+App.handleMsdsUpload = async function(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  if (file.size > 20 * 1024 * 1024) return this.showToast('error', 'خطأ', 'حجم الملف يتجاوز 20MB');
+  
+  try {
+    this.showToast('info', '⏳', 'جاري رفع MSDS...');
+    const url = await this.uploadFileToStorage(file, 'products/msds');
+    if (!url) throw new Error('فشل الرفع');
+    document.getElementById('prdFullMsdsUrl').value = url;
+    this.showToast('success', 'تم رفع MSDS ✅');
+  } catch (e) {
+    this.showToast('error', 'فشل الرفع', e.message);
+  }
+  event.target.value = '';
+};
+
+/* ═══════════ UPLOAD SDS ═══════════ */
+App.handleSdsUpload = async function(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  if (file.size > 20 * 1024 * 1024) return this.showToast('error', 'خطأ', 'حجم الملف يتجاوز 20MB');
+  
+  try {
+    this.showToast('info', '⏳', 'جاري رفع SDS...');
+    const url = await this.uploadFileToStorage(file, 'products/sds');
+    if (!url) throw new Error('فشل الرفع');
+    document.getElementById('prdFullSdsUrl').value = url;
+    this.showToast('success', 'تم رفع SDS ✅');
+  } catch (e) {
+    this.showToast('error', 'فشل الرفع', e.message);
+  }
+  event.target.value = '';
+};
+
+/* ═══════════ CORE UPLOAD FUNCTION ═══════════ */
+App.uploadFileToStorage = async function(file, folder = 'uploads') {
+  const ext = file.name.split('.').pop() || 'bin';
+  const fileName = `${folder}/${Date.now()}-${Math.random().toString(36).slice(2, 10)}.${ext}`;
+  
+  const { data, error } = await supabaseClient.storage
+    .from('chemato-files')
+    .upload(fileName, file, {
+      cacheControl: '3600',
+      upsert: false,
+      contentType: file.type
+    });
+  
+  if (error) throw new Error(error.message || 'فشل الرفع');
+  
+  const { data: urlData } = supabaseClient.storage
+    .from('chemato-files')
+    .getPublicUrl(data.path);
+  
+  return urlData.publicUrl;
+};
+
+/* ═══════════ SAVE FULL PRODUCT ═══════════ */
+App.saveFullProduct = async function() {
+  const btn = document.getElementById('prdFullSaveBtn');
+  const supplierId = document.getElementById('prdFullSupplier').value;
+  const name = document.getElementById('prdFullName').value.trim();
+  
+  if (!supplierId) return this.showToast('warning', 'تنبيه', 'اختر المورد');
+  if (!name) return this.showToast('warning', 'تنبيه', 'اسم المنتج مطلوب');
+  
+  const categoryId = document.getElementById('prdFullCategory').value || null;
+  let categoryName = '';
+  if (categoryId) {
+    const cat = this.state.productCategories.find(c => c.id === categoryId);
+    categoryName = cat?.name || '';
+  }
+  if (!categoryName) {
+    categoryName = document.getElementById('prdFullSubCatText').value.trim() || 'مواد كيماوية';
+  }
+  
+  const payload = {
+    supplier_id: supplierId,
+    name,
+    cas_number: document.getElementById('prdFullCas').value.trim() || null,
+    formula: document.getElementById('prdFullFormula').value.trim() || null,
+    category: categoryName,
+    category_id: categoryId,
+    subcategory_id: document.getElementById('prdFullSubcategory').value || null,
+    sub_category: document.getElementById('prdFullSubCatText').value.trim() || null,
+    description: document.getElementById('prdFullDescription').value.trim() || null,
+    price: parseFloat(document.getElementById('prdFullPrice').value) || null,
+    unit: document.getElementById('prdFullUnit').value || 'كجم',
+    quantity_available: document.getElementById('prdFullQuantity').value.trim() || null,
+    min_order_quantity: document.getElementById('prdFullMinOrder').value.trim() || null,
+    stock_status: document.getElementById('prdFullStock').value || 'available',
+    status: document.getElementById('prdFullStatus').value || 'active',
+    purity: document.getElementById('prdFullPurity').value.trim() || null,
+    grade: document.getElementById('prdFullGrade').value.trim() || null,
+    origin_country: document.getElementById('prdFullOrigin').value.trim() || null,
+    packaging: document.getElementById('prdFullPackaging').value.trim() || null,
+    molecular_weight: parseFloat(document.getElementById('prdFullMolecularWeight').value) || null,
+    density: document.getElementById('prdFullDensity').value.trim() || null,
+    melting_point: document.getElementById('prdFullMelting').value.trim() || null,
+    boiling_point: document.getElementById('prdFullBoiling').value.trim() || null,
+    solubility: document.getElementById('prdFullSolubility').value.trim() || null,
+    appearance: document.getElementById('prdFullAppearance').value.trim() || null,
+    hazard_class: document.getElementById('prdFullHazard').value.trim() || null,
+    storage_conditions: document.getElementById('prdFullStorage').value.trim() || null,
+    image_url: document.getElementById('prdFullImageUrl').value.trim() || null,
+    images: this.state.extraImages.length > 0 ? this.state.extraImages : null,
+    msds_url: document.getElementById('prdFullMsdsUrl').value.trim() || null,
+    sds_url: document.getElementById('prdFullSdsUrl').value.trim() || null,
+    views: parseInt(document.getElementById('prdFullViews').value) || 0,
+    views_count: parseInt(document.getElementById('prdFullViewsCount').value) || 0,
+    avg_rating: parseFloat(document.getElementById('prdFullRating').value) || 0,
+    is_featured: document.getElementById('prdFullFeatured').checked,
+    hide_price: document.getElementById('prdFullHidePrice').checked,
+    updated_at: new Date().toISOString()
+  };
+  
+  btn.disabled = true;
+  const oldTxt = btn.textContent;
+  btn.textContent = '⏳ جاري الحفظ...';
+  
+  try {
+    let error;
+    if (this.state.editingIds.product) {
+      ({ error } = await supabaseClient.from('products')
+        .update(payload).eq('id', this.state.editingIds.product));
+    } else {
+      ({ error } = await supabaseClient.from('products').insert(payload));
+    }
+    
+    if (error) throw error;
+    
+    this.showToast('success', 
+      this.state.editingIds.product ? 'تم التحديث ✅' : 'تمت الإضافة ✅',
+      this.state.editingIds.product ? 'تم تحديث المنتج بنجاح' : 'تم إضافة المنتج للموقع'
+    );
+    
+    this.closeModal('productFullModal');
+    await this.loadProducts();
+    await this.loadNavCounts();
+  } catch (e) {
+    console.error('Save product error:', e);
+    this.showToast('error', 'فشل الحفظ', e.message);
+  } finally {
+    btn.disabled = false;
+    btn.textContent = oldTxt;
+  }
+};
+
+/* ═══════════════════════════════════════════════════════
+   CSV IMPORT SYSTEM
+   ═══════════════════════════════════════════════════════ */
+App.openCsvImportModal = async function() {
+  if (!this.state.productSuppliers.length) await this.loadProductSuppliers();
+  
+  document.getElementById('csvFileInput').value = '';
+  document.getElementById('csvSupplierSelect').value = '';
+  document.getElementById('csvUpdateExisting').checked = false;
+  document.getElementById('csvPreviewWrap').style.display = 'none';
+  document.getElementById('csvErrors').innerHTML = '';
+  document.getElementById('csvImportBtn').disabled = true;
+  this.state.csvParsedData = [];
+  
+  // attach file listener if not yet
+  const fileInput = document.getElementById('csvFileInput');
+  if (!fileInput.dataset.listenerAttached) {
+    fileInput.addEventListener('change', (e) => this.handleCsvFile(e));
+    fileInput.dataset.listenerAttached = 'true';
+  }
+  
+  this.openModal('csvImportModal');
+};
+
+App.handleCsvFile = async function(event) {
+  const file = event.target.files?.[0];
+  if (!file) return;
+  
+  if (!file.name.toLowerCase().endsWith('.csv')) {
+    return this.showToast('error', 'خطأ', 'الملف يجب أن يكون CSV');
+  }
+  
+  try {
+    const text = await file.text();
+    const rows = this.parseCsv(text);
+    
+    if (!rows.length) {
+      return this.showToast('error', 'خطأ', 'الملف فارغ');
+    }
+    
+    this.state.csvParsedData = rows;
+    this.renderCsvPreview(rows);
+    document.getElementById('csvPreviewWrap').style.display = 'block';
+    document.getElementById('csvImportBtn').disabled = false;
+    this.showToast('success', 'تم القراءة ✅', `${rows.length} صف`);
+  } catch (e) {
+    console.error('CSV parse error:', e);
+    this.showToast('error', 'خطأ في القراءة', e.message);
+  }
+};
+
+App.parseCsv = function(text) {
+  const lines = text.split(/\r?\n/).filter(l => l.trim());
+  if (lines.length < 2) return [];
+  
+  const headers = this.parseCsvLine(lines[0]).map(h => h.trim().toLowerCase());
+  const rows = [];
+  
+  for (let i = 1; i < lines.length; i++) {
+    const values = this.parseCsvLine(lines[i]);
+    if (!values.some(v => v.trim())) continue;
+    const row = {};
+    headers.forEach((h, idx) => {
+      row[h] = (values[idx] || '').trim();
+    });
+    rows.push(row);
+  }
+  return rows;
+};
+
+App.parseCsvLine = function(line) {
+  const result = [];
+  let cur = '';
+  let inQuotes = false;
+  
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') {
+      if (inQuotes && line[i+1] === '"') { cur += '"'; i++; }
+      else inQuotes = !inQuotes;
+    } else if (c === ',' && !inQuotes) {
+      result.push(cur);
+      cur = '';
+    } else {
+      cur += c;
+    }
+  }
+  result.push(cur);
+  return result;
+};
+
+App.renderCsvPreview = function(rows) {
+  const wrap = document.getElementById('csvPreviewTable');
+  document.getElementById('csvPreviewCount').textContent = rows.length;
+  
+  const displayCols = ['name', 'cas_number', 'category', 'price', 'unit', 'status', 'image_url', 'msds_url'];
+  const headers = displayCols.filter(c => rows.some(r => r[c] !== undefined));
+  if (!headers.length) {
+    headers.push(...Object.keys(rows[0]).slice(0, 8));
+  }
+  
+  wrap.querySelector('thead').innerHTML = '<tr>' + headers.map(h => `<th>${this.esc(h)}</th>`).join('') + '</tr>';
+  wrap.querySelector('tbody').innerHTML = rows.slice(0, 50).map(r => 
+    '<tr>' + headers.map(h => {
+      let v = r[h] || '—';
+      if (h === 'image_url' || h === 'msds_url' || h === 'sds_url') {
+        v = v && v !== '—' ? `<a href="${this.esc(v)}" target="_blank" class="badge badge-info">🔗 رابط</a>` : '<span class="td-muted">—</span>';
+      } else {
+        v = this.esc(String(v).slice(0, 40));
+      }
+      return `<td>${v}</td>`;
+    }).join('') + '</tr>'
+  ).join('');
+  
+  // Validation summary
+  const errors = [];
+  rows.forEach((r, i) => {
+    if (!r.name) errors.push(`صف ${i + 2}: اسم المنتج مفقود`);
+  });
+  
+  const errWrap = document.getElementById('csvErrors');
+  if (errors.length) {
+    errWrap.innerHTML = `<div class="info-box warning" style="margin-bottom:10px">
+      <strong>⚠️ ${errors.length} تنبيه:</strong>
+      <ul style="margin-top:6px; margin-right:20px; font-size:12px">
+        ${errors.slice(0, 10).map(e => `<li>${this.esc(e)}</li>`).join('')}
+        ${errors.length > 10 ? `<li>... و${errors.length - 10} أخرى</li>` : ''}
+      </ul>
+    </div>`;
+  } else {
+    errWrap.innerHTML = '<div class="info-box green" style="margin-bottom:10px">✅ لا توجد أخطاء - جاهز للاستيراد</div>';
+  }
+};
+
+/* ═══════════ DOWNLOAD CSV TEMPLATE ═══════════ */
+App.downloadCsvTemplate = function() {
+  const headers = [
+    'name', 'cas_number', 'category', 'sub_category', 'description',
+    'price', 'unit', 'min_order_quantity', 'quantity_available',
+    'purity', 'grade', 'packaging', 'origin_country',
+    'formula', 'molecular_weight', 'density', 'melting_point',
+    'boiling_point', 'solubility', 'appearance', 'hazard_class',
+    'storage_conditions', 'image_url', 'msds_url', 'sds_url',
+    'status', 'stock_status', 'is_featured', 'hide_price'
+  ];
+  
+  const example = [
+    'صودا كاوية 99%', '1310-73-2', 'مواد قلوية', 'هيدروكسيدات',
+    'صودا كاوية نقية 99% للاستخدام الصناعي', '25.50', 'كجم', '50 كجم', '5000 كجم',
+    '99%', 'Technical', 'أكياس 25 كجم', 'مصر', 'NaOH', '40.00',
+    '2.13 g/cm³', '318°C', '1390°C', 'Soluble', 'White solid', '8',
+    'مكان جاف بعيد عن الرطوبة',
+    'https://example.com/image.jpg',
+    'https://example.com/msds.pdf',
+    '',
+    'active', 'available', 'false', 'false'
+  ];
+  
+  const rows = [headers.join(','), example.map(v => `"${v}"`).join(',')];
+  const csv = '\ufeff' + rows.join('\n'); // BOM for UTF-8
+  
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = 'chemato-products-template.csv';
+  link.click();
+  URL.revokeObjectURL(link.href);
+  this.showToast('success', 'تم التحميل ✅');
+};
+
+App.downloadPreviewCsv = function() {
+  if (!this.state.csvParsedData.length) return;
+  const rows = this.state.csvParsedData;
+  const headers = Object.keys(rows[0]);
+  const csv = '\ufeff' + [headers.join(',')].concat(
+    rows.map(r => headers.map(h => `"${(r[h] || '').replace(/"/g, '""')}"`).join(','))
+  ).join('\n');
+  
+  const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+  const link = document.createElement('a');
+  link.href = URL.createObjectURL(blob);
+  link.download = `preview-${Date.now()}.csv`;
+  link.click();
+  URL.revokeObjectURL(link.href);
+};
+
+/* ═══════════ EXECUTE CSV IMPORT ═══════════ */
+App.executeCsvImport = async function() {
+  const btn = document.getElementById('csvImportBtn');
+  const supplierId = document.getElementById('csvSupplierSelect').value;
+  const updateExisting = document.getElementById('csvUpdateExisting').checked;
+  const rows = this.state.csvParsedData;
+  
+  if (!supplierId) return this.showToast('warning', 'تنبيه', 'اختر المورد');
+  if (!rows.length) return this.showToast('warning', 'تنبيه', 'لا توجد بيانات');
+  
+  const oldTxt = btn.textContent;
+  btn.disabled = true;
+  btn.textContent = '⏳ جاري الاستيراد...';
+  
+  let success = 0;
+  let updated = 0;
+  let failed = 0;
+  const errors = [];
+  
+  for (let i = 0; i < rows.length; i++) {
+    const r = rows[i];
+    if (!r.name) { failed++; errors.push(`صف ${i + 2}: اسم مفقود`); continue; }
+    
+    try {
+      const priceNum = parseFloat(r.price);
+      const payload = {
+        supplier_id: supplierId,
+        name: r.name,
+        cas_number: r.cas_number || null,
+        category: r.category || 'مواد كيماوية',
+        sub_category: r.sub_category || null,
+        description: r.description || null,
+        price: !isNaN(priceNum) && priceNum > 0 ? priceNum : null,
+        unit: r.unit || 'كجم',
+        min_order_quantity: r.min_order_quantity || null,
+        quantity_available: r.quantity_available || null,
+        purity: r.purity || null,
+        grade: r.grade || null,
+        packaging: r.packaging || null,
+        origin_country: r.origin_country || null,
+        formula: r.formula || null,
+        molecular_weight: !isNaN(parseFloat(r.molecular_weight)) ? parseFloat(r.molecular_weight) : null,
+        density: r.density || null,
+        melting_point: r.melting_point || null,
+        boiling_point: r.boiling_point || null,
+        solubility: r.solubility || null,
+        appearance: r.appearance || null,
+        hazard_class: r.hazard_class || null,
+        storage_conditions: r.storage_conditions || null,
+        image_url: r.image_url || null,
+        msds_url: r.msds_url || null,
+        sds_url: r.sds_url || null,
+        status: ['active', 'hidden', 'sold'].includes(r.status) ? r.status : 'active',
+        stock_status: ['available', 'limited', 'out_of_stock', 'discontinued'].includes(r.stock_status) ? r.stock_status : 'available',
+        is_featured: r.is_featured === 'true' || r.is_featured === '1',
+        hide_price: r.hide_price === 'true' || r.hide_price === '1',
+        updated_at: new Date().toISOString()
+      };
+      
+      if (updateExisting && r.cas_number) {
+        const { data: existing } = await supabaseClient.from('products')
+          .select('id').eq('supplier_id', supplierId)
+          .eq('cas_number', r.cas_number).eq('name', r.name).maybeSingle();
+        
+        if (existing?.id) {
+          const { error } = await supabaseClient.from('products').update(payload).eq('id', existing.id);
+          if (error) throw error;
+          updated++;
+          continue;
+        }
+      }
+      
+      const { error } = await supabaseClient.from('products').insert(payload);
+      if (error) throw error;
+      success++;
+    } catch (e) {
+      failed++;
+      errors.push(`صف ${i + 2}: ${e.message}`);
+    }
+  }
+  
+  btn.disabled = false;
+  btn.textContent = oldTxt;
+  
+  const summary = `✅ ${success} مضاف • 🔄 ${updated} محدّث • ❌ ${failed} فشل`;
+  this.showToast(success + updated > 0 ? 'success' : 'error', 'تم الاستيراد', summary);
+  
+  if (errors.length) {
+    document.getElementById('csvErrors').innerHTML = `<div class="info-box warning" style="margin-bottom:10px">
+      <strong>⚠️ أخطاء (${errors.length}):</strong>
+      <ul style="margin-top:6px; margin-right:20px; font-size:12px; max-height:150px; overflow:auto">
+        ${errors.slice(0, 30).map(e => `<li>${this.esc(e)}</li>`).join('')}
+        ${errors.length > 30 ? `<li>... و${errors.length - 30} أخرى</li>` : ''}
+      </ul>
+    </div>`;
+  } else {
+    setTimeout(() => this.closeModal('csvImportModal'), 1500);
+  }
+  
+  await this.loadProducts();
+  await this.loadNavCounts();
+};
+
+/* ═══════════════════════════════════════════════════════
+   EVENT LISTENERS - FILTERS & TAB TRIGGERS
+   ═══════════════════════════════════════════════════════ */
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
+  
+  // Article slug auto
   const ti = document.getElementById('artTitle'), si = document.getElementById('artSlug');
-  ti?.addEventListener('blur', () => { if (!si.value && ti.value) si.value = App.slugify(ti.value); });
+  ti?.addEventListener('blur', () => { 
+    if (!si.value && ti.value) si.value = App.slugify(ti.value); 
+  });
 
+  // Product filter: category change → update subcategory
+  document.getElementById('prdFullCategory')?.addEventListener('change', (e) => {
+    App.updateSubcategorySelect(e.target.value);
+  });
+
+  // Debounced filters
   let t1, t2, t3;
-  document.getElementById('prodSearch')?.addEventListener('input', () => { clearTimeout(t1); t1 = setTimeout(() => App.loadProducts(), 400); });
-  document.getElementById('prodStatusFilter')?.addEventListener('change', () => App.loadProducts());
-  document.getElementById('prodFeaturedFilter')?.addEventListener('change', () => App.loadProducts());
-  document.getElementById('userSearch')?.addEventListener('input', () => { clearTimeout(t2); t2 = setTimeout(() => App.loadUsers(), 400); });
+  
+  document.getElementById('prodSearch')?.addEventListener('input', (e) => {
+    clearTimeout(t1);
+    t1 = setTimeout(() => {
+      App.state.productFilters.search = e.target.value.trim();
+      App.loadProducts();
+    }, 400);
+  });
+  
+  document.getElementById('prodSupplierFilter')?.addEventListener('change', (e) => {
+    App.state.productFilters.supplier = e.target.value;
+    App.loadProducts();
+  });
+  
+  document.getElementById('prodCategoryFilter')?.addEventListener('change', (e) => {
+    App.state.productFilters.category = e.target.value;
+    App.loadProducts();
+  });
+  
+  document.getElementById('prodStatusFilter')?.addEventListener('change', (e) => {
+    App.state.productFilters.status = e.target.value;
+    App.loadProducts();
+  });
+  
+  document.getElementById('prodFeaturedFilter')?.addEventListener('change', (e) => {
+    App.state.productFilters.featured = e.target.value;
+    App.loadProducts();
+  });
+  
+  document.getElementById('prodStockFilter')?.addEventListener('change', (e) => {
+    App.state.productFilters.stock = e.target.value;
+    App.loadProducts();
+  });
+
+  // Users filters
+  document.getElementById('userSearch')?.addEventListener('input', () => { 
+    clearTimeout(t2); t2 = setTimeout(() => App.loadUsers(), 400); 
+  });
   document.getElementById('userTypeFilter')?.addEventListener('change', () => App.loadUsers());
   document.getElementById('userVerifiedFilter')?.addEventListener('change', () => App.loadUsers());
   document.getElementById('userSuspendedFilter')?.addEventListener('change', () => App.loadUsers());
-  document.getElementById('rfqSearch')?.addEventListener('input', () => { clearTimeout(t3); t3 = setTimeout(() => App.loadRfqs(), 400); });
+  
+  // RFQs filters
+  document.getElementById('rfqSearch')?.addEventListener('input', () => { 
+    clearTimeout(t3); t3 = setTimeout(() => App.loadRfqs(), 400); 
+  });
   document.getElementById('rfqStatusFilter')?.addEventListener('change', () => App.loadRfqs());
+  
+  // Other filters
   document.getElementById('contactTypeFilter')?.addEventListener('change', () => App.loadContacts());
   document.getElementById('eventTypeFilter')?.addEventListener('change', () => App.loadAnalytics());
 });
