@@ -4,7 +4,6 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>إدارة المنصة | كيماتو</title>
-<meta name="description" content="لوحة داخلية لإدارة حسابات المستخدمين والمنتجات والطلبات ومحتوى منصة كيماتو.">
 <meta name="robots" content="noindex, nofollow">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
@@ -120,7 +119,7 @@ input,select,textarea{font-family:inherit}
 .form-label .hint{font-weight:400;color:var(--c-text-sub);font-size:11px;margin-right:6px}
 .form-input,.form-select,.form-textarea{width:100%;padding:10px 13px;background:var(--c-surface-2);color:var(--c-text);border:1.5px solid var(--c-border);border-radius:var(--r-sm);font-size:13.5px;transition:all .2s}
 .form-input:focus,.form-select:focus,.form-textarea:focus{outline:none;border-color:var(--c-primary-500);background:var(--c-surface);box-shadow:0 0 0 4px rgba(44,122,184,.1)}
-.form-textarea{resize:vertical;min-height:100px;line-height:1.6}
+.form-textarea{resize:vertical;min-height:100px;line-height:1.6;white-space:pre-wrap;word-wrap:break-word}
 .form-check{display:flex;align-items:center;gap:10px;padding:10px 13px;background:var(--c-surface-2);border:1.5px solid var(--c-border);border-radius:var(--r-sm);cursor:pointer}
 .form-check input{width:18px;height:18px;accent-color:var(--c-primary-600);cursor:pointer}
 
@@ -145,7 +144,6 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
 .td-muted{color:var(--c-text-muted);font-size:11.5px}
 .td-mono{font-family:'Courier New',monospace;font-size:11.5px;color:var(--c-text-muted);background:var(--c-surface-2);padding:2px 6px;border-radius:4px}
 .td-actions{display:flex;gap:5px;flex-wrap:wrap}
-.td-pass{font-family:'Courier New',monospace;font-size:12px;background:rgba(243,156,18,.15);color:#b9770e;padding:3px 8px;border-radius:4px;font-weight:700;cursor:pointer;user-select:all}
 
 /* CHECKBOXES */
 .row-checkbox{width:18px;height:18px;accent-color:var(--c-primary-600);cursor:pointer}
@@ -189,7 +187,7 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
 .modal{background:var(--c-surface);border-radius:var(--r-lg);width:100%;max-width:720px;max-height:90vh;display:flex;flex-direction:column;box-shadow:var(--shadow-lg);animation:modalIn .3s}
 .modal.wide{max-width:960px}
-.modal.extra-wide{max-width:1200px}
+.modal.extra-wide{max-width:1400px}
 @keyframes modalIn{from{opacity:0;transform:scale(.95) translateY(20px)}to{opacity:1;transform:scale(1) translateY(0)}}
 .modal-header{padding:16px 22px;border-bottom:1px solid var(--c-border);display:flex;align-items:center;justify-content:space-between;gap:12px;flex-shrink:0}
 .modal-title{font-size:17px;font-weight:800;display:flex;align-items:center;gap:10px}
@@ -301,6 +299,20 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
 
 /* COUNTER BADGE */
 .counter-badge{display:inline-flex;align-items:center;gap:4px;padding:2px 10px;background:var(--c-primary-500);color:#fff;border-radius:var(--r-full);font-size:11px;font-weight:700;margin-right:8px}
+
+/* CSV PREVIEW TABLE */
+#csvPreviewTable{min-width:1800px;font-size:11px}
+#csvPreviewTable th{padding:8px 6px;font-size:10px;min-width:100px}
+#csvPreviewTable td{padding:6px;font-size:11px;max-width:200px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+#csvPreviewTable td.wrap{white-space:normal;word-break:break-word;max-width:250px}
+#csvPreviewTable th.sticky-col,
+#csvPreviewTable td.sticky-col{position:sticky;right:0;background:var(--c-surface);z-index:2;box-shadow:-2px 0 4px rgba(0,0,0,.05);font-weight:700}
+
+/* CSV COLUMN SELECTOR */
+.col-selector{display:flex;flex-wrap:wrap;gap:6px;padding:10px;background:var(--c-surface-2);border:1px solid var(--c-border);border-radius:var(--r-sm);margin-bottom:10px;max-height:130px;overflow-y:auto}
+.col-checkbox{display:inline-flex;align-items:center;gap:5px;padding:4px 10px;background:var(--c-surface);border:1px solid var(--c-border);border-radius:var(--r-full);font-size:11.5px;cursor:pointer;user-select:none}
+.col-checkbox input{width:14px;height:14px;accent-color:var(--c-primary-600)}
+.col-checkbox.checked{background:var(--c-primary-50);border-color:var(--c-primary-500);color:var(--c-primary-700)}
 
 /* RESPONSIVE */
 @media (max-width:1000px){
@@ -790,8 +802,8 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
             <select class="form-select" id="prdFullSubcategory"><option value="">اختر تصنيف</option></select>
           </div>
           <div class="form-field full">
-            <label class="form-label">الوصف <span class="hint">(يدعم الأسطر المتعددة)</span></label>
-            <textarea class="form-textarea" id="prdFullDescription" style="min-height:90px" placeholder="يمكنك كتابة الوصف على عدة أسطر..."></textarea>
+            <label class="form-label">الوصف <span class="hint">(يدعم الأسطر المتعددة - اضغط Enter لإضافة سطر جديد)</span></label>
+            <textarea class="form-textarea" id="prdFullDescription" style="min-height:120px; font-family:'Cairo',sans-serif" placeholder="مثال:&#10;صودا كاوية نقية 99%&#10;تُستخدم في:&#10;- التنظيف&#10;- صناعة الصابون"></textarea>
           </div>
           <div class="form-field">
             <label class="form-label">السعر (جنيه)</label>
@@ -854,7 +866,7 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
         <div class="form-field full" style="margin-bottom:16px">
           <label class="form-label">🖼️ الصورة الرئيسية</label>
           <div style="display:flex; gap:8px; flex-wrap:wrap">
-            <input type="url" class="form-input" id="prdFullImageUrl" placeholder="https://... (Supabase / Google Drive / أي مصدر)" style="flex:1; min-width:250px" dir="ltr">
+            <input type="url" class="form-input" id="prdFullImageUrl" placeholder="https://drive.google.com/... أو https://..." style="flex:1; min-width:250px" dir="ltr">
             <button class="btn btn-outline btn-sm" type="button" onclick="App.triggerMainImageUpload()">📤 رفع ملف</button>
             <input type="file" id="prdMainImageFile" accept="image/*" style="display:none" onchange="App.handleMainImageUpload(event)">
           </div>
@@ -864,7 +876,7 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
         <div class="form-field full" style="margin-bottom:16px">
           <label class="form-label">📸 صور إضافية</label>
           <div style="display:flex; gap:8px; flex-wrap:wrap; margin-bottom:8px">
-            <input type="url" class="form-input" id="prdExtraImageUrl" placeholder="الصق رابط صورة..." style="flex:1; min-width:250px" dir="ltr">
+            <input type="url" class="form-input" id="prdExtraImageUrl" placeholder="الصق رابط صورة (Google Drive / أي رابط)..." style="flex:1; min-width:250px" dir="ltr">
             <button class="btn btn-outline btn-sm" type="button" onclick="App.addExtraImageFromInput()">➕ إضافة</button>
             <button class="btn btn-outline btn-sm" type="button" onclick="App.triggerExtraImagesUpload()">📤 رفع ملفات</button>
             <input type="file" id="prdExtraImagesFiles" accept="image/*" multiple style="display:none" onchange="App.handleExtraImagesUpload(event)">
@@ -876,7 +888,7 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
           <div class="form-field">
             <label class="form-label">📄 رابط MSDS</label>
             <div style="display:flex; gap:6px">
-              <input type="url" class="form-input" id="prdFullMsdsUrl" placeholder="https://..." style="flex:1" dir="ltr">
+              <input type="url" class="form-input" id="prdFullMsdsUrl" placeholder="Google Drive / أي رابط" style="flex:1" dir="ltr">
               <button class="btn btn-outline btn-sm" type="button" onclick="App.triggerMsdsUpload()">📤</button>
               <input type="file" id="prdMsdsFile" accept=".pdf,.doc,.docx" style="display:none" onchange="App.handleMsdsUpload(event)">
             </div>
@@ -884,16 +896,21 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
           <div class="form-field">
             <label class="form-label">📄 رابط SDS</label>
             <div style="display:flex; gap:6px">
-              <input type="url" class="form-input" id="prdFullSdsUrl" placeholder="https://..." style="flex:1" dir="ltr">
+              <input type="url" class="form-input" id="prdFullSdsUrl" placeholder="Google Drive / أي رابط" style="flex:1" dir="ltr">
               <button class="btn btn-outline btn-sm" type="button" onclick="App.triggerSdsUpload()">📤</button>
               <input type="file" id="prdSdsFile" accept=".pdf,.doc,.docx" style="display:none" onchange="App.handleSdsUpload(event)">
             </div>
           </div>
         </div>
 
-        <div class="info-box">
-          ℹ️ <strong>مدعوم:</strong> Supabase Storage • Google Drive • Dropbox • أي رابط مباشر<br>
-          💡 لـ Google Drive: <code dir="ltr">https://drive.google.com/uc?export=view&id=FILE_ID</code>
+        <div class="info-box green">
+          ✅ <strong>دعم كامل لـ Google Drive:</strong> النظام يحوّل روابط Drive تلقائياً لروابط مباشرة قابلة للعرض<br>
+          <strong>الصيغ المدعومة:</strong><br>
+          • <code dir="ltr">https://drive.google.com/file/d/FILE_ID/view</code><br>
+          • <code dir="ltr">https://drive.google.com/open?id=FILE_ID</code><br>
+          • <code dir="ltr">https://drive.google.com/uc?id=FILE_ID</code><br>
+          <br>
+          <strong>⚠️ مهم:</strong> تأكد أن الملف في Google Drive <strong>Public</strong> (Anyone with the link can view)
         </div>
       </div>
 
@@ -926,14 +943,12 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
       <div class="info-box green" style="margin-bottom:16px">
         <div style="font-weight:700; margin-bottom:6px">📋 خطوات الاستيراد</div>
         <ol style="margin-right:20px; font-size:13px; line-height:1.9">
-          <li>حمّل ملف CSV النموذجي</li>
-          <li>عدّل البيانات في Excel أو Google Sheets</li>
-          <li>احفظ الملف بصيغة CSV UTF-8</li>
-          <li>ارفع الملف واختر المورد</li>
+          <li>حمّل ملف CSV النموذجي (فيه كل الأعمدة)</li>
+          <li>عدّل البيانات في Excel (يدعم الأسطر المتعددة داخل الخلايا)</li>
+          <li>احفظ الملف بصيغة <strong>CSV UTF-8</strong></li>
+          <li>ارفع الملف → ستشاهد معاينة كاملة لكل الأعمدة</li>
+          <li>اختر المورد → اضغط استيراد</li>
         </ol>
-        <div style="margin-top:8px; padding-top:8px; border-top:1px solid rgba(46,204,113,.2); font-size:12px">
-          ✅ <strong>النظام الجديد يتعامل مع:</strong> الأسطر المتعددة في الوصف، الفواصل داخل النصوص، علامات التنصيص
-        </div>
       </div>
 
       <div class="form-grid">
@@ -957,12 +972,21 @@ tbody tr.row-selected{background:rgba(44,122,184,.08) !important}
       </div>
 
       <div id="csvPreviewWrap" style="display:none; margin-top:16px">
-        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:8px; flex-wrap:wrap; gap:8px">
-          <strong>📊 معاينة (<span id="csvPreviewCount">0</span> منتج فعلي)</strong>
-          <button class="btn btn-sm btn-outline" onclick="App.downloadPreviewCsv()">📥 تحميل المعاينة</button>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px; flex-wrap:wrap; gap:8px">
+          <strong>📊 معاينة كاملة (<span id="csvPreviewCount">0</span> منتج فعلي)</strong>
+          <div style="display:flex; gap:8px">
+            <button class="btn btn-sm btn-outline" onclick="App.downloadPreviewCsv()">📥 تحميل المعاينة</button>
+            <button class="btn btn-sm btn-outline" onclick="App.selectAllPreviewCols()">✓ كل الأعمدة</button>
+            <button class="btn btn-sm btn-outline" onclick="App.selectNonePreviewCols()">✕ إلغاء الكل</button>
+          </div>
         </div>
+
+        <!-- Column Selector -->
+        <div style="font-size:12px; font-weight:700; margin-bottom:6px">📌 اختر الأعمدة للعرض:</div>
+        <div class="col-selector" id="csvColSelector"></div>
+
         <div id="csvErrors"></div>
-        <div class="table-wrap" style="max-height:400px; overflow:auto">
+        <div class="table-wrap" style="max-height:500px; overflow:auto">
           <table id="csvPreviewTable"><thead></thead><tbody></tbody></table>
         </div>
       </div>
@@ -1093,6 +1117,68 @@ async function callAdminEdge(action, params = {}) {
 }
 
 /* ═══════════════════════════════════════════════════════
+   GOOGLE DRIVE URL CONVERTER
+   يحوّل روابط Google Drive إلى روابط مباشرة قابلة للعرض
+   ═══════════════════════════════════════════════════════ */
+function convertGoogleDriveUrl(url) {
+  if (!url || typeof url !== 'string') return url;
+  url = url.trim();
+  
+  // لو مش رابط Drive → رجعه كما هو
+  if (!url.includes('drive.google.com') && !url.includes('docs.google.com')) {
+    return url;
+  }
+  
+  // استخراج FILE_ID من جميع الأشكال
+  let fileId = null;
+  
+  // شكل 1: https://drive.google.com/file/d/FILE_ID/view
+  let m = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  if (m) fileId = m[1];
+  
+  // شكل 2: https://drive.google.com/open?id=FILE_ID
+  if (!fileId) {
+    m = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (m) fileId = m[1];
+  }
+  
+  // شكل 3: https://drive.google.com/uc?id=FILE_ID
+  if (!fileId) {
+    m = url.match(/\/uc\?.*?id=([a-zA-Z0-9_-]+)/);
+    if (m) fileId = m[1];
+  }
+  
+  // شكل 4: https://drive.google.com/thumbnail?id=FILE_ID
+  if (!fileId) {
+    m = url.match(/\/thumbnail\?.*?id=([a-zA-Z0-9_-]+)/);
+    if (m) fileId = m[1];
+  }
+  
+  if (!fileId) return url;
+  
+  // ✅ الرابط المباشر الجديد - يعمل مع الصور والـ PDF
+  return `https://lh3.googleusercontent.com/d/${fileId}`;
+}
+
+/* رابط بديل للـ iframe والعرض المضمّن */
+function convertGoogleDriveEmbed(url) {
+  if (!url || typeof url !== 'string') return url;
+  url = url.trim();
+  if (!url.includes('drive.google.com')) return url;
+  
+  let m = url.match(/\/file\/d\/([a-zA-Z0-9_-]+)/);
+  let fileId = m ? m[1] : null;
+  if (!fileId) {
+    m = url.match(/[?&]id=([a-zA-Z0-9_-]+)/);
+    if (m) fileId = m[1];
+  }
+  if (!fileId) return url;
+  
+  // للـ PDF والملفات
+  return `https://drive.google.com/file/d/${fileId}/preview`;
+}
+
+/* ═══════════════════════════════════════════════════════
    APP OBJECT
    ═══════════════════════════════════════════════════════ */
 const App = {
@@ -1110,7 +1196,9 @@ const App = {
     productSuppliers: [],
     productCategories: [],
     productSubcategories: [],
-    csvParsedData: []
+    csvParsedData: [],
+    csvAllColumns: [],
+    csvVisibleColumns: new Set()
   },
 
   init() {
@@ -1279,7 +1367,6 @@ const App = {
   /* ═══════════ USER CACHE ═══════════ */
   async buildUserCache() {
     try {
-      // ✅ Pagination لجلب كل المستخدمين
       const allUsers = await this.fetchAllData('profiles', 'id, full_name, company_name, email, user_type, avatar_url, is_verified');
       const cache = {};
       allUsers.forEach(u => {
@@ -1319,19 +1406,16 @@ const App = {
     </div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     CORE DATA FETCHER - PAGINATION (يحل مشكلة 1000 صف)
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ FETCH ALL WITH PAGINATION ═══════════ */
   async fetchAllData(table, fields = '*', filters = null, order = null) {
     const PAGE_SIZE = 1000;
-    const MAX_PAGES = 100; // حماية: 100,000 صف أقصى
+    const MAX_PAGES = 100;
     let allData = [];
     let from = 0;
     let pageCount = 0;
     
     while (pageCount < MAX_PAGES) {
       let q = supabaseClient.from(table).select(fields).range(from, from + PAGE_SIZE - 1);
-      
       if (order) q = q.order(order.column, { ascending: order.ascending ?? false });
       if (filters && typeof filters === 'function') q = filters(q);
       
@@ -1374,9 +1458,7 @@ const App = {
     }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     DASHBOARD
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ DASHBOARD ═══════════ */
   async loadStats() {
     const wrap = document.getElementById('mainStats');
     try {
@@ -1450,9 +1532,7 @@ const App = {
     } catch (e) { wrap.innerHTML = `<p style="color:var(--c-danger)">${e.message}</p>`; }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     USERS - مع Pagination
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ USERS ═══════════ */
   async loadUsers() {
     const wrap = document.getElementById('usersList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1668,9 +1748,7 @@ const App = {
     this.confirmDeleteUser(this.state.currentUser.id, this.state.currentUser.full_name || this.state.currentUser.email);
   },
 
-  /* ═══════════════════════════════════════════════════════
-     BROADCAST
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ BROADCAST ═══════════ */
   async openBroadcastNotifModal() {
     document.querySelectorAll('#notifTargetSelector .target-option').forEach(o => o.classList.remove('active'));
     document.querySelector('#notifTargetSelector .target-option[data-target="all"]').classList.add('active');
@@ -1699,7 +1777,7 @@ const App = {
     if (target === 'specific' && !document.getElementById('notifSpecificUser').value) return this.showToast('warning', 'تنبيه', 'اختر المستخدم');
 
     const oldTxt = btn?.textContent;
-    if (btn) { btn.disabled = true; btn.textContent = '⏳ جاري الإرسال...'; }
+    if (btn) { btn.disabled = true; btn.textContent = '⏳...'; }
 
     try {
       const params = { p_target: target, p_title: title, p_message: message || null, p_type: type };
@@ -1737,16 +1815,10 @@ const App = {
     finally { if (btn) { btn.disabled = false; btn.textContent = oldTxt || '📤 إرسال'; } }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     EXPORT - EXCEL (يدعم الأسطر المتعددة بشكل صحيح)
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ EXPORT ═══════════ */
   downloadExcel(rows, filename) {
     if (!rows || !rows.length) return this.showToast('warning', 'تنبيه', 'لا يوجد بيانات');
-    
-    // ✅ XLSX بيتعامل مع الأسطر المتعددة والفواصل تلقائياً
     const ws = XLSX.utils.json_to_sheet(rows);
-    
-    // ضبط عرض الأعمدة تلقائياً
     const colWidths = Object.keys(rows[0] || {}).map(key => {
       let maxLen = key.length;
       rows.forEach(r => {
@@ -1758,7 +1830,6 @@ const App = {
       return { wch: maxLen + 2 };
     });
     ws['!cols'] = colWidths;
-    
     const wb = XLSX.utils.book_new();
     XLSX.utils.book_append_sheet(wb, ws, 'Data');
     XLSX.writeFile(wb, `${filename}-${new Date().toISOString().slice(0,10)}.xlsx`);
@@ -1767,17 +1838,8 @@ const App = {
   async exportData(table) {
     try {
       const profileFields = 'id, full_name, email, phone, whatsapp, company_name, city, user_type, avatar_url, is_verified, is_suspended, is_admin, login_count, last_login_at, last_seen, created_at, updated_at, address, bio, admin_notes';
-      
-      // ✅ استخدم Pagination لجلب كل البيانات
-      const data = await this.fetchAllData(
-        table, 
-        table === 'profiles' ? profileFields : '*',
-        null,
-        { column: 'created_at', ascending: false }
-      );
-      
+      const data = await this.fetchAllData(table, table === 'profiles' ? profileFields : '*', null, { column: 'created_at', ascending: false });
       if (!data.length) return this.showToast('warning', 'تنبيه', 'لا يوجد بيانات');
-      
       const rows = data.map(row => {
         const out = {};
         Object.keys(row).forEach(k => {
@@ -1788,7 +1850,6 @@ const App = {
         });
         return out;
       });
-      
       this.downloadExcel(rows, `chemato-${table}`);
       this.showToast('success', 'تم التصدير ✅', `${rows.length} صف`);
     } catch (e) { this.showToast('error', 'فشل التصدير', e.message); }
@@ -1841,9 +1902,7 @@ const App = {
     } catch (e) { this.showToast('error', 'فشل', e.message); }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     ARTICLES
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ ARTICLES ═══════════ */
   async loadArticles() {
     const wrap = document.getElementById('articlesList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -1976,9 +2035,7 @@ const App = {
     finally { btn.disabled = false; btn.textContent = '💾 حفظ'; }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     TICKER
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ TICKER ═══════════ */
   async loadTicker() {
     const wrap = document.getElementById('tickerList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -2088,7 +2145,7 @@ const App = {
   },
 
   /* ═══════════════════════════════════════════════════════
-     PRODUCTS - FULL SYSTEM WITH PAGINATION
+     PRODUCTS - FULL SYSTEM
      ═══════════════════════════════════════════════════════ */
   async loadProducts() {
     const wrap = document.getElementById('productsList');
@@ -2099,8 +2156,6 @@ const App = {
       if (!this.state.productCategories.length) await this.loadProductCategories();
 
       const f = this.state.productFilters;
-      
-      // ✅ Pagination لجلب كل المنتجات
       const data = await this.fetchAllData('products', '*', (q) => {
         if (f.status) q = q.eq('status', f.status);
         if (f.featured === 'true') q = q.eq('is_featured', true);
@@ -2237,8 +2292,9 @@ const App = {
       </tr></thead>
       <tbody>${this.state.products.map(p => {
         const isSelected = this.state.selectedProductIds.has(p.id);
-        const thumb = p.image_url 
-          ? `<img src="${this.esc(p.image_url)}" class="prod-thumb" onerror="this.outerHTML='<div class=\\'prod-thumb-placeholder\\'>🧪</div>'">`
+        const convertedUrl = convertGoogleDriveUrl(p.image_url);
+        const thumb = convertedUrl 
+          ? `<img src="${this.esc(convertedUrl)}" class="prod-thumb" onerror="this.outerHTML='<div class=\\'prod-thumb-placeholder\\'>🧪</div>'">`
           : '<div class="prod-thumb-placeholder">🧪</div>';
         const hasMsds = p.msds_url || p.sds_url;
         
@@ -2337,7 +2393,7 @@ const App = {
   async bulkDelete() {
     const ids = Array.from(this.state.selectedProductIds);
     if (!ids.length) return;
-    if (!confirm(`⚠️ هل أنت متأكد من حذف ${ids.length} منتج نهائياً؟\n\nلا يمكن التراجع!`)) return;
+    if (!confirm(`⚠️ هل أنت متأكد من حذف ${ids.length} منتج نهائياً؟`)) return;
     try {
       const { error } = await supabaseClient.from('products').delete().in('id', ids);
       if (error) throw error;
@@ -2478,11 +2534,14 @@ const App = {
   renderMainImagePreview(url) {
     const wrap = document.getElementById('prdMainImagePreview');
     if (!url) { wrap.innerHTML = ''; return; }
+    const convertedUrl = convertGoogleDriveUrl(url);
+    const isDrive = url.includes('drive.google.com');
     wrap.innerHTML = `
       <div style="position:relative; display:inline-block">
-        <img src="${this.esc(url)}" class="img-preview-main" onerror="this.outerHTML='<div class=\\'info-box warning\\'>⚠️ تعذر تحميل الصورة</div>'">
+        <img src="${this.esc(convertedUrl)}" class="img-preview-main" onerror="this.outerHTML='<div class=\\'info-box warning\\'>⚠️ تعذر تحميل الصورة. تأكد أن الملف Public في Google Drive.</div>'">
         <button type="button" onclick="App.clearMainImage()" style="position:absolute; top:6px; left:6px; width:28px; height:28px; border-radius:50%; background:rgba(231,76,60,.9); color:#fff; border:none; cursor:pointer; font-size:14px">✕</button>
       </div>
+      ${isDrive ? '<div class="info-box green" style="margin-top:8px; font-size:11.5px">✅ تم تحويل رابط Google Drive تلقائياً</div>' : ''}
     `;
   },
 
@@ -2494,12 +2553,15 @@ const App = {
   renderExtraImagesPreview() {
     const wrap = document.getElementById('prdExtraImagesPreview');
     if (!this.state.extraImages.length) { wrap.innerHTML = ''; return; }
-    wrap.innerHTML = this.state.extraImages.map((url, i) => `
-      <div class="img-preview-item">
-        <img src="${this.esc(url)}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23fee%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23c00%22 font-size=%2212%22%3E⚠️%3C/text%3E%3C/svg%3E'">
-        <button type="button" class="remove-img" onclick="App.removeExtraImage(${i})">✕</button>
-      </div>
-    `).join('');
+    wrap.innerHTML = this.state.extraImages.map((url, i) => {
+      const convertedUrl = convertGoogleDriveUrl(url);
+      return `
+        <div class="img-preview-item">
+          <img src="${this.esc(convertedUrl)}" onerror="this.src='data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 width=%22100%22 height=%22100%22%3E%3Crect fill=%22%23fee%22 width=%22100%22 height=%22100%22/%3E%3Ctext x=%2250%25%22 y=%2250%25%22 text-anchor=%22middle%22 dy=%22.3em%22 fill=%22%23c00%22 font-size=%2212%22%3E⚠️%3C/text%3E%3C/svg%3E'">
+          <button type="button" class="remove-img" onclick="App.removeExtraImage(${i})">✕</button>
+        </div>
+      `;
+    }).join('');
   },
 
   addExtraImageFromInput() {
@@ -2612,6 +2674,10 @@ const App = {
       categoryName = document.getElementById('prdFullSubCatText').value.trim() || 'مواد كيماوية';
     }
     
+    // ✅ حفظ الوصف مع الأسطر المتعددة
+    const descriptionRaw = document.getElementById('prdFullDescription').value;
+    const description = descriptionRaw ? descriptionRaw.trim() : null;
+    
     const payload = {
       supplier_id: supplierId,
       name,
@@ -2621,7 +2687,7 @@ const App = {
       category_id: categoryId,
       subcategory_id: document.getElementById('prdFullSubcategory').value || null,
       sub_category: document.getElementById('prdFullSubCatText').value.trim() || null,
-      description: document.getElementById('prdFullDescription').value.trim() || null,
+      description: description,
       price: parseFloat(document.getElementById('prdFullPrice').value) || null,
       unit: document.getElementById('prdFullUnit').value || 'كجم',
       quantity_available: document.getElementById('prdFullQuantity').value.trim() || null,
@@ -2678,7 +2744,7 @@ const App = {
   },
 
   /* ═══════════════════════════════════════════════════════
-     CSV IMPORT - PARSER قوي يدعم الأسطر المتعددة
+     CSV IMPORT - الاحترافي مع معاينة كاملة
      ═══════════════════════════════════════════════════════ */
   async openCsvImportModal() {
     if (!this.state.productSuppliers.length) await this.loadProductSuppliers();
@@ -2690,6 +2756,8 @@ const App = {
     document.getElementById('csvErrors').innerHTML = '';
     document.getElementById('csvImportBtn').disabled = true;
     this.state.csvParsedData = [];
+    this.state.csvAllColumns = [];
+    this.state.csvVisibleColumns = new Set();
     
     const fileInput = document.getElementById('csvFileInput');
     if (!fileInput.dataset.listenerAttached) {
@@ -2712,7 +2780,17 @@ const App = {
       if (!rows.length) return this.showToast('error', 'خطأ', 'الملف فارغ');
       
       this.state.csvParsedData = rows;
-      this.renderCsvPreview(rows);
+      
+      // استخرج كل الأعمدة الفريدة
+      const allCols = new Set();
+      rows.forEach(r => Object.keys(r).forEach(k => allCols.add(k)));
+      this.state.csvAllColumns = Array.from(allCols);
+      
+      // عرض كل الأعمدة افتراضياً
+      this.state.csvVisibleColumns = new Set(this.state.csvAllColumns);
+      
+      this.renderCsvColumnSelector();
+      this.renderCsvPreview();
       document.getElementById('csvPreviewWrap').style.display = 'block';
       document.getElementById('csvImportBtn').disabled = false;
       this.showToast('success', 'تم القراءة ✅', `${rows.length} منتج فعلي`);
@@ -2722,16 +2800,39 @@ const App = {
     }
   },
 
-  /* ✅ PARSER احترافي يدعم:
-     - الأسطر المتعددة داخل ""
-     - الفواصل داخل ""
-     - "" كـ escape للاقتباس
-     - BOM (UTF-8 with BOM)
-  */
+  renderCsvColumnSelector() {
+    const sel = document.getElementById('csvColSelector');
+    sel.innerHTML = this.state.csvAllColumns.map(col => 
+      `<label class="col-checkbox ${this.state.csvVisibleColumns.has(col) ? 'checked' : ''}">
+        <input type="checkbox" ${this.state.csvVisibleColumns.has(col) ? 'checked' : ''} 
+               onchange="App.toggleCsvColumn('${this.escAttr(col)}', this.checked)">
+        ${this.esc(col)}
+      </label>`
+    ).join('');
+  },
+
+  toggleCsvColumn(col, checked) {
+    if (checked) this.state.csvVisibleColumns.add(col);
+    else this.state.csvVisibleColumns.delete(col);
+    this.renderCsvColumnSelector();
+    this.renderCsvPreview();
+  },
+
+  selectAllPreviewCols() {
+    this.state.csvVisibleColumns = new Set(this.state.csvAllColumns);
+    this.renderCsvColumnSelector();
+    this.renderCsvPreview();
+  },
+
+  selectNonePreviewCols() {
+    this.state.csvVisibleColumns = new Set();
+    this.renderCsvColumnSelector();
+    this.renderCsvPreview();
+  },
+
+  /* ✅ PARSER احترافي - يدعم كل الحالات */
   parseCsv(text) {
     if (!text || typeof text !== 'string') return [];
-    
-    // إزالة BOM
     text = text.replace(/^\ufeff/, '');
     
     const rows = [];
@@ -2745,48 +2846,32 @@ const App = {
       const next = text[i + 1];
       
       if (inQuotes) {
-        if (c === '"' && next === '"') {
-          cur += '"';
-          i += 2;
-          continue;
-        } else if (c === '"') {
-          inQuotes = false;
-        } else {
-          cur += c;
-        }
+        if (c === '"' && next === '"') { cur += '"'; i += 2; continue; }
+        else if (c === '"') { inQuotes = false; }
+        else { cur += c; }
       } else {
-        if (c === '"') {
-          inQuotes = true;
-        } else if (c === ',') {
+        if (c === '"') { inQuotes = true; }
+        else if (c === ',') { row.push(cur); cur = ''; }
+        else if (c === '\n' || (c === '\r' && next === '\n')) {
           row.push(cur);
-          cur = '';
-        } else if (c === '\n' || (c === '\r' && next === '\n')) {
-          row.push(cur);
-          if (row.some(v => v.trim())) {
-            rows.push([...row]);
-          }
-          row = [];
-          cur = '';
+          if (row.some(v => v.trim())) rows.push([...row]);
+          row = []; cur = '';
           if (c === '\r') i++;
         } else if (c === '\r') {
-          // تجاهل \r المفرد
-        } else {
-          cur += c;
-        }
+          // تجاهل
+        } else { cur += c; }
       }
       i++;
     }
     
     if (cur || row.length) {
       row.push(cur);
-      if (row.some(v => v.trim())) {
-        rows.push(row);
-      }
+      if (row.some(v => v.trim())) rows.push(row);
     }
     
     if (rows.length < 2) return [];
     
-    const headers = rows[0].map(h => h.trim().toLowerCase().replace(/^\ufeff/, ''));
+    const headers = rows[0].map(h => h.trim().toLowerCase().replace(/^\ufeff/, '').replace(/\s+/g, '_'));
     const result = [];
     
     for (let r = 1; r < rows.length; r++) {
@@ -2803,27 +2888,59 @@ const App = {
     return result;
   },
 
-  renderCsvPreview(rows) {
+  renderCsvPreview() {
     const wrap = document.getElementById('csvPreviewTable');
+    const rows = this.state.csvParsedData;
     document.getElementById('csvPreviewCount').textContent = rows.length;
     
-    const displayCols = ['name', 'cas_number', 'category', 'price', 'unit', 'status', 'image_url', 'msds_url'];
-    const headers = displayCols.filter(c => rows.some(r => r[c] !== undefined && r[c] !== ''));
-    if (!headers.length) headers.push(...Object.keys(rows[0]).slice(0, 8));
+    const visibleCols = this.state.csvAllColumns.filter(c => this.state.csvVisibleColumns.has(c));
+    if (!visibleCols.length) {
+      wrap.querySelector('thead').innerHTML = '<tr><th>لا توجد أعمدة محددة</th></tr>';
+      wrap.querySelector('tbody').innerHTML = '<tr><td>اختر أعمدة للعرض من الأعلى</td></tr>';
+      return;
+    }
     
-    wrap.querySelector('thead').innerHTML = '<tr>' + headers.map(h => `<th>${this.esc(h)}</th>`).join('') + '</tr>';
-    wrap.querySelector('tbody').innerHTML = rows.slice(0, 50).map(r => 
-      '<tr>' + headers.map(h => {
-        let v = r[h] || '—';
-        if (h === 'image_url' || h === 'msds_url' || h === 'sds_url') {
-          v = v && v !== '—' ? `<a href="${this.esc(v)}" target="_blank" class="badge badge-info">🔗 رابط</a>` : '<span class="td-muted">—</span>';
-        } else {
-          v = this.esc(String(v).slice(0, 40));
+    // الرؤوس
+    wrap.querySelector('thead').innerHTML = '<tr>' + visibleCols.map(h => `<th>${this.esc(h)}</th>`).join('') + '</tr>';
+    
+    // الصفوف (50 صف أول + عداد للباقي)
+    const previewRows = rows.slice(0, 100);
+    wrap.querySelector('tbody').innerHTML = previewRows.map((r, idx) => 
+      '<tr>' + visibleCols.map(h => {
+        let v = r[h] || '';
+        const isLongText = v.length > 60;
+        const isUrl = /^https?:\/\//i.test(v);
+        
+        if (isUrl) {
+          // عرض الصورة إذا كانت صورة
+          const isImage = /\.(jpg|jpeg|png|gif|webp|svg|bmp)/i.test(v) || v.includes('drive.google.com');
+          if (isImage) {
+            const converted = convertGoogleDriveUrl(v);
+            return `<td><img src="${this.esc(converted)}" style="width:50px; height:50px; object-fit:cover; border-radius:6px; border:1px solid var(--c-border)" onerror="this.outerHTML='<span class=\\'badge badge-danger\\'>❌ فشل</span>'"><br><a href="${this.esc(v)}" target="_blank" style="font-size:10px">🔗 فتح</a></td>`;
+          } else {
+            return `<td><a href="${this.esc(v)}" target="_blank" class="badge badge-info">🔗 ملف</a></td>`;
+          }
         }
-        return `<td>${v}</td>`;
+        
+        if (isLongText) {
+          const escaped = this.esc(v);
+          const short = this.esc(v.slice(0, 100));
+          return `<td class="wrap" title="${escaped}">
+            <div style="max-height:80px; overflow-y:auto; font-size:10.5px; line-height:1.4">${short.replace(/\n/g, '<br>')}${v.length > 100 ? '...' : ''}</div>
+          </td>`;
+        }
+        
+        // عرض النص العادي
+        return `<td title="${this.esc(v)}">${this.esc(v.slice(0, 50))}${v.length > 50 ? '...' : ''}</td>`;
       }).join('') + '</tr>'
     ).join('');
     
+    // إظهار ملاحظة لو فيه صفوف كتير
+    if (rows.length > 100) {
+      wrap.querySelector('tbody').innerHTML += `<tr><td colspan="${visibleCols.length}" style="text-align:center; padding:15px; background:var(--c-surface-2); font-weight:700">📌 يتم عرض أول 100 صف فقط. الإجمالي: ${rows.length} منتج</td></tr>`;
+    }
+    
+    // Validation
     const errors = [];
     rows.forEach((r, i) => {
       if (!r.name) errors.push(`صف ${i + 2}: اسم المنتج مفقود`);
@@ -2844,6 +2961,7 @@ const App = {
   },
 
   downloadCsvTemplate() {
+    // ✅ نموذج كامل فيه كل الأعمدة
     const headers = [
       'name', 'cas_number', 'category', 'sub_category', 'description',
       'price', 'unit', 'min_order_quantity', 'quantity_available',
@@ -2854,46 +2972,78 @@ const App = {
       'status', 'stock_status', 'is_featured', 'hide_price'
     ];
     
+    // وصف فيه أسطر متعددة (المشكلة الأصلية)
+    const exampleDescription = `صودا كاوية نقية 99% للاستخدام الصناعي
+تُستخدم في:
+- التنظيف العميق
+- صناعة الصابون والمنظفات
+- معالجة المياه
+- صناعة الورق والنسيج`;
+    
     const example = [
-      'صودا كاوية 99%', '1310-73-2', 'مواد قلوية', 'هيدروكسيدات',
-      'صودا كاوية نقية 99% للاستخدام الصناعي\nتُستخدم في:\n- التنظيف\n- صناعة الصابون',
-      '25.50', 'كجم', '50 كجم', '5000 كجم',
-      '99%', 'Technical', 'أكياس 25 كجم', 'مصر', 'NaOH', '40.00',
-      '2.13 g/cm³', '318°C', '1390°C', 'Soluble', 'White solid', '8',
-      'مكان جاف بعيد عن الرطوبة',
-      'https://example.com/image.jpg',
-      'https://example.com/msds.pdf',
+      'صودا كاوية 99%',
+      '1310-73-2',
+      'مواد قلوية',
+      'هيدروكسيدات',
+      exampleDescription,
+      '25.50',
+      'كجم',
+      '50 كجم',
+      '5000 كجم',
+      '99%',
+      'Technical',
+      'أكياس 25 كجم',
+      'مصر',
+      'NaOH',
+      '40.00',
+      '2.13 g/cm³',
+      '318°C',
+      '1390°C',
+      'Soluble in water',
+      'White solid',
+      '8 - Corrosive',
+      'مكان جاف بعيد عن الرطوبة المباشرة',
+      'https://drive.google.com/file/d/YOUR_FILE_ID/view',
+      'https://drive.google.com/file/d/MSDS_FILE_ID/view',
       '',
-      'active', 'available', 'false', 'false'
+      'active',
+      'available',
+      'false',
+      'false'
     ];
     
+    // دالة escape كاملة
     const escapeCSV = (v) => {
       const str = String(v ?? '');
-      if (str.includes(',') || str.includes('\n') || str.includes('"')) {
+      if (str.includes(',') || str.includes('\n') || str.includes('\r') || str.includes('"')) {
         return '"' + str.replace(/"/g, '""') + '"';
       }
       return str;
     };
     
-    const csv = '\ufeff' + [headers.map(escapeCSV).join(','), example.map(escapeCSV).join(',')].join('\r\n');
+    const lines = [
+      headers.map(escapeCSV).join(','),
+      example.map(escapeCSV).join(',')
+    ];
     
+    const csv = '\ufeff' + lines.join('\r\n');
     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8;' });
     const link = document.createElement('a');
     link.href = URL.createObjectURL(blob);
     link.download = 'chemato-products-template.csv';
     link.click();
     URL.revokeObjectURL(link.href);
-    this.showToast('success', 'تم التحميل ✅');
+    this.showToast('success', 'تم تحميل النموذج ✅');
   },
 
   downloadPreviewCsv() {
     if (!this.state.csvParsedData.length) return;
     const rows = this.state.csvParsedData;
-    const headers = Object.keys(rows[0]);
+    const headers = this.state.csvAllColumns;
     
     const escapeCSV = (v) => {
       const str = String(v ?? '');
-      if (str.includes(',') || str.includes('\n') || str.includes('"')) {
+      if (str.includes(',') || str.includes('\n') || str.includes('\r') || str.includes('"')) {
         return '"' + str.replace(/"/g, '""') + '"';
       }
       return str;
@@ -2941,7 +3091,8 @@ const App = {
           cas_number: r.cas_number || null,
           category: r.category || 'مواد كيماوية',
           sub_category: r.sub_category || null,
-          description: r.description || null,
+          // ✅ الوصف مع الأسطر المتعددة
+          description: r.description ? r.description.trim() : null,
           price: !isNaN(priceNum) && priceNum > 0 ? priceNum : null,
           unit: r.unit || 'كجم',
           min_order_quantity: r.min_order_quantity || null,
@@ -3011,9 +3162,7 @@ const App = {
     await this.loadNavCounts();
   },
 
-  /* ═══════════════════════════════════════════════════════
-     RFQs
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ RFQs ═══════════ */
   async loadRfqs() {
     const wrap = document.getElementById('rfqsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3066,9 +3215,7 @@ const App = {
     } catch (e) { this.showToast('error', 'خطأ', e.message); await this.loadRfqs(); }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     OFFERS & QUOTES
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ OFFERS & QUOTES ═══════════ */
   async loadOffers() {
     const wrap = document.getElementById('offersList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3123,9 +3270,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     MESSAGES
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ MESSAGES ═══════════ */
   async loadMessages() {
     const wrap = document.getElementById('chatSidebar');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3183,9 +3328,7 @@ const App = {
     } catch (e) { wrap.innerHTML = `<div class="empty-state"><p style="color:var(--c-danger)">${e.message}</p></div>`; }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     CONTACTS
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ CONTACTS ═══════════ */
   async loadContacts() {
     const wrap = document.getElementById('contactsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3216,9 +3359,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     NOTIFICATIONS
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ NOTIFICATIONS ═══════════ */
   async loadNotifications() {
     const wrap = document.getElementById('notificationsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3246,9 +3387,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     REVIEWS
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ REVIEWS ═══════════ */
   async loadReviews() {
     const wrap = document.getElementById('reviewsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3303,9 +3442,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     FOLLOWS
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ FOLLOWS ═══════════ */
   async loadFollows() {
     const wrap = document.getElementById('followsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3332,9 +3469,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     FAVORITES
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ FAVORITES ═══════════ */
   async loadFavorites() {
     const wrap = document.getElementById('favoritesList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3359,9 +3494,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     CATEGORIES
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ CATEGORIES ═══════════ */
   async loadCategories() {
     const wrap = document.getElementById('catsList');
     wrap.innerHTML = '<div class="loader"><div class="spinner"></div></div>';
@@ -3412,9 +3545,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     ANALYTICS
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ ANALYTICS ═══════════ */
   async loadAnalytics() {
     const wrap = document.getElementById('analyticsList');
     const sw = document.getElementById('analyticsStats');
@@ -3453,9 +3584,7 @@ const App = {
     </table></div>`;
   },
 
-  /* ═══════════════════════════════════════════════════════
-     VISITORS
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ VISITORS ═══════════ */
   async loadVisitors() {
     const wrap = document.getElementById('visitorsList');
     const sw = document.getElementById('visitorStats');
@@ -3508,9 +3637,7 @@ const App = {
     } catch (e) { wrap.innerHTML = `<div class="empty-state"><span class="emoji">⚠️</span><h3>خطأ</h3><p>${e.message}</p></div>`; }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     DELETE
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ DELETE ═══════════ */
   confirmDelete(type, id, name = '') {
     const labels = { article: 'المقال', ticker: 'الخبر', product: 'المنتج', purchase_request: 'طلب الشراء', notification: 'الإشعار', review: 'التقييم', follow: 'المتابعة', favorite: 'المفضلة' };
     document.getElementById('confirmMessage').textContent = `هل أنت متأكد من حذف ${labels[type] || 'العنصر'}${name ? ` "${name}"` : ''}؟`;
@@ -3539,9 +3666,7 @@ const App = {
     } catch (e) { this.showToast('error', 'فشل', e.message); }
   },
 
-  /* ═══════════════════════════════════════════════════════
-     TOAST + HELPERS
-     ═══════════════════════════════════════════════════════ */
+  /* ═══════════ TOAST + HELPERS ═══════════ */
   showToast(type, title, desc) {
     const icons = { success: '✅', error: '❌', warning: '⚠️', info: 'ℹ️' };
     const container = document.getElementById('toastContainer');
@@ -3595,9 +3720,7 @@ const App = {
   }
 };
 
-/* ═══════════════════════════════════════════════════════
-   DOMContentLoaded - Event Listeners
-   ═══════════════════════════════════════════════════════ */
+/* ═══════════ EVENT LISTENERS ═══════════ */
 document.addEventListener('DOMContentLoaded', () => {
   App.init();
   
@@ -3618,41 +3741,18 @@ document.addEventListener('DOMContentLoaded', () => {
     }, 400);
   });
   
-  document.getElementById('prodSupplierFilter')?.addEventListener('change', (e) => {
-    App.state.productFilters.supplier = e.target.value;
-    App.loadProducts();
-  });
-  
-  document.getElementById('prodCategoryFilter')?.addEventListener('change', (e) => {
-    App.state.productFilters.category = e.target.value;
-    App.loadProducts();
-  });
-  
-  document.getElementById('prodStatusFilter')?.addEventListener('change', (e) => {
-    App.state.productFilters.status = e.target.value;
-    App.loadProducts();
-  });
-  
-  document.getElementById('prodFeaturedFilter')?.addEventListener('change', (e) => {
-    App.state.productFilters.featured = e.target.value;
-    App.loadProducts();
-  });
-  
-  document.getElementById('prodStockFilter')?.addEventListener('change', (e) => {
-    App.state.productFilters.stock = e.target.value;
-    App.loadProducts();
-  });
+  document.getElementById('prodSupplierFilter')?.addEventListener('change', (e) => { App.state.productFilters.supplier = e.target.value; App.loadProducts(); });
+  document.getElementById('prodCategoryFilter')?.addEventListener('change', (e) => { App.state.productFilters.category = e.target.value; App.loadProducts(); });
+  document.getElementById('prodStatusFilter')?.addEventListener('change', (e) => { App.state.productFilters.status = e.target.value; App.loadProducts(); });
+  document.getElementById('prodFeaturedFilter')?.addEventListener('change', (e) => { App.state.productFilters.featured = e.target.value; App.loadProducts(); });
+  document.getElementById('prodStockFilter')?.addEventListener('change', (e) => { App.state.productFilters.stock = e.target.value; App.loadProducts(); });
 
-  document.getElementById('userSearch')?.addEventListener('input', () => { 
-    clearTimeout(t2); t2 = setTimeout(() => App.loadUsers(), 400); 
-  });
+  document.getElementById('userSearch')?.addEventListener('input', () => { clearTimeout(t2); t2 = setTimeout(() => App.loadUsers(), 400); });
   document.getElementById('userTypeFilter')?.addEventListener('change', () => App.loadUsers());
   document.getElementById('userVerifiedFilter')?.addEventListener('change', () => App.loadUsers());
   document.getElementById('userSuspendedFilter')?.addEventListener('change', () => App.loadUsers());
   
-  document.getElementById('rfqSearch')?.addEventListener('input', () => { 
-    clearTimeout(t3); t3 = setTimeout(() => App.loadRfqs(), 400); 
-  });
+  document.getElementById('rfqSearch')?.addEventListener('input', () => { clearTimeout(t3); t3 = setTimeout(() => App.loadRfqs(), 400); });
   document.getElementById('rfqStatusFilter')?.addEventListener('change', () => App.loadRfqs());
   
   document.getElementById('contactTypeFilter')?.addEventListener('change', () => App.loadContacts());
